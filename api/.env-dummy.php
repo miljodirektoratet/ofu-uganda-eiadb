@@ -9,8 +9,8 @@ return array(
 
 		'app_url' => 'https://uganda',
 		'app_debug' => true,
-    'mysql_database' => 'databasename',
-    'mysql_username' => 'username',
-    'mysql_password' => 'password',
+		'mysql_database' => 'databasename',
+		'mysql_username' => 'username',
+		'mysql_password' => 'password',
 
 );
