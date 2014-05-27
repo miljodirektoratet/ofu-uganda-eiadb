@@ -41,11 +41,12 @@
 
 	<?php
 //echo phpinfo();
-	$user = Auth::user();
+/*	$user = Auth::user();
 	print("A".$user->hasRole("Rolle 1"));
 	print("B".$user->hasRole("Rolle 2"));
 	print("C".$user->can("Rettighet 1"));
 	print("D".$user->can("Rettighet 2"));
+	*/
 	?>
 </body>
 </html>
