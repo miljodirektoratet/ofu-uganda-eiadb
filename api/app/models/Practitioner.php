@@ -7,5 +7,7 @@ class Practitioner extends Eloquent {
 
     protected $fillable = array('person', 'tin', 'organisation_name', 'visiting_address', 'box_no', 'city', 'phone',
     	'fax', 'email', 'qualifications', 'expertise', 'remarks');
+
+    protected $hidden = array('deleted_at');
  
 }

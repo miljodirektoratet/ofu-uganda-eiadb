@@ -26,18 +26,16 @@ class PractitionerController extends BaseController {
 	{		
 		$data = Input::all();
 
-	    $resource = new Practitioner($data);	    
+    $resource = new Practitioner($data);	    
 	    	 
-	    // Validation and Filtering is sorely needed!!
-	    // Seriously, I'm a bad person for leaving that out.
+    // Validation and Filtering is sorely needed!!
+    // Seriously, I'm a bad person for leaving that out.
 	 
-	    $resource->save();
+    $resource->save();
+
+    $resource = Practitioner::find($resource->id);
 	 
-	    return Response::json(array(
-	        'error' => false,
-	        'resource' => $resource->toArray()),
-	        200
-	    );
+    return Response::json($resource->toArray(), 200);
 	}
 
 
@@ -49,18 +47,29 @@ class PractitionerController extends BaseController {
 	 */
 	public function show($id)
 	{
-	    // Make sure current user owns the requested resource
-	    $resource = Practitioner::where('id', $id)
+    // Make sure current user owns the requested resource
+    $resource = Practitioner::where('id', $id)
 	            ->take(1)
 	            ->get();
 	 
-	    return Response::json(array(
-	        'error' => false,
-	        'resource' => $resource->toArray()),
-	        200
-	    );
+ 		return Response::json($resource->toArray(), 200);
 	}
 
+
+	private function updateValuesInResource($resource, $data)
+	{
+    foreach ($data as $key => $value)
+    {
+    	if (in_array($key, $resource["fillable"], true))
+    	{    		
+    		if ($resource[$key] != $value)
+    		{
+    			// TODO: Validate.
+    			$resource[$key] = $value;	    			
+    		}	    	    		
+    	}	    	
+    }
+	}
 
 	/**
 	 * Update the specified resource in storage.
@@ -80,25 +89,13 @@ class PractitionerController extends BaseController {
 		        404
 		    );
 	    }
-	 
-	    if ( Request::get('person') )
-	    {
-	        $resource->person = Request::get('person');
-	    }
-	 
-	    if ( Request::get('email') )
-	    {
-	        $resource->email = Request::get('email');
-	    }
-	 
+
+	    $data = Input::all();
+	    $this->updateValuesInResource($resource, $data);	    
+
 	    $resource->save();
-	 
-	    return Response::json(array(
-	        'error' => false,
-	        'resource' => $resource->toArray(),
-	        'message' => 'resource updated'),
-	        200
-	    );
+
+	    return Response::json($resource->toArray(), 200);
 	}
 
 
@@ -110,13 +107,12 @@ class PractitionerController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-	   	$resource = Practitioner::find($id);	 
-	    $resource->delete();
-	 
-	    return Response::json(array(
-	        'error' => false,
-	        'message' => 'resource deleted'),
-	        200
-	        );
+	  $resource = Practitioner::find($id);	 
+	  $resource->delete();	 	 	
+    return Response::json(array(
+        'error' => false,
+        'message' => 'resource deleted'),
+        200
+        );
 	}
 }

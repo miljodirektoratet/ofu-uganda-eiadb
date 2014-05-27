@@ -22,7 +22,6 @@ Schema::create('additional_districts', function(Blueprint $table)
 	$table->foreign('district_id')->references('id')->on('districts');
 	$table->integer('project_id')->unsigned()->nullable(); 
 	$table->foreign('project_id')->references('id')->on('projects');
-	$table->timestamps();
 });
 
 
@@ -43,27 +42,29 @@ Schema::create('audits_inspections', function(Blueprint $table)
 	$table->integer('project_id')->unsigned()->nullable(); 
 	$table->foreign('project_id')->references('id')->on('projects');
 	$table->string('remarks', 2000)->nullable();
-	$table->boolean('is_deleted')->default(false)->nullable();
+	$table->softDeletes();
 	$table->timestamps();
 });
 
 
-Schema::create('practitioner_certificates', function(Blueprint $table)
+Schema::create('categories', function(Blueprint $table)
 {
 	$table->increments('id');
-	$table->integer('practitioner_id')->unsigned()->nullable(); 
-	$table->foreign('practitioner_id')->references('id')->on('practitioners');
-	$table->integer('year')->unsigned()->nullable();
-	$table->date('date_of_entry')->nullable();
-	$table->boolean('approved')->default(false)->nullable();
-	$table->integer('cert_type')->unsigned()->nullable();
-	$table->integer('number')->unsigned()->nullable();
-	$table->string('cert_no', 255)->nullable();
-	$table->integer('conditions')->unsigned()->nullable();
-	$table->boolean('is_cancelled')->default(false)->nullable();
-	$table->string('remarks', 2000)->nullable();
-	$table->boolean('is_deleted')->default(false)->nullable();
-	$table->timestamps();
+	$table->string('description_short', 255)->nullable();
+	$table->string('description_long', 2000)->nullable();
+	$table->integer('consequence')->unsigned()->nullable();
+	$table->boolean('is_passive')->default(false)->nullable();
+});
+
+
+Schema::create('codes', function(Blueprint $table)
+{
+	$table->increments('id');
+	$table->string('description1', 255)->nullable();
+	$table->string('description2', 255)->nullable();
+	$table->integer('value1')->unsigned()->nullable();
+	$table->string('dropdown_list', 255)->nullable();
+	$table->boolean('is_passive')->default(false)->nullable();
 });
 
 
@@ -72,10 +73,11 @@ Schema::create('documents', function(Blueprint $table)
 	$table->increments('id');
 	$table->date('date_submitted')->nullable();
 	$table->integer('sub_final')->unsigned()->nullable();
-	$table->string('code', 255)->nullable();
 	$table->integer('sub_copy_no')->unsigned()->nullable();
 	$table->string('title', 255)->nullable();
 	$table->integer('type')->unsigned()->nullable();
+	$table->integer('number')->unsigned()->nullable();
+	$table->string('code', 255)->nullable();
 	$table->string('consultent', 255)->nullable();
 	$table->integer('ded_copy_no')->unsigned()->nullable();
 	$table->date('date_sent_ded')->nullable();
@@ -90,52 +92,20 @@ Schema::create('documents', function(Blueprint $table)
 	$table->foreign('eia_permit_id')->references('id')->on('eias_permits');
 	$table->integer('control_id')->unsigned()->nullable();
 	$table->string('remarks', 2000)->nullable();
-	$table->boolean('is_deleted')->default(false)->nullable();
+	$table->softDeletes();
 	$table->timestamps();
 });
 
 
-Schema::create('categories', function(Blueprint $table)
+Schema::create('districts', function(Blueprint $table)
 {
 	$table->increments('id');
-	$table->string('description_short', 255)->nullable();
-	$table->string('description_long', 2000)->nullable();
-	$table->integer('consequence')->unsigned()->nullable();
-	$table->boolean('is_passive')->default(false)->nullable();
-	$table->timestamps();
-});
-
-
-Schema::create('codes', function(Blueprint $table)
-{
-	$table->increments('id');
-	$table->string('description1', 255)->nullable();
-	$table->string('description2', 255)->nullable();
-	$table->integer('value1')->unsigned()->nullable();
-	$table->string('dropdown_list', 255)->nullable();
-	$table->boolean('is_passive')->default(false)->nullable();
-	$table->timestamps();
-});
-
-
-Schema::create('projects', function(Blueprint $table)
-{
-	$table->increments('id');
-	$table->string('title', 255)->nullable();
-	$table->integer('category_id')->unsigned()->nullable(); 
-	$table->foreign('category_id')->references('id')->on('categories');
-	$table->string('location', 255)->nullable();
-	$table->string('description', 255)->nullable();
-	$table->integer('district_id')->unsigned()->nullable(); 
-	$table->foreign('district_id')->references('id')->on('districts');
-	$table->decimal('longitude', 24, 6)->nullable();
-	$table->decimal('latitude', 24, 6)->nullable();
-	$table->boolean('has_industrial_waste_water')->default(false)->nullable();
-	$table->integer('grade')->unsigned()->nullable();
-	$table->integer('organisation_id')->unsigned()->nullable(); 
-	$table->foreign('organisation_id')->references('id')->on('organisations');
-	$table->string('remarks', 2000)->nullable();
-	$table->boolean('is_deleted')->default(false)->nullable();
+	$table->string('district', 255)->nullable();
+	$table->string('hasc', 255)->nullable();
+	$table->integer('iso')->unsigned()->nullable();
+	$table->string('fips', 255)->nullable();
+	$table->string('region', 255)->nullable();
+	$table->softDeletes();
 	$table->timestamps();
 });
 
@@ -162,23 +132,10 @@ Schema::create('eias_permits', function(Blueprint $table)
 	$table->string('fee_receipt_no', 255)->nullable();
 	$table->integer('designation')->unsigned()->nullable();
 	$table->date('date_certificate')->nullable();
-	$table->string('certificate_no', 255)->nullable();
+	$table->integer('certificate_no')->unsigned()->nullable();
 	$table->date('date_cancelled')->nullable();
 	$table->string('remarks', 2000)->nullable();
-	$table->boolean('is_deleted')->default(false)->nullable();
-	$table->timestamps();
-});
-
-
-Schema::create('districts', function(Blueprint $table)
-{
-	$table->increments('id');
-	$table->string('district', 255)->nullable();
-	$table->string('hasc', 255)->nullable();
-	$table->integer('iso')->unsigned()->nullable();
-	$table->string('fips', 255)->nullable();
-	$table->string('region', 255)->nullable();
-	$table->boolean('is_deleted')->default(false)->nullable();
+	$table->softDeletes();
 	$table->timestamps();
 });
 
@@ -196,7 +153,7 @@ Schema::create('hearings', function(Blueprint $table)
 	$table->integer('document_id')->unsigned()->nullable(); 
 	$table->foreign('document_id')->references('id')->on('documents');
 	$table->string('remarks', 2000)->nullable();
-	$table->boolean('is_deleted')->default(false)->nullable();
+	$table->softDeletes();
 	$table->timestamps();
 });
 
@@ -214,7 +171,26 @@ Schema::create('organisations', function(Blueprint $table)
 	$table->string('email', 255)->nullable();
 	$table->string('contact_person', 255)->nullable();
 	$table->string('remarks', 2000)->nullable();
-	$table->boolean('is_deleted')->default(false)->nullable();
+	$table->softDeletes();
+	$table->timestamps();
+});
+
+
+Schema::create('practitioner_certificates', function(Blueprint $table)
+{
+	$table->increments('id');
+	$table->integer('practitioner_id')->unsigned()->nullable(); 
+	$table->foreign('practitioner_id')->references('id')->on('practitioners');
+	$table->integer('year')->unsigned()->nullable();
+	$table->date('date_of_entry')->nullable();
+	$table->boolean('is_approved')->default(false)->nullable();
+	$table->integer('cert_type')->unsigned()->nullable();
+	$table->integer('number')->unsigned()->nullable();
+	$table->string('cert_no', 255)->nullable();
+	$table->integer('conditions')->unsigned()->nullable();
+	$table->boolean('is_cancelled')->default(false)->nullable();
+	$table->string('remarks', 2000)->nullable();
+	$table->softDeletes();
 	$table->timestamps();
 });
 
@@ -233,9 +209,31 @@ Schema::create('practitioners', function(Blueprint $table)
 	$table->string('email', 255)->nullable();
 	$table->string('qualifications', 2000)->nullable();
 	$table->string('expertise', 2000)->nullable();
-	$table->string('remarks', 2000)->nullable();	
-	$table->timestamps();
+	$table->string('remarks', 2000)->nullable();
 	$table->softDeletes();
+	$table->timestamps();
+});
+
+
+Schema::create('projects', function(Blueprint $table)
+{
+	$table->increments('id');
+	$table->string('title', 255)->nullable();
+	$table->integer('category_id')->unsigned()->nullable(); 
+	$table->foreign('category_id')->references('id')->on('categories');
+	$table->string('location', 255)->nullable();
+	$table->string('description', 255)->nullable();
+	$table->integer('district_id')->unsigned()->nullable(); 
+	$table->foreign('district_id')->references('id')->on('districts');
+	$table->decimal('longitude', 24, 6)->nullable();
+	$table->decimal('latitude', 24, 6)->nullable();
+	$table->boolean('has_industrial_waste_water')->default(false)->nullable();
+	$table->integer('grade')->unsigned()->nullable();
+	$table->integer('organisation_id')->unsigned()->nullable(); 
+	$table->foreign('organisation_id')->references('id')->on('organisations');
+	$table->string('remarks', 2000)->nullable();
+	$table->softDeletes();
+	$table->timestamps();
 });
 
 
@@ -246,7 +244,6 @@ Schema::create('team_members', function(Blueprint $table)
 	$table->foreign('practitioner_id')->references('id')->on('practitioners');
 	$table->integer('eia_permit_id')->unsigned()->nullable(); 
 	$table->foreign('eia_permit_id')->references('id')->on('eias_permits');
-	$table->timestamps();
 });
 
 
@@ -266,16 +263,16 @@ Schema::create('team_members', function(Blueprint $table)
 // down begin
 	Schema::dropIfExists('additional_districts', function(Blueprint $table){});
 	Schema::dropIfExists('audits_inspections', function(Blueprint $table){});
-	Schema::dropIfExists('practitioner_certificates', function(Blueprint $table){});
-	Schema::dropIfExists('documents', function(Blueprint $table){});
 	Schema::dropIfExists('categories', function(Blueprint $table){});
 	Schema::dropIfExists('codes', function(Blueprint $table){});
-	Schema::dropIfExists('projects', function(Blueprint $table){});
-	Schema::dropIfExists('eias_permits', function(Blueprint $table){});
+	Schema::dropIfExists('documents', function(Blueprint $table){});
 	Schema::dropIfExists('districts', function(Blueprint $table){});
+	Schema::dropIfExists('eias_permits', function(Blueprint $table){});
 	Schema::dropIfExists('hearings', function(Blueprint $table){});
 	Schema::dropIfExists('organisations', function(Blueprint $table){});
+	Schema::dropIfExists('practitioner_certificates', function(Blueprint $table){});
 	Schema::dropIfExists('practitioners', function(Blueprint $table){});
+	Schema::dropIfExists('projects', function(Blueprint $table){});
 	Schema::dropIfExists('team_members', function(Blueprint $table){});
 // down end
 	DB::statement('SET FOREIGN_KEY_CHECKS=1;');
