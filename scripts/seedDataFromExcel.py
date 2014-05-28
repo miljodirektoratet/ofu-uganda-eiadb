@@ -49,7 +49,9 @@ def getColumnSeed(columnName, value):
 	if columnName == passwordColumn:
 		return "'%s' => Hash::make('%s')" % (columnName, 'password')
 	if columnName in lookupColumns:
-		value = getLookupValue(columnName, value)			
+		value = getLookupValue(columnName, value)
+		if not value:
+			return
 	if columnName in dateColumns:
 			value = value.strftime("%Y-%m-%d")			
 	if isNumber(value):
