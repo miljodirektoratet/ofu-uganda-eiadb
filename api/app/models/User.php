@@ -7,20 +7,11 @@ use Zizaco\Entrust\HasRole;
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use HasRole; 
+			
+	protected $softDelete = true;
+	protected $guarded = array('id', 'password', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at');
+	protected $hidden = array('password', 'deleted_at');
 	
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
-
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password');
 
 	/**
 	 * Get the unique identifier for the user.

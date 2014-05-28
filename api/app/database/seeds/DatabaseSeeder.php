@@ -13,10 +13,13 @@ class DatabaseSeeder extends Seeder {
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-		$this->call('UserTableSeeder');
-		$this->call('PractitionerTableSeeder');
+		#$this->call('UserTableSeeder');
+		#$this->call('PractitionerTableSeeder');
+		$this->call('ExcelDataTableSeeder');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+		Eloquent::reguard();
 	}
 
 }

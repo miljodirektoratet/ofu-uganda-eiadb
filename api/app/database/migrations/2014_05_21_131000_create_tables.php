@@ -43,6 +43,8 @@ Schema::create('audits_inspections', function(Blueprint $table)
 	$table->foreign('project_id')->references('id')->on('projects');
 	$table->string('remarks', 2000)->nullable();
 	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
 	$table->timestamps();
 });
 
@@ -79,13 +81,13 @@ Schema::create('documents', function(Blueprint $table)
 	$table->integer('number')->unsigned()->nullable();
 	$table->string('code', 255)->nullable();
 	$table->string('consultent', 255)->nullable();
-	$table->integer('ded_copy_no')->unsigned()->nullable();
-	$table->date('date_sent_ded')->nullable();
-	$table->integer('eiac_copy_no')->unsigned()->nullable();
-	$table->date('date_copies_eiac')->nullable();
+	$table->integer('director_copy_no')->unsigned()->nullable();
+	$table->date('date_sent_director')->nullable();
+	$table->integer('coordinator_copy_no')->unsigned()->nullable();
+	$table->date('date_copies_coordinator')->nullable();
 	$table->date('date_next_appointment')->nullable();
 	$table->date('date_sent_from_dep')->nullable();
-	$table->date('date_sent_eiao')->nullable();
+	$table->date('date_sent_officer')->nullable();
 	$table->string('folio_no', 255)->nullable();
 	$table->integer('conclusion')->unsigned()->nullable();
 	$table->integer('eia_permit_id')->unsigned()->nullable(); 
@@ -93,6 +95,8 @@ Schema::create('documents', function(Blueprint $table)
 	$table->integer('control_id')->unsigned()->nullable();
 	$table->string('remarks', 2000)->nullable();
 	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
 	$table->timestamps();
 });
 
@@ -106,6 +110,8 @@ Schema::create('districts', function(Blueprint $table)
 	$table->string('fips', 255)->nullable();
 	$table->string('region', 255)->nullable();
 	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
 	$table->timestamps();
 });
 
@@ -136,6 +142,8 @@ Schema::create('eias_permits', function(Blueprint $table)
 	$table->date('date_cancelled')->nullable();
 	$table->string('remarks', 2000)->nullable();
 	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
 	$table->timestamps();
 });
 
@@ -154,6 +162,8 @@ Schema::create('hearings', function(Blueprint $table)
 	$table->foreign('document_id')->references('id')->on('documents');
 	$table->string('remarks', 2000)->nullable();
 	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
 	$table->timestamps();
 });
 
@@ -162,7 +172,7 @@ Schema::create('organisations', function(Blueprint $table)
 {
 	$table->increments('id');
 	$table->integer('tin')->unsigned()->nullable();
-	$table->string('organisation_name', 255)->nullable();
+	$table->string('name', 255)->nullable();
 	$table->string('visiting_address', 255)->nullable();
 	$table->integer('box_no')->unsigned()->nullable();
 	$table->string('city', 255)->nullable();
@@ -172,6 +182,8 @@ Schema::create('organisations', function(Blueprint $table)
 	$table->string('contact_person', 255)->nullable();
 	$table->string('remarks', 2000)->nullable();
 	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
 	$table->timestamps();
 });
 
@@ -183,7 +195,6 @@ Schema::create('practitioner_certificates', function(Blueprint $table)
 	$table->foreign('practitioner_id')->references('id')->on('practitioners');
 	$table->integer('year')->unsigned()->nullable();
 	$table->date('date_of_entry')->nullable();
-	$table->boolean('is_approved')->default(false)->nullable();
 	$table->integer('cert_type')->unsigned()->nullable();
 	$table->integer('number')->unsigned()->nullable();
 	$table->string('cert_no', 255)->nullable();
@@ -191,6 +202,8 @@ Schema::create('practitioner_certificates', function(Blueprint $table)
 	$table->boolean('is_cancelled')->default(false)->nullable();
 	$table->string('remarks', 2000)->nullable();
 	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
 	$table->timestamps();
 });
 
@@ -211,6 +224,8 @@ Schema::create('practitioners', function(Blueprint $table)
 	$table->string('expertise', 2000)->nullable();
 	$table->string('remarks', 2000)->nullable();
 	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
 	$table->timestamps();
 });
 
@@ -221,18 +236,19 @@ Schema::create('projects', function(Blueprint $table)
 	$table->string('title', 255)->nullable();
 	$table->integer('category_id')->unsigned()->nullable(); 
 	$table->foreign('category_id')->references('id')->on('categories');
-	$table->string('location', 255)->nullable();
-	$table->string('description', 255)->nullable();
 	$table->integer('district_id')->unsigned()->nullable(); 
 	$table->foreign('district_id')->references('id')->on('districts');
+	$table->string('location', 255)->nullable();
 	$table->decimal('longitude', 24, 6)->nullable();
 	$table->decimal('latitude', 24, 6)->nullable();
-	$table->boolean('has_industrial_waste_water')->default(false)->nullable();
+	$table->integer('has_industrial_waste_water')->unsigned()->nullable();
 	$table->integer('grade')->unsigned()->nullable();
 	$table->integer('organisation_id')->unsigned()->nullable(); 
 	$table->foreign('organisation_id')->references('id')->on('organisations');
 	$table->string('remarks', 2000)->nullable();
 	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
 	$table->timestamps();
 });
 

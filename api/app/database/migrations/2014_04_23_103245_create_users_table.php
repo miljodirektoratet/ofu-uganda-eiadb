@@ -23,8 +23,10 @@ class CreateUsersTable extends Migration {
     	$table->string('password');
     	$table->string('remember_token');
     	$table->boolean('is_passive')->default(false)->nullable();
-			$table->softDeletes();    	
-    	$table->timestamps();
+			$table->softDeletes();    	    	
+    	$table->string('created_by', 255)->nullable();
+			$table->string('updated_by', 255)->nullable();
+			$table->timestamps();
 		});
 	}
 

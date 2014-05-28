@@ -3,6 +3,6 @@
 use Zizaco\Entrust\EntrustRole;
 
 class Role extends EntrustRole
-{
-	protected $table = 'role';
+{	
+	protected $guarded = array('id', 'created_at', 'updated_at');	
 }
