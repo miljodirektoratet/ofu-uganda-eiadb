@@ -28,8 +28,7 @@ class ExcelDataTableSeeder extends Seeder {
         $user0 = User::create(array(
             'initials' => 'josska',
             'full_name' => 'Jostein Skaar',
-            'job_position_code' => 'NEI',
-            'job_position_name' => 0,
+            'job_position_code' => 'NEI',            
             'email' => 'jostein.skaar@miljodir.no',
             'password' => Hash::make('jostein')            
         ));
@@ -40,7 +39,6 @@ $user1 = User::create(array(
   'initials' => "awinyi" ,
 	'full_name' => "Alex Winyi" ,
 	'job_position_code' => "EIAO" ,
-	'job_position_name' => 0 ,
 	'email' => "awinyi@nemaug.org"             
 ));
 
@@ -48,7 +46,6 @@ $user2 = User::create(array(
   'initials' => "bbirungi" ,
 	'full_name' => "Bonny Birungi" ,
 	'job_position_code' => "DS" ,
-	'job_position_name' => 0 ,
 	'email' => "kbirungi@nemaug.org"             
 ));
 
@@ -56,7 +53,6 @@ $user3 = User::create(array(
   'initials' => "dlufafa" ,
 	'full_name' => "Dick Lufafa" ,
 	'job_position_code' => "EAMO-1" ,
-	'job_position_name' => 0 ,
 	'email' => "dlufafa@nemaug.org"             
 ));
 
@@ -64,7 +60,6 @@ $user4 = User::create(array(
   'initials' => "enidt" ,
 	'full_name' => "Enid Turyahikayo" ,
 	'job_position_code' => "EAMO" ,
-	'job_position_name' => 0 ,
 	'email' => "enidt@nemaug.org"             
 ));
 
@@ -72,7 +67,6 @@ $user5 = User::create(array(
   'initials' => "fbagoora" ,
 	'full_name' => "Festus Bagoora" ,
 	'job_position_code' => "NRM(S&L)" ,
-	'job_position_name' => 0 ,
 	'email' => "fbagoora@nemaug.org"             
 ));
 
@@ -80,7 +74,6 @@ $user6 = User::create(array(
   'initials' => "fogwal" ,
 	'full_name' => "Francis Ogwal" ,
 	'job_position_code' => "NRM(B&R)" ,
-	'job_position_name' => 0 ,
 	'email' => "fogwal@nemaug.org"             
 ));
 
@@ -88,7 +81,6 @@ $user7 = User::create(array(
   'initials' => "fonyai" ,
 	'full_name' => "Fred Onyai" ,
 	'job_position_code' => "IMES" ,
-	'job_position_name' => 0 ,
 	'email' => "fonyai@nemaug.org"             
 ));
 
@@ -96,7 +88,6 @@ $user8 = User::create(array(
   'initials' => "gkitutu" ,
 	'full_name' => "Goreti K. Kitutu" ,
 	'job_position_code' => "EISS" ,
-	'job_position_name' => 0 ,
 	'email' => "gkitutu@nemaug.org"             
 ));
 
@@ -104,7 +95,6 @@ $user9 = User::create(array(
   'initials' => "glubega" ,
 	'full_name' => "Lubega George" ,
 	'job_position_code' => "NRM(Aq)" ,
-	'job_position_name' => 0 ,
 	'email' => "glubega@nemaug.org"             
 ));
 
@@ -112,7 +102,6 @@ $user10 = User::create(array(
   'initials' => "gsawula" ,
 	'full_name' => "Gerald Sawula" ,
 	'job_position_code' => "DED" ,
-	'job_position_name' => 0 ,
 	'email' => "gsawula@nemaug.org"             
 ));
 
@@ -120,7 +109,6 @@ $user11 = User::create(array(
   'initials' => "hnamara" ,
 	'full_name' => "Harriet Namara" ,
 	'job_position_code' => "EIAA" ,
-	'job_position_name' => 0 ,
 	'email' => "hnamara@nemaug.org"             
 ));
 
@@ -128,7 +116,6 @@ $user12 = User::create(array(
   'initials' => "iintujju" ,
 	'full_name' => "Isaac I.G. Ntujju" ,
 	'job_position_code' => "SEI" ,
-	'job_position_name' => 0 ,
 	'email' => "iigntujju@nemaug.org"             
 ));
 
@@ -136,7 +123,6 @@ $user13 = User::create(array(
   'initials' => "inamuleme" ,
 	'full_name' => "Namuleme Immaculate" ,
 	'job_position_code' => "EAIMA" ,
-	'job_position_name' => 0 ,
 	'email' => "inamuleme@nemaug.org"             
 ));
 
@@ -144,7 +130,6 @@ $user14 = User::create(array(
   'initials' => "jkagoda" ,
 	'full_name' => "Joy Kagoda" ,
 	'job_position_code' => "SPS" ,
-	'job_position_name' => 0 ,
 	'email' => "jkagoda@nemaug.org"             
 ));
 
@@ -152,7 +137,6 @@ $user15 = User::create(array(
   'initials' => "jkutesakwe" ,
 	'full_name' => "Jeniffer Kutesakwe" ,
 	'job_position_code' => "LT" ,
-	'job_position_name' => 0 ,
 	'email' => "jkutesakwe@nemaug.org"             
 ));
 
@@ -160,7 +144,6 @@ $user16 = User::create(array(
   'initials' => "maanyu" ,
 	'full_name' => "Aanyu Margaret" ,
 	'job_position_code' => "EIAC" ,
-	'job_position_name' => 0 ,
 	'email' => "maanyu@nemaug.org"             
 ));
 
@@ -168,7 +151,6 @@ $user17 = User::create(array(
   'initials' => "mmubangizi" ,
 	'full_name' => "Matia Mubangizi" ,
 	'job_position_code' => "EAA" ,
-	'job_position_name' => 0 ,
 	'email' => "mmubangizi@nemaug.org"             
 ));
 
@@ -176,7 +158,6 @@ $user18 = User::create(array(
   'initials' => "naisha" ,
 	'full_name' => "Nakanwaji Aisha" ,
 	'job_position_code' => "RA" ,
-	'job_position_name' => 0 ,
 	'email' => "naisha@nemaug.org"             
 ));
 
@@ -184,7 +165,6 @@ $user19 = User::create(array(
   'initials' => "nallimadi" ,
 	'full_name' => "Nancy Allimadi" ,
 	'job_position_code' => "EI" ,
-	'job_position_name' => 0 ,
 	'email' => "nallimadi@nemaug.org"             
 ));
 
@@ -192,7 +172,6 @@ $user20 = User::create(array(
   'initials' => "nobbo" ,
 	'full_name' => "Obbo Naome" ,
 	'job_position_code' => "EIAO" ,
-	'job_position_name' => 0 ,
 	'email' => "nobbo@nemaug.org"             
 ));
 
@@ -200,7 +179,6 @@ $user21 = User::create(array(
   'initials' => "pkato" ,
 	'full_name' => "Phillip Kato" ,
 	'job_position_code' => "NA" ,
-	'job_position_name' => 0 ,
 	'email' => "pkato@nemaug.org"             
 ));
 
@@ -208,7 +186,6 @@ $user22 = User::create(array(
   'initials' => "pnsereko" ,
 	'full_name' => "Patience Nsereko" ,
 	'job_position_code' => "EMO" ,
-	'job_position_name' => 0 ,
 	'email' => "pnsereko@nemaug.org"             
 ));
 
@@ -216,7 +193,6 @@ $user23 = User::create(array(
   'initials' => "rmugambwa" ,
 	'full_name' => "Richard Mugambwa" ,
 	'job_position_code' => "PM-MSW" ,
-	'job_position_name' => 0 ,
 	'email' => "rmugambwa@nemaug.org"             
 ));
 
@@ -224,7 +200,6 @@ $user24 = User::create(array(
   'initials' => "rnamara" ,
 	'full_name' => "Namara Rhona" ,
 	'job_position_code' => "SPS" ,
-	'job_position_name' => 0 ,
 	'email' => "rnamara@nemaug.org"             
 ));
 
@@ -232,7 +207,6 @@ $user25 = User::create(array(
   'initials' => "tkiwanuka" ,
 	'full_name' => "Tonny Kiwanuka" ,
 	'job_position_code' => "EIAA" ,
-	'job_position_name' => 0 ,
 	'email' => "tkiwanuma@nemaug.org"             
 ));
 
@@ -240,7 +214,6 @@ $user26 = User::create(array(
   'initials' => "tokurut" ,
 	'full_name' => "Tom O. Okurut" ,
 	'job_position_code' => "ED" ,
-	'job_position_name' => 0 ,
 	'email' => "tokurut@nemaug.org"             
 ));
 
@@ -248,7 +221,6 @@ $user27 = User::create(array(
   'initials' => "wayazika" ,
 	'full_name' => "Waiswa Ayazika" ,
 	'job_position_code' => "DEMC" ,
-	'job_position_name' => 0 ,
 	'email' => "wayazika@nemaug.org"             
 ));
 

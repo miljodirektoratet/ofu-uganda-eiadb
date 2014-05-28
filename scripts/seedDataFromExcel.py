@@ -29,7 +29,7 @@ def getColumnLetterFromCoordinate(coordinate):
 
 def getLookupValue(columnName, value):
 	if columnName == 'job_position_name':
-		return "0"
+		return 0
 
 def isNumber(s):
     try:
@@ -49,7 +49,7 @@ def getColumnSeed(columnName, value):
 	if columnName == passwordColumn:
 		return "'%s' => Hash::make('%s')" % (columnName, 'password')
 	if columnName in lookupColumns:
-		value = getLookupValue(columnName, value)
+		value = getLookupValue(columnName, value)		
 		if not value:
 			return
 	if columnName in dateColumns:
@@ -76,6 +76,7 @@ seedTemplate = """$%s = %s::create(array(
 wb = openpyxl.load_workbook(filename = tableFile, data_only=True)
 seeds = []
 for tableName in tablesData:
+	#if tableName != "users": continue
 	print("// Creating seeds for %s" % tableName)
 	entityName = tablesData[tableName]
 	
@@ -94,7 +95,7 @@ for tableName in tablesData:
 			if columnSeed:
 				columnSeeds.append(columnSeed)				
 		seed = seedTemplate % (getSeedVariableName(entityName, column.coordinate, rowsOffset), entityName, ",\n\t".join(columnSeeds))
-		seeds.append(seed)
+		seeds.append(seed)		
 		
 allSeeds = ""
 for seed in seeds:
