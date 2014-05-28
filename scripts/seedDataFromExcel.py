@@ -1,13 +1,13 @@
 #!python3
 # -*- coding: utf8 -*-
 
-import os, openpyxl, re
+import os, openpyxl, re, glob
 from collections import OrderedDict
 from datetime import datetime
 
 phpFile = r"..\api\app\database\\seeds\ExcelDataTableSeeder.php"
 
-tableFile = r"N:\Felles\Forurensning\2. Internasjonalt arbeid\2012. Uganda\Kravspek\Tabeller\Supporting tables version 0.4.xlsx"
+tableFilePattern = r"N:\Felles\Forurensning\2. Internasjonalt arbeid\2012. Uganda\Kravspek\Tabeller\Supporting tables version*.xlsx"
 tablesData = OrderedDict()
 tablesData["users"] = "User"
 tablesData["districts"] = "District"
@@ -28,8 +28,9 @@ def getColumnLetterFromCoordinate(coordinate):
 	return re.sub('[0-9]*', '', coordinate)
 
 def getLookupValue(columnName, value):
-	if columnName == 'job_position_name':
-		return 0
+	if not value: return
+	if columnName == 'x':
+		return 123
 
 def isNumber(s):
     try:
@@ -40,18 +41,16 @@ def isNumber(s):
 
 ignoreColumns = ['id', 'is_deleted']
 passwordColumn = 'password'
-lookupColumns = ['job_position_name']
+lookupColumns = []
 dateColumns = ['date_of_entry']
 
 def getColumnSeed(columnName, value):
-	if columnName in ignoreColumns: return
-	if not value: return
+	if columnName in ignoreColumns: return	
 	if columnName == passwordColumn:
 		return "'%s' => Hash::make('%s')" % (columnName, 'password')
 	if columnName in lookupColumns:
 		value = getLookupValue(columnName, value)		
-		if not value:
-			return
+	if not value: return
 	if columnName in dateColumns:
 			value = value.strftime("%Y-%m-%d")			
 	if isNumber(value):
@@ -73,11 +72,12 @@ seedTemplate = """$%s = %s::create(array(
   %s            
 ));"""
 
+tableFile = glob.glob(tableFilePattern)[-1]
+print("Reading from file %s" % tableFile)
 wb = openpyxl.load_workbook(filename = tableFile, data_only=True)
 seeds = []
-for tableName in tablesData:
-	#if tableName != "users": continue
-	print("// Creating seeds for %s" % tableName)
+for tableName in tablesData:	
+	print("Creating seeds for %s" % tableName)
 	entityName = tablesData[tableName]
 	
 	dataSheet = wb.get_sheet_by_name(tableName)	
@@ -100,5 +100,5 @@ for tableName in tablesData:
 allSeeds = ""
 for seed in seeds:
 	allSeeds += (seed + "\n\n")
-print (allSeeds)
+#print (allSeeds)
 replaceInFile(phpFile, "// seed begin", "// seed end", allSeeds)

@@ -12,9 +12,7 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-		#$this->call('UserTableSeeder');
-		#$this->call('PractitionerTableSeeder');
+		
 		$this->call('ExcelDataTableSeeder');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');

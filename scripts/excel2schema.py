@@ -153,7 +153,7 @@ fielddata = """1	id	int	No	Additional district ID	-		-	Calculated	Role 1	additio
 3	full_name	varchar (255)	No	Full name	-		-		Role 8	users
 4	job_position_code	varchar (255)	No	Job position code	-		-		Role 8	users
 100	soft_deletion	internal	No	Not use this user any more?	-		-		Role 8	users
-5	job_position_name	int	No	Job position name	-		-		Role 8	users
+5	job_position_name	varchar (255)	No	Job position name	-		-		Role 8	users
 6	email	varchar (255)	No	email	-		-		Role 8	users
 99	is_passive	bool	No	Is the user passive?	-		-		Role 8	users
 110	timestamp	internal	No	-	-		-		Role 7	audits_inspections

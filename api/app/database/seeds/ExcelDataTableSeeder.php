@@ -25,13 +25,33 @@ class ExcelDataTableSeeder extends Seeder {
         $role2->attachPermission($permission1);
         $role2->attachPermission($permission2);
 
-        $user0 = User::create(array(
+        $user0a = User::create(array(
             'initials' => 'josska',
             'full_name' => 'Jostein Skaar',
-            'job_position_code' => 'NEI',            
+            'job_position_code' => 'Mjød',
+            'job_position_name' => 'Software Developer',
             'email' => 'jostein.skaar@miljodir.no',
             'password' => Hash::make('jostein')            
         ));
+
+        $user0b = User::create(array(
+            'initials' => 'chrhau',
+            'full_name' => 'Christian Haugland',
+            'job_position_code' => 'Mjød',
+            'job_position_name' => 'Prince of Excel',
+            'email' => 'christian.haugland@miljodir.no',
+            'password' => Hash::make('christian')            
+        ));
+
+        $user0c = User::create(array(
+            'initials' => 'torfin',
+            'full_name' => 'Torstein Finnesand',
+            'job_position_code' => 'Mjød',
+            'job_position_name' => 'King of Excel',
+            'email' => 'torstein.finnesand@miljodir.no',
+            'password' => Hash::make('torstein')            
+        ));
+
 
 
         // seed begin
@@ -39,189 +59,243 @@ $user1 = User::create(array(
   'initials' => "awinyi" ,
 	'full_name' => "Alex Winyi" ,
 	'job_position_code' => "EIAO" ,
-	'email' => "awinyi@nemaug.org"             
+	'job_position_name' => "Evironmental Impact Assessment Officer" ,
+	'email' => "awinyi@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user2 = User::create(array(
   'initials' => "bbirungi" ,
 	'full_name' => "Bonny Birungi" ,
 	'job_position_code' => "DS" ,
-	'email' => "kbirungi@nemaug.org"             
+	'job_position_name' => "Departmental Secretary" ,
+	'email' => "kbirungi@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user3 = User::create(array(
   'initials' => "dlufafa" ,
 	'full_name' => "Dick Lufafa" ,
 	'job_position_code' => "EAMO-1" ,
-	'email' => "dlufafa@nemaug.org"             
+	'job_position_name' => "Environmental Audits Monitoring Officer" ,
+	'email' => "dlufafa@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user4 = User::create(array(
   'initials' => "enidt" ,
 	'full_name' => "Enid Turyahikayo" ,
 	'job_position_code' => "EAMO" ,
-	'email' => "enidt@nemaug.org"             
+	'job_position_name' => "Environmental Audits and Monitoring Officer" ,
+	'email' => "enidt@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user5 = User::create(array(
   'initials' => "fbagoora" ,
 	'full_name' => "Festus Bagoora" ,
 	'job_position_code' => "NRM(S&L)" ,
-	'email' => "fbagoora@nemaug.org"             
+	'job_position_name' => "Natural Resources Management Specialist (Soils & Land Use)" ,
+	'email' => "fbagoora@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user6 = User::create(array(
   'initials' => "fogwal" ,
 	'full_name' => "Francis Ogwal" ,
 	'job_position_code' => "NRM(B&R)" ,
-	'email' => "fogwal@nemaug.org"             
+	'job_position_name' => "Natural Resources Management Specialist (Bio/Range Lands)" ,
+	'email' => "fogwal@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user7 = User::create(array(
   'initials' => "fonyai" ,
 	'full_name' => "Fred Onyai" ,
 	'job_position_code' => "IMES" ,
-	'email' => "fonyai@nemaug.org"             
+	'job_position_name' => "Internal Monitoring and Evaluation Specialist" ,
+	'email' => "fonyai@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user8 = User::create(array(
   'initials' => "gkitutu" ,
 	'full_name' => "Goreti K. Kitutu" ,
 	'job_position_code' => "EISS" ,
-	'email' => "gkitutu@nemaug.org"             
+	'job_position_name' => "Environmental Information Systems Specialist" ,
+	'email' => "gkitutu@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user9 = User::create(array(
   'initials' => "glubega" ,
 	'full_name' => "Lubega George" ,
 	'job_position_code' => "NRM(Aq)" ,
-	'email' => "glubega@nemaug.org"             
+	'job_position_name' => "Natural Resources Management Specialist (Aquatic)" ,
+	'email' => "glubega@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user10 = User::create(array(
   'initials' => "gsawula" ,
 	'full_name' => "Gerald Sawula" ,
 	'job_position_code' => "DED" ,
-	'email' => "gsawula@nemaug.org"             
+	'job_position_name' => "Deputy Executive Director" ,
+	'email' => "gsawula@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user11 = User::create(array(
   'initials' => "hnamara" ,
 	'full_name' => "Harriet Namara" ,
 	'job_position_code' => "EIAA" ,
-	'email' => "hnamara@nemaug.org"             
+	'job_position_name' => "Environmental Impact Assessment Assistant" ,
+	'email' => "hnamara@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user12 = User::create(array(
   'initials' => "iintujju" ,
 	'full_name' => "Isaac I.G. Ntujju" ,
 	'job_position_code' => "SEI" ,
-	'email' => "iigntujju@nemaug.org"             
+	'job_position_name' => "Senior Environmental Inspector" ,
+	'email' => "iigntujju@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user13 = User::create(array(
   'initials' => "inamuleme" ,
 	'full_name' => "Namuleme Immaculate" ,
 	'job_position_code' => "EAIMA" ,
-	'email' => "inamuleme@nemaug.org"             
+	'job_position_name' => "Environmental Assessment and Information Monitoring Assistant " ,
+	'email' => "inamuleme@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user14 = User::create(array(
   'initials' => "jkagoda" ,
 	'full_name' => "Joy Kagoda" ,
 	'job_position_code' => "SPS" ,
-	'email' => "jkagoda@nemaug.org"             
+	'job_position_name' => "Senior Personal Secretary ED" ,
+	'email' => "jkagoda@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user15 = User::create(array(
   'initials' => "jkutesakwe" ,
 	'full_name' => "Jeniffer Kutesakwe" ,
 	'job_position_code' => "LT" ,
-	'email' => "jkutesakwe@nemaug.org"             
+	'job_position_name' => "Laboratory Technician" ,
+	'email' => "jkutesakwe@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user16 = User::create(array(
   'initials' => "maanyu" ,
 	'full_name' => "Aanyu Margaret" ,
 	'job_position_code' => "EIAC" ,
-	'email' => "maanyu@nemaug.org"             
+	'job_position_name' => "Environmental Impact Assesment Coordinator" ,
+	'email' => "maanyu@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user17 = User::create(array(
   'initials' => "mmubangizi" ,
 	'full_name' => "Matia Mubangizi" ,
 	'job_position_code' => "EAA" ,
-	'email' => "mmubangizi@nemaug.org"             
+	'job_position_name' => "Environmental Audits Assistant" ,
+	'email' => "mmubangizi@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user18 = User::create(array(
   'initials' => "naisha" ,
 	'full_name' => "Nakanwaji Aisha" ,
 	'job_position_code' => "RA" ,
-	'email' => "naisha@nemaug.org"             
+	'job_position_name' => "Registry Assistant" ,
+	'email' => "naisha@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user19 = User::create(array(
   'initials' => "nallimadi" ,
 	'full_name' => "Nancy Allimadi" ,
 	'job_position_code' => "EI" ,
-	'email' => "nallimadi@nemaug.org"             
+	'job_position_name' => "Environmental Inspector" ,
+	'email' => "nallimadi@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user20 = User::create(array(
   'initials' => "nobbo" ,
 	'full_name' => "Obbo Naome" ,
 	'job_position_code' => "EIAO" ,
-	'email' => "nobbo@nemaug.org"             
+	'job_position_name' => "Environmental Impact Assessment officer" ,
+	'email' => "nobbo@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user21 = User::create(array(
   'initials' => "pkato" ,
 	'full_name' => "Phillip Kato" ,
 	'job_position_code' => "NA" ,
-	'email' => "pkato@nemaug.org"             
+	'job_position_name' => "Network Administrator" ,
+	'email' => "pkato@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user22 = User::create(array(
   'initials' => "pnsereko" ,
 	'full_name' => "Patience Nsereko" ,
 	'job_position_code' => "EMO" ,
-	'email' => "pnsereko@nemaug.org"             
+	'job_position_name' => "Environmental Monitoring Officer-Oil & Gas" ,
+	'email' => "pnsereko@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user23 = User::create(array(
   'initials' => "rmugambwa" ,
 	'full_name' => "Richard Mugambwa" ,
 	'job_position_code' => "PM-MSW" ,
-	'email' => "rmugambwa@nemaug.org"             
+	'job_position_name' => "Project Manager-Municipal Solid Waste" ,
+	'email' => "rmugambwa@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user24 = User::create(array(
   'initials' => "rnamara" ,
 	'full_name' => "Namara Rhona" ,
 	'job_position_code' => "SPS" ,
-	'email' => "rnamara@nemaug.org"             
+	'job_position_name' => "Senior Personal Assistant DED" ,
+	'email' => "rnamara@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user25 = User::create(array(
   'initials' => "tkiwanuka" ,
 	'full_name' => "Tonny Kiwanuka" ,
 	'job_position_code' => "EIAA" ,
-	'email' => "tkiwanuma@nemaug.org"             
+	'job_position_name' => "Environmental Impact Assessment Assistant" ,
+	'email' => "tkiwanuma@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user26 = User::create(array(
   'initials' => "tokurut" ,
 	'full_name' => "Tom O. Okurut" ,
 	'job_position_code' => "ED" ,
-	'email' => "tokurut@nemaug.org"             
+	'job_position_name' => "Executive Director" ,
+	'email' => "tokurut@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $user27 = User::create(array(
   'initials' => "wayazika" ,
 	'full_name' => "Waiswa Ayazika" ,
 	'job_position_code' => "DEMC" ,
-	'email' => "wayazika@nemaug.org"             
+	'job_position_name' => "Director Environmental Monitoring and Compliance" ,
+	'email' => "wayazika@nemaug.org" ,
+	'password' => Hash::make('password')            
 ));
 
 $district1 = District::create(array(

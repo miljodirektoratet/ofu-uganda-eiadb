@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->string('initials', 255)->nullable();
 			$table->string('full_name', 255)->nullable();
 			$table->string('job_position_code', 255)->nullable();
-			$table->integer('job_position_name')->unsigned()->nullable();
+			$table->string('job_position_name', 255)->nullable();
     	$table->string('email')->unique();        	
     	$table->string('password');
     	$table->string('remember_token');
