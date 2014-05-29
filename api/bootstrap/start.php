@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('PC-JOSSKA'),
+	'local' => array('PC-JOSSKA', 'Josteins-iMac.local'),
 	'test' => array('ip-10-155-179-190'),
 
 ));
