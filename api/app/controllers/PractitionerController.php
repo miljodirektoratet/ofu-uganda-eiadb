@@ -9,11 +9,11 @@ class PractitionerController extends BaseController {
 	 */
 	public function index()
 	{
-	    $resources = Practitioner::all();
+			$resources = Practitioner::all();
 	
-	    return Response::json($resources->toArray(),
-	        200		
-       	);	 
+			return Response::json($resources->toArray(),
+					200		
+				);	 
 	}
 
 
@@ -26,16 +26,16 @@ class PractitionerController extends BaseController {
 	{		
 		$data = Input::all();
 
-    $resource = new Practitioner($data);	    
-	    	 
-    // Validation and Filtering is sorely needed!!
-    // Seriously, I'm a bad person for leaving that out.
+		$resource = new Practitioner($data);	    
+				 
+		// Validation and Filtering is sorely needed!!
+		// Seriously, I'm a bad person for leaving that out.
 	 
-    $resource->save();
+		$resource->save();
 
-    $resource = Practitioner::find($resource->id);
+		$resource = Practitioner::find($resource->id);
 	 
-    return Response::json($resource->toArray(), 200);
+		return Response::json($resource->toArray(), 200);
 	}
 
 
@@ -47,28 +47,33 @@ class PractitionerController extends BaseController {
 	 */
 	public function show($id)
 	{
-    // Make sure current user owns the requested resource
-    $resource = Practitioner::where('id', $id)
-	            ->take(1)
-	            ->get();
-	 
- 		return Response::json($resource->toArray(), 200);
+		// Make sure current user owns the requested resource
+		// $resource = Practitioner::with('practitionerCertificates')
+		// 	->where('id', $id)
+		// 	->take(1)					
+		// 	->get();
+		
+		$resource = Practitioner::where('id', $id)
+			->take(1)
+			->with('validCertificate')			
+			->get();			
+		return Response::json($resource->toArray(), 200);
 	}
 
 
 	private function updateValuesInResource($resource, $data)
 	{
-    foreach ($data as $key => $value)
-    {
-    	if (in_array($key, $resource["fillable"], true))
-    	{    		
-    		if ($resource[$key] != $value)
-    		{
-    			// TODO: Validate.
-    			$resource[$key] = $value;	    			
-    		}	    	    		
-    	}	    	
-    }
+		foreach ($data as $key => $value)
+		{
+			if (in_array($key, $resource["fillable"], true))
+			{    		
+				if ($resource[$key] != $value)
+				{
+					// TODO: Validate.
+					$resource[$key] = $value;	    			
+				}	    	    		
+			}	    	
+		}
 	}
 
 	/**
@@ -79,23 +84,23 @@ class PractitionerController extends BaseController {
 	 */
 	public function update($id)
 	{
-	    $resource = Practitioner::find($id);
+			$resource = Practitioner::find($id);
 
-	    if (!$resource)
-	    {
-		    return Response::json(array(
-		        'error' => true,
-		        'message' => 'not found'),
-		        404
-		    );
-	    }
+			if (!$resource)
+			{
+				return Response::json(array(
+						'error' => true,
+						'message' => 'not found'),
+						404
+				);
+			}
 
-	    $data = Input::all();
-	    $this->updateValuesInResource($resource, $data);	    
+			$data = Input::all();
+			$this->updateValuesInResource($resource, $data);	    
 
-	    $resource->save();
+			$resource->save();
 
-	    return Response::json($resource->toArray(), 200);
+			return Response::json($resource->toArray(), 200);
 	}
 
 
@@ -107,12 +112,12 @@ class PractitionerController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-	  $resource = Practitioner::find($id);	 
-	  $resource->delete();	 	 	
-    return Response::json(array(
-        'error' => false,
-        'message' => 'resource deleted'),
-        200
-        );
+		$resource = Practitioner::find($id);	 
+		$resource->delete();	 	 	
+		return Response::json(array(
+				'error' => false,
+				'message' => 'resource deleted'),
+				200
+				);
 	}
 }

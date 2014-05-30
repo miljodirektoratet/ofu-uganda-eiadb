@@ -1,6 +1,6 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
+	"name": "sero",
+	"description": "sero",
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",	
 	"require": {

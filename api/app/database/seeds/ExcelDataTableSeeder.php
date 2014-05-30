@@ -63,7 +63,6 @@ $user1 = User::create(array(
 	'email' => "awinyi@nemaug.org" ,
 	'password' => Hash::make('password')            
 ));
-
 $user2 = User::create(array(
   'initials' => "bbirungi" ,
 	'full_name' => "Bonny Birungi" ,
@@ -3691,13 +3690,24 @@ $practitionercertificate11 = PractitionerCertificate::create(array(
 	'conditions' => "The practitioner shall practice as a MEMBER of an Environmental Audit team"             
 ));
 
+
 $practitionercertificate12 = PractitionerCertificate::create(array(
-  'practitioner_id' => 12 ,
+  'practitioner_id' => $practitioner12->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
 	'number' => 42 ,
 	'cert_no' => "CC/EA/042/13" ,
+	'conditions' => "The practitioner shall practice as a MEMBER of an Environmental Audit team"             
+));
+
+$practitionercertificate12b = PractitionerCertificate::create(array(
+  'practitioner_id' => $practitioner12->id ,
+	'year' => 2014 ,
+	'date_of_entry' => "2014-02-27" ,
+	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
+	'number' => 942 ,
+	'cert_no' => "CC/EA/942/14" ,
 	'conditions' => "The practitioner shall practice as a MEMBER of an Environmental Audit team"             
 ));
 
