@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" ng-app="seroApp">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <!-- Style begin -->
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <!-- Style end -->
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController" >
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">EIA Database</a>
+    </div>
+    <div class="navbar-collapse" collapse="isCollapsed">
+      <ul class="nav navbar-nav">
+        <li ng-class="{ active: isActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
+        <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#/advanced1">Advanced 1</a></li>
+            <li><a href="#/advanced2">Advanced 2</a></li>
+            <li class="disabled"><a href="#/advanced3">Advanced 3</a></li>
+            <li class="divider"></li>
+            <li><a href="#/advanced4">Something else</a></li>
+          </ul>
+        </li>
+        <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
+      </ul>
+      <p class="navbar-text navbar-right">Signed in as <a href="#/user" class="navbar-link">Name Namason</a></p>
+    </div><!--/.nav-collapse -->
+
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div ng-view></div>
+</div>
+
+<!-- Script begin -->
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-route/angular-route.js"></script>
+<script src="../bower_components/angular-resource/angular-resource.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/directives.js"></script>
+<!-- Script end -->
+</body>
+</html>
