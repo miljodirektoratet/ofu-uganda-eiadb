@@ -10,14 +10,15 @@ var seroApp = angular.module('seroApp', [
   'seroApp.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/practitioners', {templateUrl: 'partials/practitioners.html', controller: 'PractitionersController'});
+  $routeProvider.when('/', {templateUrl: 'partials/home.html'});
   $routeProvider.when('/advanced1', {templateUrl: 'partials/advanced.html'});
   $routeProvider.when('/advanced2', {templateUrl: 'partials/advanced.html'});
   $routeProvider.when('/advanced3', {templateUrl: 'partials/advanced.html'});
   $routeProvider.when('/advanced4', {templateUrl: 'partials/advanced.html'});
   $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
   $routeProvider.when('/user', {templateUrl: 'partials/user.html'});
-  $routeProvider.otherwise({redirectTo: '/practitioners'});
+  $routeProvider.when('/practitioners', {templateUrl: 'partials/practitioners.html', controller: 'PractitionersController'});
+  $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
 //myApp.config(['$resourceProvider', function ($resourceProvider) {

@@ -40,7 +40,8 @@ Route::get('/user', array('as' => 'user.show',
 ));
 
 
-Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
+//Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
+Route::group(array('prefix' => 'v1'), function()
 {	
     Route::resource('practitioner', 'PractitionerController');    
 });
