@@ -263,6 +263,31 @@ Schema::create('team_members', function(Blueprint $table)
 });
 
 
+Schema::create('users', function(Blueprint $table)
+{
+	$table->increments('id');
+	$table->string('initials', 255)->nullable();
+	$table->string('full_name', 255)->nullable();
+	$table->string('job_position_code', 255)->nullable();
+	$table->string('job_position_name', 255)->nullable();
+	$table->string('email', 255)->nullable();
+	$table->string('password', 255)->nullable();
+	$table->boolean('is_passive')->default(false)->nullable();
+	$table->softDeletes();
+	$table->string('created_by', 255)->nullable();
+	$table->string('updated_by', 255)->nullable();
+	$table->timestamps();
+});
+
+
+Schema::create('lead_agencies', function(Blueprint $table)
+{
+	$table->increments('id');
+	$table->string('lead_agency_short', 255)->nullable();
+	$table->string('lead_agency_long', 255)->nullable();
+});
+
+
 // up end
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -290,6 +315,8 @@ Schema::create('team_members', function(Blueprint $table)
 	Schema::dropIfExists('practitioners', function(Blueprint $table){});
 	Schema::dropIfExists('projects', function(Blueprint $table){});
 	Schema::dropIfExists('team_members', function(Blueprint $table){});
+	Schema::dropIfExists('users', function(Blueprint $table){});
+	Schema::dropIfExists('lead_agencies', function(Blueprint $table){});
 // down end
 	DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}	

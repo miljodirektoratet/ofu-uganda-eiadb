@@ -15,6 +15,7 @@ tablesData["codes"] = "Code"
 tablesData["categories"] = "Category"
 tablesData["practitioners"] = "Practitioner"
 tablesData["practitioner_certificates"] = "PractitionerCertificate"
+tablesData["lead_agencies"] = "LeadAgency"
 
 def getDbColumnsInfo(dataSheet, headerRowIndex):
 	dbColumnsInfo = {}
@@ -43,6 +44,7 @@ ignoreColumns = ['id', 'is_deleted']
 passwordColumn = 'password'
 lookupColumns = []
 dateColumns = ['date_of_entry']
+relationshipColumns = {'practitioner_id':'$practitioner%s->id'}
 
 def getColumnSeed(columnName, value):
 	if columnName in ignoreColumns: return	
@@ -52,8 +54,10 @@ def getColumnSeed(columnName, value):
 		value = getLookupValue(columnName, value)		
 	if not value: return
 	if columnName in dateColumns:
-			value = value.strftime("%Y-%m-%d")			
-	if isNumber(value):
+			value = value.strftime("%Y-%m-%d")
+	if columnName in relationshipColumns:
+		value = relationshipColumns[columnName]%value
+	if isNumber(value) or columnName in relationshipColumns:
 		return """'%s' => %s """ % (columnName, value)
 	return """'%s' => "%s" """ % (columnName, value)
 
@@ -69,7 +73,7 @@ def replaceInFile(filePath, searchBegin, searchEnd, replace):
 		file.write(content)
 
 seedTemplate = """$%s = %s::create(array(
-  %s            
+	%s            
 ));"""
 
 tableFile = glob.glob(tableFilePattern)[-1]

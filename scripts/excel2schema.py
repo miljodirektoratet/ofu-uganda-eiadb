@@ -4,8 +4,9 @@
 import re
 from collections import OrderedDict
 
-phpFile = r"..\api\app\database\migrations\2014_05_21_131000_create_tables.php"
+phpFile = r"..\api\app\database\migrations\2014_06_03_No1_create_tables.php"
 
+#Sortering	dB fields	Data type	Shown in application	Application fields	Field type	Drop-down list	Mandatory	Input	Roles	Table
 fielddata = """1	id	int	No	Additional district ID	-		-	Calculated	Role 1	additional_districts
 2	district_id	int	Yes	District	Dropdown	district	No		Role 1	additional_districts
 3	project_id	int	No	Project ID	-		-	Calculated	Role 1	additional_districts
@@ -165,7 +166,10 @@ fielddata = """1	id	int	No	Additional district ID	-		-	Calculated	Role 1	additio
 110	timestamp	internal	No	-	-		-		Role 1	projects
 110	timestamp	internal	No	-	-		-		Role 8	districts
 110	timestamp	internal	No	-	-		-		Role 6	practitioner_certificates
-110	timestamp	internal	No	-	-		-		Role 8	users"""
+110	timestamp	internal	No	-	-		-		Role 8	users
+1	id	int	No	-	-		-		Role 3	lead_agencies
+2	lead_agency_short	varchar (255)	No	-	-		-		Role 3	lead_agencies
+3	lead_agency_long	varchar (255)	No	-	-		-		Role 3	lead_agencies"""
 
 
 def createSchemaLineForField(fieldname, datatype, foreignIds):	
@@ -226,7 +230,7 @@ def foreignIdFromMainId(tablename):
 		return "audit_inspection_id"		
 	return tablename[:-1] + "_id"
 
-ignore = ['users']
+ignore = []#['users']
 
 foreignIds = {}
 

@@ -56,15 +56,16 @@ class ExcelDataTableSeeder extends Seeder {
 
         // seed begin
 $user1 = User::create(array(
-  'initials' => "awinyi" ,
+	'initials' => "awinyi" ,
 	'full_name' => "Alex Winyi" ,
 	'job_position_code' => "EIAO" ,
 	'job_position_name' => "Evironmental Impact Assessment Officer" ,
 	'email' => "awinyi@nemaug.org" ,
 	'password' => Hash::make('password')            
 ));
+
 $user2 = User::create(array(
-  'initials' => "bbirungi" ,
+	'initials' => "bbirungi" ,
 	'full_name' => "Bonny Birungi" ,
 	'job_position_code' => "DS" ,
 	'job_position_name' => "Departmental Secretary" ,
@@ -73,7 +74,7 @@ $user2 = User::create(array(
 ));
 
 $user3 = User::create(array(
-  'initials' => "dlufafa" ,
+	'initials' => "dlufafa" ,
 	'full_name' => "Dick Lufafa" ,
 	'job_position_code' => "EAMO-1" ,
 	'job_position_name' => "Environmental Audits Monitoring Officer" ,
@@ -82,7 +83,7 @@ $user3 = User::create(array(
 ));
 
 $user4 = User::create(array(
-  'initials' => "enidt" ,
+	'initials' => "enidt" ,
 	'full_name' => "Enid Turyahikayo" ,
 	'job_position_code' => "EAMO" ,
 	'job_position_name' => "Environmental Audits and Monitoring Officer" ,
@@ -91,7 +92,7 @@ $user4 = User::create(array(
 ));
 
 $user5 = User::create(array(
-  'initials' => "fbagoora" ,
+	'initials' => "fbagoora" ,
 	'full_name' => "Festus Bagoora" ,
 	'job_position_code' => "NRM(S&L)" ,
 	'job_position_name' => "Natural Resources Management Specialist (Soils & Land Use)" ,
@@ -100,7 +101,7 @@ $user5 = User::create(array(
 ));
 
 $user6 = User::create(array(
-  'initials' => "fogwal" ,
+	'initials' => "fogwal" ,
 	'full_name' => "Francis Ogwal" ,
 	'job_position_code' => "NRM(B&R)" ,
 	'job_position_name' => "Natural Resources Management Specialist (Bio/Range Lands)" ,
@@ -109,7 +110,7 @@ $user6 = User::create(array(
 ));
 
 $user7 = User::create(array(
-  'initials' => "fonyai" ,
+	'initials' => "fonyai" ,
 	'full_name' => "Fred Onyai" ,
 	'job_position_code' => "IMES" ,
 	'job_position_name' => "Internal Monitoring and Evaluation Specialist" ,
@@ -118,7 +119,7 @@ $user7 = User::create(array(
 ));
 
 $user8 = User::create(array(
-  'initials' => "gkitutu" ,
+	'initials' => "gkitutu" ,
 	'full_name' => "Goreti K. Kitutu" ,
 	'job_position_code' => "EISS" ,
 	'job_position_name' => "Environmental Information Systems Specialist" ,
@@ -127,7 +128,7 @@ $user8 = User::create(array(
 ));
 
 $user9 = User::create(array(
-  'initials' => "glubega" ,
+	'initials' => "glubega" ,
 	'full_name' => "Lubega George" ,
 	'job_position_code' => "NRM(Aq)" ,
 	'job_position_name' => "Natural Resources Management Specialist (Aquatic)" ,
@@ -136,7 +137,7 @@ $user9 = User::create(array(
 ));
 
 $user10 = User::create(array(
-  'initials' => "gsawula" ,
+	'initials' => "gsawula" ,
 	'full_name' => "Gerald Sawula" ,
 	'job_position_code' => "DED" ,
 	'job_position_name' => "Deputy Executive Director" ,
@@ -145,7 +146,7 @@ $user10 = User::create(array(
 ));
 
 $user11 = User::create(array(
-  'initials' => "hnamara" ,
+	'initials' => "hnamara" ,
 	'full_name' => "Harriet Namara" ,
 	'job_position_code' => "EIAA" ,
 	'job_position_name' => "Environmental Impact Assessment Assistant" ,
@@ -154,7 +155,7 @@ $user11 = User::create(array(
 ));
 
 $user12 = User::create(array(
-  'initials' => "iintujju" ,
+	'initials' => "iintujju" ,
 	'full_name' => "Isaac I.G. Ntujju" ,
 	'job_position_code' => "SEI" ,
 	'job_position_name' => "Senior Environmental Inspector" ,
@@ -163,7 +164,7 @@ $user12 = User::create(array(
 ));
 
 $user13 = User::create(array(
-  'initials' => "inamuleme" ,
+	'initials' => "inamuleme" ,
 	'full_name' => "Namuleme Immaculate" ,
 	'job_position_code' => "EAIMA" ,
 	'job_position_name' => "Environmental Assessment and Information Monitoring Assistant " ,
@@ -172,7 +173,7 @@ $user13 = User::create(array(
 ));
 
 $user14 = User::create(array(
-  'initials' => "jkagoda" ,
+	'initials' => "jkagoda" ,
 	'full_name' => "Joy Kagoda" ,
 	'job_position_code' => "SPS" ,
 	'job_position_name' => "Senior Personal Secretary ED" ,
@@ -181,7 +182,7 @@ $user14 = User::create(array(
 ));
 
 $user15 = User::create(array(
-  'initials' => "jkutesakwe" ,
+	'initials' => "jkutesakwe" ,
 	'full_name' => "Jeniffer Kutesakwe" ,
 	'job_position_code' => "LT" ,
 	'job_position_name' => "Laboratory Technician" ,
@@ -190,7 +191,7 @@ $user15 = User::create(array(
 ));
 
 $user16 = User::create(array(
-  'initials' => "maanyu" ,
+	'initials' => "maanyu" ,
 	'full_name' => "Aanyu Margaret" ,
 	'job_position_code' => "EIAC" ,
 	'job_position_name' => "Environmental Impact Assesment Coordinator" ,
@@ -199,7 +200,7 @@ $user16 = User::create(array(
 ));
 
 $user17 = User::create(array(
-  'initials' => "mmubangizi" ,
+	'initials' => "mmubangizi" ,
 	'full_name' => "Matia Mubangizi" ,
 	'job_position_code' => "EAA" ,
 	'job_position_name' => "Environmental Audits Assistant" ,
@@ -208,7 +209,7 @@ $user17 = User::create(array(
 ));
 
 $user18 = User::create(array(
-  'initials' => "naisha" ,
+	'initials' => "naisha" ,
 	'full_name' => "Nakanwaji Aisha" ,
 	'job_position_code' => "RA" ,
 	'job_position_name' => "Registry Assistant" ,
@@ -217,7 +218,7 @@ $user18 = User::create(array(
 ));
 
 $user19 = User::create(array(
-  'initials' => "nallimadi" ,
+	'initials' => "nallimadi" ,
 	'full_name' => "Nancy Allimadi" ,
 	'job_position_code' => "EI" ,
 	'job_position_name' => "Environmental Inspector" ,
@@ -226,7 +227,7 @@ $user19 = User::create(array(
 ));
 
 $user20 = User::create(array(
-  'initials' => "nobbo" ,
+	'initials' => "nobbo" ,
 	'full_name' => "Obbo Naome" ,
 	'job_position_code' => "EIAO" ,
 	'job_position_name' => "Environmental Impact Assessment officer" ,
@@ -235,7 +236,7 @@ $user20 = User::create(array(
 ));
 
 $user21 = User::create(array(
-  'initials' => "pkato" ,
+	'initials' => "pkato" ,
 	'full_name' => "Phillip Kato" ,
 	'job_position_code' => "NA" ,
 	'job_position_name' => "Network Administrator" ,
@@ -244,7 +245,7 @@ $user21 = User::create(array(
 ));
 
 $user22 = User::create(array(
-  'initials' => "pnsereko" ,
+	'initials' => "pnsereko" ,
 	'full_name' => "Patience Nsereko" ,
 	'job_position_code' => "EMO" ,
 	'job_position_name' => "Environmental Monitoring Officer-Oil & Gas" ,
@@ -253,7 +254,7 @@ $user22 = User::create(array(
 ));
 
 $user23 = User::create(array(
-  'initials' => "rmugambwa" ,
+	'initials' => "rmugambwa" ,
 	'full_name' => "Richard Mugambwa" ,
 	'job_position_code' => "PM-MSW" ,
 	'job_position_name' => "Project Manager-Municipal Solid Waste" ,
@@ -262,7 +263,7 @@ $user23 = User::create(array(
 ));
 
 $user24 = User::create(array(
-  'initials' => "rnamara" ,
+	'initials' => "rnamara" ,
 	'full_name' => "Namara Rhona" ,
 	'job_position_code' => "SPS" ,
 	'job_position_name' => "Senior Personal Assistant DED" ,
@@ -271,7 +272,7 @@ $user24 = User::create(array(
 ));
 
 $user25 = User::create(array(
-  'initials' => "tkiwanuka" ,
+	'initials' => "tkiwanuka" ,
 	'full_name' => "Tonny Kiwanuka" ,
 	'job_position_code' => "EIAA" ,
 	'job_position_name' => "Environmental Impact Assessment Assistant" ,
@@ -280,7 +281,7 @@ $user25 = User::create(array(
 ));
 
 $user26 = User::create(array(
-  'initials' => "tokurut" ,
+	'initials' => "tokurut" ,
 	'full_name' => "Tom O. Okurut" ,
 	'job_position_code' => "ED" ,
 	'job_position_name' => "Executive Director" ,
@@ -289,7 +290,7 @@ $user26 = User::create(array(
 ));
 
 $user27 = User::create(array(
-  'initials' => "wayazika" ,
+	'initials' => "wayazika" ,
 	'full_name' => "Waiswa Ayazika" ,
 	'job_position_code' => "DEMC" ,
 	'job_position_name' => "Director Environmental Monitoring and Compliance" ,
@@ -298,7 +299,7 @@ $user27 = User::create(array(
 ));
 
 $district1 = District::create(array(
-  'district' => "Abim" ,
+	'district' => "Abim" ,
 	'hasc' => "UG.AI" ,
 	'iso' => 317 ,
 	'fips' => "UGB6" ,
@@ -306,7 +307,7 @@ $district1 = District::create(array(
 ));
 
 $district2 = District::create(array(
-  'district' => "Adjumani" ,
+	'district' => "Adjumani" ,
 	'hasc' => "UG.AD" ,
 	'iso' => 301 ,
 	'fips' => "UG98" ,
@@ -314,21 +315,21 @@ $district2 = District::create(array(
 ));
 
 $district3 = District::create(array(
-  'district' => "Agago" ,
+	'district' => "Agago" ,
 	'hasc' => "UG.AG" ,
 	'fips' => "UGE3" ,
 	'region' => "N"             
 ));
 
 $district4 = District::create(array(
-  'district' => "Alebtong" ,
+	'district' => "Alebtong" ,
 	'hasc' => "UG.AL" ,
 	'fips' => "UGE4" ,
 	'region' => "N"             
 ));
 
 $district5 = District::create(array(
-  'district' => "Amolatar" ,
+	'district' => "Amolatar" ,
 	'hasc' => "UG.AT" ,
 	'iso' => 314 ,
 	'fips' => "UGB7" ,
@@ -336,14 +337,14 @@ $district5 = District::create(array(
 ));
 
 $district6 = District::create(array(
-  'district' => "Amudat" ,
+	'district' => "Amudat" ,
 	'hasc' => "UG.AZ" ,
 	'fips' => "UGE5" ,
 	'region' => "N"             
 ));
 
 $district7 = District::create(array(
-  'district' => "Amuria" ,
+	'district' => "Amuria" ,
 	'hasc' => "UG.AM" ,
 	'iso' => 216 ,
 	'fips' => "UGB8" ,
@@ -351,7 +352,7 @@ $district7 = District::create(array(
 ));
 
 $district8 = District::create(array(
-  'district' => "Amuru" ,
+	'district' => "Amuru" ,
 	'hasc' => "UG.AY" ,
 	'iso' => 319 ,
 	'fips' => "UGB9" ,
@@ -359,7 +360,7 @@ $district8 = District::create(array(
 ));
 
 $district9 = District::create(array(
-  'district' => "Apac" ,
+	'district' => "Apac" ,
 	'hasc' => "UG.AQ" ,
 	'iso' => 302 ,
 	'fips' => "UG99" ,
@@ -367,7 +368,7 @@ $district9 = District::create(array(
 ));
 
 $district10 = District::create(array(
-  'district' => "Arua" ,
+	'district' => "Arua" ,
 	'hasc' => "UG.AX" ,
 	'iso' => 303 ,
 	'fips' => "UGA1" ,
@@ -375,7 +376,7 @@ $district10 = District::create(array(
 ));
 
 $district11 = District::create(array(
-  'district' => "Budaka" ,
+	'district' => "Budaka" ,
 	'hasc' => "UG.BD" ,
 	'iso' => 217 ,
 	'fips' => "UGC1" ,
@@ -383,7 +384,7 @@ $district11 = District::create(array(
 ));
 
 $district12 = District::create(array(
-  'district' => "Bududa" ,
+	'district' => "Bududa" ,
 	'hasc' => "UG.BA" ,
 	'iso' => 223 ,
 	'fips' => "UGC2" ,
@@ -391,7 +392,7 @@ $district12 = District::create(array(
 ));
 
 $district13 = District::create(array(
-  'district' => "Bugiri" ,
+	'district' => "Bugiri" ,
 	'hasc' => "UG.BI" ,
 	'iso' => 201 ,
 	'fips' => "UG66" ,
@@ -399,21 +400,21 @@ $district13 = District::create(array(
 ));
 
 $district14 = District::create(array(
-  'district' => "Buhweju" ,
+	'district' => "Buhweju" ,
 	'hasc' => "UG.BH" ,
 	'fips' => "UGE6" ,
 	'region' => "W"             
 ));
 
 $district15 = District::create(array(
-  'district' => "Buikwe" ,
+	'district' => "Buikwe" ,
 	'hasc' => "UG.BZ" ,
 	'fips' => "UGE7" ,
 	'region' => "C"             
 ));
 
 $district16 = District::create(array(
-  'district' => "Bukedea" ,
+	'district' => "Bukedea" ,
 	'hasc' => "UG.BE" ,
 	'iso' => 224 ,
 	'fips' => "UGC3" ,
@@ -421,14 +422,14 @@ $district16 = District::create(array(
 ));
 
 $district17 = District::create(array(
-  'district' => "Bukomansimbi" ,
+	'district' => "Bukomansimbi" ,
 	'hasc' => "UG.BM" ,
 	'fips' => "UGE8" ,
 	'region' => "C"             
 ));
 
 $district18 = District::create(array(
-  'district' => "Bukwa" ,
+	'district' => "Bukwa" ,
 	'hasc' => "UG.BW" ,
 	'iso' => 218 ,
 	'fips' => "UGC4" ,
@@ -436,14 +437,14 @@ $district18 = District::create(array(
 ));
 
 $district19 = District::create(array(
-  'district' => "Bulambuli" ,
+	'district' => "Bulambuli" ,
 	'hasc' => "UG.BB" ,
 	'fips' => "UGE9" ,
 	'region' => "E"             
 ));
 
 $district20 = District::create(array(
-  'district' => "Buliisa" ,
+	'district' => "Buliisa" ,
 	'hasc' => "UG.BL" ,
 	'iso' => 419 ,
 	'fips' => "UGC5" ,
@@ -451,7 +452,7 @@ $district20 = District::create(array(
 ));
 
 $district21 = District::create(array(
-  'district' => "Bundibugyo" ,
+	'district' => "Bundibugyo" ,
 	'hasc' => "UG.BX" ,
 	'iso' => 401 ,
 	'fips' => "UG28" ,
@@ -459,7 +460,7 @@ $district21 = District::create(array(
 ));
 
 $district22 = District::create(array(
-  'district' => "Bushenyi" ,
+	'district' => "Bushenyi" ,
 	'hasc' => "UG.BC" ,
 	'iso' => 402 ,
 	'fips' => "UG29" ,
@@ -467,7 +468,7 @@ $district22 = District::create(array(
 ));
 
 $district23 = District::create(array(
-  'district' => "Busia" ,
+	'district' => "Busia" ,
 	'hasc' => "UG.BU" ,
 	'iso' => 202 ,
 	'fips' => "UG67" ,
@@ -475,7 +476,7 @@ $district23 = District::create(array(
 ));
 
 $district24 = District::create(array(
-  'district' => "Butaleja" ,
+	'district' => "Butaleja" ,
 	'hasc' => "UG.BJ" ,
 	'iso' => 219 ,
 	'fips' => "UGC6" ,
@@ -483,28 +484,28 @@ $district24 = District::create(array(
 ));
 
 $district25 = District::create(array(
-  'district' => "Butambala" ,
+	'district' => "Butambala" ,
 	'hasc' => "UG.BT" ,
 	'fips' => "UGF1" ,
 	'region' => "C"             
 ));
 
 $district26 = District::create(array(
-  'district' => "Buvuma" ,
+	'district' => "Buvuma" ,
 	'hasc' => "UG.BV" ,
 	'fips' => "UGF2" ,
 	'region' => "C"             
 ));
 
 $district27 = District::create(array(
-  'district' => "Buyende" ,
+	'district' => "Buyende" ,
 	'hasc' => "UG.BY" ,
 	'fips' => "UGF3" ,
 	'region' => "E"             
 ));
 
 $district28 = District::create(array(
-  'district' => "Dokolo" ,
+	'district' => "Dokolo" ,
 	'hasc' => "UG.DO" ,
 	'iso' => 318 ,
 	'fips' => "UGC7" ,
@@ -512,14 +513,14 @@ $district28 = District::create(array(
 ));
 
 $district29 = District::create(array(
-  'district' => "Gomba" ,
+	'district' => "Gomba" ,
 	'hasc' => "UG.GM" ,
 	'fips' => "UGF4" ,
 	'region' => "C"             
 ));
 
 $district30 = District::create(array(
-  'district' => "Gulu" ,
+	'district' => "Gulu" ,
 	'hasc' => "UG.GL" ,
 	'iso' => 304 ,
 	'fips' => "UGA2" ,
@@ -527,7 +528,7 @@ $district30 = District::create(array(
 ));
 
 $district31 = District::create(array(
-  'district' => "Hoima" ,
+	'district' => "Hoima" ,
 	'hasc' => "UG.HO" ,
 	'iso' => 403 ,
 	'fips' => "UG31" ,
@@ -535,7 +536,7 @@ $district31 = District::create(array(
 ));
 
 $district32 = District::create(array(
-  'district' => "Ibanda" ,
+	'district' => "Ibanda" ,
 	'hasc' => "UG.IB" ,
 	'iso' => 416 ,
 	'fips' => "UGC8" ,
@@ -543,7 +544,7 @@ $district32 = District::create(array(
 ));
 
 $district33 = District::create(array(
-  'district' => "Iganga" ,
+	'district' => "Iganga" ,
 	'hasc' => "UG.IC" ,
 	'iso' => 203 ,
 	'fips' => "UGA3" ,
@@ -551,7 +552,7 @@ $district33 = District::create(array(
 ));
 
 $district34 = District::create(array(
-  'district' => "Isingiro" ,
+	'district' => "Isingiro" ,
 	'hasc' => "UG.NG" ,
 	'iso' => 417 ,
 	'fips' => "UGC9" ,
@@ -559,7 +560,7 @@ $district34 = District::create(array(
 ));
 
 $district35 = District::create(array(
-  'district' => "Jinja" ,
+	'district' => "Jinja" ,
 	'hasc' => "UG.JI" ,
 	'iso' => 204 ,
 	'fips' => "UG33" ,
@@ -567,7 +568,7 @@ $district35 = District::create(array(
 ));
 
 $district36 = District::create(array(
-  'district' => "Kaabong" ,
+	'district' => "Kaabong" ,
 	'hasc' => "UG.AB" ,
 	'iso' => 315 ,
 	'fips' => "UGD1" ,
@@ -575,7 +576,7 @@ $district36 = District::create(array(
 ));
 
 $district37 = District::create(array(
-  'district' => "Kabale" ,
+	'district' => "Kabale" ,
 	'hasc' => "UG.KA" ,
 	'iso' => 404 ,
 	'fips' => "UG34" ,
@@ -583,7 +584,7 @@ $district37 = District::create(array(
 ));
 
 $district38 = District::create(array(
-  'district' => "Kabarole" ,
+	'district' => "Kabarole" ,
 	'hasc' => "UG.BR" ,
 	'iso' => 405 ,
 	'fips' => "UG79" ,
@@ -591,7 +592,7 @@ $district38 = District::create(array(
 ));
 
 $district39 = District::create(array(
-  'district' => "Kaberamaido" ,
+	'district' => "Kaberamaido" ,
 	'hasc' => "UG.KD" ,
 	'iso' => 213 ,
 	'fips' => "UG80" ,
@@ -599,7 +600,7 @@ $district39 = District::create(array(
 ));
 
 $district40 = District::create(array(
-  'district' => "Kalangala" ,
+	'district' => "Kalangala" ,
 	'hasc' => "UG.KN" ,
 	'iso' => 101 ,
 	'fips' => "UG36" ,
@@ -607,7 +608,7 @@ $district40 = District::create(array(
 ));
 
 $district41 = District::create(array(
-  'district' => "Kaliro" ,
+	'district' => "Kaliro" ,
 	'hasc' => "UG.RO" ,
 	'iso' => 220 ,
 	'fips' => "UGD2" ,
@@ -615,14 +616,14 @@ $district41 = District::create(array(
 ));
 
 $district42 = District::create(array(
-  'district' => "Kalungu" ,
+	'district' => "Kalungu" ,
 	'hasc' => "UG.QA" ,
 	'fips' => "UGF5" ,
 	'region' => "C"             
 ));
 
 $district43 = District::create(array(
-  'district' => "Kampala" ,
+	'district' => "Kampala" ,
 	'hasc' => "UG.KM" ,
 	'iso' => 102 ,
 	'fips' => "UG37" ,
@@ -630,7 +631,7 @@ $district43 = District::create(array(
 ));
 
 $district44 = District::create(array(
-  'district' => "Kamuli" ,
+	'district' => "Kamuli" ,
 	'hasc' => "UG.QU" ,
 	'iso' => 205 ,
 	'fips' => "UGA4" ,
@@ -638,7 +639,7 @@ $district44 = District::create(array(
 ));
 
 $district45 = District::create(array(
-  'district' => "Kamwenge" ,
+	'district' => "Kamwenge" ,
 	'hasc' => "UG.KE" ,
 	'iso' => 413 ,
 	'fips' => "UG81" ,
@@ -646,7 +647,7 @@ $district45 = District::create(array(
 ));
 
 $district46 = District::create(array(
-  'district' => "Kanungu" ,
+	'district' => "Kanungu" ,
 	'hasc' => "UG.UU" ,
 	'iso' => 414 ,
 	'fips' => "UG82" ,
@@ -654,7 +655,7 @@ $district46 = District::create(array(
 ));
 
 $district47 = District::create(array(
-  'district' => "Kapchorwa" ,
+	'district' => "Kapchorwa" ,
 	'hasc' => "UG.QP" ,
 	'iso' => 206 ,
 	'fips' => "UGA5" ,
@@ -662,7 +663,7 @@ $district47 = District::create(array(
 ));
 
 $district48 = District::create(array(
-  'district' => "Kasese" ,
+	'district' => "Kasese" ,
 	'hasc' => "UG.KS" ,
 	'iso' => 406 ,
 	'fips' => "UG40" ,
@@ -670,7 +671,7 @@ $district48 = District::create(array(
 ));
 
 $district49 = District::create(array(
-  'district' => "Katakwi" ,
+	'district' => "Katakwi" ,
 	'hasc' => "UG.KK" ,
 	'iso' => 207 ,
 	'fips' => "UGA6" ,
@@ -678,7 +679,7 @@ $district49 = District::create(array(
 ));
 
 $district50 = District::create(array(
-  'district' => "Kayunga" ,
+	'district' => "Kayunga" ,
 	'hasc' => "UG.KY" ,
 	'iso' => 112 ,
 	'fips' => "UG83" ,
@@ -686,7 +687,7 @@ $district50 = District::create(array(
 ));
 
 $district51 = District::create(array(
-  'district' => "Kibaale" ,
+	'district' => "Kibaale" ,
 	'hasc' => "UG.KI" ,
 	'iso' => 407 ,
 	'fips' => "UG41" ,
@@ -694,7 +695,7 @@ $district51 = District::create(array(
 ));
 
 $district52 = District::create(array(
-  'district' => "Kiboga" ,
+	'district' => "Kiboga" ,
 	'hasc' => "UG.QO" ,
 	'iso' => 103 ,
 	'fips' => "UG42" ,
@@ -702,14 +703,14 @@ $district52 = District::create(array(
 ));
 
 $district53 = District::create(array(
-  'district' => "Kibuku" ,
+	'district' => "Kibuku" ,
 	'hasc' => "UG.QB" ,
 	'fips' => "UGF6" ,
 	'region' => "E"             
 ));
 
 $district54 = District::create(array(
-  'district' => "Kiruhura" ,
+	'district' => "Kiruhura" ,
 	'hasc' => "UG.KH" ,
 	'iso' => 418 ,
 	'fips' => "UGD3" ,
@@ -717,14 +718,14 @@ $district54 = District::create(array(
 ));
 
 $district55 = District::create(array(
-  'district' => "Kiryandongo" ,
+	'district' => "Kiryandongo" ,
 	'hasc' => "UG.QD" ,
 	'fips' => "UGF7" ,
 	'region' => "W"             
 ));
 
 $district56 = District::create(array(
-  'district' => "Kisoro" ,
+	'district' => "Kisoro" ,
 	'hasc' => "UG.KR" ,
 	'iso' => 408 ,
 	'fips' => "UG43" ,
@@ -732,7 +733,7 @@ $district56 = District::create(array(
 ));
 
 $district57 = District::create(array(
-  'district' => "Kitgum" ,
+	'district' => "Kitgum" ,
 	'hasc' => "UG.QT" ,
 	'iso' => 305 ,
 	'fips' => "UG84" ,
@@ -740,7 +741,7 @@ $district57 = District::create(array(
 ));
 
 $district58 = District::create(array(
-  'district' => "Koboko" ,
+	'district' => "Koboko" ,
 	'hasc' => "UG.OK" ,
 	'iso' => 316 ,
 	'fips' => "UGD4" ,
@@ -748,14 +749,14 @@ $district58 = District::create(array(
 ));
 
 $district59 = District::create(array(
-  'district' => "Kole" ,
+	'district' => "Kole" ,
 	'hasc' => "UG.QL" ,
 	'fips' => "UGF8" ,
 	'region' => "N"             
 ));
 
 $district60 = District::create(array(
-  'district' => "Kotido" ,
+	'district' => "Kotido" ,
 	'hasc' => "UG.KF" ,
 	'iso' => 306 ,
 	'fips' => "UGA7" ,
@@ -763,7 +764,7 @@ $district60 = District::create(array(
 ));
 
 $district61 = District::create(array(
-  'district' => "Kumi" ,
+	'district' => "Kumi" ,
 	'hasc' => "UG.QM" ,
 	'iso' => 208 ,
 	'fips' => "UG46" ,
@@ -771,28 +772,28 @@ $district61 = District::create(array(
 ));
 
 $district62 = District::create(array(
-  'district' => "Kween" ,
+	'district' => "Kween" ,
 	'hasc' => "UG.QW" ,
 	'fips' => "UGF9" ,
 	'region' => "E"             
 ));
 
 $district63 = District::create(array(
-  'district' => "Kyankwanzi" ,
+	'district' => "Kyankwanzi" ,
 	'hasc' => "UG.QZ" ,
 	'fips' => "UGG1" ,
 	'region' => "C"             
 ));
 
 $district64 = District::create(array(
-  'district' => "Kyegegwa" ,
+	'district' => "Kyegegwa" ,
 	'hasc' => "UG.QG" ,
 	'fips' => "UGG2" ,
 	'region' => "W"             
 ));
 
 $district65 = District::create(array(
-  'district' => "Kyenjojo" ,
+	'district' => "Kyenjojo" ,
 	'hasc' => "UG.QJ" ,
 	'iso' => 415 ,
 	'fips' => "UG85" ,
@@ -800,14 +801,14 @@ $district65 = District::create(array(
 ));
 
 $district66 = District::create(array(
-  'district' => "Lamwo" ,
+	'district' => "Lamwo" ,
 	'hasc' => "UG.LM" ,
 	'fips' => "UGG3" ,
 	'region' => "N"             
 ));
 
 $district67 = District::create(array(
-  'district' => "Lira" ,
+	'district' => "Lira" ,
 	'hasc' => "UG.LL" ,
 	'iso' => 307 ,
 	'fips' => "UGA8" ,
@@ -815,14 +816,14 @@ $district67 = District::create(array(
 ));
 
 $district68 = District::create(array(
-  'district' => "Luuka" ,
+	'district' => "Luuka" ,
 	'hasc' => "UG.LK" ,
 	'fips' => "UGG4" ,
 	'region' => "E"             
 ));
 
 $district69 = District::create(array(
-  'district' => "Luweero" ,
+	'district' => "Luweero" ,
 	'hasc' => "UG.LW" ,
 	'iso' => 104 ,
 	'fips' => "UGA9" ,
@@ -830,14 +831,14 @@ $district69 = District::create(array(
 ));
 
 $district70 = District::create(array(
-  'district' => "Lwengo" ,
+	'district' => "Lwengo" ,
 	'hasc' => "UG.LE" ,
 	'fips' => "UGG5" ,
 	'region' => "C"             
 ));
 
 $district71 = District::create(array(
-  'district' => "Lyantonde" ,
+	'district' => "Lyantonde" ,
 	'hasc' => "UG.LY" ,
 	'iso' => 116 ,
 	'fips' => "UGD5" ,
@@ -845,7 +846,7 @@ $district71 = District::create(array(
 ));
 
 $district72 = District::create(array(
-  'district' => "Manafwa" ,
+	'district' => "Manafwa" ,
 	'hasc' => "UG.MW" ,
 	'iso' => 221 ,
 	'fips' => "UGD6" ,
@@ -853,7 +854,7 @@ $district72 = District::create(array(
 ));
 
 $district73 = District::create(array(
-  'district' => "Masaka" ,
+	'district' => "Masaka" ,
 	'hasc' => "UG.MQ" ,
 	'iso' => 105 ,
 	'fips' => "UG71" ,
@@ -861,7 +862,7 @@ $district73 = District::create(array(
 ));
 
 $district74 = District::create(array(
-  'district' => "Masindi" ,
+	'district' => "Masindi" ,
 	'hasc' => "UG.MZ" ,
 	'iso' => 409 ,
 	'fips' => "UG50" ,
@@ -869,7 +870,7 @@ $district74 = District::create(array(
 ));
 
 $district75 = District::create(array(
-  'district' => "Mayuge" ,
+	'district' => "Mayuge" ,
 	'hasc' => "UG.MG" ,
 	'iso' => 214 ,
 	'fips' => "UG86" ,
@@ -877,7 +878,7 @@ $district75 = District::create(array(
 ));
 
 $district76 = District::create(array(
-  'district' => "Mbale" ,
+	'district' => "Mbale" ,
 	'hasc' => "UG.ME" ,
 	'iso' => 209 ,
 	'fips' => "UGB1" ,
@@ -885,7 +886,7 @@ $district76 = District::create(array(
 ));
 
 $district77 = District::create(array(
-  'district' => "Mbarara" ,
+	'district' => "Mbarara" ,
 	'hasc' => "UG.RR" ,
 	'iso' => 410 ,
 	'fips' => "UGB2" ,
@@ -893,14 +894,14 @@ $district77 = District::create(array(
 ));
 
 $district78 = District::create(array(
-  'district' => "Mitooma" ,
+	'district' => "Mitooma" ,
 	'hasc' => "UG.MM" ,
 	'fips' => "UGG6" ,
 	'region' => "W"             
 ));
 
 $district79 = District::create(array(
-  'district' => "Mityana" ,
+	'district' => "Mityana" ,
 	'hasc' => "UG.TY" ,
 	'iso' => 114 ,
 	'fips' => "UGD8" ,
@@ -908,7 +909,7 @@ $district79 = District::create(array(
 ));
 
 $district80 = District::create(array(
-  'district' => "Moroto" ,
+	'district' => "Moroto" ,
 	'hasc' => "UG.MX" ,
 	'iso' => 308 ,
 	'fips' => "UG88" ,
@@ -916,7 +917,7 @@ $district80 = District::create(array(
 ));
 
 $district81 = District::create(array(
-  'district' => "Moyo" ,
+	'district' => "Moyo" ,
 	'hasc' => "UG.MY" ,
 	'iso' => 309 ,
 	'fips' => "UGB3" ,
@@ -924,7 +925,7 @@ $district81 = District::create(array(
 ));
 
 $district82 = District::create(array(
-  'district' => "Mpigi" ,
+	'district' => "Mpigi" ,
 	'hasc' => "UG.MJ" ,
 	'iso' => 106 ,
 	'fips' => "UG89" ,
@@ -932,7 +933,7 @@ $district82 = District::create(array(
 ));
 
 $district83 = District::create(array(
-  'district' => "Mubende" ,
+	'district' => "Mubende" ,
 	'hasc' => "UG.MD" ,
 	'iso' => 107 ,
 	'fips' => "UGB4" ,
@@ -940,7 +941,7 @@ $district83 = District::create(array(
 ));
 
 $district84 = District::create(array(
-  'district' => "Mukono" ,
+	'district' => "Mukono" ,
 	'hasc' => "UG.MV" ,
 	'iso' => 108 ,
 	'fips' => "UG90" ,
@@ -948,7 +949,7 @@ $district84 = District::create(array(
 ));
 
 $district85 = District::create(array(
-  'district' => "Nakapiripirit" ,
+	'district' => "Nakapiripirit" ,
 	'hasc' => "UG.NI" ,
 	'iso' => 311 ,
 	'fips' => "UG91" ,
@@ -956,7 +957,7 @@ $district85 = District::create(array(
 ));
 
 $district86 = District::create(array(
-  'district' => "Nakaseke" ,
+	'district' => "Nakaseke" ,
 	'hasc' => "UG.NK" ,
 	'iso' => 115 ,
 	'fips' => "UGD9" ,
@@ -964,7 +965,7 @@ $district86 = District::create(array(
 ));
 
 $district87 = District::create(array(
-  'district' => "Nakasongola" ,
+	'district' => "Nakasongola" ,
 	'hasc' => "UG.NA" ,
 	'iso' => 109 ,
 	'fips' => "UG73" ,
@@ -972,14 +973,14 @@ $district87 = District::create(array(
 ));
 
 $district88 = District::create(array(
-  'district' => "Namayingo" ,
+	'district' => "Namayingo" ,
 	'hasc' => "UG.NY" ,
 	'fips' => "UGG7" ,
 	'region' => "E"             
 ));
 
 $district89 = District::create(array(
-  'district' => "Namutumba" ,
+	'district' => "Namutumba" ,
 	'hasc' => "UG.BK" ,
 	'iso' => 222 ,
 	'fips' => "UGE1" ,
@@ -987,14 +988,14 @@ $district89 = District::create(array(
 ));
 
 $district90 = District::create(array(
-  'district' => "Napak" ,
+	'district' => "Napak" ,
 	'hasc' => "UG.NQ" ,
 	'fips' => "UGG8" ,
 	'region' => "N"             
 ));
 
 $district91 = District::create(array(
-  'district' => "Nebbi" ,
+	'district' => "Nebbi" ,
 	'hasc' => "UG.NB" ,
 	'iso' => 310 ,
 	'fips' => "UG58" ,
@@ -1002,21 +1003,21 @@ $district91 = District::create(array(
 ));
 
 $district92 = District::create(array(
-  'district' => "Ngora" ,
+	'district' => "Ngora" ,
 	'hasc' => "UG.NR" ,
 	'fips' => "UGG9" ,
 	'region' => "E"             
 ));
 
 $district93 = District::create(array(
-  'district' => "Ntoroko" ,
+	'district' => "Ntoroko" ,
 	'hasc' => "UG.NO" ,
 	'fips' => "UGH1" ,
 	'region' => "W"             
 ));
 
 $district94 = District::create(array(
-  'district' => "Ntungamo" ,
+	'district' => "Ntungamo" ,
 	'hasc' => "UG.NT" ,
 	'iso' => 411 ,
 	'fips' => "UG59" ,
@@ -1024,14 +1025,14 @@ $district94 = District::create(array(
 ));
 
 $district95 = District::create(array(
-  'district' => "Nwoya" ,
+	'district' => "Nwoya" ,
 	'hasc' => "UG.NW" ,
 	'fips' => "UGH2" ,
 	'region' => "N"             
 ));
 
 $district96 = District::create(array(
-  'district' => "Maracha" ,
+	'district' => "Maracha" ,
 	'hasc' => "UG.MH" ,
 	'iso' => 320 ,
 	'fips' => "UGD7" ,
@@ -1039,14 +1040,14 @@ $district96 = District::create(array(
 ));
 
 $district97 = District::create(array(
-  'district' => "Otuke" ,
+	'district' => "Otuke" ,
 	'hasc' => "UG.OT" ,
 	'fips' => "UGH3" ,
 	'region' => "N"             
 ));
 
 $district98 = District::create(array(
-  'district' => "Oyam" ,
+	'district' => "Oyam" ,
 	'hasc' => "UG.OY" ,
 	'iso' => 321 ,
 	'fips' => "UGE2" ,
@@ -1054,7 +1055,7 @@ $district98 = District::create(array(
 ));
 
 $district99 = District::create(array(
-  'district' => "Pader" ,
+	'district' => "Pader" ,
 	'hasc' => "UG.PR" ,
 	'iso' => 312 ,
 	'fips' => "UG92" ,
@@ -1062,7 +1063,7 @@ $district99 = District::create(array(
 ));
 
 $district100 = District::create(array(
-  'district' => "Pallisa" ,
+	'district' => "Pallisa" ,
 	'hasc' => "UG.PS" ,
 	'iso' => 210 ,
 	'fips' => "UGB5" ,
@@ -1070,7 +1071,7 @@ $district100 = District::create(array(
 ));
 
 $district101 = District::create(array(
-  'district' => "Rakai" ,
+	'district' => "Rakai" ,
 	'hasc' => "UG.RI" ,
 	'iso' => 110 ,
 	'fips' => "UG61" ,
@@ -1078,14 +1079,14 @@ $district101 = District::create(array(
 ));
 
 $district102 = District::create(array(
-  'district' => "Rubirizi" ,
+	'district' => "Rubirizi" ,
 	'hasc' => "UG.RZ" ,
 	'fips' => "UGH4" ,
 	'region' => "W"             
 ));
 
 $district103 = District::create(array(
-  'district' => "Rukungiri" ,
+	'district' => "Rukungiri" ,
 	'hasc' => "UG.RK" ,
 	'iso' => 412 ,
 	'fips' => "UG93" ,
@@ -1093,7 +1094,7 @@ $district103 = District::create(array(
 ));
 
 $district104 = District::create(array(
-  'district' => "Sembabule" ,
+	'district' => "Sembabule" ,
 	'hasc' => "UG.SE" ,
 	'iso' => 111 ,
 	'fips' => "UG74" ,
@@ -1101,21 +1102,21 @@ $district104 = District::create(array(
 ));
 
 $district105 = District::create(array(
-  'district' => "Serere" ,
+	'district' => "Serere" ,
 	'hasc' => "UG.SX" ,
 	'fips' => "UGH5" ,
 	'region' => "E"             
 ));
 
 $district106 = District::create(array(
-  'district' => "Sheema" ,
+	'district' => "Sheema" ,
 	'hasc' => "UG.SH" ,
 	'fips' => "UGH6" ,
 	'region' => "W"             
 ));
 
 $district107 = District::create(array(
-  'district' => "Sironko" ,
+	'district' => "Sironko" ,
 	'hasc' => "UG.SK" ,
 	'iso' => 215 ,
 	'fips' => "UG94" ,
@@ -1123,7 +1124,7 @@ $district107 = District::create(array(
 ));
 
 $district108 = District::create(array(
-  'district' => "Soroti" ,
+	'district' => "Soroti" ,
 	'hasc' => "UG.ST" ,
 	'iso' => 211 ,
 	'fips' => "UG95" ,
@@ -1131,7 +1132,7 @@ $district108 = District::create(array(
 ));
 
 $district109 = District::create(array(
-  'district' => "Tororo" ,
+	'district' => "Tororo" ,
 	'hasc' => "UG.TR" ,
 	'iso' => 212 ,
 	'fips' => "UG76" ,
@@ -1139,7 +1140,7 @@ $district109 = District::create(array(
 ));
 
 $district110 = District::create(array(
-  'district' => "Wakiso" ,
+	'district' => "Wakiso" ,
 	'hasc' => "UG.WA" ,
 	'iso' => 113 ,
 	'fips' => "UG96" ,
@@ -1147,7 +1148,7 @@ $district110 = District::create(array(
 ));
 
 $district111 = District::create(array(
-  'district' => "Yumbe" ,
+	'district' => "Yumbe" ,
 	'hasc' => "UG.YU" ,
 	'iso' => 313 ,
 	'fips' => "UG97" ,
@@ -1155,374 +1156,450 @@ $district111 = District::create(array(
 ));
 
 $district112 = District::create(array(
-  'district' => "Zombo" ,
+	'district' => "Zombo" ,
 	'hasc' => "UG.ZO" ,
 	'fips' => "UGH7" ,
 	'region' => "N"             
 ));
 
 $code1 = Code::create(array(
-  'description1' => "Approved" ,
+	'description1' => "Approved" ,
 	'dropdown_list' => "decision"             
 ));
 
 $code2 = Code::create(array(
-  'description1' => "Rejected" ,
+	'description1' => "Rejected" ,
 	'dropdown_list' => "decision"             
 ));
 
 $code3 = Code::create(array(
-  'description1' => "Disregarded" ,
+	'description1' => "Disregarded" ,
 	'dropdown_list' => "decision"             
 ));
 
 $code4 = Code::create(array(
-  'description1' => "Re-submitted" ,
+	'description1' => "Re-submitted" ,
 	'dropdown_list' => "submission"             
 ));
 
 $code5 = Code::create(array(
-  'description1' => "Final submission" ,
+	'description1' => "Final submission" ,
 	'dropdown_list' => "submission"             
 ));
 
 $code6 = Code::create(array(
-  'description1' => "Considered for EIA" ,
+	'description1' => "Considered for EIA" ,
 	'dropdown_list' => "consequence"             
 ));
 
 $code7 = Code::create(array(
-  'description1' => "Likely exemptet from EIA" ,
+	'description1' => "Likely exemptet from EIA" ,
 	'dropdown_list' => "consequence"             
 ));
 
 $code8 = Code::create(array(
-  'description1' => "PB" ,
+	'description1' => "PB" ,
 	'description2' => "Project Briefs" ,
 	'value1' => 21 ,
 	'dropdown_list' => "project_type"             
 ));
 
 $code9 = Code::create(array(
-  'description1' => "EIATOR" ,
+	'description1' => "EIATOR" ,
 	'description2' => "TORs for EIA" ,
 	'value1' => 14 ,
 	'dropdown_list' => "project_type"             
 ));
 
 $code10 = Code::create(array(
-  'description1' => "EIA" ,
+	'description1' => "EIA" ,
 	'description2' => "EIA Reports" ,
 	'value1' => 30 ,
 	'dropdown_list' => "project_type"             
 ));
 
 $code11 = Code::create(array(
-  'description1' => "EATOR" ,
+	'description1' => "EATOR" ,
 	'description2' => "TOR for EA" ,
 	'value1' => 14             
 ));
 
 $code12 = Code::create(array(
-  'description1' => "EA" ,
+	'description1' => "EA" ,
 	'description2' => "Audit Reports" ,
 	'value1' => 21             
 ));
 
 $code13 = Code::create(array(
-  'description1' => "App. forms" ,
+	'description1' => "App. forms" ,
 	'description2' => "Application forms"             
 ));
 
 $code14 = Code::create(array(
-  'description1' => "Other"             
+	'description1' => "Other"             
 ));
 
 $code15 = Code::create(array(
-  'description1' => "PB received" ,
+	'description1' => "PB received" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code16 = Code::create(array(
-  'description1' => "PB sent to DED" ,
+	'description1' => "PB sent to DED" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code17 = Code::create(array(
-  'description1' => "PB sent to EIAC" ,
+	'description1' => "PB sent to EIAC" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code18 = Code::create(array(
-  'description1' => "PB assigned" ,
+	'description1' => "PB assigned" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code19 = Code::create(array(
-  'description1' => "PB sent to LA" ,
+	'description1' => "PB sent to LA" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code20 = Code::create(array(
-  'description1' => "PB conclusion" ,
+	'description1' => "PB conclusion" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code21 = Code::create(array(
-  'description1' => "TOR received" ,
+	'description1' => "TOR received" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code22 = Code::create(array(
-  'description1' => "TOR sent to DED" ,
+	'description1' => "TOR sent to DED" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code23 = Code::create(array(
-  'description1' => "TOR sent to EIAC" ,
+	'description1' => "TOR sent to EIAC" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code24 = Code::create(array(
-  'description1' => "TOR assigned" ,
+	'description1' => "TOR assigned" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code25 = Code::create(array(
-  'description1' => "TOR sent to LA" ,
+	'description1' => "TOR sent to LA" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code26 = Code::create(array(
-  'description1' => "TOR conclusion" ,
+	'description1' => "TOR conclusion" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code27 = Code::create(array(
-  'description1' => "EIS received" ,
+	'description1' => "EIS received" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code28 = Code::create(array(
-  'description1' => "EIS sent to DED" ,
+	'description1' => "EIS sent to DED" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code29 = Code::create(array(
-  'description1' => "EIS sent to EIAC" ,
+	'description1' => "EIS sent to EIAC" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code30 = Code::create(array(
-  'description1' => "EIS assigned" ,
+	'description1' => "EIS assigned" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code31 = Code::create(array(
-  'description1' => "EIS sent to LA" ,
+	'description1' => "EIS sent to LA" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code32 = Code::create(array(
-  'description1' => "Project Recomondations ready" ,
+	'description1' => "Project Recomondations ready" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code33 = Code::create(array(
-  'description1' => "Project Decision" ,
+	'description1' => "Project Decision" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code34 = Code::create(array(
-  'description1' => "Invoiced" ,
+	'description1' => "Invoiced" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code35 = Code::create(array(
-  'description1' => "Invoice paid" ,
+	'description1' => "Invoice paid" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code36 = Code::create(array(
-  'description1' => "Cert. issued" ,
+	'description1' => "Cert. issued" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $code37 = Code::create(array(
-  'description1' => "Cert. cancelled" ,
+	'description1' => "Cert. cancelled" ,
 	'dropdown_list' => "eia_status"             
 ));
 
 $category1 = Category::create(array(
-  'Id' => 1 ,
+	'Id' => 1 ,
 	'description_long' => " Education Facility" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category2 = Category::create(array(
-  'Id' => 2 ,
+	'Id' => 2 ,
 	'description_long' => " Energy Production / Distribution" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category3 = Category::create(array(
-  'Id' => 3 ,
+	'Id' => 3 ,
 	'description_long' => " Fuel Station" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category4 = Category::create(array(
-  'Id' => 4 ,
+	'Id' => 4 ,
 	'description_long' => " Information & Communications Technology" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category5 = Category::create(array(
-  'Id' => 5 ,
+	'Id' => 5 ,
 	'description_long' => " Infrastructure - Roads, Housing, Renovations" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category6 = Category::create(array(
-  'Id' => 6 ,
+	'Id' => 6 ,
 	'description_long' => " Land-Use Change, Forestry, Agriculture, Livestock" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category7 = Category::create(array(
-  'Id' => 7 ,
+	'Id' => 7 ,
 	'description_long' => " Minerals, Mining, Quarry" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category8 = Category::create(array(
-  'Id' => 8 ,
+	'Id' => 8 ,
 	'description_long' => " Miscellaneous Assessments - Policy, Plan, Programme" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category9 = Category::create(array(
-  'Id' => 9 ,
+	'Id' => 9 ,
 	'description_long' => " Oil and Gas" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category10 = Category::create(array(
-  'Id' => 10 ,
+	'Id' => 10 ,
 	'description_long' => " Pest, Vector, Disease Control" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category11 = Category::create(array(
-  'Id' => 11 ,
+	'Id' => 11 ,
 	'description_long' => " Processing, Manufacturing Industry" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category12 = Category::create(array(
-  'Id' => 12 ,
+	'Id' => 12 ,
 	'description_long' => " Waste Management and Infrastructure" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category13 = Category::create(array(
-  'Id' => 13 ,
+	'Id' => 13 ,
 	'description_long' => " Water Supply Systems and Sanitation" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category14 = Category::create(array(
-  'Id' => 14 ,
+	'Id' => 14 ,
 	'description_long' => " Water Resources, Wetlands, Fisheries Management" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category15 = Category::create(array(
-  'Id' => 15 ,
+	'Id' => 15 ,
 	'description_long' => " Wildlife, Hotels, Leisure, Tourism Facility" ,
 	'consequence' => "Considered for EIA"             
 ));
 
 $category16 = Category::create(array(
-  'Id' => 16 ,
+	'Id' => 16 ,
 	'description_long' => "Clearing and farm construction for individual subsistence smal farms" ,
 	'consequence' => "Likely exemptet from EIA"             
 ));
 
 $category17 = Category::create(array(
-  'Id' => 17 ,
+	'Id' => 17 ,
 	'description_long' => "Construction or repair of individual houses" ,
 	'consequence' => "Likely exemptet from EIA"             
 ));
 
 $category18 = Category::create(array(
-  'Id' => 18 ,
+	'Id' => 18 ,
 	'description_long' => "Minor land use changes in area with slopes less than 20 % including housing construction" ,
 	'consequence' => "Likely exemptet from EIA"             
 ));
 
 $category19 = Category::create(array(
-  'Id' => 19 ,
+	'Id' => 19 ,
 	'description_long' => "Information collection (scientific or educational) exept if it involves use of chemicals or endangered species or alien materials" ,
 	'consequence' => "Likely exemptet from EIA"             
 ));
 
 $category20 = Category::create(array(
-  'Id' => 20 ,
+	'Id' => 20 ,
 	'description_long' => "Transfer of ownership of land or related facilities so long as the general character of the area is not changed" ,
 	'consequence' => "Likely exemptet from EIA"             
 ));
 
 $category21 = Category::create(array(
-  'Id' => 21 ,
+	'Id' => 21 ,
 	'description_long' => "Environmental enforcement actions" ,
 	'consequence' => "Likely exemptet from EIA"             
 ));
 
 $category22 = Category::create(array(
-  'Id' => 22 ,
+	'Id' => 22 ,
 	'description_long' => "Emergency repairs to facilities within the character of its surroundings" ,
 	'consequence' => "Likely exemptet from EIA"             
 ));
 
 $practitioner1 = Practitioner::create(array(
-  'person' => "Mr. Advan MBABAZI " ,
-	'organisation_name' => "Advann Uganda Limited" ,
-	'visiting_address' => "Nsambya-Avemaria, Off Kevina Road" ,
-	'box_no' => "P.O. Box 1539 " ,
+	'person' => "Dr. Andrew MUWANGA" ,
+	'organisation_name' => "Department of Geology" ,
+	'visiting_address' => "Makerere University" ,
+	'box_no' => "P.O. Box 7062" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0784992264 and 0704323993" ,
-	'email' => " madvan.m@gmail.com ; advannuganda@gmail.com " ,
-	'qualifications' => "B. Environmental Science " ,
-	'expertise' => "Fuel Stations, Communication Masts, Waste Management, Mining Projects,"             
+	'phone' => "Tel: Office: 0414-541258;    Mob: 0712 803 362 " ,
+	'email' => " amuwanga@sci.mak.ac.ug  " ,
+	'qualifications' => "PhD. Environmental Geology; BSc. Geology & Chemistry" ,
+	'expertise' => "Geology; Mining; Hydrogeological Projects; Stone Quarrying; Water Quality Assessment & Monitoring; Assessment of natural hazards (e.g. landslides)"             
 ));
 
 $practitioner2 = Practitioner::create(array(
-  'person' => "Eng. Lammeck KAJUBI" ,
-	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
-	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
-	'box_no' => "P.O. Box 22428" ,
+	'person' => "Dr. Balla TURYAHUMURA" ,
+	'organisation_name' => "KATS Consult" ,
+	'visiting_address' => "Buganda Road, 666/ G, " ,
+	'box_no' => "P.O. Box 504 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0712 403357 and 0782580480" ,
-	'email' => " l.kajubi@awe-engineers.com " ,
-	'qualifications' => "MEngSc. Environmental Engineering; BSc. Agricultural Engineering (Soil & Water)" ,
-	'expertise' => "Air Pollution Engineering; Wastewater Engineering; Solid waste; Hydropower, Medical Waste, Noise Pollution; Cleaner Production; Risk Assessment; Occupational Safety & Health; Clean Development Mechanism (CDM); GIS; Strategic Environmental Assessment .  "             
+	'phone' => "Tel: Mob :   0772 470785 ;  Office : 0312 108449 ; " ,
+	'email' => " ballakats@gmail.com  " ,
+	'qualifications' => "PhD. Technical Sciences; MSc. Chemical Engineering/Plastics Technology" ,
+	'expertise' => "Chemical & Process Industries, Enterprises using chemicals, institutions and others such as Waste Disposal Facilities."             
 ));
 
 $practitioner3 = Practitioner::create(array(
-  'person' => "Mr. Herbert Mpagi KALIBALA" ,
-	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
-	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
-	'box_no' => "P.O. Box 22428 " ,
+	'person' => "Dr. Bob Humphrey OGWANG" ,
+	'organisation_name' => "Greenbelt Consult Ltd." ,
+	'visiting_address' => "Colline House, 3rd Floor, Nile Av. " ,
+	'box_no' => "P.O. Box 24854" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772496451" ,
-	'email' => "  h.kalibbala@awe-ngineers.com " ,
-	'qualifications' => "MSc. Civil Engineering, BSc. Civil Engineering" ,
-	'expertise' => "Hydropower, Sanitation, Water Quality Management & Pollution Control; Designing Water & Wastewater Treatment Systems, roads and highways, Hydrology and Hydrogeology, Geotechnical Surveys. "             
+	'phone' => "Tel: Office: 0414-346426; Mob: 0772-841264" ,
+	'email' => " bogwang@greenbelt.co.ug " ,
+	'qualifications' => "PhD. Natural Resource Management; MSc. Agriculture; BSc. Agriculture." ,
+	'expertise' => "Natural Resource Management; Energy infrastructure;  Telecommunications; Agriculture and Waste Management "             
 ));
 
 $practitioner4 = Practitioner::create(array(
-  'person' => "Dr. Isa KABENGE" ,
+	'person' => "Dr. Bruce RUKUNDO" ,
+	'box_no' => "P.O. Box 1729" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256782392951" ,
+	'email' => "rukundobr@yahoo.com ; brucerukundo@gmail.com " ,
+	'qualifications' => "Phd Land Management (Dr.-Ing.); MSc. Land Management and Tenure, BA. Environmental Management" ,
+	'expertise' => "Land-use Planning and Management, Disaster and Environmental Risk Assessments"             
+));
+
+$practitioner5 = Practitioner::create(array(
+	'person' => "Dr. Charles A. KOOJO " ,
+	'organisation_name' => "Urban Research and Training Consultancy (URTC)/ Enviro and Industrial Consult (EICU) " ,
+	'box_no' => "P.O. Box 20032 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: Office: + 256 312 10 5641; Mobile: 0772 522707 " ,
+	'email' => " Koojocharles@yahoo.co.uk ; Urtcea@urban-research.net " ,
+	'qualifications' => "PhD. Landuse & Regional Planning; MSc. Geography.; PgD. Environmental Impact Assessment;" ,
+	'expertise' => "Landuse Planning & Policy; Land Resources Analysis;  Environmental Planning; Strategic Environmental Assessment; Eco-Benefits & Cleaner Production; Urban Development Planning; Resettlement Action Plans for Infrastructure "             
+));
+
+$practitioner6 = Practitioner::create(array(
+	'person' => "Dr. Charles B. NIWAGABA " ,
+	'organisation_name' => "Department of Civil Engineering" ,
+	'visiting_address' => "Makerere University" ,
+	'box_no' => "P.O. Box 7062 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: Office: 0414-543152; Mobile:      0772-335477" ,
+	'email' => "  cniwagaba@tech.mak.ac.ug ; cbniwagaba@yahoo.co.uk " ,
+	'qualifications' => "PhD. in Environmental Engineering; MSc. Environmental Engineering; BSc. Civil Engineering." ,
+	'expertise' => "Water and waste water Management; Civil Works and Construction; and Road works."             
+));
+
+$practitioner7 = Practitioner::create(array(
+	'person' => "Dr. Denis BYAMUKAMA " ,
+	'organisation_name' => "WSS Services(U) Ltd" ,
+	'visiting_address' => "6th Floor Impala House Annex, Plot 13/15 Kimathi Avenue" ,
+	'box_no' => "P.O. Box 27755" ,
+	'city' => "Kampala" ,
+	'phone' => " Tel: 0782 519 315 " ,
+	'expertise' => "Environmental Impacts Assessment; Environmental Audits; Environmental Health; Environmental Monitoring/ Planning for Water, Wastewater, Housing, and Roads Projects."             
+));
+
+$practitioner8 = Practitioner::create(array(
+	'person' => "Dr. Deogratius  Kaheeru SEKIMPI " ,
+	'organisation_name' => "OSHFA Ltd." ,
+	'box_no' => "P.O. Box 16422" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772-451641" ,
+	'email' => " oshefa@yahoo.com ; dsekimpi@yahoo.com " ,
+	'qualifications' => "MSc. Occupational Medicine;" ,
+	'expertise' => "Occupational Health and Safety, Environmental Health, Public Health, Environment and Natural Resources"             
+));
+
+$practitioner9 = Practitioner::create(array(
+	'person' => "Dr. Festus Kibiri BAGOORA" ,
+	'organisation_name' => "Nature-RIDD (U) Ltd" ,
+	'visiting_address' => "Lower Estate Kyambogo, Plot 12 Devon Avenue" ,
+	'box_no' => "P.O. Box 26598" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772 551340" ,
+	'email' => " fbago; a@gmail.com" ,
+	'qualifications' => "PHD in Environmental science, Bachelor of Arts and Diploma in Education" ,
+	'expertise' => "Ecosystems impacts & restoration, land evaluation & land use planning, soils & Geomorphological assessments, Disaster/hazards Management, Boundary-layer climatology & Remote sensing of the environment, and climate & climate change impact evaluation"             
+));
+
+$practitioner10 = Practitioner::create(array(
+	'person' => "Dr. Fred Alex TUGUME" ,
+	'box_no' => "P.O. Box 9" ,
+	'city' => " Entebbe" ,
+	'phone' => "Tel: 0772471131" ,
+	'email' => "   fredtugume@gmail.com" ,
+	'qualifications' => "PhD. in Geo Sciences, MSc.  GeoSciences, MSc.  Geophysics, BSc. Physics & Mathematics" ,
+	'expertise' => "Land Use Planning and Management, Impact Predictions."             
+));
+
+$practitioner11 = Practitioner::create(array(
+	'person' => "Dr. Isa KABENGE" ,
 	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
 	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
 	'box_no' => "P.O. Box 22428 " ,
@@ -1533,56 +1610,134 @@ $practitioner4 = Practitioner::create(array(
 	'expertise' => "Water/Waste Water and Sanitation, GIS, Hydrological  Analysis and Surveys, Irrigation schemes, Hydro power, Soil Conservation, Strategic environmental Assessments, Air quality and EMS"             
 ));
 
-$practitioner5 = Practitioner::create(array(
-  'person' => "Ms. Pamela. K. TASHOBYA " ,
-	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
-	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
-	'box_no' => "P.O. Box 22428 " ,
+$practitioner12 = Practitioner::create(array(
+	'person' => "Dr. Isyagi–Levine Nelly AJANGALE" ,
+	'box_no' => "P.O. Box 20044 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0414 268466" ,
-	'email' => " mail@awe-engineers.com " ,
-	'qualifications' => "MSc. Development Management; BA. Environmental Management  " ,
-	'expertise' => "Social Impact Assessment; Waste Management; Public & Occupational Health Risk Assessment."             
+	'phone' => "Tel: +256 782 728028" ,
+	'qualifications' => "Ph.D. Aquaculture; MSc. Aquaculture; B. Veterinary Medicine" ,
+	'expertise' => "Aquaculture; Fish Health and Animal Production Assessments"             
 ));
 
-$practitioner6 = Practitioner::create(array(
-  'person' => "Ms. Faith MUGERWA" ,
-	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
-	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
-	'box_no' => "P.O. Box 22428 " ,
+$practitioner13 = Practitioner::create(array(
+	'person' => "Dr. James OKOT - OKUMU" ,
+	'organisation_name' => "Ecotech Consulting Environmental Management Firm Ltd." ,
+	'box_no' => "P.O. Box 16569" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0782716542" ,
-	'email' => " faithmugerwa@yahoo.co.uk " ,
-	'qualifications' => "BA Sociology, " ,
-	'expertise' => "Social Impact Assessment (SIA), Resettlement Action Plan (RAP) Social Planning, Sociology of Health, Urban Planning "             
+	'phone' => "Tel: 0772 411 460" ,
+	'email' => " jokotokumu@yahoo.com; jokotokumu@muienr.mak.ac.ug " ,
+	'qualifications' => "PhD. Environmental Science; BSc. Chemistry & Biochemistry" ,
+	'expertise' => "Water Resources Management; Pollution Management; Cleaner Production; Environmental Chemistry"             
 ));
 
-$practitioner7 = Practitioner::create(array(
-  'person' => "Mr. Ben David OYEN" ,
-	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
-	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
-	'box_no' => "P.O. Box 22428 " ,
+$practitioner14 = Practitioner::create(array(
+	'person' => "Dr. John C. SSEMPEBWA" ,
+	'organisation_name' => "Environpower (U) ltd" ,
+	'visiting_address' => "Mukono" ,
+	'box_no' => "P.O. Box 575" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772196033 and 0700945694" ,
-	'email' => " oyenben@yahoo.com ; oyen.ben@gmail.com " ,
-	'qualifications' => "BSc. In Environmental Engineering and Management" ,
-	'expertise' => "Cleaner Production, Occupational Health and Safety Site Remediation, Environmental Monitoring &Analysis; and Structural Engineering Designs of Waste Management Systems"             
+	'phone' => "Tel: 0772963074 and 0704663074" ,
+	'email' => " jssemps@musph.ac.ug ; environpower@gmail.com" ,
+	'qualifications' => "PhD. EnvironmentalToxicology; MSc. Water Resources Management BSc. Botany & Zoology" ,
+	'expertise' => "Health Risk/Impacts  Evaluation; Hazardous Material Management & Emergency Response; Waste Water Treatment Systems; Water Quality Surveillance; Fisheries Management; Occupational Safety and Health; Post-Contamination Site Remediation; Solid Waste Management; Pollution Control and Waste Management."             
 ));
 
-$practitioner8 = Practitioner::create(array(
-  'person' => "MS. Ritah NABAGALLA" ,
-	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
-	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
-	'box_no' => "P.O. Box 22428 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772693630 and 0704154674" ,
-	'email' => " ritahnabaggala@yahoo.com ; r.nabaggala@awe-engineers.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Social Impact Assessment, Ressettlement Action Plans, Environmental Sensitisation,"             
+$practitioner15 = Practitioner::create(array(
+	'person' => "Dr. Joseph KOBUSHESHE" ,
+	'organisation_name' => "Petroleum Exploration & Production Department" ,
+	'box_no' => "P.O. Box 9" ,
+	'city' => "Entebbe" ,
+	'phone' => "Tel:0777863903" ,
+	'email' => " jkobusheshe@yahoo.com ; j.kobusheshe@petroleum.go.ug " ,
+	'qualifications' => "PhD in Environmental Engineering, MSc. in Environmental & Resource Engineering, BSc.  Civil Engineering" ,
+	'expertise' => "Petroleum Exploration (Drilling) and Production and Supplies, Energy Resources Development (Hydro-power and Nuclear Energy Civil Engineering Projects (Highway, Water, Housing)"             
 ));
 
-$practitioner9 = Practitioner::create(array(
-  'person' => "Eng. Lammeck KAJUBI" ,
+$practitioner16 = Practitioner::create(array(
+	'person' => "Dr. Muhammad NTALE" ,
+	'organisation_name' => "Department of Chemistry " ,
+	'visiting_address' => "Makerere University" ,
+	'box_no' => "P.O. Box 7062" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0414540992, Mob: 0392967223" ,
+	'email' => " muhntale@yahoo.co.uk " ,
+	'qualifications' => "PhD In Analytical Chemistry, MSc. (Analytical Chemistry), BSc. (Chemistry) " ,
+	'expertise' => "Environmental Auditing, Environmental Chemistry, Solid waste management and Cleaner Production"             
+));
+
+$practitioner17 = Practitioner::create(array(
+	'person' => "Dr. Paul Kijobo MUSALI" ,
+	'organisation_name' => "Department of Geography" ,
+	'visiting_address' => "Makerere University" ,
+	'box_no' => "P.O. Box 7062 " ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: +256 772 491083; Mob : 0772 347854; Tel: : 0414 530686 ; " ,
+	'email' => " rogo966@yahoo.co.uk ; muspal@arts.mak.ac.ug   " ,
+	'qualifications' => "PhD.  Natural Resource Management; BA. Geography" ,
+	'expertise' => "Natural Resource Assessment, Land-use Planning/ Agriculture, Infrastructural Development, Biodiversity Planning, Waste Management Socio-Economic Assessments, Housing & Estate Development."             
+));
+
+$practitioner18 = Practitioner::create(array(
+	'person' => "Dr. Paul SSEGAWA " ,
+	'organisation_name' => "Geo-Taxon Consults" ,
+	'visiting_address' => "Makerere University" ,
+	'box_no' => "P.O. Box 28973 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256- (0) 772 411469" ,
+	'email' => " paulssegawa@yahoo.com " ,
+	'qualifications' => "PhD in Plant Ecology and Ethnobotany; MSc. Environment and Natural Resource Management; BSc. Forestry " ,
+	'expertise' => "Terrestrial Ecology; Biodiversity Studies; Plant Taxonomy "             
+));
+
+$practitioner19 = Practitioner::create(array(
+	'person' => "Dr. Rose MUGIDDE" ,
+	'organisation_name' => "COWI Uganda Ltd." ,
+	'visiting_address' => "Crusader House, 2nd Floor, Plot No. 3, Portal Avenue " ,
+	'box_no' => "P.O. Box 10591" ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: +256 775 739538" ,
+	'email' => " mugidde@yahoo.com " ,
+	'qualifications' => "PhD. (Biology); BSc. Zoology (Wildlife and Ecology)" ,
+	'expertise' => "Toxicology, Aquatic environments’ evaluation, GIS, water resources, and water quality monitoring & evaluation"             
+));
+
+$practitioner20 = Practitioner::create(array(
+	'person' => "Dr. Swidiq MUGERWA" ,
+	'organisation_name' => "National Livestock Resources Institute " ,
+	'box_no' => "P.O. Box 96 " ,
+	'city' => "Tororo" ,
+	'phone' => "Tel: + 256 782660295" ,
+	'email' => " swidiqk@yahoo.com " ,
+	'qualifications' => "BSc. Agriculture" ,
+	'expertise' => "Ecology, Biodiversity Conservation, Animal Environment Interaction Social and Economic Environmental Impacts, Environmental Ecotechnology, Agriculture Development Projects, Construction projects and water resources management"             
+));
+
+$practitioner21 = Practitioner::create(array(
+	'person' => "Eng. Andrew Nabikamba TADHUBA" ,
+	'organisation_name' => "TAMP  Engineering Consultants Ltd" ,
+	'visiting_address' => "Plot 6 Entebbe Road" ,
+	'box_no' => "P.O. Box 6780 " ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: 0751504444 or 0772404414" ,
+	'email' => "  tadhuba@yahoo.com" ,
+	'qualifications' => "BSc. Engineering (Civil), BA. Development Studies and Democracy" ,
+	'expertise' => "Civil works & construction infrastructure, Risk Assessment, Occupational Safety & Health, Materials' suitability analysis,"             
+));
+
+$practitioner22 = Practitioner::create(array(
+	'person' => "Eng. Edward Mike NDAWULA" ,
+	'organisation_name' => "Nek Consults Limited (www.nekconsults.com)" ,
+	'visiting_address' => "Block 2, Suite B5, NHCC Estate Wandegeya" ,
+	'box_no' => "P.O. Box 23949" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256 752740664" ,
+	'email' => " ndawula@nekconsults.com " ,
+	'qualifications' => "BSc. Electrical Engineering" ,
+	'expertise' => "Energy and Hydropower projects, Electronic waste and materials management, Electrical Engineering"             
+));
+
+$practitioner23 = Practitioner::create(array(
+	'person' => "Eng. Lammeck KAJUBI" ,
 	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
 	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
 	'box_no' => "P.O. Box 22428" ,
@@ -1590,210 +1745,45 @@ $practitioner9 = Practitioner::create(array(
 	'phone' => "Tel: 0712 403357 and 0782580480" ,
 	'email' => " l.kajubi@awe-engineers.com " ,
 	'qualifications' => "MEngSc. Environmental Engineering; BSc. Agricultural Engineering (Soil & Water)" ,
-	'expertise' => "Air Pollution Engineering; Wastewater Engineering; Solid waste; Hydropower, Medical Waste, Noise Pollution; Cleaner Production; Risk Assessment; Occupational Health & Safety; Clean Development Mechanism (CDM); GIS; Strategic Environmental Assessment. "             
-));
-
-$practitioner10 = Practitioner::create(array(
-  'person' => "Mr. Herbert Mpagi KALIBALA" ,
-	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
-	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
-	'box_no' => "P.O. Box 22428 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772496451" ,
-	'email' => "   h.kalibbala@awe-ngineers.com " ,
-	'qualifications' => "MSc. Civil Engineering, BSc. Civil Engineering" ,
-	'expertise' => "Hydropower, Sanitation, Water Quality Management & Pollution Control; Designing Water & Wastewater Treatment Systems, Roads and Highways, Hydrology and Hydrogeology, Strategic Environmental Assessment Geotechnical Surveys. "             
-));
-
-$practitioner11 = Practitioner::create(array(
-  'person' => "Dr. Isa KABENGE" ,
-	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
-	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
-	'box_no' => "P.O. Box 22428" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772377172" ,
-	'email' => "  isakabenge@gmail.com ; i.kabenge@awe-engineers.com " ,
-	'qualifications' => "PhD. Biological Systems Engineering, Master of Agricultural Engineering, BSc. Agricultural Engineering" ,
-	'expertise' => "Water/Waste Water and Sanitation, GIS, Hydrological  Analysis and Surveys, Irrigation schemes, Hydro power, Soil Conservation, Strategic environmental Assessments, Air quality and EMS"             
-));
-
-$practitioner12 = Practitioner::create(array(
-  'person' => "Ms. Pamela. K. TASHOBYA " ,
-	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
-	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
-	'box_no' => "P.O. Box 22428" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0414 268466" ,
-	'email' => " mail@awe-engineers.com " ,
-	'qualifications' => "MSc. Development Management; BA. Environmental Management  " ,
-	'expertise' => "Strategic and Environmental and Social Impact Assessment, Waste Management, Public and Ocupational Health Risk Assessments"             
-));
-
-$practitioner13 = Practitioner::create(array(
-  'person' => "Mr. Alex KAGODA " ,
-	'organisation_name' => "Arc Design Ltd" ,
-	'visiting_address' => "Plot 85, Buganda Road; " ,
-	'box_no' => "P.O. Box 22946" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: 0774 404052" ,
-	'email' => " kagodalex@gmail.com " ,
-	'qualifications' => "BSc. Industrial Chemistry" ,
-	'expertise' => "Occupational Health and Safety; Environmental Pollution Assessment"             
-));
-
-$practitioner14 = Practitioner::create(array(
-  'person' => "Mr. Dismas Jacob ONGWEN" ,
-	'organisation_name' => "Archio- Heritage Consultancy " ,
-	'box_no' => "P.O. Box 33334" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel:0772970991" ,
-	'email' => " dis3ongwen@gmail.com " ,
-	'qualifications' => "M. Phil in Archaeology, BA.  History/Philosophy" ,
-	'expertise' => "Archiological and Physical Culture,"             
-));
-
-$practitioner15 = Practitioner::create(array(
-  'person' => "Mr. Robert Charles AGUMA" ,
-	'organisation_name' => "ASRDEM  Ltd." ,
-	'box_no' => "P.O. Box 22609" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772-380340" ,
-	'email' => " robertaguma@yahoo.com " ,
-	'qualifications' => "MSc. GIS & Earth Observation (Forestry for Sustainable Development)" ,
-	'expertise' => "Agriculture and Forestry; Natural Resource Management; Environmental Management; Waste Management "             
-));
-
-$practitioner16 = Practitioner::create(array(
-  'person' => "Mr. Robert Charles AGUMA" ,
-	'organisation_name' => "ASRDEM  Ltd." ,
-	'box_no' => "P.O. Box 22609" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772-380340" ,
-	'email' => " robertaguma@yahoo.com" ,
-	'qualifications' => "MSc. GIS & Earth Observation (Forestry for Sustainable Development)  BSc. Forestry." ,
-	'expertise' => "Forestry, Tourism, Mining, Energy, and Water Resources auditing,"             
-));
-
-$practitioner17 = Practitioner::create(array(
-  'person' => "Mr. Edgar D. Kamugasha MUGISHA " ,
-	'organisation_name' => "Atacama Consulting, " ,
-	'visiting_address' => "Plot 23 Gloucester Avenue" ,
-	'box_no' => "P.O. Box 12130 " ,
-	'city' => "Kyambogo, " ,
-	'phone' => "Tel: 0752-998545 (Mobile) OR 0751-090752 (Office)" ,
-	'email' => " edgarmugisha@atacama.co.ug ; edgarmugisha@yahoo.com  " ,
-	'qualifications' => "MSc. Environmental Assessment & Management; BSc. Environmental Management" ,
-	'expertise' => "Environmental Management Systems (ISO 14001) and Auditing; Occupational Health and Safety; Climate Change Services (Emissions Reduction and Carbon Trading); Oil & Gas, Natural Resource Management; Cleaner Production Assessments; Waste Management; Land Use Planning; and Sustainable Tourism. "             
-));
-
-$practitioner18 = Practitioner::create(array(
-  'person' => "Ms. Juliana KEIRUNGI" ,
-	'organisation_name' => "Atacama Consulting, " ,
-	'visiting_address' => "Plot 23 Gloucester Avenue" ,
-	'box_no' => "P.O. Box 12130" ,
-	'city' => "Kyambogo," ,
-	'phone' => "Tel: 0701-553642 (Mobile)  OR 0751-090752 (Office)   " ,
-	'email' => "  keirungi@yahoo.com ; julianakeirungi@atacama.co.ug   " ,
-	'qualifications' => "MSc. Environmental Science; BScH. Environmental Science" ,
-	'expertise' => "Industrial and Municipal Wastewater Management; Wastewater Treatment Plant Design; Community Based Natural Resource Management; Zoology; Resource Economics; Mine Assessments."             
-));
-
-$practitioner19 = Practitioner::create(array(
-  'person' => "Mr. Edgar D. Kamugasha MUGISHA" ,
-	'organisation_name' => "Atacama Consulting, " ,
-	'visiting_address' => "Plot 23 Gloucester Avenue" ,
-	'box_no' => "P.O. Box 12130 " ,
-	'city' => "Kyambogo, " ,
-	'phone' => "Tel: 0752-998545 (Mobile) OR  0751-090752 (Office)" ,
-	'email' => " edgarmugisha@yahoo.com ; edgarmugisha@atacama.co.ug" ,
-	'qualifications' => "MSc. Environmental Assessment & Management; BSc. Environmental Management" ,
-	'expertise' => "Environmental Management Systems (ISO 14001) and Auditing; Occupational Health and Safety; Climate Change Services (Emissions Reduction and Carbon Trading); Natural Resource Mgt. Cleaner Production Assessments; Waste Management; Land Use Planning; and Sustainable Tourism"             
-));
-
-$practitioner20 = Practitioner::create(array(
-  'person' => "Ms. Juliana KEIRUNGI " ,
-	'organisation_name' => "Atacama Consulting, " ,
-	'visiting_address' => "Plot 23 Gloucester Avenue" ,
-	'box_no' => "P.O. Box 12130 " ,
-	'city' => "Kyambogo," ,
-	'phone' => "Tel: 0701-553642 (Mobile)  OR 0751-090752 (Office) " ,
-	'email' => "  keirungi@yahoo.com ; julianakeirungi@atacama.co.ug   " ,
-	'qualifications' => "MSc. Environmental Science ; BScH. Environmental Science ; " ,
-	'expertise' => "Mining, Highway/ Road Developments, Renewable Energy, Oil and Gas, Biofuels Development, Water & Sanitation Projects, Waste Management , Industrial and Municipal Wastewater Management  "             
-));
-
-$practitioner21 = Practitioner::create(array(
-  'person' => "Ms. Olive TURYAMUREEBA" ,
-	'organisation_name' => "Atek Projects (U) Ltd " ,
-	'visiting_address' => "UMA Show Grounds, Bell Building Unit 3, Plot 28-29 Coronation Street" ,
-	'box_no' => "P.O. Box 5211 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712635230; 414692920" ,
-	'email' => " turyamureba@yahoo.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Waste Management; Aquatic and Water Resources Management; Wetland Resources Management; Land-Use Planning and Management; "             
-));
-
-$practitioner22 = Practitioner::create(array(
-  'person' => "Ms. Olive TURYAMUREEBA" ,
-	'organisation_name' => "Atek Projects (U) Ltd " ,
-	'visiting_address' => "UMA Show Grounds, Bell Building Unit 3, Plot 28-29 Coronation Street" ,
-	'box_no' => "P.O. Box 5211 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712635230; 414692920" ,
-	'email' => " turyamureba@yahoo.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Environmental Auditing; Waste Management; Aquatic and Water Resources Management; Wetland Resources Management;"             
-));
-
-$practitioner23 = Practitioner::create(array(
-  'person' => "Ms. Juliet Kintu NANSIKOMBI " ,
-	'organisation_name' => "Bimco Consult Ltd" ,
-	'box_no' => "P.O. Box 75383" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256 771 400485/ 701400485 " ,
-	'email' => " julie.kintn@uaia.ug  ; Juliek.nansikombi@gmail.com " ,
-	'qualifications' => "MSc. Conservation Biology; " ,
-	'expertise' => "Ecology, Biodiversity Studies, Ornithology, Agricultural Developments, Food Processing and Manufacturing, Eco Technology Projects, telecommunication masts"             
+	'expertise' => "Air Pollution Engineering; Wastewater Engineering; Solid waste; Hydropower, Medical Waste, Noise Pollution; Cleaner Production; Risk Assessment; Occupational Safety & Health; Clean Development Mechanism (CDM); GIS; Strategic Environmental Assessment .  "             
 ));
 
 $practitioner24 = Practitioner::create(array(
-  'person' => "Mr. Joshua Kaliba KATALIMULINGO" ,
-	'organisation_name' => "BIMCO Consult Ltd" ,
-	'visiting_address' => "Plot 17 Kakungulu Road Ntinda" ,
-	'box_no' => "P.O. Box 75383" ,
+	'person' => "Eng. Michael DAKA" ,
+	'organisation_name' => "NEWPLAN Ltd." ,
+	'visiting_address' => "Consulting Engineers & Planners, Crusader House, 1st Floor, Plot No. 3, Portal Avenue" ,
+	'box_no' => "P.O. Box 7544 " ,
 	'city' => "Kampala" ,
-	'phone' => "Mob: +256774260204" ,
-	'email' => " joshkaliba@yahoo.com ; joshkaliba@gmail.com" ,
-	'qualifications' => "Bachelor of Environmental Science Technology and Management" ,
-	'expertise' => "Occupational Health and safety, Environmental Processing Technology, Water and Waste water treatment, Environmental Quality Management"             
+	'phone' => "Tel: 0782819688" ,
+	'email' => " daka@newplan.ug ; Daka.michael@gmail.com " ,
+	'qualifications' => "MSc. Engineering (Infrastructure); BSc. Engineering(Civil) " ,
+	'expertise' => "General civil engineering, Transport(roads and highways), hydropower, Resettlement Action plans, ISO 9001:2008 QMS, Dams, Occupational Health and Safety, climate change, Risk assessment"             
 ));
 
 $practitioner25 = Practitioner::create(array(
-  'person' => "Mr. Moses OTIM " ,
-	'organisation_name' => "Bimco Consult Ltd" ,
-	'visiting_address' => "(off Luthuli Avenue), Plot 23 B, Bandali Rise" ,
-	'box_no' => "P.O. Box 35209" ,
+	'person' => "Eng. Priscilla NAKIBONEKA" ,
+	'organisation_name' => "M/S Sanitation and Environmental Consult" ,
+	'box_no' => "P.O. Box 2364 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: +256-256 312 114891; Mobile: 0701-912870; 0392 944844" ,
-	'email' => " bimco@bimco.co.ug  ; m_otim@hotmail.com  ;  teepgis@yahoo.com " ,
-	'qualifications' => "MSc. Geo information Science & Earth Observation; MSc. Educational & Training Systems Design;" ,
-	'expertise' => "Industry Development Planning, Waste Management, OSH & Environmental Management Systems; Mineral Resources Evaluation, Metallurgy & Environmental Geology; Water Resources and Water Quality Assessment, Eco-hydrology; Spatial Analysis & Modelling, Oil and Gas exploration and developments, downstream petroleum developments, Hydropower projects"             
+	'phone' => "Tel: 0772499336" ,
+	'email' => " pnakiboneka@gmail.com  " ,
+	'qualifications' => "BSc. Civil Engineering" ,
+	'expertise' => "Civil & Infrastructural developments, Waste-water Engineering, Solid Waste and Health-care Waste Management, water and Sanitation assessment"             
 ));
 
 $practitioner26 = Practitioner::create(array(
-  'person' => "Ms. Hanifah N. LUBEGA" ,
-	'organisation_name' => "Bimco Consult Ltd" ,
-	'box_no' => "P.O. Box 35209" ,
+	'person' => "Eng. Simon P. OTOI" ,
+	'organisation_name' => "Spot-on Engineering Services Ltd." ,
+	'box_no' => "P.O. Box 5883" ,
 	'city' => "Kampala" ,
-	'phone' => "Mobile: 0783655211 and 0704642827" ,
-	'email' => " ls_hanny@yahoo.com " ,
-	'qualifications' => "B.Eng. Environmental Engineering." ,
-	'expertise' => "Occupational Health and Safety, Industrial Developments, Environmental Engineering Systems, Energy Developments, Water Resources and Waste Water Treatment Projects, Cleaner Production Assessments and Clean Development Mechanisms"             
+	'phone' => "Tel: 0712 707502 and 0771460309." ,
+	'email' => " simonotoi@yahoo.co.uk  ; simonotoi@gmail.com " ,
+	'qualifications' => "MSc. Sanitary & Civil Engineering; BSc. Civil Engineering" ,
+	'expertise' => "Public Health – Water & Sanitation Assessments; Water Resources Investigations; Assessment"             
 ));
 
 $practitioner27 = Practitioner::create(array(
-  'person' => "Juliet Kintu NANSIKOMBI" ,
+	'person' => "Juliet Kintu NANSIKOMBI" ,
 	'organisation_name' => "BIMCO Consult Ltd" ,
 	'visiting_address' => "Plot 17 Kakungulu Road Ntinda" ,
 	'box_no' => "P.O. Box 75383" ,
@@ -1805,641 +1795,7 @@ $practitioner27 = Practitioner::create(array(
 ));
 
 $practitioner28 = Practitioner::create(array(
-  'person' => "Mr. Joshua Kaliba KATALIMULINGO" ,
-	'organisation_name' => "BIMCO Consult Ltd" ,
-	'visiting_address' => "Plot 17 Kakungulu Road Ntinda" ,
-	'box_no' => "P.O. Box 75383" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob:  +256774260204" ,
-	'email' => " joshkaliba@yahoo.com & joshkaliba@gmail.com " ,
-	'qualifications' => "Bachelor of Environmental Science Technology and Management" ,
-	'expertise' => "Occupational Health and safety, Environmental Processing Technology, Water and Waste water treatment, Environmental Quality Management"             
-));
-
-$practitioner29 = Practitioner::create(array(
-  'person' => "Mr. Moses OTIM " ,
-	'organisation_name' => "Bimco Consult Ltd" ,
-	'visiting_address' => "(off Luthuli Avenue), Plot 23 B, Bandali Rise" ,
-	'box_no' => "P.O. Box 35209" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256-256 312 114891 Mobile:  0701-912870; 0392 944844" ,
-	'email' => " bimco@bimco.co.ug  ; m_otim@hotmail.com  ;  teepgis@yahoo.com " ,
-	'qualifications' => "MSc. Geo information Science & Earth Observation; MSc. Educational & Training Systems Design;" ,
-	'expertise' => "Industrial developments; Environmental Management Systems; Energy and Telecommunications Projects; Mineral Resources Evaluation; Metallurgy; Water Resources and Quality Assessment; Spatial Analysis and Environmental Modelling; Hydropower projects and facilities, energy audits, downstream petroleum facilities"             
-));
-
-$practitioner30 = Practitioner::create(array(
-  'person' => "Ms. Hanifah N. LUBEGA" ,
-	'organisation_name' => "Bimco Consult Ltd" ,
-	'box_no' => "P.O. Box 35209" ,
-	'city' => "Kampala" ,
-	'phone' => "Mobile: 0783655211 and 0704642827" ,
-	'email' => " ls_hanny@yahoo.com " ,
-	'qualifications' => "B.Eng. Environmental Engineering." ,
-	'expertise' => "Occupational Health and Safety, Industrial Developments, Environmental Engineering Systems, Energy Developments, Water Resources and Waste Water Treatment Projects, Cleaner Production Assessments and Clean Development Mechanisms"             
-));
-
-$practitioner31 = Practitioner::create(array(
-  'person' => "Ms. Apophia ATUKUNDA" ,
-	'organisation_name' => "Chantalle Solutions" ,
-	'visiting_address' => "Plot 1272, Nsambya-Ggaba Road," ,
-	'box_no' => "P.O. Box 23020" ,
-	'city' => "Kampala" ,
-	'phone' => "Mobile:  0702 98 71 14; Office:   0414 53 21 92" ,
-	'email' => "   apophiaa@yahoo.co.uk" ,
-	'qualifications' => "MSc. Agriculture (Agroforestry);BSc. Forestry" ,
-	'expertise' => "Protected Area Management; Biodiversity Conservation, Forestry Management, Agricultural Development Projects"             
-));
-
-$practitioner32 = Practitioner::create(array(
-  'person' => "Ms. Patricia ONEGA" ,
-	'organisation_name' => "COWI Uganda Ltd." ,
-	'visiting_address' => "Crusader House, 2nd Floor, Plot No. 3, Portal Avenue " ,
-	'box_no' => "P.O. Box 10591" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0782922422" ,
-	'email' => " pao@cowi.co.ug ; pattyonega@yahoo.co.uk" ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Infrastructural Assessments and Social Impact Assessments"             
-));
-
-$practitioner33 = Practitioner::create(array(
-  'person' => "Dr. Rose MUGIDDE" ,
-	'organisation_name' => "COWI Uganda Ltd." ,
-	'visiting_address' => "Crusader House, 2nd Floor, Plot No. 3, Portal Avenue " ,
-	'box_no' => "P.O. Box 10591" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256 775 739538" ,
-	'email' => " mugidde@yahoo.com " ,
-	'qualifications' => "PhD. (Biology); BSc. Zoology (Wildlife and Ecology)" ,
-	'expertise' => "Toxicology, Aquatic environments’ evaluation, GIS, water resources, and water quality monitoring & evaluation"             
-));
-
-$practitioner34 = Practitioner::create(array(
-  'person' => "Mr. Bernard OCHOLA" ,
-	'organisation_name' => "COWI Uganda Ltd." ,
-	'visiting_address' => "Crusader House, 2nd Floor, Plot No. 3, Portal Avenue " ,
-	'box_no' => "P.O. Box 10591" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0414 343 045  Mob: 0772660279" ,
-	'email' => " benochola2003@yahoo.com " ,
-	'qualifications' => "BA. Social Sciences – Sociology and Social Administration" ,
-	'expertise' => "Social Impact Assessments and Resettlement Action Planning  "             
-));
-
-$practitioner35 = Practitioner::create(array(
-  'person' => "Dr. Muhammad NTALE" ,
-	'organisation_name' => "Department of Chemistry " ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0414540992, Mob: 0392967223" ,
-	'email' => " muhntale@yahoo.co.uk " ,
-	'qualifications' => "PhD In Analytical Chemistry, MSc. (Analytical Chemistry), BSc. (Chemistry) " ,
-	'expertise' => "Environmental Auditing, Environmental Chemistry, Solid waste management and Cleaner Production"             
-));
-
-$practitioner36 = Practitioner::create(array(
-  'person' => "Dr.  Charles B. NIWAGABA " ,
-	'organisation_name' => "Department of Civil Engineering" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: Office: 0414-543152; Mobile:      0772-335477" ,
-	'email' => "  cniwagaba@tech.mak.ac.ug ; cbniwagaba@yahoo.co.uk " ,
-	'qualifications' => "PhD. in Environmental Engineering; MSc. Environmental Engineering; BSc. Civil Engineering." ,
-	'expertise' => "Water and waste water Management; Civil Works and Construction; and Road works."             
-));
-
-$practitioner37 = Practitioner::create(array(
-  'person' => "Dr. Paul Kijobo MUSALI" ,
-	'organisation_name' => "Department of Geography" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062 " ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256 772 491083; Mob : 0772 347854; Tel: : 0414 530686 ; " ,
-	'email' => " rogo966@yahoo.co.uk ; muspal@arts.mak.ac.ug   " ,
-	'qualifications' => "PhD.  Natural Resource Management; BA. Geography" ,
-	'expertise' => "Natural Resource Assessment, Land-use Planning/ Agriculture, Infrastructural Development, Biodiversity Planning, Waste Management Socio-Economic Assessments, Housing & Estate Development."             
-));
-
-$practitioner38 = Practitioner::create(array(
-  'person' => "Dr. Paul Kijobo MUSALI" ,
-	'organisation_name' => "Department of Geography" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062 " ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256 772 491083" ,
-	'email' => " rogo966@yahoo.co.uk ; muspal@arts.mak.ac.ug   " ,
-	'qualifications' => "PhD.  Natural Resource Management; BA. Geography" ,
-	'expertise' => "Natural Resource Assessment, Land-use Planning/ Agriculture, Infrastructural Development, Biodiversity Planning, Waste Management Socio-Economic Assessments, Housing & Estate Development."             
-));
-
-$practitioner39 = Practitioner::create(array(
-  'person' => "Dr. Andrew MUWANGA" ,
-	'organisation_name' => "Department of Geology" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: Office: 0414-541258;    Mob: 0712 803 362 " ,
-	'email' => " amuwanga@sci.mak.ac.ug  " ,
-	'qualifications' => "PhD. Environmental Geology; BSc. Geology & Chemistry" ,
-	'expertise' => "Geology; Mining; Hydrogeological Projects; Stone Quarrying; Water Quality Assessment & Monitoring; Assessment of natural hazards (e.g. landslides)"             
-));
-
-$practitioner40 = Practitioner::create(array(
-  'person' => "Dr. Andrew MUWANGA" ,
-	'organisation_name' => "Department of Geology" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: Office: 0414-541258; Mob: 0712 803 362" ,
-	'email' => " amuwanga@sci.mak.ac.ug " ,
-	'qualifications' => "PhD. Environmental Geology; MSc. Engineering Geology; BSc. Geology Chemistry" ,
-	'expertise' => "Mining, Oil and Gas Exploration; Natural Disasters, Hydrogeoloy, Water Pollution, Environmental Restoration"             
-));
-
-$practitioner41 = Practitioner::create(array(
-  'person' => "Ms. Esther Kalule NANFUKA " ,
-	'organisation_name' => "Department of Social Work & Social Administration" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 484265" ,
-	'email' => " nanfuka@ss.mak.ac.ug  ; esthernanfuka@yahoo.com" ,
-	'qualifications' => "Master of Arts in Social Sector Planning and Management, " ,
-	'expertise' => "Social Impact  Assessment ; Socio-Economic Assessment "             
-));
-
-$practitioner42 = Practitioner::create(array(
-  'person' => "Ms. Esther Kalule NANFUKA " ,
-	'organisation_name' => "Department of Social Work & Social Administration" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 484265" ,
-	'email' => "  nanfuka@ss.mak.ac.ug  &    esthernanfuka@yahoo.com" ,
-	'qualifications' => "Master of Arts in Social Sector Planning and Management, " ,
-	'expertise' => "Sociological studies, socio-economic audits, socio-anthropological and social health audits"             
-));
-
-$practitioner43 = Practitioner::create(array(
-  'person' => "Mr. Amos MAFIGIRI" ,
-	'organisation_name' => "Eco & Partner Consult Ltd" ,
-	'box_no' => "P.O. Box 23989" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256-782677442" ,
-	'email' => " amos@ecopartner.co.ug " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Waste Management, Environmental Management Systems ISO 14001:2004, General Environmental Management"             
-));
-
-$practitioner44 = Practitioner::create(array(
-  'person' => "Mr. David SERUGGA" ,
-	'organisation_name' => "Eco & Partner Consult Ltd" ,
-	'box_no' => "P.O. Box 23989 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0755 929223" ,
-	'email' => " david@ecopartner.co.ug ; dserugga@yahoo.com" ,
-	'qualifications' => "Msc. Environment & Natural Resources," ,
-	'expertise' => "Soil & Wetland management; Natural resources management, Telecommunications infrastructure, Petroleum products’ depots & retail outlets, and Waste Management"             
-));
-
-$practitioner45 = Practitioner::create(array(
-  'person' => "Mr. Eddie LUYIMA" ,
-	'organisation_name' => "Eco & Partner Consult Ltd" ,
-	'visiting_address' => "Plot No. 57 Naguru Drive, Naguru Hill" ,
-	'box_no' => "P.O. Box 23989" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: + 256 312 291830 (Office);  + 256 772 669601 (Mob)" ,
-	'email' => " eddie@ecopartner.co.ug  ;     ecopart@africamail.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Environmental Management Systems based on ISO 14001 series; Occupational Health and Safety Management Systems based on OHSAS/ISO 18001; Quality Management Systems; Oil and Gas for both Upstream and downstream; Mining & quarrying; Telecommunications; Industrial and Solid Waste Management; Cleaner Production; Air quality and noise monitoring and modelling; Socio-Economic assessments."             
-));
-
-$practitioner46 = Practitioner::create(array(
-  'person' => "Mr. Francis LUGEMWA " ,
-	'organisation_name' => "Eco & Partner Consult Ltd" ,
-	'visiting_address' => "Plot No. 57 Naguru Drive, Naguru Hill" ,
-	'box_no' => "P.O. Box 23989" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: + 256 312 291830 (Office);  + 256 772 438609 (Mob)" ,
-	'email' => " fralu5@yahoo.com   ;    ecopart@africamail.com" ,
-	'qualifications' => "BA. Education; " ,
-	'expertise' => "Socio-Economic Impact Assessment; Geomorphology "             
-));
-
-$practitioner47 = Practitioner::create(array(
-  'person' => "Mr. Eddie LUYIMA" ,
-	'organisation_name' => "Eco & Partner Consult Ltd" ,
-	'visiting_address' => "Plot No. 57 Naguru Drive, Naguru Hill" ,
-	'box_no' => "P.O. Box 23989" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: + 256 312 291830 (Office); + 256 772 669601 (Mob)" ,
-	'email' => " eddie@ecopartner.co.ug  ;     ecopart@africamail.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Industrial and Solid Waste Management; Air quality and noise monitoring and modelling; Mining & quarrying; Cleaner Production; Environmental Management Systems based on ISO 14001 series; Occupational Health and Safety Management Systems based on OHSAS/ISO 18001; Quality Management Systems; Oil and Gas for both Upstream and downstream; Telecommunications."             
-));
-
-$practitioner48 = Practitioner::create(array(
-  'person' => "Mr. Francis LUGEMWA " ,
-	'organisation_name' => "Eco & Partner Consult Ltd" ,
-	'visiting_address' => "Plot No. 57 Naguru Drive, Naguru Hill" ,
-	'box_no' => "P.O. Box 23989" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: + 256 312 291830 (Office); + 256 772 438609 (Mob)" ,
-	'email' => " fralu5@yahoo.com   ;    ecopart@africamail.com " ,
-	'qualifications' => "BA. Education; PGD-EIA " ,
-	'expertise' => "Socio-Impact Audits; "             
-));
-
-$practitioner49 = Practitioner::create(array(
-  'person' => "Ms. Phionah SASIRA" ,
-	'organisation_name' => "Eco Innovations International Ltd" ,
-	'visiting_address' => "Postal office Building Kampala Road, " ,
-	'box_no' => "P.O. Box 35289 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256 712235427" ,
-	'email' => " sfionah@yahoo.com" ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Evaluation of Fuel Dispensing Facilities, Quarry Sites, Telecommunication Facilities and Agricultural facilities."             
-));
-
-$practitioner50 = Practitioner::create(array(
-  'person' => "Ms. Phionah SASIRA" ,
-	'organisation_name' => "Eco Innovations International Ltd" ,
-	'visiting_address' => "Postal office Building Kampala Road, " ,
-	'box_no' => "P.O. Box 35289 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256 712235427" ,
-	'email' => " sfionah@yahoo.com" ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Environment performance and evaluation of fuel dispensing facilities, quarry sites, telecommunication facilities and established Infrastructural establishments."             
-));
-
-$practitioner51 = Practitioner::create(array(
-  'person' => "Dr. James OKOT - OKUMU" ,
-	'organisation_name' => "Ecotech Consulting Environmental Management Firm Ltd." ,
-	'box_no' => "P.O. Box 16569" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 411 460" ,
-	'email' => " jokotokumu@yahoo.com; jokotokumu@muienr.mak.ac.ug " ,
-	'qualifications' => "PhD. Environmental Science; BSc. Chemistry & Biochemistry" ,
-	'expertise' => "Water Resources Management; Pollution Management; Cleaner Production; Environmental Chemistry"             
-));
-
-$practitioner52 = Practitioner::create(array(
-  'person' => "Dr. James OKOT - OKUMU" ,
-	'organisation_name' => "Ecotech Consulting Environmental Management Firm Ltd." ,
-	'box_no' => "P.O. Box 16569 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 411 460" ,
-	'email' => " jokotokumu@yahoo.com ; jokotokumu@muienr.mak.ac.ug " ,
-	'qualifications' => "PhD. Environmental Science; BSc. Chemistry & Biochemistry" ,
-	'expertise' => "Water Resources Management; Pollution Management; Cleaner Production; Environmental Chemistry"             
-));
-
-$practitioner53 = Practitioner::create(array(
-  'person' => "Mr. Charles MUTEMO" ,
-	'organisation_name' => "Envicom" ,
-	'visiting_address' => "Jinja" ,
-	'box_no' => "P.O. Box 893" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256772315061" ,
-	'email' => " mutemocharles@yahoo.com " ,
-	'qualifications' => "MSc. Environment and Natural resources;BA. Geography; PgD. Education" ,
-	'expertise' => "Transport & Works Infrastructure, Suitability Analysis in Agriculture, and Land-use & Resource Assessment. "             
-));
-
-$practitioner54 = Practitioner::create(array(
-  'person' => "Mr. Anthony ORYADA" ,
-	'organisation_name' => "Enviro-Care & Management Ltd" ,
-	'visiting_address' => "Plot 9 Dewinton Road" ,
-	'box_no' => "P.O. Box 35204" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0782 070457; 702070457" ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Waste Management, Pollution Assessment ; General Environment Management"             
-));
-
-$practitioner55 = Practitioner::create(array(
-  'person' => "Mr. Ananias Ammar BAZIRA" ,
-	'organisation_name' => "Enviro-Care & Management Ltd" ,
-	'visiting_address' => "Plot 9 Dewinton Road" ,
-	'box_no' => "P.O. Box 35204" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0792 243512 OR 0703 500056" ,
-	'email' => " bazianan@gmail.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Waste management; Energy management; Civil works and Construction; General Environmental Management "             
-));
-
-$practitioner56 = Practitioner::create(array(
-  'person' => "Mr. Martin ARYAGARUKA" ,
-	'organisation_name' => "Enviro-Care & Management Ltd" ,
-	'box_no' => "P.O. Box 971 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: Office: 0414257323; Mob:  0772523728" ,
-	'email' => " aryagaruka2000@yahoo.com" ,
-	'qualifications' => "Master of Natural Resource Management, Bachelor of Science" ,
-	'expertise' => "Natural Resource Management(Social Economic Information),Energy Management, Cleaner Production, Environmental Management Systems"             
-));
-
-$practitioner57 = Practitioner::create(array(
-  'person' => "Mr. Danson ASIIMWE" ,
-	'organisation_name' => "Enviro-Care & Management Ltd" ,
-	'visiting_address' => "Total deluxe house, Plot 29/33 Jinja Road" ,
-	'box_no' => "P.O. Box 70360" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256774755954" ,
-	'email' => " richdanson@yahoo.com " ,
-	'qualifications' => "MSc. Water and Environmental Management; Bachelor of Environmental Science" ,
-	'expertise' => "Water Resources Management, Water Quality Analysis And Assessment, Pollution Analysis and Management (Waste Water and Solid Waste), ISO 14001 and Environmental Management Systems."             
-));
-
-$practitioner58 = Practitioner::create(array(
-  'person' => "Mr. Danson ASIIMWE" ,
-	'organisation_name' => "Enviro-Care & Management Ltd" ,
-	'visiting_address' => "Total deluxe house, Plot 29/33 Jinja Road" ,
-	'box_no' => "P.O. Box 70360" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256774755954" ,
-	'email' => " richdanson@yahoo.com " ,
-	'qualifications' => "MSc. Water & Environmental Management, Bachelor of Environmental Science," ,
-	'expertise' => "Environmental Management Systems; Hydrology and Water quality assessment, pollution analysis and control, waste management, Occupational Health and Safety"             
-));
-
-$practitioner59 = Practitioner::create(array(
-  'person' => "Mr. Martin ARYAGARUKA" ,
-	'organisation_name' => "Enviro-Care & Management Ltd" ,
-	'box_no' => "P.O. Box 971 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: Office: 0414257323         Mob:  0772523728" ,
-	'email' => "  aryagaruka2000@yahoo.com" ,
-	'qualifications' => "Master of Natural Resource Management, Bachelor of Science" ,
-	'expertise' => "Natural Resource Management(Social Economic Information),Energy Management, Cleaner Production, Environmental Management Systems"             
-));
-
-$practitioner60 = Practitioner::create(array(
-  'person' => "Ms. Anita KIGONYA" ,
-	'organisation_name' => "Environment & Development Action Consult" ,
-	'visiting_address' => "Equatorial House, Kampala Road" ,
-	'box_no' => "P.O. BOX 31211" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 422 877" ,
-	'email' => " endasug@yahoo.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Land Resources; Water & Sanitation; Chemical Management; Energy Management."             
-));
-
-$practitioner61 = Practitioner::create(array(
-  'person' => "Ms. Anita KIGONYA" ,
-	'organisation_name' => "Environment & Development Action Consult" ,
-	'visiting_address' => "Equatorial House, Kampala Road" ,
-	'box_no' => "P.O. BOX 31211" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 422 877" ,
-	'email' => "endasug@yahoo.com" ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Land Resources; Water & Sanitation; Chemical Management; Energy Management."             
-));
-
-$practitioner62 = Practitioner::create(array(
-  'person' => "Mr. Moses Kitimbo  KAGODA " ,
-	'organisation_name' => "Environmental Assessment Consult Ltd. (EACL)" ,
-	'visiting_address' => "Kisozi House Close, Plot 8, Kyagwe Road" ,
-	'box_no' => "P.O. BOX 3128 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel :     0772 434155" ,
-	'email' => "eacl@infocom.co.ug " ,
-	'qualifications' => "MSc. Environmental & Resource Assessment; BSc. Botany & Zoology " ,
-	'expertise' => "Botanical / Zoological Assessments, fisheries Resources management, Water resources, Wetland Assessment, Waste management "             
-));
-
-$practitioner63 = Practitioner::create(array(
-  'person' => "Mr. Moses Kitimbo  KAGODA " ,
-	'organisation_name' => "Environmental Assessment Consult Ltd. (EACL)" ,
-	'visiting_address' => "Kisozi House Close, Plot 8, Kyagwe Road" ,
-	'box_no' => "P.O. BOX 3128 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel :      0772 434155" ,
-	'email' => "eacl@infocom.co.ug " ,
-	'qualifications' => "MSc. Environmental & Resource Assessment; BSc. Botany & Zoology" ,
-	'expertise' => "Cleaner Production, Botany, Zoology, Fisheries, Water Resources, Wetland Assessment"             
-));
-
-$practitioner64 = Practitioner::create(array(
-  'person' => "Mr. Moses ERIATU" ,
-	'organisation_name' => "Environmental Planning and Management Consults, " ,
-	'box_no' => "P.O. Box 34939  " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772360689 / 0702 255314" ,
-	'email' => " eriatumoses2000@yahoo.com " ,
-	'qualifications' => "Masters in Management Studies, PgD. Integrated Rural Planning. " ,
-	'expertise' => "Rural Development Planning; Energy Management; Social Impacts Assessments; Occupational Health & Safety"             
-));
-
-$practitioner65 = Practitioner::create(array(
-  'person' => "Mr. Moses ERIATU" ,
-	'organisation_name' => "Environmental Planning and Management Consults, " ,
-	'box_no' => "P.O. Box 34939  " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772360689 & 702255314" ,
-	'email' => " eriatumoses2000@yahoo.com " ,
-	'qualifications' => "Masters in Management Studies, PgD. Integrated Rural Planning. " ,
-	'expertise' => "Social Impact Audits, Energy Management, Occupational Health and Safety and Waste Management."             
-));
-
-$practitioner66 = Practitioner::create(array(
-  'person' => "Dr. John C. SSEMPEBWA" ,
-	'organisation_name' => "Environpower (U) ltd" ,
-	'visiting_address' => "Mukono" ,
-	'box_no' => "P.O. Box 575" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772963074 and 0704663074" ,
-	'email' => " jssemps@musph.ac.ug ; environpower@gmail.com" ,
-	'qualifications' => "PhD. EnvironmentalToxicology; MSc. Water Resources Management BSc. Botany & Zoology" ,
-	'expertise' => "Health Risk/Impacts  Evaluation; Hazardous Material Management & Emergency Response; Waste Water Treatment Systems; Water Quality Surveillance; Fisheries Management; Occupational Safety and Health; Post-Contamination Site Remediation; Solid Waste Management; Pollution Control and Waste Management."             
-));
-
-$practitioner67 = Practitioner::create(array(
-  'person' => "Prof. Hannington ORYEM-ORIGA" ,
-	'organisation_name' => "Faculty of Science, Department of Botany" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 624932" ,
-	'email' => " H; yem; iga@botany.mak.ac.ug " ,
-	'qualifications' => "PhD. Ecophysiology; MSc. Plant Physiology; BSc. Botany, Zoology & Chemistry" ,
-	'expertise' => "Environmental Pollution, Pollution control, Phytostabilization &, Phytoremediation, Ecological Studies; and Generally Biophysical Assessment  "             
-));
-
-$practitioner68 = Practitioner::create(array(
-  'person' => "Prof. Hannington ORYEM-ORIGA" ,
-	'organisation_name' => "Faculty of Science, Department of Botany" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7062" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 624932" ,
-	'email' => "h; yem-; iga@botany.mak.ac.ug " ,
-	'qualifications' => "PhD. Ecophysiology; MSc. Plant Physiology; BSc. Botany, Zoology & Chemistry" ,
-	'expertise' => "Environmental Pollution, Pollution control, Phytostabilization &, Phytoremediation, Ecological Studies; and Generally Biophysical Assessment  and Auditing"             
-));
-
-$practitioner69 = Practitioner::create(array(
-  'person' => "Mr. Amadra ORI-OKIDO" ,
-	'organisation_name' => "Geo-Information Communication Ltd" ,
-	'box_no' => "P.O. Box 2944" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 445011" ,
-	'email' => " amadra@gic.co.ug " ,
-	'qualifications' => "MSc. Geographic Information Systems for Rural Applications; BSc.Natural Resources & Environmental Studies" ,
-	'expertise' => "Computer-Based analysis on Land Cover/Land Use change; Decision Support System Applications"             
-));
-
-$practitioner70 = Practitioner::create(array(
-  'person' => "Mr. David Nelson NKUUTU" ,
-	'organisation_name' => "Geo-Taxon Consults" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 28973" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel.     0772 488 621;  0712 488621 " ,
-	'email' => " dn_nkuutu@yahoo.com " ,
-	'qualifications' => "BSc. Forestry" ,
-	'expertise' => "Ecology, Forest & Plantations, Management;  Land-use Planning & Mapping; Resource Assessment and Geographical Mapping.  "             
-));
-
-$practitioner71 = Practitioner::create(array(
-  'person' => "Dr. Paul SSEGAWA " ,
-	'organisation_name' => "Geo-Taxon Consults" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 28973 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256- (0) 772 411469" ,
-	'email' => " paulssegawa@yahoo.com " ,
-	'qualifications' => "PhD in Plant Ecology and Ethnobotany; MSc. Environment and Natural Resource Management; BSc. Forestry " ,
-	'expertise' => "Terrestrial Ecology; Biodiversity Studies; Plant Taxonomy "             
-));
-
-$practitioner72 = Practitioner::create(array(
-  'person' => "Mr. David Nelson NKUUTU" ,
-	'organisation_name' => "Geo-Taxon Consults" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 28973 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel.      0772 488 621;  712488621" ,
-	'email' => " dn_nkuutu@yahoo.com " ,
-	'qualifications' => "BSc. Forestry" ,
-	'expertise' => "Ecology, Forest & Plantations, Management; Land-use Planning & Mapping; Resource Assessment and Geographical Mapping.  "             
-));
-
-$practitioner73 = Practitioner::create(array(
-  'person' => "Dr. Paul SSEGAWA " ,
-	'organisation_name' => "Geo-Taxon Consults" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 28973 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256- (0) 772 411469" ,
-	'email' => "   paulssegawa@yahoo.com  " ,
-	'qualifications' => "PhD in Conservation Biology; MSc. Environment and Natural Resource; BSc. Forestry" ,
-	'expertise' => "Terrestrial Ecology; Biodiversity Studies; Plant Taxonomy"             
-));
-
-$practitioner74 = Practitioner::create(array(
-  'person' => "Mr. Happy Peter MURWANYI" ,
-	'organisation_name' => "Gissat Environment Associates (www.gissatconsult.com)" ,
-	'box_no' => "P.O. Box 21598" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256774829579" ,
-	'email' => " happy_peter@yahoo.com " ,
-	'qualifications' => "BSc. Environmental Science" ,
-	'expertise' => "Waste management, socio-economic assessment and occupational Health and safety"             
-));
-
-$practitioner75 = Practitioner::create(array(
-  'person' => "Ms. Harriet N. MUJUNI" ,
-	'organisation_name' => "Gissat Environment Associates (www.gissatconsult.com)" ,
-	'visiting_address' => "Plot 3334 UDC Close, Muyenga" ,
-	'box_no' => "P.O. Box 21598" ,
-	'city' => "Kampala" ,
-	'phone' => "Office Tel/Fax: 0414 267 070; Cell: 0772 403796; 0712 403796; 0702 403 796" ,
-	'email' => " info@gissat.co.ug  ; harriet.mujuni@gmail.com  " ,
-	'qualifications' => "Bachelor of Laws (LL.B.)" ,
-	'expertise' => "Environmental Law & Compliance; Strategic Environmental Assessments; Environmental & Social Impact Assessments; Resettlement & Rehabilitation; Conflict Resolution (Natural Resources); Cleaner Production; Health Impact Assessments "             
-));
-
-$practitioner76 = Practitioner::create(array(
-  'person' => "Ms. Harriet N. MUJUNI" ,
-	'organisation_name' => "Gissat Environment Associates (www.gissatconsult.com)" ,
-	'visiting_address' => "Plot 3334 UDC Close, Muyenga" ,
-	'box_no' => "P.O. Box 21598" ,
-	'city' => "Kampala" ,
-	'phone' => "Office Tel/Fax: 0414 267 070; Cell: 0772 403796; 0712 403796; 0702 403 796" ,
-	'email' => " info@gissat.co.ug  ; harriet.mujuni@gmail.com  " ,
-	'qualifications' => "Bachelor of Laws (LL.B.)" ,
-	'expertise' => "Environmental Law & Compliance; Land use Management & Planning; Social, Strategic & Economic Impact Evaluation; Environment & Development Monitoring; Cleaner Production"             
-));
-
-$practitioner77 = Practitioner::create(array(
-  'person' => "Mr. Moses Mugimba MUHUMUZA " ,
-	'organisation_name' => "Green Impact & Development Services (GIDS) Consults Ltd " ,
-	'box_no' => "P.O. Box 12211 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 077 332108/ +256 312515083 " ,
-	'email' => " mmugim@gmail.com ; muhumuza.moses.m@greenimpactco.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Waste Management; Eco-Tourism Impact Analysis; Environmental Standards Conformity; Work and Public Health and Safety; Energy Management"             
-));
-
-$practitioner78 = Practitioner::create(array(
-  'person' => "Mr. Moses Mugimba MUHUMUZA " ,
-	'organisation_name' => "Green Impact & Development Services (GIDS) Consults Ltd " ,
-	'box_no' => "P.O. Box 12211 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 077 332108/ +256 312515083 " ,
-	'email' => " mmugim@gmail.com ; muhumuza.moses.m@greenimpactco.com" ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Waste Management; Eco-Tourism Impact Analysis; Environmental Standards Conformity; Work and Public Health and Safety; Energy Management"             
-));
-
-$practitioner79 = Practitioner::create(array(
-  'person' => "Dr. Bob Humphrey OGWANG" ,
-	'organisation_name' => "Greenbelt Consult Ltd." ,
-	'visiting_address' => "Colline House, 3rd Floor, Nile Av. " ,
-	'box_no' => "P.O. Box 24854" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: Office: 0414-346426; Mob: 0772-841264" ,
-	'email' => " bogwang@greenbelt.co.ug " ,
-	'qualifications' => "PhD. Natural Resource Management; MSc. Agriculture; BSc. Agriculture." ,
-	'expertise' => "Natural Resource Management; Energy infrastructure;  Telecommunications; Agriculture and Waste Management "             
-));
-
-$practitioner80 = Practitioner::create(array(
-  'person' => "Dr. Bob Humphrey OGWANG" ,
-	'organisation_name' => "Greenbelt Consult Ltd." ,
-	'visiting_address' => "Colline House, 3rd Floor, Nile Av. " ,
-	'box_no' => "P.O. Box 24854" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: Office: 0414-346426; Mob: 0772-841264" ,
-	'email' => " bogwang@greenbelt.co.ug " ,
-	'qualifications' => "PhD. Natural Resource Management; MSc. Agriculture; BSc. Agriculture." ,
-	'expertise' => "Roads, Hydro Power, Agriculture, Natural Resources, Quarries and Building Construction"             
-));
-
-$practitioner81 = Practitioner::create(array(
-  'person' => "Mr. Brian MUHIMBURA " ,
-	'organisation_name' => "Greenlife  Enviro Consult (U)Ltd" ,
-	'visiting_address' => "Plot 13 Luthuli Avenue," ,
-	'box_no' => "P.O. Box 29397" ,
-	'city' => "Bugolobi" ,
-	'phone' => "Tel: 0774202151 and 0705484210" ,
-	'email' => " muhii86@yahoo.com " ,
-	'qualifications' => "Bachelor of Environmental Science" ,
-	'expertise' => "Waste management, Energy resources, Ecosystem assessments and Industrial processes/cleaner production."             
-));
-
-$practitioner82 = Practitioner::create(array(
-  'person' => "Mr. Abdallah MUNUBI " ,
+	'person' => "Mr. Abdallah MUNUBI " ,
 	'organisation_name' => "Heboco Consult Ltd" ,
 	'visiting_address' => "Uganda House" ,
 	'box_no' => "P.O. Box 3451" ,
@@ -2450,89 +1806,212 @@ $practitioner82 = Practitioner::create(array(
 	'expertise' => "Wetland ecology and Management, Environmental Economics, Environmental Health and Sanitation, Forest Management, Waste Management and Infrastructural Assessment"             
 ));
 
-$practitioner83 = Practitioner::create(array(
-  'person' => "Mr. Abdallah MUNUBI " ,
-	'organisation_name' => "Heboco Consult Ltd" ,
-	'visiting_address' => "Uganda House," ,
-	'box_no' => "P.O. Box 3451" ,
+$practitioner29 = Practitioner::create(array(
+	'person' => "Mr. Advan MBABAZI " ,
+	'organisation_name' => "Advann Uganda Limited" ,
+	'visiting_address' => "Nsambya-Avemaria, Off Kevina Road" ,
+	'box_no' => "P.O. Box 1539 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: +256776485230" ,
-	'email' => "hecoboconsult@gmail.com &    munubibob@yahoo.com " ,
-	'qualifications' => "MSc. In Environmental Management, BSc. In Environment Management" ,
-	'expertise' => "Wetland Ecology and Management, Environmental Economics, Environmental Health and Sanitation, Waste Management and Infrastructural Assessment"             
+	'phone' => "Tel: 0784992264 and 0704323993" ,
+	'email' => " madvan.m@gmail.com ; advannuganda@gmail.com " ,
+	'qualifications' => "B. Environmental Science " ,
+	'expertise' => "Fuel Stations, Communication Masts, Waste Management, Mining Projects,"             
 ));
 
-$practitioner84 = Practitioner::create(array(
-  'person' => "Mr. Peter ISAMAT " ,
-	'organisation_name' => "ICL" ,
-	'box_no' => "P.O. Box 5229" ,
+$practitioner30 = Practitioner::create(array(
+	'person' => "Mr. Alex ASIIMWE" ,
+	'box_no' => "P.O. Box 34061" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 409 564 " ,
-	'email' => " isamatpeter@yahoo.co.uk " ,
-	'qualifications' => "BA. Social Sciences " ,
-	'expertise' => "Socio-Economic Assessments; Environmental Management Systems. "             
+	'phone' => "Tel: 0784 224448 or  0702 213165" ,
+	'email' => " asiimwealex@gmail.com " ,
+	'qualifications' => "MSc. Environment & Natural Resources; BA. Environmental Management; PgD-PPM, & PgD-OSH" ,
+	'expertise' => "Occupational Safety & Health, Natural Resources Management, Social Safeguards, Resettlement Action Planning, Labourforce management, Waste Management, Cleaner"             
 ));
 
-$practitioner85 = Practitioner::create(array(
-  'person' => "Mr. Peter ISAMAT " ,
-	'organisation_name' => "ICL" ,
-	'box_no' => "P.O. Box 5229" ,
+$practitioner31 = Practitioner::create(array(
+	'person' => "Mr. Alex KAGODA " ,
+	'organisation_name' => "Arc Design Ltd" ,
+	'visiting_address' => "Plot 85, Buganda Road; " ,
+	'box_no' => "P.O. Box 22946" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 409 564 " ,
-	'email' => " isamatpeter@yahoo.co.uk" ,
-	'qualifications' => "BA. Social Sciences " ,
-	'expertise' => "Cleaner Production; Socio-Economic Audits; Environmental Management Systems Audits; Integrated Environmental and Quality Management Systems and Integrated Audits"             
+	'phone' => "Mob: 0774 404052" ,
+	'email' => " kagodalex@gmail.com " ,
+	'qualifications' => "BSc. Industrial Chemistry" ,
+	'expertise' => "Occupational Health and Safety; Environmental Pollution Assessment"             
 ));
 
-$practitioner86 = Practitioner::create(array(
-  'person' => "Mr. Hilary BAKAMWESIGA" ,
-	'organisation_name' => "Institute of Environment & Natural Resources" ,
+$practitioner32 = Practitioner::create(array(
+	'person' => "Mr. Alex KAKUUKU" ,
+	'box_no' => "P.O. Box 9031" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0782022087" ,
+	'email' => " ajkakuuku@gmail.com" ,
+	'qualifications' => "Bachelor of Science in Environmental Management" ,
+	'expertise' => "Industrial Waste management, Environmental Management Systems, Infrastructural development(Telecom masts), Occupational health and safety"             
+));
+
+$practitioner33 = Practitioner::create(array(
+	'person' => "Mr. Alfred TUMUSIIME" ,
+	'organisation_name' => "OPEP Consult Ltd." ,
+	'box_no' => "P.O. Box 34502" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0782-335405" ,
+	'email' => " alfreduganda@yahoo.com  ; opepconsult@yahoo.com " ,
+	'qualifications' => "BSc. Forestry " ,
+	'expertise' => "Natural Resources Management, Forestry resources assessments, Energy Projects"             
+));
+
+$practitioner34 = Practitioner::create(array(
+	'person' => "Mr. Amadra ORI-OKIDO" ,
+	'organisation_name' => "Geo-Information Communication Ltd" ,
+	'box_no' => "P.O. Box 2944" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772 445011" ,
+	'email' => " amadra@gic.co.ug " ,
+	'qualifications' => "MSc. Geographic Information Systems for Rural Applications; BSc.Natural Resources & Environmental Studies" ,
+	'expertise' => "Computer-Based analysis on Land Cover/Land Use change; Decision Support System Applications"             
+));
+
+$practitioner35 = Practitioner::create(array(
+	'person' => "Mr. Amos MAFIGIRI" ,
+	'organisation_name' => "Eco & Partner Consult Ltd" ,
+	'box_no' => "P.O. Box 23989" ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: +256-782677442" ,
+	'email' => " amos@ecopartner.co.ug " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Waste Management, Environmental Management Systems ISO 14001:2004, General Environmental Management"             
+));
+
+$practitioner36 = Practitioner::create(array(
+	'person' => "Mr. Ananias Ammar BAZIRA" ,
+	'organisation_name' => "Enviro-Care & Management Ltd" ,
+	'visiting_address' => "Plot 9 Dewinton Road" ,
+	'box_no' => "P.O. Box 35204" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0792 243512 OR 0703 500056" ,
+	'email' => " bazianan@gmail.com " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Waste management; Energy management; Civil works and Construction; General Environmental Management "             
+));
+
+$practitioner37 = Practitioner::create(array(
+	'person' => "Mr. Anthony ORYADA" ,
+	'organisation_name' => "Enviro-Care & Management Ltd" ,
+	'visiting_address' => "Plot 9 Dewinton Road" ,
+	'box_no' => "P.O. Box 35204" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0782 070457; 702070457" ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Waste Management, Pollution Assessment ; General Environment Management"             
+));
+
+$practitioner38 = Practitioner::create(array(
+	'person' => "Mr. Ben David OYEN" ,
+	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
+	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
+	'box_no' => "P.O. Box 22428 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772196033 and 0700945694" ,
+	'email' => " oyenben@yahoo.com ; oyen.ben@gmail.com " ,
+	'qualifications' => "BSc. In Environmental Engineering and Management" ,
+	'expertise' => "Cleaner Production, Occupational Health and Safety Site Remediation, Environmental Monitoring &Analysis; and Structural Engineering Designs of Waste Management Systems"             
+));
+
+$practitioner39 = Practitioner::create(array(
+	'person' => "Mr. Bernard OCHOLA" ,
+	'organisation_name' => "COWI Uganda Ltd." ,
+	'visiting_address' => "Crusader House, 2nd Floor, Plot No. 3, Portal Avenue " ,
+	'box_no' => "P.O. Box 10591" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0414 343 045  Mob: 0772660279" ,
+	'email' => " benochola2003@yahoo.com " ,
+	'qualifications' => "BA. Social Sciences – Sociology and Social Administration" ,
+	'expertise' => "Social Impact Assessments and Resettlement Action Planning  "             
+));
+
+$practitioner40 = Practitioner::create(array(
+	'person' => "Mr. Brian MUHIMBURA " ,
+	'organisation_name' => "Greenlife  Enviro Consult (U)Ltd" ,
+	'visiting_address' => "Plot 13 Luthuli Avenue," ,
+	'box_no' => "P.O. Box 29397" ,
+	'city' => "Bugolobi" ,
+	'phone' => "Tel: 0774202151 and 0705484210" ,
+	'email' => " muhii86@yahoo.com " ,
+	'qualifications' => "Bachelor of Environmental Science" ,
+	'expertise' => "Waste management, Energy resources, Ecosystem assessments and Industrial processes/cleaner production."             
+));
+
+$practitioner41 = Practitioner::create(array(
+	'person' => "Mr. Bryan OKEDI" ,
+	'box_no' => "P.O. Box 9317" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0782 383300" ,
+	'email' => "  bryokd@live.com " ,
+	'qualifications' => "BSc. Environmental Management" ,
+	'expertise' => "Environmental Pollution assessment, Water quality  assessments, Fuel dispensing facilities, , and Social Impact Assessment"             
+));
+
+$practitioner42 = Practitioner::create(array(
+	'person' => "Mr. Charles MUTEMO" ,
+	'organisation_name' => "Envicom" ,
+	'visiting_address' => "Jinja" ,
+	'box_no' => "P.O. Box 893" ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: +256772315061" ,
+	'email' => " mutemocharles@yahoo.com " ,
+	'qualifications' => "MSc. Environment and Natural resources;BA. Geography; PgD. Education" ,
+	'expertise' => "Transport & Works Infrastructure, Suitability Analysis in Agriculture, and Land-use & Resource Assessment. "             
+));
+
+$practitioner43 = Practitioner::create(array(
+	'person' => "Mr. Danson ASIIMWE" ,
+	'organisation_name' => "Enviro-Care & Management Ltd" ,
+	'visiting_address' => "Total deluxe house, Plot 29/33 Jinja Road" ,
+	'box_no' => "P.O. Box 70360" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256774755954" ,
+	'email' => " richdanson@yahoo.com " ,
+	'qualifications' => "MSc. Water and Environmental Management; Bachelor of Environmental Science" ,
+	'expertise' => "Water Resources Management, Water Quality Analysis And Assessment, Pollution Analysis and Management (Waste Water and Solid Waste), ISO 14001 and Environmental Management Systems."             
+));
+
+$practitioner44 = Practitioner::create(array(
+	'person' => "Mr. David Nelson NKUUTU" ,
+	'organisation_name' => "Geo-Taxon Consults" ,
 	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7298 " ,
+	'box_no' => "P.O. Box 28973" ,
 	'city' => "Kampala" ,
-	'email' => " hbakamwesiga@yahoo.com " ,
-	'qualifications' => "MSc. Environmental Science;" ,
-	'expertise' => "Biodiversity Inventory, Analysis and Mapping; Wetlands Management and Conservation; Waste and Pollution Assessment. "             
+	'phone' => "Tel.     0772 488 621;  0712 488621 " ,
+	'email' => " dn_nkuutu@yahoo.com " ,
+	'qualifications' => "BSc. Forestry" ,
+	'expertise' => "Ecology, Forest & Plantations, Management;  Land-use Planning & Mapping; Resource Assessment and Geographical Mapping.  "             
 ));
 
-$practitioner87 = Practitioner::create(array(
-  'person' => "Prof. Frank KANSIIME" ,
-	'organisation_name' => "Institute of Environment & Natural Resources" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7298" ,
+$practitioner45 = Practitioner::create(array(
+	'person' => "Mr. David Samuel WAFULA" ,
+	'organisation_name' => "Urban Research and Training Consultancy Ltd" ,
+	'box_no' => "P.O. Box 34950" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 506520 and 0752506520" ,
-	'email' => " fkansiime@muienr.mak.ac.ug ; fkansiime@gmail.com " ,
-	'qualifications' => "PhD. Environmental Ecotechnology; MSc. Environmental / Sanitary Engineering; MSc Applied Environmental Microbiology; BSc. Education (Biology, & Chemistry)" ,
-	'expertise' => "Environmental Ecotechnology, Environmental Systems Analysis, Assessments & Monitoring , Use of Ecological Principles to solve Environmental Problems, Waste Management"             
+	'phone' => "  Tel: +256-312105641; Mob: +256-772957515" ,
+	'email' => " wafulasamueldavid@yahoo.com " ,
+	'qualifications' => "BA. Urban Planning; PhD. Environmental Microbiology; MSc. Environmental Science and Technology  BSc. Biochemistry and Zoology" ,
+	'expertise' => "Infrastructural development, resettlement action planning, and urban planning & housing studies"             
 ));
 
-$practitioner88 = Practitioner::create(array(
-  'person' => "Prof. Frank KANSIIME" ,
-	'organisation_name' => "Institute of Environment & Natural Resources" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7298" ,
+$practitioner46 = Practitioner::create(array(
+	'person' => "Mr. David SERUGGA" ,
+	'organisation_name' => "Eco & Partner Consult Ltd" ,
+	'box_no' => "P.O. Box 23989 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 506520 and 0752506520" ,
-	'email' => " fkansiime@gmail.com  ; fkansiime@muienr.mak.ac.ug " ,
-	'qualifications' => "PhD. Environmental Ecotechnology; MSc. Environmental / Sanitary Engineering; MSc Applied Environmental Microbiology; BSc. Education (Biology, & Chemistry)" ,
-	'expertise' => "Environmental Ecotechnology, Environmental Systems Analysis, Assessments & Monitoring , Use of Ecological Principles to solve Environmental Problems, Waste Management"             
+	'phone' => "Tel: 0755 929223" ,
+	'email' => " david@ecopartner.co.ug ; dserugga@yahoo.com" ,
+	'qualifications' => "Msc. Environment & Natural Resources," ,
+	'expertise' => "Soil & Wetland management; Natural resources management, Telecommunications infrastructure, Petroleum products’ depots & retail outlets, and Waste Management"             
 ));
 
-$practitioner89 = Practitioner::create(array(
-  'person' => "Mr. Richard Mugambe KIBIRANGO " ,
-	'organisation_name' => "Institute of Public Health" ,
-	'visiting_address' => "Makerere University" ,
-	'box_no' => "P.O. Box 7072 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712 381346 and 0774 116280" ,
-	'email' => " rkmugambe@yahoo.com " ,
-	'qualifications' => "MSc. Environmental Technology; Bachelor of Environmental Health Sciences" ,
-	'expertise' => "Waste water and Waste management Technologies; Environmental Health; Renewable Energy Technology and applications"             
-));
-
-$practitioner90 = Practitioner::create(array(
-  'person' => "Mr. Dennis KAMOGA" ,
+$practitioner47 = Practitioner::create(array(
+	'person' => "Mr. Dennis KAMOGA" ,
 	'organisation_name' => "Jera" ,
 	'box_no' => "P.O. Box 27901" ,
 	'city' => "Kampala" ,
@@ -2542,8 +2021,183 @@ $practitioner90 = Practitioner::create(array(
 	'expertise' => "Biodiversity Assessments, Terrestrial/Restoration Ecology, Plant use and Community Development (Ethrobotany / Ethro-Ecology)"             
 ));
 
-$practitioner91 = Practitioner::create(array(
-  'person' => "Mr. John Bosco LUBEGA" ,
+$practitioner48 = Practitioner::create(array(
+	'person' => "Mr. Derrick KYATEREKERA " ,
+	'box_no' => "P.O. Box 10454 " ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: 0772 457282 and  0712 574159" ,
+	'email' => " kyderrick@gmail.com " ,
+	'qualifications' => "MSc. Natural Resources Management, BA. Environmental Management " ,
+	'expertise' => "Oil & Gas Environmental Management, Waste Management; Eco-Tourism Impact Analysis; Work-Public Health and Safety;  Social Impact Assessment; Control of Substances Hazardous to Health (COSHH); Site Rehabilitation & Restoration, Gas testing & Confined space related works"             
+));
+
+$practitioner49 = Practitioner::create(array(
+	'person' => "Mr. Dismas Jacob ONGWEN" ,
+	'organisation_name' => "Archio- Heritage Consultancy " ,
+	'box_no' => "P.O. Box 33334" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel:0772970991" ,
+	'email' => " dis3ongwen@gmail.com " ,
+	'qualifications' => "M. Phil in Archaeology, BA.  History/Philosophy" ,
+	'expertise' => "Archiological and Physical Culture,"             
+));
+
+$practitioner50 = Practitioner::create(array(
+	'person' => "Mr. Eddie LUYIMA" ,
+	'organisation_name' => "Eco & Partner Consult Ltd" ,
+	'visiting_address' => "Plot No. 57 Naguru Drive, Naguru Hill" ,
+	'box_no' => "P.O. Box 23989" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: + 256 312 291830 (Office);  + 256 772 669601 (Mob)" ,
+	'email' => " eddie@ecopartner.co.ug  ;     ecopart@africamail.com " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Environmental Management Systems based on ISO 14001 series; Occupational Health and Safety Management Systems based on OHSAS/ISO 18001; Quality Management Systems; Oil and Gas for both Upstream and downstream; Mining & quarrying; Telecommunications; Industrial and Solid Waste Management; Cleaner Production; Air quality and noise monitoring and modelling; Socio-Economic assessments."             
+));
+
+$practitioner51 = Practitioner::create(array(
+	'person' => "Mr. Edgar D. Kamugasha MUGISHA" ,
+	'organisation_name' => "Atacama Consulting, " ,
+	'visiting_address' => "Plot 23 Gloucester Avenue" ,
+	'box_no' => "P.O. Box 12130 " ,
+	'city' => "Kyambogo, " ,
+	'phone' => "Tel: 0752-998545 (Mobile) OR  0751-090752 (Office)" ,
+	'email' => " edgarmugisha@yahoo.com ; edgarmugisha@atacama.co.ug" ,
+	'qualifications' => "MSc. Environmental Assessment & Management; BSc. Environmental Management" ,
+	'expertise' => "Environmental Management Systems (ISO 14001) and Auditing; Occupational Health and Safety; Climate Change Services (Emissions Reduction and Carbon Trading); Natural Resource Mgt. Cleaner Production Assessments; Waste Management; Land Use Planning; and Sustainable Tourism"             
+));
+
+$practitioner52 = Practitioner::create(array(
+	'person' => "Mr. Francis LUGEMWA " ,
+	'organisation_name' => "Eco & Partner Consult Ltd" ,
+	'visiting_address' => "Plot No. 57 Naguru Drive, Naguru Hill" ,
+	'box_no' => "P.O. Box 23989" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: + 256 312 291830 (Office);  + 256 772 438609 (Mob)" ,
+	'email' => " fralu5@yahoo.com   ;    ecopart@africamail.com" ,
+	'qualifications' => "BA. Education; " ,
+	'expertise' => "Socio-Economic Impact Assessment; Geomorphology "             
+));
+
+$practitioner53 = Practitioner::create(array(
+	'person' => "Mr. Fred SSEGIRINYA" ,
+	'visiting_address' => "Plot 15, Bandali Rise, Bugolobi; " ,
+	'box_no' => "P.O. Box 40311 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0712 804425" ,
+	'email' => " fssegirinya93@yahoo.com " ,
+	'qualifications' => "BSc. Forestry" ,
+	'expertise' => "Forestry Projects, Seismic Surveys; Exploratory Drilling; Quarries; Water & Infrastructural Developments; "             
+));
+
+$practitioner54 = Practitioner::create(array(
+	'person' => "Mr. George Herbert KYABOONA" ,
+	'box_no' => "P.O. Box 16422" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772996387" ,
+	'email' => " kyaboona@gmail.com " ,
+	'qualifications' => "MSc. Environment and Development, B.A Environment Management; PgD. Research Methods and Writing Skills " ,
+	'expertise' => "Resettlement Action Planning, Social impact Assessments, Environmental Education, Waste management, Occupational Health and Safety Assessments."             
+));
+
+$practitioner55 = Practitioner::create(array(
+	'person' => "Mr. George KUNIHIRA " ,
+	'organisation_name' => "Omudima Services Limited" ,
+	'box_no' => "P.O. Box 9 " ,
+	'city' => "Entebbe" ,
+	'phone' => "Tel: 0782980306" ,
+	'qualifications' => "BA. Economics " ,
+	'expertise' => "Socio-economic assessment, Community Development, Cultural Assessment, Business Plans"             
+));
+
+$practitioner56 = Practitioner::create(array(
+	'person' => "Mr. Godfrey BAHATI" ,
+	'box_no' => "P.O. Box 9" ,
+	'city' => "Entebbe" ,
+	'phone' => "Tel: 0775601232" ,
+	'email' => " gbahati@gmail.com " ,
+	'qualifications' => "MSc. Environmental Management,  BSc. Chemistry" ,
+	'expertise' => "Minerals and Energy, Geothermal Assessment, Waste Management, Pollution Control"             
+));
+
+$practitioner57 = Practitioner::create(array(
+	'person' => "Mr. Happy Peter MURWANYI" ,
+	'organisation_name' => "Gissat Environment Associates (www.gissatconsult.com)" ,
+	'box_no' => "P.O. Box 21598" ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: +256774829579" ,
+	'email' => " happy_peter@yahoo.com " ,
+	'qualifications' => "BSc. Environmental Science" ,
+	'expertise' => "Waste management, socio-economic assessment and occupational Health and safety"             
+));
+
+$practitioner58 = Practitioner::create(array(
+	'person' => "Mr. Herbert Mpagi KALIBALA" ,
+	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
+	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
+	'box_no' => "P.O. Box 22428 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772496451" ,
+	'email' => "  h.kalibbala@awe-ngineers.com " ,
+	'qualifications' => "MSc. Civil Engineering, BSc. Civil Engineering" ,
+	'expertise' => "Hydropower, Sanitation, Water Quality Management & Pollution Control; Designing Water & Wastewater Treatment Systems, roads and highways, Hydrology and Hydrogeology, Geotechnical Surveys. "             
+));
+
+$practitioner59 = Practitioner::create(array(
+	'person' => "Mr. Hilary BAKAMWESIGA" ,
+	'organisation_name' => "Institute of Environment & Natural Resources" ,
+	'visiting_address' => "Makerere University" ,
+	'box_no' => "P.O. Box 7298 " ,
+	'city' => "Kampala" ,
+	'email' => " hbakamwesiga@yahoo.com " ,
+	'qualifications' => "MSc. Environmental Science;" ,
+	'expertise' => "Biodiversity Inventory, Analysis and Mapping; Wetlands Management and Conservation; Waste and Pollution Assessment. "             
+));
+
+$practitioner60 = Practitioner::create(array(
+	'person' => "Mr. Isaac KIFAMULUSI" ,
+	'box_no' => "P.O. Box 28119 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0783019566; 0702209581" ,
+	'email' => " isaackifamulusi@yahoo.com" ,
+	'qualifications' => "BSc. Environmental Science" ,
+	'expertise' => "Ecosystems Management, Environmental Pollution, Waste Management, Cleaner Production, Occupational Health and Safety and Climate Change Services "             
+));
+
+$practitioner61 = Practitioner::create(array(
+	'person' => "Mr. Isaac TUNYWANE " ,
+	'box_no' => "P.O. Box 11175 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256 782 036665" ,
+	'email' => " itunywane@yahoo.com " ,
+	'qualifications' => "B. Environmental Science " ,
+	'expertise' => "Waste Management, Environmental Health and Safety, Water and Sanitation Assessment."             
+));
+
+$practitioner62 = Practitioner::create(array(
+	'person' => "Mr. Isaiah OWIUNJI" ,
+	'box_no' => "P.O. Box 3205" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772-411278" ,
+	'email' => " iowiunji@wwfuganda.; g ; " ,
+	'qualifications' => "MSc. Zoology (Vertebrate Ecology &
+Natural Resource
+Management) BSc. Zoology" ,
+	'expertise' => "Vertebrate Ecology, Wildlife Evaluation, and Natural"             
+));
+
+$practitioner63 = Practitioner::create(array(
+	'person' => "Mr. Jerome TWIMUKYE " ,
+	'organisation_name' => "Winsjet Associates " ,
+	'box_no' => "P.O. Box 2887 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0712 152503 and  0784 115204" ,
+	'email' => " jetwimkye@yahoo.co.uk " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Waste Management; Biodiversity Assessments."             
+));
+
+$practitioner64 = Practitioner::create(array(
+	'person' => "Mr. John Bosco LUBEGA" ,
 	'organisation_name' => "KATS Consult" ,
 	'visiting_address' => "Buganda Road, 666/ G, " ,
 	'box_no' => "P.O. Box 504 " ,
@@ -2554,121 +2208,51 @@ $practitioner91 = Practitioner::create(array(
 	'expertise' => "Geological Assessments, Waste management,  "             
 ));
 
-$practitioner92 = Practitioner::create(array(
-  'person' => "Dr. Balla TURYAHUMURA" ,
-	'organisation_name' => "KATS Consult" ,
-	'visiting_address' => "Buganda Road, 666/ G, " ,
-	'box_no' => "P.O. Box 504 " ,
+$practitioner65 = Practitioner::create(array(
+	'person' => "Mr. John Ochoko KAMERI" ,
+	'organisation_name' => "Pinnacle Enviro Consult" ,
+	'box_no' => "P.O. Box 22546" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: Mob :   0772 470785 ;  Office : 0312 108449 ; " ,
-	'email' => " ballakats@gmail.com  " ,
-	'qualifications' => "PhD. Technical Sciences; MSc. Chemical Engineering/Plastics Technology" ,
-	'expertise' => "Chemical & Process Industries, Enterprises using chemicals, institutions and others such as Waste Disposal Facilities."             
+	'phone' => "Tel: 0714333200 and 703333200" ,
+	'email' => "  pinnacle@utlonline.co.ug " ,
+	'qualifications' => "MBA. Marketing" ,
+	'expertise' => "Cleaner Production, EMS-ISO 14001:2004, Auditing Construction Infrastructure (roads, dams, bridges, buildings), Communication Facilities, Agricultural Projects, Fuel & Service Stations, Quarries,  Waste Management,  Noise Pollution."             
 ));
 
-$practitioner93 = Practitioner::create(array(
-  'person' => "Dr. Balla TURYAHUMURA" ,
-	'organisation_name' => "KATS Consult" ,
-	'visiting_address' => "Buganda Road, 666/ G, " ,
-	'box_no' => "P.O. Box 504 " ,
+$practitioner66 = Practitioner::create(array(
+	'person' => "Mr. John T. TUMUHIMBISE" ,
+	'box_no' => "P.O. Box 7270" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: Mob :   0772 470785 ; Office : 0312 108449 ; " ,
-	'email' => "  ballakats@gmail.com  " ,
-	'qualifications' => "PhD. Technical Sciences; MSc. Chemical Engineering/Plastics Technology" ,
-	'expertise' => "Chemical & Process Industries, Enterprises using Chemicals, Institutions and Others such as Waste Disposal Facilities."             
+	'phone' => "Tel: 0772 694014 and 0414-257863." ,
+	'qualifications' => "MSc. Energy Studies; BSc. Forestry." ,
+	'expertise' => "Forestry and Energy."             
 ));
 
-$practitioner94 = Practitioner::create(array(
-  'person' => "Ms. Mary Clemence Mugabe NDEKEZI " ,
-	'organisation_name' => "KOM Consulting Engineers & Planners" ,
-	'box_no' => "P.O. Box 33959 " ,
+$practitioner67 = Practitioner::create(array(
+	'person' => "Mr. Joseph AGUMA-ACON" ,
+	'organisation_name' => "Occupational Q & E Mgt Systems Ltd, Plot 99, Ntinda-Nakawa Road, " ,
+	'box_no' => "P.O. Box 28831" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: +256 (0) 772 464 440 " ,
-	'email' => " mnmugabe@yahoo.com " ,
-	'qualifications' => "MA. Gender Studies; " ,
-	'expertise' => "Environmental Impact Assessment of Physical Environment;  Social/Gender Impact Assessment "             
+	'phone' => "Tel: 0772-463288" ,
+	'email' => " joeaacon@yahoo.com " ,
+	'qualifications' => "BSc. Chemistry" ,
+	'expertise' => "Occupational Safety and Health; Chemical Safety; and Pollution Management. "             
 ));
 
-$practitioner95 = Practitioner::create(array(
-  'person' => "Eng. Priscilla NAKIBONEKA" ,
-	'organisation_name' => "M/S Sanitation and Environmental Consult" ,
-	'box_no' => "P.O. Box 2364 " ,
+$practitioner68 = Practitioner::create(array(
+	'person' => "Mr. Joshua Kaliba KATALIMULINGO" ,
+	'organisation_name' => "BIMCO Consult Ltd" ,
+	'visiting_address' => "Plot 17 Kakungulu Road Ntinda" ,
+	'box_no' => "P.O. Box 75383" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772499336" ,
-	'email' => " pnakiboneka@gmail.com  " ,
-	'qualifications' => "BSc. Civil Engineering" ,
-	'expertise' => "Civil & Infrastructural developments, Waste-water Engineering, Solid Waste and Health-care Waste Management, water and Sanitation assessment"             
+	'phone' => "Mob: +256774260204" ,
+	'email' => " joshkaliba@yahoo.com ; joshkaliba@gmail.com" ,
+	'qualifications' => "Bachelor of Environmental Science Technology and Management" ,
+	'expertise' => "Occupational Health and safety, Environmental Processing Technology, Water and Waste water treatment, Environmental Quality Management"             
 ));
 
-$practitioner96 = Practitioner::create(array(
-  'person' => "Ms. Janet Shabaan MBAKA" ,
-	'organisation_name' => "MSTIU Consults" ,
-	'box_no' => "P.O. Box 29871" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256 772 854103 " ,
-	'email' => " janet.shaban@gmail.com  " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Telecom Projects; Fuel Stations; Stone Quarries, Remote sensing, Land use planning, Occupational Health and Safety, GIS and Waste management,"             
-));
-
-$practitioner97 = Practitioner::create(array(
-  'person' => "Ms. Janet Shabaan Mbaka " ,
-	'organisation_name' => "MSTIU Consults" ,
-	'box_no' => "P.O. Box 29871" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256 772 854103 " ,
-	'email' => " janet.shaban@gmail.com  " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Land use planning, Waste management, Occupational Health and Safety, GIS and Remote sensing"             
-));
-
-$practitioner98 = Practitioner::create(array(
-  'person' => "Mr. Paul Katya MUBIRU" ,
-	'organisation_name' => "Multi-Build Uganda" ,
-	'box_no' => "P.O. Box 11782 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel:0772481855" ,
-	'email' => " mubirukatya@yahoo.com " ,
-	'qualifications' => "BSc. Environmental Management" ,
-	'expertise' => "Solid Waste Management, Protected Area/ Wildlife use, Planning, Telecommunication Masts Industrial Pollution."             
-));
-
-$practitioner99 = Practitioner::create(array(
-  'person' => "Mr. Paul Buyerah MUSAMALI" ,
-	'organisation_name' => "National Forestry Authority" ,
-	'box_no' => "P.O. Box 70863" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel. : Mob : 0772 466569 Office : 0414 230365    " ,
-	'email' => "paulm@nfa.; g.ug " ,
-	'qualifications' => "MSc. Environment Science; " ,
-	'expertise' => "Natural Resource Planning & management; Integrated environment  and Water management; Solid waste management"             
-));
-
-$practitioner100 = Practitioner::create(array(
-  'person' => "Dr. Swidiq MUGERWA" ,
-	'organisation_name' => "National Livestock Resources Institute " ,
-	'box_no' => "P.O. Box 96 " ,
-	'city' => "Tororo" ,
-	'phone' => "Tel: + 256 782660295" ,
-	'email' => " swidiqk@yahoo.com " ,
-	'qualifications' => "BSc. Agriculture" ,
-	'expertise' => "Ecology, Biodiversity Conservation, Animal Environment Interaction Social and Economic Environmental Impacts, Environmental Ecotechnology, Agriculture Development Projects, Construction projects and water resources management"             
-));
-
-$practitioner101 = Practitioner::create(array(
-  'person' => "Dr. Festus Kibiri BAGOORA" ,
-	'organisation_name' => "Nature-RIDD (U) Ltd" ,
-	'visiting_address' => "Lower Estate Kyambogo, Plot 12 Devon Avenue" ,
-	'box_no' => "P.O. Box 26598" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 551340" ,
-	'email' => " fbago; a@gmail.com" ,
-	'qualifications' => "PHD in Environmental science, Bachelor of Arts and Diploma in Education" ,
-	'expertise' => "Ecosystems impacts & restoration, land evaluation & land use planning, soils & Geomorphological assessments, Disaster/hazards Management, Boundary-layer climatology & Remote sensing of the environment, and climate & climate change impact evaluation"             
-));
-
-$practitioner102 = Practitioner::create(array(
-  'person' => "Mr. Lameck MUWANGA" ,
+$practitioner69 = Practitioner::create(array(
+	'person' => "Mr. Lameck MUWANGA" ,
 	'organisation_name' => "Nature-RIDD (U) Ltd" ,
 	'visiting_address' => "Lower Estate Kyambogo, Plot 12 Devon Avenue" ,
 	'box_no' => "P.O. Box 26598" ,
@@ -2679,44 +2263,87 @@ $practitioner102 = Practitioner::create(array(
 	'expertise' => "Social Impact Assessment, Eco-tourism Impact Analysis, Telecommunication"             
 ));
 
-$practitioner103 = Practitioner::create(array(
-  'person' => "Dr. Festus Kibiri BAGOORA" ,
-	'organisation_name' => "Nature-RIDD (U) Ltd" ,
-	'visiting_address' => "Lower Estate Kyambogo, Plot 12 Devon Avenue" ,
-	'box_no' => "P.O. Box 26598" ,
+$practitioner70 = Practitioner::create(array(
+	'person' => "Mr. Lawrence Omulen" ,
+	'organisation_name' => "NEWPLAN Ltd." ,
+	'visiting_address' => "Consulting Engineers & Planners, Crusader House, 1st Floor, Plot No. 3, Portal Avenue" ,
+	'box_no' => "P.O. Box 7544 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 551340" ,
-	'email' => " fbago; a@gmail.com" ,
-	'qualifications' => "PHD in Environmental science, Bachelor of Arts and Diploma in Education" ,
-	'expertise' => "Ecosystems impacts & restoration, land evaluation & land use planning, soils & Geomorphological assessments, Disaster/hazards Management, Boundary-layer climatology & Remote sensing of the environment, and climate & climate change impact evaluation"             
+	'phone' => "Tel: 0772-780000,  0414-34024/5" ,
+	'qualifications' => "MBA Business Administration; MSc. Energy Management; BA. Political Science and Social Administration." ,
+	'expertise' => "Energy Management"             
 ));
 
-$practitioner104 = Practitioner::create(array(
-  'person' => "Eng. Edward Mike NDAWULA" ,
-	'organisation_name' => "Nek Consults Limited (www.nekconsults.com)" ,
-	'visiting_address' => "Block 2, Suite B5, NHCC Estate Wandegeya" ,
-	'box_no' => "P.O. Box 23949" ,
+$practitioner71 = Practitioner::create(array(
+	'person' => "Mr. Martin ARYAGARUKA" ,
+	'organisation_name' => "Enviro-Care & Management Ltd" ,
+	'box_no' => "P.O. Box 971 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: +256 752740664" ,
-	'email' => " ndawula@nekconsults.com " ,
-	'qualifications' => "BSc. Electrical Engineering" ,
-	'expertise' => "Energy and Hydropower projects, Electronic waste and materials management, Electrical Engineering"             
+	'phone' => "Tel: Office: 0414257323; Mob:  0772523728" ,
+	'email' => " aryagaruka2000@yahoo.com" ,
+	'qualifications' => "Master of Natural Resource Management, Bachelor of Science" ,
+	'expertise' => "Natural Resource Management(Social Economic Information),Energy Management, Cleaner Production, Environmental Management Systems"             
 ));
 
-$practitioner105 = Practitioner::create(array(
-  'person' => "Ms. Christine NANKUBUGE" ,
-	'organisation_name' => "Nek Consults Limited (www.nekconsults.com)" ,
-	'visiting_address' => "Block 2, Suite B5, NHCC Estate Wandegeya" ,
-	'box_no' => "P.O. Box 23949" ,
+$practitioner72 = Practitioner::create(array(
+	'person' => "Mr. Moses ERIATU" ,
+	'organisation_name' => "Environmental Planning and Management Consults, " ,
+	'box_no' => "P.O. Box 34939  " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: +256772447388" ,
-	'email' => " cnankubuge@yahoo.com " ,
-	'qualifications' => "Master of Social Sector Planning and Management, B.A in Social Work and Social Administration" ,
-	'expertise' => "Social impact Assessments, Environmental Impact Assessments, Social Policy Analysis, Gender Mainstreaming, Project planning and management"             
+	'phone' => "Tel: 0772360689 / 0702 255314" ,
+	'email' => " eriatumoses2000@yahoo.com " ,
+	'qualifications' => "Masters in Management Studies, PgD. Integrated Rural Planning. " ,
+	'expertise' => "Rural Development Planning; Energy Management; Social Impacts Assessments; Occupational Health & Safety"             
 ));
 
-$practitioner106 = Practitioner::create(array(
-  'person' => "Mr. Nelson OMAGOR " ,
+$practitioner73 = Practitioner::create(array(
+	'person' => "Mr. Moses Kitimbo  KAGODA " ,
+	'organisation_name' => "Environmental Assessment Consult Ltd. (EACL)" ,
+	'visiting_address' => "Kisozi House Close, Plot 8, Kyagwe Road" ,
+	'box_no' => "P.O. BOX 3128 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel :     0772 434155" ,
+	'email' => "eacl@infocom.co.ug " ,
+	'qualifications' => "MSc. Environmental & Resource Assessment; BSc. Botany & Zoology " ,
+	'expertise' => "Botanical / Zoological Assessments, fisheries Resources management, Water resources, Wetland Assessment, Waste management "             
+));
+
+$practitioner74 = Practitioner::create(array(
+	'person' => "Mr. Moses Mugimba MUHUMUZA " ,
+	'organisation_name' => "Green Impact & Development Services (GIDS) Consults Ltd " ,
+	'box_no' => "P.O. Box 12211 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 077 332108/ +256 312515083 " ,
+	'email' => " mmugim@gmail.com ; muhumuza.moses.m@greenimpactco.com " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Waste Management; Eco-Tourism Impact Analysis; Environmental Standards Conformity; Work and Public Health and Safety; Energy Management"             
+));
+
+$practitioner75 = Practitioner::create(array(
+	'person' => "Mr. Moses OLUKA " ,
+	'organisation_name' => "Urban Research and Training Consultancy Ltd" ,
+	'box_no' => "P.O. Box 34950" ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: 0774 205209 and 0702 205209" ,
+	'email' => " olukaomo@yahoo.co.uk " ,
+	'qualifications' => "B. Urban Planning " ,
+	'expertise' => "Land Use Planning, Land Resource Assessment, Environmental Planning, Social Impact Assessment, and Infrastructural Projects Evaluation"             
+));
+
+$practitioner76 = Practitioner::create(array(
+	'person' => "Mr. Moses OTIM " ,
+	'organisation_name' => "Bimco Consult Ltd" ,
+	'visiting_address' => "(off Luthuli Avenue), Plot 23 B, Bandali Rise" ,
+	'box_no' => "P.O. Box 35209" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256-256 312 114891; Mobile: 0701-912870; 0392 944844" ,
+	'email' => " bimco@bimco.co.ug  ; m_otim@hotmail.com  ;  teepgis@yahoo.com " ,
+	'qualifications' => "MSc. Geo information Science & Earth Observation; MSc. Educational & Training Systems Design;" ,
+	'expertise' => "Industry Development Planning, Waste Management, OSH & Environmental Management Systems; Mineral Resources Evaluation, Metallurgy & Environmental Geology; Water Resources and Water Quality Assessment, Eco-hydrology; Spatial Analysis & Modelling, Oil and Gas exploration and developments, downstream petroleum developments, Hydropower projects"             
+));
+
+$practitioner77 = Practitioner::create(array(
+	'person' => "Mr. Nelson OMAGOR " ,
 	'organisation_name' => "Nelson and Associates Environment Consultants " ,
 	'visiting_address' => "Hot Springs Restaurant Building, Plot 27 Clement Hill Road" ,
 	'box_no' => "P.O. Box 4066 " ,
@@ -2727,32 +2354,8 @@ $practitioner106 = Practitioner::create(array(
 	'expertise' => "EIAs for: Roads; Communication Masts; Wetland Wise Use and Management; Fuel Stations; Building & Construction Projects; Dams and Hydro Power Projects; Mining Projects; Agricultural Projects; EMS (ISO 14001) and ISO 19011 for QMS; Social Impact Assessment, including Preparation of Resettlement Action Plans.  "             
 ));
 
-$practitioner107 = Practitioner::create(array(
-  'person' => "Mr. Nelson OMAGOR " ,
-	'organisation_name' => "Nelson and Associates Environment Consultants " ,
-	'visiting_address' => "Hot Springs Restaurant Building, Plot 27 Clement Hill Road" ,
-	'box_no' => "P.O. Box 4066 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel. Office:   0414 382924   Mob:            0772 458903 / 0701-458903 " ,
-	'email' => " nelsonomag; @gmail.com  " ,
-	'qualifications' => "MSc. (Botany); BSc. Botany & Zoology " ,
-	'expertise' => "Auditing of Construction Infrastructure (Dams, Roads, Housing & Bridges); Communication Facilities; Agricultural Projects; Fuel Stations; Industrial Settings  "             
-));
-
-$practitioner108 = Practitioner::create(array(
-  'person' => "Eng. Michael DAKA" ,
-	'organisation_name' => "NEWPLAN Ltd." ,
-	'visiting_address' => "Consulting Engineers & Planners, Crusader House, 1st Floor, Plot No. 3, Portal Avenue" ,
-	'box_no' => "P.O. Box 7544 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0782819688" ,
-	'email' => " daka@newplan.ug ; Daka.michael@gmail.com " ,
-	'qualifications' => "MSc. Engineering (Infrastructure); BSc. Engineering(Civil) " ,
-	'expertise' => "General civil engineering, Transport(roads and highways), hydropower, Resettlement Action plans, ISO 9001:2008 QMS, Dams, Occupational Health and Safety, climate change, Risk assessment"             
-));
-
-$practitioner109 = Practitioner::create(array(
-  'person' => "Mr. Omino. Joseph OTEU  " ,
+$practitioner78 = Practitioner::create(array(
+	'person' => "Mr. Omino. Joseph OTEU  " ,
 	'organisation_name' => "NEWPLAN Ltd." ,
 	'visiting_address' => "Consulting Engineers & Planners, Crusader House, 1st Floor, Plot No. 3, Portal Avenue" ,
 	'box_no' => "P.O. Box 7544 " ,
@@ -2763,8 +2366,351 @@ $practitioner109 = Practitioner::create(array(
 	'expertise' => "Hydro Power Plants, Road construction, Communication Masts, Oil and Gas Project Assessments"             
 ));
 
+$practitioner79 = Practitioner::create(array(
+	'person' => "Mr. Oscar MASABA" ,
+	'organisation_name' => "Nova Consult (U) Ltd" ,
+	'visiting_address' => "Mandela National Stadium, Northern Wing, Suit 1-1-2" ,
+	'box_no' => "P.O. Box 33649" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0773285012" ,
+	'email' => " mabz_0s@yahoo.com " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Natural Resources Management, Pollution and Solid Waste management and Socio Impact Evaluation"             
+));
+
+$practitioner80 = Practitioner::create(array(
+	'person' => "Mr. Paul Buyerah MUSAMALI" ,
+	'organisation_name' => "National Forestry Authority" ,
+	'box_no' => "P.O. Box 70863" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel. : Mob : 0772 466569 Office : 0414 230365    " ,
+	'email' => "paulm@nfa.; g.ug " ,
+	'qualifications' => "MSc. Environment Science; " ,
+	'expertise' => "Natural Resource Planning & management; Integrated environment  and Water management; Solid waste management"             
+));
+
+$practitioner81 = Practitioner::create(array(
+	'person' => "Mr. Paul Katya MUBIRU" ,
+	'organisation_name' => "Multi-Build Uganda" ,
+	'box_no' => "P.O. Box 11782 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel:0772481855" ,
+	'email' => " mubirukatya@yahoo.com " ,
+	'qualifications' => "BSc. Environmental Management" ,
+	'expertise' => "Solid Waste Management, Protected Area/ Wildlife use, Planning, Telecommunication Masts Industrial Pollution."             
+));
+
+$practitioner82 = Practitioner::create(array(
+	'person' => "Mr. Peter ISAMAT " ,
+	'organisation_name' => "ICL" ,
+	'box_no' => "P.O. Box 5229" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772 409 564 " ,
+	'email' => " isamatpeter@yahoo.co.uk " ,
+	'qualifications' => "BA. Social Sciences " ,
+	'expertise' => "Socio-Economic Assessments; Environmental Management Systems. "             
+));
+
+$practitioner83 = Practitioner::create(array(
+	'person' => "Mr. Pius KAHANGIRWE" ,
+	'box_no' => "P.O. Box 27755 " ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: 0712 929120" ,
+	'email' => " kpuirs@gmail.com ; pkahangirwe@muienr.mak.ac.ug " ,
+	'qualifications' => "MSc. Environment & Natural Resources, BA. Environmental Management" ,
+	'expertise' => "Environmental Heath and Social Impact assessment, Water resources management, Cumulative Effects Assessment, Climate Change Impact Assessment, Planning Infrastructure Development"             
+));
+
+$practitioner84 = Practitioner::create(array(
+	'person' => "Mr. Richard BAVAKURE " ,
+	'visiting_address' => "Plot 44 Lunyo Road" ,
+	'box_no' => "P.O. Box 34 " ,
+	'city' => "Entebbe" ,
+	'phone' => "Tel: 0782 090677/ 0754 090677" ,
+	'email' => " bavarichard@yahoo.co.uk " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Telecom Projects and assisting in general EIAs."             
+));
+
+$practitioner85 = Practitioner::create(array(
+	'person' => "Mr. Richard Mugambe KIBIRANGO " ,
+	'organisation_name' => "Institute of Public Health" ,
+	'visiting_address' => "Makerere University" ,
+	'box_no' => "P.O. Box 7072 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0712 381346 and 0774 116280" ,
+	'email' => " rkmugambe@yahoo.com " ,
+	'qualifications' => "MSc. Environmental Technology; Bachelor of Environmental Health Sciences" ,
+	'expertise' => "Waste water and Waste management Technologies; Environmental Health; Renewable Energy Technology and applications"             
+));
+
+$practitioner86 = Practitioner::create(array(
+	'person' => "Mr. Richard OSALIYA" ,
+	'box_no' => "P.O. Box 7611" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0782 451815" ,
+	'email' => " osaliya@yahoo.com " ,
+	'qualifications' => "MSc. Environment & Natural Resources; Bachelor of Urban Planning" ,
+	'expertise' => "Water Resources Management, Urban Development, Land-use assessments, Cumulative Impacts, Climate Change Impact Assessment"             
+));
+
+$practitioner87 = Practitioner::create(array(
+	'person' => "Mr. Robert Charles AGUMA" ,
+	'organisation_name' => "ASRDEM  Ltd." ,
+	'box_no' => "P.O. Box 22609" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772-380340" ,
+	'email' => " robertaguma@yahoo.com " ,
+	'qualifications' => "MSc. GIS & Earth Observation (Forestry for Sustainable Development)" ,
+	'expertise' => "Agriculture and Forestry; Natural Resource Management; Environmental Management; Waste Management "             
+));
+
+$practitioner88 = Practitioner::create(array(
+	'person' => "Mr. Robert NDYABAREMA" ,
+	'box_no' => "P.O. Box 10491 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256-414-543826 / Mobile: +256-712-417452" ,
+	'email' => " rndyaba@gmail.com  " ,
+	'qualifications' => "MSc. Environment & Natural Resources; BSc. Geography & Environment." ,
+	'expertise' => "Environment & Natural Resources"             
+));
+
+$practitioner89 = Practitioner::create(array(
+	'person' => "Mr. Roland Bless TAREMWA" ,
+	'organisation_name' => "Pinnacle Enviro Consult" ,
+	'box_no' => "P.O. Box 22546" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel:+256-414340756 Mobile:0 711586509 and 0772586509" ,
+	'email' => " roland.taremwa@in.com " ,
+	'qualifications' => "BSc Computer Science" ,
+	'expertise' => "Electronic waste management, Telecom developments, Information Technology developments and Infrastructure developments."             
+));
+
+$practitioner90 = Practitioner::create(array(
+	'person' => "Mr. Ronald ANGUTOKO" ,
+	'box_no' => "P.O. Box 37372 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0789467372  OR  0701839299" ,
+	'email' => " rangutoko@yahoo.com " ,
+	'qualifications' => "BSc. in Environmental Engineering " ,
+	'expertise' => "Infrastructural  Development, Waste management, Water and Air Pollution, Wetland Resources Management, Public Health and Safety"             
+));
+
+$practitioner91 = Practitioner::create(array(
+	'person' => "Mr. Samuel Vivian MATAAGI" ,
+	'organisation_name' => "Savimaxx Ltd." ,
+	'visiting_address' => "Nalya Housing Estate, Plot 843, Shelter Road" ,
+	'box_no' => "P.O. Box 25250 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0712 654651 " ,
+	'email' => " savimaxxcompanylimited@gmail.com " ,
+	'qualifications' => "MSc. Plant Taxonomy; BSc. Botany & Zoology" ,
+	'expertise' => "ISO 1400 Environmental Management Systems; Industrial Waste Water Management; Environmental Pollution Assessment"             
+));
+
+$practitioner92 = Practitioner::create(array(
+	'person' => "Mr. Silver SSEBAGALA" ,
+	'organisation_name' => "Uganda Cleaner Production Centre " ,
+	'box_no' => "P.O. Box 34644    " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0774647363" ,
+	'email' => " silverssebagala@yahoo.com " ,
+	'qualifications' => "Master of Science in Analytical Chemistry " ,
+	'expertise' => "Cleaner Production and Industrial Process, Environment Management System (EMS), Life Cycle Analysis (LCA), Industrial Pollution Control & Management; Waste Management and Sanitation"             
+));
+
+$practitioner93 = Practitioner::create(array(
+	'person' => "Mr. Stephen A. K. MAGEZI" ,
+	'organisation_name' => "Rwenzo – Green Associates" ,
+	'box_no' => "P.O. Box 1299" ,
+	'city' => "Kampala" ,
+	'phone' => "Mob + 256702878322 or +256752878322 or  +256772878322" ,
+	'email' => " rwenzogreen@gmail.com ; sak_magezi@yahoo.com  " ,
+	'qualifications' => "MSc. Meteorology (Tropical Urban Pollution Potential Assessment);" ,
+	'expertise' => "Tropical Urban Pollution; climate change,"             
+));
+
+$practitioner94 = Practitioner::create(array(
+	'person' => "Mr. Tom Ndamira RUKUNDO " ,
+	'box_no' => "P.O. Box 21129" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772 591205" ,
+	'email' => "  rukundotn@yahoo.com  ; tomr@nfa.; g.ug " ,
+	'qualifications' => "MSc. Environment and Natural Resource  Management, BSc. Forestry, PgD. Education" ,
+	'expertise' => "Environmental  and Natural Resources Management Forestry"             
+));
+
+$practitioner95 = Practitioner::create(array(
+	'person' => "Mr. Wilbroad KUKUNDAKWE" ,
+	'visiting_address' => "Plot 4 Jinja Road, 3rd Floor, Northern Wing, Social Security House," ,
+	'box_no' => "P.O. Box 29005  " ,
+	'city' => "Kampala" ,
+	'phone' => "Mobile: 0772-842416" ,
+	'email' => " wilbroadk@gmail.com " ,
+	'qualifications' => "BSc. Industrial Chemistry" ,
+	'expertise' => "Chemicals Management; Waste Management; "             
+));
+
+$practitioner96 = Practitioner::create(array(
+	'person' => "Mrs. Gertrude MAGEZI" ,
+	'organisation_name' => "Rwenzo – Green Associates" ,
+	'box_no' => "P.O. Box 1299" ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: 0701441846 and 0752441844" ,
+	'email' => " rwenzogreen@gmail.com ; sak_magezi@yahoo.com  " ,
+	'qualifications' => "BA. Social Sciences" ,
+	'expertise' => "Social Environment Impact Assessment; Resettlement Impacts & Plans"             
+));
+
+$practitioner97 = Practitioner::create(array(
+	'person' => "Ms. Anita KIGONYA" ,
+	'organisation_name' => "Environment & Development Action Consult" ,
+	'visiting_address' => "Equatorial House, Kampala Road" ,
+	'box_no' => "P.O. BOX 31211" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772 422 877" ,
+	'email' => " endasug@yahoo.com " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Land Resources; Water & Sanitation; Chemical Management; Energy Management."             
+));
+
+$practitioner98 = Practitioner::create(array(
+	'person' => "Ms. Apophia ATUKUNDA" ,
+	'organisation_name' => "Chantalle Solutions" ,
+	'visiting_address' => "Plot 1272, Nsambya-Ggaba Road," ,
+	'box_no' => "P.O. Box 23020" ,
+	'city' => "Kampala" ,
+	'phone' => "Mobile:  0702 98 71 14; Office:   0414 53 21 92" ,
+	'email' => "   apophiaa@yahoo.co.uk" ,
+	'qualifications' => "MSc. Agriculture (Agroforestry);BSc. Forestry" ,
+	'expertise' => "Protected Area Management; Biodiversity Conservation, Forestry Management, Agricultural Development Projects"             
+));
+
+$practitioner99 = Practitioner::create(array(
+	'person' => "Ms. Celia NALWADDA" ,
+	'box_no' => "P.O. Box 10395" ,
+	'city' => "Kampala" ,
+	'phone' => "Mob: +256 772537830" ,
+	'email' => " jtcelia@yahoo.co.uk ; jtcelia@gmail.com " ,
+	'qualifications' => "MSc. Land Management (Natural Resources management), BSc. Forestry" ,
+	'expertise' => "Natural resources management, social resources survey, land use planning, and GIS & Remote sensing"             
+));
+
+$practitioner100 = Practitioner::create(array(
+	'person' => "Ms. Christine NANKUBUGE" ,
+	'organisation_name' => "Nek Consults Limited (www.nekconsults.com)" ,
+	'visiting_address' => "Block 2, Suite B5, NHCC Estate Wandegeya" ,
+	'box_no' => "P.O. Box 23949" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256772447388" ,
+	'email' => " cnankubuge@yahoo.com " ,
+	'qualifications' => "Master of Social Sector Planning and Management, B.A in Social Work and Social Administration" ,
+	'expertise' => "Social impact Assessments, Environmental Impact Assessments, Social Policy Analysis, Gender Mainstreaming, Project planning and management"             
+));
+
+$practitioner101 = Practitioner::create(array(
+	'person' => "Ms. Comfort  Zacia DRADRI" ,
+	'organisation_name' => "NUDEIL" ,
+	'visiting_address' => "Plot 9, Olia Road" ,
+	'box_no' => "P.O. Box 272 " ,
+	'city' => "Gulu" ,
+	'phone' => " Tel: 0471433045 and 0 471433049  Mobile: 0777766694 and 0711690555" ,
+	'email' => "  czdradri@field.winrock.; g " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Road Construction, Communication Masts, Building and Construction Projects, Social Impact Evaluation"             
+));
+
+$practitioner102 = Practitioner::create(array(
+	'person' => "Ms. Diana NAKALANZI" ,
+	'organisation_name' => "WSS Services(U) Ltd" ,
+	'visiting_address' => "6th Floor Impala House Annex, Plot 13/15 Kimathi Avenue" ,
+	'box_no' => "P.O. Box 27755" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256752840101" ,
+	'email' => " dianak@yahoo.com " ,
+	'qualifications' => "MSc. Limnology and Wetland Ecosystems" ,
+	'expertise' => "Wetlands ecology assessments, water quality assessments, wetlands efficiency assessments, EIA for petrol stations"             
+));
+
+$practitioner103 = Practitioner::create(array(
+	'person' => "Ms. Edith Birungi KAHUBIRE " ,
+	'box_no' => "P.O. Box 1299" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel.     0772 540966 and 702540966" ,
+	'email' => " kahubire@yahoo.co.uk " ,
+	'qualifications' => "M.Phil. Development Geography; MSc. Geo-Information Science and Earth Observation (Natural Resource Management); BA. Social Sciences " ,
+	'expertise' => "Social Impact Assessment; Economic Assessment; Cultural Assessment."             
+));
+
+$practitioner104 = Practitioner::create(array(
+	'person' => "Ms. Enid Ocaya KABASINGUZI" ,
+	'box_no' => "P.O. Box 3790 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256 772668727" ,
+	'email' => " enidkabocaya@gmail.com" ,
+	'qualifications' => "BSc. Botany and Zoology" ,
+	'expertise' => "Environment Natural Resources Management"             
+));
+
+$practitioner105 = Practitioner::create(array(
+	'person' => "Ms. Esther Kalule NANFUKA " ,
+	'organisation_name' => "Department of Social Work & Social Administration" ,
+	'visiting_address' => "Makerere University" ,
+	'box_no' => "P.O. Box 7062" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772 484265" ,
+	'email' => " nanfuka@ss.mak.ac.ug  ; esthernanfuka@yahoo.com" ,
+	'qualifications' => "Master of Arts in Social Sector Planning and Management, " ,
+	'expertise' => "Social Impact  Assessment ; Socio-Economic Assessment "             
+));
+
+$practitioner106 = Practitioner::create(array(
+	'person' => "Ms. Faith MUGERWA" ,
+	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
+	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
+	'box_no' => "P.O. Box 22428 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0782716542" ,
+	'email' => " faithmugerwa@yahoo.co.uk " ,
+	'qualifications' => "BA Sociology, " ,
+	'expertise' => "Social Impact Assessment (SIA), Resettlement Action Plan (RAP) Social Planning, Sociology of Health, Urban Planning "             
+));
+
+$practitioner107 = Practitioner::create(array(
+	'person' => "Ms. Hanifah N. LUBEGA" ,
+	'organisation_name' => "Bimco Consult Ltd" ,
+	'box_no' => "P.O. Box 35209" ,
+	'city' => "Kampala" ,
+	'phone' => "Mobile: 0783655211 and 0704642827" ,
+	'email' => " ls_hanny@yahoo.com " ,
+	'qualifications' => "B.Eng. Environmental Engineering." ,
+	'expertise' => "Occupational Health and Safety, Industrial Developments, Environmental Engineering Systems, Energy Developments, Water Resources and Waste Water Treatment Projects, Cleaner Production Assessments and Clean Development Mechanisms"             
+));
+
+$practitioner108 = Practitioner::create(array(
+	'person' => "Ms. Harriet N. MUJUNI" ,
+	'organisation_name' => "Gissat Environment Associates (www.gissatconsult.com)" ,
+	'visiting_address' => "Plot 3334 UDC Close, Muyenga" ,
+	'box_no' => "P.O. Box 21598" ,
+	'city' => "Kampala" ,
+	'phone' => "Office Tel/Fax: 0414 267 070; Cell: 0772 403796; 0712 403796; 0702 403 796" ,
+	'email' => " info@gissat.co.ug  ; harriet.mujuni@gmail.com  " ,
+	'qualifications' => "Bachelor of Laws (LL.B.)" ,
+	'expertise' => "Environmental Law & Compliance; Strategic Environmental Assessments; Environmental & Social Impact Assessments; Resettlement & Rehabilitation; Conflict Resolution (Natural Resources); Cleaner Production; Health Impact Assessments "             
+));
+
+$practitioner109 = Practitioner::create(array(
+	'person' => "Ms. Harriet NANKYA" ,
+	'box_no' => "P.O. Box 4856" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772 868154" ,
+	'email' => " nankyaha@yahoo.co.uk " ,
+	'qualifications' => "BSc. Forestry" ,
+	'expertise' => "Forestry and Natural Resources, Ecosystem Assessment Impacts Analysis, Recreation and Tourism Infrastructure."             
+));
+
 $practitioner110 = Practitioner::create(array(
-  'person' => "Ms. Jane MUGANO" ,
+	'person' => "Ms. Jane MUGANO" ,
 	'organisation_name' => "NEWPLAN Ltd." ,
 	'visiting_address' => "1st Flloor, Crusader House" ,
 	'box_no' => "P.O. Box 7544 " ,
@@ -2776,30 +2722,18 @@ $practitioner110 = Practitioner::create(array(
 ));
 
 $practitioner111 = Practitioner::create(array(
-  'person' => "Ms. Jovah NDYABAREMA" ,
-	'organisation_name' => "NEWPLAN Ltd." ,
-	'visiting_address' => "Consulting Engineers & Planners, Crusader House, 1st Floor, Plot No. 3, Portal Avenue" ,
-	'box_no' => "P.O. Box 7544 " ,
+	'person' => "Ms. Janet Shabaan MBAKA" ,
+	'organisation_name' => "MSTIU Consults" ,
+	'box_no' => "P.O. Box 29871" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0414-34024/5; Mob : 0782 440942" ,
-	'email' => " jovah.ndyabarema@gmail.com  " ,
-	'qualifications' => "MSc. Water & Environment Management. BSc. Botany & Zoology; Dip. Sustainable Agric. & Environment" ,
-	'expertise' => "Environmental sanitation; Agricultural Environment; Integrated Water Resources Mgt; Solid Waste Management; Vertebrate Zoology, Entomology and Parasitology; Occupational Health and Safety, Policy and Institutional Review/Reform,   Resettlement Action Plans & implementation, Environmental & Social Monitoring during construction"             
+	'phone' => "Mob: +256 772 854103 " ,
+	'email' => " janet.shaban@gmail.com  " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Telecom Projects; Fuel Stations; Stone Quarries, Remote sensing, Land use planning, Occupational Health and Safety, GIS and Waste management,"             
 ));
 
 $practitioner112 = Practitioner::create(array(
-  'person' => "Mr. Lawrence Omulen" ,
-	'organisation_name' => "NEWPLAN Ltd." ,
-	'visiting_address' => "Consulting Engineers & Planners, Crusader House, 1st Floor, Plot No. 3, Portal Avenue" ,
-	'box_no' => "P.O. Box 7544 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772-780000,  0414-34024/5" ,
-	'qualifications' => "MBA Business Administration; MSc. Energy Management; BA. Political Science and Social Administration." ,
-	'expertise' => "Energy Management"             
-));
-
-$practitioner113 = Practitioner::create(array(
-  'person' => "Ms. Josephine AURUGA " ,
+	'person' => "Ms. Josephine AURUGA " ,
 	'organisation_name' => "Nova Consult (U) Ltd" ,
 	'visiting_address' => "Mandela National Stadium, Northern Wing, Suit 1-1-2" ,
 	'box_no' => "P.O. Box 33649" ,
@@ -2810,142 +2744,113 @@ $practitioner113 = Practitioner::create(array(
 	'expertise' => "Natural Resource Management; Pollution and Waste Management; Social Impact Evaluation; "             
 ));
 
-$practitioner114 = Practitioner::create(array(
-  'person' => "Mr. Oscar MASABA" ,
-	'organisation_name' => "Nova Consult (U) Ltd" ,
-	'visiting_address' => "Mandela National Stadium, Northern Wing, Suit 1-1-2" ,
-	'box_no' => "P.O. Box 33649" ,
+$practitioner113 = Practitioner::create(array(
+	'person' => "Ms. Jovah NDYABAREMA" ,
+	'organisation_name' => "NEWPLAN Ltd." ,
+	'visiting_address' => "Consulting Engineers & Planners, Crusader House, 1st Floor, Plot No. 3, Portal Avenue" ,
+	'box_no' => "P.O. Box 7544 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0773285012" ,
-	'email' => " mabz_0s@yahoo.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Natural Resources Management, Pollution and Solid Waste management and Socio Impact Evaluation"             
+	'phone' => "Tel: 0414-34024/5; Mob : 0782 440942" ,
+	'email' => " jovah.ndyabarema@gmail.com  " ,
+	'qualifications' => "MSc. Water & Environment Management. BSc. Botany & Zoology; Dip. Sustainable Agric. & Environment" ,
+	'expertise' => "Environmental sanitation; Agricultural Environment; Integrated Water Resources Mgt; Solid Waste Management; Vertebrate Zoology, Entomology and Parasitology; Occupational Health and Safety, Policy and Institutional Review/Reform,   Resettlement Action Plans & implementation, Environmental & Social Monitoring during construction"             
+));
+
+$practitioner114 = Practitioner::create(array(
+	'person' => "Ms. Juliana KEIRUNGI" ,
+	'organisation_name' => "Atacama Consulting, " ,
+	'visiting_address' => "Plot 23 Gloucester Avenue" ,
+	'box_no' => "P.O. Box 12130" ,
+	'city' => "Kyambogo," ,
+	'phone' => "Tel: 0701-553642 (Mobile)  OR 0751-090752 (Office)   " ,
+	'email' => "  keirungi@yahoo.com ; julianakeirungi@atacama.co.ug   " ,
+	'qualifications' => "MSc. Environmental Science; BScH. Environmental Science" ,
+	'expertise' => "Industrial and Municipal Wastewater Management; Wastewater Treatment Plant Design; Community Based Natural Resource Management; Zoology; Resource Economics; Mine Assessments."             
 ));
 
 $practitioner115 = Practitioner::create(array(
-  'person' => "Ms. Josephine AURUGA " ,
-	'organisation_name' => "Nova Consult (U) Ltd" ,
-	'visiting_address' => "Mandela National Stadium, Northern Wing, Suit 1-1-2" ,
-	'box_no' => "P.O. Box 33649" ,
+	'person' => "Ms. Juliet Kintu NANSIKOMBI " ,
+	'organisation_name' => "Bimco Consult Ltd" ,
+	'box_no' => "P.O. Box 75383" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0782 924 408 / 0772 385183" ,
-	'email' => " aurugajoe@yahoo.com" ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Pollution and Waste Management; Socio-Economic Impact Audits; "             
+	'phone' => "Mob: +256 771 400485/ 701400485 " ,
+	'email' => " julie.kintn@uaia.ug  ; Juliek.nansikombi@gmail.com " ,
+	'qualifications' => "MSc. Conservation Biology; " ,
+	'expertise' => "Ecology, Biodiversity Studies, Ornithology, Agricultural Developments, Food Processing and Manufacturing, Eco Technology Projects, telecommunication masts"             
 ));
 
 $practitioner116 = Practitioner::create(array(
-  'person' => "Ms. Comfort  Zacia DRADRI" ,
-	'organisation_name' => "NUDEIL" ,
-	'visiting_address' => "Plot 9, Olia Road" ,
-	'box_no' => "P.O. Box 272 " ,
-	'city' => "Gulu" ,
-	'phone' => " Tel: 0471433045 and 0 471433049  Mobile: 0777766694 and 0711690555" ,
-	'email' => "  czdradri@field.winrock.; g " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Road Construction, Communication Masts, Building and Construction Projects, Social Impact Evaluation"             
+	'person' => "Ms. Mary Clemence Mugabe NDEKEZI " ,
+	'organisation_name' => "KOM Consulting Engineers & Planners" ,
+	'box_no' => "P.O. Box 33959 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256 (0) 772 464 440 " ,
+	'email' => " mnmugabe@yahoo.com " ,
+	'qualifications' => "MA. Gender Studies; " ,
+	'expertise' => "Environmental Impact Assessment of Physical Environment;  Social/Gender Impact Assessment "             
 ));
 
 $practitioner117 = Practitioner::create(array(
-  'person' => "Mr. Joseph AGUMA-ACON" ,
-	'organisation_name' => "Occupational Q & E Mgt Systems Ltd, Plot 99, Ntinda-Nakawa Road, " ,
-	'box_no' => "P.O. Box 28831" ,
+	'person' => "Ms. Olive TURYAMUREEBA" ,
+	'organisation_name' => "Atek Projects (U) Ltd " ,
+	'visiting_address' => "UMA Show Grounds, Bell Building Unit 3, Plot 28-29 Coronation Street" ,
+	'box_no' => "P.O. Box 5211 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772-463288" ,
-	'email' => " joeaacon@yahoo.com " ,
-	'qualifications' => "BSc. Chemistry" ,
-	'expertise' => "Occupational Safety and Health; Chemical Safety; and Pollution Management. "             
+	'phone' => "Tel: 0712635230; 414692920" ,
+	'email' => " turyamureba@yahoo.com " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Waste Management; Aquatic and Water Resources Management; Wetland Resources Management; Land-Use Planning and Management; "             
 ));
 
 $practitioner118 = Practitioner::create(array(
-  'person' => "Mr. Joseph AGUMA-ACON" ,
-	'organisation_name' => "Occupational Q & E Mgt Systems Ltd, Plot 99, Ntinda-Nakawa Road, " ,
-	'box_no' => "P.O. Box 28831" ,
+	'person' => "Ms. Olivia NAMUTOSI" ,
+	'organisation_name' => "Winsjet Associates " ,
+	'box_no' => "P.O. Box 2887 " ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772-463288" ,
-	'email' => " joeaacon@yahoo.com " ,
-	'qualifications' => "BSc. Chemistry" ,
-	'expertise' => "Occupational Safety and Health; Chemical Safety; and Pollution Management"             
+	'phone' => "Tel: 0776949098 / 0712949098" ,
+	'email' => " onamu@yahoo.com " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Social Impact Assessment, ecological, eco-tourism impact analysis, land and water resources management; and Strategic Environmental planning"             
 ));
 
 $practitioner119 = Practitioner::create(array(
-  'person' => "Mr. George KUNIHIRA " ,
-	'organisation_name' => "Omudima Services Limited" ,
-	'box_no' => "P.O. Box 9 " ,
-	'city' => "Entebbe" ,
-	'phone' => "Tel: 0782980306" ,
-	'qualifications' => "BA. Economics " ,
-	'expertise' => "Socio-economic assessment, Community Development, Cultural Assessment, Business Plans"             
+	'person' => "Ms. Pamela. K. TASHOBYA " ,
+	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
+	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
+	'box_no' => "P.O. Box 22428 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0414 268466" ,
+	'email' => " mail@awe-engineers.com " ,
+	'qualifications' => "MSc. Development Management; BA. Environmental Management  " ,
+	'expertise' => "Social Impact Assessment; Waste Management; Public & Occupational Health Risk Assessment."             
 ));
 
 $practitioner120 = Practitioner::create(array(
-  'person' => "Mr. Alfred TUMUSIIME" ,
-	'organisation_name' => "OPEP Consult Ltd." ,
-	'box_no' => "P.O. Box 34502" ,
+	'person' => "Ms. Pamela. K. TASHOBYA " ,
+	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
+	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
+	'box_no' => "P.O. Box 22428" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0782-335405" ,
-	'email' => " alfreduganda@yahoo.com  ; opepconsult@yahoo.com " ,
-	'qualifications' => "BSc. Forestry " ,
-	'expertise' => "Natural Resources Management, Forestry resources assessments, Energy Projects"             
+	'phone' => "Tel: 0414 268466" ,
+	'email' => " mail@awe-engineers.com " ,
+	'qualifications' => "MSc. Development Management; BA. Environmental Management  " ,
+	'expertise' => "Strategic and Environmental and Social Impact Assessment, Waste Management, Public and Ocupational Health Risk Assessments"             
 ));
 
 $practitioner121 = Practitioner::create(array(
-  'person' => "Mr. Alfred TUMUSIIME" ,
-	'organisation_name' => "OPEP Consult Ltd." ,
-	'box_no' => "P.O. Box 34502" ,
+	'person' => "Ms. Patricia ONEGA" ,
+	'organisation_name' => "COWI Uganda Ltd." ,
+	'visiting_address' => "Crusader House, 2nd Floor, Plot No. 3, Portal Avenue " ,
+	'box_no' => "P.O. Box 10591" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0782-335405" ,
-	'email' => " alfreduganda@yahoo.com ; opepconsult@yahoo.com " ,
-	'qualifications' => "BSc. Forestry " ,
-	'expertise' => "Natural Resources Management, Forestry resources, Energy Projects"             
+	'phone' => "Tel: 0782922422" ,
+	'email' => " pao@cowi.co.ug ; pattyonega@yahoo.co.uk" ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Infrastructural Assessments and Social Impact Assessments"             
 ));
 
 $practitioner122 = Practitioner::create(array(
-  'person' => "Dr. Deogratius  Kaheeru SEKIMPI " ,
-	'organisation_name' => "OSHFA Ltd." ,
-	'box_no' => "P.O. Box 16422" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772-451641" ,
-	'email' => " oshefa@yahoo.com ; dsekimpi@yahoo.com " ,
-	'qualifications' => "MSc. Occupational Medicine;" ,
-	'expertise' => "Occupational Health and Safety, Environmental Health, Public Health, Environment and Natural Resources"             
-));
-
-$practitioner123 = Practitioner::create(array(
-  'person' => "Dr. Deogratius  Kaheeru SEKIMPI " ,
-	'organisation_name' => "OSHFA Ltd." ,
-	'box_no' => "P.O. Box 16422" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772-451641" ,
-	'email' => " oshefa@yahoo.com ; dsekimpi@yahoo.com" ,
-	'qualifications' => "MSc. Occupational Medicine;" ,
-	'expertise' => "Occupational Health and Safety, Environmental Health, Public Health, Environment and Natural Resources"             
-));
-
-$practitioner124 = Practitioner::create(array(
-  'person' => "Dr. Joseph KOBUSHESHE" ,
-	'organisation_name' => "Petroleum Exploration & Production Department" ,
-	'box_no' => "P.O. Box 9" ,
-	'city' => "Entebbe" ,
-	'phone' => "Tel:0777863903" ,
-	'email' => " jkobusheshe@yahoo.com ; j.kobusheshe@petroleum.go.ug " ,
-	'qualifications' => "PhD in Environmental Engineering, MSc. in Environmental & Resource Engineering, BSc.  Civil Engineering" ,
-	'expertise' => "Petroleum Exploration (Drilling) and Production and Supplies, Energy Resources Development (Hydro-power and Nuclear Energy Civil Engineering Projects (Highway, Water, Housing)"             
-));
-
-$practitioner125 = Practitioner::create(array(
-  'person' => "Mr. John Ochoko KAMERI " ,
-	'organisation_name' => "Pinnacle Enviro Consult" ,
-	'box_no' => "P.O. Box 22546" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0714333200 and 0703333200" ,
-	'email' => " pinnacle@utlonline.co.ug " ,
-	'qualifications' => "MBA. Marketing" ,
-	'expertise' => "Stone Quarry, Communication Masts (Telecom Projects), Fuel stations, Waste Management, Mining, Building & Construction Projects."             
-));
-
-$practitioner126 = Practitioner::create(array(
-  'person' => "Ms. Penelope Atuhaire KAMERI" ,
+	'person' => "Ms. Penelope Atuhaire KAMERI" ,
 	'organisation_name' => "Pinnacle Enviro Consult" ,
 	'box_no' => "P.O. Box 22546" ,
 	'city' => "Kampala" ,
@@ -2955,30 +2860,74 @@ $practitioner126 = Practitioner::create(array(
 	'expertise' => "Social Impact Assessment, Quarries, Telecom Projects, Fuel & service stations"             
 ));
 
-$practitioner127 = Practitioner::create(array(
-  'person' => "Mr. Roland Bless TAREMWA" ,
-	'organisation_name' => "Pinnacle Enviro Consult" ,
-	'box_no' => "P.O. Box 22546" ,
+$practitioner123 = Practitioner::create(array(
+	'person' => "Ms. Phenella EMODEK" ,
+	'box_no' => "P.O. Box 70711" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel:+256-414340756 Mobile:0 711586509 and 0772586509" ,
-	'email' => " roland.taremwa@in.com " ,
-	'qualifications' => "BSc Computer Science" ,
-	'expertise' => "Electronic waste management, Telecom developments, Information Technology developments and Infrastructure developments."             
+	'phone' => "Tel: 0787492755 and 0712 614 491" ,
+	'email' => " emophenella@yahoo.com " ,
+	'qualifications' => "BSc. Fisheries and" ,
+	'expertise' => "Environmental Management and Resource Management; Basic Aquatic Ecology Assessments; Utilization of Non-Conventional Aquatic Resources; Aquaculture"             
+));
+
+$practitioner124 = Practitioner::create(array(
+	'person' => "Ms. Phionah SASIRA" ,
+	'organisation_name' => "Eco Innovations International Ltd" ,
+	'visiting_address' => "Postal office Building Kampala Road, " ,
+	'box_no' => "P.O. Box 35289 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: +256 712235427" ,
+	'email' => " sfionah@yahoo.com" ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Evaluation of Fuel Dispensing Facilities, Quarry Sites, Telecommunication Facilities and Agricultural facilities."             
+));
+
+$practitioner125 = Practitioner::create(array(
+	'person' => "MS. Ritah NABAGALLA" ,
+	'organisation_name' => "Air, Water Earth (AWE) Ltd." ,
+	'visiting_address' => "27, Binayomba Road, Bugolobi" ,
+	'box_no' => "P.O. Box 22428 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0772693630 and 0704154674" ,
+	'email' => " ritahnabaggala@yahoo.com ; r.nabaggala@awe-engineers.com " ,
+	'qualifications' => "B.A. Environmental Management  " ,
+	'expertise' => "Social Impact Assessment, Ressettlement Action Plans, Environmental Sensitisation,"             
+));
+
+$practitioner126 = Practitioner::create(array(
+	'person' => "Ms. Shallon NIWAMANYA" ,
+	'box_no' => "P.O. Box 28907 " ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0774422616" ,
+	'email' => " shalloni@gmail.com " ,
+	'qualifications' => "BSc. In Environmental Science, PgD. in Environmental Management  " ,
+	'expertise' => "Waste Management, Environmental Health and Safety, Water and Sanitation Assessment and Energy/ Petroleum Retail Facilities"             
+));
+
+$practitioner127 = Practitioner::create(array(
+	'person' => "Ms. Sheba NDAGIRE " ,
+	'organisation_name' => "Thom Consult Ltd" ,
+	'visiting_address' => "33 Martyrs Way, Ntinda, " ,
+	'box_no' => "P.O. Box 3976" ,
+	'city' => "Kampala" ,
+	'phone' => "Tel: 0712638250  " ,
+	'email' => " shndagire@gmail.com ; ndagires@thomug.; g " ,
+	'qualifications' => "MSc. Environmental Science; BSc. Forestry " ,
+	'expertise' => "Health Impact Assessment; Ecotoxicology; Biodiversity Conservation & Management; Health & Safety; Ecosystem & Spatial Epidemiology; Global Environmental Change; Energy, Housing & Construction."             
 ));
 
 $practitioner128 = Practitioner::create(array(
-  'person' => "Mr. John Ochoko KAMERI" ,
-	'organisation_name' => "Pinnacle Enviro Consult" ,
-	'box_no' => "P.O. Box 22546" ,
+	'person' => "Ms. Susan Kigozi TAKIRAMBUDDE" ,
+	'box_no' => "P.O. Box 7062" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0714333200 and 703333200" ,
-	'email' => "  pinnacle@utlonline.co.ug " ,
-	'qualifications' => "MBA. Marketing" ,
-	'expertise' => "Cleaner Production, EMS-ISO 14001:2004, Auditing Construction Infrastructure (roads, dams, bridges, buildings), Communication Facilities, Agricultural Projects, Fuel & Service Stations, Quarries,  Waste Management,  Noise Pollution."             
+	'phone' => "Tel: 0772450749 and 0772409491" ,
+	'email' => " tskigozi@yahoo.co.uk " ,
+	'qualifications' => "MSc. Environment and Natural Resources; Diploma in Science Technology (Chemistry)" ,
+	'expertise' => "Social Economic Assessments, Occupational Health and Safety, Natural resource Management and Cleaner Production"             
 ));
 
 $practitioner129 = Practitioner::create(array(
-  'person' => "Ms. Susan N BUSULWA-LUBEGA" ,
+	'person' => "Ms. Susan N BUSULWA-LUBEGA" ,
 	'organisation_name' => "Quality Assurance and" ,
 	'visiting_address' => "Management Consultants, Plot 1001, Nsambya-Gaba Road" ,
 	'box_no' => "P.O. Box 1367" ,
@@ -2990,598 +2939,31 @@ $practitioner129 = Practitioner::create(array(
 ));
 
 $practitioner130 = Practitioner::create(array(
-  'person' => "Mr. Stephen A. K. MAGEZI" ,
-	'organisation_name' => "Rwenzo – Green Associates" ,
-	'box_no' => "P.O. Box 1299" ,
+	'person' => "Prof. Frank KANSIIME" ,
+	'organisation_name' => "Institute of Environment & Natural Resources" ,
+	'visiting_address' => "Makerere University" ,
+	'box_no' => "P.O. Box 7298" ,
 	'city' => "Kampala" ,
-	'phone' => "Mob + 256702878322 or +256752878322 or  +256772878322" ,
-	'email' => " rwenzogreen@gmail.com ; sak_magezi@yahoo.com  " ,
-	'qualifications' => "MSc. Meteorology (Tropical Urban Pollution Potential Assessment);" ,
-	'expertise' => "Tropical Urban Pollution; climate change,"             
+	'phone' => "Tel: 0772 506520 and 0752506520" ,
+	'email' => " fkansiime@muienr.mak.ac.ug ; fkansiime@gmail.com " ,
+	'qualifications' => "PhD. Environmental Ecotechnology; MSc. Environmental / Sanitary Engineering; MSc Applied Environmental Microbiology; BSc. Education (Biology, & Chemistry)" ,
+	'expertise' => "Environmental Ecotechnology, Environmental Systems Analysis, Assessments & Monitoring , Use of Ecological Principles to solve Environmental Problems, Waste Management"             
 ));
 
 $practitioner131 = Practitioner::create(array(
-  'person' => "Mrs. Gertrude MAGEZI" ,
-	'organisation_name' => "Rwenzo – Green Associates" ,
-	'box_no' => "P.O. Box 1299" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: 0701441846 and 0752441844" ,
-	'email' => " rwenzogreen@gmail.com ; sak_magezi@yahoo.com  " ,
-	'qualifications' => "BA. Social Sciences" ,
-	'expertise' => "Social Environment Impact Assessment; Resettlement Impacts & Plans"             
-));
-
-$practitioner132 = Practitioner::create(array(
-  'person' => "Mr. Stephen A. K. MAGEZI" ,
-	'organisation_name' => "Rwenzo – Green Associates" ,
-	'box_no' => "P.O. Box 1299" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: 0702878322 or 0752878322 or  0772878322" ,
-	'email' => " rwenzogreen@gmail.com ; sak_magezi@yahoo.com  " ,
-	'qualifications' => "MSc. Meteorology (Tropical Urban Pollution Potential Assessment);" ,
-	'expertise' => "Tropical Urban Pollution"             
-));
-
-$practitioner133 = Practitioner::create(array(
-  'person' => "Mr. Samuel Vivian MATAAGI" ,
-	'organisation_name' => "Savimaxx Ltd." ,
-	'visiting_address' => "Nalya Housing Estate, Plot 843, Shelter Road" ,
-	'box_no' => "P.O. Box 25250 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712 654651 " ,
-	'email' => " savimaxxcompanylimited@gmail.com " ,
-	'qualifications' => "MSc. Plant Taxonomy; BSc. Botany & Zoology" ,
-	'expertise' => "ISO 1400 Environmental Management Systems; Industrial Waste Water Management; Environmental Pollution Assessment"             
-));
-
-$practitioner134 = Practitioner::create(array(
-  'person' => "Mr. Samuel Vivian MATAAGI" ,
-	'organisation_name' => "Savimaxx Ltd." ,
-	'visiting_address' => "Nalya Housing Estate, Plot 843, Shelter Road" ,
-	'box_no' => "P.O. Box 25250 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712 654651 " ,
-	'email' => " savimaxxcompanylimited@gmail.com " ,
-	'qualifications' => "MSc. Zoology; BSc. Botany, Zoology & Chemistry" ,
-	'expertise' => "ISO 1400 Environmental Management Systems; Industrial Waste water Management; Environmental Pollution Assessment"             
-));
-
-$practitioner135 = Practitioner::create(array(
-  'person' => "Eng. Simon P. OTOI" ,
-	'organisation_name' => "Spot-on Engineering Services Ltd." ,
-	'box_no' => "P.O. Box 5883" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712 707502 and 0771460309." ,
-	'email' => " simonotoi@yahoo.co.uk  ; simonotoi@gmail.com " ,
-	'qualifications' => "MSc. Sanitary & Civil Engineering; BSc. Civil Engineering" ,
-	'expertise' => "Public Health – Water & Sanitation Assessments; Water Resources Investigations; Assessment"             
-));
-
-$practitioner136 = Practitioner::create(array(
-  'person' => "Eng. Andrew Nabikamba TADHUBA" ,
-	'organisation_name' => "TAMP  Engineering Consultants Ltd" ,
-	'visiting_address' => "Plot 6 Entebbe Road" ,
-	'box_no' => "P.O. Box 6780 " ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: 0751504444 or 0772404414" ,
-	'email' => "  tadhuba@yahoo.com" ,
-	'qualifications' => "BSc. Engineering (Civil), BA. Development Studies and Democracy" ,
-	'expertise' => "Civil works & construction infrastructure, Risk Assessment, Occupational Safety & Health, Materials' suitability analysis,"             
-));
-
-$practitioner137 = Practitioner::create(array(
-  'person' => "Eng. Andrew Nabikamba TADHUBA" ,
-	'organisation_name' => "TAMP  Engineering Consultants Ltd" ,
-	'visiting_address' => "Plot 6 Entebbe Road" ,
-	'box_no' => "P.O. Box 6780 " ,
-	'city' => "Kampala" ,
-	'phone' => "Mob:   0751504444  or 772404414" ,
-	'email' => "  tadhuba@yahoo.com" ,
-	'qualifications' => "BSc. Engineering (Civil), BA. Development Studies and Democracy" ,
-	'expertise' => "Civil works & construction infrastructure, Risk Assessment, Occupational Safety & Health, Materials' suitability analysis,"             
-));
-
-$practitioner138 = Practitioner::create(array(
-  'person' => "Ms. Sheba NDAGIRE " ,
-	'organisation_name' => "Thom Consult Ltd" ,
-	'visiting_address' => "33 Martyrs Way, Ntinda, " ,
-	'box_no' => "P.O. Box 3976" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712638250  " ,
-	'email' => " shndagire@gmail.com ; ndagires@thomug.; g " ,
-	'qualifications' => "MSc. Environmental Science; BSc. Forestry " ,
-	'expertise' => "Health Impact Assessment; Ecotoxicology; Biodiversity Conservation & Management; Health & Safety; Ecosystem & Spatial Epidemiology; Global Environmental Change; Energy, Housing & Construction."             
-));
-
-$practitioner139 = Practitioner::create(array(
-  'person' => "Ms. Sheba NDAGIRE " ,
-	'organisation_name' => "Thom Consult Ltd" ,
-	'visiting_address' => "33 Martyrs Way, Ntinda, " ,
-	'box_no' => "P.O. Box 3976" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712638250  " ,
-	'email' => " shndagire@gmail.com ; ndagires@thomug.; g" ,
-	'qualifications' => "MSc. Environmental Science, BSc. Forestry " ,
-	'expertise' => "Health Impact Assessment; Ecotoxicology; Biodiversity Conservation & Management; Health & Safety; Ecosystem & Spatial Epidemiology; Global Environmental Change; Energy, Housing & Construction."             
-));
-
-$practitioner140 = Practitioner::create(array(
-  'person' => "Mr. Silver SSEBAGALA" ,
-	'organisation_name' => "Uganda Cleaner Production Centre " ,
-	'box_no' => "P.O. Box 34644    " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0774647363" ,
-	'email' => " silverssebagala@yahoo.com " ,
-	'qualifications' => "Master of Science in Analytical Chemistry " ,
-	'expertise' => "Cleaner Production and Industrial Process, Environment Management System (EMS), Life Cycle Analysis (LCA), Industrial Pollution Control & Management; Waste Management and Sanitation"             
-));
-
-$practitioner141 = Practitioner::create(array(
-  'person' => "Dr. Charles A. KOOJO " ,
-	'organisation_name' => "Urban Research and Training Consultancy (URTC)/ Enviro and Industrial Consult (EICU) " ,
-	'box_no' => "P.O. Box 20032 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: Office: + 256 312 10 5641; Mobile: 0772 522707 " ,
-	'email' => " Koojocharles@yahoo.co.uk ; Urtcea@urban-research.net " ,
-	'qualifications' => "PhD. Landuse & Regional Planning; MSc. Geography.; PgD. Environmental Impact Assessment;" ,
-	'expertise' => "Landuse Planning & Policy; Land Resources Analysis;  Environmental Planning; Strategic Environmental Assessment; Eco-Benefits & Cleaner Production; Urban Development Planning; Resettlement Action Plans for Infrastructure "             
-));
-
-$practitioner142 = Practitioner::create(array(
-  'person' => "Dr. Charles A. KOOJO " ,
-	'organisation_name' => "Urban Research and Training Consultancy (URTC)/ Enviro and Industrial Consult (EICU) " ,
-	'box_no' => "P.O. Box 20032 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: Office:     + 256 312 10 5641; Mobile:           + 256 772 522707 " ,
-	'email' => " Koojocharles@yahoo.co.uk ; Urtcea@urban-research.net" ,
-	'qualifications' => "PhD. Landuse & Regional Planning; MSc. Geography.PgD. Environmental Impact Assessment;" ,
-	'expertise' => "Eco-benefits and cleaner production, Infrastructure Developments, water resources, energy projects, urban planning, and telecommunications systems"             
-));
-
-$practitioner143 = Practitioner::create(array(
-  'person' => "Mr. Moses OLUKA " ,
-	'organisation_name' => "Urban Research and Training Consultancy Ltd" ,
-	'box_no' => "P.O. Box 34950" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: 0774 205209 and 0702 205209" ,
-	'email' => " olukaomo@yahoo.co.uk " ,
-	'qualifications' => "B. Urban Planning " ,
-	'expertise' => "Land Use Planning, Land Resource Assessment, Environmental Planning, Social Impact Assessment, and Infrastructural Projects Evaluation"             
-));
-
-$practitioner144 = Practitioner::create(array(
-  'person' => "Mr. David Samuel WAFULA" ,
-	'organisation_name' => "Urban Research and Training Consultancy Ltd" ,
-	'box_no' => "P.O. Box 34950" ,
-	'city' => "Kampala" ,
-	'phone' => "  Tel: +256-312105641; Mob: +256-772957515" ,
-	'email' => " wafulasamueldavid@yahoo.com " ,
-	'qualifications' => "BA. Urban Planning; PhD. Environmental Microbiology; MSc. Environmental Science and Technology  BSc. Biochemistry and Zoology" ,
-	'expertise' => "Infrastructural development, resettlement action planning, and urban planning & housing studies"             
-));
-
-$practitioner145 = Practitioner::create(array(
-  'person' => "Ms. Olivia NAMUTOSI" ,
-	'organisation_name' => "Winsjet Associates " ,
-	'box_no' => "P.O. Box 2887 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0776949098 / 0712949098" ,
-	'email' => " onamu@yahoo.com " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Social Impact Assessment, ecological, eco-tourism impact analysis, land and water resources management; and Strategic Environmental planning"             
-));
-
-$practitioner146 = Practitioner::create(array(
-  'person' => "Mr. Jerome TWIMUKYE " ,
-	'organisation_name' => "Winsjet Associates " ,
-	'box_no' => "P.O. Box 2887 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712 152503 and  0784 115204" ,
-	'email' => " jetwimkye@yahoo.co.uk " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Waste Management; Biodiversity Assessments."             
-));
-
-$practitioner147 = Practitioner::create(array(
-  'person' => "Ms. Diana NAKALANZI" ,
-	'organisation_name' => "WSS Services(U) Ltd" ,
-	'visiting_address' => "6th Floor Impala House Annex, Plot 13/15 Kimathi Avenue" ,
-	'box_no' => "P.O. Box 27755" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256752840101" ,
-	'email' => " dianak@yahoo.com " ,
-	'qualifications' => "MSc. Limnology and Wetland Ecosystems" ,
-	'expertise' => "Wetlands ecology assessments, water quality assessments, wetlands efficiency assessments, EIA for petrol stations"             
-));
-
-$practitioner148 = Practitioner::create(array(
-  'person' => "Dr. Denis BYAMUKAMA " ,
-	'organisation_name' => "WSS Services(U) Ltd" ,
-	'visiting_address' => "6th Floor Impala House Annex, Plot 13/15 Kimathi Avenue" ,
-	'box_no' => "P.O. Box 27755" ,
-	'city' => "Kampala" ,
-	'phone' => " Tel: 0782 519 315 " ,
-	'expertise' => "Environmental Impacts Assessment; Environmental Audits; Environmental Health; Environmental Monitoring/ Planning for Water, Wastewater, Housing, and Roads Projects."             
-));
-
-$practitioner149 = Practitioner::create(array(
-  'person' => "Dr. Denis BYAMUKAMA " ,
-	'organisation_name' => "WSS Services(U) Ltd" ,
-	'visiting_address' => "6th Floor Impala House Annex, Plot 13/15 Kimathi Avenue" ,
-	'box_no' => "P.O. Box 27755" ,
-	'city' => "Kampala" ,
-	'phone' => " Tel: 0782 519 315 " ,
-	'qualifications' => "PhD. Environmental Microbiology;  MSc. Environmental Science and Technology;  BSc. Biochemistry and Zoology" ,
-	'expertise' => "Infrastructure projects, water resources, supply industries, energy development. Solid waste and waste water, agricultural projects"             
-));
-
-$practitioner150 = Practitioner::create(array(
-  'person' => "Dr. Isyagi–Levine Nelly AJANGALE" ,
-	'box_no' => "P.O. Box 20044 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256 782 728028" ,
-	'qualifications' => "Ph.D. Aquaculture; MSc. Aquaculture; B. Veterinary Medicine" ,
-	'expertise' => "Aquaculture; Fish Health and Animal Production Assessments"             
-));
-
-$practitioner151 = Practitioner::create(array(
-  'person' => "Mr. Pius KAHANGIRWE" ,
-	'box_no' => "P.O. Box 27755 " ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: 0712 929120" ,
-	'email' => " kpuirs@gmail.com ; pkahangirwe@muienr.mak.ac.ug " ,
-	'qualifications' => "MSc. Environment & Natural Resources, BA. Environmental Management" ,
-	'expertise' => "Environmental Heath and Social Impact assessment, Water resources management, Cumulative Effects Assessment, Climate Change Impact Assessment, Planning Infrastructure Development"             
-));
-
-$practitioner152 = Practitioner::create(array(
-  'person' => "Mr. Richard OSALIYA" ,
-	'box_no' => "P.O. Box 7611" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0782 451815" ,
-	'email' => " osaliya@yahoo.com " ,
-	'qualifications' => "MSc. Environment & Natural Resources; Bachelor of Urban Planning" ,
-	'expertise' => "Water Resources Management, Urban Development, Land-use assessments, Cumulative Impacts, Climate Change Impact Assessment"             
-));
-
-$practitioner153 = Practitioner::create(array(
-  'person' => "Dr. Bruce RUKUNDO" ,
-	'box_no' => "P.O. Box 1729" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256782392951" ,
-	'email' => "rukundobr@yahoo.com ; brucerukundo@gmail.com " ,
-	'qualifications' => "Phd Land Management (Dr.-Ing.); MSc. Land Management and Tenure, BA. Environmental Management" ,
-	'expertise' => "Land-use Planning and Management, Disaster and Environmental Risk Assessments"             
-));
-
-$practitioner154 = Practitioner::create(array(
-  'person' => "Mr. Robert NDYABAREMA" ,
-	'box_no' => "P.O. Box 10491 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256-414-543826 / Mobile: +256-712-417452" ,
-	'email' => " rndyaba@gmail.com  " ,
-	'qualifications' => "MSc. Environment & Natural Resources; BSc. Geography & Environment." ,
-	'expertise' => "Environment & Natural Resources"             
-));
-
-$practitioner155 = Practitioner::create(array(
-  'person' => "Mr. Ronald ANGUTOKO" ,
-	'box_no' => "P.O. Box 37372 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0789467372  OR  0701839299" ,
-	'email' => " rangutoko@yahoo.com " ,
-	'qualifications' => "BSc. in Environmental Engineering " ,
-	'expertise' => "Infrastructural  Development, Waste management, Water and Air Pollution, Wetland Resources Management, Public Health and Safety"             
-));
-
-$practitioner156 = Practitioner::create(array(
-  'person' => "Mr. Bryan OKEDI" ,
-	'box_no' => "P.O. Box 9317" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0782 383300" ,
-	'email' => "  bryokd@live.com " ,
-	'qualifications' => "BSc. Environmental Management" ,
-	'expertise' => "Environmental Pollution assessment, Water quality  assessments, Fuel dispensing facilities, , and Social Impact Assessment"             
-));
-
-$practitioner157 = Practitioner::create(array(
-  'person' => "Mr. Richard BAVAKURE " ,
-	'visiting_address' => "Plot 44 Lunyo Road" ,
-	'box_no' => "P.O. Box 34 " ,
-	'city' => "Entebbe" ,
-	'phone' => "Tel: 0782 090677/ 0754 090677" ,
-	'email' => " bavarichard@yahoo.co.uk " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Telecom Projects and assisting in general EIAs."             
-));
-
-$practitioner158 = Practitioner::create(array(
-  'person' => "Mr. Alex ASIIMWE" ,
-	'box_no' => "P.O. Box 34061" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0784 224448 or  0702 213165" ,
-	'email' => " asiimwealex@gmail.com " ,
-	'qualifications' => "MSc. Environment & Natural Resources; BA. Environmental Management; PgD-PPM, & PgD-OSH" ,
-	'expertise' => "Occupational Safety & Health, Natural Resources Management, Social Safeguards, Resettlement Action Planning, Labourforce management, Waste Management, Cleaner"             
-));
-
-$practitioner159 = Practitioner::create(array(
-  'person' => "Mr. Tom Ndamira RUKUNDO " ,
-	'box_no' => "P.O. Box 21129" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 591205" ,
-	'email' => "  rukundotn@yahoo.com  ; tomr@nfa.; g.ug " ,
-	'qualifications' => "MSc. Environment and Natural Resource  Management, BSc. Forestry, PgD. Education" ,
-	'expertise' => "Environmental  and Natural Resources Management Forestry"             
-));
-
-$practitioner160 = Practitioner::create(array(
-  'person' => "Mr. Wilbroad KUKUNDAKWE" ,
-	'visiting_address' => "Plot 4 Jinja Road, 3rd Floor, Northern Wing, Social Security House," ,
-	'box_no' => "P.O. Box 29005  " ,
-	'city' => "Kampala" ,
-	'phone' => "Mobile: 0772-842416" ,
-	'email' => " wilbroadk@gmail.com " ,
-	'qualifications' => "BSc. Industrial Chemistry" ,
-	'expertise' => "Chemicals Management; Waste Management; "             
-));
-
-$practitioner161 = Practitioner::create(array(
-  'person' => "Mr. Isaac KIFAMULUSI" ,
-	'box_no' => "P.O. Box 28119 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0783019566; 0702209581" ,
-	'email' => " isaackifamulusi@yahoo.com" ,
-	'qualifications' => "BSc. Environmental Science" ,
-	'expertise' => "Ecosystems Management, Environmental Pollution, Waste Management, Cleaner Production, Occupational Health and Safety and Climate Change Services "             
-));
-
-$practitioner162 = Practitioner::create(array(
-  'person' => "Ms. Enid Ocaya KABASINGUZI" ,
-	'box_no' => "P.O. Box 3790 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256 772668727" ,
-	'email' => " enidkabocaya@gmail.com" ,
-	'qualifications' => "BSc. Botany and Zoology" ,
-	'expertise' => "Environment Natural Resources Management"             
-));
-
-$practitioner163 = Practitioner::create(array(
-  'person' => "Mr. Fred SSEGIRINYA" ,
-	'visiting_address' => "Plot 15, Bandali Rise, Bugolobi; " ,
-	'box_no' => "P.O. Box 40311 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712 804425" ,
-	'email' => " fssegirinya93@yahoo.com " ,
-	'qualifications' => "BSc. Forestry" ,
-	'expertise' => "Forestry Projects, Seismic Surveys; Exploratory Drilling; Quarries; Water & Infrastructural Developments; "             
-));
-
-$practitioner164 = Practitioner::create(array(
-  'person' => "Mr. Derrick KYATEREKERA " ,
-	'box_no' => "P.O. Box 10454 " ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: 0772 457282 and  0712 574159" ,
-	'email' => " kyderrick@gmail.com " ,
-	'qualifications' => "MSc. Natural Resources Management, BA. Environmental Management " ,
-	'expertise' => "Oil & Gas Environmental Management, Waste Management; Eco-Tourism Impact Analysis; Work-Public Health and Safety;  Social Impact Assessment; Control of Substances Hazardous to Health (COSHH); Site Rehabilitation & Restoration, Gas testing & Confined space related works"             
-));
-
-$practitioner165 = Practitioner::create(array(
-  'person' => "Ms. Celia NALWADDA" ,
-	'box_no' => "P.O. Box 10395" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256 772537830" ,
-	'email' => " jtcelia@yahoo.co.uk ; jtcelia@gmail.com " ,
-	'qualifications' => "MSc. Land Management (Natural Resources management), BSc. Forestry" ,
-	'expertise' => "Natural resources management, social resources survey, land use planning, and GIS & Remote sensing"             
-));
-
-$practitioner166 = Practitioner::create(array(
-  'person' => "Mr. Godfrey BAHATI" ,
-	'box_no' => "P.O. Box 9" ,
-	'city' => "Entebbe" ,
-	'phone' => "Tel: 0775601232" ,
-	'email' => " gbahati@gmail.com " ,
-	'qualifications' => "MSc. Environmental Management,  BSc. Chemistry" ,
-	'expertise' => "Minerals and Energy, Geothermal Assessment, Waste Management, Pollution Control"             
-));
-
-$practitioner167 = Practitioner::create(array(
-  'person' => "Ms. Edith Birungi KAHUBIRE " ,
-	'box_no' => "P.O. Box 1299" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel.     0772 540966 and 702540966" ,
-	'email' => " kahubire@yahoo.co.uk " ,
-	'qualifications' => "M.Phil. Development Geography; MSc. Geo-Information Science and Earth Observation (Natural Resource Management); BA. Social Sciences " ,
-	'expertise' => "Social Impact Assessment; Economic Assessment; Cultural Assessment."             
-));
-
-$practitioner168 = Practitioner::create(array(
-  'person' => "Mr. Isaac TUNYWANE " ,
-	'box_no' => "P.O. Box 11175 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256 782 036665" ,
-	'email' => " itunywane@yahoo.com " ,
-	'qualifications' => "B. Environmental Science " ,
-	'expertise' => "Waste Management, Environmental Health and Safety, Water and Sanitation Assessment."             
-));
-
-$practitioner169 = Practitioner::create(array(
-  'person' => "Mr. John T. TUMUHIMBISE" ,
-	'box_no' => "P.O. Box 7270" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 694014 and 0414-257863." ,
-	'qualifications' => "MSc. Energy Studies; BSc. Forestry." ,
-	'expertise' => "Forestry and Energy."             
-));
-
-$practitioner170 = Practitioner::create(array(
-  'person' => "Ms. Harriet NANKYA" ,
-	'box_no' => "P.O. Box 4856" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772 868154" ,
-	'email' => " nankyaha@yahoo.co.uk " ,
-	'qualifications' => "BSc. Forestry" ,
-	'expertise' => "Forestry and Natural Resources, Ecosystem Assessment Impacts Analysis, Recreation and Tourism Infrastructure."             
-));
-
-$practitioner171 = Practitioner::create(array(
-  'person' => "Mr. George Herbert KYABOONA" ,
-	'box_no' => "P.O. Box 16422" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772996387" ,
-	'email' => " kyaboona@gmail.com " ,
-	'qualifications' => "MSc. Environment and Development, B.A Environment Management; PgD. Research Methods and Writing Skills " ,
-	'expertise' => "Resettlement Action Planning, Social impact Assessments, Environmental Education, Waste management, Occupational Health and Safety Assessments."             
-));
-
-$practitioner172 = Practitioner::create(array(
-  'person' => "Ms. Phenella EMODEK" ,
-	'box_no' => "P.O. Box 70711" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0787492755 and 0712 614 491" ,
-	'email' => " emophenella@yahoo.com " ,
-	'qualifications' => "BSc. Fisheries and" ,
-	'expertise' => "Environmental Management and Resource Management; Basic Aquatic Ecology Assessments; Utilization of Non-Conventional Aquatic Resources; Aquaculture"             
-));
-
-$practitioner173 = Practitioner::create(array(
-  'person' => "Ms. Susan Kigozi TAKIRAMBUDDE" ,
+	'person' => "Prof. Hannington ORYEM-ORIGA" ,
+	'organisation_name' => "Faculty of Science, Department of Botany" ,
+	'visiting_address' => "Makerere University" ,
 	'box_no' => "P.O. Box 7062" ,
 	'city' => "Kampala" ,
-	'phone' => "Tel: 0772450749 and 0772409491" ,
-	'email' => " tskigozi@yahoo.co.uk " ,
-	'qualifications' => "MSc. Environment and Natural Resources; Diploma in Science Technology (Chemistry)" ,
-	'expertise' => "Social Economic Assessments, Occupational Health and Safety, Natural resource Management and Cleaner Production"             
-));
-
-$practitioner174 = Practitioner::create(array(
-  'person' => "Mr. Isaiah OWIUNJI" ,
-	'box_no' => "P.O. Box 3205" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0772-411278" ,
-	'email' => " iowiunji@wwfuganda.; g ; " ,
-	'qualifications' => "MSc. Zoology (Vertebrate Ecology &
-Natural Resource
-Management) BSc. Zoology" ,
-	'expertise' => "Vertebrate Ecology, Wildlife Evaluation, and Natural"             
-));
-
-$practitioner175 = Practitioner::create(array(
-  'person' => "Dr. Fred Alex TUGUME" ,
-	'box_no' => "P.O. Box 9" ,
-	'city' => " Entebbe" ,
-	'phone' => "Tel: 0772471131" ,
-	'email' => "   fredtugume@gmail.com" ,
-	'qualifications' => "PhD. in Geo Sciences, MSc.  GeoSciences, MSc.  Geophysics, BSc. Physics & Mathematics" ,
-	'expertise' => "Land Use Planning and Management, Impact Predictions."             
-));
-
-$practitioner176 = Practitioner::create(array(
-  'person' => "Ms. Shallon NIWAMANYA" ,
-	'box_no' => "P.O. Box 28907 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0774422616" ,
-	'email' => " shalloni@gmail.com " ,
-	'qualifications' => "BSc. In Environmental Science, PgD. in Environmental Management  " ,
-	'expertise' => "Waste Management, Environmental Health and Safety, Water and Sanitation Assessment and Energy/ Petroleum Retail Facilities"             
-));
-
-$practitioner177 = Practitioner::create(array(
-  'person' => "Dr. Isyagi–Levine Nelly AJANGALE" ,
-	'box_no' => "P.O. Box 20044 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256 782 728028" ,
-	'email' => " nisyagi18@yahoo.co.uk " ,
-	'qualifications' => "Ph.D. Aquaculture; MSc. Aquaculture; B. Veterinary Medicine" ,
-	'expertise' => "Aquaculture; Fish Health and Animal Production Assessments"             
-));
-
-$practitioner178 = Practitioner::create(array(
-  'person' => "Mr. Alex KAKUUKU" ,
-	'box_no' => "P.O. Box 9031" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0782022087" ,
-	'email' => " ajkakuuku@gmail.com" ,
-	'qualifications' => "Bachelor of Science in Environmental Management" ,
-	'expertise' => "Industrial Waste management, Environmental Management Systems, Infrastructural development(Telecom masts), Occupational health and safety"             
-));
-
-$practitioner179 = Practitioner::create(array(
-  'person' => "Dr. Bruce RUKUNDO" ,
-	'box_no' => "P.O. Box 1729" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: +256782392951" ,
-	'email' => " rukundobr@yahoo.com ; brucerukundo@gmail.com " ,
-	'qualifications' => "Phd Land Management (Dr.-Ing.), MSc. Land Management and Tenure, BA. Environmental Management" ,
-	'expertise' => "Land-use Planning and Management, Disaster and Environmental Risk Assessments"             
-));
-
-$practitioner180 = Practitioner::create(array(
-  'person' => "Mr. Pius KAHANGIRWE" ,
-	'box_no' => "P.O. Box 27755 " ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0712 929120 or  0701 570318" ,
-	'email' => " kpuirs@gmail.com ; pkahangirwe@muienr.mak.ac.ug" ,
-	'qualifications' => "MSc. Environment & Natural Resources, BA. Environmental Management" ,
-	'expertise' => "Water resources management, Cumulative effects assessments, Climate change, planning infrastructure development"             
-));
-
-$practitioner181 = Practitioner::create(array(
-  'person' => "Mr. Richard BAVAKURE " ,
-	'visiting_address' => "Plot 44 Lunyo Road" ,
-	'box_no' => "P.O. Box 34 " ,
-	'city' => "Entebbe" ,
-	'phone' => "Tel: 0782 090677/ 0754 090677" ,
-	'email' => " bavarichard@yahoo.co.uk " ,
-	'qualifications' => "B.A. Environmental Management  " ,
-	'expertise' => "Telecom Projects and Assisting in General EA’s."             
-));
-
-$practitioner182 = Practitioner::create(array(
-  'person' => "Mr. Alex ASIIMWE" ,
-	'box_no' => "P.O. Box 34061" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel: 0784 224448/ 0702 213165" ,
-	'email' => " asiimwealex@gmail.com " ,
-	'qualifications' => "MSc. Environment & Natural Resources, PgD-PPM, &  PgD-OSH" ,
-	'expertise' => "Occupational Safety & Health, Natural Resources Management, Social Safeguards, Waste Management, Cleaner"             
-));
-
-$practitioner183 = Practitioner::create(array(
-  'person' => "Mr. Wilbroad KUKUNDAKWE" ,
-	'visiting_address' => "Plot 4 Jinja Road, 3rd Floor, Northern Wing, Social Security House," ,
-	'box_no' => "P.O. Box 29005  " ,
-	'city' => "Kampala" ,
-	'phone' => "Mobile: 0772-842416" ,
-	'email' => " wilbroadk@gmail.com " ,
-	'qualifications' => "BSc. Industrial Chemistry" ,
-	'expertise' => "Waste Management, Pollution Control, Environmental Management Systems, Cleaner Production "             
-));
-
-$practitioner184 = Practitioner::create(array(
-  'person' => "Ms. Celia NALWADDA" ,
-	'box_no' => "P.O. Box 10395" ,
-	'city' => "Kampala" ,
-	'phone' => "Mob: +256 772537830" ,
-	'email' => " jtcelia@yahoo.co.uk ; jtcelia@gmail.com " ,
-	'qualifications' => "MSc. Land Management (Natural Resources management); BSc. Forestry" ,
-	'expertise' => "Natural resources management, social resources survey, land use planning, and GIS & Remote sensing"             
-));
-
-$practitioner185 = Practitioner::create(array(
-  'person' => "Ms. Edith Birungi KAHUBIRE " ,
-	'box_no' => "P.O. Box 1299" ,
-	'city' => "Kampala" ,
-	'phone' => "Tel. 0772 540966 and  0702540966" ,
-	'email' => " kahubire@yahoo.co.uk " ,
-	'qualifications' => "M.Phil. Development Geography; MSc. Geo-Information Science and Earth Observation (Natural Resource Management); BA. Social Sciences" ,
-	'expertise' => "Social Impact Audits; Socio-Economic Audits; Cultural Assessments."             
+	'phone' => "Tel: 0772 624932" ,
+	'email' => " H; yem; iga@botany.mak.ac.ug " ,
+	'qualifications' => "PhD. Ecophysiology; MSc. Plant Physiology; BSc. Botany, Zoology & Chemistry" ,
+	'expertise' => "Environmental Pollution, Pollution control, Phytostabilization &, Phytoremediation, Ecological Studies; and Generally Biophysical Assessment  "             
 ));
 
 $practitionercertificate1 = PractitionerCertificate::create(array(
-  'practitioner_id' => 1 ,
+	'practitioner_id' => $practitioner29->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3591,7 +2973,7 @@ $practitionercertificate1 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate2 = PractitionerCertificate::create(array(
-  'practitioner_id' => 2 ,
+	'practitioner_id' => $practitioner23->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3601,7 +2983,7 @@ $practitionercertificate2 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate3 = PractitionerCertificate::create(array(
-  'practitioner_id' => 3 ,
+	'practitioner_id' => $practitioner58->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3611,7 +2993,7 @@ $practitionercertificate3 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate4 = PractitionerCertificate::create(array(
-  'practitioner_id' => 4 ,
+	'practitioner_id' => $practitioner11->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3621,7 +3003,7 @@ $practitionercertificate4 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate5 = PractitionerCertificate::create(array(
-  'practitioner_id' => 5 ,
+	'practitioner_id' => $practitioner119->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3631,7 +3013,7 @@ $practitionercertificate5 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate6 = PractitionerCertificate::create(array(
-  'practitioner_id' => 6 ,
+	'practitioner_id' => $practitioner106->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3641,7 +3023,7 @@ $practitionercertificate6 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate7 = PractitionerCertificate::create(array(
-  'practitioner_id' => 7 ,
+	'practitioner_id' => $practitioner38->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3651,7 +3033,7 @@ $practitionercertificate7 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate8 = PractitionerCertificate::create(array(
-  'practitioner_id' => 8 ,
+	'practitioner_id' => $practitioner125->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3661,7 +3043,7 @@ $practitionercertificate8 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate9 = PractitionerCertificate::create(array(
-  'practitioner_id' => 9 ,
+	'practitioner_id' => $practitioner23->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3671,7 +3053,7 @@ $practitionercertificate9 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate10 = PractitionerCertificate::create(array(
-  'practitioner_id' => 10 ,
+	'practitioner_id' => $practitioner58->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3681,7 +3063,7 @@ $practitionercertificate10 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate11 = PractitionerCertificate::create(array(
-  'practitioner_id' => 11 ,
+	'practitioner_id' => $practitioner11->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3690,9 +3072,8 @@ $practitionercertificate11 = PractitionerCertificate::create(array(
 	'conditions' => "The practitioner shall practice as a MEMBER of an Environmental Audit team"             
 ));
 
-
 $practitionercertificate12 = PractitionerCertificate::create(array(
-  'practitioner_id' => $practitioner12->id ,
+	'practitioner_id' => $practitioner120->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3701,18 +3082,8 @@ $practitionercertificate12 = PractitionerCertificate::create(array(
 	'conditions' => "The practitioner shall practice as a MEMBER of an Environmental Audit team"             
 ));
 
-$practitionercertificate12b = PractitionerCertificate::create(array(
-  'practitioner_id' => $practitioner12->id ,
-	'year' => 2014 ,
-	'date_of_entry' => "2014-02-27" ,
-	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
-	'number' => 942 ,
-	'cert_no' => "CC/EA/942/14" ,
-	'conditions' => "The practitioner shall practice as a MEMBER of an Environmental Audit team"             
-));
-
 $practitionercertificate13 = PractitionerCertificate::create(array(
-  'practitioner_id' => 13 ,
+	'practitioner_id' => $practitioner31->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3722,7 +3093,7 @@ $practitionercertificate13 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate14 = PractitionerCertificate::create(array(
-  'practitioner_id' => 14 ,
+	'practitioner_id' => $practitioner49->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-10" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3732,7 +3103,7 @@ $practitionercertificate14 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate15 = PractitionerCertificate::create(array(
-  'practitioner_id' => 15 ,
+	'practitioner_id' => $practitioner87->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3742,7 +3113,7 @@ $practitionercertificate15 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate16 = PractitionerCertificate::create(array(
-  'practitioner_id' => 16 ,
+	'practitioner_id' => $practitioner87->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3752,7 +3123,7 @@ $practitionercertificate16 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate17 = PractitionerCertificate::create(array(
-  'practitioner_id' => 17 ,
+	'practitioner_id' => $practitioner51->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3762,7 +3133,7 @@ $practitionercertificate17 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate18 = PractitionerCertificate::create(array(
-  'practitioner_id' => 18 ,
+	'practitioner_id' => $practitioner114->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3772,7 +3143,7 @@ $practitionercertificate18 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate19 = PractitionerCertificate::create(array(
-  'practitioner_id' => 19 ,
+	'practitioner_id' => $practitioner51->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3782,7 +3153,7 @@ $practitionercertificate19 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate20 = PractitionerCertificate::create(array(
-  'practitioner_id' => 20 ,
+	'practitioner_id' => $practitioner114->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3792,7 +3163,7 @@ $practitionercertificate20 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate21 = PractitionerCertificate::create(array(
-  'practitioner_id' => 21 ,
+	'practitioner_id' => $practitioner117->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3802,7 +3173,7 @@ $practitionercertificate21 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate22 = PractitionerCertificate::create(array(
-  'practitioner_id' => 22 ,
+	'practitioner_id' => $practitioner117->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3812,7 +3183,7 @@ $practitionercertificate22 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate23 = PractitionerCertificate::create(array(
-  'practitioner_id' => 23 ,
+	'practitioner_id' => $practitioner115->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3822,7 +3193,7 @@ $practitionercertificate23 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate24 = PractitionerCertificate::create(array(
-  'practitioner_id' => 24 ,
+	'practitioner_id' => $practitioner68->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3832,7 +3203,7 @@ $practitionercertificate24 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate25 = PractitionerCertificate::create(array(
-  'practitioner_id' => 25 ,
+	'practitioner_id' => $practitioner76->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3842,7 +3213,7 @@ $practitionercertificate25 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate26 = PractitionerCertificate::create(array(
-  'practitioner_id' => 26 ,
+	'practitioner_id' => $practitioner107->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3852,7 +3223,7 @@ $practitionercertificate26 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate27 = PractitionerCertificate::create(array(
-  'practitioner_id' => 27 ,
+	'practitioner_id' => $practitioner27->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3862,7 +3233,7 @@ $practitionercertificate27 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate28 = PractitionerCertificate::create(array(
-  'practitioner_id' => 28 ,
+	'practitioner_id' => $practitioner68->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3872,7 +3243,7 @@ $practitionercertificate28 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate29 = PractitionerCertificate::create(array(
-  'practitioner_id' => 29 ,
+	'practitioner_id' => $practitioner76->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3882,7 +3253,7 @@ $practitionercertificate29 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate30 = PractitionerCertificate::create(array(
-  'practitioner_id' => 30 ,
+	'practitioner_id' => $practitioner107->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3892,7 +3263,7 @@ $practitionercertificate30 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate31 = PractitionerCertificate::create(array(
-  'practitioner_id' => 31 ,
+	'practitioner_id' => $practitioner98->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3902,7 +3273,7 @@ $practitionercertificate31 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate32 = PractitionerCertificate::create(array(
-  'practitioner_id' => 32 ,
+	'practitioner_id' => $practitioner121->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-14" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3912,7 +3283,7 @@ $practitionercertificate32 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate33 = PractitionerCertificate::create(array(
-  'practitioner_id' => 33 ,
+	'practitioner_id' => $practitioner19->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-20" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3922,7 +3293,7 @@ $practitionercertificate33 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate34 = PractitionerCertificate::create(array(
-  'practitioner_id' => 34 ,
+	'practitioner_id' => $practitioner39->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3932,7 +3303,7 @@ $practitionercertificate34 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate35 = PractitionerCertificate::create(array(
-  'practitioner_id' => 35 ,
+	'practitioner_id' => $practitioner16->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-20" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3942,7 +3313,7 @@ $practitionercertificate35 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate36 = PractitionerCertificate::create(array(
-  'practitioner_id' => 36 ,
+	'practitioner_id' => $practitioner6->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-08" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3952,7 +3323,7 @@ $practitionercertificate36 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate37 = PractitionerCertificate::create(array(
-  'practitioner_id' => 37 ,
+	'practitioner_id' => $practitioner17->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3962,7 +3333,7 @@ $practitionercertificate37 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate38 = PractitionerCertificate::create(array(
-  'practitioner_id' => 38 ,
+	'practitioner_id' => $practitioner17->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3972,7 +3343,7 @@ $practitionercertificate38 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate39 = PractitionerCertificate::create(array(
-  'practitioner_id' => 39 ,
+	'practitioner_id' => $practitioner1->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-09" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -3982,7 +3353,7 @@ $practitionercertificate39 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate40 = PractitionerCertificate::create(array(
-  'practitioner_id' => 40 ,
+	'practitioner_id' => $practitioner1->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-09" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -3992,7 +3363,7 @@ $practitionercertificate40 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate41 = PractitionerCertificate::create(array(
-  'practitioner_id' => 41 ,
+	'practitioner_id' => $practitioner105->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-16" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4002,7 +3373,7 @@ $practitionercertificate41 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate42 = PractitionerCertificate::create(array(
-  'practitioner_id' => 42 ,
+	'practitioner_id' => $practitioner105->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-14" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4012,7 +3383,7 @@ $practitionercertificate42 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate43 = PractitionerCertificate::create(array(
-  'practitioner_id' => 43 ,
+	'practitioner_id' => $practitioner35->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4022,7 +3393,7 @@ $practitionercertificate43 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate44 = PractitionerCertificate::create(array(
-  'practitioner_id' => 44 ,
+	'practitioner_id' => $practitioner46->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-05" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4032,7 +3403,7 @@ $practitionercertificate44 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate45 = PractitionerCertificate::create(array(
-  'practitioner_id' => 45 ,
+	'practitioner_id' => $practitioner50->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-20" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4042,7 +3413,7 @@ $practitionercertificate45 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate46 = PractitionerCertificate::create(array(
-  'practitioner_id' => 46 ,
+	'practitioner_id' => $practitioner52->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-20" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4052,7 +3423,7 @@ $practitionercertificate46 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate47 = PractitionerCertificate::create(array(
-  'practitioner_id' => 47 ,
+	'practitioner_id' => $practitioner50->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-20" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4062,7 +3433,7 @@ $practitionercertificate47 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate48 = PractitionerCertificate::create(array(
-  'practitioner_id' => 48 ,
+	'practitioner_id' => $practitioner52->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-20" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4072,7 +3443,7 @@ $practitionercertificate48 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate49 = PractitionerCertificate::create(array(
-  'practitioner_id' => 49 ,
+	'practitioner_id' => $practitioner124->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4082,7 +3453,7 @@ $practitionercertificate49 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate50 = PractitionerCertificate::create(array(
-  'practitioner_id' => 50 ,
+	'practitioner_id' => $practitioner124->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4092,7 +3463,7 @@ $practitionercertificate50 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate51 = PractitionerCertificate::create(array(
-  'practitioner_id' => 51 ,
+	'practitioner_id' => $practitioner13->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4102,7 +3473,7 @@ $practitionercertificate51 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate52 = PractitionerCertificate::create(array(
-  'practitioner_id' => 52 ,
+	'practitioner_id' => $practitioner13->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4112,7 +3483,7 @@ $practitionercertificate52 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate53 = PractitionerCertificate::create(array(
-  'practitioner_id' => 53 ,
+	'practitioner_id' => $practitioner42->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-25" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4122,7 +3493,7 @@ $practitionercertificate53 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate54 = PractitionerCertificate::create(array(
-  'practitioner_id' => 54 ,
+	'practitioner_id' => $practitioner37->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4132,7 +3503,7 @@ $practitionercertificate54 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate55 = PractitionerCertificate::create(array(
-  'practitioner_id' => 55 ,
+	'practitioner_id' => $practitioner36->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4142,7 +3513,7 @@ $practitionercertificate55 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate56 = PractitionerCertificate::create(array(
-  'practitioner_id' => 56 ,
+	'practitioner_id' => $practitioner71->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-22" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4152,7 +3523,7 @@ $practitionercertificate56 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate57 = PractitionerCertificate::create(array(
-  'practitioner_id' => 57 ,
+	'practitioner_id' => $practitioner43->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-22" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4162,7 +3533,7 @@ $practitionercertificate57 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate58 = PractitionerCertificate::create(array(
-  'practitioner_id' => 58 ,
+	'practitioner_id' => $practitioner43->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4172,7 +3543,7 @@ $practitionercertificate58 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate59 = PractitionerCertificate::create(array(
-  'practitioner_id' => 59 ,
+	'practitioner_id' => $practitioner71->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-22" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4182,7 +3553,7 @@ $practitionercertificate59 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate60 = PractitionerCertificate::create(array(
-  'practitioner_id' => 60 ,
+	'practitioner_id' => $practitioner97->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4192,7 +3563,7 @@ $practitionercertificate60 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate61 = PractitionerCertificate::create(array(
-  'practitioner_id' => 61 ,
+	'practitioner_id' => $practitioner97->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4202,7 +3573,7 @@ $practitionercertificate61 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate62 = PractitionerCertificate::create(array(
-  'practitioner_id' => 62 ,
+	'practitioner_id' => $practitioner73->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-21" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4212,7 +3583,7 @@ $practitionercertificate62 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate63 = PractitionerCertificate::create(array(
-  'practitioner_id' => 63 ,
+	'practitioner_id' => $practitioner73->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-21" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4222,7 +3593,7 @@ $practitionercertificate63 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate64 = PractitionerCertificate::create(array(
-  'practitioner_id' => 64 ,
+	'practitioner_id' => $practitioner72->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4232,7 +3603,7 @@ $practitionercertificate64 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate65 = PractitionerCertificate::create(array(
-  'practitioner_id' => 65 ,
+	'practitioner_id' => $practitioner72->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4242,7 +3613,7 @@ $practitionercertificate65 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate66 = PractitionerCertificate::create(array(
-  'practitioner_id' => 66 ,
+	'practitioner_id' => $practitioner14->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-01" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4252,7 +3623,7 @@ $practitionercertificate66 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate67 = PractitionerCertificate::create(array(
-  'practitioner_id' => 67 ,
+	'practitioner_id' => $practitioner131->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4262,7 +3633,7 @@ $practitionercertificate67 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate68 = PractitionerCertificate::create(array(
-  'practitioner_id' => 68 ,
+	'practitioner_id' => $practitioner131->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2012-01-20" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4272,7 +3643,7 @@ $practitionercertificate68 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate69 = PractitionerCertificate::create(array(
-  'practitioner_id' => 69 ,
+	'practitioner_id' => $practitioner34->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-07" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4282,7 +3653,7 @@ $practitionercertificate69 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate70 = PractitionerCertificate::create(array(
-  'practitioner_id' => 70 ,
+	'practitioner_id' => $practitioner44->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4292,7 +3663,7 @@ $practitionercertificate70 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate71 = PractitionerCertificate::create(array(
-  'practitioner_id' => 71 ,
+	'practitioner_id' => $practitioner18->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4302,7 +3673,7 @@ $practitionercertificate71 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate72 = PractitionerCertificate::create(array(
-  'practitioner_id' => 72 ,
+	'practitioner_id' => $practitioner44->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4312,7 +3683,7 @@ $practitionercertificate72 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate73 = PractitionerCertificate::create(array(
-  'practitioner_id' => 73 ,
+	'practitioner_id' => $practitioner18->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4322,7 +3693,7 @@ $practitionercertificate73 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate74 = PractitionerCertificate::create(array(
-  'practitioner_id' => 74 ,
+	'practitioner_id' => $practitioner57->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4332,7 +3703,7 @@ $practitionercertificate74 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate75 = PractitionerCertificate::create(array(
-  'practitioner_id' => 75 ,
+	'practitioner_id' => $practitioner108->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4342,7 +3713,7 @@ $practitionercertificate75 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate76 = PractitionerCertificate::create(array(
-  'practitioner_id' => 76 ,
+	'practitioner_id' => $practitioner108->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4352,7 +3723,7 @@ $practitionercertificate76 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate77 = PractitionerCertificate::create(array(
-  'practitioner_id' => 77 ,
+	'practitioner_id' => $practitioner74->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4362,7 +3733,7 @@ $practitionercertificate77 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate78 = PractitionerCertificate::create(array(
-  'practitioner_id' => 78 ,
+	'practitioner_id' => $practitioner74->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4372,7 +3743,7 @@ $practitionercertificate78 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate79 = PractitionerCertificate::create(array(
-  'practitioner_id' => 79 ,
+	'practitioner_id' => $practitioner3->id ,
 	'year' => 2013 ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
 	'number' => 123 ,
@@ -4381,7 +3752,7 @@ $practitionercertificate79 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate80 = PractitionerCertificate::create(array(
-  'practitioner_id' => 80 ,
+	'practitioner_id' => $practitioner3->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4391,7 +3762,7 @@ $practitionercertificate80 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate81 = PractitionerCertificate::create(array(
-  'practitioner_id' => 81 ,
+	'practitioner_id' => $practitioner40->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4401,7 +3772,7 @@ $practitionercertificate81 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate82 = PractitionerCertificate::create(array(
-  'practitioner_id' => 82 ,
+	'practitioner_id' => $practitioner28->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-03" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4411,7 +3782,7 @@ $practitionercertificate82 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate83 = PractitionerCertificate::create(array(
-  'practitioner_id' => 83 ,
+	'practitioner_id' => $practitioner28->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-03" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4421,7 +3792,7 @@ $practitionercertificate83 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate84 = PractitionerCertificate::create(array(
-  'practitioner_id' => 84 ,
+	'practitioner_id' => $practitioner82->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4431,7 +3802,7 @@ $practitionercertificate84 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate85 = PractitionerCertificate::create(array(
-  'practitioner_id' => 85 ,
+	'practitioner_id' => $practitioner82->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4441,7 +3812,7 @@ $practitionercertificate85 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate86 = PractitionerCertificate::create(array(
-  'practitioner_id' => 86 ,
+	'practitioner_id' => $practitioner59->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4451,7 +3822,7 @@ $practitionercertificate86 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate87 = PractitionerCertificate::create(array(
-  'practitioner_id' => 87 ,
+	'practitioner_id' => $practitioner130->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4461,7 +3832,7 @@ $practitionercertificate87 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate88 = PractitionerCertificate::create(array(
-  'practitioner_id' => 88 ,
+	'practitioner_id' => $practitioner130->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4471,7 +3842,7 @@ $practitionercertificate88 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate89 = PractitionerCertificate::create(array(
-  'practitioner_id' => 89 ,
+	'practitioner_id' => $practitioner85->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4481,7 +3852,7 @@ $practitionercertificate89 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate90 = PractitionerCertificate::create(array(
-  'practitioner_id' => 90 ,
+	'practitioner_id' => $practitioner47->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4491,7 +3862,7 @@ $practitionercertificate90 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate91 = PractitionerCertificate::create(array(
-  'practitioner_id' => 91 ,
+	'practitioner_id' => $practitioner64->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-21" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4501,7 +3872,7 @@ $practitionercertificate91 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate92 = PractitionerCertificate::create(array(
-  'practitioner_id' => 92 ,
+	'practitioner_id' => $practitioner2->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-22" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4511,7 +3882,7 @@ $practitionercertificate92 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate93 = PractitionerCertificate::create(array(
-  'practitioner_id' => 93 ,
+	'practitioner_id' => $practitioner2->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-22" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4521,7 +3892,7 @@ $practitionercertificate93 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate94 = PractitionerCertificate::create(array(
-  'practitioner_id' => 94 ,
+	'practitioner_id' => $practitioner116->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-13" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4531,7 +3902,7 @@ $practitionercertificate94 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate95 = PractitionerCertificate::create(array(
-  'practitioner_id' => 95 ,
+	'practitioner_id' => $practitioner25->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-13" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4541,7 +3912,7 @@ $practitionercertificate95 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate96 = PractitionerCertificate::create(array(
-  'practitioner_id' => 96 ,
+	'practitioner_id' => $practitioner111->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-13" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4551,7 +3922,7 @@ $practitionercertificate96 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate97 = PractitionerCertificate::create(array(
-  'practitioner_id' => 97 ,
+	'practitioner_id' => $practitioner111->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-13" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4561,7 +3932,7 @@ $practitionercertificate97 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate98 = PractitionerCertificate::create(array(
-  'practitioner_id' => 98 ,
+	'practitioner_id' => $practitioner81->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4571,7 +3942,7 @@ $practitionercertificate98 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate99 = PractitionerCertificate::create(array(
-  'practitioner_id' => 99 ,
+	'practitioner_id' => $practitioner80->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4581,7 +3952,7 @@ $practitionercertificate99 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate100 = PractitionerCertificate::create(array(
-  'practitioner_id' => 100 ,
+	'practitioner_id' => $practitioner20->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4591,7 +3962,7 @@ $practitionercertificate100 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate101 = PractitionerCertificate::create(array(
-  'practitioner_id' => 101 ,
+	'practitioner_id' => $practitioner9->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-05" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4601,7 +3972,7 @@ $practitionercertificate101 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate102 = PractitionerCertificate::create(array(
-  'practitioner_id' => 102 ,
+	'practitioner_id' => $practitioner69->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4611,7 +3982,7 @@ $practitionercertificate102 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate103 = PractitionerCertificate::create(array(
-  'practitioner_id' => 103 ,
+	'practitioner_id' => $practitioner9->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-05" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4621,7 +3992,7 @@ $practitionercertificate103 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate104 = PractitionerCertificate::create(array(
-  'practitioner_id' => 104 ,
+	'practitioner_id' => $practitioner22->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-01" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4631,7 +4002,7 @@ $practitionercertificate104 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate105 = PractitionerCertificate::create(array(
-  'practitioner_id' => 105 ,
+	'practitioner_id' => $practitioner100->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-01" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4641,7 +4012,7 @@ $practitionercertificate105 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate106 = PractitionerCertificate::create(array(
-  'practitioner_id' => 106 ,
+	'practitioner_id' => $practitioner77->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-09" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4651,7 +4022,7 @@ $practitionercertificate106 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate107 = PractitionerCertificate::create(array(
-  'practitioner_id' => 107 ,
+	'practitioner_id' => $practitioner77->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-09" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4661,7 +4032,7 @@ $practitionercertificate107 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate108 = PractitionerCertificate::create(array(
-  'practitioner_id' => 108 ,
+	'practitioner_id' => $practitioner24->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2012-12-19" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4671,7 +4042,7 @@ $practitionercertificate108 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate109 = PractitionerCertificate::create(array(
-  'practitioner_id' => 109 ,
+	'practitioner_id' => $practitioner78->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-11" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4681,7 +4052,7 @@ $practitionercertificate109 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate110 = PractitionerCertificate::create(array(
-  'practitioner_id' => 110 ,
+	'practitioner_id' => $practitioner110->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-11" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4691,7 +4062,7 @@ $practitionercertificate110 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate111 = PractitionerCertificate::create(array(
-  'practitioner_id' => 111 ,
+	'practitioner_id' => $practitioner113->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-11" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4701,7 +4072,7 @@ $practitionercertificate111 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate112 = PractitionerCertificate::create(array(
-  'practitioner_id' => 112 ,
+	'practitioner_id' => $practitioner70->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4711,7 +4082,7 @@ $practitionercertificate112 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate113 = PractitionerCertificate::create(array(
-  'practitioner_id' => 113 ,
+	'practitioner_id' => $practitioner112->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-01" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4721,7 +4092,7 @@ $practitionercertificate113 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate114 = PractitionerCertificate::create(array(
-  'practitioner_id' => 114 ,
+	'practitioner_id' => $practitioner79->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-01" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4731,7 +4102,7 @@ $practitionercertificate114 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate115 = PractitionerCertificate::create(array(
-  'practitioner_id' => 115 ,
+	'practitioner_id' => $practitioner112->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-01" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4741,7 +4112,7 @@ $practitionercertificate115 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate116 = PractitionerCertificate::create(array(
-  'practitioner_id' => 116 ,
+	'practitioner_id' => $practitioner101->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4751,7 +4122,7 @@ $practitionercertificate116 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate117 = PractitionerCertificate::create(array(
-  'practitioner_id' => 117 ,
+	'practitioner_id' => $practitioner67->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-10" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4761,7 +4132,7 @@ $practitionercertificate117 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate118 = PractitionerCertificate::create(array(
-  'practitioner_id' => 118 ,
+	'practitioner_id' => $practitioner67->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-10" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4771,7 +4142,7 @@ $practitionercertificate118 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate119 = PractitionerCertificate::create(array(
-  'practitioner_id' => 119 ,
+	'practitioner_id' => $practitioner55->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4781,7 +4152,7 @@ $practitionercertificate119 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate120 = PractitionerCertificate::create(array(
-  'practitioner_id' => 120 ,
+	'practitioner_id' => $practitioner33->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-21" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4791,7 +4162,7 @@ $practitionercertificate120 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate121 = PractitionerCertificate::create(array(
-  'practitioner_id' => 121 ,
+	'practitioner_id' => $practitioner33->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-21" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4801,7 +4172,7 @@ $practitionercertificate121 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate122 = PractitionerCertificate::create(array(
-  'practitioner_id' => 122 ,
+	'practitioner_id' => $practitioner8->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4811,7 +4182,7 @@ $practitionercertificate122 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate123 = PractitionerCertificate::create(array(
-  'practitioner_id' => 123 ,
+	'practitioner_id' => $practitioner8->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4821,7 +4192,7 @@ $practitionercertificate123 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate124 = PractitionerCertificate::create(array(
-  'practitioner_id' => 124 ,
+	'practitioner_id' => $practitioner15->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4831,7 +4202,7 @@ $practitionercertificate124 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate125 = PractitionerCertificate::create(array(
-  'practitioner_id' => 125 ,
+	'practitioner_id' => $practitioner65->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4841,7 +4212,7 @@ $practitionercertificate125 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate126 = PractitionerCertificate::create(array(
-  'practitioner_id' => 126 ,
+	'practitioner_id' => $practitioner122->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4851,7 +4222,7 @@ $practitionercertificate126 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate127 = PractitionerCertificate::create(array(
-  'practitioner_id' => 127 ,
+	'practitioner_id' => $practitioner89->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4861,7 +4232,7 @@ $practitionercertificate127 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate128 = PractitionerCertificate::create(array(
-  'practitioner_id' => 128 ,
+	'practitioner_id' => $practitioner65->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4871,7 +4242,7 @@ $practitionercertificate128 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate129 = PractitionerCertificate::create(array(
-  'practitioner_id' => 129 ,
+	'practitioner_id' => $practitioner129->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-05" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4881,7 +4252,7 @@ $practitionercertificate129 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate130 = PractitionerCertificate::create(array(
-  'practitioner_id' => 130 ,
+	'practitioner_id' => $practitioner93->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-02" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4891,7 +4262,7 @@ $practitionercertificate130 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate131 = PractitionerCertificate::create(array(
-  'practitioner_id' => 131 ,
+	'practitioner_id' => $practitioner96->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-02" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4901,7 +4272,7 @@ $practitionercertificate131 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate132 = PractitionerCertificate::create(array(
-  'practitioner_id' => 132 ,
+	'practitioner_id' => $practitioner93->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-02" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4911,7 +4282,7 @@ $practitionercertificate132 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate133 = PractitionerCertificate::create(array(
-  'practitioner_id' => 133 ,
+	'practitioner_id' => $practitioner91->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-14" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4921,7 +4292,7 @@ $practitionercertificate133 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate134 = PractitionerCertificate::create(array(
-  'practitioner_id' => 134 ,
+	'practitioner_id' => $practitioner91->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-14" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4931,7 +4302,7 @@ $practitionercertificate134 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate135 = PractitionerCertificate::create(array(
-  'practitioner_id' => 135 ,
+	'practitioner_id' => $practitioner26->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-06" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4941,7 +4312,7 @@ $practitionercertificate135 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate136 = PractitionerCertificate::create(array(
-  'practitioner_id' => 136 ,
+	'practitioner_id' => $practitioner21->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-19" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4951,7 +4322,7 @@ $practitionercertificate136 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate137 = PractitionerCertificate::create(array(
-  'practitioner_id' => 137 ,
+	'practitioner_id' => $practitioner21->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-19" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4961,7 +4332,7 @@ $practitionercertificate137 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate138 = PractitionerCertificate::create(array(
-  'practitioner_id' => 138 ,
+	'practitioner_id' => $practitioner127->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -4971,7 +4342,7 @@ $practitionercertificate138 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate139 = PractitionerCertificate::create(array(
-  'practitioner_id' => 139 ,
+	'practitioner_id' => $practitioner127->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4981,7 +4352,7 @@ $practitionercertificate139 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate140 = PractitionerCertificate::create(array(
-  'practitioner_id' => 140 ,
+	'practitioner_id' => $practitioner92->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-20" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -4991,7 +4362,7 @@ $practitionercertificate140 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate141 = PractitionerCertificate::create(array(
-  'practitioner_id' => 141 ,
+	'practitioner_id' => $practitioner5->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5001,7 +4372,7 @@ $practitionercertificate141 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate142 = PractitionerCertificate::create(array(
-  'practitioner_id' => 142 ,
+	'practitioner_id' => $practitioner5->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5011,7 +4382,7 @@ $practitionercertificate142 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate143 = PractitionerCertificate::create(array(
-  'practitioner_id' => 143 ,
+	'practitioner_id' => $practitioner75->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5021,7 +4392,7 @@ $practitionercertificate143 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate144 = PractitionerCertificate::create(array(
-  'practitioner_id' => 144 ,
+	'practitioner_id' => $practitioner45->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5031,7 +4402,7 @@ $practitionercertificate144 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate145 = PractitionerCertificate::create(array(
-  'practitioner_id' => 145 ,
+	'practitioner_id' => $practitioner118->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5041,7 +4412,7 @@ $practitionercertificate145 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate146 = PractitionerCertificate::create(array(
-  'practitioner_id' => 146 ,
+	'practitioner_id' => $practitioner63->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5051,7 +4422,7 @@ $practitionercertificate146 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate147 = PractitionerCertificate::create(array(
-  'practitioner_id' => 147 ,
+	'practitioner_id' => $practitioner102->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5061,7 +4432,7 @@ $practitionercertificate147 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate148 = PractitionerCertificate::create(array(
-  'practitioner_id' => 148 ,
+	'practitioner_id' => $practitioner7->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5071,7 +4442,7 @@ $practitionercertificate148 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate149 = PractitionerCertificate::create(array(
-  'practitioner_id' => 149 ,
+	'practitioner_id' => $practitioner7->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5081,7 +4452,7 @@ $practitionercertificate149 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate150 = PractitionerCertificate::create(array(
-  'practitioner_id' => 150 ,
+	'practitioner_id' => $practitioner12->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5091,7 +4462,7 @@ $practitionercertificate150 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate151 = PractitionerCertificate::create(array(
-  'practitioner_id' => 151 ,
+	'practitioner_id' => $practitioner83->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5101,7 +4472,7 @@ $practitionercertificate151 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate152 = PractitionerCertificate::create(array(
-  'practitioner_id' => 152 ,
+	'practitioner_id' => $practitioner86->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-17" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5111,7 +4482,7 @@ $practitionercertificate152 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate153 = PractitionerCertificate::create(array(
-  'practitioner_id' => 153 ,
+	'practitioner_id' => $practitioner4->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5121,7 +4492,7 @@ $practitionercertificate153 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate154 = PractitionerCertificate::create(array(
-  'practitioner_id' => 154 ,
+	'practitioner_id' => $practitioner88->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-23" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5131,7 +4502,7 @@ $practitionercertificate154 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate155 = PractitionerCertificate::create(array(
-  'practitioner_id' => 155 ,
+	'practitioner_id' => $practitioner90->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-25" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5141,7 +4512,7 @@ $practitionercertificate155 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate156 = PractitionerCertificate::create(array(
-  'practitioner_id' => 156 ,
+	'practitioner_id' => $practitioner41->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-06" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5151,7 +4522,7 @@ $practitionercertificate156 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate157 = PractitionerCertificate::create(array(
-  'practitioner_id' => 157 ,
+	'practitioner_id' => $practitioner84->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-22" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5161,7 +4532,7 @@ $practitionercertificate157 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate158 = PractitionerCertificate::create(array(
-  'practitioner_id' => 158 ,
+	'practitioner_id' => $practitioner30->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-25" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5171,7 +4542,7 @@ $practitionercertificate158 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate159 = PractitionerCertificate::create(array(
-  'practitioner_id' => 159 ,
+	'practitioner_id' => $practitioner94->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5181,7 +4552,7 @@ $practitionercertificate159 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate160 = PractitionerCertificate::create(array(
-  'practitioner_id' => 160 ,
+	'practitioner_id' => $practitioner95->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5191,7 +4562,7 @@ $practitionercertificate160 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate161 = PractitionerCertificate::create(array(
-  'practitioner_id' => 161 ,
+	'practitioner_id' => $practitioner60->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5201,7 +4572,7 @@ $practitionercertificate161 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate162 = PractitionerCertificate::create(array(
-  'practitioner_id' => 162 ,
+	'practitioner_id' => $practitioner104->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5211,7 +4582,7 @@ $practitionercertificate162 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate163 = PractitionerCertificate::create(array(
-  'practitioner_id' => 163 ,
+	'practitioner_id' => $practitioner53->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5221,7 +4592,7 @@ $practitionercertificate163 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate164 = PractitionerCertificate::create(array(
-  'practitioner_id' => 164 ,
+	'practitioner_id' => $practitioner48->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5231,7 +4602,7 @@ $practitionercertificate164 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate165 = PractitionerCertificate::create(array(
-  'practitioner_id' => 165 ,
+	'practitioner_id' => $practitioner99->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5241,7 +4612,7 @@ $practitionercertificate165 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate166 = PractitionerCertificate::create(array(
-  'practitioner_id' => 166 ,
+	'practitioner_id' => $practitioner56->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5251,7 +4622,7 @@ $practitionercertificate166 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate167 = PractitionerCertificate::create(array(
-  'practitioner_id' => 167 ,
+	'practitioner_id' => $practitioner103->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5261,7 +4632,7 @@ $practitionercertificate167 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate168 = PractitionerCertificate::create(array(
-  'practitioner_id' => 168 ,
+	'practitioner_id' => $practitioner61->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5271,7 +4642,7 @@ $practitionercertificate168 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate169 = PractitionerCertificate::create(array(
-  'practitioner_id' => 169 ,
+	'practitioner_id' => $practitioner66->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-28" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5281,7 +4652,7 @@ $practitionercertificate169 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate170 = PractitionerCertificate::create(array(
-  'practitioner_id' => 170 ,
+	'practitioner_id' => $practitioner109->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-01" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5291,7 +4662,7 @@ $practitionercertificate170 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate171 = PractitionerCertificate::create(array(
-  'practitioner_id' => 171 ,
+	'practitioner_id' => $practitioner54->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-01" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5301,7 +4672,7 @@ $practitionercertificate171 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate172 = PractitionerCertificate::create(array(
-  'practitioner_id' => 172 ,
+	'practitioner_id' => $practitioner123->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-04" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5311,7 +4682,7 @@ $practitionercertificate172 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate173 = PractitionerCertificate::create(array(
-  'practitioner_id' => 173 ,
+	'practitioner_id' => $practitioner128->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-05" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5321,7 +4692,7 @@ $practitionercertificate173 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate174 = PractitionerCertificate::create(array(
-  'practitioner_id' => 174 ,
+	'practitioner_id' => $practitioner62->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-07" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5331,7 +4702,7 @@ $practitionercertificate174 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate175 = PractitionerCertificate::create(array(
-  'practitioner_id' => 175 ,
+	'practitioner_id' => $practitioner10->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5341,7 +4712,7 @@ $practitionercertificate175 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate176 = PractitionerCertificate::create(array(
-  'practitioner_id' => 176 ,
+	'practitioner_id' => $practitioner126->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-03-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS" ,
@@ -5351,7 +4722,7 @@ $practitionercertificate176 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate177 = PractitionerCertificate::create(array(
-  'practitioner_id' => 177 ,
+	'practitioner_id' => $practitioner12->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-15" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5361,7 +4732,7 @@ $practitionercertificate177 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate178 = PractitionerCertificate::create(array(
-  'practitioner_id' => 178 ,
+	'practitioner_id' => $practitioner32->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-16" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5371,7 +4742,7 @@ $practitionercertificate178 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate179 = PractitionerCertificate::create(array(
-  'practitioner_id' => 179 ,
+	'practitioner_id' => $practitioner4->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-01-18" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5381,7 +4752,7 @@ $practitionercertificate179 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate180 = PractitionerCertificate::create(array(
-  'practitioner_id' => 180 ,
+	'practitioner_id' => $practitioner83->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-21" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5391,7 +4762,7 @@ $practitionercertificate180 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate181 = PractitionerCertificate::create(array(
-  'practitioner_id' => 181 ,
+	'practitioner_id' => $practitioner84->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-22" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5401,7 +4772,7 @@ $practitionercertificate181 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate182 = PractitionerCertificate::create(array(
-  'practitioner_id' => 182 ,
+	'practitioner_id' => $practitioner30->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-25" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5411,7 +4782,7 @@ $practitionercertificate182 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate183 = PractitionerCertificate::create(array(
-  'practitioner_id' => 183 ,
+	'practitioner_id' => $practitioner95->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-26" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5421,7 +4792,7 @@ $practitionercertificate183 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate184 = PractitionerCertificate::create(array(
-  'practitioner_id' => 184 ,
+	'practitioner_id' => $practitioner99->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
@@ -5431,13 +4802,18 @@ $practitionercertificate184 = PractitionerCertificate::create(array(
 ));
 
 $practitionercertificate185 = PractitionerCertificate::create(array(
-  'practitioner_id' => 185 ,
+	'practitioner_id' => $practitioner103->id ,
 	'year' => 2013 ,
 	'date_of_entry' => "2013-02-27" ,
 	'cert_type' => "CERTIFIED ENVIRONMENTAL AUDITORS" ,
 	'number' => 45 ,
 	'cert_no' => "CC/EA/045/13" ,
 	'conditions' => "The practitioner shall practice as a TEAM LEADER/ MEMBER of an Environmental Audit team."             
+));
+
+$leadagency1 = LeadAgency::create(array(
+	'lead_agency_short' => "PEPD" ,
+	'lead_agency_long' => "The Petroleum Exploration and Production Department"             
 ));
 
 // seed end
