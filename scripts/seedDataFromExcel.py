@@ -7,7 +7,7 @@ from datetime import datetime
 
 phpFile = r"..\api\app\database\\seeds\ExcelDataTableSeeder.php"
 
-tableFilePattern = r"N:\Felles\Forurensning\2. Internasjonalt arbeid\2012. Uganda\Kravspek\Tabeller\Supporting tables version*.xlsx"
+tableFilePattern = r"N:\Felles\Forurensning\2. Internasjonalt arbeid\2012. Uganda\Kravspek\Tabeller\Supporting tables version*.xlsx"									 
 tablesData = OrderedDict()
 tablesData["users"] = "User"
 tablesData["districts"] = "District"

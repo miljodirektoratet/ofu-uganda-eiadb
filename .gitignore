@@ -6,3 +6,4 @@ node_modules
 .idea/tasks.xml
 .idea/deployment.xml
 npm-debug.log
+*.dmp
