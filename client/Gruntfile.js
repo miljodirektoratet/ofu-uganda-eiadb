@@ -54,7 +54,9 @@ module.exports = function (grunt)
       app: {
         files: [
           {expand: true, flatten: true, src: ['app/index.html'], dest: '../build/app/', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['app/partials/*.html'], dest: '../build/app/partials/'}
+          {expand: true, flatten: true, src: ['app/partials/*.html'], dest: '../build/app/partials/'},
+          {expand: true, flatten: true, src: ['app/img/*.png'], dest: '../build/app/img/'},
+          {expand: true, flatten: true, src: ['app/img/*.jpg'], dest: '../build/app/jpg/'}
         ]
       }
     },
