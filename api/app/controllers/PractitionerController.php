@@ -3,22 +3,29 @@
 class PractitionerController extends BaseController {
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the resource. GET /resource
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-			$resources = Practitioner::all();
+		$withFunction = function ($query)
+		{
+			$query->select('id', 'practitioner_id', 'year', 'cert_type')
+				->where('year', '=', 2013);
+		};				
+
+		$resources = Practitioner::
+			with(array('practitionerCertificates'=>$withFunction))
+			//->take(10)
+			->get(array('id', 'person', 'organisation_name', 'visiting_address', 'city'));					
 	
-			return Response::json($resources->toArray(),
-					200		
-				);	 
+		return Response::json($resources->toArray(), 200);	 
 	}
 
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created resource in storage. POST /resource
 	 *
 	 * @return Response
 	 */
@@ -40,7 +47,7 @@ class PractitionerController extends BaseController {
 
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified resource. GET /resource/:id
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -55,11 +62,33 @@ class PractitionerController extends BaseController {
 		
 		$resource = Practitioner::where('id', $id)
 			->take(1)
-			->with('validCertificate')			
+			->with('practitionerCertificates')			
 			->get();			
 		return Response::json($resource->toArray(), 200);
 	}
 
+	/**
+	 * Update the specified resource in storage. PUT/PATCH /resource/:id
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+		$resource = Practitioner::find($id);
+
+		if (!$resource)
+		{
+			return Response::json(array('error' => true, 'message' => 'not found'), 404);
+		}
+
+		$data = Input::all();
+		$this->updateValuesInResource($resource, $data);	    
+
+		$resource->save();
+
+		return Response::json($resource->toArray(), 200);
+	}
 
 	private function updateValuesInResource($resource, $data)
 	{
@@ -76,36 +105,9 @@ class PractitionerController extends BaseController {
 		}
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-			$resource = Practitioner::find($id);
-
-			if (!$resource)
-			{
-				return Response::json(array(
-						'error' => true,
-						'message' => 'not found'),
-						404
-				);
-			}
-
-			$data = Input::all();
-			$this->updateValuesInResource($resource, $data);	    
-
-			$resource->save();
-
-			return Response::json($resource->toArray(), 200);
-	}
-
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified resource from storage. DELETE /resource/:id
 	 *
 	 * @param  int  $id
 	 * @return Response

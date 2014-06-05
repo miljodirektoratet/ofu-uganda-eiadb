@@ -38,7 +38,7 @@ module.exports = function (grunt)
           banner: '/* Generated with grunt. Do not edit! */\n\n'
         },
         files: {
-          '../build/app/app.min.css': ['app/css/navbar.css', 'app/css/navbar.css']
+          '../build/app/app.min.css': ['app/css/navbar.css', 'app/css/style.css']
         }
       }
     },
@@ -79,6 +79,22 @@ module.exports = function (grunt)
             '<script src="vendor/lodash.min.js"></script>\n\t' +
             '<script src="app.min.js"></script>'}]
       }
+    },
+
+    bump: {
+      options: {
+        files: ['package.json', 'bower.json', 'app/js/services.js'],
+        updateConfigs: [],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['-a'], // '-a' for all files
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: false,
+        pushTo: 'origin',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
+      }
     }
 
 
@@ -102,22 +118,6 @@ module.exports = function (grunt)
 //      }
 //    },
 
-//    bump: {
-//      options: {
-//        files: ['package.json', 'bower.json', 'app/js/app.js']//,
-//        updateConfigs: [],
-//        commit: true,
-//        commitMessage: 'Release v%VERSION%',
-//        commitFiles: ['package.json'], // '-a' for all files
-//        createTag: true,
-//        tagName: 'v%VERSION%',
-//        tagMessage: 'Version %VERSION%',
-//        push: true,
-//        pushTo: 'upstream',
-//        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
-//      }
-//    }
-
   });
 
   grunt.loadNpmTasks('grunt-bower-install-simple');
@@ -127,11 +127,13 @@ module.exports = function (grunt)
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-bump');
 
+  grunt.loadNpmTasks('grunt-contrib-watch');
+
+
   grunt.registerTask('build', [
+    'bump-only',
     'bower-install-simple',
     'clean:build',
     'concat',

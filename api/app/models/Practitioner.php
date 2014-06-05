@@ -10,12 +10,4 @@ class Practitioner extends Eloquent
     {
         return $this->hasMany('PractitionerCertificate');
     }
-
-    public function validCertificate()
-    {
-        return $this->hasOne('PractitionerCertificate')
-        	->where('is_cancelled', '=', 0)
-			->orderBy('year', 'desc')
-			->take(1);
-    }
 }

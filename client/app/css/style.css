@@ -1,2 +1,37 @@
 /* Needed by ui.bootstrap */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.practitioners .header
+{
+    font-weight: bold;
+}
+.practitioners .practitioner .master
+{
+    background-color: #f3f3f3;
+    border-top:1px solid darkgray;
+    cursor: pointer;
+    padding-bottom:3px
+}
+.practitioners .practitioner .master .noCertificate
+{
+    opacity: 0;
+}
+
+
+.practitioners .practitioner .detail
+{
+    padding-top:5px;
+    padding-bottom:10px;
+    background-color: #FCFCFC;
+}
+.practitioners .selected
+{
+    background-color: #FCFCFC !important;
+}
+
+.btn-link-hover
+{
+    color: #2a6496;
+    text-decoration: underline;
+}
+

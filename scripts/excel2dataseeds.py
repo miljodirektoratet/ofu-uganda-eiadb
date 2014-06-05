@@ -30,8 +30,11 @@ def getColumnLetterFromCoordinate(coordinate):
 
 def getLookupValue(columnName, value):
 	if not value: return
-	if columnName == 'x':
-		return 123
+	if columnName == 'cert_type':
+		if value == "CERTIFIED ENVIRONMENTAL IMPACT ASSESSORS": return 1
+		if value == "CERTIFIED ENVIRONMENTAL AUDITORS": return 2
+		print("Lookup value for %s. No hit for value=%s." % (columnName, value))
+	return 0
 
 def isNumber(s):
     try:
@@ -42,7 +45,7 @@ def isNumber(s):
 
 ignoreColumns = ['id', 'is_deleted']
 passwordColumn = 'password'
-lookupColumns = []
+lookupColumns = ['cert_type']
 dateColumns = ['date_of_entry']
 relationshipColumns = {'practitioner_id':'$practitioner%s->id'}
 

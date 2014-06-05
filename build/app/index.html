@@ -4,13 +4,15 @@
   <meta charset="utf-8">
   <title>EIA Database</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
   <link rel="stylesheet" href="vendor/bootstrap.min.css"/>
 	<link rel="stylesheet" href="app.min.css"/>
 </head>
 <body>
 
   <div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController" >
-    <div class="container-fluid">
+    <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
           <span class="sr-only">Toggle navigation</span>
@@ -44,7 +46,7 @@
     </div>
   </div>
 
-  <div class="container-fluid">
+  <div class="container">
     <div ng-view></div>
   </div>
 
