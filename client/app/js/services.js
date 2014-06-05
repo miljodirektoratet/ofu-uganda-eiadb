@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "0.0.2"};
+var version = {"version": "0.0.4"};
 
 // Demonstrate how to register services
 // In this case it is a simple value service.

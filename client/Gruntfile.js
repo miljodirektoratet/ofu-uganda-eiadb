@@ -95,6 +95,33 @@ module.exports = function (grunt)
         pushTo: 'origin',
         gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
       }
+    },
+
+    release: {
+      options: {
+        bump: false, //default: true
+        file: 'package.json',
+        add: true,
+        commit: true,
+        tag: true,
+        push: true,
+        pushTags: true,
+        npm: false,
+        tagName: 'v<%= version %>'
+        //commitMessage: 'release <%= version %>'
+        //tagMessage: 'Version <%= version %>',
+      }
+    },
+
+    gitcommit: {
+      task: {
+        options: {
+          message: 'Testing'
+        },
+        files: {
+          src: ['.']
+        }
+      }
     }
 
 
@@ -128,12 +155,13 @@ module.exports = function (grunt)
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-release');
+  grunt.loadNpmTasks('grunt-git');
 
   grunt.loadNpmTasks('grunt-contrib-watch');
 
 
   grunt.registerTask('build', [
-    'bump-only',
     'bower-install-simple',
     'clean:build',
     'concat',
@@ -141,6 +169,13 @@ module.exports = function (grunt)
     'cssmin',
     'copy',
     'replace'
+  ]);
+
+  grunt.registerTask('publish', [
+    'bump-only',
+    'build',
+    'gitcommit',
+    'release'
   ]);
 
 };
