@@ -119,7 +119,7 @@ module.exports = function (grunt)
           message: 'Testing'
         },
         files: {
-          src: ['.']
+          src: ['../.']
         }
       }
     }
