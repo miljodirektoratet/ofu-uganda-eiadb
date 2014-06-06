@@ -117,10 +117,11 @@ module.exports = function (grunt)
       all: {
         options: {
           message: 'Lazy commit all.',
-          verbose: true
+          verbose: true,
+          all: true
         },
         files: {
-          src: ['--all', '../.']
+          src: ['../.']
         }
       }
     }
