@@ -10,11 +10,11 @@ angular.module('seroApp.controllers', [])
 
   scope.hasEia = function(p)
   {
-    return _.some(p.practitioner_certificates,  { 'cert_type': "1" });
+    return _.some(p.practitioner_certificates,  { 'cert_type': 1 });
   };
   scope.hasAudit = function(p)
   {
-    return _.some(p.practitioner_certificates,  { 'cert_type': "2" });
+    return _.some(p.practitioner_certificates,  { 'cert_type': 2 });
   };
 }])
 
