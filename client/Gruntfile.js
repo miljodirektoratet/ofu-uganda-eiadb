@@ -114,13 +114,13 @@ module.exports = function (grunt)
     },
 
     gitcommit: {
-      task: {
+      all: {
         options: {
-          message: 'Testing',
+          message: 'Lazy commit all.',
           verbose: true
         },
         files: {
-          src: ['../.']
+          src: ['--all', '../.']
         }
       }
     }
@@ -175,7 +175,7 @@ module.exports = function (grunt)
   grunt.registerTask('publish', [
     'bump-only',
     'build',
-    'gitcommit',
+    'gitcommit:all',
     'release'
   ]);
 
