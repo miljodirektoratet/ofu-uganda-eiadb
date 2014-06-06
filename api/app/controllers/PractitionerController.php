@@ -64,7 +64,7 @@ class PractitionerController extends BaseController {
 			->take(1)
 			->with('practitionerCertificates')			
 			->get();			
-		return Response::json($resource->toArray()[0], 200);
+		return Response::json($resource[0], 200);
 	}
 
 	/**
@@ -83,22 +83,24 @@ class PractitionerController extends BaseController {
 		}
 
 		$data = Input::all();
-		$this->updateValuesInResource($resource, $data);	    
+		//unset($data["practitioner_certificates"]);
+		$this->updateValuesInResource($resource, $data);			
 
+		
+		//var_dump($resource);
 		$resource->save();
-
 		return Response::json($resource->toArray(), 200);
 	}
 
 	private function updateValuesInResource($resource, $data)
-	{
+	{		
 		foreach ($data as $key => $value)
-		{
+		{			
 			if (in_array($key, $resource["fillable"], true))
 			{    		
 				if ($resource[$key] != $value)
 				{
-					// TODO: Validate.
+					// TODO: Validate.					
 					$resource[$key] = $value;	    			
 				}	    	    		
 			}	    	
