@@ -1,17 +1,22 @@
 /* Needed by ui.bootstrap */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+.practitioners
+{
+}
 .practitioners .header
 {
     font-weight: bold;
+    font-size: 13px;
 }
 .practitioners .practitioner .master
 {
     background-color: #f3f3f3;
     border-top:1px solid darkgray;
     cursor: pointer;
-    padding-bottom:3px
+    font-size: 13px;
 }
+
 .practitioners .practitioner .master .noCertificate
 {
     opacity: 0;
@@ -40,3 +45,13 @@
     max-width:1200px;
 }
 
+.practitioners .practitioner .master .certificate-label
+{
+    font-size: 10px;
+    padding: 0.2em 0.6em 0.2em;
+}
+
+.practitioners .btn-link
+{
+    line-height: 1.2;
+}

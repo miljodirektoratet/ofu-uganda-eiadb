@@ -64,7 +64,7 @@ class PractitionerController extends BaseController {
 			->take(1)
 			->with('practitionerCertificates')			
 			->get();			
-		return Response::json($resource->toArray(), 200);
+		return Response::json($resource->toArray()[0], 200);
 	}
 
 	/**
