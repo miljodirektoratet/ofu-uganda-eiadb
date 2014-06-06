@@ -8,7 +8,7 @@ angular.module('seroApp.controllers', [])
 {
 
   scope.practitioners = PractitionersService.query({}, function() {
-    scope.current = scope.practitioners[1];
+    //scope.current = scope.practitioners[1];
   });
 
   scope.hasEia = function(p)
