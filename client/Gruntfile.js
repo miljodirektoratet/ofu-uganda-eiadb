@@ -116,7 +116,8 @@ module.exports = function (grunt)
     gitcommit: {
       task: {
         options: {
-          message: 'Testing'
+          message: 'Testing',
+          verbose: true
         },
         files: {
           src: ['../.']
