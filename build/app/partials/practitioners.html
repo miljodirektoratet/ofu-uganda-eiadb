@@ -1,21 +1,21 @@
 <div class="practitioners">
 
-  <div class="row header">
-    <div class="col-lg-3">Person</div>
-    <div class="col-lg-3">Organisation name</div>
-    <div class="col-lg-3">Visiting address</div>
-    <div class="col-lg-1">City</div>
-    <div class="col-lg-2">Certificates</div>
+  <div class="row header hidden-xs">
+    <div class="col-sm-3">Person</div>
+    <div class="col-sm-3">Organisation name</div>
+    <div class="col-sm-3">Visiting address</div>
+    <div class="col-sm-1">City</div>
+    <div class="col-sm-2">Certificates</div>
   </div>
 
   <div class="row practitioner" ng-repeat="p in practitioners">
-    <div class="col-lg-12">
+    <div class="col-sm-12">
       <div class="row master" ng-click="p.viewDetail = !p.viewDetail" ng-class="{selected: p.viewDetail}" ng-mouseenter="p.hover=true" ng-mouseleave="p.hover=false">
-        <div class="col-lg-3">{{p.person}} (id={{p.id}})</div>
-        <div class="col-lg-3">{{p.organisation_name}}</div>
-        <div class="col-lg-3">{{p.visiting_address}}</div>
-        <div class="col-lg-1">{{p.city}}</div>
-        <div class="col-lg-2">
+        <div class="col-sm-3">{{p.person}} (id={{p.id}})</div>
+        <div class="col-sm-3">{{p.organisation_name}}</div>
+        <div class="col-sm-3 hidden-xs">{{p.visiting_address}}</div>
+        <div class="col-sm-1 hidden-xs">{{p.city}}</div>
+        <div class="col-sm-2">
           <span class="label" ng-class="hasEia(p) ? 'label-success' :'label-default noCertificate'">EIA</span>
           <span class="label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">Au</span>
           <button type="button" class="btn btn-xs btn-link pull-right text-right" ng-class="{'btn-link-hover':p.hover}" ng-show="!p.viewDetail">Edit</button>
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="row detail" ng-show="p.viewDetail">
-        <div class="col-lg-6">EDIT details.</div>
+        <div class="col-sm-6" style="min-height:800px;">EDIT details.</div>
       </div>
     </div>
   </div>
