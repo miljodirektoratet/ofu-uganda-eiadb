@@ -1,12 +1,11 @@
 {
   "name": "Uganda",
-  "version": "0.0.5",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.4",
-    "grunt-bower-install-simple": "^0.9.1",
     "grunt-contrib-concat": "^0.3.0",
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-watch": "^0.6.0",
@@ -29,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "/Users/josteinskaar/Dropbox/repo-git/Uganda.git"
+    "url": "git@github.com:miljodir/sero.git"
   },
   "author": "Jostein Skaar <jostein.skaar@gmail.com>",
   "license": "MIT"

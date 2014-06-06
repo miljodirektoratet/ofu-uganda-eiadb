@@ -9,7 +9,6 @@ module.exports = function (grunt)
     },
 
     concat: {
-
       vendor: {
         files: {
           '../build/app/vendor/angular.min.js': [
@@ -148,7 +147,6 @@ module.exports = function (grunt)
 
   });
 
-  grunt.loadNpmTasks('grunt-bower-install-simple');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -163,7 +161,6 @@ module.exports = function (grunt)
 
 
   grunt.registerTask('build', [
-    'bower-install-simple',
     'clean:build',
     'concat',
     'uglify',
@@ -179,7 +176,8 @@ module.exports = function (grunt)
     'release'
   ]);
 
-  grunt.registerTask('publish:nobump', [
+  // If publish fails (deleted files must be commited manually because of changed behaviour in git 2.0, and this task doesn't add flag --all)
+  grunt.registerTask('publish-only', [
     'build',
     'gitcommit:all',
     'release'
