@@ -173,8 +173,13 @@ module.exports = function (grunt)
   ]);
 
   grunt.registerTask('publish', [
-    'gitcommit:all',
     'bump-only',
+    'build',
+    'gitcommit:all',
+    'release'
+  ]);
+
+  grunt.registerTask('publish:nobump', [
     'build',
     'gitcommit:all',
     'release'
