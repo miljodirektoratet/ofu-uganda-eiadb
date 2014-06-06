@@ -102,7 +102,7 @@ module.exports = function (grunt)
         bump: false, //default: true
         file: 'package.json',
         add: true,
-        commit: true,
+        commit: false,
         tag: true,
         push: true,
         pushTags: true,
