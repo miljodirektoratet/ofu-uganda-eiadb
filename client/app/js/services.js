@@ -9,12 +9,13 @@ var version = {"version": "0.0.7"};
 var services = angular.module('seroApp.services', []).
   value("version", version.version);
 
-services.factory('PractitionersService', ['$resource', function ($resource)
+services.factory('Practitioner', ['$resource', function ($resource)
 {
   // TODO: Use anything to auth? (for example auth-token).
   // {headers: { 'auth-token': 'C3PO R2D2' }}
-  return $resource('/api/public/v1/practitioner/:practitionerId', { practitionerId: '@practitionerId' },
+  return $resource('/api/public/v1/practitioner/:id', { id: '@id' },
     {
-      'update': { method:'PUT' }
+      'update': { method:'PUT', isArray: false },
+      'crazy': {'method': 'GET', 'params': {'crazy': "true"}, isArray: true}
     });
 }]);

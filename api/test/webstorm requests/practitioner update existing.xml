@@ -1,0 +1,41 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list>
+      <Biscuit>
+        <option name="date" value="1402663597000" />
+        <option name="domain" value="uganda" />
+        <option name="name" value="laravel_session" />
+        <option name="path" value="/" />
+        <option name="value" value="eyJpdiI6InZVemRpVnQ0aUxlSG5vSzJGSCtmRkZhM0h4YjdYSUd4Q21RNEhpdEVMeWM9IiwidmFsdWUiOiJiWlwvM0Rja0ZoVXNqUjBmcGcxcVwvbGNsTGQ1ZVwvb1dlTUZjSklMTldDaThCckRnQVwvQW02S2JXeUhJd3VOcnp5elwvSFhDbFpsMkFSYXVmdFFsNms0MWV3PT0iLCJtYWMiOiIzNzgxMmMzMTdkYjE0NzZlNThlY2IyMTFmYjdlYzM0YWUwZjM3M2Q1ODQ3M2NkZjg0NGZhYWI0MmY1ZGFmOWNmIn0%3D" />
+      </Biscuit>
+    </list>
+  </option>
+  <option name="httpMethod" value="PUT" />
+  <option name="urlBase" value="https://uganda" />
+  <option name="urlPath" value="/api/public/v1/practitioner/1" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Accept" />
+        <option name="value" value="*/*" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Cache-Control" />
+        <option name="value" value="no-cache" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Content-Type" />
+        <option name="value" value="application/json" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list />
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="true" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="{&quot;id&quot;:1,&quot;person&quot;:&quot;Dr. Jostein Skaar6&quot;,&quot;organisation_name&quot;:&quot;Department of Geology&quot;,&quot;visiting_address&quot;:&quot;Makerere University&quot;,&quot;city&quot;:null,&quot;practitioner_certificates&quot;:[{&quot;id&quot;:39,&quot;practitioner_id&quot;:1,&quot;year&quot;:2013,&quot;cert_type&quot;:1,&quot;date_of_entry&quot;:&quot;2013-01-09&quot;,&quot;number&quot;:8,&quot;cert_no&quot;:&quot;CC/EIA/008/13&quot;,&quot;conditions&quot;:0,&quot;is_cancelled&quot;:0,&quot;remarks&quot;:&quot;XXXXXX&quot;,&quot;created_by&quot;:null,&quot;updated_by&quot;:null,&quot;created_at&quot;:&quot;2014-06-05 08:35:26&quot;,&quot;updated_at&quot;:&quot;2014-06-05 08:35:26&quot;},{&quot;id&quot;:40,&quot;practitioner_id&quot;:1,&quot;year&quot;:2012,&quot;date_of_entry&quot;:&quot;2013-01-09&quot;,&quot;cert_type&quot;:2,&quot;number&quot;:5,&quot;cert_no&quot;:&quot;CC/EA/005/13&quot;,&quot;conditions&quot;:0,&quot;is_cancelled&quot;:0,&quot;remarks&quot;:null,&quot;created_by&quot;:null,&quot;updated_by&quot;:null,&quot;created_at&quot;:&quot;2014-06-05 08:35:26&quot;,&quot;updated_at&quot;:&quot;2014-06-05 08:35:26&quot;}],&quot;hover&quot;:true,&quot;tin&quot;:null,&quot;box_no&quot;:null,&quot;phone&quot;:&quot;Tel: Office: 0414-541258; Mob: 0712 803 362 &quot;,&quot;fax&quot;:null,&quot;email&quot;:&quot; amuwanga@sci.mak.ac.ug &quot;,&quot;qualifications&quot;:&quot;PhD. Environmental Geology; BSc. Geology &amp; Chemistry&quot;,&quot;expertise&quot;:&quot;Geology; Mining; Hydrogeological Projects; Stone Quarrying; Water Quality Assessment &amp; Monitoring; Assessment of natural hazards (e.g. landslides)&quot;,&quot;remarks&quot;:&quot;JOstein er helt ekkselente!&quot;,&quot;created_by&quot;:null,&quot;updated_by&quot;:null,&quot;created_at&quot;:&quot;2014-06-05 08:35:26&quot;,&quot;updated_at&quot;:&quot;2014-06-13 09:38:54&quot;}" />
+  <option name="filesToSend" value="" />
+</RestClientRequest>

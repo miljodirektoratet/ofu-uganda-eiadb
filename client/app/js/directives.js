@@ -13,7 +13,7 @@ var directives = angular.module('seroApp.directives', []).
   }]);
 
 
-directives.directive("addPractitionerButton", [ 'PractitionersService', function (PractitionersService)
+directives.directive("addPractitionerButton", [ 'Practitioner', function (Practitioner)
 {
   return {
     restrict: "A",
@@ -21,7 +21,7 @@ directives.directive("addPractitionerButton", [ 'PractitionersService', function
     {
       element.bind("click", function ()
       {
-        var newTest = new PractitionersService({"person": "Gunnar Nymann", "city": "Oslo"});
+        var newTest = new Practitioner({"person": "Gunnar Nymann", "city": "Oslo"});
         newTest.$save();
       });
     }

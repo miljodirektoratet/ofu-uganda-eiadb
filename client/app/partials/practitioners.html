@@ -112,6 +112,7 @@
                     <th>Conditions</th>
                     <th>Certificate cancelled?</th>
                     <th>Remarks</th>
+                    <th>&nbsp;</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -123,6 +124,7 @@
                     <td><input type="number" class="form-control input-sm" id="c_conditions"  ng-model="c.conditions" /></td>
                     <td><input type="number" class="form-control input-sm" id="c_is_cancelled"  ng-model="c.is_cancelled" /></td>
                     <td><input type="text" class="form-control input-sm" id="c_remarks"  ng-model="c.remarks" /></td>
+                    <td><button type="button" class="btn btn-danger btn-sm" ng-click="deleteCertificate(p, c)">Delete</button></td>
                   </tr>
                   </tbody>
                 </table>

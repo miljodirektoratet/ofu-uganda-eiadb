@@ -2,9 +2,11 @@
 
 class PractitionerCertificate extends Eloquent 
 {    
-	protected $softDelete = true;    
-	protected $guarded = array('id', 'practitioner_id', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at');
+	protected $softDelete = true;    	
+	protected $fillable = array('practitioner_id','year','date_of_entry','cert_type','number','cert_no','conditions','is_cancelled','remarks');
 	protected $hidden = array('deleted_at'); 
+	
+
 
 		public function practitioner()
 		{

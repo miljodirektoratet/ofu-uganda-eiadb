@@ -15,12 +15,12 @@ class PractitionerController extends BaseController {
 				->where('year', '=', 2013);
 		};				
 
-		$resources = Practitioner::
+		$practitioners = Practitioner::
 			with(array('practitionerCertificates'=>$withFunction))
 			//->take(10)
 			->get(array('id', 'person', 'organisation_name', 'visiting_address', 'city'));					
 	
-		return Response::json($resources->toArray(), 200);	 
+		return Response::json($practitioners->toArray(), 200);	 
 	}
 
 
@@ -33,16 +33,16 @@ class PractitionerController extends BaseController {
 	{		
 		$data = Input::all();
 
-		$resource = new Practitioner($data);	    
+		$practitioner = new Practitioner($data);	    
 				 
 		// Validation and Filtering is sorely needed!!
 		// Seriously, I'm a bad person for leaving that out.
 	 
-		$resource->save();
+		$practitioner->save();
 
-		$resource = Practitioner::find($resource->id);
+		$practitioner = Practitioner::find($practitioner->id);
 	 
-		return Response::json($resource->toArray(), 200);
+		return Response::json($practitioner->toArray(), 200);
 	}
 
 
@@ -55,16 +55,16 @@ class PractitionerController extends BaseController {
 	public function show($id)
 	{
 		// Make sure current user owns the requested resource
-		// $resource = Practitioner::with('practitionerCertificates')
+		// $practitioner = Practitioner::with('practitionerCertificates')
 		// 	->where('id', $id)
 		// 	->take(1)					
 		// 	->get();
 		
-		$resource = Practitioner::where('id', $id)
+		$practitioner = Practitioner::where('id', $id)
 			->take(1)
 			->with('practitionerCertificates')			
 			->get();			
-		return Response::json($resource[0], 200);
+		return Response::json($practitioner[0], 200);
 	}
 
 	/**
@@ -74,22 +74,49 @@ class PractitionerController extends BaseController {
 	 * @return Response
 	 */
 	public function update($id)
-	{
-		$resource = Practitioner::find($id);
-
-		if (!$resource)
+	{		
+		$practitioner = Practitioner::with('practitionerCertificates')->find($id);		
+		if (!$practitioner)
 		{
 			return Response::json(array('error' => true, 'message' => 'not found'), 404);
 		}
 
-		$data = Input::all();
-		//unset($data["practitioner_certificates"]);
-		$this->updateValuesInResource($resource, $data);			
+		$data = Input::all();		
+		$this->updateValuesInResource($practitioner, $data);
+		$this->handleCertificates($practitioner, $data);
 
-		
-		//var_dump($resource);
-		$resource->save();
-		return Response::json($resource->toArray(), 200);
+		/*
+    $rules = array('city' => 'required|min:2');
+    $validator = Validator::make($data, $rules);
+    if ($validator->fails())
+    {
+  		var_dump($validator);
+  		exit();
+    }*/
+
+		$practitioner->save();
+		return Response::json($practitioner->toArray(), 200);
+	}
+
+	private function handleCertificates($practitioner, $data)
+	{						
+		foreach ($data["practitioner_certificates"] as $certificateData) 
+		{			
+			$certificateId = $certificateData["id"];
+			if ($certificateId)
+			{
+				$certificate = $practitioner["practitioner_certificates"]->find($certificateId);
+				
+			}
+			else
+			{				
+				$certificate = new PractitionerCertificate;				
+				$certificate->practitioner()->associate($practitioner);
+			}
+
+			$this->updateValuesInResource($certificate, $certificateData);		
+			$certificate->save();	
+		}
 	}
 
 	private function updateValuesInResource($resource, $data)
@@ -97,11 +124,16 @@ class PractitionerController extends BaseController {
 		foreach ($data as $key => $value)
 		{			
 			if (in_array($key, $resource["fillable"], true))
-			{    		
+			{				
+				if ($value == "")
+				{
+					$value = null;
+				}
 				if ($resource[$key] != $value)
 				{
 					// TODO: Validate.					
-					$resource[$key] = $value;	    			
+					$resource[$key] = $value;
+
 				}	    	    		
 			}	    	
 		}
@@ -116,8 +148,8 @@ class PractitionerController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$resource = Practitioner::find($id);	 
-		$resource->delete();	 	 	
+		$practitioner = Practitioner::find($id);	 
+		$practitioner->delete();	 	 	
 		return Response::json(array(
 				'error' => false,
 				'message' => 'resource deleted'),
