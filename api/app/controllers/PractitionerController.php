@@ -104,26 +104,27 @@ class PractitionerController extends BaseController {
 	private function handleCertificates($practitioner, $inputData)
 	{						
 		foreach ($inputData["practitioner_certificates"] as $certificateInputData) 
-		{			
+		{						
 			$certificateId = $certificateInputData["id"];
-			if ($certificateId)
-			{
-				$certificate = $practitioner["practitioner_certificates"]->find($certificateId);
-				$isDeleted = array_key_exists("is_deleted", $certificateInputData) && $certificateInputData["is_deleted"]===true;
-				if ($isDeleted)
+			$certificate = $practitioner["practitioner_certificates"]->find($certificateId);
+			$isDeleted = array_key_exists("is_deleted", $certificateInputData) && $certificateInputData["is_deleted"]===true;			
+			if ($isDeleted)
+			{				
+				if ($certificate)
 				{
 					$certificate->delete();					
-					continue;
-				}
+				}				
 			}
 			else
-			{				
-				$certificate = new PractitionerCertificate;				
-				$certificate->practitioner()->associate($practitioner);
-			}
-
-			$this->updateValuesInResource($certificate, $certificateInputData);		
-			$certificate->save();	
+			{
+				if (!$certificate)
+				{									
+					$certificate = new PractitionerCertificate;				
+					$certificate->practitioner()->associate($practitioner);					
+				}				
+				$this->updateValuesInResource($certificate, $certificateInputData);		
+				$certificate->save();	
+			}		
 		}
 	}
 

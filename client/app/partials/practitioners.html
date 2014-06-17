@@ -16,7 +16,7 @@
     <div class="col-sm-2">Certificates</div>
   </div>
 
-  <div class="row practitioner" ng-repeat="p in practitioners">
+  <div class="row practitioner" ng-repeat="p in practitioners | orderBy:practitionerOrderBy">
     <div class="col-sm-12">
       <div class="row master" ng-click="setCurrent(p)" ng-class="{selected: current==p}" ng-mouseenter="p.hover=true" ng-mouseleave="p.hover=false">
         <div class="col-sm-3">{{p.person}} (id={{p.id}})</div>
@@ -124,7 +124,8 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr ng-repeat="c in p.practitioner_certificates" ng-hide="c.is_deleted">
+                  <!--<tr ng-class="{'bg-success':c.is_new}" ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">-->
+                  <tr ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">
                     <td><input type="number" class="form-control input-sm input-year" id="c_year" ng-model="c.year" /></td>
                     <td>
                       <div class="input-group container-datepicker" ng-controller="DatePickerController">

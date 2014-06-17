@@ -13,13 +13,27 @@ angular.module('seroApp.controllers', [])
 //    scope.current = scope.practitioners[1];
   });
 
+  var filterCertificates = function(certificates, certType, year)
+  {
+    var e = function(value)
+    {
+      if (value.cert_type !== certType) {return false;}
+      if (value.year !== year) {return false;}
+      if (value.is_deleted) {return false;}
+      return true;
+    };
+    var x = filter('filter')(certificates, e, true);
+    return x.length > 0;
+  };
   scope.hasEia = function(p)
   {
-    return _.some(p.practitioner_certificates,  { 'cert_type': 10, 'year':yearForValidPractitionerCertificate });
+    return filterCertificates(p.practitioner_certificates, 10, yearForValidPractitionerCertificate);
+
+    //return _.some(p.practitioner_certificates,  { 'cert_type':10, 'year':yearForValidPractitionerCertificate, 'is_deleted':true });
   };
   scope.hasAudit = function(p)
   {
-    return _.some(p.practitioner_certificates,  { 'cert_type': 12, 'year':yearForValidPractitionerCertificate });
+    return filterCertificates(p.practitioner_certificates, 12, yearForValidPractitionerCertificate);
   };
 
   scope.newPractitioner = function()
@@ -37,7 +51,8 @@ angular.module('seroApp.controllers', [])
     {
       'id':0,
       'year':2014,
-      'date_of_entry':filter('date')(new Date(), "yyyy-MM-dd")
+      'date_of_entry':new Date(),
+      'is_new':true
     };
     p.practitioner_certificates.push(c);
   };
@@ -55,6 +70,12 @@ angular.module('seroApp.controllers', [])
       //p.$get();
       p.$get({}, createDatesInJsonData);
     }
+  };
+
+  scope.practitionerOrderBy = function(p)
+  {
+    var sortName = p.person.trim().substring(p.person.trim().lastIndexOf(" "));
+    return sortName;
   };
 
   function createDatesInJsonData(p)
