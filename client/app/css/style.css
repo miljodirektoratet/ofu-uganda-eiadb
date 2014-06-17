@@ -55,3 +55,31 @@
 {
     line-height: 1.2;
 }
+
+.practitioners .practitioner .certificates .btn-delete-certificate,
+.practitioners .practitioner .certificates .btn-add-certificate
+{
+    min-width: 60px;
+}
+
+.practitioners .practitioner .certificates .input-date
+{
+    min-width:87px;
+}
+
+.practitioners .practitioner .certificates .dropdown-menu table
+{
+    min-width:280px;
+}
+
+.practitioners .practitioner .certificates .input-year
+{
+    min-width:65px;
+}
+
+.container-datepicker .input-group-btn
+{
+    /* Fix for bug: https://github.com/twbs/bootstrap/issues/9950 */
+    width: auto;
+}
+

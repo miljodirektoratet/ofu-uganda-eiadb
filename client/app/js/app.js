@@ -17,7 +17,7 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/advanced4', {templateUrl: 'partials/advanced.html'});
   $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
   $routeProvider.when('/user', {templateUrl: 'partials/user.html'});
-  $routeProvider.when('/practitioners', {templateUrl: 'partials/practitioners.html', controller: 'PractitionersController'});
+  $routeProvider.when('/advanced/practitioners', {templateUrl: 'partials/practitioners.html', controller: 'PractitionersController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
 

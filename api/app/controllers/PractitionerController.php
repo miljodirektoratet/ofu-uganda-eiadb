@@ -20,7 +20,7 @@ class PractitionerController extends BaseController {
 			//->take(10)
 			->get(array('id', 'person', 'organisation_name', 'visiting_address', 'city'));					
 	
-		return Response::json($practitioners->toArray(), 200);	 
+		return Response::json($practitioners->toArray(), 200); 
 	}
 
 
@@ -75,15 +75,15 @@ class PractitionerController extends BaseController {
 	 */
 	public function update($id)
 	{		
-		$practitioner = Practitioner::with('practitionerCertificates')->find($id);		
+		$practitioner = Practitioner::with('practitionerCertificates')->find($id);
 		if (!$practitioner)
 		{
 			return Response::json(array('error' => true, 'message' => 'not found'), 404);
 		}
 
-		$data = Input::all();		
-		$this->updateValuesInResource($practitioner, $data);
-		$this->handleCertificates($practitioner, $data);
+		$inputData = Input::all();
+		$this->updateValuesInResource($practitioner, $inputData);
+		$this->handleCertificates($practitioner, $inputData);
 
 		/*
     $rules = array('city' => 'required|min:2');
@@ -95,18 +95,26 @@ class PractitionerController extends BaseController {
     }*/
 
 		$practitioner->save();
+
+		$practitioner = Practitioner::with('practitionerCertificates')->find($id);		
 		return Response::json($practitioner->toArray(), 200);
+		//return Response::json(array('message' => "Could not save."), 500);
 	}
 
-	private function handleCertificates($practitioner, $data)
+	private function handleCertificates($practitioner, $inputData)
 	{						
-		foreach ($data["practitioner_certificates"] as $certificateData) 
+		foreach ($inputData["practitioner_certificates"] as $certificateInputData) 
 		{			
-			$certificateId = $certificateData["id"];
+			$certificateId = $certificateInputData["id"];
 			if ($certificateId)
 			{
 				$certificate = $practitioner["practitioner_certificates"]->find($certificateId);
-				
+				$isDeleted = array_key_exists("is_deleted", $certificateInputData) && $certificateInputData["is_deleted"]===true;
+				if ($isDeleted)
+				{
+					$certificate->delete();					
+					continue;
+				}
 			}
 			else
 			{				
@@ -114,7 +122,7 @@ class PractitionerController extends BaseController {
 				$certificate->practitioner()->associate($practitioner);
 			}
 
-			$this->updateValuesInResource($certificate, $certificateData);		
+			$this->updateValuesInResource($certificate, $certificateInputData);		
 			$certificate->save();	
 		}
 	}
@@ -130,7 +138,7 @@ class PractitionerController extends BaseController {
 					$value = null;
 				}
 				if ($resource[$key] != $value)
-				{
+				{					
 					// TODO: Validate.					
 					$resource[$key] = $value;
 

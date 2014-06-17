@@ -1,3 +1,11 @@
+
+
+<button type="button" class="btn btn-success hidden" ng-click="newPractitioner()">New practitioner</button></th>
+  <br/>
+<p>
+  For now, click close on a row to save. (By the way: No validations yet.)
+</p>
+
 <div class="practitioners">
 
   <div class="row header hidden-xs">
@@ -17,25 +25,25 @@
         <div class="col-sm-1 hidden-xs">{{p.city}}</div>
         <div class="col-sm-2">
           <span class="label certificate-label" ng-class="hasEia(p) ? 'label-success' :'label-default noCertificate'">EIA</span>
-          <span class="label certificate-label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">Au</span>
+          <span class="label certificate-label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">AU</span>
           <button type="button" class="btn btn-xs btn-link pull-right text-right" ng-class="{'btn-link-hover':p.hover}" ng-show="current!=p">Edit</button>
           <button type="button" class="btn btn-xs btn-link pull-right text-right" ng-class="{'btn-link-hover':p.hover}" ng-show="current==p">Close</button>
         </div>
       </div>
-      <div class="row detail" ng-show="current==p">
+      <div class="row detail" ng-if="current==p">
         <div class="col-sm-12" style="min-height:400px;">
           <form role="form">
             <div class="row">
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="person">Person</label>
-                  <input type="text"  class="form-control input-sm" id="person" ng-value="p.person" />
+                  <input type="text"  class="form-control input-sm" id="person" ng-model="p.person" />
                 </div>
               </div>
               <div class="col-sm-8">
                 <div class="form-group">
                   <label for="organisation_name">Organisation Name</label>
-                  <input type="text"  class="form-control input-sm" id="organisation_name" ng-value="p.organisation_name" />
+                  <input type="text"  class="form-control input-sm" id="organisation_name" ng-model="p.organisation_name" />
                 </div>
               </div>
             </div>
@@ -43,19 +51,19 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="visiting_address">Visiting Address</label>
-                  <input type="text"  class="form-control input-sm" id="visiting_address" ng-value="p.visiting_address" />
+                  <input type="text"  class="form-control input-sm" id="visiting_address" ng-model="p.visiting_address" />
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="box_no">Box No</label>
-                  <input type="text"  class="form-control input-sm" id="box_no"  ng-value="p.box_no" />
+                  <input type="text"  class="form-control input-sm" id="box_no"  ng-model="p.box_no" />
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="city">City</label>
-                  <input type="text"  class="form-control input-sm" id="city" ng-value="p.city" />
+                  <input type="text"  class="form-control input-sm" id="city" ng-model="p.city" />
                 </div>
               </div>
             </div>
@@ -63,19 +71,19 @@
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="phone">Phone</label>
-                  <input type="text"  class="form-control input-sm" id="phone" ng-value="p.phone" />
+                  <input type="text"  class="form-control input-sm" id="phone" ng-model="p.phone" />
                 </div>
               </div>
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="fax">Fax</label>
-                  <input type="text"  class="form-control input-sm" id="fax"  ng-value="p.fax" />
+                  <input type="text"  class="form-control input-sm" id="fax"  ng-model="p.fax" />
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="email">E-mail</label>
-                  <input type="text"  class="form-control input-sm" id="email" ng-value="p.email" />
+                  <input type="text"  class="form-control input-sm" id="email" ng-model="p.email" />
                 </div>
               </div>
             </div>
@@ -83,24 +91,24 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="qualifications">Qualifications</label>
-                  <textarea  class="form-control input-sm" rows="2" id="qualifications">{{p.qualifications}}</textarea>
+                  <textarea  class="form-control input-sm" rows="3" id="qualifications" ng-model="p.qualifications"></textarea>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="expertise">Expertise</label>
-                  <textarea  class="form-control input-sm" rows="2" id="expertise">{{p.expertise}}</textarea>
+                  <textarea  class="form-control input-sm" rows="3" id="expertise" ng-model="p.expertise"></textarea>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="email">Remarks</label>
-                  <textarea  class="form-control input-sm" rows="2" id="remarks">{{p.remarks}}</textarea>
+                  <textarea  class="form-control input-sm" rows="3" id="remarks" ng-model="p.remarks"></textarea>
                 </div>
               </div>
             </div>
             <h4>Certificates</h4>
-            <div class="row">
+            <div class="row certificates">
               <div class="col-sm-12">
                 <table class="table">
                   <thead>
@@ -112,21 +120,31 @@
                     <th>Conditions</th>
                     <th>Certificate cancelled?</th>
                     <th>Remarks</th>
+                    <th><button type="button" class="btn btn-success btn-sm btn-add-certificate" ng-click="newCertificate(p)">New</button></th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td><input type="number" class="form-control input-sm" id=""  ng-value="" /></td>
-                    <td><input type="number" class="form-control input-sm" id=""  ng-value="" /></td>
-                    <td><input type="number" class="form-control input-sm" id=""  ng-value="" /></td>
-                    <td><input type="number" class="form-control input-sm" id=""  ng-value="" /></td>
-                    <td><input type="number" class="form-control input-sm" id=""  ng-value="" /></td>
-                    <td><input type="number" class="form-control input-sm" id=""  ng-value="" /></td>
-                    <td><input type="number" class="form-control input-sm" id=""  ng-value="" /></td>
+                  <tr ng-repeat="c in p.practitioner_certificates" ng-hide="c.is_deleted">
+                    <td><input type="number" class="form-control input-sm input-year" id="c_year" ng-model="c.year" /></td>
+                    <td>
+                      <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                        <input type="text" class="form-control input-sm input-date" ng-model="c.date_of_entry" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                        </span>
+                      </div>
+                    </td>
+
+                    <td><input type="number" class="form-control input-sm" id="c_cert_type" ng-model="c.cert_type" /></td>
+                    <td><input type="text" class="form-control input-sm" id="c_cert_no" ng-model="c.cert_no" /></td>
+                    <td><input type="number" class="form-control input-sm" id="c_conditions" ng-model="c.conditions" /></td>
+                    <td><input type="number" class="form-control input-sm" id="c_is_cancelled" ng-model="c.is_cancelled" /></td>
+                    <td><input type="text" class="form-control input-sm" id="c_remarks" ng-model="c.remarks" /></td>
+                    <td><button type="button" class="btn btn-danger btn-sm btn-delete-certificate" ng-click="deleteCertificate(c)">Delete</button></td>
                   </tr>
                   </tbody>
                 </table>
-                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -135,6 +153,3 @@
   </div>
 
 </div>
-
-
-<button add-practitioner-button>Add practitioner</button>

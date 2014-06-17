@@ -31,10 +31,10 @@
       </div>
       <div class="navbar-collapse" collapse="isCollapsed">
         <ul class="nav navbar-nav">
-          <li ng-class="{ active: isActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
           <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
             <ul class="dropdown-menu">
+              <li ng-class="{ active: isAdvancedActive('/advanced/practitioners')}"><a href="#/advanced/practitioners">Practitioners</a></li>
               <li><a href="#/advanced1">Advanced 1</a></li>
               <li><a href="#/advanced2">Advanced 2</a></li>
               <li class="disabled"><a href="#/advanced3">Advanced 3</a></li>
@@ -58,7 +58,8 @@
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-route/angular-route.js"></script>
   <script src="../bower_components/angular-resource/angular-resource.js"></script>
-  <script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <!--<script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>-->
   <script src="../bower_components/lodash/dist/lodash.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
