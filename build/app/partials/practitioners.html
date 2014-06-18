@@ -26,8 +26,6 @@
     <div class="col-sm-12"><hr/></div>
   </div>
 
-
-
   <div class="row header hidden-xs">
     <div class="col-sm-3">Person</div>
     <div class="col-sm-3">Organisation name</div>
@@ -38,7 +36,7 @@
 
   <div class="row practitioner" ng-repeat="p in practitioners | filter:filterText">
     <div class="col-sm-12">
-      <div class="row master" ng-click="setCurrent(p)" ng-class="{selected: current==p}" ng-mouseenter="p.hover=true" ng-mouseleave="p.hover=false">
+      <div class="row master" ng-click="setCurrent(p)" ng-class="{selected: current==p}">
         <div class="col-sm-3" title="id={{p.id}}">{{p.person}}</div>
         <div class="col-sm-3">{{p.organisation_name}}</div>
         <div class="col-sm-3 hidden-xs">{{p.visiting_address}}</div>
@@ -46,8 +44,8 @@
         <div class="col-sm-2">
           <span class="label certificate-label" ng-class="hasEia(p) ? 'label-success' :'label-default noCertificate'">EIA</span>
           <span class="label certificate-label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">AU</span>
-          <button type="button" class="btn btn-xs btn-link pull-right text-right" ng-class="{'btn-link-hover':p.hover}" ng-show="current!=p">Edit</button>
-          <button type="button" class="btn btn-xs btn-link pull-right text-right" ng-class="{'btn-link-hover':p.hover}" ng-show="current==p">Close</button>
+          <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current!=p">Edit</button>
+          <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current==p">Close</button>
         </div>
       </div>
       <div class="row detail" ng-if="current==p">
@@ -127,7 +125,16 @@
                 </div>
               </div>
             </div>
-            <h4>Certificates</h4>
+
+            <div class="row">
+              <div class="col-sm-8">
+                <h4>Certificates</h4>
+              </div>
+              <div class="col-sm-4">
+                <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="deletePractitioner($index, p)">Delete practitioner</button>
+              </div>
+            </div>
+
             <div class="row certificates">
               <div class="col-sm-12">
                 <table class="table">

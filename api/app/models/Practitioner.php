@@ -10,4 +10,15 @@ class Practitioner extends Eloquent
     {
         return $this->hasMany('PractitionerCertificate');
     }
+
+    public static function boot()
+    {        
+        parent::boot();    
+        
+        // Soft delete children as well        
+        static::deleted(function($practitioner)
+        {
+            $practitioner->practitionerCertificates()->delete();            
+        });
+    }
 }

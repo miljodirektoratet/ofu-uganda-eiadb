@@ -2,11 +2,7 @@
 
 class PractitionerController extends BaseController {
 
-	/**
-	 * Display a listing of the resource. GET /resource
-	 *
-	 * @return Response
-	 */
+	// GET /resource
 	public function index()
 	{
 		$withFunction = function ($query)
@@ -23,31 +19,7 @@ class PractitionerController extends BaseController {
 		return Response::json($practitioners->toArray(), 200); 
 	}
 
-
-	/**
-	 * Store a newly created resource in storage. POST /resource
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{		
-		$inputData = Input::all();
-		$practitioner = new Practitioner();	   
-		$this->updateValuesInResource($practitioner, $inputData);		
-		$practitioner->save();		 		
-		$this->handleCertificates($practitioner, $inputData);
-		// Validation and Filtering is sorely needed!!		
-
-		return $this->show($practitioner->id);
-	}
-
-
-	/**
-	 * Display the specified resource. GET /resource/:id
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	// GET /resource/:id
 	public function show($id)
 	{
 		// Make sure current user owns the requested resource
@@ -60,12 +32,20 @@ class PractitionerController extends BaseController {
 		return Response::json($practitioner, 200);
 	}
 
-	/**
-	 * Update the specified resource in storage. PUT/PATCH /resource/:id
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	// POST /resource
+	public function store()
+	{		
+		$inputData = Input::all();
+		$practitioner = new Practitioner();	   
+		$this->updateValuesInResource($practitioner, $inputData);		
+		$practitioner->save();		 		
+		$this->handleCertificates($practitioner, $inputData);
+		// Validation and Filtering is sorely needed!!		
+
+		return $this->show($practitioner->id);
+	}	
+
+	// PUT/PATCH /resource/:id
 	public function update($id)
 	{		
 		$practitioner = Practitioner::with('practitionerCertificates')->find($id);
@@ -79,17 +59,16 @@ class PractitionerController extends BaseController {
 		$practitioner->save();
 		$this->handleCertificates($practitioner, $inputData);
 
-		/*
-    $rules = array('city' => 'required|min:2');
-    $validator = Validator::make($data, $rules);
-    if ($validator->fails())
-    {
-  		var_dump($validator);
-  		exit();
-    }*/		
-    return $this->show($practitioner->id);	
-		//return Response::json(array('message' => "Could not save."), 500);
+    return $this->show($practitioner->id);
 	}
+
+	// DELETE /resource/:id
+	public function destroy($id)
+	{
+		$practitioner = Practitioner::find($id);	 
+		$practitioner->delete();
+		return Response::json(array('is_deleted' => true), 200);
+	}	
 
 	private function handleCertificates($practitioner, $inputData)
 	{						
@@ -108,10 +87,7 @@ class PractitionerController extends BaseController {
 				{
 					$certificate->delete();					
 				}
-				else
-				{
-					// Ignore.
-				}
+				else {} // New and deleted, ignore
 			}
 			else
 			{
@@ -140,27 +116,19 @@ class PractitionerController extends BaseController {
 				{					
 					// TODO: Validate.					
 					$resource[$key] = $value;
-
 				}	    	    		
 			}	    	
 		}
 	}
-
-
-	/**
-	 * Remove the specified resource from storage. DELETE /resource/:id
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		$practitioner = Practitioner::find($id);	 
-		$practitioner->delete();	 	 	
-		return Response::json(array(
-				'error' => false,
-				'message' => 'resource deleted'),
-				200
-				);
-	}
 }
+
+
+		/*
+    $rules = array('city' => 'required|min:2');
+    $validator = Validator::make($data, $rules);
+    if ($validator->fails())
+    {
+  		var_dump($validator);
+  		exit();
+    }*/		
+    //return Response::json(array('message' => "Could not save."), 500);

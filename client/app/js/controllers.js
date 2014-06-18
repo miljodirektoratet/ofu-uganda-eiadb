@@ -50,6 +50,12 @@ angular.module('seroApp.controllers', [])
     scope.setCurrent(p);
 
   };
+  scope.deletePractitioner = function(index, p)
+  {
+    scope.current = null;
+    p.$delete();
+    scope.practitioners.splice(index, 1);
+  };
   scope.deleteCertificate = function(c)
   {
     c.is_deleted=true;
@@ -71,19 +77,16 @@ angular.module('seroApp.controllers', [])
       scope.current = null;
       if (p.is_new)
       {
-        //delete p.id; // If id is present, the post will go to .../:id
         p.$save({}, createDatesInJsonData);
       }
       else
       {
-        //p.$update({}, function(pSaved){mergePractitionerObject(p, pSaved)}, function(){console.log("Error when saving")});
         p.$update({}, createDatesInJsonData);
       }
     }
     else
     {
       scope.current = p;
-      //p.$get();
       if (!p.is_new)
       {
         p.$get({}, createDatesInJsonData);
