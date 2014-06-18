@@ -4,6 +4,7 @@
 var seroApp = angular.module('seroApp', [
   'ngRoute',
   'ngResource',
+  'ngAnimate',
   'ui.bootstrap',
   'seroApp.services',
   'seroApp.directives',
@@ -57,3 +58,23 @@ function NavBarController($scope, $location)
     return $location.path().indexOf(viewLocation) == 0;
   };
 }*/
+
+
+seroApp.directive('animateNewElement', ['$animate', function(animate)
+{
+  return function(scope, element, attrs)
+  {
+    scope.$watch(attrs.animateNewElement, function(nv,ov)
+    {
+      if (nv === true)
+      {
+        console.log(element);
+        var className = 'new-element';
+        animate.addClass(element, className, function ()
+        {
+          animate.removeClass(element, className);
+        });
+      }
+    })
+  }
+}]);

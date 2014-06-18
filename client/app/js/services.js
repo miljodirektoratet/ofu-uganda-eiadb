@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "0.0.9"};
+var version = {"version": "0.0.10"};
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
@@ -15,7 +15,6 @@ services.factory('Practitioner', ['$resource', function ($resource)
   // {headers: { 'auth-token': 'C3PO R2D2' }}
   return $resource('/api/public/v1/practitioner/:id', { id: '@id' },
     {
-      'update': { method:'PUT', isArray: false },
-      'crazy': {'method': 'GET', 'params': {'crazy': "true"}, isArray: true}
+      'update': { method:'PUT', isArray: false }
     });
 }]);

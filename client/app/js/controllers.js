@@ -15,6 +15,7 @@ angular.module('seroApp.controllers', [])
 
   var filterCertificates = function(certificates, certType, year)
   {
+    if (!certificates) {return false;}
     var e = function(value)
     {
       if (value.cert_type !== certType) {return false;}
@@ -22,53 +23,71 @@ angular.module('seroApp.controllers', [])
       if (value.is_deleted) {return false;}
       return true;
     };
-    var x = filter('filter')(certificates, e, true);
-    return x.length > 0;
+    return filter('filter')(certificates, e, true).length > 0;
   };
   scope.hasEia = function(p)
   {
-    return filterCertificates(p.practitioner_certificates, 10, yearForValidPractitionerCertificate);
-
-    //return _.some(p.practitioner_certificates,  { 'cert_type':10, 'year':yearForValidPractitionerCertificate, 'is_deleted':true });
+    var has = filterCertificates(p.practitioner_certificates, 10, yearForValidPractitionerCertificate);
+    p.cert_eia = has ? "eia":null;
+    return has;
   };
   scope.hasAudit = function(p)
   {
-    return filterCertificates(p.practitioner_certificates, 12, yearForValidPractitionerCertificate);
+    var has = filterCertificates(p.practitioner_certificates, 12, yearForValidPractitionerCertificate);
+    p.cert_au = has ? "audit":null;
+    return has;
   };
 
   scope.newPractitioner = function()
   {
-    alert("Not implemented yet.");
+    var pData =
+    {
+      'practitioner_certificates':[],
+      'is_new':true
+    };
+    var p = new Practitioner(pData);
+    scope.practitioners.unshift(p);
+    scope.setCurrent(p);
+
   };
   scope.deleteCertificate = function(c)
   {
-    alert("I know. Some sort of confirming is coming.");
     c.is_deleted=true;
   };
   scope.newCertificate = function(p)
   {
     var c =
     {
-      'id':0,
       'year':2014,
       'date_of_entry':new Date(),
       'is_new':true
     };
-    p.practitioner_certificates.push(c);
+    p.practitioner_certificates.unshift(c);
   };
   scope.setCurrent = function(p)
   {
     if (scope.current == p)
     {
       scope.current = null;
-      //p.$update({}, function(pSaved){mergePractitionerObject(p, pSaved)}, function(){console.log("Error when saving")});
-      p.$update({}, createDatesInJsonData);
+      if (p.is_new)
+      {
+        //delete p.id; // If id is present, the post will go to .../:id
+        p.$save({}, createDatesInJsonData);
+      }
+      else
+      {
+        //p.$update({}, function(pSaved){mergePractitionerObject(p, pSaved)}, function(){console.log("Error when saving")});
+        p.$update({}, createDatesInJsonData);
+      }
     }
     else
     {
       scope.current = p;
       //p.$get();
-      p.$get({}, createDatesInJsonData);
+      if (!p.is_new)
+      {
+        p.$get({}, createDatesInJsonData);
+      }
     }
   };
 

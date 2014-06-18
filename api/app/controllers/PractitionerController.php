@@ -31,18 +31,14 @@ class PractitionerController extends BaseController {
 	 */
 	public function store()
 	{		
-		$data = Input::all();
+		$inputData = Input::all();
+		$practitioner = new Practitioner();	   
+		$this->updateValuesInResource($practitioner, $inputData);		
+		$practitioner->save();		 		
+		$this->handleCertificates($practitioner, $inputData);
+		// Validation and Filtering is sorely needed!!		
 
-		$practitioner = new Practitioner($data);	    
-				 
-		// Validation and Filtering is sorely needed!!
-		// Seriously, I'm a bad person for leaving that out.
-	 
-		$practitioner->save();
-
-		$practitioner = Practitioner::find($practitioner->id);
-	 
-		return Response::json($practitioner->toArray(), 200);
+		return $this->show($practitioner->id);
 	}
 
 
@@ -59,12 +55,9 @@ class PractitionerController extends BaseController {
 		// 	->where('id', $id)
 		// 	->take(1)					
 		// 	->get();
-		
-		$practitioner = Practitioner::where('id', $id)
-			->take(1)
-			->with('practitionerCertificates')			
-			->get();			
-		return Response::json($practitioner[0], 200);
+
+		$practitioner = Practitioner::with('practitionerCertificates')->find($id);
+		return Response::json($practitioner, 200);
 	}
 
 	/**
@@ -83,6 +76,7 @@ class PractitionerController extends BaseController {
 
 		$inputData = Input::all();
 		$this->updateValuesInResource($practitioner, $inputData);
+		$practitioner->save();
 		$this->handleCertificates($practitioner, $inputData);
 
 		/*
@@ -92,35 +86,39 @@ class PractitionerController extends BaseController {
     {
   		var_dump($validator);
   		exit();
-    }*/
-
-		$practitioner->save();
-
-		$practitioner = Practitioner::with('practitionerCertificates')->find($id);		
-		return Response::json($practitioner->toArray(), 200);
+    }*/		
+    return $this->show($practitioner->id);	
 		//return Response::json(array('message' => "Could not save."), 500);
 	}
 
 	private function handleCertificates($practitioner, $inputData)
 	{						
 		foreach ($inputData["practitioner_certificates"] as $certificateInputData) 
-		{						
-			$certificateId = $certificateInputData["id"];
-			$certificate = $practitioner["practitioner_certificates"]->find($certificateId);
-			$isDeleted = array_key_exists("is_deleted", $certificateInputData) && $certificateInputData["is_deleted"]===true;			
+		{
+			$certificate = null;
+			if (array_key_exists("id", $certificateInputData))
+			{
+				$certificateId = $certificateInputData["id"];
+				$certificate = $practitioner["practitioner_certificates"]->find($certificateId);	
+			}			
+			$isDeleted = array_key_exists("is_deleted", $certificateInputData) && $certificateInputData["is_deleted"]===true;
 			if ($isDeleted)
 			{				
 				if ($certificate)
 				{
 					$certificate->delete();					
-				}				
+				}
+				else
+				{
+					// Ignore.
+				}
 			}
 			else
 			{
 				if (!$certificate)
-				{									
-					$certificate = new PractitionerCertificate;				
-					$certificate->practitioner()->associate($practitioner);					
+				{														
+					$certificate = new PractitionerCertificate;
+					$certificate->practitioner()->associate($practitioner);										
 				}				
 				$this->updateValuesInResource($certificate, $certificateInputData);		
 				$certificate->save();	

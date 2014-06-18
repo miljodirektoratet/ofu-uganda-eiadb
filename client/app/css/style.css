@@ -1,6 +1,17 @@
 /* Needed by ui.bootstrap */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+
+.top-header
+{
+    margin-bottom:30px;
+}
+.top-header h1
+{
+    margin-top:0;
+}
+
+
 .practitioners
 {
 }
@@ -86,5 +97,28 @@
 .bg-success
 {
     background-color: #5cb85c;
+}
+
+.practitioners .input-filter
+{
+    min-width:400px;
+}
+
+
+.new-element-add, .new-element-remove
+{
+    background-color: transparent;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+.new-element, .new-element-add-active
+{
+    background-color: #5cb85c;
+}
+.new-element-remove-active
+{
+    background-color: transparent;
 }
 

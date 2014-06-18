@@ -1,12 +1,32 @@
-
-
-<button type="button" class="btn btn-success hidden" ng-click="newPractitioner()">New practitioner</button></th>
-  <br/>
-<p>
-  For now, click close on a row to save. (By the way: No validations yet.)
-</p>
+<div class="top-header">
+  <h1>Practitioners</h1>
+  <p class="lead">Edit practitioners and certificates for EIA and audits.</p>
+</div>
 
 <div class="practitioners">
+
+  <!--<button ng-click="d1=true">på</button>-->
+  <!--<button ng-click="d1=false">igjen</button>-->
+  <!--<span animate-new-element='d1'>ddddd</span>-->
+
+  <div class="row">
+    <div class="col-sm-8">
+      <form class="form-inline" role="form">
+        <div class="form-group">
+          <label class="sr-only" for="filterText">Filter</label>
+          <input type="text" class="form-control input-filter" id="filterText" placeholder="Filter (try anything, e.g. name, city, eia or audit)" ng-model="filterText">
+        </div>
+        <span>Count: {{(practitioners | filter:filterText).length}}</span>
+        <small class="pull-right">(Click close to save a row. No validations yet.)</small>
+      </form>
+    </div>
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-success pull-right" ng-click="newPractitioner()">New practitioner</button>
+    </div>
+    <div class="col-sm-12"><hr/></div>
+  </div>
+
+
 
   <div class="row header hidden-xs">
     <div class="col-sm-3">Person</div>
@@ -16,10 +36,10 @@
     <div class="col-sm-2">Certificates</div>
   </div>
 
-  <div class="row practitioner" ng-repeat="p in practitioners | orderBy:practitionerOrderBy">
+  <div class="row practitioner" ng-repeat="p in practitioners | filter:filterText">
     <div class="col-sm-12">
       <div class="row master" ng-click="setCurrent(p)" ng-class="{selected: current==p}" ng-mouseenter="p.hover=true" ng-mouseleave="p.hover=false">
-        <div class="col-sm-3">{{p.person}} (id={{p.id}})</div>
+        <div class="col-sm-3" title="id={{p.id}}">{{p.person}}</div>
         <div class="col-sm-3">{{p.organisation_name}}</div>
         <div class="col-sm-3 hidden-xs">{{p.visiting_address}}</div>
         <div class="col-sm-1 hidden-xs">{{p.city}}</div>
@@ -56,7 +76,7 @@
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
-                  <label for="box_no">Box No</label>
+                  <label for="box_no">P.O. Box</label>
                   <input type="text"  class="form-control input-sm" id="box_no"  ng-model="p.box_no" />
                 </div>
               </div>
@@ -126,7 +146,7 @@
                   <tbody>
                   <!--<tr ng-class="{'bg-success':c.is_new}" ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">-->
                   <tr ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">
-                    <td><input type="number" class="form-control input-sm input-year" id="c_year" ng-model="c.year" /></td>
+                    <td><input type="number" class="form-control input-sm input-year" id="c_year" ng-model="c.year"/></td>
                     <td>
                       <div class="input-group container-datepicker" ng-controller="DatePickerController">
                         <input type="text" class="form-control input-sm input-date" ng-model="c.date_of_entry" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
