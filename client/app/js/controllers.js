@@ -6,12 +6,11 @@ var yearForValidPractitionerCertificate = 2013;
 
 angular.module('seroApp.controllers', [])
 
-.controller('PractitionersController', ['$scope', '$filter', 'Practitioner', function (scope, filter, Practitioner)
+.controller('PractitionersController', ['$scope', '$filter', 'Practitioner', 'Valuelist', '$animate', function (scope, filter, Practitioner, Valuelist, animate)
 {
 
-  scope.practitioners = Practitioner.query({}, function() {
-//    scope.current = scope.practitioners[1];
-  });
+  scope.valuelists = Valuelist.get({'id':'all'});
+  scope.practitioners = Practitioner.query();
 
   var filterCertificates = function(certificates, certType, year)
   {
@@ -40,6 +39,7 @@ angular.module('seroApp.controllers', [])
 
   scope.newPractitioner = function()
   {
+    console.log(scope.valuelists.practitionertype);
     var pData =
     {
       'practitioner_certificates':[],
@@ -47,13 +47,16 @@ angular.module('seroApp.controllers', [])
     };
     var p = new Practitioner(pData);
     scope.practitioners.unshift(p);
-    scope.setCurrent(p);
+    scope.setNewCurrent(p);
 
   };
   scope.deletePractitioner = function(index, p)
   {
     scope.current = null;
-    p.$delete();
+    if (!p.is_new)
+    {
+      p.$delete();
+    }
     scope.practitioners.splice(index, 1);
   };
   scope.deleteCertificate = function(c)
@@ -70,19 +73,39 @@ angular.module('seroApp.controllers', [])
     };
     p.practitioner_certificates.unshift(c);
   };
-  scope.setCurrent = function(p)
+  scope.saveCurrent = function()
+  {
+    if (scope.current)
+    {
+      var p = scope.current;
+      if (p.is_new)
+      {
+        p.$save({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+      }
+      else
+      {
+       // p.$update({}, createDatesInJsonData);
+        p.$update({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+      }
+    }
+  };
+
+  var showSaveInfo = function()
+  {
+    return;
+//    var element = angular.element(document.getElementById('infoMessageBox'));
+//    var className = 'infomessagebox';
+//    animate.addClass(element, className, function ()
+//    {
+//      setTimeout(function(){animate.removeClass(element, className);},1000);
+//    });
+  };
+
+  scope.setNewCurrent = function(p)
   {
     if (scope.current == p)
     {
       scope.current = null;
-      if (p.is_new)
-      {
-        p.$save({}, createDatesInJsonData);
-      }
-      else
-      {
-        p.$update({}, createDatesInJsonData);
-      }
     }
     else
     {

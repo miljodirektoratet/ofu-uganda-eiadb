@@ -45,3 +45,7 @@ Route::group(array('prefix' => 'v1'), function()
 {	
     Route::resource('practitioner', 'PractitionerController');    
 });
+Route::group(array('prefix' => 'v1'), function()
+{	
+    Route::resource('valuelist', 'ValuelistController');    
+});

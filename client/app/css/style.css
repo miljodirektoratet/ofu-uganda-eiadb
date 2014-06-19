@@ -122,3 +122,54 @@
     background-color: transparent;
 }
 
+.bgcolor-success
+{
+    background-color: #5cb85c;
+}
+.bgcolor-info
+{
+    background-color: #5bc0de;
+}
+
+
+
+
+#infoMessageBox
+{
+    top:60px;
+    left: 50%;
+    width:300px;
+    /*height:50px;*/
+    /*margin-top: 0px; *//*set to a negative number 1/2 of your height*/
+    margin-left: -200px; /*set to a negative number 1/2 of your width*/
+    position:fixed;
+    z-index: 100000;
+    padding:2px;
+    text-align: center;
+    color:#ffffff;
+    font-size: 1.1em;
+    opacity: 0;
+    box-shadow:rgba(0, 0, 0, 0.4) 0 2px 4px;
+}
+
+
+.infomessagebox-add, .infomessagebox-remove
+{
+    /*display: none !important;*/
+    opacity: 0 !important;
+    -webkit-transition: all 750ms ease-in-out;
+    -moz-transition: all 750ms ease-in-out;
+    -o-transition: all 750ms ease-in-out;
+    transition: all 750ms ease-in-out;
+}
+
+.infomessagebox, .infomessagebox-add-active
+{
+    /*display: block !important;*/
+    opacity: 1 !important;
+}
+.infomessagebox-remove-active
+{
+    /*display: none !important;*/
+    opacity: 0 !important;
+}

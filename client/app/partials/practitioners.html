@@ -36,7 +36,7 @@
 
   <div class="row practitioner" ng-repeat="p in practitioners | filter:filterText">
     <div class="col-sm-12">
-      <div class="row master" ng-click="setCurrent(p)" ng-class="{selected: current==p}">
+      <div class="row master" ng-click="saveCurrent();setNewCurrent(p);" ng-class="{selected: current==p}">
         <div class="col-sm-3" title="id={{p.id}}">{{p.person}}</div>
         <div class="col-sm-3">{{p.organisation_name}}</div>
         <div class="col-sm-3 hidden-xs">{{p.visiting_address}}</div>
@@ -163,7 +163,11 @@
                       </div>
                     </td>
 
-                    <td><input type="number" class="form-control input-sm" id="c_cert_type" ng-model="c.cert_type" /></td>
+                    <!--<td><input type="number" class="form-control input-sm" id="c_cert_type" ng-model="c.cert_type" /></td>-->
+
+                    <td>
+                      <select id="c_cert_type" class="form-control input-sm" ng-model="c.cert_type" ng-required="true" ng-options="v.id for v in valuelists.practitionertype"></select>
+                    </td>
                     <td><input type="text" class="form-control input-sm" id="c_cert_no" ng-model="c.cert_no" /></td>
                     <td><input type="number" class="form-control input-sm" id="c_conditions" ng-model="c.conditions" /></td>
                     <td><input type="number" class="form-control input-sm" id="c_is_cancelled" ng-model="c.is_cancelled" /></td>

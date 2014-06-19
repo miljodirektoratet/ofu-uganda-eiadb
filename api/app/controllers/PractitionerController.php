@@ -57,8 +57,7 @@ class PractitionerController extends BaseController {
 		$inputData = Input::all();
 		$this->updateValuesInResource($practitioner, $inputData);
 		$practitioner->save();
-		$this->handleCertificates($practitioner, $inputData);
-
+		$this->handleCertificates($practitioner, $inputData);		
     return $this->show($practitioner->id);
 	}
 

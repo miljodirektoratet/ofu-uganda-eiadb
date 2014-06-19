@@ -2,7 +2,7 @@
 
 class Code extends Eloquent 
 {
-  protected $softDelete = true;
-	protected $guarded = array('id');
+  protected $softDelete = false;
+	protected $fillable = array();
 	public $timestamps = false;
 }

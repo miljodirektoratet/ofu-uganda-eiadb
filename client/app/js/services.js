@@ -18,3 +18,9 @@ services.factory('Practitioner', ['$resource', function ($resource)
       'update': { method:'PUT', isArray: false }
     });
 }]);
+
+services.factory('Valuelist', ['$resource', function ($resource)
+{
+  // {headers: { 'auth-token': 'C3PO R2D2' }}
+  return $resource('/api/public/v1/valuelist/:id', { id: '@id' });
+}]);
