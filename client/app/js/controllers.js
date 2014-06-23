@@ -39,7 +39,7 @@ angular.module('seroApp.controllers', [])
 
   scope.newPractitioner = function()
   {
-    console.log(scope.valuelists.practitionertype);
+    //console.log(scope.valuelists.practitionertype);
     var pData =
     {
       'practitioner_certificates':[],

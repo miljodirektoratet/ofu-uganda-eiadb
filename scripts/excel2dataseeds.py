@@ -4,6 +4,7 @@
 import os, openpyxl, re, glob
 from collections import OrderedDict
 from datetime import datetime
+import random, string
 
 phpFile = r"..\api\app\database\\seeds\ExcelDataTableSeeder.php"
 
@@ -16,6 +17,7 @@ tablesData["categories"] = "Category"
 tablesData["practitioners"] = "Practitioner"
 tablesData["practitioner_certificates"] = "PractitionerCertificate"
 tablesData["lead_agencies"] = "LeadAgency"
+tablesData["roles"] = "Role"
 
 def getDbColumnsInfo(dataSheet, headerRowIndex):
 	dbColumnsInfo = {}
@@ -44,15 +46,21 @@ def isNumber(s):
         return False
 
 ignoreColumns = ['id', 'is_deleted']
+ignoreInTable = {'users':'roles'}
+connectionInfo = OrderedDict()
+connectionInfo['users'] = ['roles']
 passwordColumn = 'password'
 lookupColumns = []
 dateColumns = ['date_of_entry']
 relationshipColumns = {'practitioner_id':'$practitioner%s->id'}
 
-def getColumnSeed(columnName, value):
-	if columnName in ignoreColumns: return	
+def getColumnSeed(tableName, columnName, value):			
+	if columnName in ignoreColumns: return
+	if tableName in ignoreInTable and columnName in ignoreInTable[tableName]: return
 	if columnName == passwordColumn:
-		return "'%s' => Hash::make('%s')" % (columnName, 'password')
+		if not value:
+			value = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(17))
+		return "'%s' => Hash::make('%s')" % (columnName, value)
 	if columnName in lookupColumns:
 		value = getLookupValue(columnName, value)		
 	if not value: return
@@ -63,6 +71,15 @@ def getColumnSeed(columnName, value):
 	if isNumber(value) or columnName in relationshipColumns:
 		return """'%s' => %s """ % (columnName, value)
 	return """'%s' => "%s" """ % (columnName, value)
+
+def getConnectionSeed(tableName, columnName, value, seedVariableName):	
+	if tableName in connectionInfo and columnName in connectionInfo[tableName] and value:		
+		connectionSeedTemplate = "$%s->attachRole($role%s);"
+		connectionSeeds = []
+		for roleId in str(value).split(";"):
+			connectionSeeds.append(connectionSeedTemplate % (seedVariableName, roleId))
+		return "\n".join(connectionSeeds)
+	return None
 
 def getSeedVariableName(entityName, coordinate, rowsOffset):
 	rowNumber = int(re.sub('[A-Z]*', '', coordinate))
@@ -86,6 +103,7 @@ tableFile = glob.glob(tableFilePattern)[-1]
 print("Reading from file %s" % tableFile)
 wb = openpyxl.load_workbook(filename = tableFile, data_only=True)
 seeds = []
+connectionSeeds = [] 
 for tableName in tablesData:	
 	print("Creating seeds for %s" % tableName)
 	entityName = tablesData[tableName]
@@ -99,13 +117,18 @@ for tableName in tablesData:
 		
 	for row in dataSheet.rows[1:]:
 		columnSeeds = []		
-		for column in row:			
+		for column in row:		
+			seedVariableName = getSeedVariableName(entityName, column.coordinate, rowsOffset)	
 			columnName = dbColumnsInfo[getColumnLetterFromCoordinate(column.coordinate)]			
-			columnSeed = getColumnSeed(columnName, column.value)
+			columnSeed = getColumnSeed(tableName, columnName, column.value)
 			if columnSeed:
-				columnSeeds.append(columnSeed)				
-		seed = seedTemplate % (getSeedVariableName(entityName, column.coordinate, rowsOffset), entityName, ",\n\t".join(columnSeeds))
+				columnSeeds.append(columnSeed)
+			connectionSeed = getConnectionSeed(tableName, columnName, column.value, seedVariableName)
+			if connectionSeed:
+				connectionSeeds.append(connectionSeed)
+		seed = seedTemplate % (seedVariableName, entityName, ",\n\t".join(columnSeeds))
 		seeds.append(seed)		
+seeds.extend(connectionSeeds)
 		
 allSeeds = ""
 for seed in seeds:

@@ -12,7 +12,7 @@ from datetime import datetime
 
 phpFile = r"..\api\app\database\migrations\2014_06_03_No1_create_tables.php"
 
-oldHeaderSignature = "A10=Sortering,B10=dB fields,C10=Data type,D10=Shown in application,E10=Application fields,F10=Field type,G10=Drop-down list,H10=Mandatory,I10=Input,J10=Roles,K10=Table,L10=Tabletype,M10=Comments,"
+oldHeaderSignature = "A10=Sortering,B10=dB fields,C10=Data type,D10=Shown in application,E10=Application fields,F10=Interface tab,G10=Field type,H10=Drop-down list,I10=Mandatory,J10=Input,K10=Roles,L10=Table,M10=Tabletype,N10=Comments,"
 fieldFilePattern = r"N:\Felles\Forurensning\2. Internasjonalt arbeid\2012. Uganda\Kravspek\Databasefields*.xlsx"
 
 doPrintModelInfo = False
@@ -63,7 +63,7 @@ def createSchema(tablename, fields, foreignIds):
 	schemaUp = "Schema::create('%s', function(Blueprint $table)\n" % (tablename)
 	schemaUp += "{\n"
 	for field in fields:
-		order, fieldname, datatype, visible, caption, fieldtype, valuelist, mandatory, inputtype, role = field		
+		order, fieldname, datatype, visible, caption, uitab, fieldtype, valuelist, mandatory, inputtype, role = field		
 		for tempSchemaUp in createSchemaLineForField(fieldname, datatype, foreignIds):
 			schemaUp += "\t" + tempSchemaUp + "\n"	
 	schemaUp += "});\n"
@@ -94,7 +94,7 @@ def printModelInfo(tablename, fields):
 	hidden = []
 	fillable = []
 	for field in fields:
-		order, fieldname, datatype, visible, caption, fieldtype, valuelist, mandatory, inputtype, role = field
+		order, fieldname, datatype, visible, caption, uitab, fieldtype, valuelist, mandatory, inputtype, role = field
 		if fieldname in notFillable: continue
 		if datatype == 'internal' and fieldname == 'timestamp': continue					
 		if datatype == 'internal' and fieldname == 'soft_deletion':
@@ -123,15 +123,15 @@ dataSheet = wb.get_sheet_by_name("Fields")
 
 checkForChangesInHeader(dataSheet.rows[9])
 
-ignore = []#['users']
+ignore = ['roles']#['users']
 foreignIds = {}
 tables = OrderedDict()
 
 for row in dataSheet.rows[10:]:		
-	columnValues = [column.value for column in row[:11]]
+	columnValues = [column.value for column in row[:12]]
 	if not row[1].value: continue # Ignore row if missing column name
 	
-	order, fieldname, datatype, visible, caption, fieldtype, valuelist, mandatory, inputtype, role, tablename = list(columnValues)
+	order, fieldname, datatype, visible, caption, uitab, fieldtype, valuelist, mandatory, inputtype, role, tablename = list(columnValues)
 	tablename = tablename.lower()
 	fieldname = fieldname.lower()
 	datatype = datatype.lower()	
@@ -140,7 +140,7 @@ for row in dataSheet.rows[10:]:
 	order = int(order)
 	if tablename not in tables:
 		tables[tablename] = []
-	tables[tablename].append([order, fieldname, datatype, visible, caption, fieldtype, valuelist, mandatory, inputtype, role])
+	tables[tablename].append([order, fieldname, datatype, visible, caption, uitab, fieldtype, valuelist, mandatory, inputtype, role])
 	tables[tablename].sort()		
 
 tablesUp = ""
