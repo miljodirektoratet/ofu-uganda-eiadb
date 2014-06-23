@@ -67,7 +67,7 @@ angular.module('seroApp.controllers', [])
   {
     var c =
     {
-      'year':2014,
+      'year':yearForValidPractitionerCertificate,
       'date_of_entry':new Date(),
       'is_new':true
     };

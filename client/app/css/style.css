@@ -88,6 +88,21 @@
     min-width:65px;
 }
 
+.practitioners .practitioner .certificates .input-conditions
+ {
+     min-width:140px;
+ }
+
+.practitioners .practitioner .certificates .input-remarks
+{
+    min-width:200px;
+}
+
+.practitioners .practitioner .certificates table th
+{
+    white-space: nowrap;
+}
+
 .container-datepicker .input-group-btn
 {
     /* Fix for bug: https://github.com/twbs/bootstrap/issues/9950 */
@@ -172,4 +187,9 @@
 {
     /*display: none !important;*/
     opacity: 0 !important;
+}
+
+.checkbox-small
+{
+    width: 30px;
 }

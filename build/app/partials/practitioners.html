@@ -36,14 +36,14 @@
 
   <div class="row practitioner" ng-repeat="p in practitioners | filter:filterText">
     <div class="col-sm-12">
-      <div class="row master" ng-click="setCurrent(p)" ng-class="{selected: current==p}">
+      <div class="row master" ng-click="saveCurrent();setNewCurrent(p);" ng-class="{selected: current==p}">
         <div class="col-sm-3" title="id={{p.id}}">{{p.person}}</div>
         <div class="col-sm-3">{{p.organisation_name}}</div>
         <div class="col-sm-3 hidden-xs">{{p.visiting_address}}</div>
         <div class="col-sm-1 hidden-xs">{{p.city}}</div>
         <div class="col-sm-2">
           <span class="label certificate-label" ng-class="hasEia(p) ? 'label-success' :'label-default noCertificate'">EIA</span>
-          <span class="label certificate-label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">AU</span>
+          <span class="label certificate-label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">EA</span>
           <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current!=p">Edit</button>
           <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current==p">Close</button>
         </div>
@@ -152,7 +152,7 @@
                   </thead>
                   <tbody>
                   <!--<tr ng-class="{'bg-success':c.is_new}" ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">-->
-                  <tr ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">
+                  <tr ng-repeat="c in p.practitioner_certificates | orderBy:['-year']" ng-hide="c.is_deleted">
                     <td><input type="number" class="form-control input-sm input-year" id="c_year" ng-model="c.year"/></td>
                     <td>
                       <div class="input-group container-datepicker" ng-controller="DatePickerController">
@@ -163,11 +163,13 @@
                       </div>
                     </td>
 
-                    <td><input type="number" class="form-control input-sm" id="c_cert_type" ng-model="c.cert_type" /></td>
+                    <!--<td><input type="number" class="form-control input-sm" id="c_cert_type" ng-model="c.cert_type" /> vv.id for v in valuelists.practitionertype</td>-->
+
+                    <td><select id="c_cert_type" class="form-control input-sm" ng-model="c.cert_type" ng-options="v.id as v.description1 for v in valuelists.practitionertype"></select></td>
                     <td><input type="text" class="form-control input-sm" id="c_cert_no" ng-model="c.cert_no" /></td>
-                    <td><input type="number" class="form-control input-sm" id="c_conditions" ng-model="c.conditions" /></td>
-                    <td><input type="number" class="form-control input-sm" id="c_is_cancelled" ng-model="c.is_cancelled" /></td>
-                    <td><input type="text" class="form-control input-sm" id="c_remarks" ng-model="c.remarks" /></td>
+                    <td><select id="c_conditions" class="form-control input-sm input-conditions" ng-model="c.conditions" ng-options="v.id as v.description2 for v in valuelists.practitionermembertype"></select></td>
+                    <td><input type="checkbox" class="checkbox-small form-control input-sm" id="c_is_cancelled" ng-model="c.is_cancelled" /></td>
+                    <td><input type="text" class="form-control input-sm input-remarks" id="c_remarks" ng-model="c.remarks" /></td>
                     <td><button type="button" class="btn btn-danger btn-sm btn-delete-certificate" ng-click="deleteCertificate(c)">Delete</button></td>
                   </tr>
                   </tbody>

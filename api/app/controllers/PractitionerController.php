@@ -54,7 +54,7 @@ class PractitionerController extends BaseController {
 			return Response::json(array('error' => true, 'message' => 'not found'), 404);
 		}
 
-		$inputData = Input::all();
+		$inputData = Input::all();		
 		$this->updateValuesInResource($practitioner, $inputData);
 		$practitioner->save();
 		$this->handleCertificates($practitioner, $inputData);		

@@ -4,7 +4,6 @@
 import os, openpyxl, re, glob
 from collections import OrderedDict
 from datetime import datetime
-import random, string
 
 phpFile = r"..\api\app\database\\seeds\ExcelDataTableSeeder.php"
 
@@ -59,7 +58,7 @@ def getColumnSeed(tableName, columnName, value):
 	if tableName in ignoreInTable and columnName in ignoreInTable[tableName]: return
 	if columnName == passwordColumn:
 		if not value:
-			value = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(17))
+			value = "crazypassword12234335"
 		return "'%s' => Hash::make('%s')" % (columnName, value)
 	if columnName in lookupColumns:
 		value = getLookupValue(columnName, value)		
@@ -91,6 +90,8 @@ def replaceInFile(filePath, searchBegin, searchEnd, replace):
 	content = re.sub("%s[\S\s]*%s" % (searchBegin, searchEnd), "%s\n%s%s" % (searchBegin, replace, searchEnd), oldcontent)	
 	if content == oldcontent:
 		return False		
+	open(r"C:\Temp\comp_old.txt",'w').write(oldcontent)
+	open(r"C:\Temp\comp_new.txt", 'w').write(content)
 	with open(filePath, "w", encoding="utf8") as file:
 		file.write(content)
 	return True		
