@@ -20,6 +20,7 @@ angular.module('seroApp.controllers', [])
       if (value.cert_type !== certType) {return false;}
       if (value.year !== year) {return false;}
       if (value.is_deleted) {return false;}
+      if (value.is_cancelled) {return false;}
       return true;
     };
     return filter('filter')(certificates, e, true).length > 0;
@@ -88,6 +89,11 @@ angular.module('seroApp.controllers', [])
         p.$update({}, function(p){createDatesInJsonData(p);showSaveInfo();});
       }
     }
+  };
+
+  scope.changeNumericBoolean = function(field)
+  {
+    return field === 0 ? 1 : 0;
   };
 
   var showSaveInfo = function()

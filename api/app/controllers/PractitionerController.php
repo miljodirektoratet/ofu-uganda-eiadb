@@ -7,7 +7,7 @@ class PractitionerController extends BaseController {
 	{
 		$withFunction = function ($query)
 		{
-			$query->select('id', 'practitioner_id', 'year', 'cert_type')
+			$query->select('id', 'practitioner_id', 'year', 'cert_type', 'is_cancelled')
 				->where('year', '=', 2013);
 		};				
 
@@ -107,7 +107,7 @@ class PractitionerController extends BaseController {
 		{			
 			if (in_array($key, $resource["fillable"], true))
 			{				
-				if ($value == "")
+				if ($value === "")
 				{
 					$value = null;
 				}
