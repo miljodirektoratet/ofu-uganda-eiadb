@@ -50,18 +50,18 @@
       </div>
       <div class="row detail" ng-if="current==p">
         <div class="col-sm-12" style="min-height:400px;">
-          <form role="form">
+          <form role="form" name="myForm" novalidation>
             <div class="row">
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="person">Person</label>
-                  <input type="text"  class="form-control input-sm" id="person" ng-model="p.person" />
+                  <input type="text" required class="form-control input-sm" id="person" name="person" ng-model="p.person" />
                 </div>
               </div>
               <div class="col-sm-8">
                 <div class="form-group">
                   <label for="organisation_name">Organisation Name</label>
-                  <input type="text"  class="form-control input-sm" id="organisation_name" ng-model="p.organisation_name" />
+                  <input type="text" ng-minlength="10" ng-maxlength="20" class="form-control input-sm" id="organisation_name" name="organisation_name" ng-model="p.organisation_name"/>
                 </div>
               </div>
             </div>
@@ -69,19 +69,19 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="visiting_address">Visiting Address</label>
-                  <input type="text"  class="form-control input-sm" id="visiting_address" ng-model="p.visiting_address" />
+                  <input type="text" class="form-control input-sm" id="visiting_address" ng-model="p.visiting_address" />
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="box_no">P.O. Box</label>
-                  <input type="text"  class="form-control input-sm" id="box_no"  ng-model="p.box_no" />
+                  <input type="text" class="form-control input-sm" id="box_no"  ng-model="p.box_no" />
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="city">City</label>
-                  <input type="text"  class="form-control input-sm" id="city" ng-model="p.city" />
+                  <input type="text" number-integer class="form-control input-sm" id="city" name="city" ng-model="p.city" />
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="email">Remarks</label>
-                  <textarea  class="form-control input-sm" rows="3" id="remarks" ng-model="p.remarks"></textarea>
+                  <textarea ng-required="true" class="form-control input-sm" rows="3" id="remarks" ng-model="p.remarks"></textarea>
                 </div>
               </div>
             </div>
@@ -175,6 +175,11 @@
                   </tbody>
                 </table>
               </div>
+
+              <tt>myForm.city.$valid = {{myForm.city.$valid}}</tt><br>
+              <tt>myForm.city.$error = {{myForm.city.$error}}</tt><br>
+              <tt>myForm.$valid = {{myForm.$valid}}</tt><br>
+              <tt>myForm.$error = {{myForm.$error}}</tt><br>
             </div>
           </form>
         </div>

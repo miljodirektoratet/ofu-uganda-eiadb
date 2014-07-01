@@ -10,7 +10,7 @@ angular.module('seroApp.controllers', [])
 {
 
   scope.valuelists = Valuelist.get({'id':'all'});
-  scope.practitioners = Practitioner.query();
+  scope.practitioners = Practitioner.query({}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
   var filterCertificates = function(certificates, certType, year)
   {

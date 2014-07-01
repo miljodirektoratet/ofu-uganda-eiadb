@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="utf-8">
+  <title>Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <!-- Style begin -->
+  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="../../app/css/style.css"/>
+  <!-- Style end -->
+</head>
+<body>
+
+<form role="form" name="myForm" novalidation ng-init="m = {text1:'Ole Brum', num1:3}">
+  <div class="container-fluid max-width">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="text1">Text1='{{m.text1}}'</label>
+          <input type="text" ng-required="true" class="form-control input-sm" id="text1" name="text1" ng-model="m.text1" />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="text2">Text2='{{m.text2}}' (between 10 and 20 chars)</label>
+          <input type="text" ng-minlength="10" ng-maxlength="20" class="form-control input-sm" id="text2" name="text2" ng-model="m.text2"/>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="text3">Text3='{{m.text3}}'</label>
+          <input type="text" class="form-control input-sm" id="text3" name="text3" ng-model="m.text3"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="num1">Num1='{{m.num1}}'</label>
+          <input type="number" ng-required="true" class="form-control input-sm" id="num1" name="num1" ng-model="m.num1" />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="num2">Num2='{{m.num2}}' (between 4 and 8 chars)</label>
+          <input type="text" ng-minlength="4" ng-maxlength="8" class="form-control input-sm" id="num2" name="num2" ng-model="m.num2"/>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <hr/>
+  myForm.text1.$valid = {{myForm.text1.$valid}}<br>
+  myForm.text1.$error = {{myForm.text1.$error}}<br>
+  myForm.$valid = {{myForm.$valid}}<br>
+  myForm.$error = {{myForm.$error}}<br>
+</form>
+
+<!-- Script begin -->
+<script src="../../bower_components/angular/angular.js"></script>
+<script src="../../bower_components/angular-route/angular-route.js"></script>
+<script src="../../bower_components/angular-resource/angular-resource.js"></script>
+<script src="../../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../../bower_components/lodash/dist/lodash.js"></script>
+<script src="../../app/js/jqlite.extra.js"></script>
+<!-- Script end -->
+</body>
+</html>

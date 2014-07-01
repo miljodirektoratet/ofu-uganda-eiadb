@@ -105,6 +105,11 @@ class PractitionerController extends BaseController {
 	{		
 		foreach ($data as $key => $value)
 		{			
+			if ($key == "date_of_entry")
+			{
+				//var_dump($value);
+				//exit();
+			}
 			if (in_array($key, $resource["fillable"], true))
 			{				
 				if ($value === "")
