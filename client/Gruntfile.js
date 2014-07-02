@@ -27,7 +27,7 @@ module.exports = function (grunt)
           banner: '// Generated with grunt. Do not edit!\n\n'
         },
         files: {
-          '../build/app/app.min.js': ['app/js/jqlite.extra.js', 'app/js/app.js','app/js/controllers.js', 'app/js/directives.js', 'app/js/filters.js', 'app/js/services.js']
+          '../build/app/app.min.js': ['app/js/jqlite.extra.js', 'app/js/app.js','app/js/controllers.js', 'app/js/directives.js', 'app/js/filters.js', 'app/js/services.js', 'app/js/validations.js']
         }
       }
     },
@@ -38,7 +38,7 @@ module.exports = function (grunt)
           banner: '/* Generated with grunt. Do not edit! */\n\n'
         },
         files: {
-          '../build/app/app.min.css': ['app/css/navbar.css', 'app/css/style.css']
+          '../build/app/app.min.css': ['app/css/navbar.css', 'app/css/style.css', 'app/css/animations.css']
         }
       }
     },

@@ -120,23 +120,6 @@
 }
 
 
-.new-element-add, .new-element-remove
-{
-    background-color: transparent;
-    -webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out;
-}
-.new-element, .new-element-add-active
-{
-    background-color: #5cb85c;
-}
-.new-element-remove-active
-{
-    background-color: transparent;
-}
-
 .bgcolor-success
 {
     background-color: #5cb85c;
@@ -192,4 +175,5 @@
 .checkbox-small
 {
     width: 30px;
+    margin: 0 !important;
 }

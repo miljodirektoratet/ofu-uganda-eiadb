@@ -61,7 +61,7 @@
               <div class="col-sm-8">
                 <div class="form-group">
                   <label for="organisation_name">Organisation Name</label>
-                  <input type="text" ng-minlength="10" ng-maxlength="20" class="form-control input-sm" id="organisation_name" name="organisation_name" ng-model="p.organisation_name"/>
+                  <input type="text" class="form-control input-sm" id="organisation_name" name="organisation_name" ng-model="p.organisation_name"/>
                 </div>
               </div>
             </div>
@@ -75,13 +75,13 @@
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="box_no">P.O. Box</label>
-                  <input type="text" class="form-control input-sm" id="box_no"  ng-model="p.box_no" />
+                  <input type="text" decimal="2" class="form-control input-sm" id="box_no"  ng-model="p.box_no" />
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="city">City</label>
-                  <input type="text" number-integer class="form-control input-sm" id="city" name="city" ng-model="p.city" />
+                  <input type="text" integer class="form-control input-sm" id="city" name="city" ng-model="p.city" />
                 </div>
               </div>
             </div>
@@ -89,19 +89,19 @@
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="phone">Phone</label>
-                  <input type="text"  class="form-control input-sm" id="phone" ng-model="p.phone" />
+                  <input type="text" class="form-control input-sm" id="phone" ng-model="p.phone" />
                 </div>
               </div>
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="fax">Fax</label>
-                  <input type="text"  class="form-control input-sm" id="fax"  ng-model="p.fax" />
+                  <input type="text" class="form-control input-sm" id="fax"  ng-model="p.fax" />
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="email">E-mail</label>
-                  <input type="text"  class="form-control input-sm" id="email" ng-model="p.email" />
+                  <input type="text" class="form-control input-sm" id="email" ng-model="p.email" />
                 </div>
               </div>
             </div>
@@ -109,19 +109,19 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="qualifications">Qualifications</label>
-                  <textarea  class="form-control input-sm" rows="3" id="qualifications" ng-model="p.qualifications"></textarea>
+                  <textarea class="form-control input-sm" rows="3" id="qualifications" ng-model="p.qualifications"></textarea>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="expertise">Expertise</label>
-                  <textarea  class="form-control input-sm" rows="3" id="expertise" ng-model="p.expertise"></textarea>
+                  <textarea class="form-control input-sm" rows="3" id="expertise" ng-model="p.expertise"></textarea>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="email">Remarks</label>
-                  <textarea ng-required="true" class="form-control input-sm" rows="3" id="remarks" ng-model="p.remarks"></textarea>
+                  <textarea class="form-control input-sm" rows="3" id="remarks" ng-model="p.remarks"></textarea>
                 </div>
               </div>
             </div>

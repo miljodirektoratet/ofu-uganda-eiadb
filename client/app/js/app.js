@@ -8,7 +8,8 @@ var seroApp = angular.module('seroApp', [
   'ui.bootstrap',
   'seroApp.services',
   'seroApp.directives',
-  'seroApp.controllers'
+  'seroApp.controllers',
+  'pax.validations'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {templateUrl: 'partials/home.html'});

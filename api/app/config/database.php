@@ -54,12 +54,12 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => '127.0.0.1',
 			'database'  => $_ENV['mysql_database'],
 			'username'  => $_ENV['mysql_username'],
 			'password'  => $_ENV['mysql_password'],
 			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
+			'collation' => 'utf8_unicode_ci',			
 			'prefix'    => '',
 		),
 
