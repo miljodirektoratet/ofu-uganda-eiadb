@@ -5,6 +5,8 @@ validations.directive('decimal', function() {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl)
     {
+      var min = attrs.min ? parseFloat(attrs.min) : null;
+      var max = attrs.max ? parseFloat(attrs.max) : null;
       var decimals = attrs.decimal ? '{0,'+parseInt(attrs.decimal)+'}' : '+';
       var minus = attrs.negativeNumber ? '\\-?' : '';
       var regexp = new RegExp('^'+minus+'\\d+((\\.|\\,)\\d'+decimals+')?$');
@@ -19,12 +21,16 @@ validations.directive('decimal', function() {
 
         if (regexp.test(viewValue))
         {
-          ctrl.$setValidity('float', true);
-          if (typeof viewValue === "number")
+          var number = viewValue;
+          if (typeof viewValue !== "number")
           {
-            return viewValue;
+            number = parseFloat(viewValue.replace(',', '.'));
           }
-          return parseFloat(viewValue.replace(',', '.'));
+          if (isNumberInRange(min, max, number))
+          {
+            ctrl.$setValidity('float', true);
+            return number;
+          }
         }
         ctrl.$setValidity('float', false);
         return undefined;
@@ -39,8 +45,16 @@ validations.directive('decimal', function() {
         }
         if (regexp.test(modelValue))
         {
-          ctrl.$setValidity('float', true);
-          return modelValue;
+          var number = modelValue;
+          if (typeof modelValue !== "number")
+          {
+            number = parseFloat(modelValue.replace(',', '.'));
+          }
+          if (isNumberInRange(min, max, number))
+          {
+            ctrl.$setValidity('float', true);
+            return number;
+          }
         }
         ctrl.$setValidity('float', false);
         return modelValue;
@@ -54,6 +68,8 @@ validations.directive('integer', function() {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl)
     {
+      var min = attrs.min ? parseInt(attrs.min) : null;
+      var max = attrs.max ? parseInt(attrs.max) : null;
       var minus = attrs.negativeNumber ? '\\-?' : '';
       var regexp = new RegExp('^'+minus+'\\d+$');
 
@@ -66,8 +82,12 @@ validations.directive('integer', function() {
         }
         if (regexp.test(viewValue))
         {
-          ctrl.$setValidity('integer', true);
-          return parseInt(viewValue);
+          var number = parseInt(viewValue);
+          if (isNumberInRange(min, max, number))
+          {
+            ctrl.$setValidity('integer', true);
+            return number;
+          }
         }
         ctrl.$setValidity('integer', false);
         return undefined;
@@ -82,8 +102,12 @@ validations.directive('integer', function() {
         }
         if (regexp.test(modelValue))
         {
-          ctrl.$setValidity('integer', true);
-          return modelValue;
+          var number = parseInt(modelValue);
+          if (isNumberInRange(min, max, number))
+          {
+            ctrl.$setValidity('integer', true);
+            return number;
+          }
         }
         ctrl.$setValidity('integer', false);
         return modelValue;
@@ -91,3 +115,57 @@ validations.directive('integer', function() {
     }
   };
 });
+
+validations.directive('certificateNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, elm, attrs, ctrl)
+    {
+      var regexp = new RegExp('^CC\/(EIA|EA)\/[0-9]{3}\/[0-9]{2}$');
+      ctrl.$parsers.unshift(function(viewValue)
+      {
+        if (viewValue == null || viewValue === '')
+        {
+          ctrl.$setValidity('certificate-number', true);
+          return undefined;
+        }
+        if (regexp.test(viewValue))
+        {
+            ctrl.$setValidity('certificate-number', true);
+            return viewValue;
+        }
+        ctrl.$setValidity('certificate-number', false);
+        return undefined;
+      });
+
+      ctrl.$formatters.push(function (modelValue)
+      {
+        if (modelValue == null || modelValue === '')
+        {
+          ctrl.$setValidity('certificate-number', true);
+          return undefined;
+        }
+        if (regexp.test(modelValue))
+        {
+            ctrl.$setValidity('certificate-number', true);
+            return modelValue;
+        }
+        ctrl.$setValidity('certificate-number', false);
+        return modelValue;
+      });
+    }
+  };
+});
+
+function isNumberInRange(min, max, number)
+{
+  if (min !== null && number<min)
+  {
+    return false;
+  }
+  if (max !== null && number>max)
+  {
+    return false;
+  }
+  return true;
+}

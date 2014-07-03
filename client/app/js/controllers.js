@@ -2,15 +2,17 @@
 
 /* Controllers */
 
+var vlists = {};
 var yearForValidPractitionerCertificate = 2013;
 
 angular.module('seroApp.controllers', [])
 
 .controller('PractitionersController', ['$scope', '$filter', 'Practitioner', 'Valuelist', '$animate', function (scope, filter, Practitioner, Valuelist, animate)
 {
-
-  scope.valuelists = Valuelist.get({'id':'all'});
-  scope.practitioners = Practitioner.query({}, function(){scope.setNewCurrent(scope.practitioners[0]);});
+  scope.certificateYearMin = 2000;
+  scope.certificateYearMax = 2015;
+  scope.valuelists = Valuelist.get({'id':'all'}, function(){vlists=scope.valuelists});
+  scope.practitioners = Practitioner.query();//{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
   var filterCertificates = function(certificates, certType, year)
   {
@@ -48,7 +50,7 @@ angular.module('seroApp.controllers', [])
     };
     var p = new Practitioner(pData);
     scope.practitioners.unshift(p);
-    scope.setNewCurrent(p);
+    scope.toggleRow(p);
 
   };
   scope.deletePractitioner = function(index, p)
@@ -60,9 +62,16 @@ angular.module('seroApp.controllers', [])
     }
     scope.practitioners.splice(index, 1);
   };
-  scope.deleteCertificate = function(c)
+  scope.deleteCertificate = function(index, p, c)
   {
-    c.is_deleted=true;
+    if (c.is_new)
+    {
+      p.practitioner_certificates.splice(index, 1);
+    }
+    else
+    {
+      c.is_deleted=true;
+    }
   };
   scope.newCertificate = function(p)
   {
@@ -72,23 +81,69 @@ angular.module('seroApp.controllers', [])
       'date_of_entry':new Date(),
       'is_new':true
     };
+    c.cert_no = scope.certificateNumber(c);
     p.practitioner_certificates.unshift(c);
   };
-  scope.saveCurrent = function()
+  scope.toggleRow = function(newP)
   {
+    // Save.
     if (scope.current)
     {
-      var p = scope.current;
-      if (p.is_new)
+
+      console.log(this.form);
+      return;
+
+      var oldP = scope.current;
+      var form = scope.currentForm;
+      console.log(form);
+      if (form.$invalid)
       {
-        p.$save({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+        alert("Form not valid. Can't save.");
+        return;
       }
-      else
+      if (form.$dirty)
       {
-       // p.$update({}, createDatesInJsonData);
-        p.$update({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+        if (oldP.is_new)
+        {
+          oldP.$save({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+        }
+        else
+        {
+          // oldP.$update({}, createDatesInJsonData);
+          oldP.$update({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+        }
       }
     }
+
+    // Set current.
+    if (scope.current == newP)
+    {
+      scope.current = null;
+    }
+    else
+    {
+      scope.current = newP;
+      scope.currentForm = this.form;
+      if (!newP.is_new)
+      {
+        newP.$get({}, createDatesInJsonData);
+      }
+    }
+  };
+
+  scope.certificateNumber = function(c)
+  {
+    // Not in use yet. Should perhaps let user input everything and validate against this?
+    var practitionertypePart = "E";
+    var practitionertype = _.find(scope.valuelists["practitionertype"], {'id': c.cert_no});
+    if (practitionertype)
+    {
+      practitionertypePart = practitionertype.description1;
+    }
+    var numberPart = "XXX";
+    var yearPart = c.year.toString().substr(2);
+    var no = "CC/"+practitionertypePart+"/"+numberPart+"/"+yearPart;
+    return no;
   };
 
   scope.changeNumericBoolean = function(field)
@@ -105,22 +160,6 @@ angular.module('seroApp.controllers', [])
 //    {
 //      setTimeout(function(){animate.removeClass(element, className);},1000);
 //    });
-  };
-
-  scope.setNewCurrent = function(p)
-  {
-    if (scope.current == p)
-    {
-      scope.current = null;
-    }
-    else
-    {
-      scope.current = p;
-      if (!p.is_new)
-      {
-        p.$get({}, createDatesInJsonData);
-      }
-    }
   };
 
   scope.practitionerOrderBy = function(p)

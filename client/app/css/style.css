@@ -40,9 +40,9 @@
     padding-bottom:10px;
     background-color: #FCFCFC;
 }
-.practitioners .selected
+.practitioners .practitioner .selected
 {
-    background-color: #FCFCFC !important;
+    background-color: #FCFCFC;
 }
 
 .btn-link-hover
@@ -176,4 +176,12 @@
 {
     width: 30px;
     margin: 0 !important;
+}
+
+input.ng-invalid,
+select.ng-invalid,
+textarea.ng-invalid,
+.practitioners .practitioner .notvalid
+{
+    background-color:#FFFF99;
 }

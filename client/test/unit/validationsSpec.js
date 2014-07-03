@@ -143,7 +143,72 @@ describe('validations.integer', function()
     });
   });
 
+  describe('integer with min', function()
+  {
+    beforeEach(inject(function($compile, $rootScope)
+    {
+      $scope = $rootScope;
+      var element = angular.element('<form name="form">' + '<input ng-model="model.somenum" name="somenum" integer min="10" />' + '</form>');
+      $scope.model = { somenum: null };
+      $compile(element)($scope);
+      $scope.$digest();
+      form = $scope.form;
+    }));
+
+    it('should pass when equal to min', function()
+    {
+      form.somenum.$setViewValue(10);
+      expect($scope.model.somenum).toEqual(10);
+      expect(form.somenum.$valid).toBe(true);
+    });
+    it('should pass when greater than min', function()
+    {
+      form.somenum.$setViewValue(11);
+      expect($scope.model.somenum).toEqual(11);
+      expect(form.somenum.$valid).toBe(true);
+    });
+    it('should not pass when less than min', function()
+    {
+      form.somenum.$setViewValue(9);
+      expect($scope.model.somenum).toBeUndefined();
+      expect(form.somenum.$valid).toBe(false);
+    });
+  });
+
+  describe('integer with max', function()
+  {
+    beforeEach(inject(function($compile, $rootScope)
+    {
+      $scope = $rootScope;
+      var element = angular.element('<form name="form">' + '<input ng-model="model.somenum" name="somenum" integer max="10" />' + '</form>');
+      $scope.model = { somenum: null };
+      $compile(element)($scope);
+      $scope.$digest();
+      form = $scope.form;
+    }));
+
+    it('should pass when equal to max', function()
+    {
+      form.somenum.$setViewValue(10);
+      expect($scope.model.somenum).toEqual(10);
+      expect(form.somenum.$valid).toBe(true);
+    });
+    it('should pass when less than max', function()
+    {
+      form.somenum.$setViewValue(9);
+      expect($scope.model.somenum).toEqual(9);
+      expect(form.somenum.$valid).toBe(true);
+    });
+    it('should not pass when greater than max', function()
+    {
+      form.somenum.$setViewValue(11);
+      expect($scope.model.somenum).toBeUndefined();
+      expect(form.somenum.$valid).toBe(false);
+    });
+  });
+
 });
+
 
 describe('validations.decimal', function()
 {
@@ -295,6 +360,70 @@ describe('validations.decimal', function()
       form.somenum.$setViewValue('0.000000000000000000000000000000000000000000123');
       expect($scope.model.somenum).toEqual(0.000000000000000000000000000000000000000000123);
       expect(form.somenum.$valid).toBe(true);
+    });
+  });
+
+  describe('decimal with min', function()
+  {
+    beforeEach(inject(function($compile, $rootScope)
+    {
+      $scope = $rootScope;
+      var element = angular.element('<form name="form">' + '<input ng-model="model.somenum" name="somenum" decimal min="10.5" />' + '</form>');
+      $scope.model = { somenum: null };
+      $compile(element)($scope);
+      $scope.$digest();
+      form = $scope.form;
+    }));
+
+    it('should pass when equal to min', function()
+    {
+      form.somenum.$setViewValue(10.5);
+      expect($scope.model.somenum).toEqual(10.5);
+      expect(form.somenum.$valid).toBe(true);
+    });
+    it('should pass when greater than min', function()
+    {
+      form.somenum.$setViewValue(11.5);
+      expect($scope.model.somenum).toEqual(11.5);
+      expect(form.somenum.$valid).toBe(true);
+    });
+    it('should not pass when less than min', function()
+    {
+      form.somenum.$setViewValue(10.499);
+      expect($scope.model.somenum).toBeUndefined();
+      expect(form.somenum.$valid).toBe(false);
+    });
+  });
+
+  describe('decimal with max', function()
+  {
+    beforeEach(inject(function($compile, $rootScope)
+    {
+      $scope = $rootScope;
+      var element = angular.element('<form name="form">' + '<input ng-model="model.somenum" name="somenum" decimal max="10.5" />' + '</form>');
+      $scope.model = { somenum: null };
+      $compile(element)($scope);
+      $scope.$digest();
+      form = $scope.form;
+    }));
+
+    it('should pass when equal to max', function()
+    {
+      form.somenum.$setViewValue(10.5);
+      expect($scope.model.somenum).toEqual(10.5);
+      expect(form.somenum.$valid).toBe(true);
+    });
+    it('should pass when less than max', function()
+    {
+      form.somenum.$setViewValue(10.499);
+      expect($scope.model.somenum).toEqual(10.499);
+      expect(form.somenum.$valid).toBe(true);
+    });
+    it('should not pass when greater than max', function()
+    {
+      form.somenum.$setViewValue(10.51);
+      expect($scope.model.somenum).toBeUndefined();
+      expect(form.somenum.$valid).toBe(false);
     });
   });
 
