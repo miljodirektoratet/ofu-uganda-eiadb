@@ -5,37 +5,44 @@ validations.directive('decimal', function() {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl)
     {
-      var decimals = parseInt(attrs.decimal);
-      var minus = attrs.numberNegative ? '\\-?' : '';
-      var regexp = new RegExp('^'+minus+'\\d+((\\.|\\,)\\d{0,'+decimals+'})?$');
+      var decimals = attrs.decimal ? '{0,'+parseInt(attrs.decimal)+'}' : '+';
+      var minus = attrs.negativeNumber ? '\\-?' : '';
+      var regexp = new RegExp('^'+minus+'\\d+((\\.|\\,)\\d'+decimals+')?$');
 
       ctrl.$parsers.unshift(function(viewValue)
       {
+        if (viewValue == null || viewValue === '')
+        {
+          ctrl.$setValidity('float', true);
+          return undefined;
+        }
+
         if (regexp.test(viewValue))
         {
           ctrl.$setValidity('float', true);
+          if (typeof viewValue === "number")
+          {
+            return viewValue;
+          }
           return parseFloat(viewValue.replace(',', '.'));
         }
-        else
-        {
-          ctrl.$setValidity('float', false);
-          return undefined;
-        }
+        ctrl.$setValidity('float', false);
+        return undefined;
       });
 
       ctrl.$formatters.push(function (modelValue)
       {
-        if (modelValue === undefined)
+        if (modelValue == null || modelValue === '')
         {
+          ctrl.$setValidity('float', true);
           return undefined;
         }
-        console.log(regexp, modelValue);
-        if (!regexp.test(modelValue))
+        if (regexp.test(modelValue))
         {
-          ctrl.$setValidity('float', false);
+          ctrl.$setValidity('float', true);
+          return modelValue;
         }
-        // Return the original value regardless of its validity,
-        // so it shows up in the view (even if it is invalid).
+        ctrl.$setValidity('float', false);
         return modelValue;
       });
     }
@@ -47,32 +54,38 @@ validations.directive('integer', function() {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl)
     {
-      var minus = attrs.numberNegative ? '\\-?' : '';
+      var minus = attrs.negativeNumber ? '\\-?' : '';
       var regexp = new RegExp('^'+minus+'\\d+$');
 
       ctrl.$parsers.unshift(function(viewValue)
       {
+        if (viewValue == null || viewValue === '')
+        {
+          ctrl.$setValidity('integer', true);
+          return undefined;
+        }
         if (regexp.test(viewValue))
         {
           ctrl.$setValidity('integer', true);
-          return parseFloat(viewValue.replace(',', '.'));
+          return parseInt(viewValue);
         }
-        else
-        {
-          ctrl.$setValidity('integer', false);
-          return undefined;
-        }
+        ctrl.$setValidity('integer', false);
+        return undefined;
       });
 
       ctrl.$formatters.push(function (modelValue)
       {
-        console.log(regexp, modelValue);
-        if (!regexp.test(modelValue))
+        if (modelValue == null || modelValue === '')
         {
-          ctrl.$setValidity('integer', false);
+          ctrl.$setValidity('integer', true);
+          return undefined;
         }
-        // Return the original value regardless of its validity,
-        // so it shows up in the view (even if it is invalid).
+        if (regexp.test(modelValue))
+        {
+          ctrl.$setValidity('integer', true);
+          return modelValue;
+        }
+        ctrl.$setValidity('integer', false);
         return modelValue;
       });
     }
