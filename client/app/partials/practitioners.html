@@ -47,10 +47,11 @@
             <span class="label certificate-label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">EA</span>
             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current!=p">Edit</button>
             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current==p">Close</button>
+            <span class="loader pull-right" ng-show="loading==p"></span>
           </div>
         </div>
-        <div class="row detail" ng-if="current==p">
-          <div class="col-sm-12" style="min-height:400px;">
+        <div class="row detail" ng-if="current==p" ng-init="setCurrentForm(form)">
+          <div class="col-sm-12">
             <div class="row">
               <div class="col-sm-4">
                 <div class="form-group">
@@ -158,7 +159,7 @@
                   </thead>
                   <tbody>
                   <!--<tr ng-class="{'bg-success':c.is_new}" ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">-->
-                  <tr ng-repeat="c in p.practitioner_certificates" ng-hide="c.is_deleted">
+                  <tr ng-repeat="c in p.practitioner_certificates" ng-hide="c.is_deletedx">
                     <td><input type="text" ng-required="true" integer min="{{certificateYearMin}}" max="{{certificateYearMax}}" class="form-control input-sm input-year" id="c_year" ng-model="c.year"/></td>
                     <td>
                       <div class="input-group container-datepicker" ng-controller="DatePickerController">
@@ -178,8 +179,10 @@
                   </tbody>
                 </table>
               </div>
-              <tt>form.$valid = {{form.$valid}}</tt><br>
-              <tt>form.$error = {{form.$error}}</tt><br>
+              <!--<tt>form.$valid = {{form.$valid}}</tt><br>-->
+              <!--<tt>form.$pristine = {{form.$pristine}}</tt><br>-->
+              <!--<tt>form.$error = {{form.$error}}</tt><br>-->
+              <!--<tt>currentForm.$valid = {{currentForm.$valid}}</tt><br>-->
             </div>
           </div>
         </div>

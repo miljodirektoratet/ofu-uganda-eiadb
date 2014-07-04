@@ -185,3 +185,20 @@ textarea.ng-invalid,
 {
     background-color:#FFFF99;
 }
+
+.loader
+{
+  background-image:url('../img/loader.gif');
+  background-repeat:no-repeat;
+  background-size:14px;
+  background-position:50% 2px;
+  height:16px;
+  width:20px;
+}
+
+.forceload
+{
+  position: absolute;
+  top: -1000px;
+  opacity:0;
+}

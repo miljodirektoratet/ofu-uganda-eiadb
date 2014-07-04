@@ -26,8 +26,7 @@ class PractitionerController extends BaseController {
 		// $practitioner = Practitioner::with('practitionerCertificates')
 		// 	->where('id', $id)
 		// 	->take(1)					
-		// 	->get();
-
+		// 	->get();		
 		$practitioner = Practitioner::with('practitionerCertificates')->find($id);
 		return Response::json($practitioner, 200);
 	}

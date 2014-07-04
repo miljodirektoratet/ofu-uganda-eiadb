@@ -56,18 +56,28 @@ module.exports = function (grunt)
           {expand: true, flatten: true, src: ['app/index.html'], dest: '../build/app/', filter: 'isFile'},
           {expand: true, flatten: true, src: ['app/partials/*.html'], dest: '../build/app/partials/'},
           {expand: true, flatten: true, src: ['app/img/*.png'], dest: '../build/app/img/'},
-          {expand: true, flatten: true, src: ['app/img/*.jpg'], dest: '../build/app/jpg/'}
+          {expand: true, flatten: true, src: ['app/img/*.jpg'], dest: '../build/app/img/'},
+          {expand: true, flatten: true, src: ['app/img/*.gif'], dest: '../build/app/img/'}
         ]
       }
     },
 
-    replace: {
-      bootstrapCss: {
+    replace:
+    {
+      bootstrapCss:
+      {
         src: ['../build/app/vendor/bootstrap.min.css'],
         overwrite: true,
         replacements: [{ from: '../fonts/', to: 'fonts/' }]
       },
-      index: {
+      styleCss:
+      {
+        src: ['../build/app/app.min.css'],
+        overwrite: true,
+        replacements: [{ from: '../img/', to: 'img/' }]
+      },
+      index:
+      {
         src: ['../build/app/index.html'],
         overwrite: true,
         replacements: [

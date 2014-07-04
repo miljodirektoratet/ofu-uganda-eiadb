@@ -11,6 +11,8 @@ angular.module('seroApp.controllers', [])
 {
   scope.certificateYearMin = 2000;
   scope.certificateYearMax = 2015;
+  scope.current = null;
+  scope.currentForm = null;
   scope.valuelists = Valuelist.get({'id':'all'}, function(){vlists=scope.valuelists});
   scope.practitioners = Practitioner.query();//{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
@@ -42,6 +44,12 @@ angular.module('seroApp.controllers', [])
 
   scope.newPractitioner = function()
   {
+    if (scope.currentForm && scope.currentForm.$invalid)
+    {
+      alert("Current form not valid. Can't create new practitioner.");
+      return;
+    }
+
     //console.log(scope.valuelists.practitionertype);
     var pData =
     {
@@ -86,16 +94,16 @@ angular.module('seroApp.controllers', [])
   };
   scope.toggleRow = function(newP)
   {
+    if (scope.loading)
+    {
+      //console.log("Currently loading. Please wait.");
+      return;
+    }
     // Save.
     if (scope.current)
     {
-
-      console.log(this.form);
-      return;
-
       var oldP = scope.current;
       var form = scope.currentForm;
-      console.log(form);
       if (form.$invalid)
       {
         alert("Form not valid. Can't save.");
@@ -112,6 +120,11 @@ angular.module('seroApp.controllers', [])
           // oldP.$update({}, createDatesInJsonData);
           oldP.$update({}, function(p){createDatesInJsonData(p);showSaveInfo();});
         }
+        form.$setPristine();
+      }
+      else
+      {
+//        console.log("No changes to save.");
       }
     }
 
@@ -122,13 +135,27 @@ angular.module('seroApp.controllers', [])
     }
     else
     {
-      scope.current = newP;
-      scope.currentForm = this.form;
-      if (!newP.is_new)
+      if (newP.is_new)
       {
-        newP.$get({}, createDatesInJsonData);
+        scope.current = newP;
+      }
+      else
+      {
+        scope.loading=newP;
+        newP.$get({}, function(p)
+        {
+          createDatesInJsonData(p);
+          scope.loading=null;
+          scope.current = newP;
+        });
       }
     }
+  };
+
+  scope.setCurrentForm = function(form)
+  {
+    // Need to set this with ngInit. This means that currentForm is set when a row is opened (because of the ngIf).
+    scope.currentForm = form;
   };
 
   scope.certificateNumber = function(c)
