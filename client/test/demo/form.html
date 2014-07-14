@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<form role="form" name="myForm" novalidation ng-init="m = {text1:'Ole Brum', num1:3}">
+<form role="form" name="myForm" novalidation ng-init="m = {text1:'Ole Brum', num1:3, ro1:'Read Only', ro2:'Read Only'}">
   <div class="container-fluid max-width">
     <div class="row">
       <div class="col-sm-4">
@@ -47,6 +47,21 @@
         <div class="form-group">
           <label for="num2">Num2='{{m.num2}}' (between 4 and 8 chars)</label>
           <input type="text" ng-minlength="4" ng-maxlength="8" class="form-control input-sm" id="num2" name="num2" ng-model="m.num2"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="num1">Readonly='{{m.ro1}}'</label>
+          <input type="text" ng-readonly="true" class="form-control input-sm" id="ro1" name="ro1" ng-model="m.ro1" />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="num1">Readonly='{{m.ro2}}'</label>
+          <input type="text" ng-disabled="true" class="form-control input-sm" id="ro2" name="ro2" ng-model="m.ro2" />
         </div>
       </div>
     </div>
