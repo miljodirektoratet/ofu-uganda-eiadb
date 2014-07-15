@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+	<style>
+		input { width:300px; }
+	</style>
 </head>
 <body>
 
@@ -14,7 +17,7 @@
 {{ Form::open(array('route' => 'password.request')) }}
  
   <p>{{ Form::label('email', 'Email') }}
-  {{ Form::text('email') }}</p>
+  {{ Form::text('email', Auth::check() ? Auth::user()->email : '')}}</p>
  
   <p>{{ Form::submit('Send reset url') }}</p>
  

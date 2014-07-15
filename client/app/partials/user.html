@@ -1,4 +1,26 @@
 <h2>User profile</h2>
 
-<p>Change password?</p>
-<p>More?</p>
+<p>Change the password? Go to the <a href="/api/public/password/reset">reset password</a> page.</p>
+
+<h3>Roles</h3>
+  <p ng-hide="userinfo.info.roles.length">No roles.</p>
+<ul>
+  <li ng-repeat="role in userinfo.info.roles">{{role.name2}} ({{role.name}})</li>
+</ul>
+
+<div ng-if="userinfo.info.role_8">
+  <h3>System manager</h3>
+
+  <p>As System manager, you may impersonate another user. This helps to verify that the different roles works as intended. If you impersonate a user that is not System manager, you have to sign out to be able to login as yourself again.</p>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <label for="userid_to_impersonate">Impersonate a user</label>
+    </div>
+    <div class="col-sm-3" ng-init="userinfo.getAllUsers()">
+      <select id="userid_to_impersonate" ng-model="$parent.userid_to_impersonate" ng-change="impersonate()" class="form-control input-sm" ng-options="u.id as u.full_name for u in userinfo.allusers | orderBy:'full_name'"></select>
+    </div>
+  </div>
+</div>
+<br/>
+<button type="button" class="btn btn-danger" ng-click="userinfo.signout()">Sign out</button>

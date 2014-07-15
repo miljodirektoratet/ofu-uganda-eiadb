@@ -21,7 +21,7 @@
       </form>
     </div>
     <div class="col-sm-4">
-      <button type="button" class="btn btn-success pull-right" ng-click="newPractitioner()">New practitioner</button>
+      <button type="button" class="btn btn-success pull-right" ng-click="newPractitioner()" ng-disabled="!canSave()">New practitioner</button>
     </div>
     <div class="col-sm-12"><hr/></div>
   </div>
@@ -45,7 +45,7 @@
           <div class="col-sm-2">
             <span class="label certificate-label" ng-class="hasEia(p) ? 'label-success' :'label-default noCertificate'">EIA</span>
             <span class="label certificate-label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">EA</span>
-            <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current!=p">Edit</button>
+            <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current!=p">{{canSave() ? "Edit" : "Show"}}</button>
             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current==p">Close</button>
             <span class="loader pull-right" ng-show="loading==p"></span>
           </div>
@@ -56,19 +56,19 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="person">Person</label>
-                  <input type="text" ng-required="true" class="form-control input-sm" id="person" ng-model="p.person" />
+                  <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="person" ng-model="p.person" />
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="tin">TIN</label>
-                  <input type="text" integer class="form-control input-sm" id="tin" ng-model="p.tin"/>
+                  <input type="text" ng-readonly="!canSave()" integer class="form-control input-sm" id="tin" ng-model="p.tin"/>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="organisation_name">Organisation Name</label>
-                  <input type="text" ng-required="true" class="form-control input-sm" id="organisation_name" ng-model="p.organisation_name"/>
+                  <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="organisation_name" ng-model="p.organisation_name"/>
                 </div>
               </div>
             </div>
@@ -76,19 +76,19 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="visiting_address">Visiting Address</label>
-                  <input type="text" class="form-control input-sm" id="visiting_address" ng-model="p.visiting_address" />
+                  <input type="text" ng-readonly="!canSave()" class="form-control input-sm" id="visiting_address" ng-model="p.visiting_address" />
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="box_no">P.O. Box</label>
-                  <input type="text" integer ng-required="true" class="form-control input-sm" id="box_no" ng-model="p.box_no" />
+                  <input type="text" ng-readonly="!canSave()" integer ng-required="true" class="form-control input-sm" id="box_no" ng-model="p.box_no" />
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="city">City</label>
-                  <input type="text" ng-required="true" class="form-control input-sm" id="city" ng-model="p.city" />
+                  <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="city" ng-model="p.city" />
                 </div>
               </div>
             </div>
@@ -96,19 +96,19 @@
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="phone">Phone</label>
-                  <input type="text" class="form-control input-sm" id="phone" ng-model="p.phone" />
+                  <input type="text" ng-readonly="!canSave()" class="form-control input-sm" id="phone" ng-model="p.phone" />
                 </div>
               </div>
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="fax">Fax</label>
-                  <input type="text" class="form-control input-sm" id="fax"  ng-model="p.fax" />
+                  <input type="text" ng-readonly="!canSave()" class="form-control input-sm" id="fax"  ng-model="p.fax" />
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="email">E-mail</label>
-                  <input type="text" class="form-control input-sm" id="email" ng-model="p.email" />
+                  <input type="text" ng-readonly="!canSave()" class="form-control input-sm" id="email" ng-model="p.email" />
                 </div>
               </div>
             </div>
@@ -116,19 +116,19 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="qualifications">Qualifications</label>
-                  <textarea ng-required="true" class="form-control input-sm" rows="3" id="qualifications" ng-model="p.qualifications"></textarea>
+                  <textarea ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" rows="3" id="qualifications" ng-model="p.qualifications"></textarea>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="expertise">Expertise</label>
-                  <textarea ng-required="true" class="form-control input-sm" rows="3" id="expertise" ng-model="p.expertise"></textarea>
+                  <textarea ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" rows="3" id="expertise" ng-model="p.expertise"></textarea>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="email">Remarks</label>
-                  <textarea class="form-control input-sm" rows="3" id="remarks" ng-model="p.remarks"></textarea>
+                  <textarea ng-readonly="!canSave()" class="form-control input-sm" rows="3" id="remarks" ng-model="p.remarks"></textarea>
                 </div>
               </div>
             </div>
@@ -138,7 +138,7 @@
                 <h4>Certificates</h4>
               </div>
               <div class="col-sm-4">
-                <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="deletePractitioner($index, p)">{{p.is_new ? "Cancel new practitioner" : "Delete practitioner"}}</button>
+                <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="deletePractitioner($index, p)" ng-disabled="!canSave()">{{p.is_new ? "Cancel new practitioner" : "Delete practitioner"}}</button>
               </div>
             </div>
 
@@ -154,27 +154,27 @@
                     <th>Conditions</th>
                     <th>Certificate cancelled?</th>
                     <th>Remarks</th>
-                    <th><button type="button" class="btn btn-success btn-sm btn-add-certificate" ng-click="newCertificate(p)">New</button></th>
+                    <th><button type="button" class="btn btn-success btn-sm btn-add-certificate" ng-click="newCertificate(p)" ng-disabled="!canSave()">New</button></th>
                   </tr>
                   </thead>
                   <tbody>
                   <!--<tr ng-class="{'bg-success':c.is_new}" ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">-->
                   <tr ng-repeat="c in p.practitioner_certificates" ng-hide="c.is_deleted">
-                    <td><input type="text" ng-required="true" integer min="{{certificateYearMin}}" max="{{certificateYearMax}}" class="form-control input-sm input-year" id="c_year" ng-model="c.year"/></td>
+                    <td><input type="text" ng-readonly="!canSave()" ng-required="true" integer min="{{certificateYearMin}}" max="{{certificateYearMax}}" class="form-control input-sm input-year" id="c_year" ng-model="c.year"/></td>
                     <td>
                       <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                        <input type="text" ng-required="true" class="form-control input-sm input-date" ng-model="c.date_of_entry" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                        <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm input-date" ng-model="c.date_of_entry" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
                         <span class="input-group-btn">
-                          <button type="button" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                          <button type="button" ng-disabled="!canSave()" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
                         </span>
                       </div>
                     </td>
-                    <td><select id="c_cert_type" ng-required="true" class="form-control input-sm" ng-model="c.cert_type" ng-options="v.id as v.description1 for v in valuelists.practitionertype"></select></td>
-                    <td><input id="c_cert_no" type="text" certificate-number ng-required="true" class="form-control input-sm" ng-model="c.cert_no" /></td>
-                    <td><select id="c_conditions" ng-required="true" class="form-control input-sm input-conditions" ng-model="c.conditions" ng-options="v.id as v.description2 for v in valuelists.practitionermembertype"></select></td>
-                    <td><input type="checkbox" class="checkbox-small form-control input-sm" id="c_is_cancelled" ng-model="fake" ng-checked="c.is_cancelled" ng-click="c.is_cancelled = !c.is_cancelled"/></td>
-                    <td><input type="text" class="form-control input-sm input-remarks" id="c_remarks" ng-model="c.remarks" /></td>
-                    <td><button type="button" class="btn btn-danger btn-sm btn-delete-certificate" ng-click="deleteCertificate($index, p, c)">{{c.is_new ? "Cancel" : "Delete"}}</button></td>
+                    <td><select ng-disabled="!canSave()" id="c_cert_type" ng-required="true" class="form-control input-sm" ng-model="c.cert_type" ng-options="v.id as v.description1 for v in valuelists.practitionertype"></select></td>
+                    <td><input type="text" ng-readonly="!canSave()" id="c_cert_no" certificate-number ng-required="true" class="form-control input-sm" ng-model="c.cert_no" /></td>
+                    <td><select ng-disabled="!canSave()" ng-required="true" id="c_conditions" class="form-control input-sm input-conditions" ng-model="c.conditions" ng-options="v.id as v.description2 for v in valuelists.practitionermembertype"></select></td>
+                    <td><input type="checkbox" ng-disabled="!canSave()" class="checkbox-small form-control input-sm" id="c_is_cancelled" ng-model="fake" ng-checked="c.is_cancelled" ng-click="c.is_cancelled = !c.is_cancelled"/></td>
+                    <td><input type="text" ng-readonly="!canSave()" class="form-control input-sm input-remarks" id="c_remarks" ng-model="c.remarks" /></td>
+                    <td><button type="button" ng-disabled="!canSave()" class="btn btn-danger btn-sm btn-delete-certificate" ng-click="deleteCertificate($index, p, c)">{{c.is_new ? "Cancel" : "Delete"}}</button></td>
                   </tr>
                   </tbody>
                 </table>

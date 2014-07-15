@@ -3,12 +3,14 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Zizaco\Entrust\HasRole;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	use HasRole; 
-			
-	protected $softDelete = true;
+	use HasRole; 			
+	use SoftDeletingTrait;
+	protected $dates = ['deleted_at'];
+
 	protected $guarded = array('id', 'password', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at');
 	protected $hidden = array('password', 'deleted_at');
 	
@@ -33,35 +35,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->password;
 	}
 
-	/**
-	 * Get the token value for the "remember me" session.
-	 *
-	 * @return string
-	 */
 	public function getRememberToken()
-	{
-		return $this->remember_token;
+	{		
+    return $this->remember_token;
 	}
 
-	/**
-	 * Set the token value for the "remember me" session.
-	 *
-	 * @param  string  $value
-	 * @return void
-	 */
 	public function setRememberToken($value)
 	{
-		$this->remember_token = $value;
+  	$this->remember_token = $value;
 	}
 
-	/**
-	 * Get the column name for the "remember me" token.
-	 *
-	 * @return string
-	 */
 	public function getRememberTokenName()
-	{
-		return 'remember_token';
+	{		
+  	return 'remember_token';
 	}
 
 	/**

@@ -2,6 +2,6 @@
 
 class Category extends Eloquent 
 {        
-		protected $guarded = array('id');
-		public $timestamps = false;
+	protected $guarded = array('id');
+	public $timestamps = false;
 }

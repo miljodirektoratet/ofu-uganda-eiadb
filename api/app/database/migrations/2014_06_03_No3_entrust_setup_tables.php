@@ -14,9 +14,9 @@ class EntrustSetupTables extends Migration {
         // Creates the roles table
         Schema::create('roles', function($table)
         {
-            $table->increments('id')->unsigned();
-            $table->string('number', 255)->nullable();
+            $table->increments('id')->unsigned();            
             $table->string('name')->unique();
+            $table->string('name2', 255)->nullable();
             $table->timestamps();
         });
 

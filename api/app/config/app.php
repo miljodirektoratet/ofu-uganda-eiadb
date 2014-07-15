@@ -190,6 +190,5 @@ return array(
 
 		'Entrust'    => 'Zizaco\Entrust\EntrustFacade',
 
-	),
-
+	)	
 );

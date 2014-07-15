@@ -7,12 +7,13 @@ var yearForValidPractitionerCertificate = 2013;
 
 angular.module('seroApp.controllers', [])
 
-.controller('PractitionersController', ['$scope', '$filter', 'Practitioner', 'Valuelist', '$animate', function (scope, filter, Practitioner, Valuelist, animate)
+.controller('PractitionersController', ['$scope', '$filter', '$animate', 'UserInfo', 'Practitioner', 'Valuelist', function (scope, filter, animate, UserInfo, Practitioner, Valuelist)
 {
   scope.certificateYearMin = 2000;
-  scope.certificateYearMax = 2015;
+  scope.certificateYearMax = new Date().getFullYear()+1;
   scope.current = null;
   scope.currentForm = null;
+  scope.userinfo = UserInfo;
   scope.valuelists = Valuelist.get({'id':'all'}, function(){vlists=scope.valuelists});
   scope.practitioners = Practitioner.query();//{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
@@ -92,6 +93,29 @@ angular.module('seroApp.controllers', [])
     c.cert_no = scope.certificateNumber(c);
     p.practitioner_certificates.unshift(c);
   };
+
+  scope.canSave = function()
+  {
+    return scope.userinfo.info.role_6;
+  };
+
+  var savePractitioner = function(p)
+  {
+    if (!scope.canSave())
+    {
+      return;
+    }
+    if (p.is_new)
+    {
+      p.$save({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+    }
+    else
+    {
+      // oldP.$update({}, createDatesInJsonData);
+      p.$update({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+    }
+  };
+
   scope.toggleRow = function(newP)
   {
     if (scope.loading)
@@ -100,7 +124,7 @@ angular.module('seroApp.controllers', [])
       return;
     }
     // Save.
-    if (scope.current)
+    if (scope.canSave() && scope.current)
     {
       var oldP = scope.current;
       var form = scope.currentForm;
@@ -111,15 +135,7 @@ angular.module('seroApp.controllers', [])
       }
       if (form.$dirty)
       {
-        if (oldP.is_new)
-        {
-          oldP.$save({}, function(p){createDatesInJsonData(p);showSaveInfo();});
-        }
-        else
-        {
-          // oldP.$update({}, createDatesInJsonData);
-          oldP.$update({}, function(p){createDatesInJsonData(p);showSaveInfo();});
-        }
+        savePractitioner(oldP);
         form.$setPristine();
       }
       else

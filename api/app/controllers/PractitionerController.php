@@ -34,6 +34,11 @@ class PractitionerController extends BaseController {
 	// POST /resource
 	public function store()
 	{		
+		if (!$this::canSave())
+		{
+			return $this::notAuthorized();
+		}
+
 		$inputData = Input::all();
 		$practitioner = new Practitioner();	   
 		$this->updateValuesInResource($practitioner, $inputData);		
@@ -47,6 +52,11 @@ class PractitionerController extends BaseController {
 	// PUT/PATCH /resource/:id
 	public function update($id)
 	{		
+		if (!$this::canSave())
+		{
+			return $this::notAuthorized();
+		}
+
 		$practitioner = Practitioner::with('practitionerCertificates')->find($id);
 		if (!$practitioner)
 		{
@@ -63,6 +73,11 @@ class PractitionerController extends BaseController {
 	// DELETE /resource/:id
 	public function destroy($id)
 	{
+		if (!$this::canSave())
+		{
+			return $this::notAuthorized();
+		}
+
 		$practitioner = Practitioner::find($id);	 
 		$practitioner->delete();
 		return Response::json(array('is_deleted' => true), 200);
@@ -123,6 +138,17 @@ class PractitionerController extends BaseController {
 			}	    	
 		}
 	}
+
+	private function canSave()
+	{
+		return Auth::user()->hasRole("Role 6");
+	}
+
+	private function notAuthorized()
+	{		
+		return Response::json("Not authorized to perform this.", 403); // 403 Forbidden
+	}
+
 }
 
 

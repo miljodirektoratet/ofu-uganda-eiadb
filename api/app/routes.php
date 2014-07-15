@@ -10,42 +10,41 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
 //Auth::logout();
 //Auth::loginUsingId(1);
 
 Route::get('/', function()
-{	
+{		
 	return View::make('hello');
+});
+
+Route::get('/client', function()
+{
+	$clientUrl = $_ENV['app_url']."/client/app/";
+	return Redirect::to($clientUrl);
 });
 
 Route::group(array('prefix' => 'password'), function()
 {
-	Route::get('reset', array('as' => 'password.remind',
-	  'uses' => 'PasswordController@getRemind'));
-
-	Route::post('reset', array('as' => 'password.request',
-	  'uses' => 'PasswordController@postRemind'));
-
-	Route::get('reset/{token}', array('as' => 'password.reset',
-	  'uses' => 'PasswordController@getReset'));
-
-	Route::post('reset/{token}', array('as' => 'password.update',
-	  'uses' => 'PasswordController@postReset'));
+	Route::get('reset', array('as' => 'password.remind', 'uses' => 'PasswordController@getRemind'));
+	Route::post('reset', array('as' => 'password.request', 'uses' => 'PasswordController@postRemind'));
+	Route::get('reset/{token}', array('as' => 'password.reset', 'uses' => 'PasswordController@getReset'));
+	Route::post('reset/{token}', array('as' => 'password.update', 'uses' => 'PasswordController@postReset'));
 });
 
-
-Route::get('/user', array('as' => 'user.show',
-	'before' => 'auth.basic',
-	'uses' => 'UserController@getIndex'	
-));
-
-
-//Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
-Route::group(array('prefix' => 'v1'), function()
-{	
-    Route::resource('practitioner', 'PractitionerController');    
+Route::group(array('prefix' => 'user', 'before' => 'auth.basic'), function()
+{
+	Route::get('info', array('uses' => 'UserController@getInfo'));
+	Route::get('impersonate/{id}', array('uses' => 'UserController@impersonate'));
+	Route::get('all', array('uses' => 'UserController@getAll'));
 });
-Route::group(array('prefix' => 'v1'), function()
+Route::get('signout', array('uses' => 'UserController@signout'));
+
+
+Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
+//Route::group(array('prefix' => 'v1'), function()
 {	
-    Route::resource('valuelist', 'ValuelistController');    
+  Route::resource('practitioner', 'PractitionerController');
+  Route::resource('valuelist', 'ValuelistController');  
 });

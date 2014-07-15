@@ -18,7 +18,8 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/advanced3', {templateUrl: 'partials/advanced.html'});
   $routeProvider.when('/advanced4', {templateUrl: 'partials/advanced.html'});
   $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
-  $routeProvider.when('/user', {templateUrl: 'partials/user.html'});
+  $routeProvider.when('/notsignedin', {templateUrl: 'partials/notsignedin.html', controller: 'UserController'});
+  $routeProvider.when('/user', {templateUrl: 'partials/user.html', controller: 'UserController'});
   $routeProvider.when('/advanced/practitioners', {templateUrl: 'partials/practitioners.html', controller: 'PractitionersController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
@@ -28,7 +29,7 @@ config(['$routeProvider', function($routeProvider) {
 //  $resourceProvider.defaults.stripTrailingSlashes = false;
 //}]);
 
-seroApp.controller('NavBarController', ['$scope', '$location', function(scope, location)
+seroApp.controller('NavBarController', ['$scope', '$location', 'UserInfo', function(scope, location, UserInfo)
 {
   scope.isActive = function (viewLocation)
   {
@@ -38,8 +39,18 @@ seroApp.controller('NavBarController', ['$scope', '$location', function(scope, l
   {
     return location.path().indexOf(viewLocation) == 0;
   };
-}
-]);
+  scope.userinfo = UserInfo;
+}]);
+
+seroApp.controller('UserController', ['$scope', 'UserInfo', function(scope, UserInfo)
+{
+  scope.userinfo = UserInfo;
+  scope.userid_to_impersonate = null;
+  scope.impersonate = function()
+  {
+    scope.userinfo.impersonate(scope.userid_to_impersonate);
+  };
+}]);
 
 /*
   .controller('PractitionersController', ['$scope', 'PractitionersService', function (scope, PractitionersService)
