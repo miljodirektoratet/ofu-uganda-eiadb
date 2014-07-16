@@ -1,9 +1,12 @@
 <div class="top-header">
-  <h1>Project X</h1>
-  <p class="lead"></p>
+  <h1>{{project.title}}</h1>
 </div>
 
 <div class="project">
-
-
+  <tabset>
+    <tab heading="Project"><ng-include src="projectTemplate"></ng-include></tab>
+    <tab heading="EIA and Permit"><ng-include src="eiasAndPermitsTemplate"></ng-include></tab>
+    <tab heading="Audit and Inspection" disabled="true"></tab>
+    <tab heading="Reports" disabled="true"></tab>
+  </tabset>
 </div>
