@@ -21,7 +21,7 @@ Route::get('/', function()
 
 Route::get('/client', function()
 {
-	$clientUrl = $_ENV['app_url']."/client/app/";
+	$clientUrl = $_ENV['app_url'].$_ENV['app_client'];
 	return Redirect::to($clientUrl);
 });
 

@@ -8,6 +8,7 @@
 return array(
 
 		'app_url' => 'https://uganda',
+		'app_client' => '/client/app',
 		'app_debug' => true,
 		'mysql_database' => 'databasename',
 		'mysql_username' => 'username',
