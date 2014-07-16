@@ -40,13 +40,13 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="longitude">Longitude</label>
-                <input type="text" decimal ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="longitude" ng-model="project.longitude" />
+                <input type="text" decimal ng-readonly="!canSave()" class="form-control input-sm" id="longitude" ng-model="project.longitude" />
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label for="latitude">Latitude</label>
-                <input type="text" decimal ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="latitude" ng-model="project.latitude" />
+                <input type="text" decimal ng-readonly="!canSave()" class="form-control input-sm" id="latitude" ng-model="project.latitude" />
               </div>
             </div>
           </div>
@@ -55,13 +55,13 @@
             <div class="col-md-7">
               <div class="form-group">
                 <label for="has_industrial_waste_water">Discharge of industrial waste water?</label>
-                <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="has_industrial_waste_water" ng-model="project.has_industrial_waste_water" />
+                <input type="text" ng-readonly="!canSave()" ng-required="false" class="form-control input-sm" id="has_industrial_waste_water" ng-model="project.has_industrial_waste_water" />
               </div>
             </div>
             <div class="col-md-5">
               <div class="form-group">
                 <label for="grade">Grade</label>
-                <input type="text" ng-readonly="!canSaveGrade()" ng-required="true" class="form-control input-sm" id="grade" ng-model="project.grade" />
+                <input type="text" ng-readonly="!canSaveGrade()" ng-required="false" class="form-control input-sm" id="grade" ng-model="project.grade" />
               </div>
             </div>
           </div>
