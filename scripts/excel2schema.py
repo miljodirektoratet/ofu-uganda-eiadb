@@ -15,7 +15,7 @@ phpFile = r"..\api\app\database\migrations\2014_06_03_No1_create_tables.php"
 oldHeaderSignature = "A10=Sortering,B10=dB fields,C10=Data type,D10=Shown in application,E10=Application fields,F10=Interface tab,G10=Field type,H10=Drop-down list,I10=Mandatory,J10=Input,K10=Roles,L10=Table,M10=Tabletype,N10=Comments,"
 fieldFilePattern = r"N:\Felles\Forurensning\2. Internasjonalt arbeid\2012. Uganda\Kravspek\Databasefields*.xlsx"
 
-doPrintModelInfo = False
+doPrintModelInfo = True
 
 def checkForChangesInHeader(headerRow):
 	headerSignature = ""	

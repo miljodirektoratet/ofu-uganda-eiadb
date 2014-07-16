@@ -19,9 +19,24 @@ services.factory('Practitioner', ['$resource', function ($resource)
     });
 }]);
 
+services.factory('Project', ['$resource', function ($resource)
+{
+  return $resource('/api/public/v1/project/:id', { id: '@id' },
+    {
+      'update': { method:'PUT', isArray: false }
+    });
+}]);
+
+services.factory('Organisation', ['$resource', function ($resource)
+{
+  return $resource('/api/public/v1/organisation/:id', { id: '@id' },
+    {
+      'update': { method:'PUT', isArray: false }
+    });
+}]);
+
 services.factory('Valuelist', ['$resource', function ($resource)
 {
-  // {headers: { 'auth-token': 'C3PO R2D2' }}
   return $resource('/api/public/v1/valuelist/:id', { id: '@id' });
 }]);
 

@@ -10,62 +10,61 @@
   <!--<span animate-new-element='d1'>ddddd</span>-->
 
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-md-8">
       <form class="form-inline" role="form">
         <div class="form-group">
           <label class="sr-only" for="filterText">Filter</label>
           <input type="text" class="form-control input-filter" id="filterText" placeholder="Filter (try anything, e.g. name, city, eia or audit)" ng-model="filterText">
         </div>
         <span>Count: {{(practitioners | filter:filterText).length}}</span>
-        <small class="pull-right">(Click close to save a row. No validations yet.)</small>
       </form>
     </div>
-    <div class="col-sm-4">
+    <div class="col-md-4">
       <button type="button" class="btn btn-success pull-right" ng-click="newPractitioner()" ng-disabled="!canSave()">New practitioner</button>
     </div>
-    <div class="col-sm-12"><hr/></div>
+    <div class="col-md-12"><hr/></div>
   </div>
 
-  <div class="row header hidden-xs">
-    <div class="col-sm-3">Person</div>
-    <div class="col-sm-3">Organisation name</div>
-    <div class="col-sm-3">Visiting address</div>
-    <div class="col-sm-1">City</div>
-    <div class="col-sm-2">Certificates</div>
+  <div class="row header visible-md visible-lg">
+    <div class="col-md-3">Person</div>
+    <div class="col-md-3">Organisation name</div>
+    <div class="col-md-3">Visiting address</div>
+    <div class="col-md-1">City</div>
+    <div class="col-md-2">Certificates</div>
   </div>
 
   <div class="row practitioner" ng-repeat="p in practitioners | filter:filterText">
-    <div class="col-sm-12">
+    <div class="col-md-12">
       <form role="form" name="form" novalidation>
         <div class="row master" ng-click="toggleRow(p);" ng-class="{selected: current==p, notvalid: form.$invalid}">
-          <div class="col-sm-3" title="id={{p.id}}">{{p.person}}</div>
-          <div class="col-sm-3">{{p.organisation_name}}</div>
-          <div class="col-sm-3 hidden-xs">{{p.visiting_address}}</div>
-          <div class="col-sm-1 hidden-xs">{{p.city}}</div>
-          <div class="col-sm-2">
+          <div class="col-md-3" title="id={{p.id}}">{{p.person}}</div>
+          <div class="col-md-3">{{p.organisation_name}}</div>
+          <div class="col-md-3 hidden-xs">{{p.visiting_address}}</div>
+          <div class="col-md-1 hidden-xs">{{p.city}}</div>
+          <div class="col-md-2">
             <span class="label certificate-label" ng-class="hasEia(p) ? 'label-success' :'label-default noCertificate'">EIA</span>
             <span class="label certificate-label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">EA</span>
-            <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current!=p">{{canSave() ? "Edit" : "Show"}}</button>
+            <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current!=p">{{canSave() ? "Edit" : "Open"}}</button>
             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current==p">Close</button>
             <span class="loader pull-right" ng-show="loading==p"></span>
           </div>
         </div>
         <div class="row detail" ng-if="current==p" ng-init="setCurrentForm(form)">
-          <div class="col-sm-12">
+          <div class="col-md-12">
             <div class="row">
-              <div class="col-sm-4">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="person">Person</label>
                   <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="person" ng-model="p.person" />
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-md-2">
                 <div class="form-group">
                   <label for="tin">TIN</label>
                   <input type="text" ng-readonly="!canSave()" integer class="form-control input-sm" id="tin" ng-model="p.tin"/>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label for="organisation_name">Organisation Name</label>
                   <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="organisation_name" ng-model="p.organisation_name"/>
@@ -73,19 +72,19 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label for="visiting_address">Visiting Address</label>
                   <input type="text" ng-readonly="!canSave()" class="form-control input-sm" id="visiting_address" ng-model="p.visiting_address" />
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-md-2">
                 <div class="form-group">
                   <label for="box_no">P.O. Box</label>
                   <input type="text" ng-readonly="!canSave()" integer ng-required="true" class="form-control input-sm" id="box_no" ng-model="p.box_no" />
                 </div>
               </div>
-              <div class="col-sm-4">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="city">City</label>
                   <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="city" ng-model="p.city" />
@@ -93,19 +92,19 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label for="phone">Phone</label>
                   <input type="text" ng-readonly="!canSave()" class="form-control input-sm" id="phone" ng-model="p.phone" />
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label for="fax">Fax</label>
                   <input type="text" ng-readonly="!canSave()" class="form-control input-sm" id="fax"  ng-model="p.fax" />
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label for="email">E-mail</label>
                   <input type="text" ng-readonly="!canSave()" class="form-control input-sm" id="email" ng-model="p.email" />
@@ -113,19 +112,19 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-4">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="qualifications">Qualifications</label>
                   <textarea ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" rows="3" id="qualifications" ng-model="p.qualifications"></textarea>
                 </div>
               </div>
-              <div class="col-sm-4">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="expertise">Expertise</label>
                   <textarea ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" rows="3" id="expertise" ng-model="p.expertise"></textarea>
                 </div>
               </div>
-              <div class="col-sm-4">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="email">Remarks</label>
                   <textarea ng-readonly="!canSave()" class="form-control input-sm" rows="3" id="remarks" ng-model="p.remarks"></textarea>
@@ -134,16 +133,16 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-8">
+              <div class="col-md-8">
                 <h4>Certificates</h4>
               </div>
-              <div class="col-sm-4">
+              <div class="col-md-4">
                 <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="deletePractitioner($index, p)" ng-disabled="!canSave()">{{p.is_new ? "Cancel new practitioner" : "Delete practitioner"}}</button>
               </div>
             </div>
 
             <div class="row certificates">
-              <div class="col-sm-12">
+              <div class="col-md-12">
                 <table class="table">
                   <thead>
                   <tr>

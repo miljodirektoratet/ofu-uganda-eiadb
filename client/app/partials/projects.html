@@ -1,0 +1,44 @@
+<div class="top-header">
+  <h1>Projects</h1>
+  <p class="lead">Lists all the projects. (When number of projects rises, we need to switch from filter to search.)</p>
+</div>
+
+<div class="projects">
+
+  <div class="row">
+    <div class="col-md-8">
+      <form class="form-inline" role="form">
+        <div class="form-group">
+          <label class="sr-only" for="filterText">Filter</label>
+          <input type="text" class="form-control input-filter" id="filterText" placeholder="Filter (try anything, e.g. title, location, or organisation)" ng-model="filterText">
+        </div>
+        <span>Count: {{(projects | filter:filterText).length}}</span>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <button type="button" class="btn btn-success pull-right" ng-click="goto('/projects/new');" ng-disabled="!canSave()">New project</button>
+    </div>
+    <div class="col-md-12"><hr/></div>
+  </div>
+
+  <div class="row header visible-md visible-lg">
+    <div class="col-md-3">Title</div>
+    <div class="col-md-3">Location</div>
+    <div class="col-md-3">Organisation</div>
+    <div class="col-md-2">Organisation City</div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <div class="row project" ng-repeat="p in projects | filter:filterText">
+    <div class="col-md-12">
+      <div class="row master" ng-click="goto('/projects/'+p.id);">
+        <div class="col-md-3" title="id={{p.id}}">{{p.title}}</div>
+        <div class="col-md-3">{{p.location}}</div>
+        <div class="col-md-3 hidden-xs" title="id={{p.organisation.id}}">{{p.organisation.name}}</div>
+        <div class="col-md-2 hidden-xs">{{p.organisation.city}}</div>
+        <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master">Open</button>
+      </div>
+    </div>
+  </div>
+
+</div>

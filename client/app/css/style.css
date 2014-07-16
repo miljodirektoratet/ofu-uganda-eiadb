@@ -15,12 +15,14 @@
 .practitioners
 {
 }
-.practitioners .header
+.practitioners .header,
+.projects .header
 {
     font-weight: bold;
     font-size: 13px;
 }
-.practitioners .practitioner .master
+.practitioners .practitioner .master,
+.projects .project .master
 {
     background-color: #f3f3f3;
     border-top:1px solid darkgray;
@@ -114,7 +116,8 @@
     background-color: #5cb85c;
 }
 
-.practitioners .input-filter
+.practitioners .input-filter,
+.projects .input-filter
 {
     min-width:400px;
 }
@@ -201,4 +204,20 @@ textarea.ng-invalid,
   position: absolute;
   top: -1000px;
   opacity:0;
+}
+
+.project .project-project,
+.project .project-eiasandpermits
+{
+    padding-top: 15px;
+}
+
+.project .project-project .project-project-project
+{
+    /*padding-right:8px;*/
+}
+
+.project .project-project .project-project-organisation
+{
+    /*padding-left:8px;*/
 }

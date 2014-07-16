@@ -31,15 +31,11 @@
       </div>
       <div class="navbar-collapse" collapse="isCollapsed">
         <ul class="nav navbar-nav">
+          <li ng-class="{ active: isAdvancedActive('/projects')}"><a href="#/projects">Projects</a></li>
           <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li ng-class="{ active: isAdvancedActive('/advanced/practitioners')}"><a href="#/advanced/practitioners">Practitioners</a></li>
-              <!--<li><a href="#/advanced1">Advanced 1</a></li>-->
-              <!--<li><a href="#/advanced2">Advanced 2</a></li>-->
-              <!--<li class="disabled"><a href="#/advanced3">Advanced 3</a></li>-->
-              <!--<li class="divider"></li>-->
-              <!--<li><a href="#/advanced4">Something else</a></li>-->
             </ul>
           </li>
           <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
@@ -69,6 +65,7 @@
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
+  <script src="js/practitionersController.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
   <script src="js/validations.js"></script>

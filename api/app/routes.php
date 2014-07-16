@@ -43,8 +43,9 @@ Route::get('signout', array('uses' => 'UserController@signout'));
 
 
 Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
-//Route::group(array('prefix' => 'v1'), function()
 {	
   Route::resource('practitioner', 'PractitionerController');
   Route::resource('valuelist', 'ValuelistController');  
+  Route::resource('project', 'ProjectController');
+  Route::resource('organisation', 'OrganisationController');
 });
