@@ -19,8 +19,10 @@ class ProjectController extends BaseController {
 
 	// GET /resource/:id
 	public function show($id)
-	{		
-		$project = Project::with('organisation')->find($id);
+	{				
+		$project = Project::
+			with('districts') // I'd like to limit the belongsToMany to only the district id, but this is not currently possible in Laravel.
+			->find($id);
 		return Response::json($project, 200);
 	}
 

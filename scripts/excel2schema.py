@@ -132,7 +132,7 @@ for row in dataSheet.rows[10:]:
 	if not row[1].value: continue # Ignore row if missing column name
 	
 	order, fieldname, datatype, visible, caption, uitab, fieldtype, valuelist, mandatory, inputtype, role, tablename = list(columnValues)
-	tablename = tablename.lower()
+	tablename = tablename.lower()	
 	fieldname = fieldname.lower()
 	datatype = datatype.lower()	
 	if fieldname == "id":

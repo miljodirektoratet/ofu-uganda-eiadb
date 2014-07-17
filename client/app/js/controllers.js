@@ -65,11 +65,12 @@ controllers.controller('ProjectController', ['$scope', '$routeParams', '$filter'
   scope.projectTemplate = 'partials/projectProject.html';
   scope.eiasAndPermitsTemplate = 'partials/projectEiasAndPermits.html';
 
+
   if (routeParams.id == "new")
   {
     var pData =
     {
-      'title': 'Project Title',
+      //'title': 'Project Title',
       'is_new':true
     };
     scope.project = new Project(pData);

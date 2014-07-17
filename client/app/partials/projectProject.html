@@ -28,6 +28,12 @@
                 <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="district_id" ng-model="project.district_id" />
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="additional_districs">Additional districts</label>
+                <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="additional_districs" ng-model="project.districts.length" />
+              </div>
+            </div>
           </div>
 
           <div class="row">

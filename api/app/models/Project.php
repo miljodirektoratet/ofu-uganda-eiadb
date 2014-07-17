@@ -14,6 +14,11 @@ class Project extends Eloquent
         return $this->belongsTo('Organisation');
     }
 
+    public function districts()
+    {
+      return $this->belongsToMany('District', 'additional_districts');
+    }        
+
     public static function boot()
     {        
         parent::boot();    
