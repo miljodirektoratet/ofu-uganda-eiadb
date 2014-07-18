@@ -65,3 +65,35 @@ directives.directive('hoverOnParent', [function()
     }
   }
 }]);
+
+
+directives.directive('coordinatePasting', function() {
+  return {
+    require: 'ngModel',
+
+    // What to do to make this work?
+
+    link: function(scope, elm, attrs, ctrl)
+    {
+
+      //console.log("viewValue", viewValue);
+      //0.356104, 32.581819
+      //viewValue='0.356104';
+      console.log("here");
+      ctrl.$setViewValue('0.12104');
+      ctrl.$render();
+//
+//      ctrl.$parsers.unshift(function(viewValue)
+//      {
+//
+//
+//      });
+//
+//      ctrl.$formatters.push(function (modelValue)
+//      {
+//        console.log("modelValue", modelValue);
+//        return modelValue;
+//      });
+    }
+  };
+});

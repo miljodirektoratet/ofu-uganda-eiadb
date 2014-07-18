@@ -7,13 +7,14 @@ class PractitionerController extends BaseController {
 	{
 		$withFunction = function ($query)
 		{
+			$year = intval(date("Y"))-1;
 			$query->select('id', 'practitioner_id', 'year', 'cert_type', 'is_cancelled')
-				->where('year', '=', 2013);
+				->where('year', '=', $year);
 		};				
 
 		$practitioners = Practitioner::
 			with(array('practitionerCertificates'=>$withFunction))
-			//->take(10)
+			//->take(3)
 			->get(array('id', 'person', 'organisation_name', 'visiting_address', 'city'));					
 	
 		return Response::json($practitioners->toArray(), 200); 

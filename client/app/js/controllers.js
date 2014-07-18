@@ -64,13 +64,14 @@ controllers.controller('ProjectController', ['$scope', '$routeParams', '$filter'
   scope.params = routeParams;
   scope.projectTemplate = 'partials/projectProject.html';
   scope.eiasAndPermitsTemplate = 'partials/projectEiasAndPermits.html';
-
-
+  scope.valuelists = Valuelist.get({'id':'all'}); // TODO: Singelton?
+  scope.forms = {};
   if (routeParams.id == "new")
   {
     var pData =
     {
       //'title': 'Project Title',
+      'has_industrial_waste_water':41,
       'is_new':true
     };
     scope.project = new Project(pData);
@@ -80,10 +81,18 @@ controllers.controller('ProjectController', ['$scope', '$routeParams', '$filter'
     scope.organisation = {};
     scope.project = Project.get({id:routeParams.id}, function(p)
     {
-      scope.organisation = Organisation.get({id:p.organisation_id});
-    });
+      //p.temp_districts = p.districts.map(function(d){return d.id});
 
+      scope.organisation = Organisation.get({id:p.organisation_id}, function(o)
+      {
+      });
+    });
   }
+
+  scope.saveProject = function(p)
+  {
+    console.log(p.temp_districts);
+  };
 
   scope.canSave = function()
   {

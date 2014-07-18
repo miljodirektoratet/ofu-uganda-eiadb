@@ -13,7 +13,6 @@ class ProjectController extends BaseController {
 		$projects = Project::		
 			with(array('organisation'=>$withFunction))			
 			->get(array('id', 'title', 'location', 'organisation_id'));					
-	
 		return Response::json($projects->toArray(), 200); 
 	}
 
@@ -22,7 +21,14 @@ class ProjectController extends BaseController {
 	{				
 		$project = Project::
 			with('districts') // I'd like to limit the belongsToMany to only the district id, but this is not currently possible in Laravel.
-			->find($id);
+			->find($id);		
+		$districtIds = array();
+		foreach ($project->districts as $district) 
+		{
+				array_push($districtIds, $district->id);
+		}		
+		$project["district_ids"] = $districtIds;	
+		unset($project["districts"]);
 		return Response::json($project, 200);
 	}
 

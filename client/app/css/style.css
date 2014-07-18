@@ -184,6 +184,7 @@
 input.ng-invalid,
 select.ng-invalid,
 textarea.ng-invalid,
+.select2-container.ng-invalid .select2-choice,
 .practitioners .practitioner .notvalid
 {
     background-color:#FFFF99;

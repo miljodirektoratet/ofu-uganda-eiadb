@@ -8,6 +8,10 @@ class ValuelistController extends BaseController {
 		$valuelists = array();
 		$valuelists["practitionertype"] = $this->practitionertype();
 		$valuelists["practitionermembertype"] = $this->practitionermembertype();
+		$valuelists["yesno"] = $this->yesno();
+		$valuelists["grade"] = $this->grade();
+		$valuelists["district"] = $this->district();
+		$valuelists["category"] = $this->category();
 
 		return Response::json($valuelists, 200); 
 	}
@@ -38,8 +42,33 @@ class ValuelistController extends BaseController {
 		return $this->getCodesFromArray(array(38,39));
 	}
 
+	private function yesno()
+	{
+		return $this->getCodesFromArray(array(40,41,42));
+	}
+
+	private function grade()
+	{
+		return $this->getCodesFromArray(array(43,44,45,46,47));
+	}
+
+	private function district()
+	{
+		$districts = District::	
+			get(array('id', 'district as description1'));
+		return $districts;		
+	}
+
+	private function category()
+	{
+		$districts = Category::			
+			get(array('id', 'description_long as description1'));
+		return $districts;		
+	}
+
 	private function getCodesFromArray($codeIds)
 	{
-		return $codes = Code::whereRaw("id in (" . join(",", $codeIds) . ")")->get()->toArray();
+		return $codes = Code::whereRaw("id in (" . join(",", $codeIds) . ")")
+			->get(array('id', 'description1', 'description2'));
 	}
 }

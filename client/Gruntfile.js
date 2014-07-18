@@ -9,14 +9,26 @@ module.exports = function (grunt)
     },
 
     concat: {
-      vendor: {
+      css: {
         files: {
-          '../build/app/vendor/angular.min.js': [
+          '../build/app/vendor/vendor.min.css': [
+            'bower_components/bootstrap/dist/css/bootstrap.min.css',
+            'bower_components/select2/select2.css',
+            'bower_components/select2-bootstrap-css/select2-bootstrap.css']
+        }
+      },
+      js: {
+        files: {
+          '../build/app/vendor/vendor.min.js': [
+            'bower_components/jquery/dist/jquery.min.js',
             'bower_components/angular/angular.min.js',
             'bower_components/angular-route/angular-route.min.js',
             'bower_components/angular-resource/angular-resource.min.js',
             'bower_components/angular-animate/angular-animate.min.js',
-            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js']
+            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+            'bower_components/select2/select2.js',
+            'app/js/select2.js',
+            'bower_components/lodash/dist/lodash.min.js']
         }
       }
     },
@@ -50,9 +62,9 @@ module.exports = function (grunt)
     copy: {
       vendor: {
         files: [
-          {expand: true, flatten: true, src: ['bower_components/bootstrap/dist/css/bootstrap.min.css'], dest: '../build/app/vendor/', filter: 'isFile'},
           {expand: true, flatten: true, src: ['bower_components/bootstrap/dist/fonts/*'], dest: '../build/app/vendor/fonts/', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/lodash/dist/lodash.min.js'], dest: '../build/app/vendor/', filter: 'isFile'}
+          {expand: true, flatten: true, src: ['bower_components/select2/select2.png'], dest: '../build/app/vendor/', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/select2/select2-spinner.gif'], dest: '../build/app/vendor/', filter: 'isFile'}
         ]
       },
       app: {
@@ -70,7 +82,7 @@ module.exports = function (grunt)
     {
       bootstrapCss:
       {
-        src: ['../build/app/vendor/bootstrap.min.css'],
+        src: ['../build/app/vendor/vendor.min.css'],
         overwrite: true,
         replacements: [{ from: '../fonts/', to: 'fonts/' }]
       },
@@ -86,11 +98,10 @@ module.exports = function (grunt)
         overwrite: true,
         replacements: [
           { from: /<!-- Style begin -->[\s\S]*<!-- Style end -->/, to:
-            '<link rel="stylesheet" href="vendor/bootstrap.min.css"/>\n\t' +
+            '<link rel="stylesheet" href="vendor/vendor.min.css"/>\n\t' +
             '<link rel="stylesheet" href="app.min.css"/>'},
           { from: /<!-- Script begin -->[\s\S]*<!-- Script end -->/, to:
-            '<script src="vendor/angular.min.js"></script>\n\t' +
-            '<script src="vendor/lodash.min.js"></script>\n\t' +
+            '<script src="vendor/vendor.min.js"></script>\n\t' +
             '<script src="app.min.js"></script>'}]
       }
     },

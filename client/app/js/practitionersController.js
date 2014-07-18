@@ -9,7 +9,7 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
   scope.current = null;
   scope.currentForm = null;
   scope.userinfo = UserInfo;
-  scope.valuelists = Valuelist.get({'id':'all'});
+  scope.valuelists = Valuelist.get({'id':'all'}); // TODO: Singelton?
   scope.practitioners = Practitioner.query();//{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
   var filterCertificates = function(certificates, certType, year)
@@ -17,7 +17,7 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
     if (!certificates) {return false;}
     var e = function(value)
     {
-      if (value.cert_type !== certType) {return false;}
+      if (value.cert_type != certType) {return false;}
       if (value.year !== year) {return false;}
       if (value.is_deleted) {return false;}
       if (value.is_cancelled) {return false;}

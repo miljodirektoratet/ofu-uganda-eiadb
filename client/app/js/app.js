@@ -6,6 +6,7 @@ var seroApp = angular.module('seroApp', [
   'ngResource',
   'ngAnimate',
   'ui.bootstrap',
+  'ui.select2',
   'seroApp.services',
   'seroApp.directives',
   'seroApp.controllers',

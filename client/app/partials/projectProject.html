@@ -2,10 +2,9 @@
 
   <div class="col-md-6 project-project-project">
     <div class="panel panel-default">
-      <div class="panel-heading"><h2 class="panel-title">Project</h2></div>
+      <div class="panel-heading" ng-click="saveProject(project)"><h2 class="panel-title">Project (Dirty:{{forms.projectform.$dirty}}, valid:{{forms.projectform.$valid}})</h2></div>
       <div class="panel-body">
-        <form role="form" name="form" novalidation>
-
+        <form role="form" name="forms.projectform" novalidation>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -16,7 +15,9 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="category_id">Category of project</label>
-                <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="category_id" ng-model="project.category_id" />
+                <select ui-select2="{allowClear:false}" ng-disabled="!canSave()" id="category_id" ng-required="true" class="form-control input-sm" ng-model="project.category_id">
+                  <option ng-repeat="v in valuelists.category" value="{{v.id}}">{{v.description1}}</option>
+                </select>
               </div>
             </div>
           </div>
@@ -25,13 +26,17 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="district_id">District</label>
-                <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="district_id" ng-model="project.district_id" />
+                <select ui-select2="{allowClear:false}" ng-disabled="!canSave()" id="district_id" ng-required="true" class="form-control input-sm" ng-model="project.district_id">
+                  <option ng-repeat="v in valuelists.district" value="{{v.id}}">{{v.description1}}</option>
+                </select>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="additional_districs">Additional districts</label>
-                <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm" id="additional_districs" ng-model="project.districts.length" />
+                <select ui-select2="{setPristine: true}" multiple="true" placeholder="Click to pick" ng-disabled="!canSave()" id="additional_districs" ng-required="true" class="form-control input-sm" ng-model="project.district_ids">
+                  <option ng-repeat="v in valuelists.district" value="{{v.id}}">{{v.description1}}</option>
+                </select>
               </div>
             </div>
           </div>
@@ -61,13 +66,18 @@
             <div class="col-md-7">
               <div class="form-group">
                 <label for="has_industrial_waste_water">Discharge of industrial waste water?</label>
-                <input type="text" ng-readonly="!canSave()" ng-required="false" class="form-control input-sm" id="has_industrial_waste_water" ng-model="project.has_industrial_waste_water" />
+                <select ui-select2="{allowClear:false}" ng-disabled="!canSave()" id="has_industrial_waste_water" ng-required="false" class="form-control input-sm" ng-model="project.has_industrial_waste_water">
+                  <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
+                </select>
               </div>
             </div>
             <div class="col-md-5">
               <div class="form-group">
                 <label for="grade">Grade</label>
-                <input type="text" ng-readonly="!canSaveGrade()" ng-required="false" class="form-control input-sm" id="grade" ng-model="project.grade" />
+                <select ui-select2="{allowClear:true}" ng-disabled="!canSaveGrade()" id="grade" ng-required="false" class="form-control input-sm" ng-model="project.grade">
+                  <option></option>
+                  <option ng-repeat="v in valuelists.grade" value="{{v.id}}">{{v.description1}}</option>
+                </select>
               </div>
             </div>
           </div>
@@ -83,13 +93,14 @@
         </form>
       </div>
     </div>
+
   </div>
 
   <div class="col-md-6 project-project-organisation">
     <div class="panel panel-default">
-      <div class="panel-heading"><h2 class="panel-title">Organisation</h2></div>
+      <div class="panel-heading"><h2 class="panel-title">Organisation (Dirty:{{organisationform.$dirty}}, valid:{{organisationform.$valid}})</h2></div>
       <div class="panel-body">
-        <form role="form" name="form" novalidation>
+        <form role="form" name="organisationform" novalidation>
 
           <div class="row">
             <div class="col-md-8">
@@ -146,7 +157,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" ng-readonly="!canSave()" class="form-control input-sm" id="email" ng-model="organisation.email" />
+                <input type="email" ng-readonly="!canSave()" class="form-control input-sm" id="email" ng-model="organisation.email" />
               </div>
             </div>
             <div class="col-md-6">

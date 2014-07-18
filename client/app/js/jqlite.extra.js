@@ -3,6 +3,7 @@
 angular.$ = angular.element;
 
 // jqLite `.parent([selector])`
+// This is needed by directive hoverOnParent, but only if the parent is a grand parent.
 angular.$.prototype.parent = function(sel) {
   if(!sel) return angular.$(this[0].parentNode);
   var list = [].slice.call(document.querySelectorAll(sel))

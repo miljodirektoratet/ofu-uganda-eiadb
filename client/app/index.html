@@ -9,6 +9,8 @@
 
   <!-- Style begin -->
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="../bower_components/select2/select2.css">
+  <link rel="stylesheet" href="../bower_components/select2-bootstrap-css/select2-bootstrap.css">
   <link rel="stylesheet" href="css/navbar.css"/>
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="stylesheet" href="css/animations.css"/>
@@ -55,11 +57,16 @@
   </div>
 
   <!-- Script begin -->
+  <!-- Make SURE to remove jquery when https://github.com/angular-ui/ui-select supports multiple items. For now, include because of angular-ui-select2. -->
+  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-route/angular-route.js"></script>
   <script src="../bower_components/angular-resource/angular-resource.js"></script>
   <script src="../bower_components/angular-animate/angular-animate.js"></script>
   <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="../bower_components/select2/select2.js"></script>
+  <!--<script src="../bower_components/angular-ui-select2/src/select2.js"></script>-->
+  <script src="js/select2.js"></script> <!-- Check comment inside select2.js file -->
   <script src="../bower_components/lodash/dist/lodash.js"></script>
   <script src="js/jqlite.extra.js"></script>
   <script src="js/app.js"></script>
