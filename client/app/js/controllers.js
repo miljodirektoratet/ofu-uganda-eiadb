@@ -66,6 +66,13 @@ controllers.controller('ProjectController', ['$scope', '$routeParams', '$filter'
   scope.eiasAndPermitsTemplate = 'partials/projectEiasAndPermits.html';
   scope.valuelists = Valuelist.get({'id':'all'}); // TODO: Singelton?
   scope.forms = {};
+  scope.isProjectLoading = true;
+  scope.isProjectSaving = false;
+  scope.isProjectSavingFinished = false;
+  scope.isOrganisationLoading = true;
+  scope.isOrganisationSaving = false;
+  scope.isOrganisationSavingFinished = false;
+
   if (routeParams.id == "new")
   {
     var pData =
@@ -75,6 +82,8 @@ controllers.controller('ProjectController', ['$scope', '$routeParams', '$filter'
       'is_new':true
     };
     scope.project = new Project(pData);
+    scope.isProjectLoading = false;
+    scope.isOrganisationLoading = false;
   }
   else
   {
@@ -82,16 +91,52 @@ controllers.controller('ProjectController', ['$scope', '$routeParams', '$filter'
     scope.project = Project.get({id:routeParams.id}, function(p)
     {
       //p.temp_districts = p.districts.map(function(d){return d.id});
-
+      scope.isProjectLoading = false;
       scope.organisation = Organisation.get({id:p.organisation_id}, function(o)
       {
+        scope.isOrganisationLoading = false;
       });
     });
   }
 
   scope.saveProject = function(p)
   {
-    console.log(p.temp_districts);
+//    console.log(p.district_ids);
+//    if (scope.isProjectSaving)
+//    {
+//      scope.isProjectSaving = false;
+//      scope.isProjectSavingFinished = true;
+//    }
+//    else
+//    {
+//      scope.isProjectSavingFinished = false;
+//      scope.isProjectSaving = true;
+//    }
+
+  };
+
+  scope.saveCurrentProject = function()
+  {
+    if (!scope.canSave() && !scope.canSaveGrade() )
+    {
+      return;
+    }
+
+    var p = scope.project;
+    if (p.is_new)
+    {
+     // p.$save({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+    }
+    else
+    {
+      scope.isProjectSavingFinished = false;
+      scope.isProjectSaving = true;
+      p.$update({}, function(p)
+      {
+        scope.isProjectSaving = false;
+        scope.isProjectSavingFinished = true;
+      });
+    }
   };
 
   scope.canSave = function()

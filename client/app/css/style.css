@@ -222,3 +222,10 @@ textarea.ng-invalid,
 {
     /*padding-left:8px;*/
 }
+
+.saving-message-inline
+{
+    padding:4px;
+    font-size: 12px;
+    color:#808080;
+}

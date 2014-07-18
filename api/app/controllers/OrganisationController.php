@@ -14,7 +14,7 @@ class OrganisationController extends BaseController {
 	// GET /resource/:id
 	public function show($id)
 	{		
-		$organisation = Organisation::find($id);
+		$organisation = Organisation::find($id);		
 		return Response::json($organisation, 200);
 	}
 
