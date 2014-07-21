@@ -1,11 +1,5 @@
 module.exports = function (grunt)
 {
-  var getCurrentVersion = function()
-  {
-    return grunt.file.readJSON("package.json").version;
-    //return require('./package.json').version;
-  }
-
   grunt.initConfig({
     clean: {
       options: {force: true},
@@ -96,17 +90,18 @@ module.exports = function (grunt)
         overwrite: true,
         replacements: [{ from: '../img/', to: 'img/' }]
       },
+
       index:
       {
         src: ['../build/app/index.html'],
         overwrite: true,
         replacements: [
           { from: /<!-- Style begin -->[\s\S]*<!-- Style end -->/, to:
-            '<link rel="stylesheet" href="vendor/vendor.min.css?v='+getCurrentVersion()+'"/>\n\t' +
-            '<link rel="stylesheet" href="app.min.css?v='+getCurrentVersion()+'"/>'},
+            '<link rel="stylesheet" href="vendor/vendor.min.css?v='+grunt.file.readJSON('package.json').version+'"/>\n\t' +
+            '<link rel="stylesheet" href="app.min.css?v='+grunt.file.readJSON('package.json').version+'"/>'},
           { from: /<!-- Script begin -->[\s\S]*<!-- Script end -->/, to:
-            '<script src="vendor/vendor.min.js?v='+getCurrentVersion()+'"></script>\n\t' +
-            '<script src="app.min.js?v='+getCurrentVersion()+'"></script>'}]
+            '<script src="vendor/vendor.min.js?v='+grunt.file.readJSON('package.json').version+'"></script>\n\t' +
+            '<script src="app.min.js?v='+grunt.file.readJSON('package.json').version+'"></script>'}]
       }
     },
 
