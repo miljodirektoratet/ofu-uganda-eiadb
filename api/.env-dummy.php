@@ -1,6 +1,6 @@
 <?php
 
-// Rename to one of the following:
+// Copy file to one of the following:
 // Development: .env.local.php
 // Test server: .env.test.php
 // Production server: .env.php

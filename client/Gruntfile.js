@@ -1,7 +1,11 @@
 module.exports = function (grunt)
 {
+  var package = require('./package.json');
+  var packageVersion = package.version;
 
   grunt.initConfig({
+
+
 
     clean: {
       options: {force: true},
@@ -98,11 +102,11 @@ module.exports = function (grunt)
         overwrite: true,
         replacements: [
           { from: /<!-- Style begin -->[\s\S]*<!-- Style end -->/, to:
-            '<link rel="stylesheet" href="vendor/vendor.min.css"/>\n\t' +
-            '<link rel="stylesheet" href="app.min.css"/>'},
+            '<link rel="stylesheet" href="vendor/vendor.min.css?v='+packageVersion+'"/>\n\t' +
+            '<link rel="stylesheet" href="app.min.css?v='+packageVersion+'"/>'},
           { from: /<!-- Script begin -->[\s\S]*<!-- Script end -->/, to:
-            '<script src="vendor/vendor.min.js"></script>\n\t' +
-            '<script src="app.min.js"></script>'}]
+            '<script src="vendor/vendor.min.js?v='+packageVersion+'"></script>\n\t' +
+            '<script src="app.min.js?v='+packageVersion+'"></script>'}]
       }
     },
 
