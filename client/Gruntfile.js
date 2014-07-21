@@ -1,6 +1,9 @@
 module.exports = function (grunt)
 {
   grunt.initConfig({
+
+    pkg: grunt.file.readJSON('package.json'),
+
     clean: {
       options: {force: true},
       build: ["../build/app/*"]
@@ -97,18 +100,17 @@ module.exports = function (grunt)
         overwrite: true,
         replacements: [
           { from: /<!-- Style begin -->[\s\S]*<!-- Style end -->/, to:
-            '<link rel="stylesheet" href="vendor/vendor.min.css?v='+grunt.file.readJSON('package.json').version+'"/>\n\t' +
-            '<link rel="stylesheet" href="app.min.css?v='+grunt.file.readJSON('package.json').version+'"/>'},
+            '<link rel="stylesheet" href="vendor/vendor.min.css?v=<%= pkg.version %>"/>\n\t' +
+            '<link rel="stylesheet" href="app.min.css?v=<%= pkg.version %>"/>'},
           { from: /<!-- Script begin -->[\s\S]*<!-- Script end -->/, to:
-            '<script src="vendor/vendor.min.js?v='+grunt.file.readJSON('package.json').version+'"></script>\n\t' +
-            '<script src="app.min.js?v='+grunt.file.readJSON('package.json').version+'"></script>'}]
+            '<script src="vendor/vendor.min.js?v=<%= pkg.version %>"></script>\n\t' +
+            '<script src="app.min.js?v=<%= pkg.version %>"></script>'}]
       }
     },
-
     bump: {
       options: {
         files: ['package.json', 'bower.json', 'app/js/services.js'],
-        updateConfigs: [],
+        updateConfigs: ['pkg'],
         commit: true,
         commitMessage: 'Release v%VERSION%',
         commitFiles: ['-a'], // '-a' for all files
