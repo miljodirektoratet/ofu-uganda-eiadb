@@ -23,13 +23,25 @@ $app = new Illuminate\Foundation\Application;
 | given environment, then we will automatically detect it for you.
 |
 */
-
+/*
 $env = $app->detectEnvironment(array(
 
 	'local' => array('PC-JOSSKA', 'Josteins-iMac.local'),
 	'test' => array('ip-10-155-179-190'),
-
 ));
+*/
+
+$env = $app->detectEnvironment( function () 
+{  
+  if (isset($_SERVER['APP_ENVIRONMENT'])) 
+  {  	
+    return $_SERVER['APP_ENVIRONMENT'];  
+  } 
+  else 
+  {
+  	return "local";    
+  }
+});
 
 /*
 |--------------------------------------------------------------------------

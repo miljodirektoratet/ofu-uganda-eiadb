@@ -35,10 +35,11 @@
 </head>
 <body>
 	<div class="welcome">		
-		<h1>SERO API</h1>
+		<h1>SERO API</h1>		
 	</div>
 
 	<?php
+	print("Environment is " . App::environment());
 //echo phpinfo();
 /*	$user = Auth::user();
 	print("A".$user->hasRole("Rolle 1"));

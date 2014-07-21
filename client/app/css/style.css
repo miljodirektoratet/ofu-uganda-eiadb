@@ -16,13 +16,15 @@
 {
 }
 .practitioners .header,
-.projects .header
+.projects .header,
+.project-project-new .header
 {
     font-weight: bold;
     font-size: 13px;
 }
 .practitioners .practitioner .master,
-.projects .project .master
+.projects .project .master,
+.project .project-project-new .master
 {
     background-color: #f3f3f3;
     border-top:1px solid darkgray;
@@ -111,28 +113,14 @@
     width: auto;
 }
 
-.bg-success
-{
-    background-color: #5cb85c;
-}
+
 
 .practitioners .input-filter,
-.projects .input-filter
+.projects .input-filter,
+.project .input-filter
 {
     min-width:400px;
 }
-
-
-.bgcolor-success
-{
-    background-color: #5cb85c;
-}
-.bgcolor-info
-{
-    background-color: #5bc0de;
-}
-
-
 
 
 #infoMessageBox
@@ -228,4 +216,24 @@ textarea.ng-invalid,
     padding:4px;
     font-size: 12px;
     color:#808080;
+}
+
+
+
+
+.bg-success
+{
+    background-color: #5cb85c;
+}
+.bgcolor-success
+{
+    background-color: #5cb85c;
+}
+.bgcolor-info
+{
+    background-color: #5bc0de;
+}
+.color-error
+{
+    color: #a94442;
 }

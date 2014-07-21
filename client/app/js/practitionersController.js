@@ -131,6 +131,7 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
       if (form.$dirty)
       {
         savePractitioner(oldP);
+        // TODO: This is happening before the callback. Tsk tsk.
         form.$setPristine();
       }
       else

@@ -19,6 +19,10 @@ class ExcelDataTableSeeder extends Seeder {
         DB::table('districts')->truncate();
         DB::table('practitioner_certificates')->truncate();
         DB::table('practitioners')->truncate();
+        DB::table('practitioners')->truncate();
+        DB::table('organisations')->truncate();
+        DB::table('projects')->truncate();
+        DB::table('additional_districts')->truncate();
 
         
         //$permission1 = Permission::create(array('name' => 'Rettighet 1', 'display_name' => 'Rettighet 1'));
@@ -26,6 +30,7 @@ class ExcelDataTableSeeder extends Seeder {
         //$role1->attachPermission($permission1);
         //$role2->attachPermission($permission1);
         //$role2->attachPermission($permission2);
+
 
         // seed begin
 $user1 = User::create(array(
@@ -4942,6 +4947,70 @@ $user30->attachRole($role7);
 $user30->attachRole($role8);
 
 // seed end
+
+
+
+$organisation1 = Organisation::create(array(
+	'name' => "Organisasjon nummer uno" ,
+	'visiting_address' => 'Sandhaugen 1',
+	'box_no' => 12345 ,	
+	'city' => "Oslo" ,
+	'contact_person' => "Jostein Skaar"	
+));
+
+$organisation2 = Organisation::create(array(
+	'name' => "Organisasjon nummer doss" ,
+	'visiting_address' => 'Hauglandsplass 13',
+	'box_no' => 23456 ,	
+	'city' => "Bergen" ,
+	'contact_person' => "Jostein Skaar"	
+));
+
+$organisation3 = Organisation::create(array(
+	'name' => "Organisasjon nummer drei" ,
+	'visiting_address' => 'Gategate 19',
+	'box_no' => 34567 ,	
+	'city' => "Kristiansand" ,
+	'contact_person' => "Jostein Skaar"	
+));
+
+$project1 = Project::create(array(
+	'title' => "Prosjet nummer ein",
+	'organisation_id' => $organisation2->id,
+	'category_id' =>  $category3->id,	
+	'district_id' => $district111->id,
+	'location' => "Lokasjon uno",
+	'has_industrial_waste_water' => $code41->id
+));
+
+$project2 = Project::create(array(
+	'title' => "Prosjet nummer two",
+	'organisation_id' => $organisation1->id,
+	'category_id' =>  $category6->id,	
+	'district_id' => $district3->id,
+	'location' => "Lokasjon dos",
+	'has_industrial_waste_water' => $code41->id
+));
+
+$project3 = Project::create(array(
+	'title' => "Prosjet nummer tress",
+	'organisation_id' => $organisation1->id,
+	'category_id' =>  $category8->id,	
+	'district_id' => $district11->id,
+	'location' => "Lokasjon tress",
+	'has_industrial_waste_water' => $code41->id
+));
+
+$project4 = Project::create(array(
+	'title' => "Prosjet nummer fjers",
+	'organisation_id' => $organisation1->id,
+	'category_id' =>  $category9->id,	
+	'district_id' => $district11->id,
+	'location' => "Lokasjon firr",
+	'has_industrial_waste_water' => $code40->id
+));
+
+
     }
 
 }

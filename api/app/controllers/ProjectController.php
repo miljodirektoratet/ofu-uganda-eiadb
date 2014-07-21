@@ -42,9 +42,10 @@ class ProjectController extends BaseController {
 
 		$inputData = Input::all();
 		$project = new Project();	   
-		$this->updateValuesInResource($project, $inputData);		
+		$this->updateValuesInResource($project, $inputData);
+		$project->created_by = Auth::user()->full_name;
 		$project->save();		
-
+		$this->handleAdditionalDistricts($project, $inputData);
 		return $this->show($project->id);
 	}	
 
@@ -56,15 +57,16 @@ class ProjectController extends BaseController {
 			return $this::notAuthorized();
 		}
 
-		$project = Project::find($id);
+		$project = Project::with('districts')->find($id);
 		if (!$project)
 		{
 			return Response::json(array('error' => true, 'message' => 'not found'), 404);
 		}
 
 		$inputData = Input::all();		
-		$this->updateValuesInResource($project, $inputData);
+		$this->updateValuesInResource($project, $inputData);		
 		$project->save();		
+		$this->handleAdditionalDistricts($project, $inputData);
     return $this->show($project->id);
 	}
 
@@ -81,8 +83,19 @@ class ProjectController extends BaseController {
 		return Response::json(array('is_deleted' => true), 200);
 	}
 
+	private function handleAdditionalDistricts($project, $inputData)
+	{								
+		$districtIds = array();
+		if (array_key_exists("district_ids", $inputData))
+		{
+			$districtIds = $inputData["district_ids"];	
+		}		
+		$project->districts()->sync($districtIds);	
+	}
+
 	private function updateValuesInResource($resource, $data)
 	{		
+		$changed = false;
 		foreach ($data as $key => $value)
 		{			
 			if (in_array($key, $resource["fillable"], true))
@@ -95,8 +108,14 @@ class ProjectController extends BaseController {
 				{					
 					// TODO: Validate.					
 					$resource[$key] = $value;
+					$changed = true;
 				}	    	    		
 			}	    	
+		}
+		if ($changed)
+		{
+			$resource["updated_by"] = Auth::user()->full_name;			
+			//$project->created_by = Auth::user()->full_name;
 		}
 	}
 

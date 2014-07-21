@@ -2,6 +2,20 @@
 
 /* Controllers */
 
+
+var SavingStateEnum =
+{
+  Loading : 'Loading',
+  Loaded : 'Loaded',
+  SavingStarted : 'Saving started',
+  SavingFinished : 'Saving finished',
+  SavingFailed : 'Saving failed',
+  Invalid : 'Form not valid'
+};
+
+
+
+
 var controllers = angular.module('seroApp.controllers', []);
 
 controllers.controller('DatePickerController', ['$scope', function (scope)
@@ -58,85 +72,148 @@ controllers.controller('ProjectsController', ['$scope', '$location', '$filter', 
 
 }]);
 
-controllers.controller('ProjectController', ['$scope', '$routeParams', '$filter', '$animate', 'UserInfo', 'Project', 'Organisation', 'Valuelist', function (scope, routeParams, filter, animate, UserInfo, Project, Organisation, Valuelist)
+controllers.controller('ProjectController', ['$scope', '$routeParams', '$filter', '$q', '$animate', 'UserInfo', 'Project', 'Organisation', 'Valuelist', function (scope, routeParams, filter, $q, animate, UserInfo, Project, Organisation, Valuelist)
 {
+  scope.SavingStateEnum = SavingStateEnum;
   scope.userinfo = UserInfo;
   scope.params = routeParams;
   scope.projectTemplate = 'partials/projectProject.html';
   scope.eiasAndPermitsTemplate = 'partials/projectEiasAndPermits.html';
   scope.valuelists = Valuelist.get({'id':'all'}); // TODO: Singelton?
-  scope.forms = {};
-  scope.isProjectLoading = true;
-  scope.isProjectSaving = false;
-  scope.isProjectSavingFinished = false;
-  scope.isOrganisationLoading = true;
-  scope.isOrganisationSaving = false;
-  scope.isOrganisationSavingFinished = false;
 
-  if (routeParams.id == "new")
+  scope.parts =
+  {
+    project:
+    {
+      form:null,
+      state:SavingStateEnum.Loading,
+      resource:null
+    },
+    organisation:
+    {
+      form:null,
+      state:SavingStateEnum.Loading,
+      resource:null
+    }
+  };
+
+  scope.selectOrganisation = function(o)
+  {
+    scope.parts.organisation.resource = o;
+    scope.createNewProject(o);
+    o.$get({}, function(o)
+    {
+      scope.parts.organisation.state = SavingStateEnum.Loaded;
+    });
+  };
+
+  scope.hasSelectedOrganisation = function()
+  {
+    return scope.parts.organisation.resource!=null;
+  };
+
+  scope.createNewOrganisation = function()
+  {
+    var oData =
+    {
+      is_new:true
+    };
+    scope.parts.organisation.resource = new Organisation(oData);
+    scope.parts.organisation.state = SavingStateEnum.Loaded;
+    scope.createNewProject(scope.parts.organisation.resource);
+  };
+
+  scope.createNewProject = function(o)
   {
     var pData =
     {
-      //'title': 'Project Title',
-      'has_industrial_waste_water':41,
-      'is_new':true
+      has_industrial_waste_water:41, // 41=No
+      organisation_id: o.id,
+      is_new:true
     };
-    scope.project = new Project(pData);
-    scope.isProjectLoading = false;
-    scope.isOrganisationLoading = false;
-  }
-  else
-  {
-    scope.organisation = {};
-    scope.project = Project.get({id:routeParams.id}, function(p)
-    {
-      //p.temp_districts = p.districts.map(function(d){return d.id});
-      scope.isProjectLoading = false;
-      scope.organisation = Organisation.get({id:p.organisation_id}, function(o)
-      {
-        scope.isOrganisationLoading = false;
-      });
-    });
-  }
-
-  scope.saveProject = function(p)
-  {
-//    console.log(p.district_ids);
-//    if (scope.isProjectSaving)
-//    {
-//      scope.isProjectSaving = false;
-//      scope.isProjectSavingFinished = true;
-//    }
-//    else
-//    {
-//      scope.isProjectSavingFinished = false;
-//      scope.isProjectSaving = true;
-//    }
-
+    scope.parts.project.resource = new Project(pData);
+    scope.parts.project.state = SavingStateEnum.Loaded;
   };
 
   scope.saveCurrentProject = function()
   {
-    if (!scope.canSave() && !scope.canSaveGrade() )
+    if (!scope.parts.project.resource.organisation_id)
     {
       return;
     }
+    scope.saveCurrent(scope.parts.project);
+  };
 
-    var p = scope.project;
-    if (p.is_new)
+  scope.saveCurrentOrganisation = function()
+  {
+    scope.saveCurrent(scope.parts.organisation).then(function(o)
     {
-     // p.$save({}, function(p){createDatesInJsonData(p);showSaveInfo();});
+      if (!scope.parts.project.resource.organisation_id)
+      {
+        scope.parts.project.resource.organisation_id = o.id;
+        scope.saveCurrentProject();
+      }
+    });
+  };
+
+  scope.saveCurrent = function(part)
+  {
+    var deferred = $q.defer();
+    var form = part.form;
+    if (!scope.canSave() && !scope.canSaveGrade() )
+    {
+      deferred.reject("Not authorized to save");
+    }
+    else if (form.$invalid)
+    {
+      part.state = SavingStateEnum.Invalid;
+      deferred.reject("Form is invalid");
+    }
+    else if (form.$pristine)
+    {
+      deferred.reject("Form is pristine");
     }
     else
     {
-      scope.isProjectSavingFinished = false;
-      scope.isProjectSaving = true;
-      p.$update({}, function(p)
+      part.state = SavingStateEnum.SavingStarted;
+      scope.saveResource(part.resource).then(function (data)
       {
-        scope.isProjectSaving = false;
-        scope.isProjectSavingFinished = true;
+        part.state = SavingStateEnum.SavingFinished;
+        part.form.$setPristine();
+        deferred.resolve(data);
+      }, function (reason)
+      {
+        part.state = SavingStateEnum.SavingFailed;
+        deferred.reject(reason);
       });
     }
+    return deferred.promise;
+  };
+
+  scope.saveResource = function(r)
+  {
+    var deferred = $q.defer();
+    if (r.is_new)
+    {
+      r.$save({}, function(data)
+      {
+        deferred.resolve(data);
+      }, function()
+      {
+        deferred.reject("Could not save new.");
+      });
+    }
+    else
+    {
+      r.$update({}, function(data)
+      {
+        deferred.resolve(data);
+      }, function()
+      {
+        deferred.reject("Could not save existing.");
+      });
+    }
+    return deferred.promise;
   };
 
   scope.canSave = function()
@@ -147,5 +224,22 @@ controllers.controller('ProjectController', ['$scope', '$routeParams', '$filter'
   {
     return scope.userinfo.info.role_7;
   };
+
+  if (routeParams.id == "new")
+  {
+    scope.organisations = Organisation.query();
+  }
+  else
+  {
+    scope.parts.organisation.resource = {};
+    scope.parts.project.resource = Project.get({id:routeParams.id}, function(p)
+    {
+      scope.parts.project.state = SavingStateEnum.Loaded;
+      scope.parts.organisation.resource = Organisation.get({id:p.organisation_id}, function(o)
+      {
+        scope.parts.organisation.state = SavingStateEnum.Loaded;
+      });
+    });
+  }
 
 }]);

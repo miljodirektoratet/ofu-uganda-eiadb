@@ -6,7 +6,7 @@ class OrganisationController extends BaseController {
 	public function index()
 	{	
 		$organisations = Organisation::						
-			get(array('id', 'name', 'city'));					
+			get(array('id', 'name', 'visiting_address', 'city', 'contact_person'));
 	
 		return Response::json($organisations->toArray(), 200); 
 	}
@@ -69,6 +69,7 @@ class OrganisationController extends BaseController {
 
 	private function updateValuesInResource($resource, $data)
 	{		
+		$changed = false;
 		foreach ($data as $key => $value)
 		{			
 			if (in_array($key, $resource["fillable"], true))
@@ -81,8 +82,14 @@ class OrganisationController extends BaseController {
 				{					
 					// TODO: Validate.					
 					$resource[$key] = $value;
+					$changed = true;
 				}	    	    		
 			}	    	
+		}
+		if ($changed)
+		{
+			$resource["updated_by"] = Auth::user()->full_name;			
+			//$project->created_by = Auth::user()->full_name;
 		}
 	}
 
