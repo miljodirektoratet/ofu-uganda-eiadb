@@ -7,7 +7,7 @@ class Project extends Eloquent
     protected $dates = ['deleted_at'];  
     protected $fillable = array('title','category_id','district_id','location','longitude','latitude','has_industrial_waste_water','grade','organisation_id','remarks');
     protected $hidden = array('deleted_at');
-	
+	protected $touches = array('Districts');
 
     public function organisation()
     {

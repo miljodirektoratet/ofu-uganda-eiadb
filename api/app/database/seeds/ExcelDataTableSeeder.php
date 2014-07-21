@@ -4956,6 +4956,8 @@ $organisation1 = Organisation::create(array(
 	'box_no' => 12345 ,	
 	'city' => "Oslo" ,
 	'contact_person' => "Jostein Skaar"	
+	,'updated_by' => 'Import'
+	,'created_by' => 'Import'
 ));
 
 $organisation2 = Organisation::create(array(
@@ -4964,6 +4966,8 @@ $organisation2 = Organisation::create(array(
 	'box_no' => 23456 ,	
 	'city' => "Bergen" ,
 	'contact_person' => "Jostein Skaar"	
+	,'updated_by' => 'Import'
+	,'created_by' => 'Import'
 ));
 
 $organisation3 = Organisation::create(array(
@@ -4972,6 +4976,8 @@ $organisation3 = Organisation::create(array(
 	'box_no' => 34567 ,	
 	'city' => "Kristiansand" ,
 	'contact_person' => "Jostein Skaar"	
+	,'updated_by' => 'Import'
+	,'created_by' => 'Import'
 ));
 
 $project1 = Project::create(array(
@@ -4981,6 +4987,8 @@ $project1 = Project::create(array(
 	'district_id' => $district111->id,
 	'location' => "Lokasjon uno",
 	'has_industrial_waste_water' => $code41->id
+	,'updated_by' => 'Import'
+	,'created_by' => 'Import'
 ));
 
 $project2 = Project::create(array(
@@ -4990,6 +4998,8 @@ $project2 = Project::create(array(
 	'district_id' => $district3->id,
 	'location' => "Lokasjon dos",
 	'has_industrial_waste_water' => $code41->id
+	,'updated_by' => 'Import'
+	,'created_by' => 'Import'
 ));
 
 $project3 = Project::create(array(
@@ -4999,6 +5009,8 @@ $project3 = Project::create(array(
 	'district_id' => $district11->id,
 	'location' => "Lokasjon tress",
 	'has_industrial_waste_water' => $code41->id
+	,'updated_by' => 'Import'
+	,'created_by' => 'Import'
 ));
 
 $project4 = Project::create(array(
@@ -5008,6 +5020,8 @@ $project4 = Project::create(array(
 	'district_id' => $district11->id,
 	'location' => "Lokasjon firr",
 	'has_industrial_waste_water' => $code40->id
+	,'updated_by' => 'Import'
+	,'created_by' => 'Import'
 ));
 
 

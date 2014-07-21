@@ -65,8 +65,8 @@ class ProjectController extends BaseController {
 
 		$inputData = Input::all();		
 		$this->updateValuesInResource($project, $inputData);		
-		$project->save();		
 		$this->handleAdditionalDistricts($project, $inputData);
+		$project->save();				
     return $this->show($project->id);
 	}
 
@@ -90,7 +90,12 @@ class ProjectController extends BaseController {
 		{
 			$districtIds = $inputData["district_ids"];	
 		}		
-		$project->districts()->sync($districtIds);	
+		$res = $project->districts()->sync($districtIds);	
+		$changes = count($res["attached"])+count($res["detached"])+count($res["updated"]);
+		if ($changes > 0)
+		{
+			$project["updated_by"] = Auth::user()->full_name;
+		}
 	}
 
 	private function updateValuesInResource($resource, $data)
@@ -114,7 +119,7 @@ class ProjectController extends BaseController {
 		}
 		if ($changed)
 		{
-			$resource["updated_by"] = Auth::user()->full_name;			
+			$resource["updated_by"] = Auth::user()->full_name;
 			//$project->created_by = Auth::user()->full_name;
 		}
 	}
@@ -129,4 +134,8 @@ class ProjectController extends BaseController {
 		return Response::json("Not authorized to perform this.", 403); // 403 Forbidden
 	}
 
+	private function log($text)
+	{
+		file_put_contents("C:\\Prosjekter\\serolog.txt", $text, FILE_APPEND | LOCK_EX);
+	}
 }
