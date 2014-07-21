@@ -2,7 +2,8 @@ module.exports = function (grunt)
 {
   var getCurrentVersion = function()
   {
-    return require('./package.json').version;
+    return grunt.file.readJSON("package.json").version;
+    //return require('./package.json').version;
   }
 
   grunt.initConfig({
