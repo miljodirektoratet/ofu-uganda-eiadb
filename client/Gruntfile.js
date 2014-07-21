@@ -1,12 +1,11 @@
 module.exports = function (grunt)
 {
-  var package = require('./package.json');
-  var packageVersion = package.version;
+  var getCurrentVersion = function()
+  {
+    return require('./package.json').version;
+  }
 
   grunt.initConfig({
-
-
-
     clean: {
       options: {force: true},
       build: ["../build/app/*"]
@@ -102,11 +101,11 @@ module.exports = function (grunt)
         overwrite: true,
         replacements: [
           { from: /<!-- Style begin -->[\s\S]*<!-- Style end -->/, to:
-            '<link rel="stylesheet" href="vendor/vendor.min.css?v='+packageVersion+'"/>\n\t' +
-            '<link rel="stylesheet" href="app.min.css?v='+packageVersion+'"/>'},
+            '<link rel="stylesheet" href="vendor/vendor.min.css?v='+getCurrentVersion()+'"/>\n\t' +
+            '<link rel="stylesheet" href="app.min.css?v='+getCurrentVersion()+'"/>'},
           { from: /<!-- Script begin -->[\s\S]*<!-- Script end -->/, to:
-            '<script src="vendor/vendor.min.js?v='+packageVersion+'"></script>\n\t' +
-            '<script src="app.min.js?v='+packageVersion+'"></script>'}]
+            '<script src="vendor/vendor.min.js?v='+getCurrentVersion()+'"></script>\n\t' +
+            '<script src="app.min.js?v='+getCurrentVersion()+'"></script>'}]
       }
     },
 
