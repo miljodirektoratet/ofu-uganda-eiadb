@@ -167,9 +167,9 @@ services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit'
         factory.eiapermit = ep;
       }
     }
-    else if (eps.length > 0)
+    else if (factory.eiaspermits.length > 0)
     {
-      factory.eiapermit = eps[0];
+      factory.eiapermit = factory.eiaspermits[0];
     }
   };
 
@@ -181,6 +181,7 @@ services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit'
 
     if (factory.project.id != params.projectId)
     {
+      factory.empty();
       factory.project = Project.get(params, function(p)
       {
         deferredProject.resolve(p);
@@ -235,7 +236,7 @@ services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit'
     factory.organisation = {};
     factory.eiaspermits = [];
     factory.eiapermit = {};
-    factory.currentEpId = 0;
+    //factory.currentEpId = 0;
   };
 
   factory.createNewProject = function(o)
