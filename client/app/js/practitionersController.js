@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('PractitionersController', ['$scope', '$filter', '$animate', 'UserInfo', 'Practitioner', 'Valuelist', function (scope, filter, animate, UserInfo, Practitioner, Valuelist)
+controllers.controller('PractitionersController', ['$scope', '$filter', '$animate', 'UserInfo', 'Practitioner', 'Valuelists', function (scope, filter, animate, UserInfo, Practitioner, Valuelists)
 {
   scope.certificateYearMin = 2000;
   scope.certificateYearMax = new Date().getFullYear()+1;
@@ -9,7 +9,7 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
   scope.current = null;
   scope.currentForm = null;
   scope.userinfo = UserInfo;
-  scope.valuelists = Valuelist.get({'id':'all'}); // TODO: Singelton?
+  scope.valuelists = Valuelists;
   scope.practitioners = Practitioner.query();//{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
   var filterCertificates = function(certificates, certType, year)

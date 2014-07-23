@@ -1,0 +1,41 @@
+<div class="project-eiasandpermits">
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" style="{width:400px;}" type="button" data-toggle="dropdown">
+          Dropdown yes Team leader: {{data.eiapermit.teamleader.person}}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="ep in data.eiaspermits" role="presentation"><a role="menuitem" href="#/projects/{{data.project.id}}/eiaspermits/{{ep.id}}">Team leader: {{ep.teamleader.person}}</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><h2 class="panel-title">EIA and Permit</h2></div>
+    <div class="panel-body">
+      <br/><br/>
+      <br/><br/>
+      <br/><br/>
+      <br/><br/>
+      <br/><br/>
+      current: {{data.eiapermit}}
+        <br/><br/>
+        <!--data.currentEpId: {{data.currentEpId}}-->
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><h2 class="panel-title">Documents</h2></div>
+    <div class="panel-body">
+      Rows...
+    </div>
+  </div>
+
+</div>
+

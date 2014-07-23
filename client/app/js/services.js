@@ -21,7 +21,7 @@ services.factory('Practitioner', ['$resource', function ($resource)
 
 services.factory('Project', ['$resource', function ($resource)
 {
-  return $resource('/api/public/v1/project/:id', { id: '@id' },
+  return $resource('/api/public/v1/project/:projectId', { projectId: '@id' },
     {
       'update': { method:'PUT', isArray: false }
     });
@@ -29,18 +29,32 @@ services.factory('Project', ['$resource', function ($resource)
 
 services.factory('Organisation', ['$resource', function ($resource)
 {
-  return $resource('/api/public/v1/organisation/:id', { id: '@id' },
+  return $resource('/api/public/v1/organisation/:organisationId', { organisationId: '@id' },
     {
       'update': { method:'PUT', isArray: false }
     });
 }]);
+
+services.factory('EiaPermit', ['$resource', function ($resource)
+{
+  return $resource('/api/public/v1/project/:projectId/eiapermit/:id', { projectId: '@projectId', id: '@id' },
+    {
+      'update': { method:'PUT', isArray: false }
+    });
+}]);
+
 
 services.factory('Valuelist', ['$resource', function ($resource)
 {
   return $resource('/api/public/v1/valuelist/:id', { id: '@id' });
 }]);
 
-services.service('UserInfo', ['$http', '$location', function ($http, $location)
+services.factory('Valuelists', ['Valuelist', function (Valuelist)
+{
+  return Valuelist.get({'id': 'all'});
+}]);
+
+services.factory('UserInfo', ['$http', '$location', function ($http, $location)
 {
   var userinfo = {info:{}};
   var emptyInfo =
@@ -118,4 +132,157 @@ services.service('UserInfo', ['$http', '$location', function ($http, $location)
   setUserInfo(null);
   getUserInfo();
   return userinfo;
+}]);
+
+services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit', function ($q, Project, Organisation, EiaPermit)
+{
+  var factory = {};
+  factory.project = {};
+  factory.organisation = {};
+  factory.eiaspermits = [];
+  factory.eiapermit = {};
+  //factory.getEiapermit = {};
+  //factory.currentEpId = 0;
+
+  factory.findEiaPermitById = function(eiapermitId)
+  {
+    var eiapermit = null;
+    angular.forEach(factory.eiaspermits, function(ep)
+    {
+      if (ep.id == eiapermitId)
+      {
+        eiapermit = ep;
+      }
+    });
+    return eiapermit;
+  }
+
+  factory.blahEiaPermit = function(params)
+  {
+    if (params.eiapermitId)
+    {
+      var ep = factory.findEiaPermitById(params.eiapermitId);
+      if (ep)
+      {
+        factory.eiapermit = ep;
+      }
+    }
+    else if (eps.length > 0)
+    {
+      factory.eiapermit = eps[0];
+    }
+  };
+
+  factory.retrieveProjectData = function(params)
+  {
+    var deferredProject = $q.defer();
+    var deferredOrganisation = $q.defer();
+    var deferredEiasPermits = $q.defer();
+
+    if (factory.project.id != params.projectId)
+    {
+      factory.project = Project.get(params, function(p)
+      {
+        deferredProject.resolve(p);
+        factory.organisation = Organisation.get({organisationId: p.organisation_id}, function(o)
+        {
+          deferredOrganisation.resolve(o);
+        });
+      });
+
+      factory.eiaspermits = EiaPermit.query(params, function(eps)
+      {
+        factory.blahEiaPermit(params);
+        deferredEiasPermits.resolve(eps);
+      });
+    }
+    else
+    {
+      deferredProject.resolve(factory.project);
+      deferredOrganisation.resolve(factory.organisation);
+      factory.blahEiaPermit(params);
+      deferredEiasPermits.resolve(factory.eiaspermits);
+    }
+    return [deferredProject.promise, deferredOrganisation.promise, deferredEiasPermits.promise];
+  };
+
+  factory.setOrganisation = function(o)
+  {
+    var deferred = $q.defer();
+    factory.organisation = o;
+    o.$get({}, function(o)
+    {
+      deferred.resolve(o);
+    });
+    return deferred.promise;
+  };
+
+  factory.setEiaPermit = function(ep)
+  {
+    var deferred = $q.defer();
+    factory.eiapermit = ep;
+//    ep.$get({}, function(ep)
+//    {
+//      deferred.resolve(ep);
+//    });
+    deferred.resolve(ep);
+    return deferred.promise;
+  };
+
+  factory.empty = function()
+  {
+    factory.project = {};
+    factory.organisation = {};
+    factory.eiaspermits = [];
+    factory.eiapermit = {};
+    factory.currentEpId = 0;
+  };
+
+  factory.createNewProject = function(o)
+  {
+    var pData =
+    {
+      has_industrial_waste_water:41, // 41=No
+      organisation_id: o.id,
+      is_new:true
+    };
+    factory.project = new Project(pData);
+  };
+
+  factory.createNewOrganisation = function()
+  {
+    var oData =
+    {
+      is_new:true
+    };
+    factory.organisation = new Organisation(oData);
+  };
+
+  factory.save = function(form, resource)
+  {
+    var deferred = $q.defer();
+    if (resource.is_new)
+    {
+      resource.$save({}, function(data)
+      {
+        deferred.resolve(data);
+      }, function()
+      {
+        deferred.reject("Saving new failed");
+      });
+    }
+    else
+    {
+      resource.$update({}, function(data)
+      {
+        deferred.resolve(data);
+      }, function()
+      {
+        deferred.reject("Saving exisiting failed");
+      });
+    }
+    return deferred.promise;
+  };
+
+  return factory;
 }]);

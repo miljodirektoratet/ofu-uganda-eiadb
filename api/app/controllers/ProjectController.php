@@ -25,7 +25,7 @@ class ProjectController extends BaseController {
 		$districtIds = array();
 		foreach ($project->districts as $district) 
 		{
-				array_push($districtIds, $district->id);
+			array_push($districtIds, $district->id);
 		}		
 		$project["district_ids"] = $districtIds;	
 		unset($project["districts"]);
@@ -119,14 +119,15 @@ class ProjectController extends BaseController {
 		}
 		if ($changed)
 		{
-			$resource["updated_by"] = Auth::user()->full_name;
-			//$project->created_by = Auth::user()->full_name;
+			$resource["updated_by"] = Auth::user()->full_name;			
 		}
 	}
 
 	private function canSave()
 	{
-		return Auth::user()->hasRole("Role 1");
+		// TODO: Granulate this.
+		return Auth::user()->hasRole("Role 1") || 
+			Auth::user()->hasRole("Role 7");
 	}
 
 	private function notAuthorized()
