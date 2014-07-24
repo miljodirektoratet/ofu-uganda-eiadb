@@ -41,7 +41,7 @@ module.exports = function (grunt)
         },
         files: {
           '../build/app/app.min.js': ['app/js/jqlite.extra.js', 'app/js/app.js',
-            'app/js/controllers.js', 'app/js/practitionersController.js',
+            'app/js/controllers.js', 'app/js/practitionersController.js', 'app/js/projectControllers.js',
             'app/js/directives.js', 'app/js/filters.js',
             'app/js/services.js',
             'app/js/validations.js']

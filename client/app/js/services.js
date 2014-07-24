@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "0.0.26"};
+var version = {"version": "0.0.27"};
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
@@ -37,7 +37,7 @@ services.factory('Organisation', ['$resource', function ($resource)
 
 services.factory('EiaPermit', ['$resource', function ($resource)
 {
-  return $resource('/api/public/v1/project/:projectId/eiapermit/:id', { projectId: '@projectId', id: '@id' },
+  return $resource('/api/public/v1/project/:projectId/eiapermit/:eiapermitId', { eiapermitId: '@id' },
     {
       'update': { method:'PUT', isArray: false }
     });
@@ -134,7 +134,7 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
   return userinfo;
 }]);
 
-services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit', function ($q, Project, Organisation, EiaPermit)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', function ($q, $filter, Project, Organisation, EiaPermit)
 {
   var factory = {};
   factory.project = {};
@@ -144,40 +144,12 @@ services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit'
   //factory.getEiapermit = {};
   //factory.currentEpId = 0;
 
-  factory.findEiaPermitById = function(eiapermitId)
-  {
-    var eiapermit = null;
-    angular.forEach(factory.eiaspermits, function(ep)
-    {
-      if (ep.id == eiapermitId)
-      {
-        eiapermit = ep;
-      }
-    });
-    return eiapermit;
-  }
-
-  factory.blahEiaPermit = function(params)
-  {
-    if (params.eiapermitId)
-    {
-      var ep = factory.findEiaPermitById(params.eiapermitId);
-      if (ep)
-      {
-        factory.eiapermit = ep;
-      }
-    }
-    else if (factory.eiaspermits.length > 0)
-    {
-      factory.eiapermit = factory.eiaspermits[0];
-    }
-  };
-
   factory.retrieveProjectData = function(params)
   {
     var deferredProject = $q.defer();
     var deferredOrganisation = $q.defer();
     var deferredEiasPermits = $q.defer();
+    var deferredEiaPermit =  $q.defer();
 
     if (factory.project.id != params.projectId)
     {
@@ -191,9 +163,13 @@ services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit'
         });
       });
 
-      factory.eiaspermits = EiaPermit.query(params, function(eps)
+      // params contains eiapermitId, so we can't user params directly.
+      factory.eiaspermits = EiaPermit.query(_.omit(params, 'eiapermitId'), function(eps)
       {
-        factory.blahEiaPermit(params);
+        factory.retrieveEiaPermit(params).then(function(ep)
+        {
+          deferredEiaPermit.resolve(ep);
+        });
         deferredEiasPermits.resolve(eps);
       });
     }
@@ -201,10 +177,48 @@ services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit'
     {
       deferredProject.resolve(factory.project);
       deferredOrganisation.resolve(factory.organisation);
-      factory.blahEiaPermit(params);
+      factory.retrieveEiaPermit(params).then(function(ep)
+      {
+        deferredEiaPermit.resolve(ep);
+      });
       deferredEiasPermits.resolve(factory.eiaspermits);
     }
-    return [deferredProject.promise, deferredOrganisation.promise, deferredEiasPermits.promise];
+    return [deferredProject.promise, deferredOrganisation.promise, deferredEiasPermits.promise, deferredEiaPermit.promise];
+  };
+
+  factory.retrieveEiaPermit = function(params)
+  {
+    var deferred = $q.defer();
+    if (params.eiapermitId)
+    {
+      var hits = $filter('filter')(factory.eiaspermits, {'id':params.eiapermitId});
+      if (hits.length==1)
+      {
+        factory.eiapermit = hits[0];
+        factory.eiapermit.$get(params, function(ep)
+        {
+          deferred.resolve(ep);
+        });
+      }
+    }
+    else if (factory.eiaspermits.length > 0)
+    {
+      if (_.isEmpty(factory.eiapermit))
+      {
+        factory.eiapermit = factory.eiaspermits[0];
+      }
+    }
+    return deferred.promise;
+  };
+
+  factory.getEiapermitSummary = function(ep)
+  {
+    var ep = ep || factory.eiapermit;
+    if (_.isEmpty(ep))
+    {
+      return "";
+    }
+    return "Status: " + ep.status + ". Team leader: " + ep.teamleader_id;
   };
 
   factory.setOrganisation = function(o)
@@ -236,7 +250,6 @@ services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit'
     factory.organisation = {};
     factory.eiaspermits = [];
     factory.eiapermit = {};
-    //factory.currentEpId = 0;
   };
 
   factory.createNewProject = function(o)
@@ -259,12 +272,26 @@ services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit'
     factory.organisation = new Organisation(oData);
   };
 
-  factory.save = function(form, resource)
+  factory.createNewEiaPermit = function(p)
+  {
+    var epData =
+    {
+      project_id: p.id,
+      is_new:true
+    };
+    factory.eiapermit = new EiaPermit(epData);
+    factory.eiaspermits.push(factory.eiapermit);
+  };
+
+  factory.save = function(params, form, resource)
   {
     var deferred = $q.defer();
     if (resource.is_new)
     {
-      resource.$save({}, function(data)
+      var saveParams = _.omit(params, function(value) {
+        return value == "new";
+      });
+      resource.$save(saveParams, function(data)
       {
         deferred.resolve(data);
       }, function()
@@ -274,7 +301,7 @@ services.factory('ProjectFactory', ['$q', 'Project', 'Organisation', 'EiaPermit'
     }
     else
     {
-      resource.$update({}, function(data)
+      resource.$update(params, function(data)
       {
         deferred.resolve(data);
       }, function()

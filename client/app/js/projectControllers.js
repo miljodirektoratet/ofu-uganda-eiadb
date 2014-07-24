@@ -74,7 +74,7 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
     else
     {
       part.state = SavingStateEnum.SavingStarted;
-      ProjectFactory.save(part.form, resource).then
+      ProjectFactory.save(scope.routeParams, part.form, resource).then
       (
         function (data)
         {
@@ -182,12 +182,12 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
   }
   else
   {
-    var deferreds = ProjectFactory.retrieveProjectData(scope.routeParams);
-    deferreds[0].then(function()
+    var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
+    promises[0].then(function()
     {
       scope.parts.project.state = SavingStateEnum.Loaded;
     });
-    deferreds[1].then(function()
+    promises[1].then(function()
     {
       scope.parts.organisation.state = SavingStateEnum.Loaded;
     });
@@ -195,28 +195,49 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
 }]);
 
 
-controllers.controller('EiasPermitsController', ['$scope', '$timeout', 'ProjectFactory', function (scope, $timeout, ProjectFactory)
+controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', function (scope, ProjectFactory)
 {
-  var deferreds = ProjectFactory.retrieveProjectData(scope.routeParams);
-  deferreds[2].then(function()
+  scope.isNewEiaPermit = false;
+  scope.parts =
   {
-    /*
-    // Hack: angular-ui ui-select2 is so not working well. Looking forward to ui-select.
-    $timeout(function()
+    eiapermit:
     {
-      scope.data.currentEpId = scope.data.hackTempCurrentEpId;
-    });*/
-  });/*
-  scope.setEiaPermit = function()
-  {
-    ProjectFactory.refreshEiapermit();
-  };*/
+      form:null,
+      state:SavingStateEnum.Loading
+    }
+  };
 
-  //scope.routeParams
-  //ProjectFactory.setEiaPermit()
+  scope.hasEiaPermit = function()
+  {
+    return !_.isEmpty(scope.data.eiapermit);
+  };
+
+  scope.saveCurrentEiaPermit = function()
+  {
+    var eiapermit = scope.data.eiapermit;
+    scope.saveCurrent(scope.parts.eiapermit, eiapermit).then(function(ep)
+    {
+      if (scope.isNewEiaPermit)
+      {
+        scope.goto("/projects/"+scope.data.project.id+"/eiaspermits/"+ep.id);
+      }
+    });
+  };
 
   scope.auth.canSave = function()
   {
     return scope.userinfo.info.role_1;
   };
+
+  var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
+  promises[3].then(function(ep)
+  {
+    scope.parts.eiapermit.state = SavingStateEnum.Loaded;
+  });
+
+  if (scope.routeParams.eiapermitId == "new")
+  {
+    ProjectFactory.createNewEiaPermit(scope.data.project);
+    scope.isNewEiaPermit = true;
+  }
 }]);

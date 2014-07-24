@@ -19,10 +19,15 @@ class EiaPermit extends Eloquent
         return $this->belongsTo('User');
     }    
 
-        public function teamleader()
+    public function teamleader()
     {
         return $this->belongsTo('Practitioner');
     }  
+
+    public function teammembers()
+    {
+        return $this->belongsToMany('Practitioner', 'team_members');
+    }        
 
     public static function boot()
     {        

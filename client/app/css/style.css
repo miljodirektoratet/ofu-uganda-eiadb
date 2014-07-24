@@ -219,7 +219,14 @@ textarea.ng-invalid,
 }
 
 
-
+.project .container-datepicker
+{
+    width:100%;
+}
+.project .container-datepicker .input-group-btn
+{
+    width:30px;
+}
 
 .bg-success
 {
@@ -236,4 +243,11 @@ textarea.ng-invalid,
 .color-error
 {
     color: #a94442;
+}
+
+
+.element-dropdown .btn,
+.element-dropdown .dropdown-menu
+{
+    width: 100%;
 }

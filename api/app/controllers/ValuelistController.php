@@ -12,6 +12,9 @@ class ValuelistController extends BaseController {
 		$valuelists["grade"] = $this->grade();
 		$valuelists["district"] = $this->district();
 		$valuelists["category"] = $this->category();
+		$valuelists["teamleader"] = $this->teamleader();
+		$valuelists["teammember"] = $this->teammember();
+		$valuelists["officer"] = $this->officer();
 
 		return Response::json($valuelists, 200); 
 	}
@@ -64,6 +67,42 @@ class ValuelistController extends BaseController {
 		$districts = Category::			
 			get(array('id', 'description_long as description1'));
 		return $districts;		
+	}
+
+	private function teamleader()
+	{		
+		$practitioners = Practitioner::
+			whereHas('practitionerCertificates', function($q)
+			{
+				$year = intval(date("Y"))-1;
+    		$q
+    			->where('year', '=', $year)
+    			->where('is_cancelled', '=', false)
+    			->where('conditions', '=', 38);
+			})
+			->get(array('id', 'person as description1'));
+		return $practitioners;		
+	}
+
+	private function teammember()
+	{		
+		$practitioners = Practitioner::
+			whereHas('practitionerCertificates', function($q)
+			{
+				$year = intval(date("Y"))-1;
+    		$q
+    			->where('year', '=', $year)
+    			->where('is_cancelled', '=', false);
+			})
+			->get(array('id', 'person as description1'));
+		return $practitioners;		
+	}
+
+	private function officer()
+	{
+		$users = User::			
+			get(array('id', 'full_name as description1'));
+		return $users;		
 	}
 
 	private function getCodesFromArray($codeIds)
