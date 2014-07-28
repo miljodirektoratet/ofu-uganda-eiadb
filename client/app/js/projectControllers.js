@@ -67,10 +67,6 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
       part.state = SavingStateEnum.Invalid;
       deferred.reject();
     }
-    else if (!scope.auth.canSave() && !scope.auth.canSaveGrade())
-    {
-      deferred.reject();
-    }
     else
     {
       part.state = SavingStateEnum.SavingStarted;
