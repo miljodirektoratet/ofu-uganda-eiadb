@@ -224,9 +224,38 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     });
   };
 
-  scope.auth.canSave = function()
+  scope.auth.canSave = function(field)
   {
-    return scope.userinfo.info.role_1;
+    switch(field)
+    {
+      case "teamleader_id":
+      case "practitioner_id":
+      case "cost":
+      case "status":
+        return scope.userinfo.info.role_1;
+      case "user_id":
+        return scope.userinfo.info.role_2;
+      case "inspection_recommended":
+      case "date_inspection":
+      case "officer_recommend":
+      case "fee":
+      case "date_sent_ded_approval":
+        return scope.userinfo.info.role_3;
+      case "date_fee_notification":
+      case "date_fee_payed":
+      case "fee_receipt_no":
+        return scope.userinfo.info.role_4;
+      case "decision":
+      case "date_decision":
+      case "designation":
+      case "date_certificate":
+      case "certificate_no":
+      case "date_cancelled":
+      case "remarks":
+        return scope.userinfo.info.role_5;
+      default:
+        return false;
+    }
   };
 
   var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
@@ -239,5 +268,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
   {
     ProjectFactory.createNewEiaPermit(scope.data.project);
     scope.isNewEiaPermit = true;
+    scope.parts.eiapermit.state = SavingStateEnum.Loaded;
   }
 }]);

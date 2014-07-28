@@ -10,11 +10,13 @@ class ValuelistController extends BaseController {
 		$valuelists["practitionermembertype"] = $this->practitionermembertype();
 		$valuelists["yesno"] = $this->yesno();
 		$valuelists["grade"] = $this->grade();
+		$valuelists["decision"] = $this->decision();
+		$valuelists["status"] = $this->status();
 		$valuelists["district"] = $this->district();
 		$valuelists["category"] = $this->category();
 		$valuelists["teamleader"] = $this->teamleader();
 		$valuelists["teammember"] = $this->teammember();
-		$valuelists["officer"] = $this->officer();
+		$valuelists["officer"] = $this->officer();		
 
 		return Response::json($valuelists, 200); 
 	}
@@ -53,6 +55,16 @@ class ValuelistController extends BaseController {
 	private function grade()
 	{
 		return $this->getCodesFromArray(array(43,44,45,46,47));
+	}
+
+	private function decision()
+	{
+		return $this->getCodesFromArray(array(1,2,3));
+	}	
+
+	private function status()
+	{
+		return $this->getCodesFromArray(array(15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37));
 	}
 
 	private function district()

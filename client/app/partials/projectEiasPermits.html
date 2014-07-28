@@ -42,7 +42,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="teamleader_id">Team leader</label>
-                  <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave()" id="teamleader_id" class="form-control input-sm" ng-model="data.eiapermit.teamleader_id">
+                  <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('teamleader_id')" id="teamleader_id" class="form-control input-sm" ng-model="data.eiapermit.teamleader_id">
                     <option ng-repeat="v in valuelists.teamleader" value="{{v.id}}">{{v.description1}}</option>
                   </select>
                 </div>
@@ -50,7 +50,7 @@
               <div class="col-md-8">
                 <div class="form-group">
                   <label for="team_members">Team members</label>
-                  <select ui-select2 multiple="true" placeholder="Click to pick" ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave()" id="team_members" class="form-control input-sm" ng-model="data.eiapermit.teammember_ids">
+                  <select ui-select2 multiple="true" placeholder="Click to pick" ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('practitioner_id')" id="team_members" class="form-control input-sm" ng-model="data.eiapermit.teammember_ids">
                     <option ng-repeat="v in valuelists.teammember" value="{{v.id}}">{{v.description1}}</option>
                   </select>
                 </div>
@@ -61,21 +61,32 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="cost">Cost of the proposed development</label>
-                  <input type="text" integer ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave()" class="form-control input-sm" id="cost" ng-model="data.eiapermit.cost" />
+                  <input type="text" integer ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('cost')" class="form-control input-sm" id="cost" ng-model="data.eiapermit.cost" />
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="user_id">The Officer assigned</label>
-                  <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave()" id="user_id" class="form-control input-sm" ng-model="data.eiapermit.user_id">
-                    <option ng-repeat="v in valuelists.officer" value="{{v.id}}">{{v.description1}}</option>
+                  <label for="status">Status</label>
+                  <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('status')" id="status" class="form-control input-sm" ng-model="data.eiapermit.status">
+                    <option ng-repeat="v in valuelists.status" value="{{v.id}}">{{v.description1}}</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
+                  <label for="user_id">The Officer assigned</label>
+                  <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('user_id')" id="user_id" class="form-control input-sm" ng-model="data.eiapermit.user_id">
+                    <option ng-repeat="v in valuelists.officer" value="{{v.id}}">{{v.description1}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
                   <label for="inspection_recommended">Inspection before approval?</label>
-                  <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave()" id="inspection_recommended" class="form-control input-sm" ng-model="data.eiapermit.inspection_recommended">
+                  <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('inspection_recommended')" id="inspection_recommended" class="form-control input-sm" ng-model="data.eiapermit.inspection_recommended">
                     <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
                   </select>
                 </div>
@@ -84,11 +95,135 @@
                 <div class="form-group">
                   <label for="date_inspection">Date of inspection</label>
                   <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave()" id="date_inspection" class="form-control input-sm input-date" ng-model="data.eiapermit.date_inspection" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
-                        <span class="input-group-btn">
-                          <button type="button" ng-disabled="!auth.canSave()" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
-                        </span>
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_inspection')" id="date_inspection" class="form-control input-sm input-date" ng-model="data.eiapermit.date_inspection" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_inspection')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
                   </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="officer_recommend">Recommendations by EIAO</label>
+                  <textarea ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('officer_recommend')" class="form-control input-sm" rows="3" id="officer_recommend" ng-model="data.eiapermit.officer_recommend"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="fee">Expected fees</label>
+                  <input type="text" decimal="6" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="data.eiapermit.fee" />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="date_sent_ded_approval">Date sent for approval</label>
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_sent_ded_approval')" id="date_sent_ded_approval" class="form-control input-sm input-date" ng-model="data.eiapermit.date_sent_ded_approval" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_sent_ded_approval')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="decision">Decision taken</label>
+                  <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('decision')" id="decision" class="form-control input-sm" ng-model="data.eiapermit.decision">
+                    <option ng-repeat="v in valuelists.decision" value="{{v.id}}">{{v.description1}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="date_decision">Date for decision</label>
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_decision')" id="date_decision" class="form-control input-sm input-date" ng-model="data.eiapermit.date_decision" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_decision')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="date_fee_notification">Date for fee notification</label>
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_notification')" id="date_fee_notification" class="form-control input-sm input-date" ng-model="data.eiapermit.date_fee_notification" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave()" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="date_fee_payed">Date invoice is payed</label>
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_payed')" id="date_fee_payed" class="form-control input-sm input-date" ng-model="data.eiapermit.date_fee_payed" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_fee_payed')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="fee_receipt_no">Fee receipt number</label>
+                  <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('fee_receipt_no')" class="form-control input-sm" id="fee_receipt_no" ng-model="data.eiapermit.fee_receipt_no" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="designation">Designation of the one who signed</label>
+                  <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('designation')" id="designation" class="form-control input-sm" ng-model="data.eiapermit.designation">
+                    <option ng-repeat="v in valuelists.officer" value="{{v.id}}">{{v.description1}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="date_certificate">Date on the certificate</label>
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_certificate')" id="date_certificate" class="form-control input-sm input-date" ng-model="data.eiapermit.date_certificate" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_certificate')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="certificate_no">Certificate number</label>
+                  <input type="text" integer ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('certificate_no')" class="form-control input-sm" id="certificate_no" ng-model="data.eiapermit.certificate_no" />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="date_cancelled">Certificate cancelled date</label>
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_cancelled')" id="date_cancelled" class="form-control input-sm input-date" ng-model="data.eiapermit.date_cancelled" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_cancelled')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="remarks">Remarks</label>
+                  <textarea ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('remarks')" class="form-control input-sm" rows="3" id="remarks" ng-model="data.eiapermit.remarks"></textarea>
                 </div>
               </div>
             </div>

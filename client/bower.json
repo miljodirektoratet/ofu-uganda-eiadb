@@ -1,6 +1,6 @@
 {
   "name": "Uganda",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "authors": [
     "Jostein Skaar <jostein.skaar@gmail.com>"
   ],
@@ -26,8 +26,5 @@
     "angular-ui-select2": "~0.0.5",
     "select2": "~3.4",
     "select2-bootstrap-css": "~1.3.1"
-  },
-  "resolutions": {
-    "angular": "1.3.0-beta.15"
   }
 }
