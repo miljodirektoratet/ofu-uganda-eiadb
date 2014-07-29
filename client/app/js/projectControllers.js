@@ -28,15 +28,15 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
 
   var getCurrentTab = function(path)
   {
-    if (path.contains("eiaspermits"))
+    if(_.contains(path, "eiaspermits"))
     {
       return ProjectTabEnum.EiasPermits;
     }
-    if (path.contains("auditsinspections"))
+    if(_.contains(path, "auditsinspections"))
     {
       return ProjectTabEnum.AuditsInspections;
     }
-    if (path.contains("reports"))
+    if(_.contains(path, "reports"))
     {
       return ProjectTabEnum.Reports;
     }
