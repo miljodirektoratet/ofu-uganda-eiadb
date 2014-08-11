@@ -43,6 +43,14 @@ services.factory('EiaPermit', ['$resource', function ($resource)
     });
 }]);
 
+services.factory('Document', ['$resource', function ($resource)
+{
+  return $resource('/api/public/v1/project/:projectId/eiapermit/:eiapermitId/document/:documentId', { documentId: '@id' },
+    {
+      'update': { method:'PUT', isArray: false }
+    });
+}]);
+
 
 services.factory('Valuelist', ['$resource', function ($resource)
 {
@@ -134,16 +142,16 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
   return userinfo;
 }]);
 
-services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Valuelists', function ($q, $filter, Project, Organisation, EiaPermit, Valuelists)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Valuelists', function ($q, $filter, Project, Organisation, EiaPermit, Document, Valuelists)
 {
   var factory = {};
   factory.project = {};
   factory.organisation = {};
   factory.eiaspermits = [];
   factory.eiapermit = {};
+  factory.documents = [];
+  factory.document = {};
   factory.valuelists = Valuelists;
-  //factory.getEiapermit = {};
-  //factory.currentEpId = 0;
 
   factory.retrieveProjectData = function(params)
   {
@@ -198,6 +206,10 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.eiapermit = hits[0];
         factory.eiapermit.$get(params, function(ep)
         {
+          factory.documents = Document.query(params, function(ds)
+          {
+
+          });
           deferred.resolve(ep);
         });
       }
@@ -257,6 +269,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
     factory.organisation = {};
     factory.eiaspermits = [];
     factory.eiapermit = {};
+    factory.documents = [];
+    factory.document = {};
   };
 
   factory.createNewProject = function(o)

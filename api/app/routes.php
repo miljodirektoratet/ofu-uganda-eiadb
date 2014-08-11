@@ -49,4 +49,5 @@ Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
   Route::resource('project', 'ProjectController');
   Route::resource('organisation', 'OrganisationController');
   Route::resource('project.eiapermit', 'EiaPermitController');
+  Route::resource('project.eiapermit.document', 'DocumentController');
 });

@@ -84,7 +84,7 @@ class EiaPermitController extends BaseController {
 	}
 
 	// DELETE /resource/:id/subresource/:subid	
-	public function destroy($id)
+	public function destroy($projectId, $id)
 	{
 		if (!$this::canSave())
 		{

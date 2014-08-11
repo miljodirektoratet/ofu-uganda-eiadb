@@ -12,6 +12,7 @@ class ValuelistController extends BaseController {
 		$valuelists["grade"] = $this->grade();
 		$valuelists["decision"] = $this->decision();
 		$valuelists["status"] = $this->status();
+		$valuelists["documenttype"] = $this->documenttype();
 		$valuelists["district"] = $this->district();
 		$valuelists["category"] = $this->category();
 		$valuelists["teamleader"] = $this->teamleader();
@@ -65,6 +66,11 @@ class ValuelistController extends BaseController {
 	private function status()
 	{
 		return $this->getCodesFromArray(array(15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37));
+	}
+
+	private function documenttype()
+	{
+		return $this->getCodesFromArray(array(8,9,10,11,12));
 	}
 
 	private function district()

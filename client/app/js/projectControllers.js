@@ -200,6 +200,11 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     {
       form:null,
       state:SavingStateEnum.Loading
+    },
+    document:
+    {
+      form:null,
+      state:SavingStateEnum.Loading
     }
   };
 
@@ -220,6 +225,41 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     });
   };
 
+  scope.saveCurrentDocument = function()
+  {
+    var document = scope.data.document;
+    scope.saveCurrent(scope.parts.document, document).then(function(d)
+    {
+    });
+  };
+
+  scope.toggleDocument = function(d)
+  {
+//    if (scope.loading)
+//    {
+//      //console.log("Currently loading. Please wait.");
+//      return;
+//    }
+    if (scope.data.document == d)
+    {
+      scope.data.document = {};
+    }
+    else
+    {
+      if (d.is_new)
+      {
+        scope.data.document = d;
+      }
+      else
+      {
+        d.$get(scope.routeParams, function(d)
+        {
+          scope.data.document = d;
+        });
+      }
+    }
+  };
+
   scope.auth.canSave = function(field)
   {
     switch(field)
@@ -230,6 +270,21 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
       case "practitioner_id":
       case "cost":
       case "status":
+      case "document.date_submitted":
+      case "document.sub_copy_no":
+      case "document.title":
+      case "document.type":
+      case "document.number":
+      case "document.code":
+      case "document.consultent":
+      case "document.director_copy_no":
+      case "document.date_sent_director":
+      case "document.coordinator_copy_no":
+      case "document.date_copies_coordinator":
+      case "document.date_next_appointment":
+      case "document.date_sent_from_dep":
+      case "document.folio_no":
+      case "document.remarks":
         return scope.userinfo.info.role_1;
       case "user_id":
         return scope.userinfo.info.role_2;
@@ -238,6 +293,8 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
       case "officer_recommend":
       case "fee":
       case "date_sent_ded_approval":
+      case "document.sub_final":
+      case "document.date_sent_officer":
         return scope.userinfo.info.role_3;
       case "date_fee_notification":
       case "date_fee_payed":
@@ -250,6 +307,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
       case "certificate_no":
       case "date_cancelled":
       case "remarks":
+      case "document.conclusion":
         return scope.userinfo.info.role_5;
       default:
         return false;

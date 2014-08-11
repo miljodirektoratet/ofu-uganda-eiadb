@@ -24,12 +24,19 @@
 }
 .practitioners .practitioner .master,
 .projects .project .master,
-.project .project-project-new .master
+.project .project-project-new .master,
+.documents .document .master
 {
     background-color: #f3f3f3;
-    border-top:1px solid darkgray;
+    /*border-top:1px solid darkgray;*/
     cursor: pointer;
     font-size: 13px;
+}
+
+.documents .document .master td
+{
+    padding-top:0px;
+    padding-bottom:0px;
 }
 
 .practitioners .practitioner .master .noCertificate
@@ -38,15 +45,22 @@
 }
 
 
-.practitioners .practitioner .detail
+.practitioners .practitioner .detail,
+.documents .document .detail
 {
     padding-top:5px;
     padding-bottom:10px;
     background-color: #FCFCFC;
 }
-.practitioners .practitioner .selected
+.practitioners .practitioner .selected,
+.documents .document .selected
 {
     background-color: #FCFCFC;
+}
+
+.documents .document .detail td
+{
+    border:none;
 }
 
 .btn-link-hover
@@ -173,7 +187,8 @@ input.ng-invalid,
 select.ng-invalid,
 textarea.ng-invalid,
 .select2-container.ng-invalid .select2-choice,
-.practitioners .practitioner .notvalid
+.practitioners .practitioner .notvalid,
+.documents .document .notvalid
 {
     background-color:#FFFF99;
 }
