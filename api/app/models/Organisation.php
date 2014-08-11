@@ -18,10 +18,10 @@ class Organisation extends Eloquent
     {        
         parent::boot();    
         
-        // Soft delete children as well        
+        // Soft delete children as well
         static::deleted(function($organisation)
         {
-            //$organisation->projects()->delete();            
+            //$organisation->projects()->delete();
         });
     }
 }

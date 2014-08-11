@@ -43,7 +43,6 @@ find . -type d -exec sudo chmod 775 {} \; && find . -type f -exec sudo chmod 664
 sudo chown ubuntu:ubuntu .gitignore cache/.gitignore logs/.gitignore meta/.gitignore sessions/.gitignore views/.gitignore
 ```
 - Set environment:
--- Test: `export APP_ENVIRONMENT=test`
--- Production: `export APP_ENVIRONMENT=production`
-- Open/close for https: Edit /etc/apache2/ports.conf and change between `Listen 443` and `Listen 127.0.0.1:443` (Remember `sudo service apache2 restart`).
+-- Goto api/bootstrap and follow instuctions in environment-dummy.php
+- Open/close for https: Edit /etc/apache2/ports.conf and change between `Listen 443` and `Listen 127.0.0.1:443` (remember `sudo service apache2 restart`)
 

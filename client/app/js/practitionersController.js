@@ -4,8 +4,8 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
 {
   scope.certificateYearMin = 2000;
   scope.certificateYearMax = new Date().getFullYear()+1;
-  //scope.certificateYearValid = new Date().getFullYear();
-  scope.certificateYearValid = 2013;
+  scope.certificateYearValid = new Date().getFullYear();
+  //scope.certificateYearValid = 2013;
   scope.current = null;
   scope.currentForm = null;
   scope.userinfo = UserInfo;

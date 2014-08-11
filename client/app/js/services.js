@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "0.0.31"};
+var version = {"version": "0.0.32"};
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
@@ -134,13 +134,14 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
   return userinfo;
 }]);
 
-services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', function ($q, $filter, Project, Organisation, EiaPermit)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Valuelists', function ($q, $filter, Project, Organisation, EiaPermit, Valuelists)
 {
   var factory = {};
   factory.project = {};
   factory.organisation = {};
   factory.eiaspermits = [];
   factory.eiapermit = {};
+  factory.valuelists = Valuelists;
   //factory.getEiapermit = {};
   //factory.currentEpId = 0;
 
@@ -218,7 +219,13 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
     {
       return "";
     }
-    return "Status: " + ep.status + ". Team leader: " + ep.teamleader_id;
+    var statusPart = "";
+    var status = _.find(factory.valuelists["status"], {'id': ep.status});
+    if (status)
+    {
+      statusPart = status.description1;
+    }
+    return "Status: " + statusPart;
   };
 
   factory.setOrganisation = function(o)

@@ -105,7 +105,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="officer_recommend">Recommendations by EIAO</label>
-                  <textarea ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('officer_recommend')" class="form-control input-sm" rows="3" id="officer_recommend" ng-model="data.eiapermit.officer_recommend"></textarea>
+                  <textarea ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('officer_recommend')" class="form-control input-sm" rows="2" id="officer_recommend" ng-model="data.eiapermit.officer_recommend"></textarea>
                 </div>
               </div>
             </div>
@@ -156,7 +156,7 @@
                   <div class="input-group container-datepicker" ng-controller="DatePickerController">
                     <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_notification')" id="date_fee_notification" class="form-control input-sm input-date" ng-model="data.eiapermit.date_fee_notification" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
                     <span class="input-group-btn">
-                      <button type="button" ng-disabled="!auth.canSave()" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                      <button type="button" ng-disabled="!auth.canSave('date_fee_notification')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
                     </span>
                   </div>
                 </div>
@@ -223,7 +223,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="remarks">Remarks</label>
-                  <textarea ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('remarks')" class="form-control input-sm" rows="3" id="remarks" ng-model="data.eiapermit.remarks"></textarea>
+                  <textarea ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('remarks')" class="form-control input-sm" rows="2" id="remarks" ng-model="data.eiapermit.remarks"></textarea>
                 </div>
               </div>
             </div>

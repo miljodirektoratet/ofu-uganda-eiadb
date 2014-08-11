@@ -44,7 +44,7 @@ def isNumber(s):
     except ValueError:
         return False
 
-ignoreColumns = ['id', 'is_deleted']
+ignoreColumns = ['id', 'is_deleted', 'soft_deletion']
 ignoreInTable = {'users':'roles'}
 connectionInfo = OrderedDict()
 connectionInfo['users'] = ['roles']
