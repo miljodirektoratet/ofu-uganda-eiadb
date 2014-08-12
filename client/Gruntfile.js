@@ -71,7 +71,7 @@ module.exports = function (grunt)
       app: {
         files: [
           {expand: true, flatten: true, src: ['app/index.html'], dest: '../build/app/', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['app/partials/*.html'], dest: '../build/app/partials/'},
+          //{expand: true, flatten: true, src: ['app/partials/*.html'], dest: '../build/app/partials/'},
           {expand: true, flatten: true, src: ['app/img/*.png'], dest: '../build/app/img/'},
           {expand: true, flatten: true, src: ['app/img/*.jpg'], dest: '../build/app/img/'},
           {expand: true, flatten: true, src: ['app/img/*.gif'], dest: '../build/app/img/'}
@@ -104,9 +104,33 @@ module.exports = function (grunt)
             '<link rel="stylesheet" href="app.min.css?v=<%= pkg.version %>"/>'},
           { from: /<!-- Script begin -->[\s\S]*<!-- Script end -->/, to:
             '<script src="vendor/vendor.min.js?v=<%= pkg.version %>"></script>\n\t' +
-            '<script src="app.min.js?v=<%= pkg.version %>"></script>'}]
+            '<script src="app.min.js?v=<%= pkg.version %>"></script>\n\t' +
+            '<script src="partials.min.js?v=<%= pkg.version %>"></script>'}]
       }
     },
+
+    ngtemplates:  {
+      seroApp:
+      {
+        cwd:      'app',
+        src:      'partials/*.html',
+        dest:     '../build/app/partials.min.js',
+        options:
+        {
+          htmlmin: {
+            collapseBooleanAttributes:      true,
+            collapseWhitespace:             true,
+            removeAttributeQuotes:          true,
+            removeComments:                 true, // Only if you don't use comment directives!
+            removeEmptyAttributes:          true,
+            removeRedundantAttributes:      true,
+            removeScriptTypeAttributes:     true,
+            removeStyleLinkTypeAttributes:  true
+          }
+        }
+      }
+    },
+
     bump: {
       options: {
         files: ['package.json', 'bower.json', 'app/js/services.js'],
@@ -181,12 +205,14 @@ module.exports = function (grunt)
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-release');
   grunt.loadNpmTasks('grunt-git');
+  grunt.loadNpmTasks('grunt-angular-templates');
 
   grunt.loadNpmTasks('grunt-contrib-watch');
 
 
   grunt.registerTask('build', [
     'clean:build',
+    'ngtemplates',
     'concat',
     'uglify',
     'cssmin',

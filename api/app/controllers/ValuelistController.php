@@ -119,7 +119,8 @@ class ValuelistController extends BaseController {
 	private function officer()
 	{
 		$users = User::			
-			get(array('id', 'full_name as description1'));
+			whereRaw("job_position_code in ('EIAO','EIAC')")
+			->get(array('id', 'full_name as description1'));
 		return $users;		
 	}
 

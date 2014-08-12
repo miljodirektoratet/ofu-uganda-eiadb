@@ -1,6 +1,6 @@
 {
   "name": "Uganda",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "",
   "main": "index.js",
   "dependencies": {},
@@ -19,7 +19,8 @@
     "grunt-release": "^0.7.0",
     "grunt-git": "^0.2.11",
     "karma-chrome-launcher": "^0.1.4",
-    "karma-jasmine": "^0.1.5"
+    "karma-jasmine": "^0.1.5",
+    "grunt-angular-templates": "^0.5.7"
   },
   "scripts": {
     "postinstall": "bower install",
