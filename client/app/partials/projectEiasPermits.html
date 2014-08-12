@@ -262,7 +262,7 @@
                     <th>Document title</th>
                     <th>Document code</th>
                     <th>Date sent to Director</th>
-                    <th>Date sent to coordinator from the dep.secretary</th>
+                    <th>Date sent to EIAC from dep.secretary</th>
                     <th>Date sent to the officer</th>
                     <th>Conclusion (PB/Tor accepted)</th>
                     <th><button type="button" class="btn btn-success btn-sm" ng-click="newDocument()" ng-disabled="!auth.canSave('new')">New</button></th>
@@ -374,13 +374,13 @@
                           <div class="row">
                             <div class="col-md-3">
                               <div class="form-group">
-                                <label for="document.coordinator_copy_no">No. of copies to coordinator</label>
+                                <label for="document.coordinator_copy_no">No. of copies to EIAC</label>
                                 <input type="text" integer ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.coordinator_copy_no')" class="form-control input-sm" id="document.coordinator_copy_no" ng-model="data.document.coordinator_copy_no" />
                               </div>
                             </div>
                             <div class="col-md-3">
                               <div class="form-group">
-                                <label for="document.date_copies_coordinator">Date copies sent to coordinator</label>
+                                <label for="document.date_copies_coordinator">Date copies sent to EIAC</label>
                                 <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_copies_coordinator')" class="form-control input-sm" id="document.date_copies_coordinator" ng-model="data.document.date_copies_coordinator" />
                                 <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
                                   <!--<input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_copies_coordinator')" id="document.date_copies_coordinator" class="form-control input-sm input-date" ng-model="data.document.date_copies_coordinator" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
@@ -407,7 +407,7 @@
                           <div class="row">
                             <div class="col-md-3">
                               <div class="form-group">
-                                <label for="document.date_sent_from_dep">Date sent to coordinator from the dep.secretary</label>
+                                <label for="document.date_sent_from_dep">Date sent to EIAC from dep.secretary</label>
                                 <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_from_dep')" class="form-control input-sm" id="document.date_sent_from_dep" ng-model="data.document.date_sent_from_dep" />
                                 <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
                                   <!--<input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_from_dep')" id="document.date_sent_from_dep" class="form-control input-sm input-date" ng-model="data.document.date_sent_from_dep" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->

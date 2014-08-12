@@ -16,6 +16,7 @@ sudo a2enmod auth_mysql
 sudo php5enmod mcrypt 
 sudo apt-get install phpmyadmin
 sudo service apache2 restart
+- Set memory limit for php: `sudo sed -i 'sudo sed -i 's/memory_limit = .*/memory_limit = 256M/' /etc/php5/apache2/php.ini`
 ```
 - Change timezone:
 ```
@@ -44,7 +45,9 @@ sudo chown ubuntu:ubuntu .gitignore cache/.gitignore logs/.gitignore meta/.gitig
 ```
 - Set environment:
 -- Goto api/bootstrap and follow instuctions in environment-dummy.php
+-- Goto api and follow instructions in .env-dummy.php
 - Open/close for https: Edit /etc/apache2/ports.conf and change between `Listen 443` and `Listen 127.0.0.1:443` (remember `sudo service apache2 restart`)
 - Redirect root to app: Create .htaccess file with `RedirectMatch ^/$ /app/#/`
+
 
 
