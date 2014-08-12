@@ -233,6 +233,12 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     });
   };
 
+  scope.newDocument = function()
+  {
+    ProjectFactory.createNewDocument(scope.data.eiapermit);
+    //scope.toggleDocument(scope.data.document);
+  }
+
   scope.toggleDocument = function(d)
   {
 //    if (scope.loading)

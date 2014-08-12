@@ -161,12 +161,13 @@
                   <tr ng-repeat="c in p.practitioner_certificates" ng-hide="c.is_deleted">
                     <td><input type="text" ng-readonly="!canSave()" ng-required="true" integer min="{{certificateYearMin}}" max="{{certificateYearMax}}" class="form-control input-sm input-year" id="c_year" ng-model="c.year"/></td>
                     <td>
-                      <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                        <input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm input-date" ng-model="c.date_of_entry" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
-                        <span class="input-group-btn">
-                          <button type="button" ng-disabled="!canSave()" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
-                        </span>
-                      </div>
+                      <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentEiaPermit()" ng-readonly="!canSave()" class="form-control input-sm" ng-model="c.date_of_entry" />
+                      <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
+                        <!--<input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm input-date" ng-model="c.date_of_entry" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
+                        <!--<span class="input-group-btn">-->
+                          <!--<button type="button" ng-disabled="!canSave()" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
+                        <!--</span>-->
+                      <!--</div>-->
                     </td>
                     <td>
                       <select ui-select2 ng-disabled="!canSave()" id="c_cert_type" ng-required="true" class="form-control input-sm" ng-model="c.cert_type">

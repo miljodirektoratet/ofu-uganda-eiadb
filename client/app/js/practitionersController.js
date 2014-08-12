@@ -209,7 +209,7 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
 
   function createDatesInJsonData(p)
   {
-    //return;
+    return;
     _.forEach(p.practitioner_certificates, function(c)
     {
       c.date_of_entry = new Date(c.date_of_entry);
