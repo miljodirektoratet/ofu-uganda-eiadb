@@ -2,12 +2,14 @@
 
 /* Services */
 
-var version = {"version": "0.0.34"};
+var version = {"version": "0.0.35"};
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-var services = angular.module('seroApp.services', []).
-  value("version", version.version);
+var services = angular.module('seroApp.services', []);
+
+services.value("version", version.version);
+
 
 services.factory('Practitioner', ['$resource', function ($resource)
 {

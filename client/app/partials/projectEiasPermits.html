@@ -240,7 +240,16 @@
       </div>
 
       <div class="panel panel-default">
-        <div class="panel-heading"><h2 class="panel-title">Documents</h2></div>
+        <div class="panel-heading">
+          <h2 class="panel-title" title="id={{data.eiapermit.id}}">Documents (Dirty:{{parts.document.form.$dirty}}, valid:{{parts.document.form.$valid}})
+            <span class="loader pull-right" ng-show="parts.document.state == SavingStateEnum.Loading"></span>
+            <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.Loaded && !data.document.is_new">Last changed by {{data.document.updated_by}}</span>
+            <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.SavingStarted">Saving...</span>
+            <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.SavingFinished">All changes saved</span>
+            <span class="saving-message-inline pull-right color-error" ng-show="parts.document.state == SavingStateEnum.SavingFailed">Saving failed</span>
+            <span class="saving-message-inline pull-right color-error" ng-show="parts.document.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+          </h2>
+        </div>
         <div class="panel-body">
           <div class="documents">
 

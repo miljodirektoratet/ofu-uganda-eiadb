@@ -1,5 +1,7 @@
 'use strict';
 
+var debug = true;
+
 // Declare app level module which depends on filters, and services
 var seroApp = angular.module('seroApp', [
   'ngRoute',
@@ -39,6 +41,7 @@ config(['$routeProvider', function($routeProvider)
 
 var SavingStateEnum =
 {
+  None : 'None',
   Loading : 'Loading',
   Loaded : 'Loaded',
   SavingStarted : 'Saving started',

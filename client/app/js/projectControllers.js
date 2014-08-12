@@ -204,7 +204,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     document:
     {
       form:null,
-      state:SavingStateEnum.Loading
+      state:SavingStateEnum.None
     }
   };
 
@@ -249,6 +249,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     if (scope.data.document == d)
     {
       scope.data.document = {};
+      scope.parts.document.state = SavingStateEnum.None;
     }
     else
     {

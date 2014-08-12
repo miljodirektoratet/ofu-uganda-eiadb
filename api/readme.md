@@ -45,4 +45,6 @@ sudo chown ubuntu:ubuntu .gitignore cache/.gitignore logs/.gitignore meta/.gitig
 - Set environment:
 -- Goto api/bootstrap and follow instuctions in environment-dummy.php
 - Open/close for https: Edit /etc/apache2/ports.conf and change between `Listen 443` and `Listen 127.0.0.1:443` (remember `sudo service apache2 restart`)
+- Redirect root to app: Create .htaccess file with `RedirectMatch ^/$ /app/#/`
+
 

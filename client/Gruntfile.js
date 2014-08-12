@@ -93,7 +93,12 @@ module.exports = function (grunt)
         overwrite: true,
         replacements: [{ from: '../img/', to: 'img/' }]
       },
-
+      debug:
+      {
+        src: ['../build/app/partials.min.js'],
+        overwrite: true,
+        replacements: [{ from: /\(Dirty.*?\)/g, to: '' }]
+      },
       index:
       {
         src: ['../build/app/index.html'],
