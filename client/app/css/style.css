@@ -269,6 +269,6 @@ textarea.ng-invalid,
 
 .warningfont
 {
-    color: #a94442;
+    color: red;
     font-weight: bold;
 }
