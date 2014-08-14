@@ -3,7 +3,7 @@
   <div class="col-md-12 project-project-new" ng-if="selectOrganisationMode">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2 class="panel-title">Select organisation for the new project</h2>
+        <h2 class="panel-title">Select developer for the new project</h2>
       </div>
       <div class="panel-body">
         <div class="row">
@@ -17,7 +17,7 @@
             </form>
           </div>
           <div class="col-md-4">
-            <button type="button" class="btn btn-success pull-right" ng-click="newProjectNewOganisation()" ng-disabled="!auth.canSave()">New organisation</button>
+            <button type="button" class="btn btn-success pull-right" ng-click="newProjectNewOganisation()" ng-disabled="!auth.canSave()">New developer</button>
           </div>
           <div class="col-md-12"><hr/></div>
         </div>
@@ -154,7 +154,7 @@
   <div class="col-md-6 project-project-organisation" ng-if="!selectOrganisationMode">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2 class="panel-title" title="id={{data.organisation.id}}">Organisation (Dirty:{{parts.organisation.form.$dirty}}, valid:{{parts.organisation.form.$valid}})
+        <h2 class="panel-title" title="id={{data.organisation.id}}">Developer (Dirty:{{parts.organisation.form.$dirty}}, valid:{{parts.organisation.form.$valid}})
           <span class="loader pull-right" ng-show="parts.organisation.state == SavingStateEnum.Loading"></span>
           <span class="saving-message-inline pull-right" ng-show="parts.organisation.state == SavingStateEnum.Loaded && !data.organisation.is_new">Last changed by {{data.organisation.updated_by}}</span>
           <span class="saving-message-inline pull-right" ng-show="parts.organisation.state == SavingStateEnum.SavingStarted">Saving...</span>
