@@ -239,6 +239,12 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     //scope.toggleDocument(scope.data.document);
   }
 
+  scope.deleteEiaPermit = function()
+  {
+    ProjectFactory.deleteEiaPermit(scope.data.eiapermit, scope.routeParams);
+    scope.goto("/projects/"+scope.data.project.id+"");
+  }
+
   scope.toggleDocument = function(d)
   {
 //    if (scope.loading)
@@ -272,6 +278,8 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     switch(field)
     {
       case "new":
+        return scope.userinfo.info.role_1;
+      case "delete":
         return scope.userinfo.info.role_1;
       case "teamleader_id":
       case "practitioner_id":

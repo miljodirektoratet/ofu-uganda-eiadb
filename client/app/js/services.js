@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "0.0.47"};
+var version = {"version": "0.0.48"};
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
@@ -316,6 +316,14 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
     };
     factory.document = new Document(dData);
     factory.documents.unshift(factory.document);
+  };
+
+  factory.deleteEiaPermit = function(ep, params)
+  {
+    var index = _.find(factory.eiapermits, {'id': ep.id});
+    ep.$delete(params);
+    factory.eiapermit = {};
+    factory.eiaspermits.splice(index, 1);
   };
 
   factory.save = function(params, form, resource)
