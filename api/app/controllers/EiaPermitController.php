@@ -113,6 +113,7 @@ class EiaPermitController extends BaseController {
 
 	private function updateValuesInResource($resource, $data)
 	{		
+		//$resource
 		$changed = false;
 		foreach ($data as $key => $value)
 		{			
@@ -122,6 +123,8 @@ class EiaPermitController extends BaseController {
 				{
 					$value = null;
 				}
+
+
 				if ($resource[$key] != $value)
 				{					
 					// TODO: Validate.					

@@ -185,7 +185,7 @@
             <div class="col-md-5">
               <div class="form-group">
                 <label for="visiting_address">Address</label>
-                <input type="text" ng-blur="saveCurrentOrganisation()" ng-readonly="!auth.canSave()" class="form-control input-sm" id="visiting_address" ng-model="data.organisation.visiting_address" />
+                <input type="text" ng-blur="saveCurrentOrganisation()" ng-readonly="!auth.canSave()" ng-required="true" class="form-control input-sm" id="visiting_address" ng-model="data.organisation.visiting_address" />
               </div>
             </div>
             <div class="col-md-3">
@@ -206,7 +206,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="text" ng-blur="saveCurrentOrganisation()" ng-readonly="!auth.canSave()" class="form-control input-sm" id="phone" ng-model="data.organisation.phone" />
+                <input type="text" ng-blur="saveCurrentOrganisation()" ng-readonly="!auth.canSave()" ng-required="true" class="form-control input-sm" id="phone" ng-model="data.organisation.phone" />
               </div>
             </div>
             <div class="col-md-6">
@@ -221,7 +221,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" ng-blur="saveCurrentOrganisation()" ng-readonly="!auth.canSave()" class="form-control input-sm" id="email" ng-model="data.organisation.email" />
+                <input type="email" ng-blur="saveCurrentOrganisation()" ng-readonly="!auth.canSave()" ng-required="true" class="form-control input-sm" id="email" ng-model="data.organisation.email" />
               </div>
             </div>
             <div class="col-md-6">
