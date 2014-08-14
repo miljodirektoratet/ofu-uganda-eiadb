@@ -78,6 +78,7 @@ class DocumentController extends BaseController {
 
 	private function updateValuesInResource($resource, $data)
 	{		
+		$dates = $resource->getDates();
 		$changed = false;
 		foreach ($data as $key => $value)
 		{			
@@ -87,6 +88,20 @@ class DocumentController extends BaseController {
 				{
 					$value = null;
 				}
+				if ($value && in_array($key, $dates))
+				{
+					$timestamp = strtotime($value);
+					if ($timestamp === false)
+					{
+						$value = null;
+					}
+					else
+					{
+						$value = new DateTime();
+						$value->setTimestamp($timestamp);
+					}
+				}					
+
 				if ($resource[$key] != $value)
 				{					
 					// TODO: Validate.					
@@ -101,7 +116,7 @@ class DocumentController extends BaseController {
 			//$project->created_by = Auth::user()->full_name;
 		}
 	}
-
+	
 	private function canSave()
 	{
 		// TODO: Granulate this.

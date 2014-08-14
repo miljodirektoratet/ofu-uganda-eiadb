@@ -40,12 +40,12 @@ class ValuelistController extends BaseController {
 
 	private function practitionertype()
 	{
-		return $this->getCodesFromArray(array(10,12));		
+		return $this->getCodesFromArray(array(50,51,52));		
 	}
 
 	private function practitionermembertype()
 	{
-		return $this->getCodesFromArray(array(38,39));
+		return $this->getCodesFromArray(array(38,39,53));
 	}
 
 	private function yesno()
@@ -96,7 +96,7 @@ class ValuelistController extends BaseController {
     		$q
     			->where('year', '=', $year)
     			->where('is_cancelled', '=', false)
-    			->where('conditions', '=', 38); // partnership.
+    			->whereRaw('conditions in (38,53)');
 			})
 			->get(array('id', 'person as description1'));
 		return $practitioners;		

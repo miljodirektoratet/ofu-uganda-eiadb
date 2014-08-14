@@ -27,14 +27,20 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
   };
   scope.hasEia = function(p)
   {
-    var has = filterCertificates(p.practitioner_certificates, 10, scope.certificateYearValid);
+    var has = filterCertificates(p.practitioner_certificates, 50, scope.certificateYearValid);
     p.cert_eia = has ? "eia":null;
     return has;
   };
   scope.hasAudit = function(p)
   {
-    var has = filterCertificates(p.practitioner_certificates, 12, scope.certificateYearValid);
+    var has = filterCertificates(p.practitioner_certificates, 51, scope.certificateYearValid);
     p.cert_au = has ? "audit":null;
+    return has;
+  };
+  scope.hasPartnership = function(p)
+  {
+    var has = filterCertificates(p.practitioner_certificates, 52, scope.certificateYearValid);
+    p.cert_ep = has ? "partnership":null;
     return has;
   };
 
@@ -212,7 +218,8 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
     return;
     _.forEach(p.practitioner_certificates, function(c)
     {
-      c.date_of_entry = new Date(c.date_of_entry);
+      var tempDate = new Date(c.date_of_entry.replace(/-/g,"/"));
+      c.date_of_entry = filter('date')(tempDate, 'd. MMM yyyy');
     });
   };
 

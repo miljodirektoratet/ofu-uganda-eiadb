@@ -118,25 +118,42 @@ class PractitionerController extends BaseController {
 
 	private function updateValuesInResource($resource, $data)
 	{		
+		$dates = $resource->getDates();
+		$changed = false;
 		foreach ($data as $key => $value)
 		{			
-			if ($key == "date_of_entry")
-			{
-				//var_dump($value);
-				//exit();
-			}
 			if (in_array($key, $resource["fillable"], true))
 			{				
 				if ($value === "")
 				{
 					$value = null;
 				}
+				if ($value && in_array($key, $dates))
+				{
+					$timestamp = strtotime($value);
+					if ($timestamp === false)
+					{
+						$value = null;
+					}
+					else
+					{
+						$value = new DateTime();
+						$value->setTimestamp($timestamp);
+					}
+				}					
+
 				if ($resource[$key] != $value)
 				{					
 					// TODO: Validate.					
 					$resource[$key] = $value;
+					$changed = true;
 				}	    	    		
 			}	    	
+		}
+		if ($changed)
+		{
+			$resource["updated_by"] = Auth::user()->full_name;
+			//$project->created_by = Auth::user()->full_name;
 		}
 	}
 

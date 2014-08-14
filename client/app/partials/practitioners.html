@@ -1,6 +1,7 @@
 <div class="top-header">
   <h1>Practitioners</h1>
-  <p class="lead">Edit practitioners and certificates for EIA and audits.</p>
+  <p class="lead">Information on practitioners and certificates for EIA and audits. When you click on a line, additional information will be shown. Green squares under certificate shows what a practitioner are certified for the current year.
+    <br/>You can filter the information in the query field.</p>
 </div>
 
 <div class="practitioners">
@@ -44,6 +45,7 @@
           <div class="col-md-2">
             <span class="label certificate-label" ng-class="hasEia(p) ? 'label-success' :'label-default noCertificate'">EIA</span>
             <span class="label certificate-label" ng-class="hasAudit(p) ? 'label-success' :'label-default noCertificate'">EA</span>
+            <span class="label certificate-label" ng-class="hasPartnership(p) ? 'label-success' :'label-default noCertificate'">EP</span>
             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current!=p">{{canSave() ? "Edit" : "Open"}}</button>
             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current==p">Close</button>
             <span class="loader pull-right" ng-show="loading==p"></span>
@@ -161,7 +163,7 @@
                   <tr ng-repeat="c in p.practitioner_certificates" ng-hide="c.is_deleted">
                     <td><input type="text" ng-readonly="!canSave()" ng-required="true" integer min="{{certificateYearMin}}" max="{{certificateYearMax}}" class="form-control input-sm input-year" id="c_year" ng-model="c.year"/></td>
                     <td>
-                      <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentEiaPermit()" ng-readonly="!canSave()" class="form-control input-sm" ng-model="c.date_of_entry" />
+                      <input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!canSave()" class="form-control input-sm" ng-model="c.date_of_entry" />
                       <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
                         <!--<input type="text" ng-readonly="!canSave()" ng-required="true" class="form-control input-sm input-date" ng-model="c.date_of_entry" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
                         <!--<span class="input-group-btn">-->

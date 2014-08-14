@@ -113,7 +113,7 @@ class EiaPermitController extends BaseController {
 
 	private function updateValuesInResource($resource, $data)
 	{		
-		//$resource
+		$dates = $resource->getDates();
 		$changed = false;
 		foreach ($data as $key => $value)
 		{			
@@ -123,7 +123,19 @@ class EiaPermitController extends BaseController {
 				{
 					$value = null;
 				}
-
+				if ($value && in_array($key, $dates))
+				{
+					$timestamp = strtotime($value. " + 1 day");
+					if ($timestamp === false)
+					{
+						$value = null;
+					}
+					else
+					{
+						$value = new DateTime();
+						$value->setTimestamp($timestamp);
+					}
+				}					
 
 				if ($resource[$key] != $value)
 				{					

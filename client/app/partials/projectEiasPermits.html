@@ -94,18 +94,18 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="date_inspection">Date of inspection</label>
-                  <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_inspection')" class="form-control input-sm" id="date_inspection" ng-model="data.eiapermit.date_inspection" />
-                  <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                    <!--<input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_inspection')" id="date_inspection" class="form-control input-sm input-date" ng-model="data.eiapermit.date_inspection" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                    <!--<span class="input-group-btn">-->
-                      <!--<button type="button" ng-disabled="!auth.canSave('date_inspection')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                    <!--</span>-->
-                  <!--</div>-->
+                  <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_inspection')" class="form-control input-sm" id="date_inspection" ng-model="data.eiapermit.date_inspection" />-->
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_inspection')" id="date_inspection" class="form-control input-sm input-date" ng-model="data.eiapermit.date_inspection" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_inspection')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="officer_recommend">Recommendations by EIAO</label>
+                  <label for="officer_recommend">Recommendations by reviewer</label>
                   <textarea ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('officer_recommend')" class="form-control input-sm" rows="2" id="officer_recommend" ng-model="data.eiapermit.officer_recommend"></textarea>
                 </div>
               </div>
@@ -121,13 +121,13 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="date_sent_ded_approval">Date sent for approval</label>
-                  <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_sent_ded_approval')" class="form-control input-sm" id="date_sent_ded_approval" ng-model="data.eiapermit.date_sent_ded_approval" />
-                  <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                    <!--<input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_sent_ded_approval')" id="date_sent_ded_approval" class="form-control input-sm input-date" ng-model="data.eiapermit.date_sent_ded_approval" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                    <!--<span class="input-group-btn">-->
-                      <!--<button type="button" ng-disabled="!auth.canSave('date_sent_ded_approval')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                    <!--</span>-->
-                  <!--</div>-->
+                  <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_sent_ded_approval')" class="form-control input-sm" id="date_sent_ded_approval" ng-model="data.eiapermit.date_sent_ded_approval" />-->
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_sent_ded_approval')" id="date_sent_ded_approval" class="form-control input-sm input-date" ng-model="data.eiapermit.date_sent_ded_approval" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_sent_ded_approval')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3">
@@ -141,13 +141,13 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="date_decision">Date for decision</label>
-                  <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_decision')" class="form-control input-sm" id="date_decision" ng-model="data.eiapermit.date_decision" />
-                  <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                    <!--<input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_decision')" id="date_decision" class="form-control input-sm input-date" ng-model="data.eiapermit.date_decision" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                    <!--<span class="input-group-btn">-->
-                      <!--<button type="button" ng-disabled="!auth.canSave('date_decision')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                    <!--</span>-->
-                  <!--</div>-->
+                  <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_decision')" class="form-control input-sm" id="date_decision" ng-model="data.eiapermit.date_decision" />-->
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_decision')" id="date_decision" class="form-control input-sm input-date" ng-model="data.eiapermit.date_decision" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_decision')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -156,25 +156,25 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="date_fee_notification">Date for fee notification</label>
-                  <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_notification')" class="form-control input-sm" id="date_fee_notification" ng-model="data.eiapermit.date_fee_notification" />
-                  <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                    <!--<input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_notification')" id="date_fee_notification" class="form-control input-sm input-date" ng-model="data.eiapermit.date_fee_notification" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                    <!--<span class="input-group-btn">-->
-                      <!--<button type="button" ng-disabled="!auth.canSave('date_fee_notification')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                    <!--</span>-->
-                  <!--</div>-->
+                  <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_notification')" class="form-control input-sm" id="date_fee_notification" ng-model="data.eiapermit.date_fee_notification" />-->
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_notification')" id="date_fee_notification" class="form-control input-sm input-date" ng-model="data.eiapermit.date_fee_notification" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_fee_notification')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="date_fee_payed">Date invoice is payed</label>
-                  <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_payed')" class="form-control input-sm" id="date_fee_payed" ng-model="data.eiapermit.date_fee_payed" />
-                  <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                    <!--<input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_payed')" id="date_fee_payed" class="form-control input-sm input-date" ng-model="data.eiapermit.date_fee_payed" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                    <!--<span class="input-group-btn">-->
-                      <!--<button type="button" ng-disabled="!auth.canSave('date_fee_payed')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                    <!--</span>-->
-                  <!--</div>-->
+                  <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_payed')" class="form-control input-sm" id="date_fee_payed" ng-model="data.eiapermit.date_fee_payed" />-->
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_payed')" id="date_fee_payed" class="form-control input-sm input-date" ng-model="data.eiapermit.date_fee_payed" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_fee_payed')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3">
@@ -197,13 +197,13 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="date_certificate">Date on the certificate</label>
-                  <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_certificate')" class="form-control input-sm" id="date_certificate" ng-model="data.eiapermit.date_certificate" />
-                  <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                    <!--<input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_certificate')" id="date_certificate" class="form-control input-sm input-date" ng-model="data.eiapermit.date_certificate" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                    <!--<span class="input-group-btn">-->
-                      <!--<button type="button" ng-disabled="!auth.canSave('date_certificate')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                    <!--</span>-->
-                  <!--</div>-->
+                  <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_certificate')" class="form-control input-sm" id="date_certificate" ng-model="data.eiapermit.date_certificate" />-->
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_certificate')" id="date_certificate" class="form-control input-sm input-date" ng-model="data.eiapermit.date_certificate" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_certificate')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3">
@@ -215,13 +215,13 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="date_cancelled">Certificate cancelled date</label>
-                  <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_cancelled')" class="form-control input-sm" id="date_cancelled" ng-model="data.eiapermit.date_cancelled" />
-                  <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                    <!--<input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_cancelled')" id="date_cancelled" class="form-control input-sm input-date" ng-model="data.eiapermit.date_cancelled" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                    <!--<span class="input-group-btn">-->
-                      <!--<button type="button" ng-disabled="!auth.canSave('date_cancelled')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                    <!--</span>-->
-                  <!--</div>-->
+                  <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_cancelled')" class="form-control input-sm" id="date_cancelled" ng-model="data.eiapermit.date_cancelled" />-->
+                  <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                    <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_cancelled')" id="date_cancelled" class="form-control input-sm input-date" ng-model="data.eiapermit.date_cancelled" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!auth.canSave('date_cancelled')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -270,12 +270,12 @@
                   </thead>
                   <tbody class="document" ng-repeat="d in data.documents">
                     <tr class="master" ng-click="toggleDocument(d);" ng-class="{selected: data.document==d, notvalid: data.document==d && parts.document.form.$invalid}">
-                      <td>{{d.date_submitted}}</td>
+                      <td>{{d.date_submitted | date:'d MMM yyyy'}}</td>
                       <td>{{d.title}}</td>
                       <td>{{d.code}}</td>
-                      <td>{{d.date_sent_director}}</td>
-                      <td>{{d.date_sent_from_dep}}</td>
-                      <td>{{d.date_sent_officer}}</td>
+                      <td>{{d.date_sent_director | date:'d MMM yyyy'}}</td>
+                      <td>{{d.date_sent_from_dep | date:'d MMM yyyy'}}</td>
+                      <td>{{d.date_sent_officer | date:'d MMM yyyy'}}</td>
                       <td>{{d.conclusion}}</td>
                       <td>
                         <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="data.document!=d">{{auth.canSave('new') ? "Edit" : "Open"}}</button>
@@ -290,19 +290,19 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.date_submitted">Date of submission</label>
-                                <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_submitted')" class="form-control input-sm" id="document.date_submitted" ng-model="data.document.date_submitted" />
-                                <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                                  <!--<input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_submitted')" id="document.date_submitted" class="form-control input-sm input-date" ng-model="data.document.date_submitted" datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                                  <!--<span class="input-group-btn">-->
-                                    <!--<button type="button" ng-disabled="!auth.canSave('document.date_submitted')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                                  <!--</span>-->
-                                <!--</div>-->
+                                <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_submitted')" class="form-control input-sm" id="document.date_submitted" ng-model="data.document.date_submitted" />-->
+                                <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                  <input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_submitted')" id="document.date_submitted" class="form-control input-sm input-date" ng-model="data.document.date_submitted" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" ng-disabled="!auth.canSave('document.date_submitted')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                                  </span>
+                                </div>
                               </div>
                             </div>
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.sub_final">Final submission</label>
-                                <select ui-select2 ng-change="saveCurrentDocument()" ng-required="true" ng-disabled="!auth.canSave('document.sub_final')" id="document.sub_final" class="form-control input-sm" ng-model="data.document.sub_final">
+                                <select ui-select2 ng-change="saveCurrentDocument()" ng-disabled="!auth.canSave('document.sub_final')" id="document.sub_final" class="form-control input-sm" ng-model="data.document.sub_final">
                                   <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
                                 </select>
                               </div>
@@ -360,13 +360,13 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.date_sent_director">Date sent to Director</label>
-                                <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_sent_director')" class="form-control input-sm" id="document.date_sent_director" ng-model="data.document.date_sent_director" />
-                                <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                                  <!--<input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_sent_director')" id="document.date_sent_director" class="form-control input-sm input-date" ng-model="data.document.date_sent_director" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                                  <!--<span class="input-group-btn">-->
-                                    <!--<button type="button" ng-disabled="!auth.canSave('document.date_sent_director')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                                  <!--</span>-->
-                                <!--</div>-->
+                                <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_sent_director')" class="form-control input-sm" id="document.date_sent_director" ng-model="data.document.date_sent_director" />-->
+                                <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                  <input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_sent_director')" id="document.date_sent_director" class="form-control input-sm input-date" ng-model="data.document.date_sent_director" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" ng-disabled="!auth.canSave('document.date_sent_director')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -381,25 +381,25 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.date_copies_coordinator">Date copies sent to coordinator</label>
-                                <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_copies_coordinator')" class="form-control input-sm" id="document.date_copies_coordinator" ng-model="data.document.date_copies_coordinator" />
-                                <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                                  <!--<input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_copies_coordinator')" id="document.date_copies_coordinator" class="form-control input-sm input-date" ng-model="data.document.date_copies_coordinator" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                                  <!--<span class="input-group-btn">-->
-                                    <!--<button type="button" ng-disabled="!auth.canSave('document.date_copies_coordinator')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                                  <!--</span>-->
-                                <!--</div>-->
+                                <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_copies_coordinator')" class="form-control input-sm" id="document.date_copies_coordinator" ng-model="data.document.date_copies_coordinator" />-->
+                                <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                  <input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_copies_coordinator')" id="document.date_copies_coordinator" class="form-control input-sm input-date" ng-model="data.document.date_copies_coordinator" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" ng-disabled="!auth.canSave('document.date_copies_coordinator')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                                  </span>
+                                </div>
                               </div>
                             </div>
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.date_next_appointment">Date of next appointment</label>
-                                <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_next_appointment')" class="form-control input-sm" id="document.date_next_appointment" ng-model="data.document.date_next_appointment" />
-                                <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                                  <!--<input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_next_appointment')" id="document.date_next_appointment" class="form-control input-sm input-date" ng-model="data.document.date_next_appointment" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                                  <!--<span class="input-group-btn">-->
-                                    <!--<button type="button" ng-disabled="!auth.canSave('document.date_next_appointment')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                                  <!--</span>-->
-                                <!--</div>-->
+                                <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_next_appointment')" class="form-control input-sm" id="document.date_next_appointment" ng-model="data.document.date_next_appointment" />-->
+                                <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                  <input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_next_appointment')" id="document.date_next_appointment" class="form-control input-sm input-date" ng-model="data.document.date_next_appointment" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" ng-disabled="!auth.canSave('document.date_next_appointment')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -408,25 +408,25 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.date_sent_from_dep">Date sent to coordinator from dep.secretary</label>
-                                <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_from_dep')" class="form-control input-sm" id="document.date_sent_from_dep" ng-model="data.document.date_sent_from_dep" />
-                                <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                                  <!--<input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_from_dep')" id="document.date_sent_from_dep" class="form-control input-sm input-date" ng-model="data.document.date_sent_from_dep" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                                  <!--<span class="input-group-btn">-->
-                                    <!--<button type="button" ng-disabled="!auth.canSave('document.date_sent_from_dep')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                                  <!--</span>-->
-                                <!--</div>-->
+                                <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_from_dep')" class="form-control input-sm" id="document.date_sent_from_dep" ng-model="data.document.date_sent_from_dep" />-->
+                                <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                  <input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_from_dep')" id="document.date_sent_from_dep" class="form-control input-sm input-date" ng-model="data.document.date_sent_from_dep" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" ng-disabled="!auth.canSave('document.date_sent_from_dep')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                                  </span>
+                                </div>
                               </div>
                             </div>
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.date_sent_officer">Date sent to the officer</label>
-                                <input type="text" placeholder="yyyy-mm-dd" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_officer')" class="form-control input-sm" id="document.date_sent_officer" ng-model="data.document.date_sent_officer" />
-                                <!--<div class="input-group container-datepicker" ng-controller="DatePickerController">-->
-                                  <!--<input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_sent_officer')" id="document.date_sent_officer" class="form-control input-sm input-date" ng-model="data.document.date_sent_officer" data-datepicker-popup data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>-->
-                                  <!--<span class="input-group-btn">-->
-                                    <!--<button type="button" ng-disabled="!auth.canSave('document.date_sent_officer')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>-->
-                                  <!--</span>-->
-                                <!--</div>-->
+                                <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_officer')" class="form-control input-sm" id="document.date_sent_officer" ng-model="data.document.date_sent_officer" />-->
+                                <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                  <input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.date_sent_officer')" id="document.date_sent_officer" class="form-control input-sm input-date" ng-model="data.document.date_sent_officer" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" ng-disabled="!auth.canSave('document.date_sent_officer')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                                  </span>
+                                </div>
                               </div>
                             </div>
                             <div class="col-md-3">

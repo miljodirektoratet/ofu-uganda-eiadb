@@ -69,6 +69,7 @@ class OrganisationController extends BaseController {
 
 	private function updateValuesInResource($resource, $data)
 	{		
+		$dates = $resource->getDates();
 		$changed = false;
 		foreach ($data as $key => $value)
 		{			
@@ -78,6 +79,20 @@ class OrganisationController extends BaseController {
 				{
 					$value = null;
 				}
+				if ($value && in_array($key, $dates))
+				{
+					$timestamp = strtotime($value);
+					if ($timestamp === false)
+					{
+						$value = null;
+					}
+					else
+					{
+						$value = new DateTime();
+						$value->setTimestamp($timestamp);
+					}
+				}					
+
 				if ($resource[$key] != $value)
 				{					
 					// TODO: Validate.					
@@ -88,7 +103,7 @@ class OrganisationController extends BaseController {
 		}
 		if ($changed)
 		{
-			$resource["updated_by"] = Auth::user()->full_name;			
+			$resource["updated_by"] = Auth::user()->full_name;
 			//$project->created_by = Auth::user()->full_name;
 		}
 	}
