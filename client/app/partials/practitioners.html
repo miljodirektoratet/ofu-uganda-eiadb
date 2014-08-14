@@ -181,7 +181,7 @@
                       </select>
                     </td>
                     <td><input type="checkbox" ng-disabled="!canSave()" class="checkbox-small form-control input-sm" id="c_is_cancelled" ng-model="fake" ng-checked="c.is_cancelled" ng-click="c.is_cancelled = !c.is_cancelled"/></td>
-                    <td><input type="text" ng-readonly="!canSave()" class="form-control input-sm input-remarks" id="c_remarks" ng-model="c.remarks" /></td>
+                    <td><input type="text" ng-readonly="!canSave()" class="form-control input-sm input-remarks warningfont" id="c_remarks" ng-model="c.remarks" /></td>
                     <td><button type="button" ng-disabled="!canSave()" class="btn btn-danger btn-sm btn-delete-certificate" ng-click="deleteCertificate($index, p, c)">{{c.is_new ? "Cancel" : "Delete"}}</button></td>
                   </tr>
                   </tbody>

@@ -96,7 +96,7 @@ class ValuelistController extends BaseController {
     		$q
     			->where('year', '=', $year)
     			->where('is_cancelled', '=', false)
-    			->where('conditions', '=', 38);
+    			->where('conditions', '=', 38); // partnership.
 			})
 			->get(array('id', 'person as description1'));
 		return $practitioners;		
