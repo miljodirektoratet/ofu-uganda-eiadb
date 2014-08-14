@@ -125,7 +125,7 @@ class EiaPermitController extends BaseController {
 				}
 				if ($value && in_array($key, $dates))
 				{
-					$timestamp = strtotime($value. " + 1 day");
+					$timestamp = strtotime($value . " + 12 hours");
 					if ($timestamp === false)
 					{
 						$value = null;

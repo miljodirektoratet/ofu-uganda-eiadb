@@ -130,7 +130,7 @@ class PractitionerController extends BaseController {
 				}
 				if ($value && in_array($key, $dates))
 				{
-					$timestamp = strtotime($value);
+					$timestamp = strtotime($value . " + 12 hours");
 					if ($timestamp === false)
 					{
 						$value = null;
