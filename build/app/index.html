@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 
-  <link rel="stylesheet" href="vendor/vendor.min.css?v=0.0.37"/>
-	<link rel="stylesheet" href="app.min.css?v=0.0.37"/>
+  <link rel="stylesheet" href="vendor/vendor.min.css?v=0.0.38"/>
+	<link rel="stylesheet" href="app.min.css?v=0.0.38"/>
 </head>
 <body>
   <div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController" >
@@ -28,12 +28,13 @@
       <div class="navbar-collapse" collapse="isCollapsed">
         <ul class="nav navbar-nav">
           <li ng-class="{ active: isAdvancedActive('/projects')}"><a href="#/projects">Projects</a></li>
-          <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
+          <li ng-class="{ active: isAdvancedActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
+<!--          <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li ng-class="{ active: isAdvancedActive('/advanced/practitioners')}"><a href="#/advanced/practitioners">Practitioners</a></li>
             </ul>
-          </li>
+          </li>-->
           <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
         </ul>
         <p class="navbar-text navbar-right">Signed in as <a href="#/user" class="navbar-link">{{userinfo.info.full_name}}</a></p>
@@ -50,9 +51,9 @@
     <div ng-view></div>
   </div>
 
-  <script src="vendor/vendor.min.js?v=0.0.37"></script>
-	<script src="app.min.js?v=0.0.37"></script>
-	<script src="partials.min.js?v=0.0.37"></script>
+  <script src="vendor/vendor.min.js?v=0.0.38"></script>
+	<script src="app.min.js?v=0.0.38"></script>
+	<script src="partials.min.js?v=0.0.38"></script>
   <div class="forceload"><img src="img/loader.gif" alt="loader"/></div>
 </body>
 </html>

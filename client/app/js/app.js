@@ -35,7 +35,7 @@ config(['$routeProvider', function($routeProvider)
   $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
   $routeProvider.when('/notsignedin', {templateUrl: 'partials/notsignedin.html', controller: 'UserController'});
   $routeProvider.when('/user', {templateUrl: 'partials/user.html', controller: 'UserController'});
-  $routeProvider.when('/advanced/practitioners', {templateUrl: 'partials/practitioners.html', controller: 'PractitionersController'});
+  $routeProvider.when('/practitioners', {templateUrl: 'partials/practitioners.html', controller: 'PractitionersController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
