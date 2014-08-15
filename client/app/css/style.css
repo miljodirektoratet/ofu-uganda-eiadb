@@ -28,7 +28,7 @@
 .documents .document .master
 {
     background-color: #f3f3f3;
-    /*border-top:1px solid darkgray;*/
+    border-top:1px solid darkgray;
     cursor: pointer;
     font-size: 13px;
 }

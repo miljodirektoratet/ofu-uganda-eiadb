@@ -278,7 +278,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     switch(field)
     {
       case "new":
-        return scope.userinfo.info.role_1;
       case "delete":
         return scope.userinfo.info.role_1;
       case "teamleader_id":

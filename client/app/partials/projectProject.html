@@ -17,7 +17,7 @@
             </form>
           </div>
           <div class="col-md-4">
-            <button type="button" class="btn btn-success pull-right" ng-click="newProjectNewOganisation()" ng-disabled="!auth.canSave()">New developer</button>
+            <button type="button" class="btn btn-success pull-right" ng-click="newProjectNewOganisation()" ng-hide="!auth.canSave()">New developer</button>
           </div>
           <div class="col-md-12"><hr/></div>
         </div>

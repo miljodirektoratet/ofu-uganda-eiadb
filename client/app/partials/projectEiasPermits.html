@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <a type="button" class="btn btn-success pull-right" ng-href="#/projects/{{data.project.id}}/eiaspermits/new" ng-disabled="!auth.canSave('new')">New EIA and Permit</a>
+      <a type="button" class="btn btn-success pull-right" ng-href="#/projects/{{data.project.id}}/eiaspermits/new" ng-hide="!auth.canSave('new')">New EIA and Permit</a>
     </div>
   </div>
   <div class="row">
@@ -173,7 +173,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="date_fee_notification">Date for fee notification</label>
+                  <label for="date_fee_notification">Date of invoicing</label>
                   <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_notification')" class="form-control input-sm" id="date_fee_notification" ng-model="data.eiapermit.date_fee_notification" />-->
                   <div class="input-group container-datepicker" ng-controller="DatePickerController">
                     <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_notification')" id="date_fee_notification" class="form-control input-sm input-date" ng-model="data.eiapermit.date_fee_notification" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
@@ -206,7 +206,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="designation">Signature of certificate</label>
+                  <label for="designation">Signature on certificate</label>
                   <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('designation')" id="designation" class="form-control input-sm" ng-model="data.eiapermit.designation">
                     <option ng-repeat="v in valuelists.executivedirector" value="{{v.id}}">{{v.description1}}</option>
                   </select>
@@ -286,7 +286,7 @@
                     <th>Date sent to coordinator from dep.secretary</th>
                     <th>Date sent to the officer</th>
                     <th>Conclusion (PB/Tor accepted)</th>
-                    <th><button type="button" class="btn btn-success btn-sm" ng-click="newDocument()" ng-disabled="data.eiapermit.is_new || !auth.canSave('new')">New</button></th>
+                    <th><button type="button" class="btn btn-success btn-sm" ng-click="newDocument()" ng-disabled="data.eiapermit.is_new" ng-hide="!auth.canSave('new')">New</button></th>
                   </tr>
                   </thead>
                   <tbody class="document" ng-repeat="d in data.documents">
