@@ -241,8 +241,8 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
 
   scope.deleteEiaPermit = function()
   {
-    ProjectFactory.deleteEiaPermit(scope.data.eiapermit, scope.routeParams);
-    scope.goto("/projects/"+scope.data.project.id+"");
+    ProjectFactory.deleteEiaPermit(scope.routeParams);
+    scope.goto("/projects/"+scope.data.project.id);
   }
 
   scope.toggleDocument = function(d)
