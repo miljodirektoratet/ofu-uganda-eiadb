@@ -62,10 +62,10 @@
                 <div class="form-group">
                   <label for="cost">Cost of the proposed development</label>
                   <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                       <input type="text" integer ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('cost')" class="form-control input-sm" id="cost" ng-model="data.eiapermit.cost" />
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                       <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('cost_currency')" id="cost_currency" class="form-control input-sm" ng-model="data.eiapermit.cost_currency">
                         <option ng-repeat="v in valuelists.currency" value="{{v.id}}">{{v.description1}}</option>
                       </select>
@@ -125,10 +125,10 @@
                 <div class="form-group">
                   <label for="fee">Expected fees</label>
                   <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                       <input type="text" decimal="6" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="data.eiapermit.fee" />
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                       <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('fee_currency')" id="fee_currency" class="form-control input-sm" ng-model="data.eiapermit.fee_currency">
                         <option ng-repeat="v in valuelists.currency" value="{{v.id}}">{{v.description1}}</option>
                       </select>
