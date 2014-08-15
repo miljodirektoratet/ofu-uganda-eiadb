@@ -18,6 +18,7 @@ class ValuelistController extends BaseController {
 		$valuelists["teamleader"] = $this->teamleader();
 		$valuelists["teammember"] = $this->teammember();
 		$valuelists["officer"] = $this->officer();
+		$valuelists["executivedirector"] = $this->executivedirector();
 		$valuelists["currency"] = $this->currency();
 
 		return Response::json($valuelists, 200); 
@@ -121,6 +122,13 @@ class ValuelistController extends BaseController {
 	{
 		$users = User::			
 			whereRaw("job_position_code in ('EIAO','EIAC','EMO')")
+			->get(array('id', 'full_name as description1'));
+		return $users;		
+	}
+	private function executivedirector()
+	{
+		$users = User::			
+			whereRaw("job_position_code in ('DED','ED')")
 			->get(array('id', 'full_name as description1'));
 		return $users;		
 	}

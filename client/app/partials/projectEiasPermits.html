@@ -124,7 +124,16 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="fee">Expected fees</label>
-                  <input type="text" decimal="6" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="data.eiapermit.fee" />
+                  <div class="row">
+                    <div class="col-md-7">
+                      <input type="text" decimal="6" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="data.eiapermit.fee" />
+                    </div>
+                    <div class="col-md-5">
+                      <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('fee_currency')" id="fee_currency" class="form-control input-sm" ng-model="data.eiapermit.fee_currency">
+                        <option ng-repeat="v in valuelists.currency" value="{{v.id}}">{{v.description1}}</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3">
@@ -197,9 +206,9 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="designation">Designation of the one who signed</label>
+                  <label for="designation">Signature of certificate</label>
                   <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('designation')" id="designation" class="form-control input-sm" ng-model="data.eiapermit.designation">
-                    <option ng-repeat="v in valuelists.officer" value="{{v.id}}">{{v.description1}}</option>
+                    <option ng-repeat="v in valuelists.executivedirector" value="{{v.id}}">{{v.description1}}</option>
                   </select>
                 </div>
               </div>

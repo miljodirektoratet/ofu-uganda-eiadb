@@ -308,6 +308,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
       case "date_inspection":
       case "officer_recommend":
       case "fee":
+      case "fee_currency":
       case "date_sent_ded_approval":
       case "document.sub_final":
       case "document.date_sent_officer":
