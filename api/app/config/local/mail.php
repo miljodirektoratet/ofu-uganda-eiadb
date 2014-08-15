@@ -1,5 +1,6 @@
 <?php
 
+
 return array(
 	'driver' => 'smtp',
 	'host' => 'smtp.mailgun.org',

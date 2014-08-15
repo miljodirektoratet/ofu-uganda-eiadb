@@ -14,7 +14,7 @@ tableFilePattern = r"C:\Dropbox\Deling\Nema\Supporting tables version*.xlsx"
 
 
 tablesData = OrderedDict()
-tablesData["users"] = "User"
+#tablesData["users"] = "User"
 tablesData["districts"] = "District"
 tablesData["codes"] = "Code"
 tablesData["categories"] = "Category"
