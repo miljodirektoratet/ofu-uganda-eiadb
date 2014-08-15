@@ -284,6 +284,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
       case "teamleader_id":
       case "practitioner_id":
       case "cost":
+      case "cost_currency":
       case "status":
       case "document.date_submitted":
       case "document.sub_copy_no":

@@ -6,7 +6,7 @@ class EiaPermit extends Eloquent
     protected $table = 'eias_permits';
     use SoftDeletingTrait;  
     protected $dates = ['deleted_at','date_inspection','date_sent_ded_approval','date_decision','date_fee_notification','date_fee_payed','date_certificate','date_cancelled'];  
-    protected $fillable = array('project_id','teamleader_id','cost','status','user_id','inspection_recommended','date_inspection','officer_recommend','fee','date_sent_ded_approval','decision','date_decision','date_fee_notification','date_fee_payed','fee_receipt_no','designation','date_certificate','certificate_no','date_cancelled','remarks');
+    protected $fillable = array('project_id','teamleader_id','cost','cost_currency','status','user_id','inspection_recommended','date_inspection','officer_recommend','fee','fee_currency','date_sent_ded_approval','decision','date_decision','date_fee_notification','date_fee_payed','fee_receipt_no','designation','date_certificate','certificate_no','date_cancelled','remarks');
     protected $hidden = array('deleted_at');
 	
     public function project()

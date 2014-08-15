@@ -61,7 +61,16 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="cost">Cost of the proposed development</label>
-                  <input type="text" integer ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('cost')" class="form-control input-sm" id="cost" ng-model="data.eiapermit.cost" />
+                  <div class="row">
+                    <div class="col-md-7">
+                      <input type="text" integer ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('cost')" class="form-control input-sm" id="cost" ng-model="data.eiapermit.cost" />
+                    </div>
+                    <div class="col-md-5">
+                      <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('cost_currency')" id="cost_currency" class="form-control input-sm" ng-model="data.eiapermit.cost_currency">
+                        <option ng-repeat="v in valuelists.currency" value="{{v.id}}">{{v.description1}}</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3">

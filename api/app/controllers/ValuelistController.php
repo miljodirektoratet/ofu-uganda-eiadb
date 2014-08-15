@@ -17,7 +17,8 @@ class ValuelistController extends BaseController {
 		$valuelists["category"] = $this->category();
 		$valuelists["teamleader"] = $this->teamleader();
 		$valuelists["teammember"] = $this->teammember();
-		$valuelists["officer"] = $this->officer();		
+		$valuelists["officer"] = $this->officer();
+		$valuelists["currency"] = $this->currency();
 
 		return Response::json($valuelists, 200); 
 	}
@@ -119,14 +120,25 @@ class ValuelistController extends BaseController {
 	private function officer()
 	{
 		$users = User::			
-			whereRaw("job_position_code in ('EIAO','EIAC')")
+			whereRaw("job_position_code in ('EIAO','EIAC','EMO')")
 			->get(array('id', 'full_name as description1'));
 		return $users;		
 	}
 
+	private function currency()
+	{
+		return $this->getCodesFromDrowdownName("currencies");
+	} 
+
 	private function getCodesFromArray($codeIds)
 	{
-		return $codes = Code::whereRaw("id in (" . join(",", $codeIds) . ")")
+		return Code::whereRaw("id in (" . join(",", $codeIds) . ")")
+			->get(array('id', 'description1', 'description2'));
+	}
+
+	private function getCodesFromDrowdownName($dropdownName)
+	{
+		return Code::where("dropdown_list", "=", $dropdownName)
 			->get(array('id', 'description1', 'description2'));
 	}
 }
