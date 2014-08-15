@@ -65,7 +65,7 @@ class ValuelistController extends BaseController {
 
 	private function status()
 	{
-		return $this->getCodesFromArray(array(15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37));
+		return $this->getCodesFromArray(array(15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,54,55,56,57,58,59));
 	}
 
 	private function documenttype()
