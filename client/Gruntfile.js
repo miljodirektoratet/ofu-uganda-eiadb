@@ -171,7 +171,7 @@ module.exports = function (grunt)
     gitcommit: {
       all: {
         options: {
-          message: 'Lazy commit all.',
+          message: 'New version.',
           verbose: true
         },
         files: {
