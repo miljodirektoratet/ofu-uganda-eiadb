@@ -47,7 +47,8 @@ var SavingStateEnum =
   SavingStarted : 'Saving started',
   SavingFinished : 'Saving finished',
   SavingFailed : 'Saving failed',
-  Invalid : 'Form not valid'
+  Invalid : 'Form not valid',
+  MissingDependency : 'Missing dependency in other form'
 };
 
 var ProjectTabEnum =

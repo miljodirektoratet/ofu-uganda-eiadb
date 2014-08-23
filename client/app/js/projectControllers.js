@@ -17,7 +17,7 @@ controllers.controller('ProjectsController', ['$scope', '$location', '$filter', 
 }]);
 
 
-controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$location', '$q', 'ProjectFactory', 'UserInfo', 'Valuelists', function (scope, routeParams, location, $q, ProjectFactory, UserInfo, Valuelists)
+controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'ProjectFactory', 'UserInfo', 'Valuelists', function (scope, routeParams, location, $q, $timeout, ProjectFactory, UserInfo, Valuelists)
 {
   scope.SavingStateEnum = SavingStateEnum;
   scope.ProjectTabEnum = ProjectTabEnum;
@@ -46,7 +46,11 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
 
   scope.goto = function(path)
   {
-    location.path(path);
+    $timeout(function()
+    {
+
+      location.path(path);
+    });
   };
 
   scope.auth = {};
@@ -131,32 +135,79 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
 
   scope.saveCurrentProject = function()
   {
-    var project = scope.data.project;
-    if (!project.organisation_id)
+    if (scope.isNewProject)
     {
+      scope.saveNewProjectAndNewOrganisation();
       return;
     }
+    var project = scope.data.project;
     scope.saveCurrent(scope.parts.project, project).then(function(data)
     {
-      if (scope.isNewProject)
-      {
-        scope.goto("/projects/"+project.id);
-      }
     });
   };
 
   scope.saveCurrentOrganisation = function()
   {
+    if (scope.isNewProject)
+    {
+      scope.saveNewProjectAndNewOrganisation();
+      return;
+    }
     var project = scope.data.project;
     var organisation = scope.data.organisation;
     scope.saveCurrent(scope.parts.organisation, organisation).then(function(o)
     {
-      if (!project.organisation_id)
-      {
-        project.organisation_id = o.id;
-        scope.saveCurrentProject();
-      }
     });
+  };
+
+  scope.saveNewProjectAndNewOrganisation = function()
+  {
+    var projectPart = scope.parts.project;
+    var organisationPart = scope.parts.organisation;
+
+    if (projectPart.form.$invalid)
+    {
+      scope.parts.project.state =  SavingStateEnum.Invalid;
+      if (organisationPart.form.$dirty)
+      {
+        scope.parts.organisation.state =  SavingStateEnum.MissingDependency;
+      }
+      return;
+    }
+
+    if (projectPart.form.$valid && organisationPart.form.$invalid)
+    {
+      scope.parts.project.state =  SavingStateEnum.MissingDependency;
+      scope.parts.organisation.state =  SavingStateEnum.Invalid;
+      return;
+    }
+
+    if (projectPart.form.$valid && organisationPart.form.$valid)
+    {
+      var project = scope.data.project;
+      var organisation = scope.data.organisation;
+      // Organisation already exists and is unchanged. Save only the project.
+      if (organisationPart.form.$pristine)
+      {
+        project.organisation_id = organisation.id;
+        scope.saveCurrent(projectPart, project).then(function(p)
+        {
+          scope.goto("/projects/"+p.id); // CAUSES "$digest already in progress" error
+        });
+      }
+      // Save organisation first, then project.
+      else
+      {
+        scope.saveCurrent(organisationPart, organisation).then(function (o)
+        {
+          project.organisation_id = o.id;
+          scope.saveCurrent(projectPart, project).then(function (p)
+          {
+            scope.goto("/projects/" + p.id); // CAUSES "$digest already in progress" error
+          });
+        });
+      }
+    }
   };
 
   scope.auth.canSave = function()

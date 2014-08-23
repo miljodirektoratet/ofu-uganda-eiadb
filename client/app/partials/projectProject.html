@@ -55,6 +55,7 @@
           <span class="saving-message-inline pull-right" ng-show="parts.project.state == SavingStateEnum.SavingFinished">All changes saved</span>
           <span class="saving-message-inline pull-right color-error" ng-show="parts.project.state == SavingStateEnum.SavingFailed">Saving failed</span>
           <span class="saving-message-inline pull-right color-error" ng-show="parts.project.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+          <span class="saving-message-inline pull-right color-error" ng-show="parts.project.state == SavingStateEnum.MissingDependency">Organisation must also be filled out</span>
         </h2>
       </div>
       <div class="panel-body">
@@ -161,6 +162,7 @@
           <span class="saving-message-inline pull-right" ng-show="parts.organisation.state == SavingStateEnum.SavingFinished">All changes saved</span>
           <span class="saving-message-inline pull-right color-error" ng-show="parts.organisation.state == SavingStateEnum.SavingFailed">Saving failed</span>
           <span class="saving-message-inline pull-right color-error" ng-show="parts.organisation.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+          <span class="saving-message-inline pull-right color-error" ng-show="parts.organisation.state == SavingStateEnum.MissingDependency">Project must be filled out first</span>
         </h2>
       </div>
       <div class="panel-body">
