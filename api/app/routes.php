@@ -36,7 +36,10 @@ Route::group(array('prefix' => 'password'), function()
 Route::group(array('prefix' => 'user', 'before' => 'auth.basic'), function()
 {
 	Route::get('info', array('uses' => 'UserController@getInfo'));
-	Route::get('impersonate/{id}', array('uses' => 'UserController@impersonate'));
+	if (App::environment() !== "production")
+	{
+		Route::get('impersonate/{id}', array('uses' => 'UserController@impersonate'));
+	}
 	Route::get('all', array('uses' => 'UserController@getAll'));
 });
 Route::get('signout', array('uses' => 'UserController@signout'));

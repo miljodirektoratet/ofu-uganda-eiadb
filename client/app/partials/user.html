@@ -11,7 +11,7 @@
   <li ng-repeat="role in userinfo.info.roles">{{role.name2}} ({{role.name}})</li>
 </ul>
 
-<div ng-if="userinfo.info.role_8">
+<div ng-if="userinfo.info.can_impersonate">
   <h3>System manager</h3>
 
   <p>As System manager, you may impersonate another user. This helps to verify that the different roles works as intended. If you impersonate a user that is not System manager, you have to sign out to be able to login as yourself again.</p>

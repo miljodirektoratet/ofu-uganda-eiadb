@@ -8,6 +8,7 @@ class UserController extends BaseController
         $user = Auth::user();
         $info = array('email' => $user->email, 
             'full_name' => $user->full_name,
+            'can_impersonate' => Auth::user()->hasRole("Role 8") && App::environment() !== "production",
             'roles' => $this::getRoles($user));
         $info = array_merge($info, $this::getRolesInfo($user));            
 
