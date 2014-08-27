@@ -1,4 +1,4 @@
-,'EAMO-1,SEI,EAMA<?php
+<?php
 
 class ValuelistController extends BaseController {
 
@@ -123,7 +123,7 @@ class ValuelistController extends BaseController {
 		$users = User::			
 			whereRaw("job_position_code in ('EIAO','EIAC','EMO','EAMO-1','SEI','EAMA')")
 			->get(array('id', 'full_name as description1'));
-		return $users;		
+		return $users;
 	}
 	private function executivedirector()
 	{
