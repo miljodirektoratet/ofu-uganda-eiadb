@@ -359,6 +359,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
       case "officer_recommend":
       case "fee":
       case "fee_currency":
+      case "remarks":
       case "date_sent_ded_approval":
       case "document.sub_final":
       case "document.date_sent_officer":
@@ -373,7 +374,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
       case "date_certificate":
       case "certificate_no":
       case "date_cancelled":
-      case "remarks":
       case "document.conclusion":
         return scope.userinfo.info.role_5;
       default:
