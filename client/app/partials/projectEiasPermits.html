@@ -189,6 +189,7 @@
                   <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_payed')" class="form-control input-sm" id="date_fee_payed" ng-model="data.eiapermit.date_fee_payed" />-->
                   <div class="input-group container-datepicker" ng-controller="DatePickerController">
                     <input type="text" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('date_fee_payed')" id="date_fee_payed" class="form-control input-sm input-date" ng-model="data.eiapermit.date_fee_payed" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                    <span>XXX{{data.eiapermit.date_fee_payed}}XXX</span>
                     <span class="input-group-btn">
                       <button type="button" ng-disabled="!auth.canSave('date_fee_payed')" class="btn btn-default btn-sm" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
                     </span>

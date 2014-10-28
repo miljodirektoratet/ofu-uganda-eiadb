@@ -21,7 +21,7 @@ tablesData["categories"] = "Category"
 #tablesData["practitioners"] = "Practitioner"
 #tablesData["practitioner_certificates"] = "PractitionerCertificate"
 tablesData["lead_agencies"] = "LeadAgency"
-tablesData["roles"] = "Role"
+#tablesData["roles"] = "Role"
 
 def getDbColumnsInfo(dataSheet, headerRowIndex):
 	dbColumnsInfo = {}
