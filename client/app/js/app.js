@@ -71,8 +71,12 @@ function convertDateStringsToDates(input) {
     var value = input[key];
     var match;
     // Check for string properties which look like dates.
-    if (typeof value === "string" && (match = value.match(regexIso8601))) {
+    if (typeof value === "string" && (match = value.match(regexIso8601)))
+    {
       var dateParts = match[0].split(" ");
+      input[key] = dateParts[0];
+      /*
+      var dateParts = match[0].replace("00:00:00", "12:00:00").split(" "); // HACK to make sure we are on the correct day.
       var dateWithT = dateParts[0]+"T"+dateParts[1];
       var milliseconds = Date.parse(dateWithT);
       if (!isNaN(milliseconds))
@@ -80,6 +84,7 @@ function convertDateStringsToDates(input) {
         input[key] = new Date(milliseconds);
         //input[key] = filter('date')(new Date(milliseconds), 'd. MMM yyyy');
       }
+      */
     } else if (typeof value === "object") {
       // Recurse into object
       convertDateStringsToDates(value);
