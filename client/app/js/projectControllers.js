@@ -324,6 +324,12 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     }
   };
 
+  scope.calculateNumberOfCopiesOfDocument = function()
+  {
+    scope.data.document.director_copy_no = 1;
+    scope.data.document.coordinator_copy_no = scope.data.document.sub_copy_no - 1;
+  };
+
   scope.auth.canSave = function(field)
   {
     switch(field)

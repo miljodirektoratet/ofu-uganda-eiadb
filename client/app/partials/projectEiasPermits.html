@@ -331,7 +331,7 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.sub_copy_no">No. of copies submitted</label>
-                                <input type="text" integer ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.sub_copy_no')" class="form-control input-sm" id="document.sub_copy_no" ng-model="data.document.sub_copy_no" />
+                                <input type="text" integer ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.sub_copy_no')" class="form-control input-sm" id="document.sub_copy_no" ng-model="data.document.sub_copy_no" ng-change="calculateNumberOfCopiesOfDocument()" />
                               </div>
                             </div>
                           </div>
@@ -375,7 +375,7 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.director_copy_no">No. of to copies Director</label>
-                                <input type="text" integer ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.director_copy_no')" class="form-control input-sm" id="document.director_copy_no" ng-model="data.document.director_copy_no" />
+                                <input type="text" integer ng-blur="saveCurrentDocument()" ng-readonly="true" class="form-control input-sm" id="document.director_copy_no" ng-model="data.document.director_copy_no" />
                               </div>
                             </div>
                             <div class="col-md-3">
@@ -396,7 +396,7 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.coordinator_copy_no">No. of copies to coordinator</label>
-                                <input type="text" integer ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.coordinator_copy_no')" class="form-control input-sm" id="document.coordinator_copy_no" ng-model="data.document.coordinator_copy_no" />
+                                <input type="text" integer ng-blur="saveCurrentDocument()" ng-readonly="true" class="form-control input-sm" id="document.coordinator_copy_no" ng-model="data.document.coordinator_copy_no" />
                               </div>
                             </div>
                             <div class="col-md-3">
