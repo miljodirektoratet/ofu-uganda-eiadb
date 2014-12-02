@@ -73,14 +73,24 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
 
   scope.saveCurrent = function(part, resource)
   {
+    if (part.saveInProgress && part.isNew)
+    {
+      var deferred = $q.defer();
+      deferred.reject();
+      return deferred.promise;
+    }
+
+    part.saveInProgress = true;
     var deferred = $q.defer();
     if (part.form.$pristine)
     {
+      part.saveInProgress = false;
       deferred.reject();
     }
     else if (part.form.$invalid)
     {
       part.state = SavingStateEnum.Invalid;
+      part.saveInProgress = false;
       deferred.reject();
     }
     else
@@ -92,12 +102,13 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
         {
           part.state = SavingStateEnum.SavingFinished;
           part.form.$setPristine();
-
+          part.saveInProgress = false;
           deferred.resolve(data);
         },
         function (reason)
         {
           part.state = SavingStateEnum.SavingFailed;
+          part.saveInProgress = false;
         }
       );
     }
@@ -236,6 +247,7 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
   {
     scope.selectOrganisationMode = true;
     scope.isNewProject = true;
+    scope.parts.project.isNew = true;
     ProjectFactory.empty();
     scope.organisations = Organisation.query();
   }
@@ -410,5 +422,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     ProjectFactory.createNewEiaPermit(scope.data.project);
     scope.isNewEiaPermit = true;
     scope.parts.eiapermit.state = SavingStateEnum.Loaded;
+    scope.parts.eiapermit.isNew = true;
   }
 }]);
