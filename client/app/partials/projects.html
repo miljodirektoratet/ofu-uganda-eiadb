@@ -11,9 +11,13 @@
           <label class="sr-only" for="filterText">Filter</label>
           <input type="text" class="form-control input-filter" id="filterText" placeholder="Filter (try anything, e.g. title, location, or organisation)" ng-model="filterText">
         </div>
-        <span>Count: {{(projects | filter:filterText).length}}</span>
+        <span>Showing {{(projects | filter:filterText).length}} of {{projectsCount}} projects</span>
       </form>
-      <button type="button" class="btn btn-primary" ng-click="getAllProjects()" ng-show="!showFilter">Show all projects</button>
+      <div ng-show="!showFilter">
+        <span>Showing {{(projects | filter:filterText).length}} of {{projectsCount}} projects</span>
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" ng-click="getAllProjects()">Show all projects</button>
+      </div>
     </div>
     <div class="col-md-4">
       <button type="button" class="btn btn-success pull-right" ng-click="goto('/projects/new');" ng-hide="!canSave()">New project</button>

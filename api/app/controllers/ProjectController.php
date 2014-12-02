@@ -5,6 +5,12 @@ class ProjectController extends BaseController {
 	// GET /resource
 	public function index()
 	{
+		$countOnly = Input::get('countOnly');
+		if ($countOnly)
+		{
+			return [Project::count()];
+		}
+
 		$count = Input::get('count');
 
 		$withFunction = function ($query)

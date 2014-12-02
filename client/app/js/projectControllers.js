@@ -5,6 +5,11 @@ controllers.controller('ProjectsController', ['$scope', '$location', '$filter', 
 {
   scope.showFilter = false;
   scope.projects = Project.query({'count':20});
+  scope.projectsCount = 0;
+  Project.query({'countOnly':1}, function(data)
+  {
+    scope.projectsCount = data[0];
+  });
   scope.userinfo = UserInfo;
   scope.goto = function(path)
   {
