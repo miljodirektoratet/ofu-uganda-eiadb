@@ -12,6 +12,7 @@ class ProjectController extends BaseController {
 
 		$projects = Project::		
 			with(array('organisation'=>$withFunction))			
+			->orderBy('id', 'desc')
 			->get(array('id', 'title', 'location', 'organisation_id'));					
 		return Response::json($projects->toArray(), 200); 
 	}
