@@ -5,6 +5,8 @@ class ProjectController extends BaseController {
 	// GET /resource
 	public function index()
 	{
+		$count = Input::get('count');
+
 		$withFunction = function ($query)
 		{
 			$query->select('id', 'name', 'city');
@@ -13,11 +15,19 @@ class ProjectController extends BaseController {
 		{
 			$query->select('id', 'district');
 		};				
+		$withFunction3 = function ($query)
+		{
+			$query->select('id', 'description_short as description');
+		};
+
+
 
 		$projects = Project::		
-			with(array('organisation'=>$withFunction, 'district'=>$withFunction2))						
+			with(array('organisation'=>$withFunction, 'district'=>$withFunction2, 'category'=>$withFunction3))						
 			->orderBy('id', 'desc')
-			->get(array('id', 'title', 'district_id', 'location', 'organisation_id'));					
+			->take($count)
+			->get(array('id', 'title', 'category_id', 'district_id', 'location', 'organisation_id'));
+			
 		return Response::json($projects->toArray(), 200); 
 	}
 

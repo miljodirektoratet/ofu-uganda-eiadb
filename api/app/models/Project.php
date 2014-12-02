@@ -18,6 +18,11 @@ class Project extends Eloquent
         return $this->belongsTo('District');
     }
 
+    public function category()
+    {
+        return $this->belongsTo('Category');
+    }    
+
     public function districts()
     {
         return $this->belongsToMany('District', 'additional_districts');

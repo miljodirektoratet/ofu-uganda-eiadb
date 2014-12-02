@@ -3,7 +3,8 @@
 
 controllers.controller('ProjectsController', ['$scope', '$location', '$filter', 'Project', 'UserInfo', function (scope, location, filter, Project, UserInfo)
 {
-  scope.projects = Project.query();
+  scope.showFilter = false;
+  scope.projects = Project.query({'count':20});
   scope.userinfo = UserInfo;
   scope.goto = function(path)
   {
@@ -14,6 +15,12 @@ controllers.controller('ProjectsController', ['$scope', '$location', '$filter', 
   {
     return scope.userinfo.info.role_1;
   };
+
+  scope.getAllProjects = function()
+  {
+    scope.projects = Project.query();
+    scope.showFilter = true;
+  }
 }]);
 
 

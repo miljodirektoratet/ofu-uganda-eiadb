@@ -21,6 +21,7 @@
 {
     font-weight: bold;
     font-size: 13px;
+    white-space: nowrap;
 }
 .practitioners .practitioner .master,
 .projects .project .master,
@@ -28,9 +29,14 @@
 .documents .document .master
 {
     background-color: #f3f3f3;
-    border-top:1px solid darkgray;
+    /*border-top:1px solid darkgray;*/
     cursor: pointer;
     font-size: 13px;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td
+{
+    padding:0px 10px;
 }
 
 .documents .document .master td
