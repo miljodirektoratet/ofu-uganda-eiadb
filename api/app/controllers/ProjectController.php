@@ -8,12 +8,16 @@ class ProjectController extends BaseController {
 		$withFunction = function ($query)
 		{
 			$query->select('id', 'name', 'city');
+		};		
+		$withFunction2 = function ($query)
+		{
+			$query->select('id', 'district');
 		};				
 
 		$projects = Project::		
-			with(array('organisation'=>$withFunction))			
+			with(array('organisation'=>$withFunction, 'district'=>$withFunction2))						
 			->orderBy('id', 'desc')
-			->get(array('id', 'title', 'location', 'organisation_id'));					
+			->get(array('id', 'title', 'district_id', 'location', 'organisation_id'));					
 		return Response::json($projects->toArray(), 200); 
 	}
 

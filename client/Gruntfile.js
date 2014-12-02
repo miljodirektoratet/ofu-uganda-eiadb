@@ -239,4 +239,6 @@ module.exports = function (grunt)
     'release'
   ]);
 
+  // git push --tags
+
 };

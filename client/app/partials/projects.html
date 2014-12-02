@@ -24,8 +24,8 @@
     <div class="col-md-1">Id</div>
     <div class="col-md-3">Title</div>
     <div class="col-md-3">Location</div>
+    <div class="col-md-2">Project District</div>
     <div class="col-md-2">Developer</div>
-    <div class="col-md-2">Developer City</div>
     <div class="col-md-1"></div>
   </div>
 
@@ -35,8 +35,8 @@
         <div class="col-md-1">{{p.id}}</div>
         <div class="col-md-3">{{p.title}}</div>
         <div class="col-md-3">{{p.location}}</div>
+        <div class="col-md-2">{{p.district.district}}</div>
         <div class="col-md-2 hidden-xs" title="id={{p.organisation.id}}">{{p.organisation.name}}</div>
-        <div class="col-md-2 hidden-xs">{{p.organisation.city}}</div>
         <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master">Open</button>
       </div>
     </div>
