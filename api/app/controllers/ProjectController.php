@@ -55,7 +55,7 @@ class ProjectController extends BaseController {
 
 	// POST /resource
 	public function store()
-	{						
+	{					
 		if (!$this::canSave())
 		{
 			return $this::notAuthorized();

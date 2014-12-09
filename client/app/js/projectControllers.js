@@ -154,6 +154,7 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
     ProjectFactory.createNewProject(scope.data.organisation);
     scope.parts.project.state = SavingStateEnum.Loaded;
     scope.parts.organisation.state = SavingStateEnum.Loaded;
+    scope.parts.organisation.isNew = true;
   };
 
   scope.saveCurrentProject = function()
