@@ -96,7 +96,7 @@ class ValuelistController extends BaseController {
 			{
 				$year = intval(date("Y"));
     		$q
-    			->where('year', '=', $year)
+    			->whereIn('year', array($year-1, $year))
     			->where('is_cancelled', '=', false)
     			->whereRaw('conditions in (38,53)');
 			})
@@ -105,13 +105,13 @@ class ValuelistController extends BaseController {
 	}
 
 	private function teammember()
-	{		
+	{				
 		$practitioners = Practitioner::
 			whereHas('practitionerCertificates', function($q)
 			{
 				$year = intval(date("Y"));
-    		$q
-    			->where('year', '=', $year)
+    		$q    			
+    			->whereIn('year', array($year-1, $year))
     			->where('is_cancelled', '=', false);
 			})
 			->get(array('id', 'person as description1'));
