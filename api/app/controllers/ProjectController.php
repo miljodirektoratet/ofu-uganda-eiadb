@@ -24,15 +24,20 @@ class ProjectController extends BaseController {
 		$withFunction3 = function ($query)
 		{
 			$query->select('id', 'description_short as description');
-		};
-
-
+		};				
 
 		$projects = Project::		
 			with(array('organisation'=>$withFunction, 'district'=>$withFunction2, 'category'=>$withFunction3))						
 			->orderBy('id', 'desc')
 			->take($count)
 			->get(array('id', 'title', 'category_id', 'district_id', 'location', 'organisation_id'));
+
+		/*foreach ($projects as $project) 
+		{
+			$project["testy1"] = "hei";
+			//print($project);
+			//exit();
+		}	*/
 			
 		return Response::json($projects->toArray(), 200); 
 	}
