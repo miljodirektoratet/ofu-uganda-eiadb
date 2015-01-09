@@ -346,7 +346,7 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.type">Type of document</label>
-                                <select ui-select2 ng-change="saveCurrentDocument()" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="data.document.type">
+                                <select ui-select2 ng-change="calculateDocumentCode();saveCurrentDocument();" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="data.document.type">
                                   <option ng-repeat="v in valuelists.documenttype" value="{{v.id}}">{{v.description2}}</option>
                                 </select>
                               </div>
@@ -354,13 +354,13 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.number">Listed number</label>
-                                <input type="text" integer ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.number')" class="form-control input-sm" id="document.number" ng-model="data.document.number" />
+                                <input type="text" integer ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.number')" class="form-control input-sm" id="document.number" ng-model="data.document.number" ng-change="calculateDocumentCode()" />
                               </div>
                             </div>
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="document.code">Document code</label>
-                                <input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.code')" class="form-control input-sm" id="document.code" ng-model="data.document.code" />
+                                <input type="text" ng-readonly="true" class="form-control input-sm" id="document.code" ng-model="data.document.code" />
                               </div>
                             </div>
                           </div>

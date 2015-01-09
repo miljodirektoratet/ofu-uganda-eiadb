@@ -1,5 +1,6 @@
 'use strict';
 
+var testy1 = "x";
 
 controllers.controller('ProjectsController', ['$scope', '$location', '$filter', 'Project', 'UserInfo', function (scope, location, filter, Project, UserInfo)
 {
@@ -353,6 +354,14 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
   {
     scope.data.document.director_copy_no = 1;
     scope.data.document.coordinator_copy_no = scope.data.document.sub_copy_no - 1;
+  };
+
+  scope.calculateDocumentCode = function()
+  {
+    var typeObject = _.find(scope.valuelists["documenttype"], {'id': parseInt(scope.data.document.type)});
+    var typeCode = typeObject ? typeObject.description1 : "";
+    var number = scope.data.document.number ? scope.data.document.number : "";
+    scope.data.document.code = typeCode + number;
   };
 
   scope.auth.canSave = function(field)
