@@ -2,8 +2,8 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="dropdown element-dropdown" ng-show="data.eiaspermits.length">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+      <div class="element-dropdown" dropdown ng-show="data.eiaspermits.length">
+        <button class="btn btn-default dropdown-toggle" type="button" dropdown-toggle>
           {{data.getEiapermitSummary()}}
           <span class="caret"></span>
         </button>
@@ -11,6 +11,7 @@
           <li ng-repeat="ep in data.eiaspermits" role="presentation"><a role="menuitem" href="#/projects/{{data.project.id}}/eiaspermits/{{ep.id}}">{{data.getEiapermitSummary(ep)}}</a></li>
         </ul>
       </div>
+
     </div>
     <div class="col-md-6">
       <a type="button" class="btn btn-success pull-right" ng-href="#/projects/{{data.project.id}}/eiaspermits/new" ng-hide="!auth.canSave('new')">New EIA and Permit</a>
