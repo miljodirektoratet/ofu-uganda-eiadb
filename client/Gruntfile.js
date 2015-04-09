@@ -172,7 +172,7 @@ module.exports = function(grunt)
   grunt.loadNpmTasks('grunt-bump');
   grunt.config('bump', {
     options: {
-      files: ['package.json', 'bower.json'],
+      files: ['package.json', 'bower.json', 'app/js/services.js'],
       updateConfigs: ['pkg'],
       commit: true,
       commitMessage: 'Release v%VERSION%',
