@@ -1,244 +1,222 @@
-module.exports = function (grunt)
+module.exports = function(grunt)
 {
   grunt.initConfig({
-
     pkg: grunt.file.readJSON('package.json'),
 
-    clean: {
-      options: {force: true},
-      build: ["../build/app/*"]
+    paths: {
+      buildPath: '../api/public/app/',
+      devPath: '../api/public/dev/'
     },
 
-    concat: {
-      css: {
-        files: {
-          '../build/app/vendor/vendor.min.css': [
-            'bower_components/bootstrap/dist/css/bootstrap.min.css',
-            'bower_components/select2/select2.css',
-            'bower_components/select2-bootstrap-css/select2-bootstrap.css']
-        }
-      },
-      js: {
-        files: {
-          '../build/app/vendor/vendor.min.js': [
-            'bower_components/jquery/dist/jquery.min.js',
-            'bower_components/angular/angular.min.js',
-            'bower_components/angular-route/angular-route.min.js',
-            'bower_components/angular-resource/angular-resource.min.js',
-            'bower_components/angular-animate/angular-animate.min.js',
-            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-            'bower_components/select2/select2.js',
-            'app/js/select2.js',
-            'bower_components/lodash/dist/lodash.min.js']
-        }
-      }
-    },
+    generatedBanner: '// Generated with grunt. Do not edit!\n\n'
+  });
 
-    uglify: {
-      app: {
-        options: {
-          banner: '// Generated with grunt. Do not edit!\n\n'
-        },
-        files: {
-          '../build/app/app.min.js': ['app/js/jqlite.extra.js', 'app/js/app.js',
-            'app/js/controllers.js', 'app/js/practitionersController.js', 'app/js/projectControllers.js',
-            'app/js/directives.js', 'app/js/filters.js',
-            'app/js/services.js',
-            'app/js/validations.js']
-        }
-      }
-    },
-
-    cssmin: {
-      app: {
-        options: {
-          banner: '/* Generated with grunt. Do not edit! */\n\n'
-        },
-        files: {
-          '../build/app/app.min.css': ['app/css/navbar.css', 'app/css/style.css', 'app/css/animations.css']
-        }
-      }
-    },
-
-    copy: {
-      vendor: {
-        files: [
-          {expand: true, flatten: true, src: ['bower_components/bootstrap/dist/fonts/*'], dest: '../build/app/vendor/fonts/', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/select2/select2.png'], dest: '../build/app/vendor/', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/select2/select2-spinner.gif'], dest: '../build/app/vendor/', filter: 'isFile'}
-        ]
-      },
-      app: {
-        files: [
-          {expand: true, flatten: true, src: ['app/index.html'], dest: '../build/app/', filter: 'isFile'},
-          //{expand: true, flatten: true, src: ['app/partials/*.html'], dest: '../build/app/partials/'},
-          {expand: true, flatten: true, src: ['app/img/*.png'], dest: '../build/app/img/'},
-          {expand: true, flatten: true, src: ['app/img/*.jpg'], dest: '../build/app/img/'},
-          {expand: true, flatten: true, src: ['app/img/*.gif'], dest: '../build/app/img/'}
-        ]
-      }
-    },
-
-    replace:
-    {
-      bootstrapCss:
-      {
-        src: ['../build/app/vendor/vendor.min.css'],
-        overwrite: true,
-        replacements: [{ from: '../fonts/', to: 'fonts/' }]
-      },
-      styleCss:
-      {
-        src: ['../build/app/app.min.css'],
-        overwrite: true,
-        replacements: [{ from: '../img/', to: 'img/' }]
-      },
-      debug:
-      {
-        src: ['../build/app/partials.min.js'],
-        overwrite: true,
-        replacements: [{ from: /\(Dirty.*?\)/g, to: '' }]
-      },
-      index:
-      {
-        src: ['../build/app/index.html'],
-        overwrite: true,
-        replacements: [
-          { from: /<!-- Style begin -->[\s\S]*<!-- Style end -->/, to:
-            '<link rel="stylesheet" href="vendor/vendor.min.css?v=<%= pkg.version %>"/>\n\t' +
-            '<link rel="stylesheet" href="app.min.css?v=<%= pkg.version %>"/>'},
-          { from: /<!-- Script begin -->[\s\S]*<!-- Script end -->/, to:
-            '<script src="vendor/vendor.min.js?v=<%= pkg.version %>"></script>\n\t' +
-            '<script src="app.min.js?v=<%= pkg.version %>"></script>\n\t' +
-            '<script src="partials.min.js?v=<%= pkg.version %>"></script>'}]
-      }
-    },
-
-    ngtemplates:  {
-      seroApp:
-      {
-        cwd:      'app',
-        src:      'partials/*.html',
-        dest:     '../build/app/partials.min.js',
-        options:
-        {
-          htmlmin: {
-            collapseBooleanAttributes:      true,
-            collapseWhitespace:             true,
-            removeAttributeQuotes:          true,
-            removeComments:                 true, // Only if you don't use comment directives!
-            removeEmptyAttributes:          true,
-            removeRedundantAttributes:      true,
-            removeScriptTypeAttributes:     true,
-            removeStyleLinkTypeAttributes:  true
-          }
-        }
-      }
-    },
-
-    bump: {
-      options: {
-        files: ['package.json', 'bower.json', 'app/js/services.js'],
-        updateConfigs: ['pkg'],
-        commit: true,
-        commitMessage: 'Release v%VERSION%',
-        commitFiles: ['-a'], // '-a' for all files
-        createTag: true,
-        tagName: 'v%VERSION%',
-        tagMessage: 'Version %VERSION%',
-        push: false,
-        pushTo: 'origin',
-        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
-      }
-    },
-
-    release: {
-      options: {
-        bump: false, //default: true
-        file: 'package.json',
-        add: true,
-        commit: false,
-        tag: true,
-        push: true,
-        pushTags: true,
-        npm: false,
-        tagName: 'v<%= version %>'
-        //commitMessage: 'release <%= version %>'
-        //tagMessage: 'Version <%= version %>',
-      }
-    },
-
-    gitcommit: {
-      all: {
-        options: {
-          message: 'New version.',
-          verbose: true
-        },
-        files: {
-          src: ['../.']
-        }
-      }
+  grunt.loadNpmTasks('grunt-sync');
+  grunt.config('sync', {
+    dev: {
+      files: [
+        {src: ['bower_components/**'], dest: '<%= paths.devPath %>'},
+        {cwd: 'app/', src: ['**'], dest: '<%= paths.devPath %>'},
+      ],
     }
-
-//    watch: {
-//      app: {
-//        files: ['app/**/*'],
-//        tasks: [],//tasks: ['app'],
-//        options: {
-//          spawn: false,
-//          livereload: true
-//        }
-//      }
-//      ,
-//      index: {
-//        files: ['public/index.php'],
-//        options: {
-//          spawn: false,
-//          livereload: true
-//        }
-//      }
-//    },
-
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.config('clean', {
+    options: {force: true},
+    build: ['<%= paths.buildPath %>*'],
+    dev: ['<%= paths.devPath %>*']
+  });
+
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-text-replace');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.config('concat', {
+    build: {
+      files: {
+        '<%= paths.buildPath %>vendor/vendor.min.css': [
+          'bower_components/bootstrap/dist/css/bootstrap.min.css',
+          'bower_components/select2/select2.css',
+          'bower_components/select2-bootstrap-css/select2-bootstrap.css'
+        ],
+        '<%= paths.buildPath %>vendor/vendor.min.js': [
+          'bower_components/jquery/dist/jquery.min.js',
+          'bower_components/angular/angular.min.js',
+          'bower_components/angular-route/angular-route.min.js',
+          'bower_components/angular-resource/angular-resource.min.js',
+          'bower_components/angular-animate/angular-animate.min.js',
+          'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+          'bower_components/select2/select2.js',
+          'app/js/select2.js',
+          'bower_components/lodash/dist/lodash.min.js'
+        ]
+      }
+    }
+  });
+
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-bump');
-  grunt.loadNpmTasks('grunt-release');
-  grunt.loadNpmTasks('grunt-git');
+  grunt.config('uglify', {
+    build: {
+      options: {
+        banner: '<%= generatedBanner %>'
+      },
+      files: {
+        '<%= paths.buildPath %>app.min.js': [
+          'app/js/jqlite.extra.js', 'app/js/app.js',
+          'app/js/controllers.js', 'app/js/practitionersController.js', 'app/js/projectControllers.js',
+          'app/js/directives.js', 'app/js/filters.js',
+          'app/js/services.js',
+          'app/js/validations.js'
+        ]
+      }
+    }
+  });
+
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.config('cssmin', {
+    build: {
+      options: {
+        banner: '<%= generatedBanner %>'
+      },
+      files: {
+        '<%= paths.buildPath %>app.min.css': [
+          'app/css/navbar.css', 'app/css/style.css', 'app/css/animations.css'
+        ]
+      }
+    }
+  });
+
   grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.config('ngtemplates', {
+    build:
+    {
+      cwd: 'app/',
+      src: 'partials/*.html',
+      dest: '<%= paths.buildPath %>partials.min.js',
+      options:
+      {
+        module: 'seroApp',
+        htmlmin: {
+          collapseBooleanAttributes:      true,
+          collapseWhitespace:             true,
+          removeAttributeQuotes:          true,
+          removeComments:                 true, // Only if you don't use comment directives!
+          removeEmptyAttributes:          true,
+          removeRedundantAttributes:      true,
+          removeScriptTypeAttributes:     true,
+          removeStyleLinkTypeAttributes:  true
+        }
+      }
+    }
+  });
+
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.config('copy', {
+    build: {
+      files: [
+        {expand: true, flatten: true, src: ['bower_components/bootstrap/dist/fonts/*'], dest: '<%= paths.buildPath %>vendor/fonts/', filter: 'isFile'},
+        {expand: true, flatten: true, src: ['bower_components/select2/select2.png'], dest: '<%= paths.buildPath %>vendor/', filter: 'isFile'},
+        {expand: true, flatten: true, src: ['bower_components/select2/select2-spinner.gif'], dest: '<%= paths.buildPath %>vendor/', filter: 'isFile'},
+        {expand: true, flatten: true, src: ['app/index.html'], dest: '<%= paths.buildPath %>', filter: 'isFile'},
+        {expand: true, flatten: false, cwd: 'app/', src: ['img/**'], dest: '<%= paths.buildPath %>'}
+      ]
+    }
+  });
+
+  grunt.loadNpmTasks('grunt-text-replace');
+  grunt.config('replace', {
+    bootstrapCss:
+    {
+      src: ['<%= paths.buildPath %>vendor/vendor.min.css'],
+      overwrite: true,
+      replacements: [{ from: '../fonts/', to: 'fonts/' }]
+    },
+    styleCss:
+    {
+      src: ['<%= paths.buildPath %>app.min.css'],
+      overwrite: true,
+      replacements: [{ from: '../img/', to: 'img/' }]
+    },
+    debug:
+    {
+      src: ['<%= paths.buildPath %>partials.min.js'],
+      overwrite: true,
+      replacements: [{ from: /\(Dirty.*?\)/g, to: '' }]
+    },
+    index:
+    {
+      src: ['<%= paths.buildPath %>index.html'],
+      overwrite: true,
+      replacements: [
+        {
+          from: /<!-- Style begin -->[\s\S]*<!-- Style end -->/,
+          to: '<link rel="stylesheet" href="vendor/vendor.min.css?v=<%= pkg.version %>"/>\n\t' +
+            '<link rel="stylesheet" href="app.min.css?v=<%= pkg.version %>"/>'
+        },
+        {
+          from: /<!-- Script begin -->[\s\S]*<!-- Script end -->/,
+          to: '<script src="vendor/vendor.min.js?v=<%= pkg.version %>"></script>\n\t' +
+            '<script src="app.min.js?v=<%= pkg.version %>"></script>\n\t' +
+            '<script src="partials.min.js?v=<%= pkg.version %>"></script>'
+        }
+      ]
+    }
+  });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.config('watch', {
+    src: {
+      files: ['*.html', '*.js', 'app/**', '!lib/dontwatch.js'],
+      tasks: ['sync:dev'],
+    },
+  });
 
+  grunt.loadNpmTasks('grunt-bump');
+  grunt.config('bump', {
+    options: {
+      files: ['package.json', 'bower.json'],
+      updateConfigs: ['pkg'],
+      commit: true,
+      commitMessage: 'Release v%VERSION%',
+      commitFiles: ['-a'], // '-a' for all files
+      createTag: true,
+      tagName: 'v%VERSION%',
+      tagMessage: 'Version %VERSION%',
+      push: true,
+      pushTo: 'origin',
+      gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
+    }
+  });
+
+  grunt.registerTask('dev', [
+    'clean:dev',
+    'sync:dev',
+    'watch'
+  ]);
 
   grunt.registerTask('build', [
     'clean:build',
-    'ngtemplates',
-    'concat',
-    'uglify',
-    'cssmin',
-    'copy',
-    'replace'
+    'concat:build',
+    'uglify:build',
+    'cssmin:build',
+    'ngtemplates:build',
+    'copy:build',
+    'replace:bootstrapCss',
+    'replace:styleCss',
+    'replace:debug',
+    'replace:index'
   ]);
 
   grunt.registerTask('publish', [
     'bump-only',
     'build',
-    'gitcommit:all',
-    'release'
+    'bump-commit'
+    //'release',
   ]);
 
-  // If publish fails (deleted files must be commited manually because of changed behaviour in git 2.0, and this task doesn't add flag --all)
-  grunt.registerTask('publish-only', [
+  grunt.registerTask('publish-minor', [
+    'bump-only:minor',
     'build',
-    'gitcommit:all',
-    'release'
+    'bump-commit'
+    //'release',
   ]);
-
-  // git push --tags
 
 };

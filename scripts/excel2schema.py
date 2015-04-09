@@ -103,10 +103,10 @@ def printModelInfo(tablename, fields):
 		fillable.append(fieldname)
 
 	print("// " + tablename)
-	phpFillable = "// protected $fillable = array('%s');" % ("','".join(fillable))
+	phpFillable = "// protected $fillable = ['%s'];" % ("','".join(fillable))
 	print(phpFillable)	
 	if hidden:
-		phpHidden = "// protected $hidden = array('%s');" % ("','".join(hidden))	
+		phpHidden = "// protected $hidden = ['%s'];" % ("','".join(hidden))	
 		print(phpHidden)
 	print("")
 

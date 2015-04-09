@@ -15,7 +15,7 @@ services.factory('Practitioner', ['$resource', function ($resource)
 {
   // TODO: Use anything to auth? (for example auth-token).
   // {headers: { 'auth-token': 'C3PO R2D2' }}
-  return $resource('/api/public/v1/practitioner/:id', { id: '@id' },
+  return $resource('/api/v1/practitioner/:id', { id: '@id' },
     {
       'update': { method:'PUT', isArray: false }
     });
@@ -23,7 +23,7 @@ services.factory('Practitioner', ['$resource', function ($resource)
 
 services.factory('Project', ['$resource', function ($resource)
 {
-  return $resource('/api/public/v1/project/:projectId', { projectId: '@id' },
+  return $resource('/api/v1/project/:projectId', { projectId: '@id' },
     {
       'update': { method:'PUT', isArray: false }
     });
@@ -31,7 +31,7 @@ services.factory('Project', ['$resource', function ($resource)
 
 services.factory('Organisation', ['$resource', function ($resource)
 {
-  return $resource('/api/public/v1/organisation/:organisationId', { organisationId: '@id' },
+  return $resource('/api/v1/organisation/:organisationId', { organisationId: '@id' },
     {
       'update': { method:'PUT', isArray: false }
     });
@@ -39,7 +39,7 @@ services.factory('Organisation', ['$resource', function ($resource)
 
 services.factory('EiaPermit', ['$resource', function ($resource)
 {
-  return $resource('/api/public/v1/project/:projectId/eiapermit/:eiapermitId', { eiapermitId: '@id' },
+  return $resource('/api/v1/project/:projectId/eiapermit/:eiapermitId', { eiapermitId: '@id' },
     {
       'update': { method:'PUT', isArray: false }
     });
@@ -47,7 +47,7 @@ services.factory('EiaPermit', ['$resource', function ($resource)
 
 services.factory('Document', ['$resource', function ($resource)
 {
-  return $resource('/api/public/v1/project/:projectId/eiapermit/:eiapermitId/document/:documentId', { documentId: '@id' },
+  return $resource('/api/v1/project/:projectId/eiapermit/:eiapermitId/document/:documentId', { documentId: '@id' },
     {
       'update': { method:'PUT', isArray: false }
     });
@@ -56,7 +56,7 @@ services.factory('Document', ['$resource', function ($resource)
 
 services.factory('Valuelist', ['$resource', function ($resource)
 {
-  return $resource('/api/public/v1/valuelist/:id', { id: '@id' });
+  return $resource('/api/v1/valuelist/:id', { id: '@id' });
 }]);
 
 services.factory('Valuelists', ['Valuelist', function (Valuelist)
@@ -69,7 +69,7 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
   var userinfo = {info:{}};
   var emptyInfo =
   {
-    "full_name": "Not signed in",
+    "name": "Not signed in",
     "role_1": false,
     "role_2": false,
     "role_3": false,
@@ -108,7 +108,7 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
   };
   var getUserInfo = function()
   {
-    $http.get('/api/public/user/info')
+    $http.get('/user/info')
       .success(setUserInfo)
       .error(gotoNotSignedIn);
   };
@@ -116,13 +116,13 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
   userinfo.impersonate = function(id)
   {
     setUserInfo(null);
-    $http.get('/api/public/user/impersonate/'+id)
+    $http.get('/user/impersonate/'+id)
       .success(setUserInfo);
   };
 
   userinfo.signout = function()
   {
-    $http.get('/api/public/signout')
+    $http.get('/auth/logout')
       .success(function()
       {
         setUserInfo(null);
@@ -132,7 +132,7 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
 
   userinfo.getAllUsers = function()
   {
-    $http.get('/api/public/user/all')
+    $http.get('/user/all')
       .success(function(data)
       {
         userinfo.allusers = data;

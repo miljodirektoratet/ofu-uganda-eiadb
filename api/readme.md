@@ -1,53 +1,23 @@
-## SERO Rest API
+## Laravel PHP Framework
 
-Could also be called "the server part" of SERO.
+[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
+[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
+[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-- Uses Laravel PHP Framework.
-- Uses https://github.com/Zizaco/entrust for roles and permissions.
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
 
-### Requirements
-- Setup server:
-```
-sudo apt-get install apache2 php5 libapache2-mod-php5 php5-cli php5-mysql mysql-client mysql-server libapache2-mod-auth-mysql php5-mysqlnd
-sudo a2enmod rewrite
-sudo a2enmod ssl
-sudo a2ensite default-ssl
-sudo a2enmod auth_mysql
-sudo php5enmod mcrypt 
-sudo apt-get install phpmyadmin
-sudo service apache2 restart
-- Set memory limit for php: `sudo sed -i 'sudo sed -i 's/memory_limit = .*/memory_limit = 256M/' /etc/php5/apache2/php.ini`
-```
-- Change timezone:
-```
-sudo dpkg-reconfigure tzdata   -> follow on screen instructions
-sudo service cron stop
-sudo service cron start
-date   -> shows current time
-more /etc/timezone   -> shows current timezone
-```
-- Setup git:
-```
-sudo apt-get install git-core
-git config --global user.email "jostein.skaar@gmail.com" && git config --global user.name "Jostein Skaar"
-git config --global core.autocrlf true
-git config --global push.default simple   -> New behaviour for Git 2.0
-```
-- Download Composer (in api directory): `curl -sS https://getcomposer.org/installer | php`
-- Install/update project dependencies: `php composer.phar update`
-- Make sure web server has write access to api/app/storage: 
-```
-cd app
-sudo chown -R www-data:www-data storage
-cd storage
-find . -type d -exec sudo chmod 775 {} \; && find . -type f -exec sudo chmod 664 {} \;
-sudo chown ubuntu:ubuntu .gitignore cache/.gitignore logs/.gitignore meta/.gitignore sessions/.gitignore views/.gitignore
-```
-- Set environment:
--- Goto api/bootstrap and follow instuctions in environment-dummy.php
--- Goto api and follow instructions in .env-dummy.php
-- Open/close for https: Edit /etc/apache2/ports.conf and change between `Listen 443` and `Listen 127.0.0.1:443` (remember `sudo service apache2 restart`)
-- Redirect root to app: Create .htaccess file with `RedirectMatch ^/$ /app/#/`
+Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
 
+## Official Documentation
 
+Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
+## Contributing
+
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+
+### License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
