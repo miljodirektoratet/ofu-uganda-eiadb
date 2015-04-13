@@ -1,7 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use Response;
+use Auth;
+use Input;
+use \DateTime;
 use \App\Practitioner;
+use \App\PractitionerCertificate;
 
 class PractitionerController extends Controller {
 
@@ -95,7 +99,7 @@ class PractitionerController extends Controller {
 			if (array_key_exists("id", $certificateInputData))
 			{
 				$certificateId = $certificateInputData["id"];
-				$certificate = $practitioner["practitioner_certificates"]->find($certificateId);	
+				$certificate = $practitioner["practitionerCertificates"]->find($certificateId);	
 			}			
 			$isDeleted = array_key_exists("is_deleted", $certificateInputData) && $certificateInputData["is_deleted"]===true;
 			if ($isDeleted)

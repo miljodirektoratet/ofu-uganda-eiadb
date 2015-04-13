@@ -13,6 +13,6 @@ class PractitionerCertificate extends Model
   
   public function practitioner()
   {
-    return $this->belongsTo('Practitioner');
+    return $this->belongsTo('App\Practitioner');
   }
 }
