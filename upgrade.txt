@@ -1,0 +1,4 @@
+0.0.x to 0.1.x:
+From 0.1 we need to make sure it is only the api/public folder that is exposed throug Apache.
+- git fetch
+- 
