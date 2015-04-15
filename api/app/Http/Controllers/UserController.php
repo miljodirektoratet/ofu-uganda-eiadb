@@ -3,6 +3,7 @@
 use Auth;
 use App;
 use Response;
+use \App\User;
 
 class UserController extends Controller 
 {
@@ -32,7 +33,7 @@ class UserController extends Controller
     $users = array();
     if (Auth::user()->hasRole("Role 8"))
     {
-      $users = \App\User::all(array("id", "name"));
+      $users = User::all(array("id", "name"));
     }        
     return Response::json($users, 200);
   }    
@@ -62,7 +63,7 @@ class UserController extends Controller
     $roles = array();
     foreach ($user->roles as $role) 
     {
-      array_push($roles, array("id"=>$role->id, "name"=>$role->name, "name2"=>$role->display_name));
+      array_push($roles, array("id"=>$role->id, "name"=>$role->name, "display_name"=>$role->display_name));
     }
     return $roles;
   }

@@ -33,11 +33,32 @@ config(['$routeProvider', function($routeProvider)
   //$routeProvider.when('/projects/:projectId/eiaspermits/:id', {templateUrl: 'partials/project.html'});
 
   $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
-  $routeProvider.when('/notsignedin', {templateUrl: 'partials/notsignedin.html', controller: 'UserController'});
+  $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'UserController'});
+  $routeProvider.when('/password/send', {templateUrl: 'partials/passwordSend.html', controller: 'LoginController'});
+  $routeProvider.when('/password/reset/:token', {templateUrl: 'partials/passwordReset.html', controller: 'LoginController'});
   $routeProvider.when('/user', {templateUrl: 'partials/user.html', controller: 'UserController'});
   $routeProvider.when('/practitioners', {templateUrl: 'partials/practitioners.html', controller: 'PractitionersController'});
   $routeProvider.otherwise({redirectTo: '/'});
-}]);
+}])
+.factory('authHttpResponseInterceptor',['$q','$location',function($q,$location){
+  return {
+
+    'responseError': function(rejection)
+    {
+      if (rejection.status === 401)
+      {
+        //console.log("Response Error 401 from responseError", rejection);
+        $location.path('/login');
+      }
+      return $q.reject(rejection);
+    }
+  }
+}])
+  .config(['$httpProvider',function($httpProvider)
+  {
+    $httpProvider.interceptors.push('authHttpResponseInterceptor');
+  }]);
+
 
 var SavingStateEnum =
 {

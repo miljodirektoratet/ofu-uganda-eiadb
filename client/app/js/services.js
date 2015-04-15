@@ -79,17 +79,17 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
     "roles": []
   };
 
-  var gotoRootIfSignedInAndOnNotSignedInPath = function()
+  var gotoRootIfSignedInAndOnLoginPath = function()
   {
-    if ($location.path() == '/notsignedin')
+    if ($location.path() == '/login')
     {
       $location.path("/");
     }
   }
 
-  var gotoNotSignedIn = function()
+  var gotoLogin = function()
   {
-    $location.path("/notsignedin");
+    $location.path("/login");
   }
 
   var setUserInfo = function(data)
@@ -97,7 +97,7 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
     if (data)
     {
       _.merge(userinfo.info, data);
-      gotoRootIfSignedInAndOnNotSignedInPath();
+      gotoRootIfSignedInAndOnLoginPath();
     }
     else
     {
@@ -108,7 +108,7 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
   {
     $http.get('/user/info')
       .success(setUserInfo)
-      .error(gotoNotSignedIn);
+      .error(gotoLogin);
   };
 
   userinfo.impersonate = function(id)
@@ -124,7 +124,7 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
       .success(function()
       {
         setUserInfo(null);
-        $location.path("/notsignedin");
+        $location.path("/login");
       });
   };
 
@@ -136,6 +136,13 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
         userinfo.allusers = data;
       });
   };
+
+  userinfo.reTry = function()
+  {
+    getUserInfo();
+  };
+
+
 
   setUserInfo(null);
   getUserInfo();
