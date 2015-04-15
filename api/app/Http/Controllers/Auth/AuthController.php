@@ -86,7 +86,7 @@ class AuthController extends Controller {
     {
       return Response::json(['message' => trans('messages.logged_in')], 200);
     }
-    return Response::json(['error' => $this->getFailedLoginMessage()], 400);
+    return Response::json(['error' => $this->getFailedLoginMessage()], 422);
   }
 
   /**

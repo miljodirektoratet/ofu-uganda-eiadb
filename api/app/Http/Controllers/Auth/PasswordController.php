@@ -69,7 +69,7 @@ class PasswordController extends Controller {
         return Response::json(['message' => trans($response)], 200);
 
       case PasswordBroker::INVALID_USER:
-        return Response::json(['error' => trans($response)], 400);
+        return Response::json(['error' => trans($response)], 422);
     }
   }
 
@@ -100,7 +100,7 @@ class PasswordController extends Controller {
         return Response::json(['message' => trans($response)], 200);
 
       default:
-        return Response::json(['error' => trans($response)], 400);
+        return Response::json(['error' => trans($response)], 422);
     }
   }
 
