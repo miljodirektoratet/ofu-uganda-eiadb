@@ -45,7 +45,11 @@ config(['$routeProvider', function($routeProvider)
 
     'responseError': function(rejection)
     {
-      if (rejection.status === 401)
+      if ($location.path().startsWith('/password/reset/'))
+      {
+        // No redirect.
+      }
+      else if (rejection.status === 401)
       {
         //console.log("Response Error 401 from responseError", rejection);
         $location.path('/login');
