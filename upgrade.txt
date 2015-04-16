@@ -7,6 +7,13 @@
 1. Set correct path in apache
 - sudo vim /etc/apache2/sites-enabled/default-ssl.conf
 - Set DocumentRoot to /home/ubuntu/sero/api/public
+- Add the following as well:
+<Directory /home/ubuntu/sero/api/public>
+    Options FollowSymlinks
+    AllowOverride all
+    Require all granted
+</Directory>
+
 
 2. Get latest files
 - cd /home/ubuntu/sero

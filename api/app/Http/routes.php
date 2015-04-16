@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('info', function(){
-  phpinfo();  
+Route::get('/', function(){
+  return redirect(env('CLIENT'));
+});
 
-
+Route::group(['middleware' => 'auth'], function()
+{
+  Route::get('info', function(){
+    phpinfo();
+  });
 });
 
 Route::controllers([
