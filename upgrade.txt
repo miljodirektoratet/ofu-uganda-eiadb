@@ -1,4 +1,25 @@
 0.0.x to 0.1.x:
-From 0.1 we need to make sure it is only the api/public folder that is exposed throug Apache.
+
+0. IMPORTANTE: 
+- Get values from old .env file. 
+- Get APP_KEY
+
+1. Set correct path in apache
+- sudo vim /etc/apache2/sites-enabled/default-ssl.conf
+- Set DocumentRoot to /home/ubuntu/sero/api/public
+
+2. Get latest files
+- cd /home/ubuntu/sero
 - git fetch
-- 
+- git checkout -v0.1.x
+- cd /home/ubuntu/sero/api
+- php composer.phar self-update
+- sudo php composer.phar install
+
+3. Set environment stuff
+- cp .env.example .env
+- Update values in .env
+-- Create new APP_KEY with for instance md5sum
+- php artisan migrate
+
+Everything ok?
