@@ -51,7 +51,6 @@ config(['$routeProvider', function($routeProvider)
       }
       else if (rejection.status === 401)
       {
-        //console.log("Response Error 401 from responseError", rejection);
         $location.path('/login');
       }
       return $q.reject(rejection);

@@ -14,11 +14,11 @@
     Require all granted
 </Directory>
 
-
 2. Get latest files
+- Delete sero and clone it fresh.
 - cd /home/ubuntu/sero
-- git fetch
-- git checkout -v0.1.x
+(- git fetch)
+(- git checkout -v0.1.x)
 - cd /home/ubuntu/sero/api
 - php composer.phar self-update
 - sudo php composer.phar install
@@ -26,7 +26,6 @@
 3. Set environment stuff
 - cp .env.example .env
 - Update values in .env
--- Create new APP_KEY with for instance md5sum
 - php artisan migrate
 
 Everything ok?

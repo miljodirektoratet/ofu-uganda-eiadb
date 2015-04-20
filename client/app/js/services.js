@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "0.1.8"};
+var version = {"version": "0.1.9"};
 
 var services = angular.module('seroApp.services', []);
 
@@ -51,7 +51,6 @@ services.factory('Document', ['$resource', function ($resource)
     });
 }]);
 
-
 services.factory('Valuelist', ['$resource', function ($resource)
 {
   return $resource('/api/v1/valuelist/:id', { id: '@id' });
@@ -79,25 +78,15 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
     "roles": []
   };
 
-  var gotoRootIfSignedInAndOnLoginPath = function()
-  {
-    if ($location.path() == '/login')
-    {
-      $location.path("/");
-    }
-  }
-
-  var gotoLogin = function()
-  {
-    $location.path("/login");
-  }
-
   var setUserInfo = function(data)
   {
     if (data)
     {
       _.merge(userinfo.info, data);
-      gotoRootIfSignedInAndOnLoginPath();
+      if ($location.path() == '/login')
+      {
+        $location.path("/");
+      }
     }
     else
     {
@@ -107,8 +96,7 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
   var getUserInfo = function()
   {
     $http.get('/user/info')
-      .success(setUserInfo)
-      .error(gotoLogin);
+      .success(setUserInfo);
   };
 
   userinfo.impersonate = function(id)
