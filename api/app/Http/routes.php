@@ -11,6 +11,14 @@
 |
 */
 
+/*Event::listen('illuminate.query', function($query)
+{
+  if (strpos($query, 'projects') !== FALSE)
+    {
+      dd($query);
+    }
+});*/
+
 Route::get('/', function(){
   return redirect(env('CLIENT'));
 });

@@ -5,6 +5,7 @@ use Input;
 use Auth;
 use \DateTime;
 use \App\Project;
+use DB;
 
 class ProjectController extends Controller {
 
@@ -18,6 +19,8 @@ class ProjectController extends Controller {
     }
 
     $count = Input::get('count');
+    
+    $criterias = getSearchCriterias(['title', 'location']);
 
     $withFunction = function ($query)
     {
@@ -32,11 +35,16 @@ class ProjectController extends Controller {
       $query->select('id', 'description_short as description');
     };
 
-    $projects = Project::   
-      with(array('organisation'=>$withFunction, 'district'=>$withFunction2, 'category'=>$withFunction3))            
-      ->orderBy('id', 'desc')
-      ->take($count)
-      ->get(array('id', 'title', 'category_id', 'district_id', 'location', 'organisation_id'));
+    $projects = Project::with(array('organisation'=>$withFunction, 'district'=>$withFunction2, 'category'=>$withFunction3));
+    foreach ($criterias as $word => $criteria) 
+    {
+      $projects = $projects->where($word, 'like', '%'.$criteria.'%');
+    }    
+    
+    $projects = $projects->orderBy('id', 'desc');
+    $projects = $projects->take($count);
+    $projects = $projects->get(array('id', 'title', 'category_id', 'district_id', 'location', 'organisation_id'));
+
 
     /*foreach ($projects as $project) 
     {

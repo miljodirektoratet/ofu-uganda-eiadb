@@ -44,8 +44,8 @@ config(['$routeProvider', function($routeProvider)
   return {
 
     'responseError': function(rejection)
-    {
-      if ($location.path().startsWith('/password/reset/'))
+    {      
+      if ($location.path().indexOf('/password/reset/') == 0)
       {
         // No redirect.
       }
