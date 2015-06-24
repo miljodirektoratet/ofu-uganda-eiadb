@@ -39,11 +39,12 @@ class ProjectController extends Controller {
     foreach ($criterias as $word => $criteria) 
     {
       $projects = $projects->where($word, 'like', '%'.$criteria.'%');
-    }    
-    
+    }
+
     $projects = $projects->orderBy('id', 'desc');
     $projects = $projects->take($count);
     $projects = $projects->get(array('id', 'title', 'category_id', 'district_id', 'location', 'organisation_id'));
+
 
 
     /*foreach ($projects as $project) 

@@ -135,8 +135,11 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+        'Illuminate\Broadcasting\BroadcastServiceProvider',
 
 		'Zizaco\Entrust\EntrustServiceProvider',
+
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 
 		/*
 		 * Application Service Providers...
