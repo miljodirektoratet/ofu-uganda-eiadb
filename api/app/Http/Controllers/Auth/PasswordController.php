@@ -25,8 +25,6 @@ class PasswordController extends Controller {
   /**
    * Create a new password controller instance.
    *
-   * @param  \Illuminate\Contracts\Auth\Guard  $auth
-   * @param  \Illuminate\Contracts\Auth\PasswordBroker  $passwords
    * @return void
    */
   public function __construct()
@@ -54,7 +52,7 @@ class PasswordController extends Controller {
   {
     $this->validate($request, ['email' => 'required|email']);
 
-    $response = $this->passwords->sendResetLink($request->only('email'), function($m)
+    $response = \Password::sendResetLink($request->only('email'), function($m)
     {
       $m->subject($this->getEmailSubject());
       //$m->body("Click here to reset your password: ");// . url('password/reset/'.$token));
@@ -82,13 +80,13 @@ class PasswordController extends Controller {
       'email', 'password', 'password_confirmation', 'token'
     );
 
-    $response = $this->passwords->reset($credentials, function($user, $password)
+    $response = \Password::reset($credentials, function($user, $password)
     {
       $user->password = bcrypt($password);
 
       $user->save();
 
-      $this->auth->login($user);
+      \Auth::login($user);
     });
 
     switch ($response)

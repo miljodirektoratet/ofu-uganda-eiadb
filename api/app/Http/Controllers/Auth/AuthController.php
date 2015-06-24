@@ -5,6 +5,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use \Illuminate\Http\Request;
 
+
 use Response;
 use Validator;
 use User;
@@ -80,7 +81,7 @@ class AuthController extends Controller {
 
     $credentials = $request->only('initials', 'password');
 
-    if ($this->auth->attempt($credentials, $request->has('remember')))
+    if (\Auth::attempt($credentials, $request->has('remember')))
     {
       return Response::json(['message' => trans('messages.logged_in')], 200);
     }
@@ -94,7 +95,7 @@ class AuthController extends Controller {
    */
   public function getLogout()
   {
-    $this->auth->logout();
+      \Auth::logout();
 
     return Response::json(['message' => trans('messages.logged_out')], 200);
   }
