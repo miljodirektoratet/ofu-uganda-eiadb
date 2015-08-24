@@ -118,7 +118,6 @@
           <root url="file://$MODULE_DIR$/api/vendor/doctrine/collections" />
           <root url="file://$MODULE_DIR$/api/vendor/phpdocumentor/reflection-docblock" />
           <root url="file://$MODULE_DIR$/api/vendor/doctrine/dbal" />
-          <root url="file://$MODULE_DIR$/api/vendor/symfony/filesystem" />
           <root url="file://$MODULE_DIR$/api/vendor/laravel/framework" />
           <root url="file://$MODULE_DIR$/api/vendor/jakub-onderka/php-console-color" />
           <root url="file://$MODULE_DIR$/api/vendor/sebastian/recursion-context" />
@@ -180,7 +179,6 @@
           <root url="file://$MODULE_DIR$/api/vendor/doctrine/collections" />
           <root url="file://$MODULE_DIR$/api/vendor/phpdocumentor/reflection-docblock" />
           <root url="file://$MODULE_DIR$/api/vendor/doctrine/dbal" />
-          <root url="file://$MODULE_DIR$/api/vendor/symfony/filesystem" />
           <root url="file://$MODULE_DIR$/api/vendor/laravel/framework" />
           <root url="file://$MODULE_DIR$/api/vendor/jakub-onderka/php-console-color" />
           <root url="file://$MODULE_DIR$/api/vendor/sebastian/recursion-context" />

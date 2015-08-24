@@ -22,6 +22,7 @@
     "angular-resource": "1.2.x",
     "angular-route": "1.2.x",
     "angular-mocks": "1.2.x",
+    "angular-sanitize": "1.2.x",
     "angular-bootstrap": "0.12.x",
     "angular-ui-select2": "~0.0.5",
     "select2": "~3.4",
