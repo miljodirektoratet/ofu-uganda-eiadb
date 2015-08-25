@@ -98,7 +98,7 @@ function convertDateStringsToDates(input) {
     if (typeof value === "string" && (match = value.match(regexIso8601)))
     {
       var dateParts = match[0].split(" ");
-      input[key] = dateParts[0];
+      input[key] = new Date(dateParts[0]);
       /*
       var dateParts = match[0].replace("00:00:00", "12:00:00").split(" "); // HACK to make sure we are on the correct day.
       var dateWithT = dateParts[0]+"T"+dateParts[1];
