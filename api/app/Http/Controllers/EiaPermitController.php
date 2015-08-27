@@ -5,6 +5,7 @@ use Auth;
 use Input;
 use \DateTime;
 use \App\Project;
+use \App\EiaPermit;
 
 class EiaPermitController extends Controller {
 
