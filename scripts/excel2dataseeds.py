@@ -4,8 +4,7 @@
 import os, openpyxl, re, glob
 from collections import OrderedDict
 from datetime import datetime
-
-phpFile = r"..\api\app\database\\seeds\ExcelDataTableSeeder.php"
+phpFile = r"..\api\database\seeds\ExcelDataTableSeeder.php"
 
 tableFilePattern = r"N:\Felles\Forurensning\2. Internasjonalt arbeid\2012. Uganda\Kravspek\Tabeller\Supporting tables version*.xlsx"									 
 #tableFilePattern = r"C:\Dropbox\Deling\Nema\Supporting tables version*.xlsx"									 
