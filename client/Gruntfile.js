@@ -61,10 +61,10 @@ module.exports = function(grunt)
       files: {
         '<%= paths.buildPath %>app.min.js': [
           'app/js/jqlite.extra.js', 'app/js/app.js',
-          'app/js/controllers.js', 'app/js/practitionersController.js', 'app/js/projectControllers.js',
+          'app/js/controllers.js', 'app/js/practitionersController.js', 'app/js/projectControllers.js', 'app/js/eiasPermitsControllers.js',
           'app/js/loginController.js',
           'app/js/directives.js', 'app/js/filters.js',
-          'app/js/services.js',
+          'app/js/services.js', 'app/js/projectFactory.js',
           'app/js/validations.js'
         ]
       }
