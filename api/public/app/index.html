@@ -1,59 +1,59 @@
 <!doctype html>
 <html lang="en" ng-app="seroApp">
 <head>
-  <meta charset="utf-8">
-  <title>EIA Database</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" >
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="utf-8">
+    <title>EIA Database</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 
-  <link rel="stylesheet" href="vendor/vendor.min.css?v=0.1.16"/>
-	<link rel="stylesheet" href="app.min.css?v=0.1.16"/>
+    <link rel="stylesheet" href="vendor/vendor.min.css?v=0.1.17"/>
+	<link rel="stylesheet" href="app.min.css?v=0.1.17"/>
 </head>
 <body>
-  <div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController" >
+<div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController" >
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a href="http://www.nemaug.org/" target="_blank">
-          <img class="navbar-left"  src="img/NEMA-logo-small.png" alt="NEMA logo" style="padding-right:5px;"/>
-        </a>
-        <a class="navbar-brand" href="#/">EIA Database</a>
-      </div>
-      <div class="navbar-collapse" collapse="isCollapsed">
-        <ul class="nav navbar-nav">
-          <li ng-class="{ active: isAdvancedActive('/projects')}"><a href="#/projects">Projects</a></li>
-          <li ng-class="{ active: isAdvancedActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
-<!--          <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li ng-class="{ active: isAdvancedActive('/advanced/practitioners')}"><a href="#/advanced/practitioners">Practitioners</a></li>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.nemaug.org/" target="_blank">
+                <img class="navbar-left"  src="img/NEMA-logo-small.png" alt="NEMA logo" style="padding-right:5px;"/>
+            </a>
+            <a class="navbar-brand" href="#/">EIA Database</a>
+        </div>
+        <div class="navbar-collapse" collapse="isCollapsed">
+            <ul class="nav navbar-nav">
+                <li ng-class="{ active: isAdvancedActive('/projects')}"><a href="#/projects">Projects</a></li>
+                <li ng-class="{ active: isAdvancedActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
+                <!--          <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                              <li ng-class="{ active: isAdvancedActive('/advanced/practitioners')}"><a href="#/advanced/practitioners">Practitioners</a></li>
+                            </ul>
+                          </li>-->
+                <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
             </ul>
-          </li>-->
-          <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
-        </ul>
-        <p class="navbar-text navbar-right">Logged in as <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a></p>
-      </div><!--/.nav-collapse -->
+            <p class="navbar-text navbar-right">Logged in as <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a></p>
+        </div><!--/.nav-collapse -->
 
     </div>
-  </div>
+</div>
 
-  <!--<div id="infoMessageBox" class="bgcolor-info">-->
-    <!--All data saved.-->
-  <!--</div>-->
+<!--<div id="infoMessageBox" class="bgcolor-info">-->
+<!--All data saved.-->
+<!--</div>-->
 
-  <div class="container-fluid max-width">
+<div class="container-fluid max-width">
     <div ng-view></div>
-  </div>
+</div>
 
-  <script src="vendor/vendor.min.js?v=0.1.16"></script>
-	<script src="app.min.js?v=0.1.16"></script>
-	<script src="partials.min.js?v=0.1.16"></script>
-  <div class="forceload"><img src="img/loader.gif" alt="loader"/></div>
+<script src="vendor/vendor.min.js?v=0.1.17"></script>
+	<script src="app.min.js?v=0.1.17"></script>
+	<script src="partials.min.js?v=0.1.17"></script>
+<div class="forceload"><img src="img/loader.gif" alt="loader"/></div>
 </body>
 </html>
