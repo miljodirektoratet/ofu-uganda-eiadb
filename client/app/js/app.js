@@ -24,6 +24,7 @@ config(['$routeProvider', function($routeProvider)
   $routeProvider.when('/projects/:projectId/eiaspermits', projectTabsOptions);
   $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId', projectTabsOptions);
   $routeProvider.when('/projects/:projectId/auditsinspections', projectTabsOptions);
+  $routeProvider.when('/projects/:projectId/auditsinspections/:auditinspectionId', projectTabsOptions);
   $routeProvider.when('/projects/:projectId/reports', projectTabsOptions);
   //$routeProvider.when('/projects/:id', {templateUrl: 'partials/project.html', controller: 'ProjectTabController'});
   //$routeProvider.when('/projects/:projectId/eiaspermits', {templateUrl: 'partials/project.html', controller: 'EiaPermitTabController'});
