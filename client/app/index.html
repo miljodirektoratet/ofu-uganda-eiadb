@@ -1,87 +1,88 @@
 <!doctype html>
 <html lang="en" ng-app="seroApp">
 <head>
-  <meta charset="utf-8">
-  <title>EIA Database</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" >
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="utf-8">
+    <title>EIA Database</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 
-  <!-- Style begin -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
-  <link rel="stylesheet" href="bower_components/select2/select2.css">
-  <link rel="stylesheet" href="bower_components/select2-bootstrap-css/select2-bootstrap.css">
-  <link rel="stylesheet" href="css/navbar.css"/>
-  <link rel="stylesheet" href="css/style.css"/>
-  <link rel="stylesheet" href="css/animations.css"/>
-  <!-- Style end -->
+    <!-- Style begin -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/select2/select2.css">
+    <link rel="stylesheet" href="bower_components/select2-bootstrap-css/select2-bootstrap.css">
+    <link rel="stylesheet" href="css/navbar.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/animations.css"/>
+    <!-- Style end -->
 </head>
 <body>
-  <div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController" >
+<div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController" >
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a href="http://www.nemaug.org/" target="_blank">
-          <img class="navbar-left"  src="img/NEMA-logo-small.png" alt="NEMA logo" style="padding-right:5px;"/>
-        </a>
-        <a class="navbar-brand" href="#/">EIA Database</a>
-      </div>
-      <div class="navbar-collapse" collapse="isCollapsed">
-        <ul class="nav navbar-nav">
-          <li ng-class="{ active: isAdvancedActive('/projects')}"><a href="#/projects">Projects</a></li>
-          <li ng-class="{ active: isAdvancedActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
-<!--          <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li ng-class="{ active: isAdvancedActive('/advanced/practitioners')}"><a href="#/advanced/practitioners">Practitioners</a></li>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.nemaug.org/" target="_blank">
+                <img class="navbar-left"  src="img/NEMA-logo-small.png" alt="NEMA logo" style="padding-right:5px;"/>
+            </a>
+            <a class="navbar-brand" href="#/">EIA Database</a>
+        </div>
+        <div class="navbar-collapse" collapse="isCollapsed">
+            <ul class="nav navbar-nav">
+                <li ng-class="{ active: isAdvancedActive('/projects')}"><a href="#/projects">Projects</a></li>
+                <li ng-class="{ active: isAdvancedActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
+                <!--          <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                              <li ng-class="{ active: isAdvancedActive('/advanced/practitioners')}"><a href="#/advanced/practitioners">Practitioners</a></li>
+                            </ul>
+                          </li>-->
+                <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
             </ul>
-          </li>-->
-          <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
-        </ul>
-        <p class="navbar-text navbar-right">Logged in as <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a></p>
-      </div><!--/.nav-collapse -->
+            <p class="navbar-text navbar-right">Logged in as <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a></p>
+        </div><!--/.nav-collapse -->
 
     </div>
-  </div>
+</div>
 
-  <!--<div id="infoMessageBox" class="bgcolor-info">-->
-    <!--All data saved.-->
-  <!--</div>-->
+<!--<div id="infoMessageBox" class="bgcolor-info">-->
+<!--All data saved.-->
+<!--</div>-->
 
-  <div class="container-fluid max-width">
+<div class="container-fluid max-width">
     <div ng-view></div>
-  </div>
+</div>
 
-  <!-- Script begin -->
-  <!-- Make SURE to remove jquery when https://github.com/angular-ui/ui-select supports multiple items. For now, include because of angular-ui-select2. -->
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>  
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="bower_components/select2/select2.js"></script>
-  <!--<script src="bower_components/angular-ui-select2/src/select2.js"></script>-->
-  <script src="js/select2.js"></script> <!-- Check comment inside select2.js file -->
-  <script src="bower_components/lodash/dist/lodash.js"></script>
-  <script src="js/jqlite.extra.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/projectFactory.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/practitionersController.js"></script>
-  <script src="js/projectControllers.js"></script>
-  <script src="js/eiasPermitsControllers.js"></script>
-  <script src="js/loginController.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
-  <script src="js/validations.js"></script>
-  <!-- Script end -->
-  <div class="forceload"><img src="img/loader.gif" alt="loader"/></div>
+<!-- Script begin -->
+<!-- Make SURE to remove jquery when https://github.com/angular-ui/ui-select supports multiple items. For now, include because of angular-ui-select2. -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/select2/select2.js"></script>
+<!--<script src="bower_components/angular-ui-select2/src/select2.js"></script>-->
+<script src="js/select2.js"></script> <!-- Check comment inside select2.js file -->
+<script src="bower_components/lodash/dist/lodash.js"></script>
+<script src="js/jqlite.extra.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/projectFactory.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/practitionersController.js"></script>
+<script src="js/projectControllers.js"></script>
+<script src="js/eiasPermitsControllers.js"></script>
+<script src="js/auditsInspectionsControllers.js"></script>
+<script src="js/loginController.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/validations.js"></script>
+<!-- Script end -->
+<div class="forceload"><img src="img/loader.gif" alt="loader"/></div>
 </body>
 </html>

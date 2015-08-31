@@ -217,7 +217,8 @@ textarea.ng-invalid,
 }
 
 .project .project-project,
-.project .project-eiasandpermits
+.project .project-eiasandpermits,
+.project .project-auditsandinspections
 {
     padding-top: 15px;
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Valuelists', function ($q, $filter, Project, Organisation, EiaPermit, Document, Valuelists)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'AuditInspection', 'Valuelists', function ($q, $filter, Project, Organisation, EiaPermit, Document, AuditInspection, Valuelists)
 {
     var factory = {};
     factory.project = {};
@@ -9,14 +9,18 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
     factory.eiapermit = {};
     factory.documents = [];
     factory.document = {};
+    factory.auditsinspections = [];
+    factory.auditinspection = {};
     factory.valuelists = Valuelists;
-
     factory.retrieveProjectData = function (params)
     {
         var deferredProject = $q.defer();
         var deferredOrganisation = $q.defer();
         var deferredEiasPermits = $q.defer();
         var deferredEiaPermit = $q.defer();
+        var deferredAuditsInspections = $q.defer();
+        var deferredAuditInspection = $q.defer();
+
 
         if (factory.project.id != params.projectId)
         {
@@ -39,18 +43,37 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 });
                 deferredEiasPermits.resolve(eps);
             });
+
+            // params contains auditinspection, so we can't user params directly.
+            factory.auditsinspections = AuditInspection.query(_.omit(params, 'auditinspectionId'), function (ais)
+            {
+                factory.retrieveAuditInspection(params).then(function (ai)
+                {
+                    deferredAuditInspection.resolve(ai);
+                });
+                deferredAuditsInspections.resolve(ais);
+            });
         }
         else
         {
             deferredProject.resolve(factory.project);
             deferredOrganisation.resolve(factory.organisation);
+
             factory.retrieveEiaPermit(params).then(function (ep)
             {
                 deferredEiaPermit.resolve(ep);
             });
             deferredEiasPermits.resolve(factory.eiaspermits);
+
+            factory.retrieveAuditInspection(params).then(function (ai)
+            {
+                deferredAuditInspection.resolve(ai);
+            });
+            deferredAuditsInspections.resolve(factory.auditsinspections);
         }
-        return [deferredProject.promise, deferredOrganisation.promise, deferredEiasPermits.promise, deferredEiaPermit.promise];
+        return [deferredProject.promise, deferredOrganisation.promise,
+            deferredEiasPermits.promise, deferredEiaPermit.promise,
+            deferredAuditsInspections.promise, deferredAuditInspection.promise];
     };
 
     factory.retrieveEiaPermit = function (params)
@@ -82,7 +105,32 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         return deferred.promise;
     };
 
-    factory.getEiapermitSummary = function (ep)
+    factory.retrieveAuditInspection = function (params)
+    {
+        var deferred = $q.defer();
+        if (params.auditinspectionId)
+        {
+            var hits = $filter('filter')(factory.auditsinspections, {'id': params.auditinspectionId});
+            if (hits.length == 1)
+            {
+                factory.auditinspection = hits[0];
+                factory.auditinspection.$get(params, function (ai)
+                {
+                    deferred.resolve(ai);
+                });
+            }
+        }
+        else if (factory.auditsinspections.length > 0)
+        {
+            if (_.isEmpty(factory.auditinspection))
+            {
+                factory.auditinspection = factory.auditsinspections[0];
+            }
+        }
+        return deferred.promise;
+    };
+
+    factory.getEiaPermitSummary = function (ep)
     {
         var ep = ep || factory.eiapermit;
         if (_.isEmpty(ep))
@@ -90,7 +138,23 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             return "";
         }
         var statusPart = "";
-        var status = _.find(factory.valuelists["status"], {'id': ep.status});
+        var status = _.find(factory.valuelists["eiastatus"], {'id': ep.status});
+        if (status)
+        {
+            statusPart = status.description1;
+        }
+        return "Status: " + statusPart;
+    };
+
+    factory.getAuditInspectionSummary = function (ai)
+    {
+        var ai = ai || factory.auditinspection;
+        if (_.isEmpty(ai))
+        {
+            return "";
+        }
+        var statusPart = "";
+        var status = _.find(factory.valuelists["auditinspectionstatus"], {'id': ai.status});
         if (status)
         {
             statusPart = status.description1;
@@ -121,6 +185,14 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         return deferred.promise;
     };
 
+    factory.setAuditInspection = function (ai)
+    {
+        var deferred = $q.defer();
+        factory.auditinspection = ai;
+        deferred.resolve(ai);
+        return deferred.promise;
+    };
+
     factory.empty = function ()
     {
         factory.project = {};
@@ -129,6 +201,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.eiapermit = {};
         factory.documents = [];
         factory.document = {};
+        factory.auditsinspections = [];
+        factory.auditinspection = {};
     };
 
     factory.createNewProject = function (o)
@@ -188,6 +262,34 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             else
             {
                 factory.eiapermit = {};
+            }
+        });
+    };
+
+    factory.createNewAuditInspection = function (p)
+    {
+        var aiData =
+        {
+            project_id: p.id,
+            is_new: true
+        };
+        factory.auditinspection = new AuditInspection(aiData);
+        factory.auditsinspections.push(factory.auditinspection);
+    };
+
+    factory.deleteAuditInspection = function (params)
+    {
+        var index = _.findIndex(factory.auditsinspections, {'id': factory.auditinspection.id});
+        factory.auditinspection.$delete(params, function ()
+        {
+            factory.auditsinspections.splice(index, 1);
+            if (factory.auditsinspections.length > 0)
+            {
+                factory.auditinspection = factory.auditinspection[0];
+            }
+            else
+            {
+                factory.auditinspection = {};
             }
         });
     };

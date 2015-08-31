@@ -1,0 +1,51 @@
+<div class="project-auditsandinspections">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="element-dropdown" dropdown ng-show="data.auditsinspections.length">
+                <button class="btn btn-default dropdown-toggle" type="button" dropdown-toggle>
+                    {{data.getAuditInspectionSummary()}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-repeat="ai in data.auditsinspections" role="presentation"><a role="menuitem" href="#/projects/{{data.project.id}}/auditsinspections/{{ai.id}}">{{data.getAuditInspectionSummary(ai)}}</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <a type="button" class="btn btn-success pull-right" ng-href="#/projects/{{data.project.id}}/auditsinspections/new" ng-hide="!auth.canSave('new')">New Audit and Inspection</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" ng-show="hasAuditInspection()">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title" title="id={{data.auditinspection.id}}">Audit and Inspection (Dirty:{{parts.auditinspection.form.$dirty}}, valid:{{parts.auditinspection.form.$valid}})
+                        <span class="loader pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.Loading"></span>
+                        <span class="saving-message-inline pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.Loaded && !data.auditinspection.is_new">Last changed by {{data.auditinspection.updated_by}}</span>
+                        <span class="saving-message-inline pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.SavingStarted">Saving...</span>
+                        <span class="saving-message-inline pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.SavingFinished">All changes saved</span>
+                        <span class="saving-message-inline pull-right color-error" ng-show="parts.auditinspection.state == SavingStateEnum.SavingFailed">Saving failed</span>
+                        <span class="saving-message-inline pull-right color-error" ng-show="parts.auditinspection.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <form role="form" name="parts.auditinspection.form" novalidation>
+                        <div>Her kommer skjemaet</div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

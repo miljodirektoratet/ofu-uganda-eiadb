@@ -53,4 +53,5 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function()
   Route::resource('organisation', 'OrganisationController');
   Route::resource('project.eiapermit', 'EiaPermitController');
   Route::resource('project.eiapermit.document', 'DocumentController');
+  Route::resource('project.auditinspection', 'AuditInspectionController');
 });
