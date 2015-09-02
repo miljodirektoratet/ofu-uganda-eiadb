@@ -29,6 +29,7 @@ class ValuelistController extends Controller {
         $valuelists["officer"] = $this->officer();
         $valuelists["executivedirector"] = $this->executivedirector();
         $valuelists["currency"] = $this->currency();
+        $valuelists["auditinspectiontype"] = $this->auditinspectiontype();
 
         return Response::json($valuelists, 200);
     }
@@ -82,6 +83,11 @@ class ValuelistController extends Controller {
     private function auditinspectionstatus()
     {
         return $this->getCodesFromDrowdownName("audit_inspection_status");
+    }
+
+    private function auditinspectiontype()
+    {
+        return $this->getCodesFromDrowdownName("audit_inspection_type");
     }
 
     private function documenttype()

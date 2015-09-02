@@ -8,13 +8,17 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li ng-repeat="ai in data.auditsinspections" role="presentation"><a role="menuitem" href="#/projects/{{data.project.id}}/auditsinspections/{{ai.id}}">{{data.getAuditInspectionSummary(ai)}}</a></li>
+                    <li ng-repeat="ai in data.auditsinspections" role="presentation"><a role="menuitem"
+                                                                                        href="#/projects/{{data.project.id}}/auditsinspections/{{ai.id}}">{{data.getAuditInspectionSummary(ai)}}</a>
+                    </li>
                 </ul>
             </div>
 
         </div>
         <div class="col-md-6">
-            <a type="button" class="btn btn-success pull-right" ng-href="#/projects/{{data.project.id}}/auditsinspections/new" ng-hide="!auth.canSave('new')">New Audit and Inspection</a>
+            <a type="button" class="btn btn-success pull-right"
+               ng-href="#/projects/{{data.project.id}}/auditsinspections/new" ng-hide="!auth.canSave('new')">New Audit
+                and Inspection</a>
         </div>
     </div>
     <div class="row">
@@ -27,18 +31,124 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2 class="panel-title" title="id={{data.auditinspection.id}}">Audit and Inspection (Dirty:{{parts.auditinspection.form.$dirty}}, valid:{{parts.auditinspection.form.$valid}})
-                        <span class="loader pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.Loading"></span>
-                        <span class="saving-message-inline pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.Loaded && !data.auditinspection.is_new">Last changed by {{data.auditinspection.updated_by}}</span>
-                        <span class="saving-message-inline pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.SavingStarted">Saving...</span>
-                        <span class="saving-message-inline pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.SavingFinished">All changes saved</span>
-                        <span class="saving-message-inline pull-right color-error" ng-show="parts.auditinspection.state == SavingStateEnum.SavingFailed">Saving failed</span>
-                        <span class="saving-message-inline pull-right color-error" ng-show="parts.auditinspection.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+                    <h2 class="panel-title" title="id={{data.auditinspection.id}}">Audit and Inspection
+                        (Dirty:{{parts.auditinspection.form.$dirty}}, valid:{{parts.auditinspection.form.$valid}})
+                        <span class="loader pull-right"
+                              ng-show="parts.auditinspection.state == SavingStateEnum.Loading"></span>
+                        <span class="saving-message-inline pull-right"
+                              ng-show="parts.auditinspection.state == SavingStateEnum.Loaded && !data.auditinspection.is_new">Last changed by {{data.auditinspection.updated_by}}</span>
+                        <span class="saving-message-inline pull-right"
+                              ng-show="parts.auditinspection.state == SavingStateEnum.SavingStarted">Saving...</span>
+                        <span class="saving-message-inline pull-right"
+                              ng-show="parts.auditinspection.state == SavingStateEnum.SavingFinished">All changes saved</span>
+                        <span class="saving-message-inline pull-right color-error"
+                              ng-show="parts.auditinspection.state == SavingStateEnum.SavingFailed">Saving failed</span>
+                        <span class="saving-message-inline pull-right color-error"
+                              ng-show="parts.auditinspection.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
                     </h2>
                 </div>
                 <div class="panel-body">
                     <form role="form" name="parts.auditinspection.form" novalidation>
-                        <div>Her kommer skjemaet</div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="year">Control Year</label>
+                                    <input type="text" integer ng-blur="saveCurrentAuditInspection()"
+                                           ng-readonly="!auth.canSave('year')" class="form-control input-sm" id="year"
+                                           ng-model="data.auditinspection.year"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="type">Control type</label>
+                                    <select ui-select2 ng-change="saveCurrentAuditInspection()"
+                                            ng-disabled="!auth.canSave('type')" id="type" class="form-control input-sm"
+                                            ng-model="data.auditinspection.type">
+                                        <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">
+                                            {{v.description1}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="users">Participants from NEMA</label>
+                                    <select ui-select2 multiple="true" placeholder="Click to pick"
+                                            ng-change="saveCurrentAuditInspection()"
+                                            ng-disabled="!auth.canSave('personnel')" id="users"
+                                            class="form-control input-sm"
+                                            ng-model="data.auditinspection.user_ids">
+                                        <option ng-repeat="v in valuelists.officer" value="{{v.id}}">
+                                            {{v.description1}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    <label for="coordinated">Coordinated</label>
+                                    <input type="checkbox" class="checkbox-small form-control input-sm" id="coordinated"
+                                           ng-model="fake_coordinated" ng-checked="data.auditinspection.coordinated"
+                                           ng-click="data.auditinspection.coordinated = !data.auditinspection.coordinated; saveCurrentAuditInspection()"
+                                           ng-readonly="!auth.canSave('coordinated')"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="date_carried_out">Date carried out</label>
+
+                                    <div class="input-group container-datepicker"
+                                         ng-controller="DatePickerController">
+                                        <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                               ng-readonly="!auth.canSave('date_carried_out')" id="date_carried_out"
+                                               class="form-control input-sm input-date"
+                                               ng-model="data.auditinspection.date_carried_out"
+                                               data-datepicker-popup="d MMM yyyy" data-is-open="opened"
+                                               data-datepicker-options="datepickerOptions"
+                                               data-show-button-bar="false"/>
+                                            <span class="input-group-btn">
+                                              <button type="button" ng-disabled="!auth.canSave('date_inspection')"
+                                                      class="btn btn-default btn-sm" ng-click="open($event)"><span
+                                                      class="glyphicon glyphicon-calendar"></span></button>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="days">Number of days</label>
+                                    <input type="text" integer ng-blur="saveCurrentAuditInspection()"
+                                           ng-readonly="!auth.canSave('days')" class="form-control input-sm" id="days"
+                                           ng-model="data.auditinspection.days"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="external_participants">Participants from lead agencies, facilities etc.</label>
+                                    <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                           ng-readonly="!auth.canSave('external_participants')" class="form-control input-sm" id="external_participants"
+                                           ng-model="data.auditinspection.external_participants"/>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="advance_notice">Advanced notice</label>
+                                    <input type="checkbox" class="checkbox-small form-control input-sm"
+                                           id="advance_notice"
+                                           ng-model="fake_advance_notice"
+                                           ng-checked="data.auditinspection.advance_notice"
+                                           ng-click="data.auditinspection.advance_notice = !data.auditinspection.advance_notice; saveCurrentAuditInspection()"
+                                           ng-readonly="!auth.canSave('advance_notice')"/>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
 

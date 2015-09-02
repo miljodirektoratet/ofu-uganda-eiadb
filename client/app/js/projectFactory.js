@@ -159,7 +159,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             statusPart = status.description1;
         }
-        return "Status: " + statusPart;
+        return "Number " + ai.year + ": " + statusPart;
     };
 
     factory.setOrganisation = function (o)
