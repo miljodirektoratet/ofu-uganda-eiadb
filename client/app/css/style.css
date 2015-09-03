@@ -1,169 +1,142 @@
 /* Needed by ui.bootstrap */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
-
-.top-header
-{
-    margin-bottom:30px;
-}
-.top-header h1
-{
-    margin-top:0;
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
 }
 
-
-.practitioners
-{
+.top-header {
+    margin-bottom: 30px;
 }
+
+.top-header h1 {
+    margin-top: 0;
+}
+
+.practitioners {
+}
+
 .practitioners .header,
 .projects .header,
-.project-project-new .header
-{
+.project-project-new .header {
     font-weight: bold;
     font-size: 13px;
     white-space: nowrap;
 }
+
 .practitioners .practitioner .master,
 .projects .project .master,
 .project .project-project-new .master,
-.documents .document .master
-{
+.documents .document .master {
     background-color: #f3f3f3;
     /*border-top:1px solid darkgray;*/
     cursor: pointer;
     font-size: 13px;
 }
 
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td
-{
-    padding:0px 10px;
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 0px 10px;
 }
 
-.documents .document .master td
-{
-    padding-top:0px;
-    padding-bottom:0px;
+.documents .document .master td {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
-.practitioners .practitioner .master .noCertificate
-{
+.practitioners .practitioner .master .noCertificate {
     opacity: 0;
 }
 
-
 .practitioners .practitioner .detail,
-.documents .document .detail
-{
-    padding-top:5px;
-    padding-bottom:10px;
+.documents .document .detail {
+    padding-top: 5px;
+    padding-bottom: 10px;
     background-color: #FCFCFC;
 }
+
 .practitioners .practitioner .selected,
-.documents .document .selected
-{
+.documents .document .selected {
     background-color: #FCFCFC;
 }
 
-.documents .document .detail td
-{
-    border:none;
+.documents .document .detail td {
+    border: none;
 }
 
-.btn-link-hover
-{
+.btn-link-hover {
     color: #2a6496;
     text-decoration: underline;
 }
 
-.max-width
-{
-    max-width:1200px;
+.max-width {
+    max-width: 1200px;
 }
 
-.practitioners .practitioner .master .certificate-label
-{
+.practitioners .practitioner .master .certificate-label {
     font-size: 9px;
     padding: 0.1em 0.6em 0.1em;
 }
 
-.practitioners .btn-link
-{
+.practitioners .btn-link {
     line-height: 1.2;
 }
 
 .practitioners .practitioner .certificates .btn-delete-certificate,
-.practitioners .practitioner .certificates .btn-add-certificate
-{
+.practitioners .practitioner .certificates .btn-add-certificate {
     min-width: 60px;
 }
 
-.practitioners .practitioner .certificates .input-date
-{
-    min-width:87px;
+.practitioners .practitioner .certificates .input-date {
+    min-width: 87px;
 }
 
-.practitioners .practitioner .certificates .dropdown-menu table
-{
-    min-width:280px;
+.practitioners .practitioner .certificates .dropdown-menu table {
+    min-width: 280px;
 }
 
-.practitioners .practitioner .certificates .input-year
-{
-    min-width:65px;
+.practitioners .practitioner .certificates .input-year {
+    min-width: 65px;
 }
 
-.practitioners .practitioner .certificates .input-conditions
- {
-     min-width:140px;
- }
-
-.practitioners .practitioner .certificates .input-remarks
-{
-    min-width:200px;
+.practitioners .practitioner .certificates .input-conditions {
+    min-width: 140px;
 }
 
-.practitioners .practitioner .certificates table th
-{
+.practitioners .practitioner .certificates .input-remarks {
+    min-width: 200px;
+}
+
+.practitioners .practitioner .certificates table th {
     white-space: nowrap;
 }
 
-.container-datepicker .input-group-btn
-{
+.container-datepicker .input-group-btn {
     /* Fix for bug: https://github.com/twbs/bootstrap/issues/9950 */
     width: auto;
 }
 
-
-
 .practitioners .input-filter,
 .projects .input-filter,
-.project .input-filter
-{
-    min-width:400px;
+.project .input-filter {
+    min-width: 400px;
 }
 
-
-#infoMessageBox
-{
-    top:60px;
+#infoMessageBox {
+    top: 60px;
     left: 50%;
-    width:300px;
+    width: 300px;
     /*height:50px;*/
     /*margin-top: 0px; *//*set to a negative number 1/2 of your height*/
     margin-left: -200px; /*set to a negative number 1/2 of your width*/
-    position:fixed;
+    position: fixed;
     z-index: 100000;
-    padding:2px;
+    padding: 2px;
     text-align: center;
-    color:#ffffff;
+    color: #ffffff;
     font-size: 1.1em;
     opacity: 0;
-    box-shadow:rgba(0, 0, 0, 0.4) 0 2px 4px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px;
 }
 
-
-.infomessagebox-add, .infomessagebox-remove
-{
+.infomessagebox-add, .infomessagebox-remove {
     /*display: none !important;*/
     opacity: 0 !important;
     -webkit-transition: all 750ms ease-in-out;
@@ -172,19 +145,17 @@
     transition: all 750ms ease-in-out;
 }
 
-.infomessagebox, .infomessagebox-add-active
-{
+.infomessagebox, .infomessagebox-add-active {
     /*display: block !important;*/
     opacity: 1 !important;
 }
-.infomessagebox-remove-active
-{
+
+.infomessagebox-remove-active {
     /*display: none !important;*/
     opacity: 0 !important;
 }
 
-.checkbox-small
-{
+.checkbox-small {
     width: 30px;
     margin: 0 !important;
 }
@@ -194,88 +165,89 @@ select.ng-invalid,
 textarea.ng-invalid,
 .select2-container.ng-invalid .select2-choice,
 .practitioners .practitioner .notvalid,
-.documents .document .notvalid
-{
-    background-color:#FFFF99;
+.documents .document .notvalid {
+    background-color: #FFFF99;
 }
 
-.loader
-{
-  background-image:url('../img/loader.gif');
-  background-repeat:no-repeat;
-  background-size:14px;
-  background-position:50% 2px;
-  height:16px;
-  width:20px;
+.loader {
+    background-image: url('../img/loader.gif');
+    background-repeat: no-repeat;
+    background-size: 14px;
+    background-position: 50% 2px;
+    height: 16px;
+    width: 20px;
 }
 
-.forceload
-{
-  position: absolute;
-  top: -1000px;
-  opacity:0;
+.forceload {
+    position: absolute;
+    top: -1000px;
+    opacity: 0;
 }
 
 .project .project-project,
 .project .project-eiasandpermits,
-.project .project-auditsandinspections
-{
+.project .project-auditsandinspections {
     padding-top: 15px;
 }
 
-.project .project-project .project-project-project
-{
+.project .project-project .project-project-project {
     /*padding-right:8px;*/
 }
 
-.project .project-project .project-project-organisation
-{
+.project .project-project .project-project-organisation {
     /*padding-left:8px;*/
 }
 
-.saving-message-inline
-{
-    padding:4px;
+.saving-message-inline {
+    padding: 4px;
     font-size: 12px;
-    color:#808080;
+    color: #808080;
 }
 
-
-.project .container-datepicker
-{
-    width:100%;
-}
-.project .container-datepicker .input-group-btn
-{
-    width:30px;
-}
-
-.bg-success
-{
-    background-color: #5cb85c;
-}
-.bgcolor-success
-{
-    background-color: #5cb85c;
-}
-.bgcolor-info
-{
-    background-color: #5bc0de;
-}
-.color-error
-{
-    color: #a94442;
-}
-
-
-.element-dropdown .btn,
-.element-dropdown .dropdown-menu
-{
+.project .container-datepicker {
     width: 100%;
 }
 
-.warningfont
-{
+.project .container-datepicker .input-group-btn {
+    width: 30px;
+}
+
+.bg-success {
+    background-color: #5cb85c;
+}
+
+.bgcolor-success {
+    background-color: #5cb85c;
+}
+
+.bgcolor-info {
+    background-color: #5bc0de;
+}
+
+.color-error {
+    color: #a94442;
+}
+
+.element-dropdown .btn,
+.element-dropdown .dropdown-menu {
+    width: 100%;
+}
+
+.warningfont {
     color: red;
     font-weight: bold;
 }
+
+.project-auditsandinspections .new-button input {
+    margin-left: 10px;
+    height:30px;
+    width: 70px;
+    padding-left:6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.project-auditsandinspections .new-button .use-button {
+
+    width:65px;
+}
+

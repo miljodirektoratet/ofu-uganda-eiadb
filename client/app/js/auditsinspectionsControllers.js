@@ -2,6 +2,7 @@
 
 controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory', function (scope, ProjectFactory)
 {
+
     scope.isNewAuditInspection = false;
     scope.parts =
     {
@@ -10,6 +11,8 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
             state: SavingStateEnum.Loading
         }
     };
+    scope.newButton = {};
+    scope.newButton.year = new Date().getFullYear();
 
     scope.hasAuditInspection = function ()
     {
@@ -19,13 +22,25 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     scope.saveCurrentAuditInspection = function ()
     {
         var auditinspection = scope.data.auditinspection;
-        scope.saveCurrent(scope.parts.auditinspection, auditinspection).then(function (ai)
+        scope.saveCurrent(scope.parts.auditinspection, auditinspection, auditinspection.is_new).then(function (ai)
         {
             if (scope.isNewAuditInspection)
             {
                 scope.goto("/projects/" + scope.data.project.id + "/auditsinspections/" + ai.id);
             }
         });
+    };
+
+    scope.newAuditInspection = function ()
+    {
+        scope.newButton.isopen = false;
+
+        ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year);
+        scope.isNewAuditInspection = true;
+        scope.parts.auditinspection.state = SavingStateEnum.Loaded;
+        scope.parts.auditinspection.isNew = true;
+
+        scope.saveCurrentAuditInspection();
     };
 
     scope.deleteAuditInspection = function ()
@@ -45,11 +60,11 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         scope.parts.auditinspection.state = SavingStateEnum.Loaded;
     });
 
-    if (scope.routeParams.auditinspectionId == "new")
+/*    if (scope.routeParams.auditinspectionId == "new")
     {
         ProjectFactory.createNewAuditInspection(scope.data.project);
         scope.isNewAuditInspection = true;
         scope.parts.auditinspection.state = SavingStateEnum.Loaded;
         scope.parts.auditinspection.isNew = true;
-    }
+    }*/
 }]);

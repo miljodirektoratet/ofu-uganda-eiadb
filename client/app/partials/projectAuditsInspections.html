@@ -16,9 +16,20 @@
 
         </div>
         <div class="col-md-6">
-            <a type="button" class="btn btn-success pull-right"
-                    ng-href="#/projects/{{data.project.id}}/auditsinspections/new"
-                    ng-hide="!auth.canSave('new')">New Audit and Inspection</a>
+            <div class="btn-group new-button pull-right" dropdown auto-close="disabled" is-open="newButton.isopen">
+                <button type="button" class="btn btn-success" dropdown-toggle>
+                    New Audit and Inspection <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li role="menuitemx">
+                        <form role="form" name="newButton.form" novalidation>
+                            <input type="text" integer placeholder="Any year"
+                                    ng-model="newButton.year"/>
+                            <button type="button" ng-disabled="newButton.form.$invalid" class="btn btn-sm btn-primary use-button" ng-click="newAuditInspection()">Create</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -55,7 +66,7 @@
                                 <div class="form-group">
                                     <label for="year">Year</label>
                                     <input type="text" integer ng-blur="saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('year')" class="form-control input-sm" id="year"
+                                            readonly class="form-control input-sm" id="year"
                                             ng-model="data.auditinspection.year"/>
                                 </div>
                             </div>

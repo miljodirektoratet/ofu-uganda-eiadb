@@ -277,11 +277,12 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         }
     };
 
-    factory.createNewAuditInspection = function (p)
+    factory.createNewAuditInspection = function (p, year)
     {
         var aiData =
         {
             project_id: p.id,
+            year: year,
             status: 70,
             is_new: true
         };
@@ -322,6 +323,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         var deferred = $q.defer();
         if (resource.is_new)
         {
+            console.log(params);
             var saveParams = _.omit(params, function (value)
             {
                 return value == "new";
