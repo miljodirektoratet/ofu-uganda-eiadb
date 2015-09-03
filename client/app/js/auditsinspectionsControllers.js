@@ -60,11 +60,4 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         scope.parts.auditinspection.state = SavingStateEnum.Loaded;
     });
 
-/*    if (scope.routeParams.auditinspectionId == "new")
-    {
-        ProjectFactory.createNewAuditInspection(scope.data.project);
-        scope.isNewAuditInspection = true;
-        scope.parts.auditinspection.state = SavingStateEnum.Loaded;
-        scope.parts.auditinspection.isNew = true;
-    }*/
 }]);
