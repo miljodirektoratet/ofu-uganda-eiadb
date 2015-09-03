@@ -78,7 +78,7 @@
                 <div class="form-group">
                   <label for="status">Status</label>
                   <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('status')" id="status" class="form-control input-sm" ng-model="data.eiapermit.status">
-                    <option ng-repeat="v in valuelists.status" value="{{v.id}}">{{v.description1}}</option>
+                    <option ng-repeat="v in valuelists.eiastatus" value="{{v.id}}">{{v.description1}}</option>
                   </select>
                 </div>
               </div>

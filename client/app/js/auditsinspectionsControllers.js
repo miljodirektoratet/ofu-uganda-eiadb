@@ -23,7 +23,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         {
             if (scope.isNewAuditInspection)
             {
-                scope.goto("/projects/" + scope.data.project.id + "/auditstinspections/" + ai.id);
+                scope.goto("/projects/" + scope.data.project.id + "/auditsinspections/" + ai.id);
             }
         });
     };

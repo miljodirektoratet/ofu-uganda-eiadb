@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\LeadAgency;
 use Response;
 use \App\Practitioner;
 use \App\Code;
@@ -30,6 +31,8 @@ class ValuelistController extends Controller {
         $valuelists["executivedirector"] = $this->executivedirector();
         $valuelists["currency"] = $this->currency();
         $valuelists["auditinspectiontype"] = $this->auditinspectiontype();
+        $valuelists["leadagency"] = $this->leadagency();
+        $valuelists["actiontaken"] = $this->actiontaken();
 
         return Response::json($valuelists, 200);
     }
@@ -156,6 +159,17 @@ class ValuelistController extends Controller {
     private function currency()
     {
         return $this->getCodesFromDrowdownName("currencies");
+    }
+
+    private function leadagency()
+    {
+        $la = LeadAgency::get(array('id', 'short_name as description1'));
+        return $la;
+    }
+
+    private function actiontaken()
+    {
+        return $this->getCodesFromDrowdownName("action_taken");
     }
 
     private function getCodesFromArray($codeIds)

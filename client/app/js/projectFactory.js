@@ -252,7 +252,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
     factory.deleteEiaPermit = function (params)
     {
         var index = _.findIndex(factory.eiaspermits, {'id': factory.eiapermit.id});
-        factory.eiapermit.$delete(params, function ()
+        var onDelete = function (index)
         {
             factory.eiaspermits.splice(index, 1);
             if (factory.eiaspermits.length > 0)
@@ -263,7 +263,18 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             {
                 factory.eiapermit = {};
             }
-        });
+        }
+        if (factory.eiapermit.is_new)
+        {
+            onDelete(index);
+        }
+        else
+        {
+            factory.eiapermit.$delete(params, function ()
+            {
+                onDelete(index);
+            });
+        }
     };
 
     factory.createNewAuditInspection = function (p)
@@ -271,6 +282,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         var aiData =
         {
             project_id: p.id,
+            status: 70,
             is_new: true
         };
         factory.auditinspection = new AuditInspection(aiData);
@@ -280,7 +292,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
     factory.deleteAuditInspection = function (params)
     {
         var index = _.findIndex(factory.auditsinspections, {'id': factory.auditinspection.id});
-        factory.auditinspection.$delete(params, function ()
+        var onDelete = function (index)
         {
             factory.auditsinspections.splice(index, 1);
             if (factory.auditsinspections.length > 0)
@@ -291,7 +303,18 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             {
                 factory.auditinspection = {};
             }
-        });
+        }
+        if (factory.auditinspection.is_new)
+        {
+            onDelete(index);
+        }
+        else
+        {
+            factory.auditinspection.$delete(params, function ()
+            {
+                onDelete(index);
+            });
+        }
     };
 
     factory.save = function (params, form, resource)
