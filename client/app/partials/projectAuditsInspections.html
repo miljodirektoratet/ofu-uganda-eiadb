@@ -73,8 +73,10 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="type">Type</label>
-                                    <select ui-select2 ng-change="saveCurrentAuditInspection()"
-                                            ng-disabled="!auth.canSave('type')" id="type" class="form-control input-sm"
+                                    <select ui-select2 id="type" class="form-control input-sm"
+                                            ng-change="saveCurrentAuditInspection()"
+                                            ng-required="true"
+                                            ng-disabled="!auth.canSave('type')"
                                             ng-model="data.auditinspection.type">
                                         <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">
                                             {{v.description1}}
@@ -132,6 +134,7 @@
                                 <div class="form-group">
                                     <label for="days">Number of days</label>
                                     <input type="text" integer ng-blur="saveCurrentAuditInspection()"
+                                            ng-required="true"
                                             ng-readonly="!auth.canSave('days')" class="form-control input-sm" id="days"
                                             ng-model="data.auditinspection.days"/>
                                 </div>
@@ -231,8 +234,10 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="timeframe">Timeframe for correcting deviations</label>
-                                    <input type="text" integer ng-blur="saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('timeframe')" class="form-control input-sm" id="timeframe"
+                                    <input type="text" decimal class="form-control input-sm" id="timeframe"
+                                            ng-blur="saveCurrentAuditInspection()"
+                                            ng-required="false"
+                                            ng-readonly="!auth.canSave('timeframe')"
                                             ng-model="data.auditinspection.timeframe"/>
                                 </div>
                             </div>
