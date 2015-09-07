@@ -77,7 +77,6 @@ validations.directive('integer', function ()
 
             ctrl.$parsers.unshift(function (viewValue)
             {
-                // TODO: Why and how?
                 if (viewValue == null || viewValue === '')
                 {
                     ctrl.$setValidity('integer', true);
@@ -98,6 +97,7 @@ validations.directive('integer', function ()
 
             ctrl.$formatters.push(function (modelValue)
             {
+
                 if (modelValue == null || modelValue === '')
                 {
                     ctrl.$setValidity('integer', true);
