@@ -44,6 +44,10 @@
                 <div class="panel-heading">
                     <h2 class="panel-title" title="id={{data.auditinspection.id}}">Audit and Inspection
                         (Dirty:{{parts.auditinspection.form.$dirty}}, valid:{{parts.auditinspection.form.$valid}})
+                        <br/>
+                        <tt>timeframe.$valid = {{parts.auditinspection.form.timeframe.$valid}}</tt><br/>
+                        <tt>timeframe.$error = {{parts.auditinspection.form.timeframe.$error}}</tt><br/>
+
                         <span class="loader pull-right"
                                 ng-show="parts.auditinspection.state == SavingStateEnum.Loading"></span>
                         <span class="saving-message-inline pull-right"
@@ -234,7 +238,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="timeframe">Timeframe for correcting deviations</label>
-                                    <input type="text" integer class="form-control input-sm" id="timeframe"
+                                    <input type="text" name="timeframe" integer min="0" class="form-control input-sm" id="timeframe"
                                             ng-blur="saveCurrentAuditInspection()"
                                             ng-required="false"
                                             ng-readonly="!auth.canSave('timeframe')"

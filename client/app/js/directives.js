@@ -2,8 +2,7 @@
 
 /* Directives */
 
-
-var directives = angular.module('seroApp.directives', []).
+var directives = angular.module('seroApp.directives').
   directive('appVersion', ['version', function (version)
   {
     return function (scope, elm, attrs)

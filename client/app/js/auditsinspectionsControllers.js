@@ -1,5 +1,7 @@
 'use strict';
 
+var controllers = angular.module('seroApp.controllers');
+
 controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory', function (scope, ProjectFactory)
 {
 

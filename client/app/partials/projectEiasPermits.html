@@ -28,6 +28,9 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title" title="id={{data.eiapermit.id}}">EIA and Permit (Dirty:{{parts.eiapermit.form.$dirty}}, valid:{{parts.eiapermit.form.$valid}})
+            <br/>
+            <tt>fee.$valid = {{parts.eiapermit.form.fee.$valid}}</tt><br/>
+            <tt>fee.$error = {{parts.eiapermit.form.fee.$error}}</tt><br/>
             <span class="loader pull-right" ng-show="parts.eiapermit.state == SavingStateEnum.Loading"></span>
             <span class="saving-message-inline pull-right" ng-show="parts.eiapermit.state == SavingStateEnum.Loaded && !data.eiapermit.is_new">Last changed by {{data.eiapermit.updated_by}}</span>
             <span class="saving-message-inline pull-right" ng-show="parts.eiapermit.state == SavingStateEnum.SavingStarted">Saving...</span>
@@ -127,7 +130,7 @@
                   <label for="fee">Expected fees</label>
                   <div class="row">
                     <div class="col-md-6">
-                      <input type="text" decimal="6" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="data.eiapermit.fee" />
+                      <input type="text" name="fee" decimal="6" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="data.eiapermit.fee" />
                     </div>
                     <div class="col-md-6">
                       <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('fee_currency')" id="fee_currency" class="form-control input-sm" ng-model="data.eiapermit.fee_currency">
