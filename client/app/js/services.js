@@ -4,7 +4,7 @@
 
 var version = {"version": "0.1.20"};
 
-var services = angular.module('seroApp.services', []);
+var services = angular.module('seroApp.services');
 
 services.value("version", version.version);
 
