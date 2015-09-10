@@ -90,7 +90,7 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
             part.saveInProgress = false;
             deferred.reject();
         }
-        else if (part.form.$invalid)
+        else if (part.form.$invalid && !(part.isNew && evenIfPristine))
         {
             part.state = SavingStateEnum.Invalid;
             part.saveInProgress = false;
