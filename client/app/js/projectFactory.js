@@ -323,7 +323,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         var deferred = $q.defer();
         if (resource.is_new)
         {
-            console.log(params);
+            //console.log(params);
             var saveParams = _.omit(params, function (value)
             {
                 return value == "new";
