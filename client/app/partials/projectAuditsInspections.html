@@ -184,7 +184,13 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Action taken letter</label>
-                                    <div>Upload file</div>
+                                    <div>
+                                        <button ngf-select="uploadFiles($files)"
+                                                accept="image/jpg,application/pdf"
+                                                ngf-max-size="20MB">
+                                            Select File</button>
+
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">

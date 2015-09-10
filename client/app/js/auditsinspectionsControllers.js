@@ -2,9 +2,8 @@
 
 var controllers = angular.module('seroApp.controllers');
 
-controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory', function (scope, ProjectFactory)
+controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory','$timeout','Upload', function (scope, ProjectFactory, $timeout, Upload)
 {
-
     scope.isNewAuditInspection = false;
     scope.parts =
     {
@@ -61,5 +60,40 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     {
         scope.parts.auditinspection.state = SavingStateEnum.Loaded;
     });
+
+    scope.uploadFiles = function (files)
+    {
+        scope.files = files;
+        angular.forEach(files, function (file)
+        {
+            if (file && !file.$error)
+            {
+                file.upload = Upload.upload({
+                    url: '/uploadfiles',
+                    file: file
+                });
+
+                file.upload.then(function (response)
+                {
+                    $timeout(function ()
+                    {
+                        file.result = response.data;
+                    });
+                }, function (response)
+                {
+                    if (response.status > 0)
+                    {
+                        scope.errorMsg = response.status + ': ' + response.data;
+                    }
+                });
+
+                file.upload.progress(function (evt)
+                {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                        evt.loaded / evt.total));
+                });
+            }
+        });
+    }
 
 }]);

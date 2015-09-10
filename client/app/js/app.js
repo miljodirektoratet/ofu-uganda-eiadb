@@ -14,6 +14,7 @@ var seroApp = angular.module('seroApp', [
     'ngAnimate',
     'ui.bootstrap',
     'ui.select2',
+    'ngFileUpload',
     'seroApp.services',
     'seroApp.directives',
     'seroApp.controllers',
