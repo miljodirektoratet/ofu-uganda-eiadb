@@ -5,24 +5,24 @@ var testy1 = "x";
 controllers.controller('ProjectsController', ['$scope', '$location', '$filter', 'Project', 'UserInfo', function (scope, location, filter, Project, UserInfo)
 {
     scope.showFilter = false;
-    scope.projects = Project.query({'count':20});
+    scope.projects = Project.query({'count': 20});
     scope.projectsCount = 0;
-    Project.query({'countOnly':1}, function(data)
+    Project.query({'countOnly': 1}, function (data)
     {
         scope.projectsCount = data[0];
     });
     scope.userinfo = UserInfo;
-    scope.goto = function(path)
+    scope.goto = function (path)
     {
         location.path(path);
     };
 
-    scope.canSave = function()
+    scope.canSave = function ()
     {
         return scope.userinfo.info.role_1;
     };
 
-    scope.getAllProjects = function()
+    scope.getAllProjects = function ()
     {
         scope.projects = Project.query();
         scope.showFilter = true;
@@ -39,17 +39,17 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
     scope.valuelists = Valuelists;
     scope.data = ProjectFactory;
 
-    var getCurrentTab = function(path)
+    var getCurrentTab = function (path)
     {
-        if(_.contains(path, "eiaspermits"))
+        if (_.contains(path, "eiaspermits"))
         {
             return ProjectTabEnum.EiasPermits;
         }
-        if(_.contains(path, "auditsinspections"))
+        if (_.contains(path, "auditsinspections"))
         {
             return ProjectTabEnum.AuditsInspections;
         }
-        if(_.contains(path, "reports"))
+        if (_.contains(path, "reports"))
         {
             return ProjectTabEnum.Reports;
         }
@@ -57,9 +57,9 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
     };
     scope.tab = getCurrentTab(location.path());
 
-    scope.goto = function(path)
+    scope.goto = function (path)
     {
-        $timeout(function()
+        $timeout(function ()
         {
 
             location.path(path);
@@ -67,12 +67,12 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
     };
 
     scope.auth = {};
-    scope.auth.canSave = function()
+    scope.auth.canSave = function ()
     {
         return false;
     }
 
-    scope.saveCurrent = function(part, resource, evenIfPristine)
+    scope.saveCurrent = function (part, resource, evenIfPristine)
     {
         evenIfPristine = typeof evenIfPristine !== 'undefined' ? evenIfPristine : false;
 
@@ -135,22 +135,20 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
 
     scope.parts =
     {
-        project:
-        {
-            form:null,
-            state:SavingStateEnum.Loading
+        project: {
+            form: null,
+            state: SavingStateEnum.Loading
         },
-        organisation:
-        {
-            form:null,
-            state:SavingStateEnum.Loading
+        organisation: {
+            form: null,
+            state: SavingStateEnum.Loading
         }
     };
 
-    scope.newProjectExisitingOrganisation = function(o)
+    scope.newProjectExisitingOrganisation = function (o)
     {
         scope.selectOrganisationMode = false;
-        ProjectFactory.setOrganisation(o).then(function(o)
+        ProjectFactory.setOrganisation(o).then(function (o)
         {
             scope.parts.organisation.state = SavingStateEnum.Loaded;
         });
@@ -158,7 +156,7 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         scope.parts.project.state = SavingStateEnum.Loaded;
     };
 
-    scope.newProjectNewOganisation = function()
+    scope.newProjectNewOganisation = function ()
     {
         scope.selectOrganisationMode = false;
         ProjectFactory.createNewOrganisation();
@@ -168,7 +166,7 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         scope.parts.organisation.isNew = true;
     };
 
-    scope.saveCurrentProject = function()
+    scope.saveCurrentProject = function ()
     {
         if (scope.isNewProject)
         {
@@ -176,12 +174,12 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
             return;
         }
         var project = scope.data.project;
-        scope.saveCurrent(scope.parts.project, project).then(function(data)
+        scope.saveCurrent(scope.parts.project, project).then(function (data)
         {
         });
     };
 
-    scope.saveCurrentOrganisation = function()
+    scope.saveCurrentOrganisation = function ()
     {
         if (scope.isNewProject)
         {
@@ -190,30 +188,30 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         }
         var project = scope.data.project;
         var organisation = scope.data.organisation;
-        scope.saveCurrent(scope.parts.organisation, organisation).then(function(o)
+        scope.saveCurrent(scope.parts.organisation, organisation).then(function (o)
         {
         });
     };
 
-    scope.saveNewProjectAndNewOrganisation = function()
+    scope.saveNewProjectAndNewOrganisation = function ()
     {
         var projectPart = scope.parts.project;
         var organisationPart = scope.parts.organisation;
 
         if (projectPart.form.$invalid)
         {
-            scope.parts.project.state =  SavingStateEnum.Invalid;
+            scope.parts.project.state = SavingStateEnum.Invalid;
             if (organisationPart.form.$dirty)
             {
-                scope.parts.organisation.state =  SavingStateEnum.MissingDependency;
+                scope.parts.organisation.state = SavingStateEnum.MissingDependency;
             }
             return;
         }
 
         if (projectPart.form.$valid && organisationPart.form.$invalid)
         {
-            scope.parts.project.state =  SavingStateEnum.MissingDependency;
-            scope.parts.organisation.state =  SavingStateEnum.Invalid;
+            scope.parts.project.state = SavingStateEnum.MissingDependency;
+            scope.parts.organisation.state = SavingStateEnum.Invalid;
             return;
         }
 
@@ -225,9 +223,9 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
             if (organisationPart.form.$pristine)
             {
                 project.organisation_id = organisation.id;
-                scope.saveCurrent(projectPart, project).then(function(p)
+                scope.saveCurrent(projectPart, project).then(function (p)
                 {
-                    scope.goto("/projects/"+p.id); // CAUSES "$digest already in progress" error
+                    scope.goto("/projects/" + p.id); // CAUSES "$digest already in progress" error
                 });
             }
             // Save organisation first, then project.
@@ -245,12 +243,12 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         }
     };
 
-    scope.auth.canSave = function()
+    scope.auth.canSave = function ()
     {
         return scope.userinfo.info.role_1;
     };
 
-    scope.auth.canSaveGrade = function()
+    scope.auth.canSaveGrade = function ()
     {
         return scope.userinfo.info.role_7;
     }
@@ -266,11 +264,11 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
     else
     {
         var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
-        promises[0].then(function()
+        promises[0].then(function ()
         {
             scope.parts.project.state = SavingStateEnum.Loaded;
         });
-        promises[1].then(function()
+        promises[1].then(function ()
         {
             scope.parts.organisation.state = SavingStateEnum.Loaded;
         });

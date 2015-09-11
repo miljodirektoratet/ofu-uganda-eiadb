@@ -1,5 +1,9 @@
 /vendor
-/node_modules
 .env
-/public/dev
-_ide_helper.php
+
+/public/dev/node_modules
+/public/dev/bower_components
+
+
+
+
