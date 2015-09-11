@@ -69,7 +69,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
             if (file && !file.$error)
             {
                 file.upload = Upload.upload({
-                    url: '/uploadfiles',
+                    url: '/file/v1/upload',
                     file: file
                 });
 

@@ -19,39 +19,48 @@
     }
 });*/
 
-Route::get('/', function(){
-  return redirect(env('CLIENT'));
+Route::get('/', function ()
+{
+    return redirect(env('CLIENT'));
 });
 
-Route::group(['middleware' => 'auth'], function()
+Route::group(['middleware' => 'auth'], function ()
 {
-  Route::get('info', function(){
-    phpinfo();
-  });
+    Route::get('info', function ()
+    {
+        phpinfo();
+    });
 });
+
 
 Route::controllers([
-  'auth' => 'Auth\AuthController',
-  'password' => 'Auth\PasswordController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
 
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function ()
 {
-  Route::get('info', ['uses' => 'UserController@getInfo']);
-  if (App::environment() !== "production")
-  {
-    Route::get('impersonate/{id}', ['uses' => 'UserController@impersonate']);
-  }
-  Route::get('all', ['uses' => 'UserController@getAll']);
+    Route::get('info', ['uses' => 'UserController@getInfo']);
+    if (App::environment() !== "production")
+    {
+        Route::get('impersonate/{id}', ['uses' => 'UserController@impersonate']);
+    }
+    Route::get('all', ['uses' => 'UserController@getAll']);
 });
 
-Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function()
-{ 
-  Route::resource('practitioner', 'PractitionerController');
-  Route::resource('valuelist', 'ValuelistController');
-  Route::resource('project', 'ProjectController');
-  Route::resource('organisation', 'OrganisationController');
-  Route::resource('project.eiapermit', 'EiaPermitController');
-  Route::resource('project.eiapermit.document', 'DocumentController');
-  Route::resource('project.auditinspection', 'AuditInspectionController');
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
+{
+    Route::resource('practitioner', 'PractitionerController');
+    Route::resource('valuelist', 'ValuelistController');
+    Route::resource('project', 'ProjectController');
+    Route::resource('organisation', 'OrganisationController');
+    Route::resource('project.eiapermit', 'EiaPermitController');
+    Route::resource('project.eiapermit.document', 'DocumentController');
+    Route::resource('project.auditinspection', 'AuditInspectionController');
+});
+
+Route::group(['prefix' => 'file/v1', 'middleware' => 'auth'], function ()
+{
+    Route::get('all', ['uses' => 'FileController@index']); // TEMPORARY ROUTE. DO NOT KEEP!!!
+    Route::post('upload', ['uses' => 'FileController@upload']);
 });
