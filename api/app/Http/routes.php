@@ -61,6 +61,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
 
 Route::group(['prefix' => 'file/v1', 'middleware' => 'auth'], function ()
 {
-    Route::get('all', ['uses' => 'FileController@index']); // TEMPORARY ROUTE. DO NOT KEEP!!!
     Route::post('upload', ['uses' => 'FileController@upload']);
+    Route::get('download/{id}', ['uses' => 'FileController@download']);
 });

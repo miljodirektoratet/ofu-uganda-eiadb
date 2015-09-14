@@ -4,3 +4,4 @@ Thumbs.db
 .idea/tasks.xml
 npm-debug.log
 *.dmp
+api/_ide_helper.php
