@@ -4,7 +4,7 @@ module.exports = function(grunt)
         pkg: grunt.file.readJSON('package.json'),
 
         paths: {
-            buildPath: '../app/'
+            buildPath: '../build/'
         },
 
         generatedBanner: '// Generated with grunt. Do not edit!\n\n'

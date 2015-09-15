@@ -89,6 +89,8 @@ def foreignIdFromMainId(tablename):
     return "audit_inspection_id"
   if tablename == "lead_agencies":
     return "lead_agency_id"
+  if tablename == "file_metadata":
+    return "file_metadata_id"
   return tablename[:-1] + "_id"
 
 def printModelInfo(tablename, fields):
@@ -126,7 +128,7 @@ dataSheet = wb.get_sheet_by_name("Fields")
 checkForChangesInHeader(dataSheet.rows[9])
 
 ignore = ['roles']#['users']
-onlyTheese = ['audits_inspections', 'audits_inspections_personnel', 'audits_inspections_lead_agencies']
+onlyTheese = ['audits_inspections', 'audits_inspections_personnel', 'audits_inspections_lead_agencies', 'audits_inspections_documentation']
 foreignIds = {}
 tables = OrderedDict()
 
