@@ -1,8 +1,8 @@
 /vendor
 .env
 /public/build
-/public/dev/node_modules
-/public/dev/bower_components
+/public/client/node_modules
+/public/client/bower_components
 
 
 
