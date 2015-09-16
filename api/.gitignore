@@ -1,6 +1,5 @@
 /vendor
 .env
-/public/build
 /public/client/node_modules
 /public/client/bower_components
 
