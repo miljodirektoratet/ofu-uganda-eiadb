@@ -1,5 +1,7 @@
 ## SERO Client Web App
 
+Located under api/public/client.
+
 Uses AngularJS.
 
 ### Requirements
