@@ -6,8 +6,8 @@
   <ul class="nav nav-tabs" role="tablist">
     <li ng-class="{active: tab==ProjectTabEnum.Project}"><a ng-href="#/projects/{{routeParams.projectId}}">Project</a></li>
     <li ng-class="{active: tab==ProjectTabEnum.EiasPermits}"><a href="#/projects/{{routeParams.projectId}}/eiaspermits/{{data.eiapermit.id}}">EIAs and Permits ({{data.eiaspermits.length}})</a></li>
-    <li ng-class="{active: tab==ProjectTabEnum.AuditsInspections}"><a href="#/projects/{{routeParams.projectId}}/auditsinspections/{{data.auditinspection.id}}">Audits and Inspections ({{data.auditsinspections.length}})</a></li>
-    <li class="disabled"><a href="#/projects/{{routeParams.projectId}}/reports">Reports</a></li>
+    <li class="disabled" onclick="return false;" ng-class="{active: tab==ProjectTabEnum.AuditsInspections}"><a href="#/projects/{{routeParams.projectId}}/auditsinspections/{{data.auditinspection.id}}">Audits and Inspections ({{data.auditsinspections.length}})</a></li>
+    <li class="disabled" onclick="return false;"><a href="#/projects/{{routeParams.projectId}}/reports">Reports</a></li>
   </ul>
 
   <div ng-if="tab==ProjectTabEnum.Project">

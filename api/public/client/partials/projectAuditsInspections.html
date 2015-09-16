@@ -9,7 +9,7 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li ng-repeat="ai in data.auditsinspections" role="presentation">
-                        <a role="menuitem" href="#/projects/{{data.project.id}}/auditsinspections/{{ai.id}}">{{data.getAuditInspectionSummary(ai)}}</a>
+                        <a role="menuitem" ng-href="#/projects/{{data.project.id}}/auditsinspections/{{ai.id}}">{{data.getAuditInspectionSummary(ai)}}</a>
                     </li>
                 </ul>
             </div>
