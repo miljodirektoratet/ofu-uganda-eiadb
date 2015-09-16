@@ -184,13 +184,40 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Action taken letter</label>
+                                    <div class="uploaded-file" ng-show="data.auditinspection.file_metadata_id">
+                                        <a ng-href="{{downloadFileUrl(data.auditinspection.file_metadata_id)}}" ng-show="data.auditinspection.action_taken_letter">{{data.auditinspection.action_taken_letter.filename}}</a>
+                                        <button type="button" class="delete btn btn-sm btn-link"
+                                                ng-click="deleteActionTakenLetter()"
+                                                ng-hide="!auth.canSave('delete')">delete
+                                        </button>
+                                    </div>
                                     <div>
-                                        <button ngf-select="uploadFiles($files)"
-                                                accept="image/*,application/pdf"
-                                                multiple
-                                                ngf-max-size="20MB">
-                                            Select File</button>
-
+                                        <button class="btn btn-sm btn-default"
+                                                ngf-select="uploadActionTakenLetter($files)"
+                                                accept="{{fileUploadPattern}}"
+                                                ngf-pattern="{{fileUploadPattern}}"
+                                                ng-model="fake_action_taken_letter"
+                                                name="action_taken_letter"
+                                                ng-hide="data.auditinspection.file_metadata_id"
+                                                ng-disabled="!auth.canSave('delete')"
+                                                ngf-max-size="10MB">
+                                            Select File
+                                        </button>
+                                        <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingFileActionTakenLetter">
+                                            <div class="file">{{actionTakenLetterFile.name}}<br/>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{actionTakenLetterFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                            style="width: {{actionTakenLetterFile.progress}}%;">
+                                                        {{actionTakenLetterFile.progress}}%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="errors" ng-messages="parts.auditinspection.form.action_taken_letter.$error" role="alert">
+                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                <div ng-message="maxSize">The file is to big.</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -331,13 +358,48 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Documentation</label>
-                                    <div>Upload files</div>
+                                    <div class="uploaded-files" ng-show="data.auditinspection.documentation">
+                                        <div class="file" ng-repeat="d in data.auditinspection.documentation">
+                                            <a ng-href="{{downloadFileUrl(d.id)}}">{{d.filename}}</a>
+                                            <button type="button" class="delete btn btn-sm btn-link"
+                                                    ng-click="deleteDocumentation(d.id)"
+                                                    ng-hide="!auth.canSave('delete')">delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-default"
+                                                ngf-select="uploadDocumentation($files)"
+                                                accept="{{fileUploadPattern}}"
+                                                ngf-pattern="{{fileUploadPattern}}"
+                                                ng-model="fake_documentation"
+                                                name="documentation"
+                                                ng-disabled="!auth.canSave('delete')"
+                                                ngf-max-size="10MB">
+                                            Select File
+                                        </button>
+                                        <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingFileDocumentation">
+                                            <div class="file">{{documentationFile.name}}<br/>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{documentationFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                            style="width: {{documentationFile.progress}}%;">
+                                                        {{documentationFile.progress}}%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="errors" ng-messages="parts.auditinspection.form.documentation.$error" role="alert">
+                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                <div ng-message="maxSize">The file is to big.</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <button type="button" class="btn btn-danger btn-sm pull-right"
                                         ng-click="deleteAuditInspection()" ng-hide="!auth.canSave('delete')">
-                                    {{data.auditinspection.is_new ? "Cancel new Audit and Inspection" : "Delete Audit and Inspection"}}
+                                    "Delete Audit and Inspection"
                                 </button>
                             </div>
                         </div>

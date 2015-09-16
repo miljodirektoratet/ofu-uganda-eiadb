@@ -63,4 +63,5 @@ Route::group(['prefix' => 'file/v1', 'middleware' => 'auth'], function ()
 {
     Route::post('upload', ['uses' => 'FileController@upload']);
     Route::get('download/{id}', ['uses' => 'FileController@download']);
+    Route::get('delete/{id}', ['uses' => 'FileController@delete']);
 });

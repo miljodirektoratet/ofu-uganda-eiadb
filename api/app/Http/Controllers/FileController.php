@@ -7,11 +7,21 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\FileMetadata;
 
+// Nginx: https://rtcamp.com/tutorials/php/increase-file-upload-size-limit/
+// Apache:
+
 class FileController extends Controller
 {
     public function upload()
     {
         $file = Request::file('file');
+
+        // When testing uploading of files.
+        if ($file->getClientOriginalName() == "SKAL FEILE.pdf")
+        {
+            return Response::json(array('error' => true, 'message' => 'failed for some reason'), 503);
+        }
+
         $extension = $file->getClientOriginalExtension();
         $mime = $file->getClientMimeType();
         $filename = self::createAsciiFilename($file->getClientOriginalName());
@@ -49,7 +59,6 @@ class FileController extends Controller
         $pathToFile = self::getPathToStorageFile($fileMetadata);
 
         return response()->download($pathToFile, $fileMetadata->filename);
-
     }
 
     private function getPathToStorageFile($fileMetadata)
@@ -65,7 +74,7 @@ class FileController extends Controller
 
     private function createAsciiFilename($filename)
     {
-        return preg_replace(array('/[^\w \(\).-]/i','/(_)\1+/'),'_',$filename);
+        return preg_replace(array('/[^\w \(\).-]/i', '/(_)\1+/'), '_', $filename);
     }
 
     private function convertToHumanFilesize($bytes, $decimals = 2)

@@ -2,7 +2,7 @@
 
 var controllers = angular.module('seroApp.controllers');
 
-controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory','$timeout','Upload', function (scope, ProjectFactory, $timeout, Upload)
+controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', function (scope, ProjectFactory, $timeout, Upload, $q)
 {
     scope.isNewAuditInspection = false;
     scope.parts =
@@ -14,6 +14,8 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     };
     scope.newButton = {};
     scope.newButton.year = new Date().getFullYear();
+
+    scope.fileUploadPattern = fileUploadPattern;
 
     scope.hasAuditInspection = function ()
     {
@@ -61,39 +63,78 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         scope.parts.auditinspection.state = SavingStateEnum.Loaded;
     });
 
-    scope.uploadFiles = function (files)
+
+    scope.uploadActionTakenLetter = function (files)
     {
-        scope.files = files;
-        angular.forEach(files, function (file)
+        if (!files)
         {
-            if (file && !file.$error)
+            return;
+        }
+        scope.showUploadingFileActionTakenLetter = true;
+        scope.actionTakenLetterFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.auditinspection.form.action_taken_letter, scope.actionTakenLetterFile);
+
+        promise.then(function (file)
+        {
+            scope.data.auditinspection.file_metadata_id = file.result.id;
+            scope.parts.auditinspection.form.action_taken_letter.$setDirty();
+            scope.saveCurrentAuditInspection();
+
+            $timeout(function ()
             {
-                file.upload = Upload.upload({
-                    url: '/file/v1/upload',
-                    file: file
-                });
+                scope.showUploadingFileActionTakenLetter = false;
+            }, 3000);
 
-                file.upload.then(function (response)
-                {
-                    $timeout(function ()
-                    {
-                        file.result = response.data;
-                    });
-                }, function (response)
-                {
-                    if (response.status > 0)
-                    {
-                        scope.errorMsg = response.status + ': ' + response.data;
-                    }
-                });
-
-                file.upload.progress(function (evt)
-                {
-                    file.progress = Math.min(100, parseInt(100.0 *
-                        evt.loaded / evt.total));
-                });
-            }
+        }, function (reason)
+        {
         });
-    }
+    };
+
+    scope.uploadDocumentation = function (files)
+    {
+        if (!files)
+        {
+            return;
+        }
+        scope.showUploadingFileDocumentation = true;
+        scope.documentationFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.auditinspection.form.documentation, scope.documentationFile);
+        promise.then(function (file)
+        {
+            scope.data.auditinspection.documentation_ids.push(file.result.id);
+            scope.parts.auditinspection.form.documentation.$setDirty();
+            scope.saveCurrentAuditInspection();
+
+            $timeout(function ()
+            {
+                scope.showUploadingFileDocumentation = false;
+            }, 3000);
+
+        }, function (reason)
+        {
+        });
+    };
+
+    scope.downloadFileUrl = function (id)
+    {
+        return "/file/v1/download/" + id;
+    };
+
+    scope.deleteActionTakenLetter = function ()
+    {
+        scope.data.auditinspection.file_metadata_id = null;
+        scope.parts.auditinspection.form.action_taken_letter.$setDirty();
+        scope.saveCurrentAuditInspection();
+    };
+
+    scope.deleteDocumentation = function (id)
+    {
+        _.remove(scope.data.auditinspection.documentation_ids, function (n)
+        {
+            return n === id
+        });
+        scope.parts.auditinspection.form.documentation.$setDirty();
+        scope.saveCurrentAuditInspection();
+    };
 
 }]);

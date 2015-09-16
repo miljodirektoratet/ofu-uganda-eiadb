@@ -22,6 +22,7 @@
     "angular-resource": "1.4.x",
     "angular-route": "1.4.x",
     "angular-sanitize": "1.4.x",
+    "angular-messages": "1.4.x",
     "angular-ui-select2": "~0.0.5",
     "bootstrap": "3.3.x",
     "lodash": "2.4.x",

@@ -27,4 +27,14 @@ class AuditInspection extends Model
     {
         return $this->belongsToMany('App\LeadAgency', 'audits_inspections_lead_agencies');
     }
+
+    public function actionTakenLetter()
+    {
+        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_id');
+    }
+
+    public function documentation()
+    {
+        return $this->belongsToMany('App\FileMetadata', 'audits_inspections_documentation')->select(array('file_metadata_id as id', 'filename'));
+    }
 }

@@ -12,6 +12,7 @@ var seroApp = angular.module('seroApp', [
     'ngRoute',
     'ngResource',
     'ngAnimate',
+    'ngMessages',
     'ui.bootstrap',
     'ui.select2',
     'ngFileUpload',
@@ -90,6 +91,9 @@ var ProjectTabEnum =
     Reports : 'Reports'
 };
 
+var fileUploadPattern = "image/*,application/pdf,application/vnd.openxmlformats*,application/msword,text/plain,text/csv";
+
+
 //var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
 var regexIso8601 = /^(\d{4}-\d{2}-\d{2} \d{2}\:\d{2}\:\d{2})$/;
 function convertDateStringsToDates(input) {
@@ -129,3 +133,47 @@ seroApp.config(["$httpProvider", function ($httpProvider) {
         return responseData;
     });
 }]);
+
+var uploadFile = function ($q, $timeout, Upload, partInForm, file)
+{
+    partInForm.$setValidity("serverError", true);
+
+    var deferred = $q.defer();
+
+    if (file && !file.$error)
+    {
+        file.upload = Upload.upload({
+            url: '/file/v1/upload',
+            file: file
+        });
+
+        file.upload.then(function (response)
+        {
+            $timeout(function ()
+            {
+                file.result = response.data;
+                deferred.resolve(file);
+            });
+        }, function (response)
+        {
+            if (response.status > 0)
+            {
+                partInForm.$setValidity("serverError", false);
+                file.progress = 0;
+                file.error = response.status + ': ' + response.data.message;
+                deferred.reject(file.error);
+            }
+        });
+
+        file.upload.progress(function (evt)
+        {
+            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+    }
+    else
+    {
+        deferred.reject("Validation error.");
+    }
+
+    return deferred.promise;
+};

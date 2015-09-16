@@ -22,11 +22,17 @@ class AuditInspectionController extends Controller
     // GET /resource/:id/subresource/:subid
     public function show($projectId, $id)
     {
+        $withActionTakenLetter = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
+
         $auditinspection = Project::find($projectId)->auditinspections()
             ->with('users')
             ->with('leadagencies')
+            ->with(array('actionTakenLetter'=>$withActionTakenLetter))
+            ->with('documentation')
             ->find($id);
-        $Ids = array();
 
         // Users (personnel).
         $userIds = array();
@@ -45,6 +51,15 @@ class AuditInspectionController extends Controller
         }
         $auditinspection["leadagency_ids"] = $leadagencyIds;
         unset($auditinspection["leadagencies"]);
+
+        // Documentation
+        $documentationIds = array();
+        foreach ($auditinspection->documentation as $documentationEntity)
+        {
+            array_push($documentationIds, $documentationEntity->id);
+        }
+        $auditinspection["documentation_ids"] = $documentationIds;
+        //unset($auditinspection["documentation"]);
 
         return Response::json($auditinspection, 200);
     }
@@ -66,6 +81,7 @@ class AuditInspectionController extends Controller
         $project->auditinspections()->save($auditinspection);
         $this->handleUsers($auditinspection, $inputData);
         $this->handleLeadAgencies($auditinspection, $inputData);
+        $this->handleDocumentation($auditinspection, $inputData);
         return $this->show($project->id, $auditinspection->id);
     }
 
@@ -87,6 +103,7 @@ class AuditInspectionController extends Controller
         $this->updateValuesInResource($auditinspection, $inputData);
         $this->handleUsers($auditinspection, $inputData);
         $this->handleLeadAgencies($auditinspection, $inputData);
+        $this->handleDocumentation($auditinspection, $inputData);
         $auditinspection->save();
         return $this->show($projectId, $id);
     }
@@ -127,6 +144,21 @@ class AuditInspectionController extends Controller
             $ids = $inputData["leadagency_ids"];
         }
         $res = $auditinspection->leadagencies()->sync($ids);
+        $changes = count($res["attached"]) + count($res["detached"]) + count($res["updated"]);
+        if ($changes > 0)
+        {
+            $auditinspection["updated_by"] = Auth::user()->name;
+        }
+    }
+
+    private function handleDocumentation($auditinspection, $inputData)
+    {
+        $ids = array();
+        if (array_key_exists("documentation_ids", $inputData))
+        {
+            $ids = $inputData["documentation_ids"];
+        }
+        $res = $auditinspection->documentation()->sync($ids);
         $changes = count($res["attached"]) + count($res["detached"]) + count($res["updated"]);
         if ($changes > 0)
         {

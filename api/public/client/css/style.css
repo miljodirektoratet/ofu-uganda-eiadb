@@ -240,14 +240,31 @@ textarea.ng-invalid,
 
 .project-auditsandinspections .new-button input {
     margin-left: 10px;
-    height:30px;
+    height: 30px;
     width: 70px;
-    padding-left:6px;
+    padding-left: 6px;
     padding-top: 2px;
     padding-bottom: 2px;
 }
+
 .project-auditsandinspections .new-button .use-button {
 
-    width:65px;
+    width: 65px;
 }
 
+.uploading-file {
+    margin-top: 5px;
+}
+
+.uploading-file .file .progress {
+    margin-top: 3px;
+}
+
+.uploaded-file {
+    margin-bottom: 10px;
+}
+
+.uploaded-file .delete, .uploaded-files .delete
+{
+    color:red;
+}
