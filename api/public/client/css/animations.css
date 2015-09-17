@@ -19,11 +19,11 @@
     display: block !important; /* yes, important */
 }
 
-
 .cssSlideUp.ng-hide-add {
     transition: 1.0s linear all;
     opacity: 1;
 }
+
 .cssSlideUp.ng-hide {
     opacity: 0;
 }

@@ -4,7 +4,6 @@ var controllers = angular.module('seroApp.controllers');
 
 controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', function (scope, ProjectFactory, $timeout, Upload, $q)
 {
-    scope.isNewAuditInspection = false;
     scope.parts =
     {
         auditinspection: {
@@ -17,6 +16,19 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 
     scope.fileUploadPattern = fileUploadPattern;
 
+    scope.isLoading = function ()
+    {
+        if (scope.parts.auditinspection.state == SavingStateEnum.Loading)
+        {
+            if (scope.hasAuditInspection())
+            {
+                return true;
+            }
+            return false;
+        }
+        return scope.parts.auditinspection.state == SavingStateEnum.LoadingNew;
+    };
+
     scope.hasAuditInspection = function ()
     {
         return !_.isEmpty(scope.data.auditinspection);
@@ -25,9 +37,10 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     scope.saveCurrentAuditInspection = function ()
     {
         var auditinspection = scope.data.auditinspection;
-        scope.saveCurrent(scope.parts.auditinspection, auditinspection, auditinspection.is_new).then(function (ai)
+        var isNew = auditinspection.is_new;
+        scope.saveCurrent(scope.parts.auditinspection, auditinspection, isNew).then(function (ai)
         {
-            if (scope.isNewAuditInspection)
+            if (isNew)
             {
                 scope.goto("/projects/" + scope.data.project.id + "/auditsinspections/" + ai.id);
             }
@@ -36,13 +49,10 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 
     scope.newAuditInspection = function ()
     {
+        scope.parts.auditinspection.state = SavingStateEnum.LoadingNew;
         scope.newButton.isopen = false;
-
         ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year);
-        scope.isNewAuditInspection = true;
-        scope.parts.auditinspection.state = SavingStateEnum.Loaded;
         scope.parts.auditinspection.isNew = true;
-
         scope.saveCurrentAuditInspection();
     };
 
@@ -56,13 +66,6 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     {
         return scope.userinfo.info.role_7;
     };
-
-    var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
-    promises[5].then(function (ai)
-    {
-        scope.parts.auditinspection.state = SavingStateEnum.Loaded;
-    });
-
 
     scope.uploadActionTakenLetter = function (files)
     {
@@ -137,4 +140,9 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         scope.saveCurrentAuditInspection();
     };
 
+    var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
+    promises[5].then(function (ai)
+    {
+        scope.parts.auditinspection.state = SavingStateEnum.Loaded;
+    });
 }]);

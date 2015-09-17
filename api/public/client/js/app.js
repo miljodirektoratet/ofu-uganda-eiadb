@@ -74,6 +74,7 @@ var seroApp = angular.module('seroApp', [
 var SavingStateEnum =
 {
     None : 'None',
+    LoadingNew : 'Loading new',
     Loading : 'Loading',
     Loaded : 'Loaded',
     SavingStarted : 'Saving started',

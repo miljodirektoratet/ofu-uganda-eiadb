@@ -178,6 +178,12 @@ textarea.ng-invalid,
     width: 20px;
 }
 
+.loader-standalone {
+    background-image: url('../img/loader.gif');
+    height:32px;
+    width:32px;
+}
+
 .forceload {
     position: absolute;
     top: -1000px;

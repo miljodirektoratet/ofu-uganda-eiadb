@@ -98,20 +98,20 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
         }
         else
         {
-            part.state = SavingStateEnum.SavingStarted;
-
+            part.state = part.isNew ? SavingStateEnum.LoadingNew : SavingStateEnum.SavingStarted;
             // New method for saving new. Save first, edit later.
             var params = scope.routeParams;
             if (evenIfPristine)
             {
                 params = _.omit(params, 'auditinspectionId');
+                params = _.omit(params, 'eiapermitId');
             }
 
             ProjectFactory.save(params, part.form, resource).then
             (
                 function (data)
                 {
-                    part.state = SavingStateEnum.SavingFinished;
+                    part.state = part.isNew ? SavingStateEnum.LoadingNew : SavingStateEnum.SavingFinished;
                     part.form.$setPristine();
                     part.saveInProgress = false;
                     deferred.resolve(data);

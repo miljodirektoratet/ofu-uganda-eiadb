@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="element-dropdown" dropdown ng-show="data.auditsinspections.length">
-                <button class="btn btn-default dropdown-toggle" type="button" dropdown-toggle>
+                <button class="btn btn-default dropdown-toggle" type="button" dropdown-toggle ng-disabled="isLoading()">
                     {{data.getAuditInspectionSummary()}}
                     <span class="caret"></span>
                 </button>
@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-6">
             <div class="btn-group new-button pull-right" dropdown auto-close="disabled" is-open="newButton.isopen">
-                <button type="button" class="btn btn-success" dropdown-toggle>
+                <button type="button" class="btn btn-success" dropdown-toggle ng-disabled="isLoading()">
                     New Audit and Inspection <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
@@ -37,16 +37,20 @@
             <hr/>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12" ng-show="hasAuditInspection()">
-
+    <div class="row" ng-show="isLoading()">
+        <div class="col-md-12">
+            <div class="loader-standalone center-block"></div>
+        </div>
+    </div>
+    <div class="row" ng-show="hasAuditInspection() && !isLoading()">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2 class="panel-title" title="id={{data.auditinspection.id}}">Audit and Inspection (Dirty:{{parts.auditinspection.form.$dirty}}, valid:{{parts.auditinspection.form.$valid}})
                         <span class="loader pull-right"
                                 ng-show="parts.auditinspection.state == SavingStateEnum.Loading"></span>
                         <span class="saving-message-inline pull-right"
-                                ng-show="parts.auditinspection.state == SavingStateEnum.Loaded && !data.auditinspection.is_new">Last changed by {{data.auditinspection.updated_by}}</span>
+                                ng-show="parts.auditinspection.state == SavingStateEnum.Loaded">Last changed by {{data.auditinspection.updated_by}}</span>
                         <span class="saving-message-inline pull-right"
                                 ng-show="parts.auditinspection.state == SavingStateEnum.SavingStarted">Saving...</span>
                         <span class="saving-message-inline pull-right"
@@ -74,7 +78,7 @@
                                     <label for="type">Type</label>
                                     <select ui-select2 id="type" class="form-control input-sm"
                                             ng-change="saveCurrentAuditInspection()"
-                                            ng-required="true"
+                                            data-x-ng-required="true"
                                             ng-disabled="!auth.canSave('type')"
                                             ng-model="data.auditinspection.type">
                                         <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">
@@ -133,7 +137,7 @@
                                 <div class="form-group">
                                     <label for="days">Number of days</label>
                                     <input type="text" integer ng-blur="saveCurrentAuditInspection()"
-                                            ng-required="true"
+                                            data-x-ng-required="true"
                                             ng-readonly="!auth.canSave('days')" class="form-control input-sm" id="days"
                                             ng-model="data.auditinspection.days"/>
                                 </div>
@@ -399,7 +403,7 @@
                             <div class="col-md-6">
                                 <button type="button" class="btn btn-danger btn-sm pull-right"
                                         ng-click="deleteAuditInspection()" ng-hide="!auth.canSave('delete')">
-                                    "Delete Audit and Inspection"
+                                    Delete Audit and Inspection
                                 </button>
                             </div>
                         </div>
