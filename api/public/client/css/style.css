@@ -180,8 +180,8 @@ textarea.ng-invalid,
 
 .loader-standalone {
     background-image: url('../img/loader.gif');
-    height:32px;
-    width:32px;
+    height: 32px;
+    width: 32px;
 }
 
 .forceload {
@@ -243,8 +243,8 @@ textarea.ng-invalid,
     color: red;
     font-weight: bold;
 }
-
-.project-auditsandinspections .new-button input {
+/*
+.project-auditsandinspections .new-button .xinput {
     margin-left: 10px;
     height: 30px;
     width: 70px;
@@ -256,6 +256,10 @@ textarea.ng-invalid,
 .project-auditsandinspections .new-button .use-button {
 
     width: 65px;
+}*/
+
+.project-auditsandinspections .new-button form {
+    width: 350px;
 }
 
 .uploading-file {
@@ -270,7 +274,6 @@ textarea.ng-invalid,
     margin-bottom: 10px;
 }
 
-.uploaded-file .delete, .uploaded-files .delete
-{
-    color:red;
+.uploaded-file .delete, .uploaded-files .delete {
+    color: red;
 }

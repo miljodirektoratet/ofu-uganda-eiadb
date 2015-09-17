@@ -21,11 +21,36 @@
                     New Audit and Inspection <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li role="menuitemx">
+                    <li role="menuitem">
                         <form role="form" name="newButton.form" novalidation>
-                            <input type="text" integer placeholder="Any year"
-                                    ng-model="newButton.year"/>
-                            <button type="button" ng-disabled="newButton.form.$invalid" class="btn btn-sm btn-primary use-button" ng-click="newAuditInspection()">Create</button>
+                            <div class="rowzzz">
+                                <div class="col-md-3">
+                                    <label for="newButton.year">Year</label>
+                                    <input type="text" integer
+                                            id="newButton.year"
+                                            ng-required="true"
+                                            ng-model="newButton.year"
+                                            class="form-control input-sm"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="newButton.type">Type</label>
+                                    <select ui-select2 id="newButton.type" class="form-control input-sm"
+                                            ng-required="true"
+                                            ng-model="newButton.type">
+                                        <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">
+                                            {{v.description1}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="newButton.create">&nbsp;</label>
+                                    <button type="button" class="btn btn-sm btn-primary use-button pull-right"
+                                            id="newButton.create"
+                                            ng-disabled="newButton.form.$invalid"
+                                            ng-click="newAuditInspection()">Create
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </li>
                 </ul>
@@ -42,7 +67,7 @@
             <div class="loader-standalone center-block"></div>
         </div>
     </div>
-    <div class="row" ng-show="hasAuditInspection() && !isLoading()">
+    <div class="row" ng-show="hasAuditInspection() && !isLoading() && !newButton.isopen">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -78,7 +103,7 @@
                                     <label for="type">Type</label>
                                     <select ui-select2 id="type" class="form-control input-sm"
                                             ng-change="saveCurrentAuditInspection()"
-                                            data-x-ng-required="true"
+                                            ng-required="true"
                                             ng-disabled="!auth.canSave('type')"
                                             ng-model="data.auditinspection.type">
                                         <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">
@@ -137,7 +162,7 @@
                                 <div class="form-group">
                                     <label for="days">Number of days</label>
                                     <input type="text" integer ng-blur="saveCurrentAuditInspection()"
-                                            data-x-ng-required="true"
+                                            ng-required="true"
                                             ng-readonly="!auth.canSave('days')" class="form-control input-sm" id="days"
                                             ng-model="data.auditinspection.days"/>
                                 </div>

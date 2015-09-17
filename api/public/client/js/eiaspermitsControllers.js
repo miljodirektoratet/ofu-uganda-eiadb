@@ -173,6 +173,14 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
     };
 
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
+    promises[2].then(function (eps)
+    {
+        if (eps.length > 0 && !scope.routeParams.eiapermitId)
+        {
+            var ep = eps[0];
+            scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + ep.id);
+        }
+    });
     promises[3].then(function (ep)
     {
         scope.parts.eiapermit.state = SavingStateEnum.Loaded;

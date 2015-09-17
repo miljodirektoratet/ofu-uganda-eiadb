@@ -95,13 +95,13 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 });
             }
         }
-        else if (factory.eiaspermits.length > 0)
+/*        else if (factory.eiaspermits.length > 0)
         {
             if (_.isEmpty(factory.eiapermit))
             {
                 factory.eiapermit = factory.eiaspermits[0];
             }
-        }
+        }*/
         return deferred.promise;
     };
 
@@ -120,13 +120,13 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 });
             }
         }
-        else if (factory.auditsinspections.length > 0)
+        /*else if (factory.auditsinspections.length > 0)
         {
             if (_.isEmpty(factory.auditinspection))
             {
                 factory.auditinspection = factory.auditsinspections[0];
             }
-        }
+        }*/
         return deferred.promise;
     };
 
@@ -277,12 +277,14 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         }
     };
 
-    factory.createNewAuditInspection = function (p, year)
+    factory.createNewAuditInspection = function (p, year, type)
     {
         var aiData =
         {
             project_id: p.id,
             year: year,
+            type: type,
+            days: 1,
             status: 70,
             is_new: true
         };

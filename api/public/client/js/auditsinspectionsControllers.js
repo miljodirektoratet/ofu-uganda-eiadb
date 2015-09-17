@@ -51,7 +51,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     {
         scope.parts.auditinspection.state = SavingStateEnum.LoadingNew;
         scope.newButton.isopen = false;
-        ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year);
+        ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year, scope.newButton.type);
         scope.parts.auditinspection.isNew = true;
         scope.saveCurrentAuditInspection();
     };
@@ -141,8 +141,17 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     };
 
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
+    promises[4].then(function (ais)
+    {
+        if (ais.length > 0 && !scope.routeParams.auditinspectionId)
+        {
+            var ai = ais[0];
+            scope.goto("/projects/" + scope.data.project.id + "/auditsinspections/" + ai.id);
+        }
+    });
     promises[5].then(function (ai)
     {
         scope.parts.auditinspection.state = SavingStateEnum.Loaded;
     });
+
 }]);
