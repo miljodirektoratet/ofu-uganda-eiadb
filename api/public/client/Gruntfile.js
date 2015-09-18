@@ -167,7 +167,8 @@ module.exports = function(grunt)
             tagMessage: 'Version %VERSION%',
             push: true,
             pushTo: 'origin',
-            gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
+            gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d', // options to use with '$ git describe'
+            regExp: false
         }
     });
 
@@ -186,13 +187,13 @@ module.exports = function(grunt)
     ]);
 
     grunt.registerTask('publish', [
-        'bump-only',
+        'bump-only:minor',
         'build',
         'bump-commit'
     ]);
 
-    grunt.registerTask('publish-minor', [
-        'bump-only:minor',
+    grunt.registerTask('publish-major', [
+        'bump-only:major',
         'build',
         'bump-commit'
     ]);

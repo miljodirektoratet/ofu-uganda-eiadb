@@ -7,7 +7,7 @@ var directives = angular.module('seroApp.directives').
   {
     return function (scope, elm, attrs)
     {
-      elm.text(version);
+      elm.text(_.trimRight(version, '.0'));
     };
   }]);
 
