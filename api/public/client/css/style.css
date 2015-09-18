@@ -24,12 +24,19 @@
 
 .practitioners .practitioner .master,
 .projects .project .master,
-.project .project-project-new .master,
-.documents .document .master {
+.project .project-project-new .master {
     background-color: #f3f3f3;
     /*border-top:1px solid darkgray;*/
     cursor: pointer;
     font-size: 13px;
+}
+
+.documents .document .master {
+    background-color: #f3f3f3;
+    font-size: 13px;
+}
+.documents .document .master .btn-download-file{
+    padding: 0px;
 }
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
@@ -243,6 +250,7 @@ textarea.ng-invalid,
     color: red;
     font-weight: bold;
 }
+
 /*
 .project-auditsandinspections .new-button .xinput {
     margin-left: 10px;

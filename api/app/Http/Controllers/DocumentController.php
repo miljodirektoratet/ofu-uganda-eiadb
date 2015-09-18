@@ -7,135 +7,149 @@ use \DateTime;
 use \App\Project;
 use \App\Document;
 
-class DocumentController extends Controller {
+class DocumentController extends Controller
+{
 
-	// GET /resource/:id/subresource/:subid/level3resource
-	public function index($projectId, $eiapermitId)
-	{		
-		$documents = Project::find($projectId)
-			->eiapermits()->find($eiapermitId)
-			->documents()
-			->get(array('id', 'date_submitted', 'title', 'code', 'date_sent_director', 'date_sent_from_dep', 'date_sent_officer', 'conclusion'));					
-		return Response::json($documents, 200); 		
-	}
+    // GET /resource/:id/subresource/:subid/level3resource
+    public function index($projectId, $eiapermitId)
+    {
+        $withAttachment = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
 
-	// GET /resource/:id/subresource/:subid/level3resource/:level3id
-	public function show($projectId, $eiapermitId, $id)
-	{						
-		$withTeamLeaderFunction = function ($query)
-		{			
-			$query->select('id', 'person');
-		};			
-		$document = Project::find($projectId)
-		->eiapermits()->find($eiapermitId)
-		->documents()
-		->find($id);		
-		return Response::json($document, 200);
-	}
+        $documents = Project::find($projectId)
+            ->eiapermits()->find($eiapermitId)
+            ->documents()
+            ->with(array('attachment'=>$withAttachment))
+            ->get(array('id', 'date_submitted', 'title', 'code', 'date_sent_director', 'date_sent_from_dep', 'date_sent_officer', 'conclusion', 'file_metadata_id'));
+        return Response::json($documents, 200);
+    }
 
-	// POST /resource/:id/subresource/:subid/level3resource
-	public function store($projectId, $eiapermitId)
-	{		
-		if (!$this::canSave())
-		{
-			return $this::notAuthorized();
-		}
+    // GET /resource/:id/subresource/:subid/level3resource/:level3id
+    public function show($projectId, $eiapermitId, $id)
+    {
+        $withTeamLeaderFunction = function ($query)
+        {
+            $query->select('id', 'person');
+        };
 
-		$inputData = Input::all();
-		$document = new Document();	   
-		$this->updateValuesInResource($document, $inputData);
-		$document->created_by = Auth::user()->name;
-		$project = Project::find($projectId);
-		$project->eiapermits()->find($eiapermitId)->documents()->save($document);
-		return $this->show($project->id, $eiapermitId, $document->id);
-	}	
+        $withAttachment = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
 
-	// PUT/PATCH /resource/:id/subresource/:subid/level3resource/:level3id
-	public function update($projectId, $eiapermitId, $id)
-	{		
-		if (!$this::canSave())
-		{
-			return $this::notAuthorized();
-		}
+        $document = Project::find($projectId)
+            ->eiapermits()->find($eiapermitId)
+            ->documents()
+            ->with(array('attachment'=>$withAttachment))
+            ->find($id);
+        return Response::json($document, 200);
+    }
 
-		$document = Project::find($projectId)->eiapermits()->find($eiapermitId)->documents()->find($id);
-		if (!$document)
-		{
-			return Response::json(array('error' => true, 'message' => 'not found'), 404);
-		}
 
-		$inputData = Input::all();		
-		$this->updateValuesInResource($document, $inputData);				
-		$document->save();				
-    return $this->show($projectId, $eiapermitId, $id);
-	}
+    // POST /resource/:id/subresource/:subid/level3resource
+    public function store($projectId, $eiapermitId)
+    {
+        if (!$this::canSave())
+        {
+            return $this::notAuthorized();
+        }
 
-	// DELETE /resource/:id/subresource/:subid/level3resource/:level3id
-	public function destroy($projectId, $eiapermitId, $id)
-	{
-		if (!$this::canSave())
-		{
-			return $this::notAuthorized();
-		}
+        $inputData = Input::all();
+        $document = new Document();
+        $this->updateValuesInResource($document, $inputData);
+        $document->created_by = Auth::user()->name;
+        $project = Project::find($projectId);
+        $project->eiapermits()->find($eiapermitId)->documents()->save($document);
+        return $this->show($project->id, $eiapermitId, $document->id);
+    }
 
-		$document = Project::find($projectId)->eiapermits()->find($eiapermitId)->documents()->find($id);
-		$document->delete();
-		return Response::json(array('is_deleted' => true), 200);
-	}
+    // PUT/PATCH /resource/:id/subresource/:subid/level3resource/:level3id
+    public function update($projectId, $eiapermitId, $id)
+    {
+        if (!$this::canSave())
+        {
+            return $this::notAuthorized();
+        }
 
-	private function updateValuesInResource($resource, $data)
-	{		
-		$dates = $resource->getDates();
-		$changed = false;
-		foreach ($data as $key => $value)
-		{			
-			if (in_array($key, $resource["fillable"], true))
-			{				
-				if ($value === "")
-				{
-					$value = null;
-				}
-				if ($value && in_array($key, $dates))
-				{
-					$timestamp = strtotime($value . " + 12 hours");
-					if ($timestamp === false)
-					{
-						$value = null;
-					}
-					else
-					{
-						$value = new DateTime();
-						$value->setTimestamp($timestamp);
-					}
-				}					
+        $document = Project::find($projectId)->eiapermits()->find($eiapermitId)->documents()->find($id);
+        if (!$document)
+        {
+            return Response::json(array('error' => true, 'message' => 'not found'), 404);
+        }
 
-				if ($resource[$key] != $value)
-				{					
-					// TODO: Validate.					
-					$resource[$key] = $value;
-					$changed = true;
-				}	    	    		
-			}	    	
-		}
-		if ($changed)
-		{
-			$resource["updated_by"] = Auth::user()->name;
-			//$project->created_by = Auth::user()->name;
-		}
-	}
-	
-	private function canSave()
-	{
-		// TODO: Granulate this.
-		return Auth::user()->hasRole("Role 1") ||
-			Auth::user()->hasRole("Role 2") ||
-			Auth::user()->hasRole("Role 3") ||
-			Auth::user()->hasRole("Role 4") ||
-			Auth::user()->hasRole("Role 5");
-	}
+        $inputData = Input::all();
+        $this->updateValuesInResource($document, $inputData);
+        $document->save();
+        return $this->show($projectId, $eiapermitId, $id);
+    }
 
-	private function notAuthorized()
-	{		
-		return Response::json("Not authorized to perform this.", 403); // 403 Forbidden
-	}
+    // DELETE /resource/:id/subresource/:subid/level3resource/:level3id
+    public function destroy($projectId, $eiapermitId, $id)
+    {
+        if (!$this::canSave())
+        {
+            return $this::notAuthorized();
+        }
+
+        $document = Project::find($projectId)->eiapermits()->find($eiapermitId)->documents()->find($id);
+        $document->delete();
+        return Response::json(array('is_deleted' => true), 200);
+    }
+
+    private function updateValuesInResource($resource, $data)
+    {
+        $dates = $resource->getDates();
+        $changed = false;
+        foreach ($data as $key => $value)
+        {
+            if (in_array($key, $resource["fillable"], true))
+            {
+                if ($value === "")
+                {
+                    $value = null;
+                }
+                if ($value && in_array($key, $dates))
+                {
+                    $timestamp = strtotime($value . " + 12 hours");
+                    if ($timestamp === false)
+                    {
+                        $value = null;
+                    } else
+                    {
+                        $value = new DateTime();
+                        $value->setTimestamp($timestamp);
+                    }
+                }
+
+                if ($resource[$key] != $value)
+                {
+                    // TODO: Validate.
+                    $resource[$key] = $value;
+                    $changed = true;
+                }
+            }
+        }
+        if ($changed)
+        {
+            $resource["updated_by"] = Auth::user()->name;
+            //$project->created_by = Auth::user()->name;
+        }
+    }
+
+    private function canSave()
+    {
+        // TODO: Granulate this.
+        return Auth::user()->hasRole("Role 1") ||
+        Auth::user()->hasRole("Role 2") ||
+        Auth::user()->hasRole("Role 3") ||
+        Auth::user()->hasRole("Role 4") ||
+        Auth::user()->hasRole("Role 5");
+    }
+
+    private function notAuthorized()
+    {
+        return Response::json("Not authorized to perform this.", 403); // 403 Forbidden
+    }
 }

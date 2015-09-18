@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', function (scope, ProjectFactory)
+controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', function (scope, ProjectFactory, $timeout, Upload, $q)
 {
     scope.parts =
     {
@@ -13,6 +13,8 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
             state: SavingStateEnum.None
         }
     };
+
+    scope.fileUploadPattern = fileUploadPattern;
 
     scope.isLoading = function ()
     {
@@ -75,6 +77,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
 
     scope.toggleDocument = function (d)
     {
+        scope.showUploadingAttachment = false;
 //    if (scope.loading)
 //    {
 //      //console.log("Currently loading. Please wait.");
@@ -170,6 +173,39 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', fun
             default:
                 return false;
         }
+    };
+
+    scope.uploadAttachment = function (files)
+    {
+        if (!files)
+        {
+            return;
+        }
+        scope.showUploadingAttachment = true;
+        scope.attachmentFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.document.form.attachment, scope.attachmentFile);
+
+        promise.then(function (file)
+        {
+            scope.data.document.file_metadata_id = file.result.id;
+            scope.parts.document.form.attachment.$setDirty();
+            scope.saveCurrentDocument();
+        }, function (reason)
+        {
+        });
+    };
+
+    scope.downloadFileUrl = function (id)
+    {
+        return "/file/v1/download/" + id;
+    };
+
+    scope.deleteAttachment = function ()
+    {
+        scope.showUploadingAttachment = false;
+        scope.data.document.file_metadata_id = null;
+        scope.parts.document.form.attachment.$setDirty();
+        scope.saveCurrentDocument();
     };
 
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
