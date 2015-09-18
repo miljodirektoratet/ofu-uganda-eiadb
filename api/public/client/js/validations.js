@@ -41,8 +41,8 @@ validations.directive('decimal', function ()
             {
                 if (!ctrl.$isEmpty(modelValue) && attrs.decimal)
                 {
-                    // TODO: _.round(parseInt(attrs.decimal)) is better. Update lodash.
-                    return parseFloat(modelValue).toFixed(parseInt(attrs.decimal));
+                    var precision = parseInt(attrs.decimal);
+                    return _.round(parseFloat(modelValue), precision).toFixed(precision);
                 }
                 return modelValue;
             });
