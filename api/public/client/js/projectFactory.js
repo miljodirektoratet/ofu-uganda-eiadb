@@ -130,6 +130,26 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         return deferred.promise;
     };
 
+    factory.getProjectSummary = function(currentTab)
+    {
+        var p = factory.project;
+        if (!p.title)
+        {
+            return "";
+        }
+        if (currentTab == ProjectTabEnum.AuditsInspections)
+        {
+            var gradePart = "";
+            var grade = _.find(factory.valuelists["grade"], {'id': p.grade});
+            if (grade)
+            {
+                gradePart = grade.description1;
+            }
+            return p.title + " (Grade: " + gradePart + ")";
+        }
+      return p.title;
+    };
+
     factory.getEiaPermitSummary = function (ep)
     {
         var ep = ep || factory.eiapermit;
