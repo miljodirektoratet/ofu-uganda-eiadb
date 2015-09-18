@@ -133,7 +133,7 @@
                                     <label for="fee">Expected fees</label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" decimal="6" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="data.eiapermit.fee"/>
+                                            <input type="text" decimal="2" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="data.eiapermit.fee"/>
                                         </div>
                                         <div class="col-md-6">
                                             <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('fee_currency')" id="fee_currency" class="form-control input-sm" ng-model="data.eiapermit.fee_currency">
@@ -386,7 +386,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <div class="form-group" ng-show="false">
+                                                        <div class="form-group">
                                                             <label>&nbsp;</label>
                                                             <div class="uploaded-file" ng-show="data.document.file_metadata_id">
                                                                 <a ng-href="{{downloadFileUrl(data.document.file_metadata_id)}}" ng-show="data.document.attachment">{{data.document.attachment.filename}}</a>

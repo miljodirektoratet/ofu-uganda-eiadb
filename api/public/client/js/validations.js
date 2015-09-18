@@ -37,6 +37,16 @@ validations.directive('decimal', function ()
                 }
             });
 
+            ctrl.$formatters.push(function formatter(modelValue)
+            {
+                if (!ctrl.$isEmpty(modelValue) && attrs.decimal)
+                {
+                    // TODO: _.round(parseInt(attrs.decimal)) is better. Update lodash.
+                    return parseFloat(modelValue).toFixed(parseInt(attrs.decimal));
+                }
+                return modelValue;
+            });
+
             ctrl.$validators.decimalInRange = function (modelValue, viewValue)
             {
                 if (ctrl.$isEmpty(modelValue))
