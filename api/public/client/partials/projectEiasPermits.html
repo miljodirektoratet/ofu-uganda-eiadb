@@ -265,7 +265,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <button type="button" style="margin-top:65px;" class="btn btn-danger btn-sm pull-right" ng-click="deleteEiaPermit()" ng-hide="!auth.canSave('delete')">{{data.eiapermit.is_new ? "Cancel new EIA and Permit" : "Delete EIA and Permit"}}</button>
+                                <button type="button" style="margin-top:65px;" class="btn btn-danger btn-sm pull-right" ng-click="deleteEiaPermit()" ng-hide="!auth.canSave('delete')">Delete EIA and Permit</button>
                             </div>
                         </div>
 
@@ -350,15 +350,15 @@
                                                             <input type="text" integer ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.sub_copy_no')" class="form-control input-sm" id="document.sub_copy_no" ng-model="data.document.sub_copy_no" ng-change="calculateNumberOfCopiesOfDocument()"/>
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="document.title">Document title</label>
                                                             <input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.title')" class="form-control input-sm" id="document.title" ng-model="data.document.title"/>
                                                         </div>
                                                     </div>
+                                                </div>
+
+                                                <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="document.type">Type of document</label>
@@ -377,6 +377,46 @@
                                                         <div class="form-group">
                                                             <label for="document.code">Document code</label>
                                                             <input type="text" ng-readonly="true" class="form-control input-sm" id="document.code" ng-model="data.document.code"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>&nbsp;</label>
+                                                            <div class="uploaded-file" ng-show="data.document.file_metadata_id">
+                                                                <a ng-href="{{downloadFileUrl(data.document.file_metadata_id)}}" ng-show="data.document.attachment">{{data.document.attachment.filename}}</a>
+                                                                <button type="button" class="delete btn btn-sm btn-link"
+                                                                        ng-click="deleteAttachment()"
+                                                                        ng-hide="!auth.canSave('delete')">delete
+                                                                </button>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-sm btn-default"
+                                                                        ngf-select="uploadAttachment($files)"
+                                                                        accept="{{fileUploadPattern}}"
+                                                                        ngf-pattern="{{fileUploadPattern}}"
+                                                                        ng-model="fake_attachment"
+                                                                        name="attachment"
+                                                                        ng-hide="data.document.file_metadata_id"
+                                                                        ng-disabled="!auth.canSave('delete')"
+                                                                        ngf-max-size="10MB">
+                                                                    Select File
+                                                                </button>
+                                                                <div class="uploading-file" ng-show="showUploadingAttachment">
+                                                                    <div class="file">{{attachmentFile.name}}<br/>
+                                                                        <div class="progress">
+                                                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{attachmentFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                                                    style="width: {{attachmentFile.progress}}%;">
+                                                                                {{attachmentFile.progress}}%
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="errors" ng-messages="parts.document.form.attachment.$error" role="alert">
+                                                                        <div ng-message="pattern">The file type is not supported.</div>
+                                                                        <div ng-message="serverError">Something went wrong on the server.</div>
+                                                                        <div ng-message="maxSize">The file is to big.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
