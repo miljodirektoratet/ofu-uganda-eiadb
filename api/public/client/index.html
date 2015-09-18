@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>EIA Database</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 
@@ -17,7 +17,7 @@
     <!-- Style end -->
 </head>
 <body>
-<div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController" >
+<div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
@@ -27,7 +27,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="http://www.nemaug.org/" target="_blank">
-                <img class="navbar-left"  src="img/NEMA-logo-small.png" alt="NEMA logo" style="padding-right:5px;"/>
+                <img class="navbar-left" src="img/NEMA-logo-small.png" alt="NEMA logo" style="padding-right:5px;"/>
             </a>
             <a class="navbar-brand" href="#/">EIA Database</a>
         </div>
@@ -42,9 +42,13 @@
                             </ul>
                           </li>-->
                 <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
+                <li><a href="#" class="version"><app-version/></a></li>
             </ul>
-            <p class="navbar-text navbar-right">Logged in as <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a></p>
-        </div><!--/.nav-collapse -->
+            <p class="navbar-text navbar-right">
+                Logged in as <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a>
+            </p>
+        </div>
+        <!--/.nav-collapse -->
 
     </div>
 </div>
@@ -68,7 +72,8 @@
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/select2/select2.js"></script>
 <!--<script src="bower_components/angular-ui-select2/src/select2.js"></script>-->
-<script src="js/select2.js"></script> <!-- Check comment inside select2.js file -->
+<script src="js/select2.js"></script>
+<!-- Check comment inside select2.js file -->
 <script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/ng-file-upload/ng-file-upload-all.js"></script>
 <script src="js/jqlite.extra.js"></script>

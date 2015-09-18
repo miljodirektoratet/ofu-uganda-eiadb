@@ -95,13 +95,13 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 });
             }
         }
-/*        else if (factory.eiaspermits.length > 0)
-        {
-            if (_.isEmpty(factory.eiapermit))
-            {
-                factory.eiapermit = factory.eiaspermits[0];
-            }
-        }*/
+        /*        else if (factory.eiaspermits.length > 0)
+         {
+         if (_.isEmpty(factory.eiapermit))
+         {
+         factory.eiapermit = factory.eiaspermits[0];
+         }
+         }*/
         return deferred.promise;
     };
 
@@ -121,16 +121,16 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             }
         }
         /*else if (factory.auditsinspections.length > 0)
-        {
-            if (_.isEmpty(factory.auditinspection))
-            {
-                factory.auditinspection = factory.auditsinspections[0];
-            }
-        }*/
+         {
+         if (_.isEmpty(factory.auditinspection))
+         {
+         factory.auditinspection = factory.auditsinspections[0];
+         }
+         }*/
         return deferred.promise;
     };
 
-    factory.getProjectSummary = function(currentTab)
+    factory.getProjectSummary = function (currentTab)
     {
         var p = factory.project;
         if (!p.title)
@@ -147,7 +147,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             }
             return p.title + " (Grade: " + gradePart + ")";
         }
-      return p.title;
+        return p.title;
     };
 
     factory.getEiaPermitSummary = function (ep)
@@ -230,6 +230,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         var pData =
         {
             has_industrial_waste_water: 41, // 41=No
+            grade: 47, // 47=Unknown
             organisation_id: o.id,
             is_new: true
         };
