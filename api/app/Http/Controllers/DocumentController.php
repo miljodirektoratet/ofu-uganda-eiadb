@@ -13,10 +13,16 @@ class DocumentController extends Controller
     // GET /resource/:id/subresource/:subid/level3resource
     public function index($projectId, $eiapermitId)
     {
+        $withAttachment = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
+
         $documents = Project::find($projectId)
             ->eiapermits()->find($eiapermitId)
             ->documents()
-            ->get(array('id', 'date_submitted', 'title', 'code', 'date_sent_director', 'date_sent_from_dep', 'date_sent_officer', 'conclusion'));
+            ->with(array('attachment'=>$withAttachment))
+            ->get(array('id', 'date_submitted', 'title', 'code', 'date_sent_director', 'date_sent_from_dep', 'date_sent_officer', 'conclusion', 'file_metadata_id'));
         return Response::json($documents, 200);
     }
 

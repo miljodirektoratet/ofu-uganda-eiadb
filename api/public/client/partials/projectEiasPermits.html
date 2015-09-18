@@ -299,13 +299,14 @@
                                         <th>Date sent to coordinator from dep.secretary</th>
                                         <th>Date sent to the officer</th>
                                         <th>Conclusion (PB/Tor accepted)</th>
+                                        <th>&nbsp;</th>
                                         <th>
-                                            <button type="button" class="btn btn-success btn-sm" ng-click="newDocument()" ng-hide="!auth.canSave('new')">New</button>
+                                            <button type="button" class="btn btn-sm btn-success btn-sm" ng-click="newDocument()" ng-hide="!auth.canSave('new')" ng-click="return false;">New</button>
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody class="document" ng-repeat="d in data.documents">
-                                    <tr class="master" ng-click="toggleDocument(d);" ng-class="{selected: data.document==d, notvalid: data.document==d && parts.document.form.$invalid}">
+                                    <tr class="master" ng-class="{selected: data.document==d, notvalid: data.document==d && parts.document.form.$invalid}">
                                         <td>{{d.date_submitted | date:'d MMM yyyy'}}</td>
                                         <td>{{d.title}}</td>
                                         <td>{{d.code}}</td>
@@ -314,8 +315,13 @@
                                         <td>{{d.date_sent_officer | date:'d MMM yyyy'}}</td>
                                         <td>{{d.conclusion}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="data.document!=d">{{auth.canSave('new') ? "Edit" : "Open"}}</button>
-                                            <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="data.document==d">Close</button>
+                                            <a ng-href="{{downloadFileUrl(d.file_metadata_id)}}" ng-show="d.attachment" ng-attr-alt="{{d.attachment.filename}}" ng-attr-title="{{d.attachment.filename}}">
+                                                <span class="glyphicon glyphicon-file"></span>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-link pull-right text-right" ng-click="toggleDocument(d);" data-x-hover-on-parent=".master" ng-show="data.document!=d">{{auth.canSave('new') ? "Edit" : "Open"}}</button>
+                                            <button type="button" class="btn btn-xs btn-link pull-right text-right" ng-click="toggleDocument(d);" data-x-hover-on-parent=".master" ng-show="data.document==d">Close</button>
                                         </td>
                                     </tr>
                                     <tr ng-if="data.document==d" class="detail">
