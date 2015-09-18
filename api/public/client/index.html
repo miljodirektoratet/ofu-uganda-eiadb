@@ -42,7 +42,7 @@
                             </ul>
                           </li>-->
                 <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
-                <li><a href="#" class="version"><app-version/></a></li>
+                <li><a href="#" onclick="return false;" class="version"><app-version/></a></li>
             </ul>
             <p class="navbar-text navbar-right">
                 Logged in as <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a>
