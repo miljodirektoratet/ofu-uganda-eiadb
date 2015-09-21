@@ -118,6 +118,22 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         scope.data.document.code = typeCode + number;
     };
 
+    scope.setDefaultDocumentConclusion = function ()
+    {
+        // 8 = Project Briefs
+        // 9 = TORs for EIA
+        // 80 = Pending conclusion
+        // 81 = Not relevant
+        if (_.indexOf(['8', '9'], scope.data.document.type) >= 0)
+        {
+            scope.data.document.conclusion = 80;
+        }
+        else
+        {
+            scope.data.document.conclusion = 81;
+        }
+    };
+
     scope.auth.canSave = function (field)
     {
         switch (field)

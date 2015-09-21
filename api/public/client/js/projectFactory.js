@@ -139,13 +139,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         }
         if (currentTab == ProjectTabEnum.AuditsInspections)
         {
-            var gradePart = "";
-            var grade = _.find(factory.valuelists["grade"], {'id': p.grade});
-            if (grade)
-            {
-                gradePart = grade.description1;
-            }
-            return p.title + " (Grade: " + gradePart + ")";
+            return p.title + " (Grade: " + factory.getCodeFromValuelist("grade", p.grade) + ")";
         }
         return p.title;
     };
@@ -157,13 +151,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             return "";
         }
-        var statusPart = "";
-        var status = _.find(factory.valuelists["eiastatus"], {'id': ep.status});
-        if (status)
-        {
-            statusPart = status.description1;
-        }
-        return "Status: " + statusPart;
+        return "Status: " + factory.getCodeFromValuelist("eiastatus", ep.status);
     };
 
     factory.getAuditInspectionSummary = function (ai)
@@ -173,13 +161,17 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             return "";
         }
-        var statusPart = "";
-        var status = _.find(factory.valuelists["auditinspectionstatus"], {'id': ai.status});
-        if (status)
+        return "Number " + ai.year + ": " + factory.getCodeFromValuelist("auditinspectionstatus", ai.status);
+    };
+
+    factory.getCodeFromValuelist = function (valuelistName, id)
+    {
+        var code = _.find(factory.valuelists[valuelistName], {'id': id});
+        if (code)
         {
-            statusPart = status.description1;
+            return code.description1;
         }
-        return "Number " + ai.year + ": " + statusPart;
+        return "";
     };
 
     factory.setOrganisation = function (o)

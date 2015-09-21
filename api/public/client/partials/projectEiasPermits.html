@@ -313,7 +313,7 @@
                                         <td>{{d.date_sent_director | date:'d MMM yyyy'}}</td>
                                         <td>{{d.date_sent_from_dep | date:'d MMM yyyy'}}</td>
                                         <td>{{d.date_sent_officer | date:'d MMM yyyy'}}</td>
-                                        <td>{{d.conclusion}}</td>
+                                        <td>{{data.getCodeFromValuelist('documentconclusion', d.conclusion)}}</td>
                                         <td>
                                             <a ng-href="{{downloadFileUrl(d.file_metadata_id)}}" ng-show="d.attachment" ng-attr-alt="{{d.attachment.filename}}" ng-attr-title="{{d.attachment.filename}}">
                                                 <span class="glyphicon glyphicon-file"></span>
@@ -368,7 +368,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="document.type">Type of document</label>
-                                                            <select ui-select2 ng-change="calculateDocumentCode();saveCurrentDocument();" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="data.document.type">
+                                                            <select ui-select2 ng-change="setDefaultDocumentConclusion();calculateDocumentCode();saveCurrentDocument();" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="data.document.type">
                                                                 <option ng-repeat="v in valuelists.documenttype" value="{{v.id}}">{{v.description2}}</option>
                                                             </select>
                                                         </div>
@@ -526,7 +526,9 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="document.conclusion">Conclusion (PB/Tor accepted)</label>
-                                                            <input type="text" integer ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.conclusion')" class="form-control input-sm" id="document.conclusion" ng-model="data.document.conclusion"/>
+                                                            <select ui-select2 ng-change="saveCurrentDocument();" ng-disabled="!auth.canSave('document.conclusion')" id="document.conclusion" class="form-control input-sm" ng-model="data.document.conclusion">
+                                                                <option ng-repeat="v in valuelists.documentconclusion" value="{{v.id}}">{{v.description1}}</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
