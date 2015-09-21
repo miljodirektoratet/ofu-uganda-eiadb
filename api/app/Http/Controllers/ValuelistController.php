@@ -180,14 +180,13 @@ class ValuelistController extends Controller {
 
     private function getCodesFromArray($codeIds)
     {
-        return Code::whereRaw("id in (" . join(",", $codeIds) . ") and not is_passive")
+        return Code::whereRaw("id in (" . join(",", $codeIds) . ")")
             ->get(array('id', 'description1', 'description2'));
     }
 
     private function getCodesFromDrowdownName($dropdownName)
     {
         return Code::where("dropdown_list", "=", $dropdownName)
-            ->where("is_passive", 0)
             ->get(array('id', 'description1', 'description2'));
     }
 }

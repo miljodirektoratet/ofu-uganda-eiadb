@@ -56,7 +56,7 @@ module.exports = function(grunt)
                     'js/jqlite.extra.js',
                     'js/app.js',
                     'js/controllers.js', 'js/practitionersController.js', 'js/projectControllers.js', 'js/eiasPermitsControllers.js', 'js/auditsInspectionsControllers.js',
-                    'js/loginController.js',
+                    'js/advancedController.js', 'js/loginController.js',
                     'js/directives.js', 'js/filters.js',
                     'js/services.js', 'js/projectFactory.js',
                     'js/validations.js'

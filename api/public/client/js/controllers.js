@@ -22,6 +22,8 @@ controllers.controller('DatePickerController', ['$scope', function (scope)
 
 controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo', function(scope, location, UserInfo)
 {
+    scope.userinfo = UserInfo;
+
     scope.isActive = function (viewLocation)
     {
         return viewLocation === location.path();
@@ -30,7 +32,10 @@ controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo', f
     {
         return location.path().indexOf(viewLocation) == 0;
     };
-    scope.userinfo = UserInfo;
+    scope.hasAccess = function(viewLocation)
+    {
+        return scope.userinfo.info.role_8;
+    };
 }]);
 
 controllers.controller('UserController', ['$scope', 'UserInfo', function(scope, UserInfo)
