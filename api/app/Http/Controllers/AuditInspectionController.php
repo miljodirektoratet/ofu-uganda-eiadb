@@ -75,8 +75,8 @@ class AuditInspectionController extends Controller
         $inputData = Input::all();
         $auditinspection = new AuditInspection();
         $this->updateValuesInResource($auditinspection, $inputData);
+        $this->generateCode($auditinspection);
         $auditinspection->created_by = Auth::user()->name;
-
         $project = Project::find($projectId);
         $project->auditinspections()->save($auditinspection);
         $this->handleUsers($auditinspection, $inputData);
@@ -164,6 +164,15 @@ class AuditInspectionController extends Controller
         {
             $auditinspection["updated_by"] = Auth::user()->name;
         }
+    }
+
+    private function generateCode($auditinspection)
+    {
+        $year = $auditinspection->year;
+        $maxNumber = AuditInspection::where('year', $year)->max('number');
+        $number = $maxNumber+1;
+        $auditinspection->number = $number;
+        $auditinspection->code = sprintf("%d.%03d", $year, $number);
     }
 
     private function updateValuesInResource($resource, $data)
