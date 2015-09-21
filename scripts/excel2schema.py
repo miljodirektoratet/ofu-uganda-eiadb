@@ -1,6 +1,8 @@
 #!python3
 # -*- coding: utf8 -*-
 
+# ONLY to be uses on for new tables. In other words not so useful any longer.
+
 # IMPORTANT:
 # openpyxl crashed when opening files with tables.
 # I had to edit parse_font() in python directory\Lib\site-packages\openpyxl\reader\style.py.
@@ -10,7 +12,7 @@ import os, openpyxl, re, glob
 from collections import OrderedDict
 from datetime import datetime
 
-phpFile = r"..\api\database\migrations\2015_08_28_FromScript_tables_audit_and_inspections.php"
+phpFile = r"..\api\database\migrations\2015_xx_xx_FromScript_tables_xxx.php"
 
 oldHeaderSignature = "A10=Sortering,B10=dB fields,C10=Data type,D10=Shown in application,E10=Application fields,F10=Interface tab,G10=Field type,H10=Drop-down list,I10=Mandatory,J10=Input,K10=Roles,L10=Table,M10=Tabletype,N10=Comments,"
 fieldFilePattern = r"N:\Felles\Forurensning\2. Internasjonalt arbeid\2012. Uganda\Kravspek\Tabeller\Databasefields*.xlsx"
@@ -128,7 +130,8 @@ dataSheet = wb.get_sheet_by_name("Fields")
 checkForChangesInHeader(dataSheet.rows[9])
 
 ignore = ['roles']#['users']
-onlyTheese = ['audits_inspections', 'audits_inspections_personnel', 'audits_inspections_lead_agencies', 'audits_inspections_documentation']
+#onlyTheese = ['audits_inspections', 'audits_inspections_personnel', 'audits_inspections_lead_agencies', 'audits_inspections_documentation']
+onlyTheese = ['add_new_tables_here']
 foreignIds = {}
 tables = OrderedDict()
 
