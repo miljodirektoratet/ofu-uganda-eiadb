@@ -64,6 +64,16 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         }
     };
 
+    scope.calculateDeadlineDate = function(ai)
+    {
+        if (ai.date_action_taken && ai.timeframe)
+        {
+            var dateDeadline = addDays(ai.date_action_taken, parseInt(ai.timeframe));
+            console.log(ai.date_action_taken, dateDeadline);
+            ai.date_deadline = dateDeadline;
+        }
+    };
+
     scope.saveCurrentAuditInspection = function ()
     {
         var auditinspection = scope.data.auditinspection;
@@ -71,6 +81,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         if (!isNew)
         {
             scope.updateStatus(auditinspection);
+            scope.calculateDeadlineDate(auditinspection);
         }
         scope.saveCurrent(scope.parts.auditinspection, auditinspection, isNew).then(function (ai)
         {

@@ -178,3 +178,11 @@ var uploadFile = function ($q, $timeout, Upload, partInForm, file)
 
     return deferred.promise;
 };
+
+function addDays(date, days)
+{
+    // http://stackoverflow.com/a/19691491/172696
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}

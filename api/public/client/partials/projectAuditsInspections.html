@@ -308,14 +308,14 @@
                                     <label for="date_deadline">Deadline to correct deviations</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
-                                                ng-readonly="!auth.canSave('date_deadline')" id="date_deadline"
+                                                ng-readonly="true" id="date_deadline"
                                                 class="form-control input-sm input-date"
                                                 ng-model="data.auditinspection.date_deadline"
                                                 data-datepicker-popup="d MMM yyyy" data-is-open="opened"
                                                 data-datepicker-options="datepickerOptions"
                                                 data-show-button-bar="false"/>
                                             <span class="input-group-btn">
-                                              <button type="button" ng-disabled="!auth.canSave('date_deadline')"
+                                              <button type="button" ng-disabled="true"
                                                       class="btn btn-default btn-sm" ng-click="open($event)"><span
                                                       class="glyphicon glyphicon-calendar"></span></button>
                                             </span>
