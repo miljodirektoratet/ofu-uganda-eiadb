@@ -13,7 +13,7 @@ class CodeController extends Controller
     // GET /resource
     public function index()
     {
-        $codes = Code::get();
+        $codes = Code::withTrashed()->get();
 
         return Response::json($codes->toArray(), 200);
     }

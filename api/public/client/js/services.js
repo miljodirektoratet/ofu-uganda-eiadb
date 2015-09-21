@@ -140,3 +140,11 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
     getUserInfo();
     return userinfo;
 }]);
+
+services.factory('EditCode', ['$resource', function ($resource)
+{
+    return $resource('/edit/v1/code/:codeId', {codeId: '@id'},
+        {
+            'update': {method: 'PUT', isArray: false}
+        });
+}]);

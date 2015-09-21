@@ -991,13 +991,13 @@ $code13 = Code::create(array(
 	'description1' => "ESMP" ,
 	'description2' => "ESMP" ,
 	'dropdown_list' => "document_type" ,
-	'is_passive' => 1             
+	'deleted_at' => "2015-09-21"
 ));
 
 $code14 = Code::create(array(
   'id' => 14 ,
 	'description1' => "VALUE NOT IN USE" ,
-	'is_passive' => 1             
+	'deleted_at' => "2015-09-21"
 ));
 
 $code15 = Code::create(array(
@@ -1192,7 +1192,7 @@ $code46 = Code::create(array(
   'id' => 46 ,
 	'description1' => "Blue" ,
 	'dropdown_list' => "grade" ,
-	'is_passive' => 1             
+	'deleted_at' => "2015-09-21"
 ));
 
 $code47 = Code::create(array(
