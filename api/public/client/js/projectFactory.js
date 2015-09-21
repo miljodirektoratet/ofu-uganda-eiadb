@@ -161,7 +161,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             return "";
         }
-        return "Number " + ai.year + ": " + factory.getCodeFromValuelist("auditinspectionstatus", ai.status);
+        return "Number " + ai.code + ": " + factory.getCodeFromValuelist("auditinspectionstatus", ai.status);
     };
 
     factory.getCodeFromValuelist = function (valuelistName, id)
