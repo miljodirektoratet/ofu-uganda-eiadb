@@ -34,10 +34,44 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         return !_.isEmpty(scope.data.auditinspection);
     };
 
+    scope.updateStatus = function (ai)
+    {
+        // 70 = Created
+        // 71 = Carried out
+        // 72 = Action taken
+        // 73 = Deadline passed
+        // 74 = Corrections received
+        // 75 = Closed
+        if (ai.date_closing)
+        {
+            ai.status = 75;
+        }
+        else if(ai.date_received)
+        {
+            ai.status = 74;
+        }
+        else if(ai.date_deadline)
+        {
+            ai.status = 73;
+        }
+        else if(ai.action_taken)
+        {
+            ai.status = 72;
+        }
+        else if(ai.date_carried_out)
+        {
+            ai.status = 71;
+        }
+    };
+
     scope.saveCurrentAuditInspection = function ()
     {
         var auditinspection = scope.data.auditinspection;
         var isNew = auditinspection.is_new;
+        if (!isNew)
+        {
+            scope.updateStatus(auditinspection);
+        }
         scope.saveCurrent(scope.parts.auditinspection, auditinspection, isNew).then(function (ai)
         {
             if (isNew)
