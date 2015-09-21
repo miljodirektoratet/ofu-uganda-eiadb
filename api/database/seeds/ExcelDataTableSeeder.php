@@ -1313,7 +1313,28 @@ $code77 = Code::create(array(
 	'dropdown_list' => "audit_inspection_document_type"             
 ));
 
-$category1 = Category::create(array(
+		$code78 = Code::create(array(
+			'description1' => "Accepted" ,
+			'dropdown_list' => "document_conclusion"
+		));
+
+		$code79 = Code::create(array(
+			'description1' => "Not accepted" ,
+			'dropdown_list' => "document_conclusion"
+		));
+
+		$code80 = Code::create(array(
+			'description1' => "Pending conclusion" ,
+			'dropdown_list' => "document_conclusion"
+		));
+
+		$code81 = Code::create(array(
+			'description1' => "Not relevant" ,
+			'dropdown_list' => "document_conclusion"
+		));
+
+
+		$category1 = Category::create(array(
 	'Id' => 1 ,
 	'description_short' => " Education Facility" ,
 	'description_long' => " Education Facility" ,

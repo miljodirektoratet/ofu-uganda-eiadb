@@ -24,7 +24,8 @@ module.exports = function(grunt)
                 '<%= paths.buildPath %>vendor/vendor.min.css': [
                     'bower_components/bootstrap/dist/css/bootstrap.min.css',
                     'bower_components/select2/select2.css',
-                    'bower_components/select2-bootstrap-css/select2-bootstrap.css'
+                    'bower_components/select2-bootstrap-css/select2-bootstrap.css',
+                    'bower_components/angular-ui-grid/ui-grid.min.css'
                 ],
                 '<%= paths.buildPath %>vendor/vendor.min.js': [
                     'bower_components/jquery/dist/jquery.min.js',
@@ -37,7 +38,8 @@ module.exports = function(grunt)
                     'bower_components/select2/select2.js',
                     'js/select2.js',
                     'bower_components/lodash/lodash.min.js',
-                    'bower_components/ng-file-upload/ng-file-upload-all.min.js'
+                    'bower_components/ng-file-upload/ng-file-upload-all.min.js',
+                    'bower_components/angular-ui-grid/ui-grid.min.js'
                 ]
             }
         }

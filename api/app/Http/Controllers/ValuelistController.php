@@ -33,6 +33,7 @@ class ValuelistController extends Controller {
         $valuelists["auditinspectiontype"] = $this->auditinspectiontype();
         $valuelists["leadagency"] = $this->leadagency();
         $valuelists["actiontaken"] = $this->actiontaken();
+        $valuelists["documentconclusion"] = $this->documentconclusion();
 
         return Response::json($valuelists, 200);
     }
@@ -96,6 +97,11 @@ class ValuelistController extends Controller {
     private function documenttype()
     {
         return $this->getCodesFromArray(array(8,9,10,11,12,13));
+    }
+
+    private function documentconclusion()
+    {
+        return $this->getCodesFromDrowdownName("document_conclusion");
     }
 
     private function district()
