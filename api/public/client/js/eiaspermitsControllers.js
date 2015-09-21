@@ -191,6 +191,18 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         }
     };
 
+    scope.isDisabledBasedOnRule = function (field)
+    {
+        // 81 = Not relevant
+        switch (field)
+        {
+            case "document.conclusion":
+                return scope.data.document.conclusion == 81;
+            default:
+                return false;
+        }
+    };
+
     scope.uploadAttachment = function (files)
     {
         if (!files)

@@ -526,7 +526,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="document.conclusion">Conclusion (PB/Tor accepted)</label>
-                                                            <select ui-select2 ng-change="saveCurrentDocument();" ng-disabled="!auth.canSave('document.conclusion')" id="document.conclusion" class="form-control input-sm" ng-model="data.document.conclusion">
+                                                            <select ui-select2 ng-change="saveCurrentDocument();" ng-disabled="!auth.canSave('document.conclusion') || isDisabledBasedOnRule('document.conclusion')" id="document.conclusion" class="form-control input-sm" ng-model="data.document.conclusion">
                                                                 <option ng-repeat="v in valuelists.documentconclusion" value="{{v.id}}">{{v.description1}}</option>
                                                             </select>
                                                         </div>
