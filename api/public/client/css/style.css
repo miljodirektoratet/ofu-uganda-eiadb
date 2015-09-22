@@ -283,10 +283,19 @@ textarea.ng-invalid,
     margin-bottom: 10px;
 }
 
-.uploaded-file .delete, .uploaded-files .delete {
+.btn-link.delete {
     color: red;
 }
 
-.advanced .grid {
+.btn-link.undelete {
+    color: green;
+}
 
+.advanced .ui-grid-cell-focus {
+    background-color: transparent;
+}
+
+.advanced .ui-grid-footer-info {
+    padding-top:7px;
+    padding-left: 5px;
 }

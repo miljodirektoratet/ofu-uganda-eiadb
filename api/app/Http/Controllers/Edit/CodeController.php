@@ -5,7 +5,9 @@ use Response;
 use Auth;
 use Input;
 use \DateTime;
+use Carbon\Carbon;
 use \App\Code;
+
 
 class CodeController extends Controller
 {
@@ -14,39 +16,50 @@ class CodeController extends Controller
     public function index()
     {
         $codes = Code::withTrashed()->get();
-
         return Response::json($codes->toArray(), 200);
     }
 
     // GET /resource/:id
     public function show($id)
     {
-        $code = Code::find($id);
+        $code = Code::withTrashed()->find($id);
+        if (!$code)
+        {
+            return $id;
+        }
         return Response::json($code, 200);
     }
 
     // POST /resource
     public function store()
     {
-        $inputData = Input::all();
         $code = new Code();
-        $this->updateValuesInResource($code, $inputData);
-        $code->created_by = Auth::user()->name;
+        $newId = Code::withTrashed()->max('id') + 1;
+        $code->id = $newId;
+        $code->created_by = $code->updated_by = Auth::user()->name;
         $code->save();
 
-        return $this->show($code->id);
+        return $this->show($newId);
     }
 
     // PUT/PATCH /resource/:id
     public function update($id)
     {
-        $code = Code::find($id);
+        $code = Code::withTrashed()->find($id);
         if (!$code)
         {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
         $inputData = Input::all();
+
+        $updatedAtFromInput = Carbon::parse($inputData["updated_at"]);
+        $diff = $code->updated_at->diffInSeconds($updatedAtFromInput);
+        if ($diff != 0)
+        {
+            return Response::json(array('error' => true, 'message' => 'conflict'), 409);
+        }
+
         $this->updateValuesInResource($code, $inputData);
         $code->save();
         return $this->show($code->id);
@@ -56,8 +69,10 @@ class CodeController extends Controller
     public function destroy($id)
     {
         $code = Code::find($id);
+        $code->updated_by = Auth::user()->name;
+        $code->save();
         $code->delete();
-        return Response::json(array('is_deleted' => true), 200);
+        return $this->show($code->id);
     }
 
     private function updateValuesInResource($resource, $data)
