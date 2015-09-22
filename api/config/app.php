@@ -39,7 +39,8 @@ return [
 	|
 	*/
 
-	'timezone' => 'Africa/Kampala',
+	//'timezone' => 'Africa/Kampala',
+	'timezone' => 'UTC',
 
 	/*
 	|--------------------------------------------------------------------------

@@ -119,8 +119,15 @@ function convertDateStringsToDates(input) {
         // Check for string properties which look like dates.
         if (typeof value === "string" && (match = value.match(regexIso8601)))
         {
-            var dateParts = match[0].split(" ");
-            input[key] = new Date(dateParts[0]);
+            // Old way (before 22 Sep 2015):
+            //var dateParts = match[0].split(" ");
+            //input[key] = new Date(dateParts[0]);
+
+            // New way, with time part as well:
+            var dateWithTime = match[0].replace(" ", "T");
+            dateWithTime = dateWithTime + "Z";
+            input[key] = new Date(dateWithTime);
+
             /*
              var dateParts = match[0].replace("00:00:00", "12:00:00").split(" "); // HACK to make sure we are on the correct day.
              var dateWithT = dateParts[0]+"T"+dateParts[1];
