@@ -79,8 +79,8 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         var isNew = auditinspection.is_new;
         if (!isNew)
         {
-            scope.updateStatus(auditinspection);
             scope.calculateDeadlineDate(auditinspection);
+            scope.updateStatus(auditinspection);
         }
         scope.saveCurrent(scope.parts.auditinspection, auditinspection, isNew).then(function (ai)
         {
