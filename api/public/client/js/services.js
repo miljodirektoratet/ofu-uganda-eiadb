@@ -83,7 +83,8 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
         "role_6": false,
         "role_7": false,
         "role_8": false,
-        "roles": []
+        "roles": [],
+        "features": []
     };
 
     var setUserInfo = function (data)
