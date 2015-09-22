@@ -1,77 +1,62 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Edit;
 
+use App\Http\Controllers\Controller;
 use Response;
 use Auth;
 use Input;
 use \DateTime;
-use \App\Organisation;
+use \App\Code;
 
-class OrganisationController extends Controller
+class CodeController extends Controller
 {
 
     // GET /resource
     public function index()
     {
-        $organisations = Organisation::
-        get(array('id', 'name', 'visiting_address', 'city', 'contact_person'));
+        $codes = Code::withTrashed()->get();
 
-        return Response::json($organisations->toArray(), 200);
+        return Response::json($codes->toArray(), 200);
     }
 
     // GET /resource/:id
     public function show($id)
     {
-        $organisation = Organisation::find($id);
-        return Response::json($organisation, 200);
+        $code = Code::find($id);
+        return Response::json($code, 200);
     }
 
     // POST /resource
     public function store()
     {
-        if (!$this::canSave())
-        {
-            return $this::notAuthorized();
-        }
-
         $inputData = Input::all();
-        $organisation = new Organisation();
-        $this->updateValuesInResource($organisation, $inputData);
-        $organisation->created_by = Auth::user()->name;
-        $organisation->save();
+        $code = new Code();
+        $this->updateValuesInResource($code, $inputData);
+        $code->created_by = Auth::user()->name;
+        $code->save();
 
-        return $this->show($organisation->id);
+        return $this->show($code->id);
     }
 
     // PUT/PATCH /resource/:id
     public function update($id)
     {
-        if (!$this::canSave())
-        {
-            return $this::notAuthorized();
-        }
-
-        $organisation = Organisation::find($id);
-        if (!$organisation)
+        $code = Code::find($id);
+        if (!$code)
         {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
         $inputData = Input::all();
-        $this->updateValuesInResource($organisation, $inputData);
-        $organisation->save();
-        return $this->show($organisation->id);
+        $this->updateValuesInResource($code, $inputData);
+        $code->save();
+        return $this->show($code->id);
     }
 
     // DELETE /resource/:id
     public function destroy($id)
     {
-        if (!$this::canSave())
-        {
-            return $this::notAuthorized();
-        }
-
-        $organisation = Organisation::find($id);
-        $organisation->delete();
+        $code = Code::find($id);
+        $code->delete();
         return Response::json(array('is_deleted' => true), 200);
     }
 
@@ -112,17 +97,6 @@ class OrganisationController extends Controller
         {
             $resource["updated_by"] = Auth::user()->name;
         }
-    }
-
-    private function canSave()
-    {
-        // TODO: grade needs Role 7.
-        return Auth::user()->hasRole("Role 1");
-    }
-
-    private function notAuthorized()
-    {
-        return Response::json("Not authorized to perform this.", 403); // 403 Forbidden
     }
 
 }

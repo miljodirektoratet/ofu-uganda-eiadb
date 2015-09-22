@@ -16,6 +16,7 @@ var seroApp = angular.module('seroApp', [
     'ui.bootstrap',
     'ui.select2',
     'ngFileUpload',
+    'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns',
     'seroApp.services',
     'seroApp.directives',
     'seroApp.controllers',
@@ -33,12 +34,9 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/projects/:projectId/auditsinspections', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/auditsinspections/:auditinspectionId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/reports', projectTabsOptions);
-        //$routeProvider.when('/projects/:id', {templateUrl: 'partials/project.html', controller: 'ProjectTabController'});
-        //$routeProvider.when('/projects/:projectId/eiaspermits', {templateUrl: 'partials/project.html', controller: 'EiaPermitTabController'});
 
-
-
-        //$routeProvider.when('/projects/:projectId/eiaspermits/:id', {templateUrl: 'partials/project.html'});
+        $routeProvider.when('/search', {templateUrl: 'partials/search.html'});
+        $routeProvider.when('/advanced', {templateUrl: 'partials/advanced.html', controller: 'AdvancedController'});
 
         $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
         $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'UserController'});
@@ -178,3 +176,11 @@ var uploadFile = function ($q, $timeout, Upload, partInForm, file)
 
     return deferred.promise;
 };
+
+function addDays(date, days)
+{
+    // http://stackoverflow.com/a/19691491/172696
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}

@@ -35,7 +35,8 @@
     background-color: #f3f3f3;
     font-size: 13px;
 }
-.documents .document .master .btn-download-file{
+
+.documents .document .master .btn-download-file {
     padding: 0px;
 }
 
@@ -284,4 +285,8 @@ textarea.ng-invalid,
 
 .uploaded-file .delete, .uploaded-files .delete {
     color: red;
+}
+
+.advanced .grid {
+
 }

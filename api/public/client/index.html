@@ -36,6 +36,8 @@
             <ul class="nav navbar-nav">
                 <li ng-class="{ active: isAdvancedActive('/projects')}"><a href="#/projects">Projects</a></li>
                 <li ng-class="{ active: isAdvancedActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
+                <li ng-class="{ active: isAdvancedActive('/search')}"><a href="#/search">Search</a></li>
+                <li ng-class="{ active: isAdvancedActive('/advanced')}" ng-show="hasAccess('/advanced')"><a href="#/advanced">Advanced</a></li>
                 <!--          <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -82,11 +84,13 @@
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
 <script src="js/projectFactory.js"></script>
+<script src="js/advancedFactory.js"></script>
 <script src="js/controllers.js"></script>
 <script src="js/practitionersController.js"></script>
 <script src="js/projectControllers.js"></script>
-<script src="js/eiasPermitsControllers.js"></script>
-<script src="js/auditsInspectionsControllers.js"></script>
+<script src="js/eiaspermitsControllers.js"></script>
+<script src="js/auditsinspectionsControllers.js"></script>
+<script src="js/advancedController.js"></script>
 <script src="js/loginController.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>

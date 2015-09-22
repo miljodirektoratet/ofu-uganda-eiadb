@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "1.37.0"};
+var version = {"version": "1.38.0"};
 
 var services = angular.module('seroApp.services');
 
@@ -139,4 +139,12 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
     setUserInfo(null);
     getUserInfo();
     return userinfo;
+}]);
+
+services.factory('EditCode', ['$resource', function ($resource)
+{
+    return $resource('/edit/v1/code/:codeId', {codeId: '@id'},
+        {
+            'update': {method: 'PUT', isArray: false}
+        });
 }]);
