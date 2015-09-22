@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "1.38.0"};
+var version = {"version": "1.39.0"};
 
 var services = angular.module('seroApp.services');
 
@@ -83,7 +83,8 @@ services.factory('UserInfo', ['$http', '$location', function ($http, $location)
         "role_6": false,
         "role_7": false,
         "role_8": false,
-        "roles": []
+        "roles": [],
+        "features": []
     };
 
     var setUserInfo = function (data)
