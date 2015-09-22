@@ -35,7 +35,12 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/projects/:projectId/auditsinspections/:auditinspectionId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/reports', projectTabsOptions);
 
-        $routeProvider.when('/search', {templateUrl: 'partials/search.html'});
+        var searchTabsOptions = {templateUrl: 'partials/searchTabs.html', controller: 'SearchTabsController'};
+        $routeProvider.when('/search', {redirectTo: '/search/auditsinspections'});
+        $routeProvider.when('/search/projects', searchTabsOptions);
+        $routeProvider.when('/search/eiaspermits', searchTabsOptions);
+        $routeProvider.when('/search/auditsinspections', searchTabsOptions);
+
         $routeProvider.when('/advanced', {templateUrl: 'partials/advanced.html', controller: 'AdvancedController'});
 
         $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
@@ -88,6 +93,13 @@ var ProjectTabEnum =
     EiasPermits : 'Eias and Permits',
     AuditsInspections : 'Audits and Inspections',
     Reports : 'Reports'
+};
+
+var SearchTabEnum =
+{
+    Projects : 'Projects',
+    EiasPermits : 'Eias and Permits',
+    AuditsInspections : 'Audits and Inspections'
 };
 
 var fileUploadPattern = "image/*,application/pdf,application/vnd.openxmlformats*,application/msword,text/plain,text/csv";
