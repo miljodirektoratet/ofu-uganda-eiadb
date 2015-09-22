@@ -59,6 +59,13 @@ DocumentRoot /home/ubuntu/sero/api/public
 </Directory>
 ```
 
+- Tasks:
+-- http://laravel.com/docs/5.1/scheduling
+-- crontab -e, and add the following:
+```
+* * * * * php /home/ubuntu/sero/api/artisan schedule:run >> /dev/null 2>&1
+```
+
 - Other stuff:
 -- "/dev/xvda1 should be checked for errors": https://nathanpfry.com/fix-dev-xvda1-should-be-checked-for-errors-on-amazon-ec2-ubuntu-instances/
 

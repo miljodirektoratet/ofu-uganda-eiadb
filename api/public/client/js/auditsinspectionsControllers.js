@@ -46,30 +46,29 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         {
             ai.status = 75;
         }
-        else if(ai.date_received)
+        else if (ai.date_received)
         {
             ai.status = 74;
         }
-        else if(ai.date_deadline)
+        else if (ai.date_deadline && ai.date_deadline < new Date())
         {
             ai.status = 73;
         }
-        else if(ai.action_taken)
+        else if (ai.action_taken)
         {
             ai.status = 72;
         }
-        else if(ai.date_carried_out)
+        else if (ai.date_carried_out)
         {
             ai.status = 71;
         }
     };
 
-    scope.calculateDeadlineDate = function(ai)
+    scope.calculateDeadlineDate = function (ai)
     {
         if (ai.date_action_taken && ai.timeframe)
         {
             var dateDeadline = addDays(ai.date_action_taken, parseInt(ai.timeframe));
-            console.log(ai.date_action_taken, dateDeadline);
             ai.date_deadline = dateDeadline;
         }
     };

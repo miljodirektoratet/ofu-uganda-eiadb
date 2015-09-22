@@ -9,7 +9,6 @@ use \App\AuditInspection;
 
 class AuditInspectionController extends Controller
 {
-
 // GET /resource/:id/subresource
     public function index($projectId)
     {
@@ -30,7 +29,7 @@ class AuditInspectionController extends Controller
         $auditinspection = Project::find($projectId)->auditinspections()
             ->with('users')
             ->with('leadagencies')
-            ->with(array('actionTakenLetter'=>$withActionTakenLetter))
+            ->with(array('actionTakenLetter' => $withActionTakenLetter))
             ->with('documentation')
             ->find($id);
 
@@ -170,7 +169,7 @@ class AuditInspectionController extends Controller
     {
         $year = $auditinspection->year;
         $maxNumber = AuditInspection::where('year', $year)->max('number');
-        $number = $maxNumber+1;
+        $number = $maxNumber + 1;
         $auditinspection->number = $number;
         $auditinspection->code = sprintf("%d.%03d", $year, $number);
     }
