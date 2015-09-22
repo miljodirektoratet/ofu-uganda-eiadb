@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "1.42.0"};
+var version = {"version": "1.43.0"};
 
 var services = angular.module('seroApp.services');
 
