@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form ng-submit="search()">
+            <form ng-submit="setSearchUrl()">
 
                 <div class="row">
                     <div class="col-md-3">
@@ -34,7 +34,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary" ng-click="search()">Search</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                         <button type="button" class="btn btn-link" ng-click="reset()">Reset search criteria</button>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
             <div class="loader-standalone center-block"></div>
         </div>
     </div>
-    <div class="row" ng-hide="isSearching">
+    <div class="row" ng-show="showResultGrid">
         <div class="col-md-12">
             <div ui-grid="gridOptions" ui-grid-resize-columns ui-grid-move-columns class="grid"></div>
         </div>
