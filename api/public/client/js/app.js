@@ -16,7 +16,7 @@ var seroApp = angular.module('seroApp', [
     'ui.bootstrap',
     'ui.select2',
     'ngFileUpload',
-    'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns',
+    'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns','ui.grid.moveColumns',
     'seroApp.services',
     'seroApp.directives',
     'seroApp.controllers',
@@ -35,7 +35,12 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/projects/:projectId/auditsinspections/:auditinspectionId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/reports', projectTabsOptions);
 
-        $routeProvider.when('/search', {templateUrl: 'partials/search.html'});
+        var searchTabsOptions = {templateUrl: 'partials/searchTabs.html', controller: 'SearchTabsController'};
+        $routeProvider.when('/search', {redirectTo: '/search/auditsinspections'});
+        $routeProvider.when('/search/projects', searchTabsOptions);
+        $routeProvider.when('/search/eiaspermits', searchTabsOptions);
+        $routeProvider.when('/search/auditsinspections', searchTabsOptions);
+
         $routeProvider.when('/advanced', {templateUrl: 'partials/advanced.html', controller: 'AdvancedController'});
 
         $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
@@ -90,6 +95,13 @@ var ProjectTabEnum =
     Reports : 'Reports'
 };
 
+var SearchTabEnum =
+{
+    Projects : 'Projects',
+    EiasPermits : 'Eias and Permits',
+    AuditsInspections : 'Audits and Inspections'
+};
+
 var fileUploadPattern = "image/*,application/pdf,application/vnd.openxmlformats*,application/msword,text/plain,text/csv";
 
 
@@ -107,8 +119,15 @@ function convertDateStringsToDates(input) {
         // Check for string properties which look like dates.
         if (typeof value === "string" && (match = value.match(regexIso8601)))
         {
-            var dateParts = match[0].split(" ");
-            input[key] = new Date(dateParts[0]);
+            // Old way (before 22 Sep 2015):
+            //var dateParts = match[0].split(" ");
+            //input[key] = new Date(dateParts[0]);
+
+            // New way, with time part as well:
+            var dateWithTime = match[0].replace(" ", "T");
+            dateWithTime = dateWithTime + "Z";
+            input[key] = new Date(dateWithTime);
+
             /*
              var dateParts = match[0].replace("00:00:00", "12:00:00").split(" "); // HACK to make sure we are on the correct day.
              var dateWithT = dateParts[0]+"T"+dateParts[1];

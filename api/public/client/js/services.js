@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "1.40.0"};
+var version = {"version": "1.47.0"};
 
 var services = angular.module('seroApp.services');
 
@@ -148,4 +148,9 @@ services.factory('EditCode', ['$resource', function ($resource)
         {
             'update': {method: 'PUT', isArray: false}
         });
+}]);
+
+services.factory('AuditInspectionSearch', ['$resource', function ($resource)
+{
+    return $resource('/search/v1/auditinspection');
 }]);

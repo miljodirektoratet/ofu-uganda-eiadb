@@ -55,7 +55,9 @@ module.exports = function(grunt)
                 '<%= paths.buildPath %>app.min.js': [
                     'js/jqlite.extra.js',
                     'js/app.js',
-                    'js/controllers.js', 'js/practitionersController.js', 'js/projectControllers.js', 'js/eiasPermitsControllers.js', 'js/auditsInspectionsControllers.js',
+                    'js/controllers.js', 'js/practitionersController.js',
+                    'js/projectControllers.js', 'js/eiasPermitsControllers.js', 'js/auditsInspectionsControllers.js',
+                    'js/searchControllers.js',
                     'js/advancedController.js', 'js/loginController.js',
                     'js/directives.js', 'js/filters.js',
                     'js/services.js', 'js/projectFactory.js', 'js/advancedFactory',
@@ -110,6 +112,7 @@ module.exports = function(grunt)
                 {expand: true, flatten: true, src: ['bower_components/bootstrap/dist/fonts/*'], dest: '<%= paths.buildPath %>vendor/fonts/', filter: 'isFile'},
                 {expand: true, flatten: true, src: ['bower_components/select2/select2.png'], dest: '<%= paths.buildPath %>vendor/', filter: 'isFile'},
                 {expand: true, flatten: true, src: ['bower_components/select2/select2-spinner.gif'], dest: '<%= paths.buildPath %>vendor/', filter: 'isFile'},
+                {expand: true, flatten: true, src: ['bower_components/angular-ui-grid/ui-grid.svg','bower_components/angular-ui-grid/ui-grid.ttf','bower_components/angular-ui-grid/ui-grid.woff'], dest: '<%= paths.buildPath %>vendor/', filter: 'isFile'},
                 {expand: true, flatten: true, src: ['index.html'], dest: '<%= paths.buildPath %>', filter: 'isFile'},
                 {expand: true, flatten: false, src: ['img/**'], dest: '<%= paths.buildPath %>'}
             ]

@@ -59,6 +59,11 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
     Route::resource('project.auditinspection', 'AuditInspectionController');
 });
 
+Route::group(['prefix' => 'search/v1', 'middleware' => 'auth'], function ()
+{
+    Route::resource('auditinspection', 'AuditInspectionSearchController');
+});
+
 Route::group(['prefix' => 'edit/v1', 'middleware' => 'manager'], function ()
 {
     Route::resource('code', 'Edit\CodeController');

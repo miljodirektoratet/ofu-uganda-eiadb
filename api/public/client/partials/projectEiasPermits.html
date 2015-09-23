@@ -299,7 +299,7 @@
                                         <th>Date sent to coordinator from dep.secretary</th>
                                         <th>Date sent to the officer</th>
                                         <th>Conclusion (PB/Tor accepted)</th>
-                                        <th>&nbsp;</th>
+                                        <th><span ng-show="userinfo.info.features.fileupload">File</span></th>
                                         <th>
                                             <button type="button" class="btn btn-sm btn-success btn-sm" ng-click="newDocument()" ng-hide="!auth.canSave('new')" ng-click="return false;">New</button>
                                         </th>
@@ -314,7 +314,7 @@
                                         <td>{{d.date_sent_from_dep | date:'d MMM yyyy'}}</td>
                                         <td>{{d.date_sent_officer | date:'d MMM yyyy'}}</td>
                                         <td>{{data.getCodeFromValuelist('documentconclusion', d.conclusion)}}</td>
-                                        <td>
+                                        <td align="center">
                                             <a ng-href="{{downloadFileUrl(d.file_metadata_id)}}" ng-show="d.attachment" ng-attr-alt="{{d.attachment.filename}}" ng-attr-title="{{d.attachment.filename}}">
                                                 <span class="glyphicon glyphicon-file"></span>
                                             </a>
