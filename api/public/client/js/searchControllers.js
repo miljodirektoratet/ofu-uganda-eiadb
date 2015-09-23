@@ -38,7 +38,6 @@ controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$loca
 }]);
 
 
-
 controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'AuditInspectionSearch', 'UserInfo', 'Valuelists', 'SearchService', function (scope, routeParams, location, $q, $timeout, AuditInspectionSearch, UserInfo, Valuelists, SearchService)
 {
     // We perform searching based on the url. A form submit changes the url (see setSearchUrl()).
@@ -93,8 +92,8 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
             // Hence we need to empty it.
             return;
         }
-        scope.criteria.reset = 0;
         var isSameCriteria = _.isEqual(SearchService.criteria, scope.criteria);
+        scope.criteria.reset = 0;
         if (isSameCriteria)
         {
             // Force same search.
@@ -129,12 +128,18 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
         location.search(scope.criteria);
     };
 
-
     scope.criteria = location.search();
     if (scope.criteria.reset == 1)
     {
         return;
     }
+    if (scope.criteria.reset == 0)
+    {
+        scope.criteria = _.omit(scope.criteria, 'reset');
+        location.search(scope.criteria);
+        return;
+    }
+
     if (_.isEmpty(scope.criteria) && !_.isEmpty(SearchService.criteria))
     {
         location.search(SearchService.criteria);
