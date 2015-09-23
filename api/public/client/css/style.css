@@ -296,6 +296,20 @@ textarea.ng-invalid,
 }
 
 .advanced .ui-grid-footer-info {
-    padding-top:7px;
+    padding-top: 7px;
     padding-left: 5px;
+}
+
+.search .nav {
+    margin-bottom: 15px;
+}
+
+.search .ui-grid-header-cell,
+.search .ui-grid-cell {
+    font-size: 12px;
+}
+
+.search .ui-grid-header-cell .ui-grid-cell-contents {
+    word-wrap: break-word;
+
 }

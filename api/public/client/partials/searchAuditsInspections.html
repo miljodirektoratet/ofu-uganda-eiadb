@@ -1,8 +1,61 @@
 <div class="search-auditsandinspections">
 
     <div class="row">
-        <div class="col-md-6">
-            Later, later, mr.
+        <div class="col-md-12">
+
+            <form ng-submit="search()">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="project_title">Project title</label>
+                            <input type="text" class="form-control input-sm" id="project_title" ng-model="criteria.project_title"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="auditinspection_year">Year</label>
+                            <input type="text" class="form-control input-sm" id="auditinspection_year" ng-model="criteria.auditinspection_year"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="auditinspection_action_taken">Action taken (not funking)</label>
+                            <input type="text" class="form-control input-sm" id="auditinspection_action_taken" ng-model="criteria.auditinspection_action_taken"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary" ng-click="search()">Search</button>
+                        <button type="button" class="btn btn-link" ng-click="reset()">Reset search criteria</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+    <div class="row" ng-show="isSearching">
+        <div class="col-md-12">
+            <div class="loader-standalone center-block"></div>
+        </div>
+    </div>
+    <div class="row" ng-hide="isSearching">
+        <div class="col-md-12">
+            <div ui-grid="gridOptions" ui-grid-resize-columns ui-grid-move-columns class="grid"></div>
+        </div>
+    </div>
+
 </div>
