@@ -18,7 +18,7 @@ controllers.controller('AdvancedController', ['$scope', '$routeParams', 'EditCod
     scope.gridOptions.minRowsToShow = 15;
     scope.gridOptions.rowEditWaitInterval = 1000;
     scope.gridOptions.enableFiltering = true;
-    scope.gridOptions.headerRowHeight= 50;
+
 
     scope.gridOptions.columnDefs = [
         {name: 'id', type: 'number', enableCellEdit: false, width: 60},
