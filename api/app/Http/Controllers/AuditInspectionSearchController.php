@@ -32,8 +32,8 @@ class AuditInspectionSearchController extends Controller
         $criteriaDefinitions = array();
         $criteriaDefinitions["search"] = ["p.title"];
         $criteriaDefinitions["exact"] = ["ai.year"];
-        $criteriaDefinitions["multiple"] = ["d.id"];
-        $criterias = getSearchCriterias(['project_title', 'auditinspection_year', 'district_id']);
+        $criteriaDefinitions["multiple"] = ["d.id", "ai.action_taken"];
+        $criterias = getSearchCriterias(['project_title', 'auditinspection_year', 'district_id', 'auditinspection_action_taken']);
 
         foreach ($criterias as $word => $criteria)
         {
@@ -51,7 +51,8 @@ class AuditInspectionSearchController extends Controller
             }
             else if (in_array($word, $criteriaDefinitions["multiple"]))
             {
-                $result = $result->whereIn($word, $criteria);
+                //dd(Input::raw());
+                $result = $result->whereIn($word, [$criteria]);
             }
         }
 
