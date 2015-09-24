@@ -21,10 +21,10 @@ class ExcelDataTableSeeder extends Seeder {
     		//DB::table('permissions')->truncate();        
         //DB::table('roles')->truncate();
         
-        DB::table('lead_agencies')->truncate();
+        //DB::table('lead_agencies')->truncate();
         DB::table('categories')->truncate();
-        DB::table('codes')->truncate();
-        DB::table('districts')->truncate();
+        //DB::table('codes')->truncate();
+        //DB::table('districts')->truncate();
         //DB::table('practitioner_certificates')->truncate();
         //DB::table('practitioners')->truncate();
         //DB::table('organisations')->truncate();
