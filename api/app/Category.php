@@ -1,14 +1,18 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model 
+class Category extends Model
 {
-  protected $fillable = ['description_short','description_long','consequence','is_passive'];
-  public $timestamps = false;
+    use SoftDeletes;
 
-  public function projects()
-  {
-    return $this->hasMany('Project');
-  } 
+    protected $table = 'categories';
+    protected $dates = ['deleted_at'];
+    protected $fillable = ['description_short', 'description_long', 'consequence', 'deleted_at'];
+
+    public function projects()
+    {
+        return $this->hasMany('Project');
+    }
 }

@@ -14,15 +14,15 @@ tableFilePattern = r"N:\Felles\Forurensning\2. Internasjonalt arbeid\2012. Ugand
 
 tablesData = OrderedDict()
 #tablesData["users"] = "User"
-tablesData["districts"] = "District"
-tablesData["codes"] = "Code"
+#tablesData["districts"] = "District"
+#tablesData["codes"] = "Code"
 tablesData["categories"] = "Category"
 #tablesData["practitioners"] = "Practitioner"
 #tablesData["practitioner_certificates"] = "PractitionerCertificate"
-tablesData["lead_agencies"] = "LeadAgency"
+#tablesData["lead_agencies"] = "LeadAgency"
 #tablesData["roles"] = "Role"
 
-notIncrements = ["codes"];
+notIncrements = ["codes", "categories"];
 
 def getDbColumnsInfo(dataSheet, headerRowIndex):
   dbColumnsInfo = {}

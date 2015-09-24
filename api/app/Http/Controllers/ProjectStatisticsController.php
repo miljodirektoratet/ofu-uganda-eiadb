@@ -2,8 +2,6 @@
 
 use Response;
 use DB;
-use Input;
-use \App\Project;
 
 class ProjectStatisticsController extends Controller
 {
@@ -13,7 +11,15 @@ class ProjectStatisticsController extends Controller
         $data = [];
         $data["data1"] = ["test1", "test2"];
         $data["data2"] = ["test3" => "test4"];
-        $data["count"] = Project::all()->count();
+
+
+        $countProjects = DB::table('projects')->count();
+        $countDevelopers = DB::table('organisations')->count();
+
+        $data["counts"] = [
+            "projects" => $countProjects,
+            "developers" => $countDevelopers];
+
 
         return Response::json($data, 200);
 
