@@ -27,14 +27,12 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="auditinspection_action_taken">Action taken</label>
-                            <select ui-select2
+                            <select ui-select2="{allowClear:true}" ng-required="false"
                                     id="auditinspection_action_taken" class="form-control input-sm"
                                     ng-model="criteria.auditinspection_action_taken">
-                                <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">
-                                    {{v.description1}}
-                                </option>
+                                <option></option>
+                                <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">{{v.description1}}</option>
                             </select>
-                        </div>
                     </div>
                 </div>
 
