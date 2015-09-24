@@ -12,62 +12,119 @@ class ProjectStatisticsController extends Controller
     {
         $data = [];
 
-        $countProjects = DB::table('projects')->count();
-        $countDevelopers = DB::table('organisations')->count();
+        // Intro.
+        $countProjects = DB::table('projects')->whereNull('deleted_at')->count();
+        $countDevelopers = DB::table('organisations')->whereNull('deleted_at')->count();
 
-        $data["counts"] = [
+        $dataCounts = [
             "projects" => $countProjects,
             "developers" => $countDevelopers
         ];
 
 
-        $categoriesConsideredForEia = DB::table('categories')->where('consequence', 6)->get();
-        $categoriesLikelyExemptedFromEia = DB::table('categories')->where('consequence', 7)->get();
-
-        $result = DB::table('categories as c')
+        // Part 1 and 2.
+        $categoriesResult = DB::table('categories as c')
             ->leftJoin('projects as p', 'c.id', '=', 'p.category_id')
             ->select('c.id', 'c.description_long as description', 'c.consequence', DB::raw('COUNT(p.id) as count'))
+            ->whereNull('p.deleted_at')
+            ->whereNull('c.deleted_at')
             ->groupBy('c.id')
             ->orderByRaw('COUNT(p.id) desc, c.description_long asc')
             ->get();
-        $data["categoryEiaYes"] = [];
-        $data["categoryEiaNo"] = [];
-        foreach ($result as $row)
+        $dataCategoryEiaYes = [];
+        $dataCategoryEiaNo = [];
+        foreach ($categoriesResult as $row)
         {
-            $key = "categoryEiaNo";
             if ($row->consequence == 6)
             {
-                $key = "categoryEiaYes";
+                unset($row->consequence);
+                $dataCategoryEiaYes [] = $row;
+            } else
+            {
+                unset($row->consequence);
+                $dataCategoryEiaNo [] = $row;
             }
-            unset($row->consequence);
-            $data[$key] [] = $row;
         }
 
+
+        // Part 3.
+        $countProjectsWithoutCoordinates = DB::table('projects')
+            ->whereNull('deleted_at')
+            ->whereRaw('latitude is null or longitude is null')
+            ->count();
+        $countProjectsWithCoordinates = $countProjects - $countProjectsWithoutCoordinates;
+
+        $dataCoordinates = [
+            ["description" => "Yes", "count" => $countProjectsWithCoordinates],
+            ["description" => "No", "count" => $countProjectsWithoutCoordinates]
+        ];
+
+
+        // Part 4.
+        $countProjectsWithWasteWater = DB::table('projects')
+            ->whereNull('deleted_at')
+            ->where('has_industrial_waste_water', 40)
+            ->count();
+        $countProjectsWithoutWasteWater = DB::table('projects')
+            ->whereNull('deleted_at')
+            ->where('has_industrial_waste_water', 41)
+            ->count();
+        $countProjectsUnknownWasteWater = $countProjects - $countProjectsWithWasteWater - $countProjectsWithoutWasteWater;
+
+        $dataWasteWater = [
+            ["id" => 40, "description" => "Yes", "count" => $countProjectsWithWasteWater],
+            ["id" => 42, "description" => "Unknown", "count" => $countProjectsUnknownWasteWater],
+            ["id" => 41, "description" => "No", "count" => $countProjectsWithoutWasteWater]
+        ];
+
+
+        // Part 5.
+        $developersResult = DB::table('organisations as o')
+            ->join('projects as p', 'o.id', '=', 'p.organisation_id')
+            ->select('o.id', 'o.name as description', DB::raw('COUNT(p.id) as count'))
+            ->whereNull('o.deleted_at')
+            ->whereNull('p.deleted_at')
+            ->groupBy('o.id')
+            ->orderByRaw('COUNT(o.id) desc, o.name asc')
+            ->take(10)
+            ->get();
+
+        $dataDevelopers = [];
+        foreach ($developersResult as $row)
+        {
+            $dataDevelopers [] = $row;
+        }
+
+
+        // Part 6.
+        $gradesResult = DB::table('codes as grades')
+            ->leftJoin('projects as p', 'grades.id', '=', 'p.grade')
+            ->select('grades.id', 'grades.description1 as description', DB::raw('COUNT(p.id) as count'))
+            ->where('grades.dropdown_list', '=', 'grade')
+            ->whereNull('p.deleted_at')
+            ->whereNull('grades.deleted_at')
+            ->groupBy('grades.id')
+            ->orderByRaw('grades.id')
+            ->get();
+
+        $dataGrades = [];
+        foreach ($gradesResult as $row)
+        {
+            $dataGrades [] = $row;
+        }
+
+
+        $data["intro"] = ["title" => sprintf("The EIA database has %d projects and %d developers. The statistics below shows the number of projects for some key elements.", $countProjects, $countDevelopers), "counts" => $dataCounts];
+        $data["parts"] = [];
+        $data["parts"]["categoryEiaYes"] = ["title" => 'The number of projects per category, where the category is "Considered for EIA".', "label1" => "Category", "label2" => "Number", "rows" => $dataCategoryEiaYes];
+        $data["parts"]["categoryEiaNo"] = ["title" => 'The number of projects per category, where the category is "Likely exempted from EIA".', "label1" => "Category", "label2" => "Number", "rows" => $dataCategoryEiaNo];
+        $data["parts"]["coordinates"] = ["title" => "The number of projects with and without coordinates.", "label1" => "Coordinates present", "label2" => "Number", "rows" => $dataCoordinates];
+        $data["parts"]["wasteWater"] = ["title" => "The number of projects with and without industrial waste water.", "label1" => "Industrial waste water", "label2" => "Number", "rows" => $dataWasteWater];
+        $data["parts"]["developers"] = ["title" => "The number of projects per developer. The list will show the ten developers with most number of projects.", "label1" => "Top ten developers", "label2" => "Number", "rows" => $dataDevelopers];
+        $data["parts"]["grades"] = ["title" => "The number of projects per grade.", "label1" => "Grade", "label2" => "Number", "rows" => $dataGrades];
+
+
+
         return Response::json($data, 200);
-
-        $result = DB::table('audits_inspections as ai')
-            ->join('projects as p', 'ai.project_id', '=', 'p.id')
-            ->join('organisations as o', 'p.organisation_id', '=', 'o.id')
-            ->join('categories as c', 'p.category_id', '=', 'c.id')
-            ->join('districts as d', 'p.district_id', '=', 'd.id')
-            ->leftJoin('codes as ai_type', 'ai.type', '=', 'ai_type.id')
-            ->leftJoin('codes as action_taken', 'ai.action_taken', '=', 'action_taken.id')
-            ->leftJoin('codes as grade', 'p.grade', '=', 'grade.id')
-            ->select('ai.id as auditinspection_id',
-                'ai.code as auditinspection_code',
-                'ai_type.description1 as auditinspection_type',
-                'action_taken.description1 as auditinspection_action_taken',
-                'ai.date_deadline as auditinspection_date_deadline',
-                'p.id as project_id',
-                'p.title as project_title',
-                'grade.description1 as project_grade',
-                'o.name as organisation_name',
-                'd.district as district_district',
-                'c.description_short as category_description');
-
-
-        $result = $result->get();
-
-        return Response::json($result, 200);
     }
 }

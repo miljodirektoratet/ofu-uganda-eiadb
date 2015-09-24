@@ -27,7 +27,10 @@ class AuditInspectionSearchController extends Controller
                 'grade.description1 as project_grade',
                 'o.name as organisation_name',
                 'd.district as district_district',
-                'c.description_short as category_description');
+                'c.description_short as category_description')
+            ->whereNull('ai.deleted_at')
+            ->whereNull('p.deleted_at')
+            ->whereNull('o.deleted_at');
 
         $criteriaDefinitions = array();
         $criteriaDefinitions["search"] = ["p.title"];
