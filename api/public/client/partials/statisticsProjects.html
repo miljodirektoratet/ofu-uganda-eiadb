@@ -1,0 +1,31 @@
+<div class="statistics-projects">
+
+    <div class="row" ng-show="isLoadingData">
+        <div class="col-md-12">
+            <div class="loader-standalone center-block"></div>
+        </div>
+    </div>
+
+    <div class="row" ng-hide="isLoadingData">
+        <div class="col-md-3">
+            Current number of projects: {{data.count}}.
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+    <div class="row" ng-show="isLoadingResultGrid">
+        <div class="col-md-12">
+            <div class="loader-standalone center-block"></div>
+        </div>
+    </div>
+    <div class="row" ng-show="showResultGrid">
+        <div class="col-md-12">
+            <div ui-grid="gridOptions" ui-grid-resize-columns ui-grid-move-columns class="result-grid"></div>
+        </div>
+    </div>
+
+</div>

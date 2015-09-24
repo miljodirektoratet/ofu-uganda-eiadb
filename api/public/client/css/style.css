@@ -300,30 +300,26 @@ textarea.ng-invalid,
     padding-left: 5px;
 }
 
-.search .nav {
+.search .nav,
+.statistics .nav {
     margin-bottom: 15px;
 }
 
-.search .ui-grid-header-cell,
-.search .ui-grid-cell {
+.result-grid .ui-grid-header-cell,
+.result-grid .ui-grid-cell {
     font-size: 12px;
-}
-
-.search .ui-grid-header-cell .ui-grid-cell-contents {
-    word-wrap: break-word;
-
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .search .grid {
+    .result-grid {
         width: 960px;
         height: 360px;
     }
 }
 
 @media (min-width: 1200px) {
-    .search .grid {
+    .result-grid {
         width: 1168px;
         height: 360px;
     }

@@ -155,6 +155,11 @@ services.factory('AuditInspectionSearch', ['$resource', function ($resource)
     return $resource('/search/v1/auditinspection');
 }]);
 
+services.factory('ProjectStatistics', ['$resource', function ($resource)
+{
+    return $resource('/statistics/v1/project');
+}]);
+
 
 services.factory('SearchService', ['AuditInspectionSearch', '$q', function (AuditInspectionSearch, $q)
 {
@@ -186,6 +191,37 @@ services.factory('SearchService', ['AuditInspectionSearch', '$q', function (Audi
                 factory.rows = rows;
                 deferred.resolve(factory.rows);
                 factory.allowCache = true;
+            });
+        }
+        return deferred.promise;
+    };
+
+    return factory;
+}]);
+
+services.factory('StatisticsService', ['ProjectStatistics', '$q', function (ProjectStatistics, $q)
+{
+    var factory = {};
+    factory.allowCache = true;
+    factory.projectData = {};
+
+    factory.getProjectData = function (criteria)
+    {
+        var deferred = $q.defer();
+
+        if (factory.allowCache && !_.isEmpty(factory.projectData))
+        {
+            //console.log("From cache");
+            deferred.resolve(factory.projectData);
+        }
+        else
+        {
+            //console.log("From server");
+            ProjectStatistics.get({}, function (data)
+            {
+                //console.log("From server finished");
+                factory.projectData = data;
+                deferred.resolve(data);
             });
         }
         return deferred.promise;
