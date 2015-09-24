@@ -11,7 +11,7 @@
             <form class="form-inline" role="form">
               <div class="form-group">
                 <label class="sr-only" for="filterText">Filter</label>
-                <input type="text" focus="true" class="form-control input-filter" id="filterText" placeholder="Filter" ng-model="filterText">
+                <input type="text" set-focus class="form-control input-filter" id="filterText" placeholder="Filter" ng-model="filterText">
               </div>
               <span>Count: {{(organisations | filter:filterText).length}}</span>
             </form>
