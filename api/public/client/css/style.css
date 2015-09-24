@@ -324,3 +324,8 @@ textarea.ng-invalid,
         height: 360px;
     }
 }
+
+.statistics .table
+{
+    margin-bottom:0px;
+}

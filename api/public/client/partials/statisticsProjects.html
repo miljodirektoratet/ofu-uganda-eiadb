@@ -13,128 +13,149 @@
             The statistics below shows the number of projects for some key elements.
         </p>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">1. The number of projects per category, where the category is considered for EIA.</h2>
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                Data
-                            </div>
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">2. The number of projects per category, where the category is likely exempted from EIA.</h2>
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                Data
-                            </div>
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
+
+            <!--First column-->
             <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">3. The number of projects with and without coordinates.</h2>
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                Data
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">The number of projects per category, where the category is "considered for EIA".</h2>
                             </div>
-                            <div class="col-md-6">
-
+                            <div class="panel-body">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>
+                                            <div class="text-right">Number</div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="row in data.categoryEiaYes">
+                                        <td title="{{row.id}}">{{row.description}}</td>
+                                        <td>
+                                            <div class="text-right">{{row.count}}</div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">The number of projects per category, where the category is likely exempted from EIA.</h2>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>
+                                            <div class="text-right">Number</div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="row in data.categoryEiaNo">
+                                        <td title="{{row.id}}">{{row.description}}</td>
+                                        <td>
+                                            <div class="text-right">{{row.count}}</div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">The number of projects with and without coordinates.</h2>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        Data
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!--Second column-->
             <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">4. The number of projects with and without industrial waste water.</h2>
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                Data
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">The number of projects with and without industrial waste water.</h2>
                             </div>
-                            <div class="col-md-6">
-
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        Data
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">The number of projects per developer. The list will show the ten developers with most number of projects.</h2>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        Data
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">The number of projects per grade.</h2>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        Data
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">5. The number of projects per developer. The list will show the ten developers with most number of projects.</h2>
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                Data
-                            </div>
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">6. The number of projects per grade.</h2>
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                Data
-                            </div>
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 

@@ -2,6 +2,8 @@
 
 use Response;
 use DB;
+use \App\Project;
+use \App\Category;
 
 class ProjectStatisticsController extends Controller
 {
@@ -9,17 +11,37 @@ class ProjectStatisticsController extends Controller
     public function index()
     {
         $data = [];
-        $data["data1"] = ["test1", "test2"];
-        $data["data2"] = ["test3" => "test4"];
-
 
         $countProjects = DB::table('projects')->count();
         $countDevelopers = DB::table('organisations')->count();
 
         $data["counts"] = [
             "projects" => $countProjects,
-            "developers" => $countDevelopers];
+            "developers" => $countDevelopers
+        ];
 
+
+        $categoriesConsideredForEia = DB::table('categories')->where('consequence', 6)->get();
+        $categoriesLikelyExemptedFromEia = DB::table('categories')->where('consequence', 7)->get();
+
+        $result = DB::table('categories as c')
+            ->leftJoin('projects as p', 'c.id', '=', 'p.category_id')
+            ->select('c.id', 'c.description_long as description', 'c.consequence', DB::raw('COUNT(p.id) as count'))
+            ->groupBy('c.id')
+            ->orderByRaw('COUNT(p.id) desc, c.description_long asc')
+            ->get();
+        $data["categoryEiaYes"] = [];
+        $data["categoryEiaNo"] = [];
+        foreach ($result as $row)
+        {
+            $key = "categoryEiaNo";
+            if ($row->consequence == 6)
+            {
+                $key = "categoryEiaYes";
+            }
+            unset($row->consequence);
+            $data[$key] [] = $row;
+        }
 
         return Response::json($data, 200);
 
@@ -44,7 +66,6 @@ class ProjectStatisticsController extends Controller
                 'c.description_short as category_description');
 
 
-        $result = $result->take(1);
         $result = $result->get();
 
         return Response::json($result, 200);
