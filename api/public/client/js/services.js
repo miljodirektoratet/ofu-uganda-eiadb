@@ -211,12 +211,12 @@ services.factory('StatisticsService', ['ProjectStatistics', '$q', function (Proj
 
         if (factory.allowCache && !_.isEmpty(factory.projectData))
         {
-            //console.log("From cache");
+            console.log("From cache");
             deferred.resolve(factory.projectData);
         }
         else
         {
-            //console.log("From server");
+            console.log("From server");
             ProjectStatistics.get({}, function (data)
             {
                 //console.log("From server finished");

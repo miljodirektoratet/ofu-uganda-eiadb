@@ -2,8 +2,7 @@
 
 use Response;
 use DB;
-use \App\Project;
-use \App\Category;
+use Carbon\Carbon;
 
 class ProjectStatisticsController extends Controller
 {
@@ -114,6 +113,7 @@ class ProjectStatisticsController extends Controller
         }
 
 
+        $data["timestamp"] = Carbon::now()->toDateTimeString(); // Utc date. The rest is fixed in javascript.
         $data["intro"] = ["title" => sprintf("The EIA database has %d projects and %d developers. The statistics below shows the number of projects for some key elements.", $countProjects, $countDevelopers), "counts" => $dataCounts];
         $data["parts"] = [];
         $data["parts"]["categoryEiaYes"] = ["title" => 'The number of projects per category, where the category is "Considered for EIA".', "label1" => "Category", "label2" => "Number", "rows" => $dataCategoryEiaYes];

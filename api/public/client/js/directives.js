@@ -116,3 +116,14 @@ directives.directive('setFocus', ['$timeout', function ($timeout)
         }
     };
 }]);
+
+directives.directive('statisticsPanel', function ()
+{
+    return {
+        restrict: 'E',
+        scope: {
+            part: '=part'
+        },
+        templateUrl: 'partials/statisticsTablePanel.html'
+    };
+});
