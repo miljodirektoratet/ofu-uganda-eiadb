@@ -1,12 +1,13 @@
 'use strict';
 
-controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'ProjectFactory', 'UserInfo', 'Valuelists', function (scope, routeParams, location, $q, $timeout, ProjectFactory, UserInfo, Valuelists)
+controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'ProjectFactory', 'Valuelists', 'SearchService', function (scope, routeParams, location, $q, $timeout, ProjectFactory, Valuelists, SearchService)
 {
     scope.SearchTabEnum = SearchTabEnum;
     scope.routeParams = routeParams;
-    scope.userinfo = UserInfo;
+    //scope.userinfo = UserInfo;
     scope.valuelists = Valuelists;
-    scope.data = ProjectFactory;
+    //scope.data = ProjectFactory;
+    scope.SearchService = SearchService;
 
     var getCurrentTab = function (path)
     {
@@ -26,19 +27,44 @@ controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$loca
     };
     scope.tab = getCurrentTab(location.path());
 
+    scope.goto = function (path)
+    {
+        $timeout(function ()
+        {
+            location.path(path);
+        });
+    };
+
 }]);
 
-controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'AuditInspectionSearch', 'UserInfo', 'Valuelists', function (scope, routeParams, location, $q, $timeout, AuditInspectionSearch, UserInfo, Valuelists)
-{
-    scope.isSearching = false;
 
-    scope.criteria = routeParams;
+controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'AuditInspectionSearch', 'UserInfo', 'Valuelists', 'SearchService', function (scope, routeParams, location, $q, $timeout, AuditInspectionSearch, UserInfo, Valuelists, SearchService)
+{
+    // We perform searching based on the url. A form submit changes the url (see setSearchUrl()).
+
+    scope.isSearching = false;
+    scope.showResultGrid = false;
+
     scope.gridOptions = {};
     scope.gridOptions.enableHorizontalScrollbar = 0;
     scope.gridOptions.showGridFooter = true;
     scope.gridOptions.minRowsToShow = 10;
     scope.gridOptions.enableColumnMenus = false;
     //scope.gridOptions.enableFiltering = true;
+    //scope.gridOptions.enableGridMenu = true;
+    //scope.gridOptions.enableRowSelection = true;
+    //scope.gridOptions.enableRowHeaderSelection = false;
+    //scope.gridOptions.multiSelect = false;
+    //scope.gridOptions.enableFooterTotalSelected = false;
+    scope.gridOptions.appScopeProvider = {
+        onDblClick: function (rowEntity)
+        {
+            scope.goto("/projects/" + rowEntity.project_id + "/auditsinspections/" + rowEntity.auditinspection_id);
+            // TODO: Mark the row that was double clicked.
+        }
+    };
+    scope.gridOptions.rowTemplate = "<div ng-dblclick=\"grid.appScope.onDblClick(row.entity)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell ></div>"
+
 
     scope.gridOptions.columnDefs = [
         {name: 'auditinspection_code', displayName: 'Number', width: 80, cellTooltip: true, headerTooltip: true},
@@ -57,21 +83,69 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
         scope.gridApi = gridApi;
     };
 
+    scope.setSearchUrl = function ()
+    {
+        if (_.isEmpty(scope.criteria))
+        {
+            // TODO: Empty location.search. location.search({}) is not working.
+            // This empty if works, but if one navigates back to the tab, the location.search values will be used.
+            // Hence we need to empty it.
+            return;
+        }
+        var isSameCriteria = _.isEqual(SearchService.criteria, scope.criteria);
+        scope.criteria.reset = 0;
+        if (isSameCriteria)
+        {
+            // Force same search.
+            SearchService.allowCache = false;
+            scope.search();
+            location.search(scope.criteria);
+        }
+        else
+        {
+            location.search(scope.criteria);
+        }
+    };
+
     scope.search = function ()
     {
         scope.isSearching = true;
-        AuditInspectionSearch.query(scope.criteria, function (rows)
+        scope.showResultGrid = false;
+        SearchService.search(scope.criteria).then(function (rows)
         {
             scope.gridOptions.data = rows;
             scope.isSearching = false;
+            scope.showResultGrid = true;
         });
     };
 
     scope.reset = function ()
     {
-        scope.criteria = {};
+        scope.criteria = {'reset': 1};
+        SearchService.criteria = {};
         scope.gridOptions.data = [];
+        scope.showResultGrid = false;
+        location.search(scope.criteria);
     };
 
-}]);
+    scope.criteria = location.search();
+    if (scope.criteria.reset == 1)
+    {
+        return;
+    }
+    if (scope.criteria.reset == 0)
+    {
+        scope.criteria = _.omit(scope.criteria, 'reset');
+        location.search(scope.criteria);
+        return;
+    }
 
+    if (_.isEmpty(scope.criteria) && !_.isEmpty(SearchService.criteria))
+    {
+        location.search(SearchService.criteria);
+    }
+    else if (!_.isEmpty(scope.criteria))
+    {
+        scope.search();
+    }
+}]);

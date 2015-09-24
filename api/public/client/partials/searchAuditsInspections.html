@@ -3,13 +3,13 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form ng-submit="search()">
+            <form ng-submit="setSearchUrl()">
 
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="project_title">Project title</label>
-                            <input type="text" class="form-control input-sm" id="project_title" ng-model="criteria.project_title"/>
+                            <input type="text" class="form-control input-sm" id="project_title" ng-model="criteria.project_title" set-focus/>
                         </div>
                     </div>
                 </div>
@@ -26,15 +26,19 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="auditinspection_action_taken">Action taken (not funking)</label>
-                            <input type="text" class="form-control input-sm" id="auditinspection_action_taken" ng-model="criteria.auditinspection_action_taken"/>
-                        </div>
+                            <label for="auditinspection_action_taken">Action taken</label>
+                            <select ui-select2="{allowClear:true}" ng-required="false"
+                                    id="auditinspection_action_taken" class="form-control input-sm"
+                                    ng-model="criteria.auditinspection_action_taken">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary" ng-click="search()">Search</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                         <button type="button" class="btn btn-link" ng-click="reset()">Reset search criteria</button>
                     </div>
                 </div>
@@ -52,7 +56,7 @@
             <div class="loader-standalone center-block"></div>
         </div>
     </div>
-    <div class="row" ng-hide="isSearching">
+    <div class="row" ng-show="showResultGrid">
         <div class="col-md-12">
             <div ui-grid="gridOptions" ui-grid-resize-columns ui-grid-move-columns class="grid"></div>
         </div>

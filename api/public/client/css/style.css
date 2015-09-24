@@ -313,3 +313,18 @@ textarea.ng-invalid,
     word-wrap: break-word;
 
 }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .search .grid {
+        width: 960px;
+        height: 360px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .search .grid {
+        width: 1168px;
+        height: 360px;
+    }
+}

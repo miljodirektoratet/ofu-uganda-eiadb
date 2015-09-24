@@ -16,7 +16,7 @@ var seroApp = angular.module('seroApp', [
     'ui.bootstrap',
     'ui.select2',
     'ngFileUpload',
-    'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns','ui.grid.moveColumns',
+    'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns','ui.grid.moveColumns','ui.grid.selection',
     'seroApp.services',
     'seroApp.directives',
     'seroApp.controllers',
