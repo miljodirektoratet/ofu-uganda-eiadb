@@ -99,7 +99,6 @@ directives.directive('coordinatePasting', function ()
 });
 
 
-
 directives.directive('setFocus', ['$timeout', function ($timeout)
 {
     return {
@@ -108,7 +107,7 @@ directives.directive('setFocus', ['$timeout', function ($timeout)
         {
             $timeout(function ()
             {
-                $timeout(function()
+                $timeout(function ()
                 {
                     element[0].focus();
                 })

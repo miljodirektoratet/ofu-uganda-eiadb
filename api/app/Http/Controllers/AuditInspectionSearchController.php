@@ -17,6 +17,8 @@ class AuditInspectionSearchController extends Controller
             ->leftJoin('codes as ai_type', 'ai.type', '=', 'ai_type.id')
             ->leftJoin('codes as action_taken', 'ai.action_taken', '=', 'action_taken.id')
             ->leftJoin('codes as grade', 'p.grade', '=', 'grade.id')
+            ->leftJoin('codes as status', 'ai.status', '=', 'status.id')
+            ->leftJoin('audits_inspections_personnel as personnel', 'ai.id', '=', 'personnel.audit_inspection_id')
             ->select('ai.id as auditinspection_id',
                 'ai.code as auditinspection_code',
                 'ai_type.description1 as auditinspection_type',
@@ -25,7 +27,7 @@ class AuditInspectionSearchController extends Controller
                 'p.id as project_id',
                 'p.title as project_title',
                 'grade.description1 as project_grade',
-                'o.name as organisation_name',
+                'o.name as developer_name',
                 'd.district as district_district',
                 'c.description_short as category_description')
             ->whereNull('ai.deleted_at')
@@ -33,17 +35,33 @@ class AuditInspectionSearchController extends Controller
             ->whereNull('o.deleted_at');
 
         $criteriaDefinitions = array();
-        $criteriaDefinitions["search"] = ["p.title"];
+        $criteriaDefinitions["search"] = ["p.title", "o.name", "ai.code"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["ai.year"];
-        $criteriaDefinitions["multiple"] = ["d.id", "ai.action_taken"];
-        $criterias = getSearchCriterias(['project_title', 'auditinspection_year', 'district_id', 'auditinspection_action_taken']);
+        $criteriaDefinitions["multiple"] = ["d.id", "ai.action_taken", "c.id", "ai.type", "personnel.user_id", "ai.status","p.grade"];
+        $criterias = getSearchCriterias([
+            'project_title',
+            'auditinspection_year',
+            'district_id',
+            'auditinspection_action_taken',
+            'category_id',
+            'developer_name',
+            'auditinspection_code',
+            'auditinspection_type',
+            'personnel_user_id',
+            'auditinspection_status',
+            'project_grade'
+
+        ]);
 
         foreach ($criterias as $word => $criteria)
         {
             $word = str_replace('project_', 'p.', $word);
             $word = str_replace('auditinspection_', 'ai.', $word);
             $word = str_replace('district_', 'd.', $word);
+            $word = str_replace('category_', 'c.', $word);
+            $word = str_replace('developer_', 'o.', $word);
+            $word = str_replace('personnel_', 'personnel.', $word);
 
             if (in_array($word, $criteriaDefinitions["search"]))
             {
@@ -56,7 +74,6 @@ class AuditInspectionSearchController extends Controller
             }
             else if (in_array($word, $criteriaDefinitions["multiple"]))
             {
-                //dd(Input::raw());
                 $result = $result->whereIn($word, [$criteria]);
             }
             else if (in_array($word, $criteriaDefinitions["exact"]))
@@ -65,7 +82,8 @@ class AuditInspectionSearchController extends Controller
             }
         }
 
-        //$result = $result->take(1);
+        // Need to have distinct because of leftJoin with audits_inspections_personnel.
+        $result = $result->distinct();
         $result = $result->get();
 
         return Response::json($result, 200);

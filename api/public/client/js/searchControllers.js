@@ -69,7 +69,7 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
     scope.gridOptions.columnDefs = [
         {name: 'auditinspection_code', displayName: 'Number', width: 80, cellTooltip: true, headerTooltip: true},
         {name: 'project_title', displayName: 'Project title', cellTooltip: true, headerTooltip: true},
-        {name: 'organisation_name', displayName: 'Developer name', cellTooltip: true, headerTooltip: true},
+        {name: 'developer_name', displayName: 'Developer name', cellTooltip: true, headerTooltip: true},
         {name: 'district_district', displayName: 'District', cellTooltip: true, headerTooltip: true},
         {name: 'auditinspection_type', displayName: 'Type', cellTooltip: true, headerTooltip: true},
         {name: 'category_description', displayName: 'Category of project', cellTooltip: true, headerTooltip: true},
@@ -93,13 +93,11 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
             return;
         }
         var isSameCriteria = _.isEqual(SearchService.criteria, scope.criteria);
-        scope.criteria.reset = 0;
         if (isSameCriteria)
         {
             // Force same search.
             SearchService.allowCache = false;
             scope.search();
-            location.search(scope.criteria);
         }
         else
         {
@@ -121,24 +119,13 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
 
     scope.reset = function ()
     {
-        scope.criteria = {'reset': 1};
+        scope.criteria = {};
         SearchService.criteria = {};
         scope.gridOptions.data = [];
         scope.showResultGrid = false;
-        location.search(scope.criteria);
     };
 
     scope.criteria = location.search();
-    if (scope.criteria.reset == 1)
-    {
-        return;
-    }
-    if (scope.criteria.reset == 0)
-    {
-        scope.criteria = _.omit(scope.criteria, 'reset');
-        location.search(scope.criteria);
-        return;
-    }
 
     if (_.isEmpty(scope.criteria) && !_.isEmpty(SearchService.criteria))
     {

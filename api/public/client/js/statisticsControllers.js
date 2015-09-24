@@ -49,6 +49,4 @@ controllers.controller('StatisticsProjectsController', ['$scope', '$routeParams'
         scope.data = data;
         scope.isLoadingData = false;
     });
-
-    scope.photos = [{"title":"test1"},{"title":"test2"}];
 }]);

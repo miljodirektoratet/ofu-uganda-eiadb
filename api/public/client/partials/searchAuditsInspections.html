@@ -12,6 +12,34 @@
                             <input type="text" class="form-control input-sm" id="project_title" ng-model="criteria.project_title" set-focus/>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="district_id">Project district</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="district_id" class="form-control input-sm"
+                                    ng-model="criteria.district_id">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.district" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="category_id">Category of project</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="category_id" class="form-control input-sm"
+                                    ng-model="criteria.category_id">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.category" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="developer_name">Developer</label>
+                            <input type="text" class="form-control input-sm" id="developer_name" ng-model="criteria.developer_name"/>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -21,19 +49,71 @@
                             <input type="text" class="form-control input-sm" id="auditinspection_year" ng-model="criteria.auditinspection_year"/>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="auditinspection_code">Number</label>
+                            <input type="text" class="form-control input-sm" id="auditinspection_code" ng-model="criteria.auditinspection_code"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="auditinspection_type">Type</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="auditinspection_type" class="form-control input-sm"
+                                    ng-model="criteria.auditinspection_type">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="personnel_user_id">Participants from NEMA</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="personnel_user_id" class="form-control input-sm"
+                                    ng-model="criteria.personnel_user_id">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.officer" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="auditinspection_action_taken">Action taken</label>
-                            <select ui-select2="{allowClear:true}" ng-required="false"
+                            <select ui-select2="{allowClear:true}"
                                     id="auditinspection_action_taken" class="form-control input-sm"
                                     ng-model="criteria.auditinspection_action_taken">
                                 <option></option>
                                 <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">{{v.description1}}</option>
                             </select>
+                        </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="auditinspection_status">Status</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="auditinspection_status" class="form-control input-sm"
+                                    ng-model="criteria.auditinspection_status">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.auditinspectionstatus" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="project_grade">Grade</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="project_grade" class="form-control input-sm"
+                                    ng-model="criteria.project_grade">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.grade" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="row">
