@@ -22,7 +22,7 @@ class DocumentController extends Controller
             ->eiapermits()->find($eiapermitId)
             ->documents()
             ->with(array('attachment'=>$withAttachment))
-            ->get(array('id', 'date_submitted', 'title', 'code', 'date_sent_director', 'date_sent_from_dep', 'date_sent_officer', 'conclusion', 'file_metadata_id'));
+            ->get(array('id', 'date_submitted', 'title', 'code', 'date_sent_director', 'date_sent_from_dep', 'date_sent_officer', 'conclusion', 'file_metadata_id','type'));
         return Response::json($documents, 200);
     }
 

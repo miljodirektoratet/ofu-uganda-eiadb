@@ -38,6 +38,10 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     {
         var eiapermit = scope.data.eiapermit;
         var isNew = eiapermit.is_new;
+        if (!isNew)
+        {
+            scope.updateStatus(eiapermit, null);
+        }
         scope.saveCurrent(scope.parts.eiapermit, eiapermit, isNew).then(function (ep)
         {
             if (isNew)
@@ -50,9 +54,54 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     scope.saveCurrentDocument = function ()
     {
         var document = scope.data.document;
+
         scope.saveCurrent(scope.parts.document, document).then(function (d)
         {
+            // Status has changed, make sure to update ep as well.
+            if (scope.updateStatus(scope.data.eiapermit, d))
+            {
+                scope.saveCurrentEiaPermit();
+            }
         });
+    };
+
+    scope.updateStatus = function (ep, d)
+    {
+        var oldStatus = ep.status;
+
+        var newStatus = 0;
+        if (ep.date_cancelled)
+        {
+            newStatus = 37;
+        }
+        else if (ep.certificate_no)
+        {
+            newStatus = 36;
+        }
+        else if(ep.fee_receipt_no)
+        {
+            newStatus = 35;
+        }
+        else if(ep.date_fee_notification)
+        {
+            newStatus = 34;
+        }
+        else if(ep.date_decision)
+        {
+            newStatus = 33;
+        }
+        else if(ep.date_sent_ded_approval)
+        {
+            newStatus = 32;
+        }
+
+//        console.log(scope.data.documents);
+
+        return false;
+
+        //scope.parts.eiapermit.form.status.$setDirty();
+        //return true;
+        // Todo: Write the codes as a comment.
     };
 
     scope.newEiaPermit = function ()
