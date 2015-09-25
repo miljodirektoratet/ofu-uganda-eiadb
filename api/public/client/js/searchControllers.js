@@ -52,10 +52,11 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
     scope.gridOptions.enableColumnMenus = false;
     //scope.gridOptions.enableFiltering = true;
     //scope.gridOptions.enableGridMenu = true;
-    //scope.gridOptions.enableRowSelection = true;
-    //scope.gridOptions.enableRowHeaderSelection = false;
-    //scope.gridOptions.multiSelect = false;
-    //scope.gridOptions.enableFooterTotalSelected = false;
+    scope.gridOptions.enableRowSelection = true;
+    scope.gridOptions.enableRowHeaderSelection = false;
+    scope.gridOptions.multiSelect = false;
+    scope.gridOptions.noUnselect = true;
+    scope.gridOptions.enableFooterTotalSelected = false;
     scope.gridOptions.appScopeProvider = {
         onDblClick: function (rowEntity)
         {
@@ -78,8 +79,21 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
         {name: 'auditinspection_date_deadline', displayName: 'Deadline to correct deviations', type: 'date', cellFilter: 'date:"d MMM yyyy"', headerTooltip: true}
     ];
 
+
+
+    //var openRow = function (row)
+    //{
+    //    console.log(row);
+    //    //SearchService.lastSelectedIndex = row;
+    //    var rowEntity = row.entity;
+    //    //scope.goto("/projects/" + rowEntity.project_id + "/auditsinspections/" + rowEntity.auditinspection_id);
+    //    // TODO: Mark the row that was double clicked.
+    //};
+
+
     scope.gridOptions.onRegisterApi = function (gridApi)
     {
+        //gridApi.selection.on.rowSelectionChanged(scope, openRow);
         scope.gridApi = gridApi;
     };
 
@@ -87,9 +101,6 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
     {
         if (_.isEmpty(scope.criteria))
         {
-            // TODO: Empty location.search. location.search({}) is not working.
-            // This empty if works, but if one navigates back to the tab, the location.search values will be used.
-            // Hence we need to empty it.
             return;
         }
         var isSameCriteria = _.isEqual(SearchService.criteria, scope.criteria);
