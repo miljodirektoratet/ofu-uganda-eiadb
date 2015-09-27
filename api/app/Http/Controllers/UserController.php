@@ -77,9 +77,9 @@ class UserController extends Controller
 
         //App::environment() !== "production"
         $features = array();
-        $features["fileupload"] = !$isProduction;
-        $features["auditsinspections"] = !$isProduction;
-        $features["search"] = !$isProduction;
+        $features["fileupload"] = true;
+        $features["auditsinspections"] = true;
+        $features["search"] = true;
         $features["advanced"] = $isDev;
         return $features;
     }
