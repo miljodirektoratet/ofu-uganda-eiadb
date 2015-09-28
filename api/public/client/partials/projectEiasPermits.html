@@ -265,44 +265,44 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <!--<div class="form-group">-->
-                                    <!--<label>Certificate</label>-->
-                                    <!--<div class="uploaded-file" ng-show="data.eiapermit.file_metadata_id">-->
-                                        <!--<a ng-href="{{downloadFileUrl(data.eiapermit.file_metadata_id)}}" ng-show="data.eiapermit.certificate">{{data.eiapermit.certificate.filename}}</a>-->
-                                        <!--<button type="button" class="delete btn btn-sm btn-link"-->
-                                                <!--ng-click="deleteCertificate()"-->
-                                                <!--ng-hide="!auth.canSave('delete')">delete-->
-                                        <!--</button>-->
-                                    <!--</div>-->
-                                    <!--<div>-->
-                                        <!--<button class="btn btn-sm btn-default"-->
-                                                <!--ngf-select="uploadCertificate($files)"-->
-                                                <!--accept="{{fileUploadPattern}}"-->
-                                                <!--ngf-pattern="{{fileUploadPattern}}"-->
-                                                <!--ng-model="fake_certificate"-->
-                                                <!--name="certificate"-->
-                                                <!--ng-hide="data.eiapermit.file_metadata_id"-->
-                                                <!--ng-disabled="!auth.canSave('delete')"-->
-                                                <!--ngf-max-size="10MB">-->
-                                            <!--Select File-->
-                                        <!--</button>-->
-                                        <!--<div class="uploading-file" ng-show="showUploadingCertificate">-->
-                                            <!--<div class="file">{{certificateFile.name}}<br/>-->
-                                                <!--<div class="progress">-->
-                                                    <!--<div class="progress-bar" role="progressbar" aria-valuenow="{{certificateFile.progress}}" aria-valuemin="0" aria-valuemax="100"-->
-                                                            <!--style="width: {{certificateFile.progress}}%;">-->
-                                                        <!--{{certificateFile.progress}}%-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                            <!--<div class="errors" ng-messages="parts.eiapermit.form.certificate.$error" role="alert">-->
-                                                <!--<div ng-message="pattern">The file type is not supported.</div>-->
-                                                <!--<div ng-message="serverError">Something went wrong on the server.</div>-->
-                                                <!--<div ng-message="maxSize">The file is to big.</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
+                                <div class="form-group">
+                                    <label>Certificate</label>
+                                    <div class="uploaded-file" ng-show="data.eiapermit.file_metadata_id">
+                                        <a ng-href="{{downloadFileUrl(data.eiapermit.file_metadata_id)}}" ng-show="data.eiapermit.certificate">{{data.eiapermit.certificate.filename}}</a>
+                                        <button type="button" class="delete btn btn-sm btn-link"
+                                                ng-click="deleteCertificate()"
+                                                ng-hide="!auth.canSave('delete')">delete
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-default"
+                                                ngf-select="uploadCertificate($files)"
+                                                accept="{{fileUploadPattern}}"
+                                                ngf-pattern="{{fileUploadPattern}}"
+                                                ng-model="fake_certificate"
+                                                name="certificate"
+                                                ng-hide="data.eiapermit.file_metadata_id"
+                                                ng-disabled="!auth.canSave('delete')"
+                                                ngf-max-size="10MB">
+                                            Select File
+                                        </button>
+                                        <div class="uploading-file" ng-show="showUploadingCertificate">
+                                            <div class="file">{{certificateFile.name}}<br/>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{certificateFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                            style="width: {{certificateFile.progress}}%;">
+                                                        {{certificateFile.progress}}%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="errors" ng-messages="parts.eiapermit.form.certificate.$error" role="alert">
+                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                <div ng-message="maxSize">The file is to big.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-3">
                                 <button type="button" style="margin-top:65px;" class="btn btn-danger btn-sm pull-right" ng-click="deleteEiaPermit()" ng-hide="!auth.canSave('delete')">Delete EIA and Permit</button>
