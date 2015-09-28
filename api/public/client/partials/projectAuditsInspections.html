@@ -212,7 +212,36 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Action taken document</label>
+                                    <label for="action_taken">Response</label>
+                                    <select ui-select2 ng-change="saveCurrentAuditInspection()"
+                                            ng-disabled="!auth.canSave('action_taken')" id="action_taken" class="form-control input-sm"
+                                            ng-model="data.auditinspection.action_taken">
+                                        <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">
+                                            {{v.description1}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="lead_agencies">Lead agencies</label>
+                                    <select ui-select2 multiple="true" placeholder="Click to pick"
+                                            ng-change="saveCurrentAuditInspection()"
+                                            ng-disabled="!auth.canSave('lead_agencies')" id="lead_agencies"
+                                            class="form-control input-sm"
+                                            ng-model="data.auditinspection.leadagency_ids">
+                                        <option ng-repeat="v in valuelists.leadagency" value="{{v.id}}">
+                                            {{v.description1}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Document issued</label>
                                     <div class="uploaded-file" ng-show="data.auditinspection.file_metadata_id">
                                         <a ng-href="{{downloadFileUrl(data.auditinspection.file_metadata_id)}}" ng-show="data.auditinspection.action_taken_letter">{{data.auditinspection.action_taken_letter.filename}}</a>
                                         <button type="button" class="delete btn btn-sm btn-link"
@@ -248,35 +277,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="lead_agencies">Lead agencies</label>
-                                    <select ui-select2 multiple="true" placeholder="Click to pick"
-                                            ng-change="saveCurrentAuditInspection()"
-                                            ng-disabled="!auth.canSave('lead_agencies')" id="lead_agencies"
-                                            class="form-control input-sm"
-                                            ng-model="data.auditinspection.leadagency_ids">
-                                        <option ng-repeat="v in valuelists.leadagency" value="{{v.id}}">
-                                            {{v.description1}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="action_taken">Response</label>
-                                    <select ui-select2 ng-change="saveCurrentAuditInspection()"
-                                            ng-disabled="!auth.canSave('action_taken')" id="action_taken" class="form-control input-sm"
-                                            ng-model="data.auditinspection.action_taken">
-                                        <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">
-                                            {{v.description1}}
-                                        </option>
-                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
