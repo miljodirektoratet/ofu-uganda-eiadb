@@ -129,7 +129,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
 
-                                    <label for="coordinated">Coordinated</label>
+                                    <label for="coordinated">Multisectoral</label>
                                     <input type="checkbox" class="checkbox-small form-control input-sm" id="coordinated"
                                             ng-model="fake_coordinated" ng-checked="data.auditinspection.coordinated"
                                             ng-click="data.auditinspection.coordinated = !data.auditinspection.coordinated; saveCurrentAuditInspection()"
@@ -193,7 +193,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date_action_taken">Date of action taken</label>
+                                    <label for="date_action_taken">Date of response</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
                                                 ng-readonly="!auth.canSave('date_action_taken')" id="date_action_taken"
@@ -212,7 +212,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Action taken letter</label>
+                                    <label>Action taken document</label>
                                     <div class="uploaded-file" ng-show="data.auditinspection.file_metadata_id">
                                         <a ng-href="{{downloadFileUrl(data.auditinspection.file_metadata_id)}}" ng-show="data.auditinspection.action_taken_letter">{{data.auditinspection.action_taken_letter.filename}}</a>
                                         <button type="button" class="delete btn btn-sm btn-link"
@@ -269,7 +269,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="action_taken">Action taken</label>
+                                    <label for="action_taken">Response</label>
                                     <select ui-select2 ng-change="saveCurrentAuditInspection()"
                                             ng-disabled="!auth.canSave('action_taken')" id="action_taken" class="form-control input-sm"
                                             ng-model="data.auditinspection.action_taken">
@@ -295,7 +295,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="timeframe">Timeframe for correcting deviations</label>
+                                    <label for="timeframe">Timeframe for complete compliance</label>
                                     <input type="text" integer class="form-control input-sm" id="timeframe"
                                             ng-blur="saveCurrentAuditInspection()"
                                             ng-required="false"
@@ -305,7 +305,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date_deadline">Deadline to correct deviations</label>
+                                    <label for="date_deadline">Deadline for complete compliance</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
                                                 ng-readonly="true" id="date_deadline"
@@ -336,7 +336,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date_received">Date for receiving corrections</label>
+                                    <label for="date_received">Date for receiving compliance documentation</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
                                                 ng-readonly="!auth.canSave('date_received')" id="date_received"
@@ -355,7 +355,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date_closing">Closing date</label>
+                                    <label for="date_closing">Activity closing date</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
                                                 ng-readonly="!auth.canSave('date_closing')" id="date_closing"
@@ -386,7 +386,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Documentation</label>
+                                    <label>Supporting documentation</label>
                                     <div class="uploaded-files" ng-show="data.auditinspection.documentation">
                                         <div class="file" ng-repeat="d in data.auditinspection.documentation">
                                             <a ng-href="{{downloadFileUrl(d.id)}}">{{d.filename}}</a>
