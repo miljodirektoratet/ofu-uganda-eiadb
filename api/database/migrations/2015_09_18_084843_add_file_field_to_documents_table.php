@@ -26,6 +26,7 @@ class AddFileFieldToDocumentsTable extends Migration
     public function down()
     {
         Schema::table('documents', function (Blueprint $table) {
+            $table->dropForeign('documents_file_metadata_id_foreign');
             $table->dropColumn('file_metadata_id');
         });
     }

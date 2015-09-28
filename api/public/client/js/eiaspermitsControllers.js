@@ -272,6 +272,26 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         });
     };
 
+    scope.uploadCertificate = function (files)
+    {
+        if (!files)
+        {
+            return;
+        }
+        scope.showUploadingCertificate = true;
+        scope.certificateFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.eiapermit.form.certificate, scope.certificateFile);
+
+        promise.then(function (file)
+        {
+            scope.data.eiapermit.file_metadata_id = file.result.id;
+            scope.parts.eiapermit.form.certificate.$setDirty();
+            scope.saveCurrentEiaPermit();
+        }, function (reason)
+        {
+        });
+    };
+
     scope.downloadFileUrl = function (id)
     {
         return "/file/v1/download/" + id;
@@ -283,6 +303,14 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         scope.data.document.file_metadata_id = null;
         scope.parts.document.form.attachment.$setDirty();
         scope.saveCurrentDocument();
+    };
+
+    scope.deleteCertificate = function ()
+    {
+        scope.showUploadingCertificate = false;
+        scope.data.eiapermit.file_metadata_id = null;
+        scope.parts.eiapermit.form.certificate.$setDirty();
+        scope.saveCurrentEiaPermit();
     };
 
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);

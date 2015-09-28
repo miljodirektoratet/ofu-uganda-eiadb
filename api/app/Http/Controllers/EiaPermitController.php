@@ -36,8 +36,14 @@ class EiaPermitController extends Controller {
         {
             $query->select('id', 'person');
         };
+        $withCertificate = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
+
         $eiapermit = Project::find($projectId)->eiapermits()
             ->with(array('teamleader'=>$withTeamLeaderFunction))
+            ->with(array('certificate'=>$withCertificate))
             ->with('teammembers')
             ->find($id);
         $teammemberIds = array();
