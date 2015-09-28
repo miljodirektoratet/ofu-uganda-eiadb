@@ -299,7 +299,7 @@
                                         <th>Date sent to coordinator from dep.secretary</th>
                                         <th>Date sent to the officer</th>
                                         <th>Conclusion (PB/Tor accepted)</th>
-                                        <th><span ng-show="userinfo.info.features.fileupload">File</span></th>
+                                        <th>File</th>
                                         <th>
                                             <button type="button" class="btn btn-sm btn-success btn-sm" ng-click="newDocument()" ng-hide="!auth.canSave('new')" ng-click="return false;">New</button>
                                         </th>
@@ -386,7 +386,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <div class="form-group" ng-show="userinfo.info.features.fileupload">
+                                                        <div class="form-group">
                                                             <label>&nbsp;</label>
                                                             <div class="uploaded-file" ng-show="data.document.file_metadata_id">
                                                                 <a ng-href="{{downloadFileUrl(data.document.file_metadata_id)}}" ng-show="data.document.attachment">{{data.document.attachment.filename}}</a>

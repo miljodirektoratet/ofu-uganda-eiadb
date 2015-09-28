@@ -38,15 +38,7 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
     scope.userinfo = UserInfo;
     scope.valuelists = Valuelists;
     scope.data = ProjectFactory;
-
-    scope.featureCheckAuditsinspections = function($event)
-    {
-        if (!scope.userinfo.info.features.auditsinspections)
-        {
-            $event.preventDefault();
-        }
-    };
-
+    
     var getCurrentTab = function (path)
     {
         if (_.contains(path, "eiaspermits"))

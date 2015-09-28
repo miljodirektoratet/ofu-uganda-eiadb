@@ -32,29 +32,6 @@ controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo', f
     {
         return location.path().indexOf(viewLocation) == 0;
     };
-    scope.hasAccess = function(viewLocation)
-    {
-        if (!scope.userinfo.info.features)
-        {
-            return false;
-        }
-        if (viewLocation == "/advanced")
-        {
-            if (!scope.userinfo.info.features.advanced)
-            {
-                return false;
-            }
-            return scope.userinfo.info.role_8;
-        }
-        if (viewLocation == "/search")
-        {
-            if (scope.userinfo.info.features.search)
-            {
-                return true;
-            }
-        }
-        return false;
-    };
 }]);
 
 controllers.controller('UserController', ['$scope', 'UserInfo', function(scope, UserInfo)

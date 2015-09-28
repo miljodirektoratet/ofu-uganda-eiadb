@@ -10,7 +10,7 @@
         <li ng-class="{active: tab==ProjectTabEnum.EiasPermits}">
             <a ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{data.eiapermit.id}}">EIAs and Permits ({{data.eiaspermits.length}})</a>
         </li>
-        <li ng-class="{active: tab==ProjectTabEnum.AuditsInspections, disabled:!userinfo.info.features.auditsinspections}" ng-click="featureCheckAuditsinspections($event)">
+        <li ng-class="{active: tab==ProjectTabEnum.AuditsInspections}">
             <a ng-href="#/projects/{{routeParams.projectId}}/auditsinspections/{{data.auditinspection.id}}">Audits and Inspections ({{data.auditsinspections.length}})</a></li>
         <li class="disabled" onclick="return false;">
             <a ng-href="#/projects/{{routeParams.projectId}}/reports">Reports</a>

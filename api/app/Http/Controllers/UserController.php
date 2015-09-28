@@ -71,16 +71,15 @@ class UserController extends Controller
 
     private function getFeatures()
     {
-        $isDev = App::environment() === "local";
+        //$isDev = App::environment() === "local";
         //$isTest = App::environment() === "test";
-        $isProduction = App::environment() === "production";
+        //$isProduction = App::environment() === "production";
 
-        //App::environment() !== "production"
         $features = array();
-        $features["fileupload"] = true;
-        $features["auditsinspections"] = true;
-        $features["search"] = true;
-        $features["advanced"] = $isDev;
+        //$features["fileupload"] = true;
+        //$features["auditsinspections"] = true;
+        //$features["search"] = true;
+        //$features["advanced"] = $isDev;
         return $features;
     }
 }
