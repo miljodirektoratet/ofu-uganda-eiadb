@@ -100,7 +100,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="inspection_recommended">Inspection before approval?</label>
+                                    <label for="inspection_recommended">Inspection before decision?</label>
                                     <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('inspection_recommended')" id="inspection_recommended" class="form-control input-sm" ng-model="data.eiapermit.inspection_recommended">
                                         <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
                                     </select>
