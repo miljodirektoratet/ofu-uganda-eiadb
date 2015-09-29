@@ -16,7 +16,10 @@
             <tr ng-repeat="row in part.rows">
                 <td title="{{row.id}}">{{row.description}}</td>
                 <td>
-                    <div class="text-right">{{row.count}}</div>
+                    <div class="text-right">
+                        <span ng-if="!row.search">{{row.count}}</span>
+                        <a ng-if="row.search" ng-href="#/search/projects?{{row.search}}">{{row.count}}</a>
+                    </div>
                 </td>
             </tr>
             </tbody>

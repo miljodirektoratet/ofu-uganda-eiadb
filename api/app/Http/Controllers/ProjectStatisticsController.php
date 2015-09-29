@@ -32,15 +32,16 @@ class ProjectStatisticsController extends Controller
             ->get();
         $dataCategoryEiaYes = [];
         $dataCategoryEiaNo = [];
-        foreach ($categoriesResult as $row)
+        foreach ($categoriesResult as $dbRow)
         {
-            if ($row->consequence == 6)
+            $row = $this::createResultRow($dbRow);
+            $row["search"] = "category_id=" . $dbRow->id;
+
+            if ($dbRow->consequence == 6)
             {
-                unset($row->consequence);
                 $dataCategoryEiaYes [] = $row;
             } else
             {
-                unset($row->consequence);
                 $dataCategoryEiaNo [] = $row;
             }
         }
@@ -71,9 +72,9 @@ class ProjectStatisticsController extends Controller
         $countProjectsUnknownWasteWater = $countProjects - $countProjectsWithWasteWater - $countProjectsWithoutWasteWater;
 
         $dataWasteWater = [
-            ["id" => 40, "description" => "Yes", "count" => $countProjectsWithWasteWater],
-            ["id" => 42, "description" => "Unknown", "count" => $countProjectsUnknownWasteWater],
-            ["id" => 41, "description" => "No", "count" => $countProjectsWithoutWasteWater]
+            ["id" => 40, "description" => "Yes", "count" => $countProjectsWithWasteWater, "search" => "project_has_industrial_waste_water=40"],
+            ["id" => 42, "description" => "Unknown", "count" => $countProjectsUnknownWasteWater, "search" => "project_has_industrial_waste_water=42"],
+            ["id" => 41, "description" => "No", "count" => $countProjectsWithoutWasteWater, "search" => "project_has_industrial_waste_water=41"]
         ];
 
 
@@ -89,8 +90,10 @@ class ProjectStatisticsController extends Controller
             ->get();
 
         $dataDevelopers = [];
-        foreach ($developersResult as $row)
+        foreach ($developersResult as $dbRow)
         {
+            $row = $this::createResultRow($dbRow);
+            $row["search"] = "developer_id=" . $dbRow->id;
             $dataDevelopers [] = $row;
         }
 
@@ -107,8 +110,10 @@ class ProjectStatisticsController extends Controller
             ->get();
 
         $dataGrades = [];
-        foreach ($gradesResult as $row)
+        foreach ($gradesResult as $dbRow)
         {
+            $row = $this::createResultRow($dbRow);
+            $row["search"] = "project_grade=" . $dbRow->id;
             $dataGrades [] = $row;
         }
 
@@ -124,7 +129,15 @@ class ProjectStatisticsController extends Controller
         $data["parts"]["grades"] = ["title" => "The number of projects per grade.", "label1" => "Grade", "label2" => "Number", "rows" => $dataGrades];
 
 
-
         return Response::json($data, 200);
+    }
+
+    private function createResultRow($dbRow)
+    {
+        $row = [];
+        $row["id"] = $dbRow->id;
+        $row["description"] = $dbRow->description;
+        $row["count"] = $dbRow->count;
+        return $row;
     }
 }

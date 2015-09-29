@@ -28,7 +28,7 @@ class ProjectSearchController extends Controller
         $criteriaDefinitions["search"] = ["p.title", "o.name", "p.location"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["p.id"];
-        $criteriaDefinitions["multiple"] = ["d.id", "c.id", "p.grade"];
+        $criteriaDefinitions["multiple"] = ["d.id", "c.id", "p.grade", "o.id", "p.has_industrial_waste_water"];
         $criterias = getSearchCriterias([
             'project_title',
             'district_id',
@@ -36,7 +36,9 @@ class ProjectSearchController extends Controller
             'developer_name',
             'project_grade',
             'project_location',
-            'project_id'
+            'project_id',
+            'developer_id',
+            'project_has_industrial_waste_water'
         ]);
 
         foreach ($criterias as $word => $criteria)
