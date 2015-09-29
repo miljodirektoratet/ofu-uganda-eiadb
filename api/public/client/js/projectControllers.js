@@ -5,7 +5,7 @@ var testy1 = "x";
 controllers.controller('ProjectsController', ['$scope', '$location', '$filter', 'Project', 'UserInfo', function (scope, location, filter, Project, UserInfo)
 {
     scope.showFilter = false;
-    scope.projects = Project.query({'count': 20});
+    scope.projects = Project.query({'count': 50});
     scope.projectsCount = 0;
     Project.query({'countOnly': 1}, function (data)
     {
