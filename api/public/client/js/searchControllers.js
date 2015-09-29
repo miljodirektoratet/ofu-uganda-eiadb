@@ -1,13 +1,12 @@
 'use strict';
 
-controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'ProjectFactory', 'Valuelists', 'SearchService', 'UserInfo', function (scope, routeParams, location, $q, $timeout, ProjectFactory, Valuelists, SearchService, UserInfo)
+controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'ProjectFactory', 'Valuelists', 'UserInfo', function (scope, routeParams, location, $q, $timeout, ProjectFactory, Valuelists, UserInfo)
 {
     scope.SearchTabEnum = SearchTabEnum;
     scope.routeParams = routeParams;
     scope.userinfo = UserInfo;
     scope.valuelists = Valuelists;
     //scope.data = ProjectFactory;
-    scope.SearchService = SearchService;
 
     var getCurrentTab = function (path)
     {
@@ -141,6 +140,102 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
     if (_.isEmpty(scope.criteria) && !_.isEmpty(SearchService.criteria))
     {
         location.search(SearchService.criteria);
+    }
+    else if (!_.isEmpty(scope.criteria))
+    {
+        scope.search();
+    }
+}]);
+
+controllers.controller('SearchProjectsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'ProjectSearch', 'UserInfo', 'Valuelists', 'ProjectSearchService', function (scope, routeParams, location, $q, $timeout, ProjectSearch, UserInfo, Valuelists, ProjectSearchService)
+{
+    // We perform searching based on the url. A form submit changes the url (see setSearchUrl()).
+
+    scope.isSearching = false;
+    scope.showResultGrid = false;
+
+    scope.gridOptions = {};
+    scope.gridOptions.enableHorizontalScrollbar = 0;
+    scope.gridOptions.showGridFooter = true;
+    scope.gridOptions.minRowsToShow = 10;
+    scope.gridOptions.enableColumnMenus = false;
+    //scope.gridOptions.enableFiltering = true;
+    //scope.gridOptions.enableGridMenu = true;
+    scope.gridOptions.enableRowSelection = true;
+    scope.gridOptions.enableRowHeaderSelection = false;
+    scope.gridOptions.multiSelect = false;
+    scope.gridOptions.noUnselect = true;
+    scope.gridOptions.enableFooterTotalSelected = false;
+    scope.gridOptions.appScopeProvider = {
+        onDblClick: function (rowEntity)
+        {
+            scope.goto("/projects/" + rowEntity.project_id);
+            // TODO: Mark the row that was double clicked.
+        }
+    };
+    scope.gridOptions.rowTemplate = "<div ng-dblclick=\"grid.appScope.onDblClick(row.entity)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell ></div>"
+
+
+    scope.gridOptions.columnDefs = [
+        {name: 'project_id', displayName: 'Id', type:'number', width: 50, cellTooltip: true, headerTooltip: true},
+        {name: 'project_title', displayName: 'Title', cellTooltip: true, headerTooltip: true},
+        {name: 'project_location', displayName: 'Location', cellTooltip: true, headerTooltip: true},
+        {name: 'district_district', displayName: 'District', cellTooltip: true, headerTooltip: true},
+        {name: 'category_description', displayName: 'Category', cellTooltip: true, headerTooltip: true},
+        {name: 'project_grade', displayName: 'Performance', width: 110, cellTooltip: true, headerTooltip: true},
+        {name: 'developer_name', displayName: 'Developer name', cellTooltip: true, headerTooltip: true}
+    ];
+
+
+    scope.gridOptions.onRegisterApi = function (gridApi)
+    {
+        scope.gridApi = gridApi;
+    };
+
+    scope.setSearchUrl = function ()
+    {
+        if (_.isEmpty(scope.criteria))
+        {
+            return;
+        }
+        var isSameCriteria = _.isEqual(ProjectSearchService.criteria, scope.criteria);
+        if (isSameCriteria)
+        {
+            // Force same search.
+            ProjectSearchService.allowCache = false;
+            scope.search();
+        }
+        else
+        {
+            location.search(scope.criteria);
+        }
+    };
+
+    scope.search = function ()
+    {
+        scope.isSearching = true;
+        scope.showResultGrid = false;
+        ProjectSearchService.search(scope.criteria).then(function (rows)
+        {
+            scope.gridOptions.data = rows;
+            scope.isSearching = false;
+            scope.showResultGrid = true;
+        });
+    };
+
+    scope.reset = function ()
+    {
+        scope.criteria = {};
+        ProjectSearchService.criteria = {};
+        scope.gridOptions.data = [];
+        scope.showResultGrid = false;
+    };
+
+    scope.criteria = location.search();
+
+    if (_.isEmpty(scope.criteria) && !_.isEmpty(ProjectSearchService.criteria))
+    {
+        location.search(ProjectSearchService.criteria);
     }
     else if (!_.isEmpty(scope.criteria))
     {

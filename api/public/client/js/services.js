@@ -155,6 +155,11 @@ services.factory('AuditInspectionSearch', ['$resource', function ($resource)
     return $resource('/search/v1/auditinspection');
 }]);
 
+services.factory('ProjectSearch', ['$resource', function ($resource)
+{
+    return $resource('/search/v1/project');
+}]);
+
 services.factory('ProjectStatistics', ['$resource', function ($resource)
 {
     return $resource('/statistics/v1/project');
@@ -186,6 +191,44 @@ services.factory('SearchService', ['AuditInspectionSearch', '$q', function (Audi
             //console.log("From server");
             factory.criteria = _.clone(criteria);
             AuditInspectionSearch.query(factory.criteria, function (rows)
+            {
+                //console.log("From server finished");
+                factory.rows = rows;
+                deferred.resolve(factory.rows);
+                factory.allowCache = true;
+            });
+        }
+        return deferred.promise;
+    };
+
+    return factory;
+}]);
+
+services.factory('ProjectSearchService', ['ProjectSearch', '$q', function (ProjectSearch, $q)
+{
+    var factory = {};
+    factory.criteria = {};
+    factory.allowCache = true;
+    factory.rows = [];
+
+    factory.search = function (criteria)
+    {
+        //console.log("allowCache", factory.allowCache);
+        var deferred = $q.defer();
+
+        var isSameCriteria = _.isEqual(factory.criteria, criteria);
+        //console.log("isSameCriteria", isSameCriteria, factory.criteria, criteria);
+
+        if (isSameCriteria && factory.allowCache)
+        {
+            console.log("From cache");
+            deferred.resolve(factory.rows);
+        }
+        else
+        {
+            console.log("From server");
+            factory.criteria = _.clone(criteria);
+            ProjectSearch.query(factory.criteria, function (rows)
             {
                 //console.log("From server finished");
                 factory.rows = rows;

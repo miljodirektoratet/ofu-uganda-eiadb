@@ -1,0 +1,98 @@
+<div class="search-auditsandinspections">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <form ng-submit="setSearchUrl()">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="project_title">Project title</label>
+                            <input type="text" class="form-control input-sm" id="project_title" ng-model="criteria.project_title" set-focus/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="district_id">Project district</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="district_id" class="form-control input-sm"
+                                    ng-model="criteria.district_id">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.district" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="category_id">Category of project</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="category_id" class="form-control input-sm"
+                                    ng-model="criteria.category_id">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.category" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="developer_name">Developer</label>
+                            <input type="text" class="form-control input-sm" id="developer_name" ng-model="criteria.developer_name"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="project_location">Project location</label>
+                            <input type="text" class="form-control input-sm" id="project_location" ng-model="criteria.project_location"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="project_id">Project ID</label>
+                            <input type="text" class="form-control input-sm" id="project_id" ng-model="criteria.project_id"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="project_grade">Performance level</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="project_grade" class="form-control input-sm"
+                                    ng-model="criteria.project_grade">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.grade" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="button" class="btn btn-link" ng-click="reset()">Reset search criteria</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+    <div class="row" ng-show="isSearching">
+        <div class="col-md-12">
+            <div class="loader-standalone center-block"></div>
+        </div>
+    </div>
+    <div class="row" ng-show="showResultGrid">
+        <div class="col-md-12">
+            <div ui-grid="gridOptions" ui-grid-resize-columns ui-grid-move-columns ui-grid-selection class="result-grid"></div>
+        </div>
+    </div>
+
+</div>
