@@ -133,7 +133,7 @@
             </div>
             <div class="col-md-5">
               <div class="form-group">
-                <label for="grade">Grade</label>
+                <label for="grade">Performance level</label>
                 <select ui-select2="{allowClear:true}" ng-change="saveCurrentProject()" ng-disabled="!auth.canSaveGrade()" id="grade" ng-required="false" class="form-control input-sm" ng-model="data.project.grade">
                   <option></option>
                   <option ng-repeat="v in valuelists.grade" value="{{v.id}}">{{v.description1}}</option>

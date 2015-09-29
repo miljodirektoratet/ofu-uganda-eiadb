@@ -139,7 +139,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         }
         if (currentTab == ProjectTabEnum.AuditsInspections)
         {
-            return p.title + " (Grade: " + factory.getCodeFromValuelist("grade", p.grade) + ")";
+            return p.title + " (Performance: " + factory.getCodeFromValuelist("grade", p.grade) + ")";
         }
         return p.title;
     };
