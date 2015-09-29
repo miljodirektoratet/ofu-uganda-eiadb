@@ -77,7 +77,6 @@ class UserController extends Controller
 
         $features = array();
         $features["notproduction"] = !$isProduction;
-        $features["notproduction"] = $isDev;
         //$features["fileupload"] = true;
         //$features["auditsinspections"] = true;
         //$features["search"] = true;
