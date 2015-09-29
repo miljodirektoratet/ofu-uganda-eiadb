@@ -187,6 +187,6 @@ class ValuelistController extends Controller {
     private function getCodesFromDrowdownName($dropdownName)
     {
         return Code::where("dropdown_list", "=", $dropdownName)
-            ->get(array('id', 'description1', 'description2'));
+            ->get(array('id', 'description1', 'description2', 'value1'));
     }
 }
