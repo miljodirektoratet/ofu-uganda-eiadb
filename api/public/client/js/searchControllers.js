@@ -1,10 +1,10 @@
 'use strict';
 
-controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'ProjectFactory', 'Valuelists', 'SearchService', function (scope, routeParams, location, $q, $timeout, ProjectFactory, Valuelists, SearchService)
+controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$location', '$q', '$timeout', 'ProjectFactory', 'Valuelists', 'SearchService', 'UserInfo', function (scope, routeParams, location, $q, $timeout, ProjectFactory, Valuelists, SearchService, UserInfo)
 {
     scope.SearchTabEnum = SearchTabEnum;
     scope.routeParams = routeParams;
-    //scope.userinfo = UserInfo;
+    scope.userinfo = UserInfo;
     scope.valuelists = Valuelists;
     //scope.data = ProjectFactory;
     scope.SearchService = SearchService;

@@ -1,8 +1,9 @@
 <div class="search">
     <ul class="nav nav-tabs" role="tablist">
-        <!--<li ng-class="{active: tab==SearchTabEnum.Projects}" class="disabled">-->
-            <!--<a ng-href="#/search/projects">Project</a>-->
-        <!--</li>-->
+
+        <li ng-class="{active: tab==SearchTabEnum.Projects}" ng-show="userinfo.info.features.notproduction">
+            <a ng-href="#/search/projects">Project</a>
+        </li>
         <!--<li ng-class="{active: tab==SearchTabEnum.EiasPermits}" class="disabled">-->
             <!--<a href="#/search/eiaspermits">EIA and Permit</a>-->
         <!--</li>-->
