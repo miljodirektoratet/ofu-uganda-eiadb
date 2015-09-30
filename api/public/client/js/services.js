@@ -221,12 +221,12 @@ services.factory('ProjectSearchService', ['ProjectSearch', '$q', function (Proje
 
         if (isSameCriteria && factory.allowCache)
         {
-            console.log("From cache");
+            //console.log("From cache");
             deferred.resolve(factory.rows);
         }
         else
         {
-            console.log("From server");
+            //console.log("From server");
             factory.criteria = _.clone(criteria);
             ProjectSearch.query(factory.criteria, function (rows)
             {
