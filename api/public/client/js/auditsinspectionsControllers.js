@@ -15,6 +15,8 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     scope.newButton.year = new Date().getFullYear();
 
     scope.fileUploadPattern = fileUploadPattern;
+    scope.fileUploadNgfPattern = fileUploadNgfPattern;
+    scope.fileUploadMaxSize = fileUploadMaxSize;
 
     scope.isLoading = function ()
     {

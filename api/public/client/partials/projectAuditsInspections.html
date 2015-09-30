@@ -258,7 +258,7 @@
                                                 name="action_taken_letter"
                                                 ng-hide="data.auditinspection.file_metadata_id"
                                                 ng-disabled="!auth.canSave('delete')"
-                                                ngf-max-size="10MB">
+                                                ngf-max-size="{{fileUploadMaxSize}}">
                                             Select File
                                         </button>
                                         <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingFileActionTakenLetter">
@@ -404,7 +404,7 @@
                                                 ng-model="fake_documentation"
                                                 name="documentation"
                                                 ng-disabled="!auth.canSave('delete')"
-                                                ngf-max-size="10MB">
+                                                ngf-max-size="{{fileUploadMaxSize}}">
                                             Select File
                                         </button>
                                         <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingFileDocumentation">

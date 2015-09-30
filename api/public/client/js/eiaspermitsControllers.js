@@ -15,6 +15,8 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     };
 
     scope.fileUploadPattern = fileUploadPattern;
+    scope.fileUploadNgfPattern = fileUploadNgfPattern;
+    scope.fileUploadMaxSize = fileUploadMaxSize;
 
     scope.isLoading = function ()
     {
