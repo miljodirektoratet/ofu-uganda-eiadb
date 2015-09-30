@@ -67,10 +67,11 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
 
     scope.updateStatus = function (ep)
     {
-        if (!scope.userinfo.info.features.notproduction)
-        {
-            return false;
-        }
+        //if (!scope.userinfo.info.features.notproduction)
+        //{
+        //    return false;
+        //}
+
         //var values = scope.data.valuelists['eiastatus'];
         //var sorted = _.sortBy(values, function (value)
         //{
@@ -314,7 +315,8 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "document.conclusion":
                 return scope.userinfo.info.role_5;
             case "status":
-                return !scope.userinfo.info.features.notproduction;
+                return false;
+//                return !scope.userinfo.info.features.notproduction;
             default:
                 return false;
         }
