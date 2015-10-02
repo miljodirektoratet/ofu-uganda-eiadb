@@ -121,12 +121,12 @@ class ProjectStatisticsController extends Controller
         $data["timestamp"] = Carbon::now()->toDateTimeString(); // Utc date. The rest is fixed in javascript.
         $data["intro"] = ["title" => sprintf("The EIA database has %d projects and %d developers. The statistics below shows the number of projects for some key elements.", $countProjects, $countDevelopers), "counts" => $dataCounts];
         $data["parts"] = [];
-        $data["parts"]["categoryEiaYes"] = ["title" => 'The number of projects per category, where the category is "Considered for EIA".', "label1" => "Category", "label2" => "Number", "rows" => $dataCategoryEiaYes];
-        $data["parts"]["categoryEiaNo"] = ["title" => 'The number of projects per category, where the category is "Likely exempted from EIA".', "label1" => "Category", "label2" => "Number", "rows" => $dataCategoryEiaNo];
-        $data["parts"]["coordinates"] = ["title" => "The number of projects with and without coordinates.", "label1" => "Coordinates present", "label2" => "Number", "rows" => $dataCoordinates];
-        $data["parts"]["wasteWater"] = ["title" => "The number of projects with and without industrial waste water.", "label1" => "Industrial waste water", "label2" => "Number", "rows" => $dataWasteWater];
-        $data["parts"]["developers"] = ["title" => "The number of projects per developer. The list will show the ten developers with most number of projects.", "label1" => "Top ten developers", "label2" => "Number", "rows" => $dataDevelopers];
-        $data["parts"]["grades"] = ["title" => "The number of projects per grade.", "label1" => "Grade", "label2" => "Number", "rows" => $dataGrades];
+        $data["parts"]["categoryEiaYes"] = ["title" => 'The number of projects per category, where the category is "Considered for EIA"', "label1" => "Category", "label2" => "Number", "rows" => $dataCategoryEiaYes];
+        $data["parts"]["categoryEiaNo"] = ["title" => 'The number of projects per category, where the category is "Likely exempted from EIA"', "label1" => "Category", "label2" => "Number", "rows" => $dataCategoryEiaNo];
+        $data["parts"]["coordinates"] = ["title" => "The number of projects with and without coordinates", "label1" => "Coordinates present", "label2" => "Number", "rows" => $dataCoordinates];
+        $data["parts"]["wasteWater"] = ["title" => "The number of projects with and without industrial waste water", "label1" => "Industrial waste water", "label2" => "Number", "rows" => $dataWasteWater];
+        $data["parts"]["developers"] = ["title" => "The number of projects per developer. The list will show the ten developers with most number of projects", "label1" => "Top ten developers", "label2" => "Number", "rows" => $dataDevelopers];
+        $data["parts"]["grades"] = ["title" => "The number of projects per performance level", "label1" => "Performance level", "label2" => "Number", "rows" => $dataGrades];
 
 
         return Response::json($data, 200);
