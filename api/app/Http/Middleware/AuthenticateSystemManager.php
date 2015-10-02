@@ -35,6 +35,7 @@ class AuthenticateSystemManager
     {
         if (!$this->auth->user()->hasRole("Role 8"))
         {
+            // TODO: Use 403 Forbidden instead?
             return response('Unauthorized.', 401);
         }
 
