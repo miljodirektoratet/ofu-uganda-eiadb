@@ -23,7 +23,7 @@ class ProjectController extends Controller
 
         $criterias = getSearchCriterias(['title', 'location']);
 
-       // dd($criterias);
+        // dd($criterias);
 
         $withFunction = function ($query)
         {
@@ -65,6 +65,12 @@ class ProjectController extends Controller
         $project = Project::
         with('districts')// I'd like to limit the belongsToMany to only the district id, but this is not currently possible in Laravel.
         ->find($id);
+
+        if (!$project)
+        {
+            return Response::json(array('error' => true, 'message' => 'not found'), 404);
+        }
+
         $districtIds = array();
         foreach ($project->districts as $district)
         {
@@ -159,7 +165,8 @@ class ProjectController extends Controller
                     if ($timestamp === false)
                     {
                         $value = null;
-                    } else
+                    }
+                    else
                     {
                         $value = new DateTime();
                         $value->setTimestamp($timestamp);

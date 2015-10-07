@@ -7,11 +7,17 @@ use \DateTime;
 use \App\Project;
 use \App\EiaPermit;
 
-class EiaPermitController extends Controller {
+class EiaPermitController extends Controller
+{
 
     // GET /resource/:id/subresource
     public function index($projectId)
     {
+        if (Project::where('id', $projectId)->count() == 0)
+        {
+            return Response::json(array('error' => true, 'message' => 'not found'), 404);
+        }
+
         $withUserFunction = function ($query)
         {
             $query->select('id', 'name');
@@ -21,11 +27,13 @@ class EiaPermitController extends Controller {
             $query->select('id', 'person');
         };
 
+
         $eiapermits = Project::find($projectId)
             ->eiapermits()
-            ->with(array('user'=>$withUserFunction))
-            ->with(array('teamleader'=>$withTeamLeaderFunction))
+            ->with(array('user' => $withUserFunction))
+            ->with(array('teamleader' => $withTeamLeaderFunction))
             ->get(array('id', 'status', 'teamleader_id', 'user_id'));
+
         return Response::json($eiapermits, 200);
     }
 
@@ -42,10 +50,16 @@ class EiaPermitController extends Controller {
         };
 
         $eiapermit = Project::find($projectId)->eiapermits()
-            ->with(array('teamleader'=>$withTeamLeaderFunction))
-            ->with(array('certificate'=>$withCertificate))
+            ->with(array('teamleader' => $withTeamLeaderFunction))
+            ->with(array('certificate' => $withCertificate))
             ->with('teammembers')
             ->find($id);
+
+        if (!$eiapermit)
+        {
+            return Response::json(array('error' => true, 'message' => 'not found'), 404);
+        }
+
         $teammemberIds = array();
         foreach ($eiapermit->teammembers as $practitioner)
         {
@@ -117,7 +131,7 @@ class EiaPermitController extends Controller {
             $teammemberIds = $inputData["teammember_ids"];
         }
         $res = $eiapermit->teammembers()->sync($teammemberIds);
-        $changes = count($res["attached"])+count($res["detached"])+count($res["updated"]);
+        $changes = count($res["attached"]) + count($res["detached"]) + count($res["updated"]);
         if ($changes > 0)
         {
             $eiapermit["updated_by"] = Auth::user()->name;
