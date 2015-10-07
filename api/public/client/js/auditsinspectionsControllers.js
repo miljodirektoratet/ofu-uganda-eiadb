@@ -77,6 +77,10 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 
     scope.saveCurrentAuditInspection = function ()
     {
+        if (console)
+        {
+            console.log("saveCurrentAuditInspection");
+        }
         var auditinspection = scope.data.auditinspection;
         var isNew = auditinspection.is_new;
         if (!isNew)
@@ -88,6 +92,10 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         {
             if (isNew)
             {
+                if (console)
+                {
+                    console.log("saveCurrent done, isNew");
+                }
                 scope.goto("/projects/" + scope.data.project.id + "/auditsinspections/" + ai.id);
             }
         });
@@ -99,6 +107,10 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         scope.newButton.isopen = false;
         ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year, scope.newButton.type);
         scope.parts.auditinspection.isNew = true;
+        if (console)
+        {
+            console.log("newAuditInspection, before save");
+        }
         scope.saveCurrentAuditInspection();
     };
 

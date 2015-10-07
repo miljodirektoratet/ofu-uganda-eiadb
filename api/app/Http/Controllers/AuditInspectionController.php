@@ -9,8 +9,17 @@ use \App\AuditInspection;
 
 class AuditInspectionController extends Controller
 {
+    public function __construct()
+    {
+        if (\App::environment() !== "production")
+        {
+            sleep(2);
+        }
+    }
+
 // GET /resource/:id/subresource
-    public function index($projectId)
+    public
+    function index($projectId)
     {
         $auditinspections = Project::find($projectId)
             ->auditinspections()
@@ -19,7 +28,8 @@ class AuditInspectionController extends Controller
     }
 
     // GET /resource/:id/subresource/:subid
-    public function show($projectId, $id)
+    public
+    function show($projectId, $id)
     {
         $withActionTakenLetter = function ($query)
         {
@@ -64,7 +74,8 @@ class AuditInspectionController extends Controller
     }
 
     // POST /resource/:id/subresource
-    public function store($projectId)
+    public
+    function store($projectId)
     {
         if (!$this::canSave())
         {
@@ -85,7 +96,8 @@ class AuditInspectionController extends Controller
     }
 
     // PUT/PATCH /resource/:id/subresource/:subid
-    public function update($projectId, $id)
+    public
+    function update($projectId, $id)
     {
         if (!$this::canSave())
         {
@@ -108,7 +120,8 @@ class AuditInspectionController extends Controller
     }
 
     // DELETE /resource/:id/subresource/:subid
-    public function destroy($projectId, $id)
+    public
+    function destroy($projectId, $id)
     {
         if (!$this::canSave())
         {
@@ -120,7 +133,8 @@ class AuditInspectionController extends Controller
         return Response::json(array('is_deleted' => true), 200);
     }
 
-    private function handleUsers($auditinspection, $inputData)
+    private
+    function handleUsers($auditinspection, $inputData)
     {
         $ids = array();
         if (array_key_exists("user_ids", $inputData))
@@ -135,7 +149,8 @@ class AuditInspectionController extends Controller
         }
     }
 
-    private function handleLeadAgencies($auditinspection, $inputData)
+    private
+    function handleLeadAgencies($auditinspection, $inputData)
     {
         $ids = array();
         if (array_key_exists("leadagency_ids", $inputData))
@@ -150,7 +165,8 @@ class AuditInspectionController extends Controller
         }
     }
 
-    private function handleDocumentation($auditinspection, $inputData)
+    private
+    function handleDocumentation($auditinspection, $inputData)
     {
         $ids = array();
         if (array_key_exists("documentation_ids", $inputData))
@@ -165,7 +181,8 @@ class AuditInspectionController extends Controller
         }
     }
 
-    private function generateCode($auditinspection)
+    private
+    function generateCode($auditinspection)
     {
         $year = $auditinspection->year;
         $maxNumber = AuditInspection::where('year', $year)->max('number');
@@ -174,7 +191,8 @@ class AuditInspectionController extends Controller
         $auditinspection->code = sprintf("%d.%03d", $year, $number);
     }
 
-    private function updateValuesInResource($resource, $data)
+    private
+    function updateValuesInResource($resource, $data)
     {
         $dates = $resource->getDates();
         $changed = false;
@@ -192,7 +210,8 @@ class AuditInspectionController extends Controller
                     if ($timestamp === false)
                     {
                         $value = null;
-                    } else
+                    }
+                    else
                     {
                         $value = new DateTime();
                         $value->setTimestamp($timestamp);
@@ -213,12 +232,14 @@ class AuditInspectionController extends Controller
         }
     }
 
-    private function canSave()
+    private
+    function canSave()
     {
         return Auth::user()->hasRole("Role 7");
     }
 
-    private function notAuthorized()
+    private
+    function notAuthorized()
     {
         return Response::json("Not authorized to perform this.", 403); // 403 Forbidden
     }
