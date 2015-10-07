@@ -11,10 +11,10 @@ class AuditInspectionController extends Controller
 {
     public function __construct()
     {
-        if (\App::environment() !== "production")
-        {
-            sleep(2);
-        }
+//        if (\App::environment() !== "production")
+//        {
+//            sleep(2);
+//        }
     }
 
 // GET /resource/:id/subresource

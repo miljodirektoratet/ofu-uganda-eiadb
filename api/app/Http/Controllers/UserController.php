@@ -22,6 +22,11 @@ class UserController extends Controller
 
     public function impersonate($id)
     {
+        if (App::environment() === "production")
+        {
+            throw new Exception('Not for production.');
+            return;
+        }
         if (Auth::user()->hasRole("Role 8") && \App\User::find($id))
         {
             Auth::loginUsingId($id);
