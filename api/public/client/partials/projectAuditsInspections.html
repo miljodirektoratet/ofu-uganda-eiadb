@@ -16,7 +16,7 @@
 
         </div>
         <div class="col-md-6">
-            <div class="btn-group new-button pull-right" dropdown auto-close="disabled" is-open="newButton.isopen">
+            <div class="btn-group new-button pull-right" dropdown auto-close="disabled" is-open="newButton.isopen"  ng-hide="!auth.canSave('new')">
                 <button type="button" class="btn btn-success" dropdown-toggle ng-disabled="isLoading()">
                     New Audit and Inspection <span class="caret"></span>
                 </button>
