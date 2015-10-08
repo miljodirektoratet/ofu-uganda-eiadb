@@ -221,7 +221,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
     {
         var pData =
         {
-            has_industrial_waste_water: 41, // 41=No
+            has_industrial_waste_water: 42, // 42=Unknown
             grade: 47, // 47=Unknown
             organisation_id: o.id,
             is_new: true
