@@ -43,3 +43,16 @@ controllers.controller('UserController', ['$scope', 'UserInfo', function(scope, 
         scope.userinfo.impersonate(scope.userid_to_impersonate);
     };
 }]);
+
+controllers.controller('PirkingController', ['$scope', 'UserInfo', function(scope, UserInfo)
+{
+    scope.userinfo = UserInfo;
+
+    scope.lastId = "..";
+    scope.criteria = {};
+
+    scope.beginPirking = function()
+    {
+        console.log("Begin working", scope.criteria.from, scope.criteria.to);
+    };
+}]);

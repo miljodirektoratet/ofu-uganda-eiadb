@@ -16,13 +16,13 @@ var seroApp = angular.module('seroApp', [
     'ui.bootstrap',
     'ui.select2',
     'ngFileUpload',
-    'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns','ui.grid.moveColumns','ui.grid.selection',
+    'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns', 'ui.grid.moveColumns', 'ui.grid.selection',
     'seroApp.services',
     'seroApp.directives',
     'seroApp.controllers',
     'pax.validations'
 ]).
-    config(['$routeProvider', function($routeProvider)
+    config(['$routeProvider', function ($routeProvider)
     {
         var projectTabsOptions = {templateUrl: 'partials/projectTabs.html', controller: 'ProjectTabsController'};
 
@@ -47,6 +47,8 @@ var seroApp = angular.module('seroApp', [
 
         $routeProvider.when('/advanced', {templateUrl: 'partials/advanced.html', controller: 'AdvancedController'});
 
+        $routeProvider.when('/pirking', {templateUrl: 'partials/pirking.html', controller: 'PirkingController'});
+
         $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
         $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'UserController'});
         $routeProvider.when('/password/send', {templateUrl: 'partials/passwordSend.html', controller: 'LoginController'});
@@ -55,10 +57,11 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/practitioners', {templateUrl: 'partials/practitioners.html', controller: 'PractitionersController'});
         $routeProvider.otherwise({redirectTo: '/'});
     }])
-    .factory('authHttpResponseInterceptor',['$q','$location',function($q,$location){
+    .factory('authHttpResponseInterceptor', ['$q', '$location', function ($q, $location)
+    {
         return {
 
-            'responseError': function(rejection)
+            'responseError': function (rejection)
             {
                 if ($location.path().indexOf('/password/reset/') == 0)
                 {
@@ -72,7 +75,7 @@ var seroApp = angular.module('seroApp', [
             }
         }
     }])
-    .config(['$httpProvider',function($httpProvider)
+    .config(['$httpProvider', function ($httpProvider)
     {
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }]);
@@ -80,37 +83,37 @@ var seroApp = angular.module('seroApp', [
 
 var SavingStateEnum =
 {
-    None : 'None',
-    LoadingNew : 'Loading new',
-    Loading : 'Loading',
-    Loaded : 'Loaded',
-    SavingStarted : 'Saving started',
-    SavingFinished : 'Saving finished',
-    SavingFailed : 'Saving failed',
-    Invalid : 'Form not valid',
-    MissingDependency : 'Missing dependency in other form'
+    None: 'None',
+    LoadingNew: 'Loading new',
+    Loading: 'Loading',
+    Loaded: 'Loaded',
+    SavingStarted: 'Saving started',
+    SavingFinished: 'Saving finished',
+    SavingFailed: 'Saving failed',
+    Invalid: 'Form not valid',
+    MissingDependency: 'Missing dependency in other form'
 };
 
 var ProjectTabEnum =
 {
-    Project : 'Project',
-    EiasPermits : 'Eias and Permits',
-    AuditsInspections : 'Audits and Inspections',
-    Reports : 'Reports'
+    Project: 'Project',
+    EiasPermits: 'Eias and Permits',
+    AuditsInspections: 'Audits and Inspections',
+    Reports: 'Reports'
 };
 
 var SearchTabEnum =
 {
-    Projects : 'Projects',
-    EiasPermits : 'Eias and Permits',
-    AuditsInspections : 'Audits and Inspections'
+    Projects: 'Projects',
+    EiasPermits: 'Eias and Permits',
+    AuditsInspections: 'Audits and Inspections'
 };
 
 var StatisticsTabEnum =
 {
-    Projects : 'Projects',
-    EiasPermits : 'Eias and Permits',
-    AuditsInspections : 'Audits and Inspections'
+    Projects: 'Projects',
+    EiasPermits: 'Eias and Permits',
+    AuditsInspections: 'Audits and Inspections'
 };
 
 var fileUploadPattern = "image/*,application/pdf,application/vnd.openxmlformats*,application/msword,text/plain,text/csv,application/octet-stream,binary/octet-stream";
@@ -120,12 +123,20 @@ var fileUploadMaxSize = "20MB";
 
 //var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
 var regexIso8601 = /^(\d{4}-\d{2}-\d{2} \d{2}\:\d{2}\:\d{2})$/;
-function convertDateStringsToDates(input) {
+function convertDateStringsToDates(input)
+{
     // Ignore things that aren't objects.
-    if (typeof input !== "object") return input;
+    if (typeof input !== "object")
+    {
+        return input;
+    }
 
-    for (var key in input) {
-        if (!input.hasOwnProperty(key)) continue;
+    for (var key in input)
+    {
+        if (!input.hasOwnProperty(key))
+        {
+            continue;
+        }
 
         var value = input[key];
         var match;
@@ -151,15 +162,19 @@ function convertDateStringsToDates(input) {
              //input[key] = filter('date')(new Date(milliseconds), 'd. MMM yyyy');
              }
              */
-        } else if (typeof value === "object") {
+        }
+        else if (typeof value === "object")
+        {
             // Recurse into object
             convertDateStringsToDates(value);
         }
     }
 }
 
-seroApp.config(["$httpProvider", function ($httpProvider) {
-    $httpProvider.defaults.transformResponse.push(function(responseData){
+seroApp.config(["$httpProvider", function ($httpProvider)
+{
+    $httpProvider.defaults.transformResponse.push(function (responseData)
+    {
         convertDateStringsToDates(responseData);
         return responseData;
     });
@@ -216,3 +231,121 @@ function addDays(date, days)
     result.setDate(result.getDate() + days);
     return result;
 }
+
+function updateEiaPermitStatus(ep, documents)
+{
+    //if (!scope.userinfo.info.features.notproduction)
+    //{
+    //    return false;
+    //}
+
+    //var values = scope.data.valuelists['eiastatus'];
+    //var sorted = _.sortBy(values, function (value)
+    //{
+    //    return value.value1;
+    //});
+    //sorted.reverse();
+
+    var oldStatus = ep.status;
+    var newStatus = null;
+
+    // EP is only criteria.
+    if (ep.date_cancelled)
+    {
+        newStatus = 37;
+    }
+    else if (ep.certificate_no)
+    {
+        newStatus = 36;
+    }
+    else if (ep.fee_receipt_no)
+    {
+        newStatus = 35;
+    }
+    else if (ep.date_fee_notification)
+    {
+        newStatus = 34;
+    }
+    else if (ep.date_decision)
+    {
+        newStatus = 33;
+    }
+    else if (ep.date_sent_ded_approval)
+    {
+        newStatus = 32;
+    }
+    // Document is criteria 2.
+    else
+    {
+        var documentsByType = _.groupBy(documents, function (document)
+        {
+            return document.type;
+        });
+        var newStatusFromDocuments = 0;
+        var typePriority = [13, 10, 9, 8];
+        var idFromPriority = {
+            13: {'conclusion': 59, 'date_dispatched': 58, 'date_sent_officer': 57, 'date_sent_from_dep': 56, 'date_sent_director': 55, 'date_submitted': 54},
+            10: {'date_dispatched': 31, 'date_sent_officer': 30, 'date_sent_from_dep': 29, 'date_sent_director': 28, 'date_submitted': 27},
+            9: {'conclusion': 26, 'date_dispatched': 25, 'date_sent_officer': 24, 'date_sent_from_dep': 23, 'date_sent_director': 22, 'date_submitted': 21},
+            8: {'conclusion': 20, 'date_dispatched': 19, 'date_sent_officer': 18, 'date_sent_from_dep': 17, 'date_sent_director': 16, 'date_submitted': 15}
+        };
+        _.forEach(typePriority, function (type)
+        {
+            var documents = documentsByType[type];
+            if (documents)
+            {
+                var tempStatus = 0;
+                _.forEach(documents, function (d)
+                {
+                    // Only conclusion if Accepted (78) or Not accepted (79)
+                    if (d.conclusion && _.includes([78, 79], d.conclusion) && idFromPriority[type]['conclusion'])
+                    {
+                        tempStatus = idFromPriority[type]['conclusion'];
+                    }
+                    //else if(d.dispatched)
+                    //{
+                    //    newStatus = idFromPriority[type]['dispatched'];
+                    //}
+                    else if (d.date_sent_officer)
+                    {
+                        tempStatus = idFromPriority[type]['date_sent_officer'];
+                    }
+                    else if (d.date_sent_from_dep)
+                    {
+                        tempStatus = idFromPriority[type]['date_sent_from_dep'];
+                    }
+                    else if (d.date_sent_director)
+                    {
+                        tempStatus = idFromPriority[type]['date_sent_director'];
+                    }
+                    else if (d.date_submitted)
+                    {
+                        tempStatus = idFromPriority[type]['date_submitted'];
+                    }
+
+                    if (tempStatus > newStatusFromDocuments)
+                    {
+                        newStatusFromDocuments = tempStatus;
+                    }
+                });
+
+                return false;
+            }
+        });
+        //console.log("newStatusFromDocuments", newStatusFromDocuments);
+        if (newStatusFromDocuments > 0)
+        {
+            newStatus = newStatusFromDocuments;
+        }
+    }
+
+    if (oldStatus != newStatus)
+    {
+        //console.log("Status changed from", oldStatus, "to", newStatus);
+        ep.status = newStatus;
+        return true;
+    }
+
+    //console.log("Status not changed", oldStatus, newStatus);
+    return false;
+};

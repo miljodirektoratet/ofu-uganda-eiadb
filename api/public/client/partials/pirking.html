@@ -1,0 +1,44 @@
+<div class="top-header">
+    <h1>Pirking</h1>
+</div>
+
+<div class="pirking">
+    <p>Currently last ID used for a EIA and Permit is {{lastId}}.</p>
+
+    <form role="form" name="criteria.form" novalidation ng-submit="beginPirking()">
+        <div class="row">
+            <div class="col-md-2">
+                <label for="criteria.from">From ID (inclusive)</label>
+                <input type="text" integer
+                        id="criteria.from"
+                        ng-required="true"
+                        ng-model="criteria.from"
+                        class="form-control input-sm"/>
+            </div>
+            <div class="col-md-2">
+                <label for="criteria.to">To ID (inclusive)</label>
+                <input type="text" integer
+                        id="criteria.to"
+                        ng-required="true"
+                        ng-model="criteria.to"
+                        class="form-control input-sm"/>
+            </div>
+            <div class="col-md-8">
+                <label for="criteria.begin">&nbsp;</label><br/>
+                <button type="submit" class="btn btn-sm btn-primary"
+                        id="criteria.begin"
+                        ng-disabled="criteria.form.$invalid">Begin pirking
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+
+
+</div>

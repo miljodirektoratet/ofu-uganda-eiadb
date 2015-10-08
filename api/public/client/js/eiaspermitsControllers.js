@@ -69,122 +69,14 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
 
     scope.updateStatus = function (ep)
     {
-        //if (!scope.userinfo.info.features.notproduction)
-        //{
-        //    return false;
-        //}
-
-        //var values = scope.data.valuelists['eiastatus'];
-        //var sorted = _.sortBy(values, function (value)
-        //{
-        //    return value.value1;
-        //});
-        //sorted.reverse();
-
-        var oldStatus = ep.status;
-        var newStatus = null;
-
-        // EP is only criteria.
-        if (ep.date_cancelled)
+        var updated = updateEiaPermitStatus(ep, scope.data.documents);
+        if (updated)
         {
-            newStatus = 37;
-        }
-        else if (ep.certificate_no)
-        {
-            newStatus = 36;
-        }
-        else if (ep.fee_receipt_no)
-        {
-            newStatus = 35;
-        }
-        else if (ep.date_fee_notification)
-        {
-            newStatus = 34;
-        }
-        else if (ep.date_decision)
-        {
-            newStatus = 33;
-        }
-        else if (ep.date_sent_ded_approval)
-        {
-            newStatus = 32;
-        }
-        // Document is criteria 2.
-        else
-        {
-            var documentsByType = _.groupBy(scope.data.documents, function (document)
-            {
-                return document.type;
-            });
-            var newStatusFromDocuments = 0;
-            var typePriority = [13, 10, 9, 8];
-            var idFromPriority = {
-                13: {'conclusion': 59, 'date_dispatched': 58, 'date_sent_officer': 57, 'date_sent_from_dep': 56, 'date_sent_director': 55, 'date_submitted': 54},
-                10: {'date_dispatched': 31, 'date_sent_officer': 30, 'date_sent_from_dep': 29, 'date_sent_director': 28, 'date_submitted': 27},
-                9: {'conclusion': 26, 'date_dispatched': 25, 'date_sent_officer': 24, 'date_sent_from_dep': 23, 'date_sent_director': 22, 'date_submitted': 21},
-                8: {'conclusion': 20, 'date_dispatched': 19, 'date_sent_officer': 18, 'date_sent_from_dep': 17, 'date_sent_director': 16, 'date_submitted': 15}
-            };
-            _.forEach(typePriority, function (type)
-            {
-                var documents = documentsByType[type];
-                if (documents)
-                {
-                    var tempStatus = 0;
-                    _.forEach(documents, function (d)
-                    {
-                        // Only conclusion if Accepted (78) or Not accepted (79)
-                        if (d.conclusion && _.includes([78, 79], d.conclusion) && idFromPriority[type]['conclusion'])
-                        {
-                            tempStatus = idFromPriority[type]['conclusion'];
-                        }
-                        //else if(d.dispatched)
-                        //{
-                        //    newStatus = idFromPriority[type]['dispatched'];
-                        //}
-                        else if (d.date_sent_officer)
-                        {
-                            tempStatus = idFromPriority[type]['date_sent_officer'];
-                        }
-                        else if (d.date_sent_from_dep)
-                        {
-                            tempStatus = idFromPriority[type]['date_sent_from_dep'];
-                        }
-                        else if (d.date_sent_director)
-                        {
-                            tempStatus = idFromPriority[type]['date_sent_director'];
-                        }
-                        else if (d.date_submitted)
-                        {
-                            tempStatus = idFromPriority[type]['date_submitted'];
-                        }
-
-                        if (tempStatus > newStatusFromDocuments)
-                        {
-                            newStatusFromDocuments = tempStatus;
-                        }
-                    });
-
-                    return false;
-                }
-            });
-            //console.log("newStatusFromDocuments", newStatusFromDocuments);
-            if (newStatusFromDocuments > 0)
-            {
-                newStatus = newStatusFromDocuments;
-            }
-        }
-
-        if (oldStatus != newStatus)
-        {
-            //console.log("Status changed from", oldStatus, "to", newStatus);
             scope.parts.eiapermit.form.status.$setDirty();
-            ep.status = newStatus;
-            return true;
         }
-
-        //console.log("Status not changed", oldStatus, newStatus);
-        return false;
+        return updated;
     };
+
 
     scope.newEiaPermit = function ()
     {

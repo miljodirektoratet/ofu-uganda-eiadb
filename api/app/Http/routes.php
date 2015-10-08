@@ -75,9 +75,15 @@ Route::group(['prefix' => 'edit/v1', 'middleware' => 'manager'], function ()
     Route::resource('code', 'Edit\CodeController');
 });
 
+
 Route::group(['prefix' => 'file/v1', 'middleware' => 'auth'], function ()
 {
     Route::post('upload', ['uses' => 'FileController@upload']);
     Route::get('download/{id}', ['uses' => 'FileController@download']);
     Route::get('delete/{id}', ['uses' => 'FileController@delete']);
+});
+
+Route::group(['prefix' => 'pirking/v1', 'middleware' => 'manager'], function ()
+{
+    Route::get('eiaspermits', ['uses' => 'PirkingController@getEiasPermits']);
 });
