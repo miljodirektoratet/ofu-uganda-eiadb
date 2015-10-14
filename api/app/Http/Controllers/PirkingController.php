@@ -23,7 +23,9 @@ class PirkingController extends Controller
             ->select('ep.id as eiapermit_id',
                 'p.id as project_id',
                 'p.title as project_title',
-                'status.description1 as status_description')
+                'status.id as status_id',
+                'status.description1 as status_description',
+            'ep.updated_at as eiapermit_updated_at')
             ->whereNull('ep.deleted_at')
             ->whereNull('p.deleted_at')
             ->whereBetween('ep.id', [$from, $to]);
