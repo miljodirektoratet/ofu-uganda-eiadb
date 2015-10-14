@@ -47,7 +47,7 @@ controllers.controller('UserController', ['$scope', 'UserInfo', function (scope,
 controllers.controller('PirkingController', ['$scope', '$http', 'EiaPermit', 'Document', 'Valuelists', '$q', function (scope, $http, EiaPermit, Document, Valuelists, $q)
 {
     scope.lastId = "..";
-    scope.criteria = {from: 3, to: 10};
+    scope.criteria = {};
     scope.dryrun = true;
     scope.eiaspermits = [];
     scope.working = false;
