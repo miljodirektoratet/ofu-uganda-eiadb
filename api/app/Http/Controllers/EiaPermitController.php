@@ -40,10 +40,6 @@ class EiaPermitController extends Controller
     // GET /resource/:id/subresource/:subid
     public function show($projectId, $id)
     {
-        if ($id == 7 || $id == 17 || $id == 27 || $id == 1 || $id == 3 || $id == 40 || $id == 15)
-        {
-            throw New Exception("Buhhffffff");
-        }
         $withTeamLeaderFunction = function ($query)
         {
             $query->select('id', 'person');
