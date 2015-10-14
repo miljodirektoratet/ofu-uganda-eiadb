@@ -32,7 +32,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2 class="panel-title">EIA and Permit <span ng-show="data.eiapermit.id">(ID {{data.eiapermit.id}})</span> (Dirty:{{parts.eiapermit.form.$dirty}}, valid:{{parts.eiapermit.form.$valid}})
+                    <h2 class="panel-title">EIA and Permit <span ng-show="data.eiapermit.id">(id {{data.eiapermit.id}})</span> (Dirty:{{parts.eiapermit.form.$dirty}}, valid:{{parts.eiapermit.form.$valid}})
                         <span class="loader pull-right" ng-show="parts.eiapermit.state == SavingStateEnum.Loading"></span>
                         <span class="saving-message-inline pull-right" ng-show="parts.eiapermit.state == SavingStateEnum.Loaded && !data.eiapermit.is_new">Last changed by {{data.eiapermit.updated_by}}</span>
                         <span class="saving-message-inline pull-right" ng-show="parts.eiapermit.state == SavingStateEnum.SavingStarted">Saving...</span>

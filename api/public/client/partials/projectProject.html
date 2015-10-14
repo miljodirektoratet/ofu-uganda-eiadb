@@ -50,7 +50,7 @@
   <div class="col-md-6 project-project-project" ng-if="!selectOrganisationMode">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2 class="panel-title">Project <span ng-show="data.project.id">(ID {{data.project.id}})</span> (Dirty:{{parts.project.form.$dirty}}, valid:{{parts.project.form.$valid}})
+        <h2 class="panel-title">Project <span ng-show="data.project.id">(id {{data.project.id}})</span> (Dirty:{{parts.project.form.$dirty}}, valid:{{parts.project.form.$valid}})
           <span class="loader pull-right" ng-show="parts.project.state == SavingStateEnum.Loading"></span>
           <span class="saving-message-inline pull-right" ng-show="parts.project.state == SavingStateEnum.Loaded && !data.project.is_new">Last changed by {{data.project.updated_by}}</span>
           <span class="saving-message-inline pull-right" ng-show="parts.project.state == SavingStateEnum.SavingStarted">Saving...</span>
@@ -161,7 +161,7 @@
   <div class="col-md-6 project-project-organisation" ng-if="!selectOrganisationMode">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2 class="panel-title">Developer <span ng-show="data.organisation.id">(ID {{data.organisation.id}}) (Dirty:{{parts.organisation.form.$dirty}}, valid:{{parts.organisation.form.$valid}})
+        <h2 class="panel-title">Developer <span ng-show="data.organisation.id">(id {{data.organisation.id}}) (Dirty:{{parts.organisation.form.$dirty}}, valid:{{parts.organisation.form.$valid}})
           <span class="loader pull-right" ng-show="parts.organisation.state == SavingStateEnum.Loading"></span>
           <span class="saving-message-inline pull-right" ng-show="parts.organisation.state == SavingStateEnum.Loaded && !data.organisation.is_new">Last changed by {{data.organisation.updated_by}}</span>
           <span class="saving-message-inline pull-right" ng-show="parts.organisation.state == SavingStateEnum.SavingStarted">Saving...</span>
