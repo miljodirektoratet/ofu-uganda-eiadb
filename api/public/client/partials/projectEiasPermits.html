@@ -306,7 +306,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="btn-group delete-button pull-right" dropdown ng-hide="!auth.canSave('delete')" is-open="deleteButton.isopen">
-                                    <button type="button" class="btn btn-sm btn-danger" dropdown-toggle>
+                                    <button type="button" class="btn btn-sm btn-danger btn-delete" dropdown-toggle>
                                         Delete EIA and Permit
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
@@ -599,6 +599,30 @@
                                                         <div class="form-group">
                                                             <label for="document.remarks">Remarks</label>
                                                             <textarea ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.remarks')" class="form-control input-sm" rows="2" id="document.remarks" ng-model="data.document.remarks"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="btn-group delete-button pull-right" dropdown ng-hide="!auth.canSave('delete')" is-open="documentsDeleteButton.isopen">
+                                                            <button type="button" class="btn btn-sm btn-danger btn-delete" dropdown-toggle>
+                                                                Delete document
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li role="menuitem">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            Do you really want to delete this record?
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4 col-md-offset-3">
+                                                                            <button type="button" class="btn btn-sm btn-primary" ng-click="deleteDocument()">Yes</button>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <button type="button" class="btn btn-sm btn-warning" ng-click="documentsDeleteButton.isopen = false">No</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -151,7 +151,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             return "";
         }
-        return "Status for id "+ ep.id +  ": " + factory.getCodeFromValuelist("eiastatus", ep.status);
+        return "Status for id " + ep.id + ": " + factory.getCodeFromValuelist("eiastatus", ep.status);
     };
 
     factory.getAuditInspectionSummary = function (ai)
@@ -284,6 +284,27 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         else
         {
             factory.eiapermit.$delete(params, function ()
+            {
+                onDelete(index);
+            });
+        }
+    };
+
+    factory.deleteDocument = function (params)
+    {
+        var index = _.findIndex(factory.documents, {'id': factory.document.id});
+        var onDelete = function (index)
+        {
+            factory.documents.splice(index, 1);
+            factory.document = {};
+        };
+        if (factory.document.is_new)
+        {
+            onDelete(index);
+        }
+        else
+        {
+            factory.document.$delete(params, function ()
             {
                 onDelete(index);
             });

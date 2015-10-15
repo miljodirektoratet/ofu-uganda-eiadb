@@ -90,13 +90,18 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     {
         ProjectFactory.createNewDocument(scope.data.eiapermit);
         //scope.toggleDocument(scope.data.document);
-    }
+    };
 
     scope.deleteEiaPermit = function ()
     {
         ProjectFactory.deleteEiaPermit(scope.routeParams);
         scope.goto("/projects/" + scope.data.project.id);
-    }
+    };
+
+    scope.deleteDocument = function ()
+    {
+        ProjectFactory.deleteDocument(scope.routeParams);
+    };
 
     scope.toggleDocument = function (d)
     {
