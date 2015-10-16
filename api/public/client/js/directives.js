@@ -121,7 +121,7 @@ directives.directive('statisticsPanel', function ()
     return {
         restrict: 'E',
         scope: {
-            part: '=part'
+            part: '='
         },
         templateUrl: 'partials/statisticsTablePanel.html'
     };
