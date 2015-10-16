@@ -336,8 +336,11 @@ textarea.ng-invalid,
 
 .project-eiasandpermits .delete-button {
     margin-top: 65px;
+
+}.project-eiasandpermits .documents .delete-button {
+    margin-top: 35px;
 }
 
 .project-eiasandpermits .btn-delete {
-    width:170px;
+    width:200px;
 }
