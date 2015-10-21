@@ -26,7 +26,7 @@ var seroApp = angular.module('seroApp', [
     {
         var projectTabsOptions = {templateUrl: 'partials/projectTabs.html', controller: 'ProjectTabsController'};
 
-        $routeProvider.when('/', {templateUrl: 'partials/home.html'});
+        $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeController'});
         $routeProvider.when('/projects', {templateUrl: 'partials/projects.html', controller: 'ProjectsController'});
         $routeProvider.when('/projects/:projectId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/eiaspermits', projectTabsOptions);

@@ -34,6 +34,16 @@ controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo', f
     };
 }]);
 
+controllers.controller('HomeController', ['$scope', 'GeneralStatistics', function (scope, GeneralStatistics)
+{
+    scope.counts = {};
+
+    GeneralStatistics.get({}, function (data)
+    {
+        scope.counts = data.counts;
+    });
+}]);
+
 controllers.controller('UserController', ['$scope', 'UserInfo', function (scope, UserInfo)
 {
     scope.userinfo = UserInfo;

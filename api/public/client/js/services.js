@@ -165,6 +165,11 @@ services.factory('ProjectStatistics', ['$resource', function ($resource)
     return $resource('/statistics/v1/project');
 }]);
 
+services.factory('GeneralStatistics', ['$resource', function ($resource)
+{
+    return $resource('/statistics/v1/general');
+}]);
+
 
 services.factory('SearchService', ['AuditInspectionSearch', '$q', function (AuditInspectionSearch, $q)
 {
