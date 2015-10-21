@@ -311,13 +311,14 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         }
     };
 
-    factory.createNewAuditInspection = function (p, year, type)
+    factory.createNewAuditInspection = function (p, year, type, reason)
     {
         var aiData =
         {
             project_id: p.id,
             year: year,
             type: type,
+            reason: reason,
             days: 1,
             status: 70,
             is_new: true

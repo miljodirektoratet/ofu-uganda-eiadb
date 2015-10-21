@@ -24,7 +24,7 @@
                     <li role="menuitem">
                         <form role="form" name="newButton.form" novalidation>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label for="newButton.year">Year</label>
                                     <input type="text" integer
                                             id="newButton.year"
@@ -32,7 +32,7 @@
                                             ng-model="newButton.year"
                                             class="form-control input-sm"/>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="newButton.type">Type</label>
                                     <select ui-select2 id="newButton.type" class="form-control input-sm"
                                             ng-required="true"
@@ -42,7 +42,20 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="newButton.reason">Reason</label>
+                                        <select ui-select2 id="newButton.reason" class="form-control input-sm"
+                                                ng-change="saveCurrentAuditInspection()"
+                                                ng-required="true"
+                                                ng-model="newButton.reason">
+                                            <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}">
+                                                {{v.description1}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
                                     <label for="newButton.create">&nbsp;</label>
                                     <button type="button" class="btn btn-sm btn-primary use-button pull-right"
                                             id="newButton.create"
@@ -141,6 +154,46 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="reason">Reason</label>
+                                    <select ui-select2 id="reason" class="form-control input-sm"
+                                            ng-change="saveCurrentAuditInspection()"
+                                            ng-required="true"
+                                            ng-disabled="!auth.canSave('reason')"
+                                            ng-model="data.auditinspection.reason">
+                                        <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}">
+                                            {{v.description1}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="external_participants">Participants from lead agencies, facilities etc.</label>
+                                    <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                            ng-readonly="!auth.canSave('external_participants')"
+                                            class="form-control input-sm" id="external_participants"
+                                            ng-model="data.auditinspection.external_participants"/>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="advance_notice">Advanced notice</label>
+                                    <input type="checkbox" class="checkbox-small form-control input-sm"
+                                            id="advance_notice"
+                                            ng-model="fake_advance_notice"
+                                            ng-checked="data.auditinspection.advance_notice"
+                                            ng-click="data.auditinspection.advance_notice = !data.auditinspection.advance_notice; saveCurrentAuditInspection()"
+                                            ng-readonly="!auth.canSave('advance_notice')"/>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="date_carried_out">Date carried out</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
@@ -169,23 +222,16 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="external_participants">Participants from lead agencies, facilities etc.</label>
-                                    <input type="text" ng-blur="saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('external_participants')"
-                                            class="form-control input-sm" id="external_participants"
-                                            ng-model="data.auditinspection.external_participants"/>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="advance_notice">Advanced notice</label>
-                                    <input type="checkbox" class="checkbox-small form-control input-sm"
-                                            id="advance_notice"
-                                            ng-model="fake_advance_notice"
-                                            ng-checked="data.auditinspection.advance_notice"
-                                            ng-click="data.auditinspection.advance_notice = !data.auditinspection.advance_notice; saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('advance_notice')"/>
-
+                                    <label for="lead_agencies">Lead agencies</label>
+                                    <select ui-select2 multiple="true" placeholder="Click to pick"
+                                            ng-change="saveCurrentAuditInspection()"
+                                            ng-disabled="!auth.canSave('lead_agencies')" id="lead_agencies"
+                                            class="form-control input-sm"
+                                            ng-model="data.auditinspection.leadagency_ids">
+                                        <option ng-repeat="v in valuelists.leadagency" value="{{v.id}}">
+                                            {{v.description1}}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -222,18 +268,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="lead_agencies">Lead agencies</label>
-                                    <select ui-select2 multiple="true" placeholder="Click to pick"
-                                            ng-change="saveCurrentAuditInspection()"
-                                            ng-disabled="!auth.canSave('lead_agencies')" id="lead_agencies"
-                                            class="form-control input-sm"
-                                            ng-model="data.auditinspection.leadagency_ids">
-                                        <option ng-repeat="v in valuelists.leadagency" value="{{v.id}}">
-                                            {{v.description1}}
-                                        </option>
-                                    </select>
+                                    <label for="findings">Description of findings</label>
+                                    <textarea class="form-control input-sm" rows="2" id="findings"
+                                            ng-blur="saveCurrentAuditInspection()"
+                                            ng-readonly="!auth.canSave('findings')"
+                                            ng-model="data.auditinspection.findings"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -283,11 +324,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="findings">Description of findings</label>
-                                    <textarea class="form-control input-sm" rows="2" id="findings"
+                                    <label for="recommendations">Recommendations</label>
+                                    <textarea class="form-control input-sm" rows="2" id="recommendations"
                                             ng-blur="saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('findings')"
-                                            ng-model="data.auditinspection.findings"></textarea>
+                                            ng-readonly="!auth.canSave('recommendations')"
+                                            ng-model="data.auditinspection.recommendations"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -324,11 +365,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="recommendations">Recommendations</label>
-                                    <textarea class="form-control input-sm" rows="2" id="recommendations"
+                                    <label for="remarks">Remarks</label>
+                                    <textarea class="form-control input-sm" rows="2" id="remarks"
                                             ng-blur="saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('recommendations')"
-                                            ng-model="data.auditinspection.recommendations"></textarea>
+                                            ng-readonly="!auth.canSave('remarks')"
+                                            ng-model="data.auditinspection.remarks"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -336,7 +377,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date_received">Date for receiving compliance documentation</label>
+                                    <label for="date_received">Received compliance documentation</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
                                                 ng-readonly="!auth.canSave('date_received')" id="date_received"
@@ -370,15 +411,6 @@
                                                       class="glyphicon glyphicon-calendar"></span></button>
                                             </span>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="remarks">Remarks</label>
-                                    <textarea class="form-control input-sm" rows="2" id="remarks"
-                                            ng-blur="saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('remarks')"
-                                            ng-model="data.auditinspection.remarks"></textarea>
                                 </div>
                             </div>
                         </div>

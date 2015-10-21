@@ -9,7 +9,7 @@ class AuditInspection extends Model
 
     protected $table = 'audits_inspections';
     protected $dates = ['deleted_at','date_carried_out','date_action_taken','date_deadline','date_received','date_closing'];
-    protected $fillable = ['year','number','code','type','coordinated','advance_notice','date_carried_out','days','findings','recommendations','date_action_taken','action_taken','external_participants','timeframe','date_deadline','date_received','date_closing','project_id','status','file_metadata_id','remarks'];
+    protected $fillable = ['year','number','code','type','coordinated','advance_notice','date_carried_out','days','findings','recommendations','date_action_taken','action_taken','external_participants','timeframe','date_deadline','date_received','date_closing','project_id','status','reason','file_metadata_id','remarks'];
     protected $hidden = ['deleted_at'];
 
 
