@@ -126,3 +126,23 @@ directives.directive('statisticsPanel', function ()
         templateUrl: 'partials/statisticsTablePanel.html'
     };
 });
+
+(function ()
+{
+    'use strict';
+
+    angular.module('seroApp.directives').directive('seroDeleteButton', directive);
+
+    function directive()
+    {
+        return {
+            restrict: 'E',
+            scope: {
+                'onYes': '&',
+                'text': '=',
+                'warning': '='
+            },
+            templateUrl: 'partials/directives.deleteButton.html'
+        };
+    }
+})();

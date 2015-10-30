@@ -32,7 +32,8 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2 class="panel-title">EIA and Permit <span ng-show="data.eiapermit.id">(id {{data.eiapermit.id}})</span> (Dirty:{{parts.eiapermit.form.$dirty}}, valid:{{parts.eiapermit.form.$valid}})
+                    <h2 class="panel-title">EIA and Permit
+                        <span ng-show="data.eiapermit.id">(id {{data.eiapermit.id}})</span> (Dirty:{{parts.eiapermit.form.$dirty}}, valid:{{parts.eiapermit.form.$valid}})
                         <span class="loader pull-right" ng-show="parts.eiapermit.state == SavingStateEnum.Loading"></span>
                         <span class="saving-message-inline pull-right" ng-show="parts.eiapermit.state == SavingStateEnum.Loaded && !data.eiapermit.is_new">Last changed by {{data.eiapermit.updated_by}}</span>
                         <span class="saving-message-inline pull-right" ng-show="parts.eiapermit.state == SavingStateEnum.SavingStarted">Saving...</span>
@@ -305,28 +306,10 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="btn-group delete-button pull-right" dropdown ng-hide="!auth.canSave('delete')" is-open="deleteButton.isopen">
-                                    <button type="button" class="btn btn-sm btn-danger btn-delete" dropdown-toggle>
-                                        Delete EIA and Permit
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li role="menuitem">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    NB! Any documents linked to this EIA and Permit will also be deleted. Do you want to proceed?
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 col-md-offset-3">
-                                                    <button type="button" class="btn btn-sm btn-primary" ng-click="deleteEiaPermit()">Yes</button>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <button type="button" class="btn btn-sm btn-warning" ng-click="deleteButton.isopen = false">No</button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                        text="'Delete EIA and Permit'"
+                                        warning="'NB! Any documents linked to this EIA and Permit will also be deleted. Do you want to proceed?'"
+                                        on-yes="deleteEiaPermit()"></sero-delete-button>
                             </div>
                         </div>
 
@@ -602,28 +585,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <div class="btn-group delete-button pull-right" dropdown ng-hide="!auth.canSave('delete')" is-open="documentsDeleteButton.isopen">
-                                                            <button type="button" class="btn btn-sm btn-danger btn-delete" dropdown-toggle>
-                                                                Delete document
-                                                            </button>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            Do you really want to delete this record?
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-4 col-md-offset-3">
-                                                                            <button type="button" class="btn btn-sm btn-primary" ng-click="deleteDocument()">Yes</button>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            <button type="button" class="btn btn-sm btn-warning" ng-click="documentsDeleteButton.isopen = false">No</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                        <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                                                text="'Delete document'"
+                                                                warning="'Do you really want to delete this record?'"
+                                                                on-yes="deleteDocument()"></sero-delete-button>
                                                     </div>
                                                 </div>
 
