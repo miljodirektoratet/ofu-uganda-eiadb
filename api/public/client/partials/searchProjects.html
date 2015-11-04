@@ -55,17 +55,6 @@
                             <input type="text" class="form-control input-sm" id="project_id" ng-model="criteria.project_id"/>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="project_grade">Performance level</label>
-                            <select ui-select2="{allowClear:true}"
-                                    id="project_grade" class="form-control input-sm"
-                                    ng-model="criteria.project_grade">
-                                <option></option>
-                                <option ng-repeat="v in valuelists.grade" value="{{v.id}}">{{v.description1}}</option>
-                            </select>
-                        </div>
-                    </div>
 
                 </div>
 

@@ -125,7 +125,7 @@
           </div>
 
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-6">
               <div class="form-group">
                 <label for="has_industrial_waste_water">Industrial waste water?</label>
                 <select ui-select2="{allowClear:false}" ng-change="saveCurrentProject()" ng-disabled="!auth.canSave()" id="has_industrial_waste_water" ng-required="false" class="form-control input-sm" ng-model="data.project.has_industrial_waste_water">
@@ -133,14 +133,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-5">
-              <div class="form-group">
-                <label for="grade">Performance level</label>
-                <select ui-select2="{allowClear:true}" ng-change="saveCurrentProject()" ng-disabled="!auth.canSaveGrade()" id="grade" ng-required="false" class="form-control input-sm" ng-model="data.project.grade">
-                  <option></option>
-                  <option ng-repeat="v in valuelists.grade" value="{{v.id}}">{{v.description1}}</option>
-                </select>
-              </div>
+            <div class="col-md-6">
             </div>
           </div>
           <div class="row">

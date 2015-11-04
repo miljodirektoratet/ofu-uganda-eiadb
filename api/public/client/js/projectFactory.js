@@ -139,10 +139,10 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             return "";
         }
-        if (currentTab == ProjectTabEnum.AuditsInspections)
-        {
-            return p.title + " (Performance: " + factory.getCodeFromValuelist("grade", p.grade) + ")";
-        }
+        //if (currentTab == ProjectTabEnum.AuditsInspections)
+        //{
+        //    return p.title + " (Performance: " + factory.getCodeFromValuelist("grade", p.grade) + ")";
+        //}
         return p.title;
     };
 
@@ -224,7 +224,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         var pData =
         {
             has_industrial_waste_water: 42, // 42=Unknown
-            grade: 47, // 47=Unknown
             organisation_id: o.id,
             is_new: true
         };
@@ -323,7 +322,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             type: type,
             reason: reason,
             days: 1,
-            status: 70,
+            status: 70, // 70=Created
+            performance_level: 47, // 47=Unknown
             lead_officer: factory.userinfo.info.id,
             is_new: true
         };

@@ -122,7 +122,6 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         {
             return false;
         }
-        console.log(scope.data.auditinspection.lead_officer);
         return scope.userinfo.info.id === scope.data.auditinspection.lead_officer;
     };
 
