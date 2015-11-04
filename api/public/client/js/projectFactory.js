@@ -243,6 +243,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         var epData =
         {
             project_id: p.id,
+            inspection_recommended: 42, // Unknown
             is_new: true
         };
         factory.eiapermit = new EiaPermit(epData);
