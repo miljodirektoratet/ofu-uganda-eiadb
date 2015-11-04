@@ -39,10 +39,16 @@ class AuditInspectionController extends Controller
             $query->select('id', 'filename');
         };
 
+        $withFileMetadata = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
+
         $auditinspection = Project::find($projectId)->auditinspections()
             ->with('users')
             ->with('leadagencies')
-            ->with(array('actionTakenLetter' => $withActionTakenLetter))
+            ->with(array('actionTakenLetter' => $withFileMetadata))
+            ->with(array('reportFile' => $withFileMetadata))
             ->with('documentation')
             ->find($id);
 

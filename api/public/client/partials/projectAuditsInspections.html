@@ -282,6 +282,46 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label>Audit/Inspection report</label>
+                                    <div class="uploaded-file" ng-show="data.auditinspection.file_metadata_report_id">
+                                        <a ng-href="{{downloadFileUrl(data.auditinspection.file_metadata_report_id)}}" ng-show="data.auditinspection.report_file">{{data.auditinspection.report_file.filename}}</a>
+                                        <button type="button" class="delete btn btn-sm btn-link"
+                                                ng-click="deleteReport()"
+                                                ng-hide="!auth.canSave('delete')">delete
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-default"
+                                                ngf-select="uploadReport($files)"
+                                                accept="{{fileUploadPattern}}"
+                                                ngf-pattern="{{fileUploadNgfPattern}}"
+                                                ng-model="fake_report"
+                                                name="report"
+                                                ng-hide="data.auditinspection.file_metadata_report_id"
+                                                ng-disabled="!auth.canSave('delete')"
+                                                ngf-max-size="{{fileUploadMaxSize}}">
+                                            Select File
+                                        </button>
+                                        <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingReport">
+                                            <div class="file">{{reportFile.name}}<br/>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{reportFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                            style="width: {{actionTakenLetterFile.progress}}%;">
+                                                        {{reportFile.progress}}%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="errors" ng-messages="parts.auditinspection.form.report.$error" role="alert">
+                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                <div ng-message="maxSize">The file is to big.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label>Response document</label>
                                     <div class="uploaded-file" ng-show="data.auditinspection.file_metadata_id">
                                         <a ng-href="{{downloadFileUrl(data.auditinspection.file_metadata_id)}}" ng-show="data.auditinspection.action_taken_letter">{{data.auditinspection.action_taken_letter.filename}}</a>
@@ -319,8 +359,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">

@@ -151,6 +151,32 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         });
     };
 
+    scope.uploadReport = function (files)
+    {
+        if (!files)
+        {
+            return;
+        }
+        scope.showUploadingFileReport = true;
+        scope.reportFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.auditinspection.form.report, scope.reportFile);
+
+        promise.then(function (file)
+        {
+            scope.data.auditinspection.file_metadata_report_id = file.result.id;
+            scope.parts.auditinspection.form.report.$setDirty();
+            scope.saveCurrentAuditInspection();
+
+            $timeout(function ()
+            {
+                scope.showUploadingFileReport = false;
+            }, 3000);
+
+        }, function (reason)
+        {
+        });
+    };
+
     scope.uploadDocumentation = function (files)
     {
         if (!files)
@@ -185,6 +211,13 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     {
         scope.data.auditinspection.file_metadata_id = null;
         scope.parts.auditinspection.form.action_taken_letter.$setDirty();
+        scope.saveCurrentAuditInspection();
+    };
+
+    scope.deleteReport = function ()
+    {
+        scope.data.auditinspection.file_metadata_report_id = null;
+        scope.parts.auditinspection.form.report.$setDirty();
         scope.saveCurrentAuditInspection();
     };
 
