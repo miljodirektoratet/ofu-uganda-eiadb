@@ -27,7 +27,7 @@ class AuditInspectionController extends Controller
 
         $auditinspections = Project::find($projectId)
             ->auditinspections()
-            ->get(array('id', 'status', 'year', 'number', 'code'));
+            ->get(array('id', 'status', 'year', 'number', 'code', 'reason'));
         return Response::json($auditinspections, 200);
     }
 

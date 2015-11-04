@@ -163,11 +163,18 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             return "";
         }
-        return "Number " + ai.code + ": " + factory.getCodeFromValuelist("auditinspectionstatus", ai.status);
+        // Example: "Number 2015.033 (Baseline inspection): Created".
+        var reason = factory.getCodeFromValuelist("audit_inspection_reason", ai.reason);
+        var status = factory.getCodeFromValuelist("auditinspectionstatus", ai.status);
+        return "Number " + ai.code + " (" + reason + "): " + status;
     };
 
     factory.getCodeFromValuelist = function (valuelistName, id)
     {
+        if (typeof id === "string")
+        {
+            id = parseInt(id);
+        }
         var code = _.find(factory.valuelists[valuelistName], {'id': id});
         if (code)
         {
