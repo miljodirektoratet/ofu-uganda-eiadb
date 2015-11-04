@@ -90,7 +90,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="user_id">The Officer assigned</label>
+                                    <label for="user_id">Officer assigned</label>
                                     <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('user_id')" id="user_id" class="form-control input-sm" ng-model="data.eiapermit.user_id">
                                         <option ng-repeat="v in valuelists.officer" value="{{v.id}}">{{v.description1}}</option>
                                     </select>
