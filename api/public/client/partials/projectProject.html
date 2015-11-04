@@ -128,12 +128,18 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="has_industrial_waste_water">Industrial waste water?</label>
-                <select ui-select2="{allowClear:false}" ng-change="saveCurrentProject()" ng-disabled="!auth.canSave()" id="has_industrial_waste_water" ng-required="false" class="form-control input-sm" ng-model="data.project.has_industrial_waste_water">
+                <select ui-select2="{allowClear:false}" ng-change="saveCurrentProject()" ng-disabled="!auth.canSave()" id="has_industrial_waste_water" class="form-control input-sm" ng-model="data.project.has_industrial_waste_water">
                   <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
                 </select>
               </div>
             </div>
             <div class="col-md-6">
+              <div class="form-group">
+                <label for="risk_level">Risk level</label>
+                <select ui-select2="{allowClear:false}" ng-change="saveCurrentProject()" ng-disabled="!auth.canSave()" id="risk_level" class="form-control input-sm" ng-model="data.project.risk_level">
+                  <option ng-repeat="v in valuelists.project_risk_level" value="{{v.id}}">{{v.description1}}</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="row">

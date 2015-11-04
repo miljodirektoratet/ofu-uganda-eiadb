@@ -37,6 +37,7 @@ class ValuelistController extends Controller
         $valuelists["documentconclusion"] = $this->documentconclusion();
 
         $valuelists["audit_inspection_reason"] = $this->audit_inspection_reason();
+        $valuelists["project_risk_level"] = $this->project_risk_level();
 
 
         return Response::json($valuelists, 200);
@@ -187,6 +188,11 @@ class ValuelistController extends Controller
     private function audit_inspection_reason()
     {
         return $this->getCodesFromDrowdownName("audit_inspection_reason");
+    }
+
+    private function project_risk_level()
+    {
+        return $this->getCodesFromDrowdownName("project_risk_level");
     }
 
     private function getCodesFromArray($codeIds)
