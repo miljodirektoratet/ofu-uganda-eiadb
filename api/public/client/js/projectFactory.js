@@ -1,6 +1,7 @@
 'use strict';
 
-services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'AuditInspection', 'Valuelists', function ($q, $filter, Project, Organisation, EiaPermit, Document, AuditInspection, Valuelists)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'AuditInspection', 'Valuelists', 'UserInfo',
+    function ($q, $filter, Project, Organisation, EiaPermit, Document, AuditInspection, Valuelists, UserInfo)
 {
     var factory = {};
     factory.project = {};
@@ -12,6 +13,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
     factory.auditsinspections = [];
     factory.auditinspection = {};
     factory.valuelists = Valuelists;
+    factory.userinfo = UserInfo;
     factory.retrieveProjectData = function (params)
     {
         var deferredProject = $q.defer();
@@ -322,6 +324,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             reason: reason,
             days: 1,
             status: 70,
+            lead_officer: factory.userinfo.info.id,
             is_new: true
         };
         factory.auditinspection = new AuditInspection(aiData);

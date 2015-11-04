@@ -188,7 +188,7 @@
                                     <input type="checkbox" class="checkbox-small form-control input-sm" id="coordinated"
                                             ng-model="fake_coordinated" ng-checked="data.auditinspection.coordinated"
                                             ng-click="data.auditinspection.coordinated = !data.auditinspection.coordinated; saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('coordinated')"/>
+                                            ng-disabled="!auth.canSave('coordinated')"/>
                                 </div>
                             </div>
                         </div>
@@ -244,7 +244,7 @@
                                             ng-model="fake_advance_notice"
                                             ng-checked="data.auditinspection.advance_notice"
                                             ng-click="data.auditinspection.advance_notice = !data.auditinspection.advance_notice; saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('advance_notice')"/>
+                                            ng-disabled="!auth.canSave('advance_notice')"/>
 
                                 </div>
                             </div>

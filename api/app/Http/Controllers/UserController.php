@@ -13,6 +13,7 @@ class UserController extends Controller
         $user = Auth::user();
         $info = array('email' => $user->email,
             'name' => $user->name,
+            'id' => $user->id,
             'can_impersonate' => Auth::user()->hasRole("Role 8") && App::environment() !== "production",
             'roles' => $this::getRoles($user),
             'features' => $this->getFeatures());

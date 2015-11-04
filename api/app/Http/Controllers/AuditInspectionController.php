@@ -79,7 +79,7 @@ class AuditInspectionController extends Controller
     // POST /resource/:id/subresource
     public function store($projectId)
     {
-        if (!$this::canSave())
+        if (!$this::canSave('new'))
         {
             return $this::notAuthorized();
         }
@@ -100,19 +100,25 @@ class AuditInspectionController extends Controller
     // PUT/PATCH /resource/:id/subresource/:subid
     public function update($projectId, $id)
     {
-        if (!$this::canSave())
-        {
-            return $this::notAuthorized();
-        }
-
         $auditinspection = Project::find($projectId)->auditinspections()->find($id);
         if (!$auditinspection)
         {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
+        if (!$this::canSave('update', $auditinspection))
+        {
+            return $this::notAuthorized();
+        }
+
+        $except = [];
+        if (!$this::canSave('lead_officer'))
+        {
+            $except = ['lead_officer'];
+        }
+
         $inputData = Input::all();
-        $this->updateValuesInResource($auditinspection, $inputData);
+        $this->updateValuesInResource($auditinspection, $inputData, $except);
         $this->handleUsers($auditinspection, $inputData);
         $this->handleLeadAgencies($auditinspection, $inputData);
         $this->handleDocumentation($auditinspection, $inputData);
@@ -123,7 +129,7 @@ class AuditInspectionController extends Controller
     // DELETE /resource/:id/subresource/:subid
     public function destroy($projectId, $id)
     {
-        if (!$this::canSave())
+        if (!$this::canSave('delete'))
         {
             return $this::notAuthorized();
         }
@@ -187,12 +193,16 @@ class AuditInspectionController extends Controller
         $auditinspection->code = sprintf("%d.%03d", $year, $number);
     }
 
-    private function updateValuesInResource($resource, $data)
+    private function updateValuesInResource($resource, $data, $except = [])
     {
         $dates = $resource->getDates();
         $changed = false;
         foreach ($data as $key => $value)
         {
+            if (in_array($key, $except))
+            {
+                continue;
+            }
             if (in_array($key, $resource["fillable"], true))
             {
                 if ($value === "")
@@ -227,9 +237,25 @@ class AuditInspectionController extends Controller
         }
     }
 
-    private function canSave()
+    private function canSave($field, $resource=null)
     {
-        return Auth::user()->hasRole("Role 7");
+        if ($field == "new")
+        {
+            return Auth::user()->hasRole("Role 7");
+        }
+        if (Auth::user()->hasRole("Role 8"))
+        {
+            return true;
+        }
+        if ($field == "lead_officer")
+        {
+            return false;
+        }
+        if ($resource)
+        {
+            return Auth::user()->id === $resource['lead_officer'];
+        }
+        return false;
     }
 
     private function notAuthorized()

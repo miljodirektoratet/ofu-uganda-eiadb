@@ -110,7 +110,20 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 
     scope.auth.canSave = function (field)
     {
-        return scope.userinfo.info.role_7;
+        if (field == "new")
+        {
+            return scope.userinfo.info.role_7;
+        }
+        if (scope.userinfo.info.role_8)
+        {
+            return true;
+        }
+        if (field == "lead_officer")
+        {
+            return false;
+        }
+        console.log(scope.data.auditinspection.lead_officer);
+        return scope.userinfo.info.id === scope.data.auditinspection.lead_officer;
     };
 
     scope.uploadActionTakenLetter = function (files)
