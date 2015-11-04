@@ -125,9 +125,23 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="users">Participants from NEMA</label>
+                                    <label for="lead_officer">Lead officer</label>
+                                    <select ui-select2
+                                            ng-change="saveCurrentAuditInspection()"
+                                            ng-disabled="!auth.canSave('lead_officer')" id="lead_officer"
+                                            class="form-control input-sm"
+                                            ng-model="data.auditinspection.lead_officer">
+                                        <option ng-repeat="v in valuelists.officer" value="{{v.id}}">
+                                            {{v.description1}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="users">Other officers</label>
                                     <select ui-select2 multiple="true" placeholder="Click to pick"
                                             ng-change="saveCurrentAuditInspection()"
                                             ng-disabled="!auth.canSave('personnel')" id="users"
@@ -137,16 +151,6 @@
                                             {{v.description1}}
                                         </option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-
-                                    <label for="coordinated">Multisectoral</label>
-                                    <input type="checkbox" class="checkbox-small form-control input-sm" id="coordinated"
-                                            ng-model="fake_coordinated" ng-checked="data.auditinspection.coordinated"
-                                            ng-click="data.auditinspection.coordinated = !data.auditinspection.coordinated; saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('coordinated')"/>
                                 </div>
                             </div>
                         </div>
@@ -179,14 +183,12 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="advance_notice">Advanced notice</label>
-                                    <input type="checkbox" class="checkbox-small form-control input-sm"
-                                            id="advance_notice"
-                                            ng-model="fake_advance_notice"
-                                            ng-checked="data.auditinspection.advance_notice"
-                                            ng-click="data.auditinspection.advance_notice = !data.auditinspection.advance_notice; saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('advance_notice')"/>
 
+                                    <label for="coordinated">Multisectoral</label>
+                                    <input type="checkbox" class="checkbox-small form-control input-sm" id="coordinated"
+                                            ng-model="fake_coordinated" ng-checked="data.auditinspection.coordinated"
+                                            ng-click="data.auditinspection.coordinated = !data.auditinspection.coordinated; saveCurrentAuditInspection()"
+                                            ng-readonly="!auth.canSave('coordinated')"/>
                                 </div>
                             </div>
                         </div>
@@ -232,6 +234,18 @@
                                             {{v.description1}}
                                         </option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="advance_notice">Advanced notice</label>
+                                    <input type="checkbox" class="checkbox-small form-control input-sm"
+                                            id="advance_notice"
+                                            ng-model="fake_advance_notice"
+                                            ng-checked="data.auditinspection.advance_notice"
+                                            ng-click="data.auditinspection.advance_notice = !data.auditinspection.advance_notice; saveCurrentAuditInspection()"
+                                            ng-readonly="!auth.canSave('advance_notice')"/>
+
                                 </div>
                             </div>
                         </div>
