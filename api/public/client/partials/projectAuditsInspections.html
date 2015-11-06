@@ -401,58 +401,17 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="timeframe">Timeframe for complete compliance</label>
-                                    <input type="text" integer class="form-control input-sm" id="timeframe"
-                                            ng-blur="saveCurrentAuditInspection()"
-                                            ng-required="false"
-                                            ng-readonly="!auth.canSave('timeframe')"
-                                            ng-model="data.auditinspection.timeframe"/>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
                                     <label for="date_deadline">Deadline for complete compliance</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
-                                                ng-readonly="true" id="date_deadline"
+                                                id="date_deadline"
                                                 class="form-control input-sm input-date"
                                                 ng-model="data.auditinspection.date_deadline"
                                                 data-datepicker-popup="d MMM yyyy" data-is-open="opened"
                                                 data-datepicker-options="datepickerOptions"
                                                 data-show-button-bar="false"/>
                                             <span class="input-group-btn">
-                                              <button type="button" ng-disabled="true"
-                                                      class="btn btn-default btn-sm" ng-click="open($event)"><span
-                                                      class="glyphicon glyphicon-calendar"></span></button>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="remarks">Remarks</label>
-                                    <textarea class="form-control input-sm" rows="2" id="remarks"
-                                            ng-blur="saveCurrentAuditInspection()"
-                                            ng-readonly="!auth.canSave('remarks')"
-                                            ng-model="data.auditinspection.remarks"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="date_received">Received compliance documentation</label>
-                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                                        <input type="text" ng-blur="saveCurrentAuditInspection()"
-                                                ng-readonly="!auth.canSave('date_received')" id="date_received"
-                                                class="form-control input-sm input-date"
-                                                ng-model="data.auditinspection.date_received"
-                                                data-datepicker-popup="d MMM yyyy" data-is-open="opened"
-                                                data-datepicker-options="datepickerOptions"
-                                                data-show-button-bar="false"/>
-                                            <span class="input-group-btn">
-                                              <button type="button" ng-disabled="!auth.canSave('date_received')"
+                                              <button type="button"
                                                       class="btn btn-default btn-sm" ng-click="open($event)"><span
                                                       class="glyphicon glyphicon-calendar"></span></button>
                                             </span>
@@ -476,6 +435,15 @@
                                                       class="glyphicon glyphicon-calendar"></span></button>
                                             </span>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="remarks">Remarks</label>
+                                    <textarea class="form-control input-sm" rows="2" id="remarks"
+                                            ng-blur="saveCurrentAuditInspection()"
+                                            ng-readonly="!auth.canSave('remarks')"
+                                            ng-model="data.auditinspection.remarks"></textarea>
                                 </div>
                             </div>
                         </div>

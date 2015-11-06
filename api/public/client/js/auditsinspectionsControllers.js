@@ -66,22 +66,12 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         }
     };
 
-    scope.calculateDeadlineDate = function (ai)
-    {
-        if (ai.date_action_taken && ai.timeframe)
-        {
-            var dateDeadline = addDays(ai.date_action_taken, parseInt(ai.timeframe));
-            ai.date_deadline = dateDeadline;
-        }
-    };
-
     scope.saveCurrentAuditInspection = function ()
     {
         var auditinspection = scope.data.auditinspection;
         var isNew = auditinspection.is_new;
         if (!isNew)
         {
-            scope.calculateDeadlineDate(auditinspection);
             scope.updateStatus(auditinspection);
         }
         scope.saveCurrent(scope.parts.auditinspection, auditinspection, isNew).then(function (ai)
@@ -216,8 +206,8 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 
     scope.deleteReport = function ()
     {
-        scope.data.auditinspection.file_metadata_report_id = null;
-        scope.parts.auditinspection.form.report.$setDirty();
+        scope.data.auditinspection.file_metadata_id = null;
+        scope.parts.auditinspection.form.action_taken_letter.$setDirty();
         scope.saveCurrentAuditInspection();
     };
 
