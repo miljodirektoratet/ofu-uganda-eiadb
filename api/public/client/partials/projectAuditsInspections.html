@@ -175,6 +175,7 @@
                                     <label for="date_carried_out">Date carried out</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                                ng-required="true"
                                                 ng-readonly="!auth.canSave('date_carried_out')" id="date_carried_out"
                                                 class="form-control input-sm input-date"
                                                 ng-model="data.auditinspection.date_carried_out"
