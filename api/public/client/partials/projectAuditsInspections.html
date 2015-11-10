@@ -16,14 +16,14 @@
 
         </div>
         <div class="col-md-6">
-            <div class="btn-group new-button pull-right" dropdown auto-close="disabled" is-open="newButton.isopen">
+            <div class="btn-group new-button pull-right" dropdown auto-close="disabled" is-open="newButton.isopen" ng-hide="!auth.canSave('new')">
                 <button type="button" class="btn btn-success" dropdown-toggle ng-disabled="isLoading()">
                     New Audit and Inspection <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li role="menuitem">
                         <form role="form" name="newButton.form" novalidation>
-                            <div class="rowzzz">
+                            <div class="row">
                                 <div class="col-md-3">
                                     <label for="newButton.year">Year</label>
                                     <input type="text" integer
@@ -426,10 +426,28 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <button type="button" class="btn btn-danger btn-sm pull-right"
-                                        ng-click="deleteAuditInspection()" ng-hide="!auth.canSave('delete')">
-                                    Delete Audit and Inspection
-                                </button>
+                                <div class="btn-group delete-button pull-right" dropdown ng-hide="!auth.canSave('delete')" is-open="deleteButton.isopen">
+                                    <button type="button" class="btn btn-sm btn-danger" dropdown-toggle>
+                                        Delete Audit and Inspection
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li role="menuitem">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    Do you really want to delete this record?
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 col-md-offset-3">
+                                                    <button type="button" class="btn btn-sm btn-primary" ng-click="deleteAuditInspection()">Yes</button>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-sm btn-warning" ng-click="deleteButton.isopen = false">No</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </form>

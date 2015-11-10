@@ -9,9 +9,22 @@ use \App\AuditInspection;
 
 class AuditInspectionController extends Controller
 {
+    public function __construct()
+    {
+//        if (\App::environment() !== "production")
+//        {
+//            sleep(2);
+//        }
+    }
+
 // GET /resource/:id/subresource
     public function index($projectId)
     {
+        if (Project::where('id', $projectId)->count() == 0)
+        {
+            return Response::json(array('error' => true, 'message' => 'not found'), 404);
+        }
+
         $auditinspections = Project::find($projectId)
             ->auditinspections()
             ->get(array('id', 'status', 'year', 'number', 'code'));
@@ -192,7 +205,8 @@ class AuditInspectionController extends Controller
                     if ($timestamp === false)
                     {
                         $value = null;
-                    } else
+                    }
+                    else
                     {
                         $value = new DateTime();
                         $value->setTimestamp($timestamp);

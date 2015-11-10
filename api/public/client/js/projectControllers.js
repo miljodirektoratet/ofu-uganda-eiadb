@@ -38,7 +38,7 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
     scope.userinfo = UserInfo;
     scope.valuelists = Valuelists;
     scope.data = ProjectFactory;
-    
+
     var getCurrentTab = function (path)
     {
         if (_.contains(path, "eiaspermits"))
@@ -118,6 +118,11 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
                 },
                 function (reason)
                 {
+                    if (console)
+                    {
+                        console.log("Error on server:", reason);
+                    }
+                    ;
                     part.state = SavingStateEnum.SavingFailed;
                     part.saveInProgress = false;
                 }

@@ -325,7 +325,15 @@ textarea.ng-invalid,
     }
 }
 
-.statistics .table
-{
-    margin-bottom:0px;
+.statistics .table {
+    margin-bottom: 0px;
+}
+
+.new-button .row, .delete-button .row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.project-eiasandpermits .delete-button {
+    margin-top: 65px;
 }
