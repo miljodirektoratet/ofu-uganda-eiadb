@@ -253,11 +253,6 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         return scope.userinfo.info.role_1;
     };
 
-    scope.auth.canSaveGrade = function ()
-    {
-        return scope.userinfo.info.role_7;
-    }
-
     if (scope.routeParams.projectId == "new")
     {
         scope.selectOrganisationMode = true;

@@ -174,8 +174,11 @@ class EiaPermitController extends Controller
         }
         if ($changed)
         {
-            $resource["updated_by"] = Auth::user()->name;
-            //$project->created_by = Auth::user()->name;
+            if (!isset($data["pirking"]))
+            {
+                $resource["updated_by"] = Auth::user()->name;
+                //$project->created_by = Auth::user()->name;
+            }
         }
     }
 

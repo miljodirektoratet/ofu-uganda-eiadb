@@ -268,7 +268,7 @@ textarea.ng-invalid,
 }*/
 
 .project-auditsandinspections .new-button form {
-    width: 350px;
+    width: 550px;
 }
 
 .uploading-file {
@@ -336,4 +336,14 @@ textarea.ng-invalid,
 
 .project-eiasandpermits .delete-button {
     margin-top: 65px;
+
 }
+
+.project-eiasandpermits .documents .delete-button {
+    margin-top: 35px;
+}
+
+.project-eiasandpermits .btn-delete {
+    width: 200px;
+}
+

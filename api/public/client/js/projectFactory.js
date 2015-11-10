@@ -1,6 +1,7 @@
 'use strict';
 
-services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'AuditInspection', 'Valuelists', function ($q, $filter, Project, Organisation, EiaPermit, Document, AuditInspection, Valuelists)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'AuditInspection', 'Valuelists', 'UserInfo',
+    function ($q, $filter, Project, Organisation, EiaPermit, Document, AuditInspection, Valuelists, UserInfo)
 {
     var factory = {};
     factory.project = {};
@@ -12,6 +13,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
     factory.auditsinspections = [];
     factory.auditinspection = {};
     factory.valuelists = Valuelists;
+    factory.userinfo = UserInfo;
     factory.retrieveProjectData = function (params)
     {
         var deferredProject = $q.defer();
@@ -137,10 +139,10 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             return "";
         }
-        if (currentTab == ProjectTabEnum.AuditsInspections)
-        {
-            return p.title + " (Performance: " + factory.getCodeFromValuelist("grade", p.grade) + ")";
-        }
+        //if (currentTab == ProjectTabEnum.AuditsInspections)
+        //{
+        //    return p.title + " (Performance: " + factory.getCodeFromValuelist("grade", p.grade) + ")";
+        //}
         return p.title;
     };
 
@@ -151,7 +153,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             return "";
         }
-        return "Status: " + factory.getCodeFromValuelist("eiastatus", ep.status);
+        return "Status for id " + ep.id + ": " + factory.getCodeFromValuelist("eiastatus", ep.status);
     };
 
     factory.getAuditInspectionSummary = function (ai)
@@ -161,11 +163,18 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             return "";
         }
-        return "Number " + ai.code + ": " + factory.getCodeFromValuelist("auditinspectionstatus", ai.status);
+        // Example: "Number 2015.033 (Baseline inspection): Created".
+        var reason = factory.getCodeFromValuelist("audit_inspection_reason", ai.reason);
+        var status = factory.getCodeFromValuelist("auditinspectionstatus", ai.status);
+        return "Number " + ai.code + " (" + reason + "): " + status;
     };
 
     factory.getCodeFromValuelist = function (valuelistName, id)
     {
+        if (typeof id === "string")
+        {
+            id = parseInt(id);
+        }
         var code = _.find(factory.valuelists[valuelistName], {'id': id});
         if (code)
         {
@@ -222,8 +231,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         var pData =
         {
             has_industrial_waste_water: 42, // 42=Unknown
-            grade: 47, // 47=Unknown
             organisation_id: o.id,
+            risk_level: 96, // 96=Unknown
             is_new: true
         };
         factory.project = new Project(pData);
@@ -243,6 +252,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         var epData =
         {
             project_id: p.id,
+            inspection_recommended: 42, // Unknown
             is_new: true
         };
         factory.eiapermit = new EiaPermit(epData);
@@ -290,15 +300,39 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         }
     };
 
-    factory.createNewAuditInspection = function (p, year, type)
+    factory.deleteDocument = function (params)
+    {
+        var index = _.findIndex(factory.documents, {'id': factory.document.id});
+        var onDelete = function (index)
+        {
+            factory.documents.splice(index, 1);
+            factory.document = {};
+        };
+        if (factory.document.is_new)
+        {
+            onDelete(index);
+        }
+        else
+        {
+            factory.document.$delete(params, function ()
+            {
+                onDelete(index);
+            });
+        }
+    };
+
+    factory.createNewAuditInspection = function (p, year, type, reason)
     {
         var aiData =
         {
             project_id: p.id,
             year: year,
             type: type,
+            reason: reason,
             days: 1,
-            status: 70,
+            status: 70, // 70=Created
+            performance_level: 47, // 47=Unknown
+            lead_officer: factory.userinfo.info.id,
             is_new: true
         };
         factory.auditinspection = new AuditInspection(aiData);

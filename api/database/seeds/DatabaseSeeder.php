@@ -3,21 +3,24 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class DatabaseSeeder extends Seeder {
+class DatabaseSeeder extends Seeder
+{
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		Model::unguard();
-		// Eloquent::unguard();
-		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-		$this->call('ExcelDataTableSeeder');
-		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-		// Eloquent::reguard();
-	}
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Model::unguard();
+        // Eloquent::unguard();
+        //DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//		$this->call('ExcelDataTableSeeder');
+        //DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        $this->call('TestUserSeeder');
+
+        // Eloquent::reguard();
+    }
 
 }

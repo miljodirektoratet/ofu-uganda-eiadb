@@ -68,6 +68,7 @@ Route::group(['prefix' => 'search/v1', 'middleware' => 'auth'], function ()
 Route::group(['prefix' => 'statistics/v1', 'middleware' => 'auth'], function ()
 {
     Route::resource('project', 'ProjectStatisticsController');
+    Route::resource('general', 'GeneralStatisticsController');
 });
 
 Route::group(['prefix' => 'edit/v1', 'middleware' => 'manager'], function ()

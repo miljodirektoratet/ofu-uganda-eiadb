@@ -97,27 +97,6 @@ class ProjectStatisticsController extends Controller
             $dataDevelopers [] = $row;
         }
 
-
-        // Part 6.
-        $gradesResult = DB::table('codes as grades')
-            ->leftJoin('projects as p', 'grades.id', '=', 'p.grade')
-            ->select('grades.id', 'grades.description1 as description', DB::raw('COUNT(p.id) as count'))
-            ->where('grades.dropdown_list', '=', 'grade')
-            ->whereNull('p.deleted_at')
-            ->whereNull('grades.deleted_at')
-            ->groupBy('grades.id')
-            ->orderByRaw('grades.id')
-            ->get();
-
-        $dataGrades = [];
-        foreach ($gradesResult as $dbRow)
-        {
-            $row = $this::createResultRow($dbRow);
-            $row["search"] = "project_grade=" . $dbRow->id;
-            $dataGrades [] = $row;
-        }
-
-
         $data["timestamp"] = Carbon::now()->toDateTimeString(); // Utc date. The rest is fixed in javascript.
         $data["intro"] = ["title" => sprintf("The EIA database has %d projects and %d developers. The statistics below shows the number of projects for some key elements.", $countProjects, $countDevelopers), "counts" => $dataCounts];
         $data["parts"] = [];
@@ -126,8 +105,6 @@ class ProjectStatisticsController extends Controller
         $data["parts"]["coordinates"] = ["title" => "The number of projects with and without coordinates", "label1" => "Coordinates present", "label2" => "Number", "rows" => $dataCoordinates];
         $data["parts"]["wasteWater"] = ["title" => "The number of projects with and without industrial waste water", "label1" => "Industrial waste water", "label2" => "Number", "rows" => $dataWasteWater];
         $data["parts"]["developers"] = ["title" => "The number of projects per developer. The list will show the ten developers with most number of projects", "label1" => "Top ten developers", "label2" => "Number", "rows" => $dataDevelopers];
-        $data["parts"]["grades"] = ["title" => "The number of projects per performance level", "label1" => "Performance level", "label2" => "Number", "rows" => $dataGrades];
-
 
         return Response::json($data, 200);
     }

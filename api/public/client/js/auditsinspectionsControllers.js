@@ -66,22 +66,12 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         }
     };
 
-    scope.calculateDeadlineDate = function (ai)
-    {
-        if (ai.date_action_taken && ai.timeframe)
-        {
-            var dateDeadline = addDays(ai.date_action_taken, parseInt(ai.timeframe));
-            ai.date_deadline = dateDeadline;
-        }
-    };
-
     scope.saveCurrentAuditInspection = function ()
     {
         var auditinspection = scope.data.auditinspection;
         var isNew = auditinspection.is_new;
         if (!isNew)
         {
-            scope.calculateDeadlineDate(auditinspection);
             scope.updateStatus(auditinspection);
         }
         scope.saveCurrent(scope.parts.auditinspection, auditinspection, isNew).then(function (ai)
@@ -97,7 +87,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     {
         scope.parts.auditinspection.state = SavingStateEnum.LoadingNew;
         scope.newButton.isopen = false;
-        ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year, scope.newButton.type);
+        ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year, scope.newButton.type, scope.newButton.reason);
         scope.parts.auditinspection.isNew = true;
         scope.saveCurrentAuditInspection();
     };
@@ -110,7 +100,19 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 
     scope.auth.canSave = function (field)
     {
-        return scope.userinfo.info.role_7;
+        if (field == "new")
+        {
+            return scope.userinfo.info.role_7;
+        }
+        if (scope.userinfo.info.role_8)
+        {
+            return true;
+        }
+        if (field == "lead_officer")
+        {
+            return false;
+        }
+        return scope.userinfo.info.id === scope.data.auditinspection.lead_officer;
     };
 
     scope.uploadActionTakenLetter = function (files)
@@ -132,6 +134,32 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
             $timeout(function ()
             {
                 scope.showUploadingFileActionTakenLetter = false;
+            }, 3000);
+
+        }, function (reason)
+        {
+        });
+    };
+
+    scope.uploadReport = function (files)
+    {
+        if (!files)
+        {
+            return;
+        }
+        scope.showUploadingFileReport = true;
+        scope.reportFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.auditinspection.form.report, scope.reportFile);
+
+        promise.then(function (file)
+        {
+            scope.data.auditinspection.file_metadata_report_id = file.result.id;
+            scope.parts.auditinspection.form.report.$setDirty();
+            scope.saveCurrentAuditInspection();
+
+            $timeout(function ()
+            {
+                scope.showUploadingFileReport = false;
             }, 3000);
 
         }, function (reason)
@@ -170,6 +198,13 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     };
 
     scope.deleteActionTakenLetter = function ()
+    {
+        scope.data.auditinspection.file_metadata_id = null;
+        scope.parts.auditinspection.form.action_taken_letter.$setDirty();
+        scope.saveCurrentAuditInspection();
+    };
+
+    scope.deleteReport = function ()
     {
         scope.data.auditinspection.file_metadata_id = null;
         scope.parts.auditinspection.form.action_taken_letter.$setDirty();

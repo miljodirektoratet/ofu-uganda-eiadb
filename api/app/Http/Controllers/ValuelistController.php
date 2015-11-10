@@ -8,7 +8,8 @@ use \App\User;
 use \App\District;
 use \App\Category;
 
-class ValuelistController extends Controller {
+class ValuelistController extends Controller
+{
 
 
     // GET /resource
@@ -35,6 +36,10 @@ class ValuelistController extends Controller {
         $valuelists["actiontaken"] = $this->actiontaken();
         $valuelists["documentconclusion"] = $this->documentconclusion();
 
+        $valuelists["audit_inspection_reason"] = $this->audit_inspection_reason();
+        $valuelists["project_risk_level"] = $this->project_risk_level();
+
+
         return Response::json($valuelists, 200);
     }
 
@@ -46,8 +51,9 @@ class ValuelistController extends Controller {
             return $this->index();
         }
 
+        // Not in use?
         $codes = array();
-        if (method_exists ($this, $id))
+        if (method_exists($this, $id))
         {
             $codes = call_user_func(array($this, $id));
         }
@@ -56,27 +62,27 @@ class ValuelistController extends Controller {
 
     private function practitionertype()
     {
-        return $this->getCodesFromArray(array(50,51,52));
+        return $this->getCodesFromArray(array(50, 51, 52));
     }
 
     private function practitionermembertype()
     {
-        return $this->getCodesFromArray(array(38,39,53));
+        return $this->getCodesFromArray(array(38, 39, 53));
     }
 
     private function yesno()
     {
-        return $this->getCodesFromArray(array(40,41,42));
+        return $this->getCodesFromArray(array(40, 41, 42));
     }
 
     private function grade()
     {
-        return $this->getCodesFromArray(array(43,44,45,46,47));
+        return $this->getCodesFromArray(array(43, 44, 45, 46, 47));
     }
 
     private function decision()
     {
-        return $this->getCodesFromArray(array(1,2,3));
+        return $this->getCodesFromArray(array(1, 2, 3));
     }
 
     private function eiastatus()
@@ -96,7 +102,7 @@ class ValuelistController extends Controller {
 
     private function documenttype()
     {
-        return $this->getCodesFromArray(array(8,9,10,11,12,13));
+        return $this->getCodesFromArray(array(8, 9, 10, 11, 12, 13));
     }
 
     private function documentconclusion()
@@ -121,11 +127,11 @@ class ValuelistController extends Controller {
     private function teamleader()
     {
         $practitioners = Practitioner::
-        whereHas('practitionerCertificates', function($q)
+        whereHas('practitionerCertificates', function ($q)
         {
             $year = intval(date("Y"));
             $q
-                ->whereIn('year', array($year-1, $year))
+                ->whereIn('year', array($year - 1, $year))
                 ->where('is_cancelled', '=', false)
                 ->whereRaw('conditions in (38,53)');
         })
@@ -136,11 +142,11 @@ class ValuelistController extends Controller {
     private function teammember()
     {
         $practitioners = Practitioner::
-        whereHas('practitionerCertificates', function($q)
+        whereHas('practitionerCertificates', function ($q)
         {
             $year = intval(date("Y"));
             $q
-                ->whereIn('year', array($year-1, $year))
+                ->whereIn('year', array($year - 1, $year))
                 ->where('is_cancelled', '=', false);
         })
             ->get(array('id', 'person as description1'));
@@ -154,6 +160,7 @@ class ValuelistController extends Controller {
             ->get(array('id', 'name as description1'));
         return $users;
     }
+
     private function executivedirector()
     {
         $users = User::
@@ -176,6 +183,16 @@ class ValuelistController extends Controller {
     private function actiontaken()
     {
         return $this->getCodesFromDrowdownName("action_taken");
+    }
+
+    private function audit_inspection_reason()
+    {
+        return $this->getCodesFromDrowdownName("audit_inspection_reason");
+    }
+
+    private function project_risk_level()
+    {
+        return $this->getCodesFromDrowdownName("project_risk_level");
     }
 
     private function getCodesFromArray($codeIds)

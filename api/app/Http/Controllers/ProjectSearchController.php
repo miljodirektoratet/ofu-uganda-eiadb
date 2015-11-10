@@ -13,11 +13,9 @@ class ProjectSearchController extends Controller
             ->join('organisations as o', 'p.organisation_id', '=', 'o.id')
             ->join('categories as c', 'p.category_id', '=', 'c.id')
             ->join('districts as d', 'p.district_id', '=', 'd.id')
-            ->leftJoin('codes as grade', 'p.grade', '=', 'grade.id')
             ->select('p.id as project_id',
                 'p.title as project_title',
                 'p.location as project_location',
-                'grade.description1 as project_grade',
                 'o.name as developer_name',
                 'd.district as district_district',
                 'c.description_short as category_description')
@@ -28,13 +26,12 @@ class ProjectSearchController extends Controller
         $criteriaDefinitions["search"] = ["p.title", "o.name", "p.location"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["p.id"];
-        $criteriaDefinitions["multiple"] = ["d.id", "c.id", "p.grade", "o.id", "p.has_industrial_waste_water"];
+        $criteriaDefinitions["multiple"] = ["d.id", "c.id", "o.id", "p.has_industrial_waste_water"];
         $criterias = getSearchCriterias([
             'project_title',
             'district_id',
             'category_id',
             'developer_name',
-            'project_grade',
             'project_location',
             'project_id',
             'developer_id',

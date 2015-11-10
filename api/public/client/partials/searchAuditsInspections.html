@@ -82,7 +82,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="auditinspection_action_taken">Action taken</label>
+                            <label for="auditinspection_action_taken">Response</label>
                             <select ui-select2="{allowClear:true}"
                                     id="auditinspection_action_taken" class="form-control input-sm"
                                     ng-model="criteria.auditinspection_action_taken">
@@ -104,10 +104,10 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="project_grade">Performance level</label>
+                            <label for="auditinspection_performance_level">Performance level</label>
                             <select ui-select2="{allowClear:true}"
-                                    id="project_grade" class="form-control input-sm"
-                                    ng-model="criteria.project_grade">
+                                    id="auditinspection_performance_level" class="form-control input-sm"
+                                    ng-model="criteria.auditinspection_performance_level">
                                 <option></option>
                                 <option ng-repeat="v in valuelists.grade" value="{{v.id}}">{{v.description1}}</option>
                             </select>

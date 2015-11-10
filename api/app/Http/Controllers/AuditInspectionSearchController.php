@@ -16,7 +16,7 @@ class AuditInspectionSearchController extends Controller
             ->join('districts as d', 'p.district_id', '=', 'd.id')
             ->leftJoin('codes as ai_type', 'ai.type', '=', 'ai_type.id')
             ->leftJoin('codes as action_taken', 'ai.action_taken', '=', 'action_taken.id')
-            ->leftJoin('codes as grade', 'p.grade', '=', 'grade.id')
+            ->leftJoin('codes as performance_level', 'ai.performance_level', '=', 'performance_level.id')
             ->leftJoin('codes as status', 'ai.status', '=', 'status.id')
             ->leftJoin('audits_inspections_personnel as personnel', 'ai.id', '=', 'personnel.audit_inspection_id')
             ->select('ai.id as auditinspection_id',
@@ -26,7 +26,7 @@ class AuditInspectionSearchController extends Controller
                 'ai.date_deadline as auditinspection_date_deadline',
                 'p.id as project_id',
                 'p.title as project_title',
-                'grade.description1 as project_grade',
+                'performance_level.description1 as auditinspection_performance_level',
                 'o.name as developer_name',
                 'd.district as district_district',
                 'c.description_short as category_description')
@@ -38,7 +38,7 @@ class AuditInspectionSearchController extends Controller
         $criteriaDefinitions["search"] = ["p.title", "o.name", "ai.code"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["ai.year"];
-        $criteriaDefinitions["multiple"] = ["d.id", "ai.action_taken", "c.id", "ai.type", "personnel.user_id", "ai.status","p.grade"];
+        $criteriaDefinitions["multiple"] = ["d.id", "ai.action_taken", "c.id", "ai.type", "personnel.user_id", "ai.status","ai.performance_level"];
         $criterias = getSearchCriterias([
             'project_title',
             'auditinspection_year',
@@ -50,7 +50,7 @@ class AuditInspectionSearchController extends Controller
             'auditinspection_type',
             'personnel_user_id',
             'auditinspection_status',
-            'project_grade'
+            'auditinspection_performance_level'
 
         ]);
 

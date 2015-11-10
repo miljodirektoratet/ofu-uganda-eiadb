@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = {"version": "2.23.0"};
+var version = {"version": "2.45.0"};
 
 var services = angular.module('seroApp.services');
 
@@ -163,6 +163,11 @@ services.factory('ProjectSearch', ['$resource', function ($resource)
 services.factory('ProjectStatistics', ['$resource', function ($resource)
 {
     return $resource('/statistics/v1/project');
+}]);
+
+services.factory('GeneralStatistics', ['$resource', function ($resource)
+{
+    return $resource('/statistics/v1/general');
 }]);
 
 

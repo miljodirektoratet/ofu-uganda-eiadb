@@ -5,7 +5,7 @@
 <div class="pirking">
     <p>Currently last ID used for a EIA and Permit is {{lastId}}.</p>
 
-    <form role="form" name="criteria.form" novalidation ng-submit="beginPirking()">
+    <form role="form" name="criteriaForm" novalidation ng-submit="beginPirking()">
         <div class="row">
             <div class="col-md-2">
                 <label for="criteria.from">From ID (inclusive)</label>
@@ -23,22 +23,72 @@
                         ng-model="criteria.to"
                         class="form-control input-sm"/>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-1">
+                <label for="dryrun">Dry run</label>
+                <input type="checkbox" class="form-control input-sm pull-left checkbox-small" id="dryrun"
+                        ng-checked="dryrun" ng-click="dryrun = !dryrun;"/>
+            </div>
+            <div class="col-md-7">
                 <label for="criteria.begin">&nbsp;</label><br/>
                 <button type="submit" class="btn btn-sm btn-primary"
                         id="criteria.begin"
-                        ng-disabled="criteria.form.$invalid">Begin pirking
+                        ng-disabled="criteriaForm.$invalid || working">Begin pirking
                 </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br/>
+                <span class="label label-info" ng-show="dryrun">Do it the chicken way: Try without saving the status back to the database.</span>
+                <span class="label label-danger" ng-hide="dryrun">This will save any changes back to the database.</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <br/>
+                <span style="padding:5px;" class="label label-info">Progress <span class="badge">{{info.finished()}}/{{eiaspermits.length}}</span></span>
+                <span style="padding:5px;" class="label label-success">Changed <span class="badge">{{info.changed}}</span></span>
+                <span style="padding:5px;" class="label label-warning">No change <span class="badge">{{info.nochange}}</span></span>
+                <span style="padding:5px;" class="label label-danger">Error <span class="badge">{{info.error}}</span></span>
+            </div>
+        </div>
+        <div class="row">
+            <br/>
+            <div class="col-md-12">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{info.progress()}}%;"></div>
+                </div>
             </div>
         </div>
     </form>
 
-
-    <div class="row">
-        <div class="col-md-12">
-            <hr/>
-        </div>
-    </div>
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th>EP ID</th>
+            <th>Project ID</th>
+            <th style="width:400px;">Project title</th>
+            <th colspan="2">Existing status</th>
+            <th colspan="2">New status</th>
+            <th>Updated at</th>
+            <th>Result</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="ep in eiaspermits" ng-class="{danger: ep.error, warning: ep.nochange, success: ep.changed}">
+            <td>{{ep.eiapermit_id}}</td>
+            <td>{{ep.project_id}}</td>
+            <td>{{ep.project_title}}</td>
+            <td>{{ep.status_id}}</td>
+            <td style="white-space: nowrap;">{{ep.status_description}}</td>
+            <td>{{ep.status_id_new}}</td>
+            <td style="white-space: nowrap;">{{ep.status_description_new}}</td>
+            <td style="white-space: nowrap;">{{ep.eiapermit_updated_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td style="white-space: nowrap;"><span ng-show="ep.updating" class="loader pull-right"></span>{{ep.result}}</td>
+        </tr>
+        </tbody>
+    </table>
 
 
 </div>
