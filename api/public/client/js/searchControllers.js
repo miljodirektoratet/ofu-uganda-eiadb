@@ -71,7 +71,7 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
         {name: 'project_title', displayName: 'Project title', cellTooltip: true, headerTooltip: true},
         {name: 'developer_name', displayName: 'Developer name', cellTooltip: true, headerTooltip: true},
         {name: 'district_district', displayName: 'District', cellTooltip: true, headerTooltip: true},
-        {name: 'auditinspection_type', displayName: 'Type', cellTooltip: true, headerTooltip: true},
+        {name: 'auditinspection_type', displayName: 'Activity', cellTooltip: true, headerTooltip: true},
         {name: 'category_description', displayName: 'Category of project', width: 150, cellTooltip: true, headerTooltip: true},
         {name: 'auditinspection_action_taken', displayName: 'Response', cellTooltip: true, headerTooltip: true},
         {name: 'auditinspection_performance_level', displayName: 'Performance', width: 110, cellTooltip: true, headerTooltip: true},
