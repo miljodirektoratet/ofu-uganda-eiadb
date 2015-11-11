@@ -16,10 +16,10 @@ tablesData = OrderedDict()
 #tablesData["users"] = "User"
 #tablesData["districts"] = "District"
 #tablesData["codes"] = "Code"
-tablesData["categories"] = "Category"
+#tablesData["categories"] = "Category"
 #tablesData["practitioners"] = "Practitioner"
 #tablesData["practitioner_certificates"] = "PractitionerCertificate"
-#tablesData["lead_agencies"] = "LeadAgency"
+tablesData["lead_agencies"] = "LeadAgency"
 #tablesData["roles"] = "Role"
 
 notIncrements = ["codes", "categories"];
