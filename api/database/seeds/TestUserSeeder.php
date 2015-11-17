@@ -29,9 +29,13 @@ class TestUserSeeder extends Seeder
         $role7 = Role::find(7);
         $role8 = Role::find(8);
 
-        $user0 = User::where('initials', '=', 'josska')->first();
-        DB::table('role_user')->where('user_id', '=', $user0->id)->delete();
-        $user0->attachRoles([$role1, $role2, $role3, $role4, $role5, $role6, $role7, $role8]);
+        $userJostein = User::where('initials', '=', 'josska')->first();
+        DB::table('role_user')->where('user_id', '=', $userJostein->id)->delete();
+        $userJostein->attachRoles([$role1, $role2, $role3, $role4, $role5, $role6, $role7, $role8]);
+
+        $userJohnny = User::where('initials', '=', 'johaue')->first();
+        DB::table('role_user')->where('user_id', '=', $userJohnny->id)->delete();
+        $userJohnny->attachRoles([$role1, $role2, $role3, $role4, $role5, $role6, $role7, $role8]);
 
         try
         {
