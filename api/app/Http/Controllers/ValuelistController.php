@@ -156,7 +156,7 @@ class ValuelistController extends Controller
     private function officer()
     {
         $users = User::
-        whereRaw("job_position_code in ('SEAO','EAM','EMO','SEI','NRM(B&R)','NRM(Aq)','EIAA','EAAA')")
+        whereRaw("job_position_code in ('SEAO','EAM','EMO','SEI','NRM(B&R)','NRM(Aq)','EIAA','EAAA','EIAO')")
             ->get(array('id', 'name as description1'));
         return $users;
     }
