@@ -190,6 +190,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "document.remarks":
                 return scope.userinfo.info.role_1;
             case "user_id":
+            case "personnel":
                 return scope.userinfo.info.role_2;
             case "inspection_recommended":
             case "date_inspection":

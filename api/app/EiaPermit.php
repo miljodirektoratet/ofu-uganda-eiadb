@@ -22,6 +22,11 @@ class EiaPermit extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'eias_permits_personnel');
+    }
+
     public function teamleader()
     {
         return $this->belongsTo('App\Practitioner');

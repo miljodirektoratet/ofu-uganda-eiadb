@@ -50,6 +50,7 @@ class EiaPermitController extends Controller
         };
 
         $eiapermit = Project::find($projectId)->eiapermits()
+            ->with('users')
             ->with(array('teamleader' => $withTeamLeaderFunction))
             ->with(array('certificate' => $withCertificate))
             ->with('teammembers')
@@ -67,6 +68,16 @@ class EiaPermitController extends Controller
         }
         $eiapermit["teammember_ids"] = $teammemberIds;
         unset($eiapermit["teammembers"]);
+
+        // Users (personnel).
+        $userIds = array();
+        foreach ($eiapermit->users as $user)
+        {
+            array_push($userIds, $user->id);
+        }
+        $eiapermit["user_ids"] = $userIds;
+        unset($eiapermit["users"]);
+
         return Response::json($eiapermit, 200);
     }
 
@@ -86,6 +97,7 @@ class EiaPermitController extends Controller
         $project = Project::find($projectId);
         $project->eiapermits()->save($eiapermit);
         $this->handleTeamMembers($eiapermit, $inputData);
+        $this->handleUsers($eiapermit, $inputData);
         return $this->show($project->id, $eiapermit->id);
     }
 
@@ -106,6 +118,7 @@ class EiaPermitController extends Controller
         $inputData = Input::all();
         $this->updateValuesInResource($eiapermit, $inputData);
         $this->handleTeamMembers($eiapermit, $inputData);
+        $this->handleUsers($eiapermit, $inputData);
         $eiapermit->save();
         return $this->show($projectId, $id);
     }
@@ -131,6 +144,21 @@ class EiaPermitController extends Controller
             $teammemberIds = $inputData["teammember_ids"];
         }
         $res = $eiapermit->teammembers()->sync($teammemberIds);
+        $changes = count($res["attached"]) + count($res["detached"]) + count($res["updated"]);
+        if ($changes > 0)
+        {
+            $eiapermit["updated_by"] = Auth::user()->name;
+        }
+    }
+
+    private function handleUsers($eiapermit, $inputData)
+    {
+        $ids = array();
+        if (array_key_exists("user_ids", $inputData))
+        {
+            $ids = $inputData["user_ids"];
+        }
+        $res = $eiapermit->users()->sync($ids);
         $changes = count($res["attached"]) + count($res["detached"]) + count($res["updated"]);
         if ($changes > 0)
         {
