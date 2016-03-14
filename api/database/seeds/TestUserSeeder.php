@@ -29,13 +29,13 @@ class TestUserSeeder extends Seeder
         $role7 = Role::find(7);
         $role8 = Role::find(8);
 
-        $userJostein = User::where('initials', '=', 'josska')->first();
-        DB::table('role_user')->where('user_id', '=', $userJostein->id)->delete();
-        $userJostein->attachRoles([$role1, $role2, $role3, $role4, $role5, $role6, $role7, $role8]);
-
-        $userJohnny = User::where('initials', '=', 'johaue')->first();
-        DB::table('role_user')->where('user_id', '=', $userJohnny->id)->delete();
-        $userJohnny->attachRoles([$role1, $role2, $role3, $role4, $role5, $role6, $role7, $role8]);
+//        $userJostein = User::where('initials', '=', 'josska')->first();
+//        DB::table('role_user')->where('user_id', '=', $userJostein->id)->delete();
+//        $userJostein->attachRoles([$role1, $role2, $role3, $role4, $role5, $role6, $role7, $role8]);
+//
+//        $userJohnny = User::where('initials', '=', 'johaue')->first();
+//        DB::table('role_user')->where('user_id', '=', $userJohnny->id)->delete();
+//        $userJohnny->attachRoles([$role1, $role2, $role3, $role4, $role5, $role6, $role7, $role8]);
 
         try
         {
@@ -85,6 +85,40 @@ class TestUserSeeder extends Seeder
         } catch (Exception $ex)
         {
             print("kjepet exists\n");
+        }
+
+        try
+        {
+
+            $user4 = User::create(array(
+                'initials' => "kriein",
+                'name' => "Kristin Eine",
+                'job_position_code' => "MILJODIR",
+                'job_position_name' => "Chief engineer",
+                'email' => "kristin.eine@miljodir.no",
+                'password' => Hash::make('kristintest')
+            ));
+            $user4->attachRoles([$role1, $role2, $role3, $role7]);
+        } catch (Exception $ex)
+        {
+            print("kriein exists\n");
+        }
+
+        try
+        {
+
+            $user4 = User::create(array(
+                'initials' => "svesko",
+                'name' => "Svein Grotli Skogen",
+                'job_position_code' => "MILJODIR",
+                'job_position_name' => "Senior advisor",
+                'email' => "svein.grotli.skogen@miljodir.no",
+                'password' => Hash::make('sveintest')
+            ));
+            $user4->attachRoles([$role1, $role2, $role3, $role7]);
+        } catch (Exception $ex)
+        {
+            print("svesko exists\n");
         }
     }
 }
