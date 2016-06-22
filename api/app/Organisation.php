@@ -17,14 +17,14 @@ class Organisation extends Model
     return $this->hasMany('App\Project');
   }
 
-  public static function boot()
-  {        
-    parent::boot();    
-    
-    // Soft delete children as well?
-    static::deleted(function($organisation)
-    {
-      //$organisation->projects()->delete();
-    });
-  }
+//  public static function boot()
+//  {
+//    parent::boot();
+//
+//    // Soft delete children as well?
+//    static::deleted(function($organisation)
+//    {
+//      //$organisation->projects()->delete();
+//    });
+//  }
 }

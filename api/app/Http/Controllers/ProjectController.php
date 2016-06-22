@@ -5,6 +5,7 @@ use Input;
 use Auth;
 use \DateTime;
 use \App\Project;
+use \App\Organisation;
 use DB;
 
 class ProjectController extends Controller
@@ -126,9 +127,16 @@ class ProjectController extends Controller
         {
             return $this::notAuthorized();
         }
-
         $project = Project::find($id);
+        $organisation = Organisation::find($project->organisation_id);
+
         $project->delete();
+
+        if ($organisation->projects()->count() === 0)
+        {
+            $organisation->delete();
+        }
+        
         return Response::json(array('is_deleted' => true), 200);
     }
 

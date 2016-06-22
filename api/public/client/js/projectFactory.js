@@ -367,6 +367,32 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             }
         };
 
+        factory.deleteProject = function (params)
+        {
+            var deferred = $q.defer();
+
+            var onDelete = function ()
+            {
+                factory.project = {};
+                deferred.resolve();
+            };
+
+            if (factory.project.is_new)
+            {
+                onDelete();
+            }
+            else
+            {
+                factory.project.$delete(params, function ()
+                {
+                    onDelete();
+                });
+            }
+
+            return deferred.promise;
+        };
+
+
         factory.save = function (params, form, resource)
         {
             var deferred = $q.defer();

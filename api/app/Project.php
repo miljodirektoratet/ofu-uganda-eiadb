@@ -41,14 +41,14 @@ class Project extends Model
         return $this->hasMany('App\AuditInspection');
     }
 
-    public static function boot()
-    {
-        parent::boot();
-
-        // Soft delete children as well
-        static::deleted(function ($project)
-        {
-            $project->eias_permits()->delete();
-        });
-    }
+//    public static function boot()
+//    {
+//        parent::boot();
+//
+//        // Soft delete children as well
+//        static::deleted(function ($project)
+//        {
+//            $project->eias_permits()->delete();
+//        });
+//    }
 }

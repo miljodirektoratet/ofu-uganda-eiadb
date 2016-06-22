@@ -70,7 +70,7 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
     scope.auth.canSave = function ()
     {
         return false;
-    }
+    };
 
     scope.saveCurrent = function (part, resource, evenIfPristine)
     {
@@ -251,6 +251,34 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
     scope.auth.canSave = function ()
     {
         return scope.userinfo.info.role_1;
+    };
+
+    scope.auth.canDelete = function ()
+    {
+        if (scope.isNewProject)
+        {
+            return false;
+        }
+        
+        if (scope.parts.project.state == SavingStateEnum.Loading)
+        {
+            return false;
+        }
+
+        if (scope.data.eiaspermits.length > 0 || scope.data.auditsinspections.length > 0)
+        {
+            return false;
+        }
+
+        return scope.auth.canSave();
+    };
+
+    scope.deleteProject = function ()
+    {
+        ProjectFactory.deleteProject(scope.routeParams).then(function()
+        {
+            scope.goto("/projects");
+        });
     };
 
     if (scope.routeParams.projectId == "new")

@@ -343,7 +343,8 @@ textarea.ng-invalid,
     margin-top: 35px;
 }
 
-.project-eiasandpermits .btn-delete {
+.project-eiasandpermits .btn-delete,
+.project-project .btn-delete {
     width: 200px;
 }
 
