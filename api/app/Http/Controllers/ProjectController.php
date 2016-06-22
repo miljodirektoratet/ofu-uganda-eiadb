@@ -127,7 +127,14 @@ class ProjectController extends Controller
         {
             return $this::notAuthorized();
         }
+        
         $project = Project::find($id);
+
+        if ($project->eiapermits()->count() > 0 || $project->auditinspections()->count() > 0)
+        {
+            return $this::notAuthorized();
+        }
+
         $organisation = Organisation::find($project->organisation_id);
 
         $project->delete();
@@ -136,7 +143,7 @@ class ProjectController extends Controller
         {
             $organisation->delete();
         }
-        
+
         return Response::json(array('is_deleted' => true), 200);
     }
 
