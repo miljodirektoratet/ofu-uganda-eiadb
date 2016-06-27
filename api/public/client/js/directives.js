@@ -140,7 +140,8 @@ directives.directive('statisticsPanel', function ()
             scope: {
                 'onYes': '&',
                 'text': '=',
-                'warning': '='
+                'warning': '=',
+                'buttonClass': '='
             },
             templateUrl: 'partials/directives.deleteButton.html'
         };

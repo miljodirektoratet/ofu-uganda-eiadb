@@ -133,7 +133,7 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
 }]);
 
 
-controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', 'Organisation', function (scope, $q, ProjectFactory, Organisation)
+controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', 'Organisation', '$timeout', function (scope, $q, ProjectFactory, Organisation, $timeout)
 {
     scope.selectOrganisationMode = false;
     scope.isNewProject = false;
@@ -157,7 +157,21 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         {
             scope.parts.organisation.state = SavingStateEnum.Loaded;
         });
-        ProjectFactory.createNewProject(o);
+
+        // Do we just want to change the organisation?
+        if (ProjectFactory.project.id > 0)
+        {
+            ProjectFactory.project.organisation_id = o.id;
+            $timeout(function ()
+            {
+                scope.saveCurrentProject(true);
+            });
+        }
+        else
+        {
+            ProjectFactory.createNewProject(o);
+        }
+
         scope.parts.project.state = SavingStateEnum.Loaded;
     };
 
@@ -165,21 +179,33 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
     {
         scope.selectOrganisationMode = false;
         ProjectFactory.createNewOrganisation();
-        ProjectFactory.createNewProject(scope.data.organisation);
+
+        // Do we just want to change the organisation?
+        if (ProjectFactory.project.id > 0)
+        {
+            //ProjectFactory.project.organisation_id = null;
+        }
+        else
+        {
+            ProjectFactory.createNewProject(scope.data.organisation);
+        }
+
         scope.parts.project.state = SavingStateEnum.Loaded;
         scope.parts.organisation.state = SavingStateEnum.Loaded;
         scope.parts.organisation.isNew = true;
     };
 
-    scope.saveCurrentProject = function ()
+    scope.saveCurrentProject = function (evenIfPristine)
     {
+        evenIfPristine = typeof evenIfPristine !== 'undefined' ? evenIfPristine : false;
+
         if (scope.isNewProject)
         {
             scope.saveNewProjectAndNewOrganisation();
             return;
         }
         var project = scope.data.project;
-        scope.saveCurrent(scope.parts.project, project).then(function (data)
+        scope.saveCurrent(scope.parts.project, project, evenIfPristine).then(function (data)
         {
         });
     };
@@ -195,6 +221,11 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         var organisation = scope.data.organisation;
         scope.saveCurrent(scope.parts.organisation, organisation).then(function (o)
         {
+            if (o.id !== project.organisation_id)
+            {
+                project.organisation_id = o.id;
+                scope.saveCurrentProject(true);
+            }
         });
     };
 
@@ -279,6 +310,13 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         {
             scope.goto("/projects");
         });
+    };
+
+    scope.changeDeveloper = function ()
+    {
+        // TODO:
+        scope.selectOrganisationMode = true;
+        scope.organisations = Organisation.query();
     };
 
     if (scope.routeParams.projectId == "new")

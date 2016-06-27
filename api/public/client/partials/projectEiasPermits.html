@@ -323,6 +323,7 @@
                                 <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
                                         text="'Delete EIA and Permit'"
                                         warning="'NB! Any documents linked to this EIA and Permit will also be deleted. Do you want to proceed?'"
+                                        button-class="'btn-danger'"
                                         on-yes="deleteEiaPermit()"></sero-delete-button>
                             </div>
                         </div>
@@ -602,6 +603,7 @@
                                                         <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
                                                                 text="'Delete document'"
                                                                 warning="'Do you really want to delete this record?'"
+                                                                button-class="'btn-danger'"
                                                                 on-yes="deleteDocument()"></sero-delete-button>
                                                     </div>
                                                 </div>

@@ -154,11 +154,21 @@
                     </div>
 
                     <div class="row">
+
                         <div class="col-md-12">
-                            <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canDelete()"
-                                    text="'Delete Project'"
-                                    warning="'Do you really want to delete this project? If the organisation is no longer connected to any project, the organisation will also be deleted.'"
-                                    on-yes="deleteProject()"></sero-delete-button>
+                            <div class="pull-right">
+                                <sero-delete-button class="delete-button" ng-hide="!auth.canSave()"
+                                        text="'Change Developer'"
+                                        warning=""
+                                        button-class="'btn-warning'"
+                                        on-yes="changeDeveloper()"></sero-delete-button>
+
+                                <sero-delete-button class="delete-button" ng-hide="!auth.canDelete()"
+                                        text="'Delete Project'"
+                                        warning="'Do you really want to delete this project? If the organisation is no longer connected to any project, the organisation will also be deleted.'"
+                                        button-class="'btn-danger'"
+                                        on-yes="deleteProject()"></sero-delete-button>
+                            </div>
                         </div>
                     </div>
 

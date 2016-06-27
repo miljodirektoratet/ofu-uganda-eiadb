@@ -114,9 +114,23 @@ class ProjectController extends Controller
         }
 
         $inputData = Input::all();
+
+        $oldOrganisationId = $project->organisation_id;
+        $newOrganisationId = $inputData['organisation_id'];
+
         $this->updateValuesInResource($project, $inputData);
         $this->handleAdditionalDistricts($project, $inputData);
         $project->save();
+
+        if ($oldOrganisationId != $newOrganisationId)
+        {
+            $oldOrganisation = Organisation::find($oldOrganisationId);
+            if ($oldOrganisation->projects()->count() === 0)
+            {
+                $oldOrganisation->delete();
+            }
+        }
+
         return $this->show($project->id);
     }
 
