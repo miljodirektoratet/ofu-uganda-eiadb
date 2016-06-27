@@ -151,6 +151,7 @@
                     <th>Year</th>
                     <th>Date of entry</th>
                     <th>Type of certificate</th>
+                    <th>Number</th>
                     <th>Certificate number</th>
                     <th>Conditions</th>
                     <th>Certificate cancelled?</th>
@@ -161,7 +162,7 @@
                   <tbody>
                   <!--<tr ng-class="{'bg-success':c.is_new}" ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">-->
                   <tr ng-repeat="c in p.practitioner_certificates" ng-hide="c.is_deleted">
-                    <td><input type="text" ng-readonly="!canSave()" ng-required="true" integer min="{{certificateYearMin}}" max="{{certificateYearMax}}" class="form-control input-sm input-year" id="c_year" ng-model="c.year"/></td>
+                    <td><input type="text" ng-readonly="!canSave()" ng-required="true" ng-change="calculateCertificateNumber(c)" integer min="{{certificateYearMin}}" max="{{certificateYearMax}}" class="form-control input-sm input-year" id="c_year" ng-model="c.year"/></td>
                     <td>
                       <div class="input-group container-datepicker" ng-controller="DatePickerController">
                         <input type="text" ng-readonly="!canSave()" class="form-control input-sm input-date" ng-model="c.date_of_entry" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
@@ -179,11 +180,12 @@
                       <!--</div>-->
                     </td>
                     <td>
-                      <select ui-select2 ng-disabled="!canSave()" id="c_cert_type" ng-required="true" class="form-control input-sm" ng-model="c.cert_type">
+                      <select ui-select2 ng-disabled="!canSave()" id="c_cert_type" ng-required="true" ng-change="calculateCertificateNumber(c)" class="form-control input-sm" ng-model="c.cert_type">
                         <option ng-repeat="v in valuelists.practitionertype" value="{{v.id}}">{{v.description1}}</option>
                       </select>
                     </td>
-                    <td><input type="text" ng-readonly="!canSave()" id="c_cert_no" certificate-number ng-required="true" class="form-control input-sm" ng-model="c.cert_no" /></td>
+                    <td><input type="text" ng-readonly="!canSave()" id="c_number" ng-change="calculateCertificateNumber(c)" ng-required="true" class="form-control input-sm" ng-model="c.number" /></td>
+                    <td><input type="text" ng-readonly="true" id="c_cert_no" certificate-number ng-required="true" class="form-control input-sm" ng-model="c.cert_no" /></td>
                     <td>
                       <select ui-select2 ng-disabled="!canSave()" ng-required="true" id="c_conditions" class="form-control input-sm input-conditions" ng-model="c.conditions">
                         <option ng-repeat="v in valuelists.practitionermembertype" value="{{v.id}}">{{v.description2}}</option>

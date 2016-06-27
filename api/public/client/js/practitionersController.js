@@ -95,6 +95,11 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
     p.practitioner_certificates.unshift(c);
   };
 
+  scope.calculateCertificateNumber = function(c)
+  {
+      c.cert_no = scope.certificateNumber(c);
+  };
+
   scope.canSave = function()
   {
     return scope.userinfo.info.role_6;
@@ -178,15 +183,15 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
 
   scope.certificateNumber = function(c)
   {
-    // Not in use yet. Should perhaps let user input everything and validate against this?
     var practitionertypePart = "E";
-    var practitionertype = _.find(scope.valuelists["practitionertype"], {'id': c.cert_no});
+      // The + is to convert c.cert_type to a integer (don't know why it is not. Because select2?).
+    var practitionertype = _.find(scope.valuelists["practitionertype"], {'id': +c.cert_type});
     if (practitionertype)
     {
       practitionertypePart = practitionertype.description1;
     }
-    var numberPart = "XXX";
-    var yearPart = c.year.toString().substr(2);
+    var numberPart = c.number ? ("00"+c.number).slice(-3) : "000";
+    var yearPart = c.year ? c.year.toString().substr(2) : "00";
     var no = "CC/"+practitionertypePart+"/"+numberPart+"/"+yearPart;
     return no;
   };
