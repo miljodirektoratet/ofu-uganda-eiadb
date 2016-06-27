@@ -16,7 +16,8 @@ class ProjectSearchController extends Controller
             ->select('p.id as project_id',
                 'p.title as project_title',
                 'p.location as project_location',
-                'o.name as developer_name',
+                DB::raw('CONCAT(o.name, " (id ", o.id, " )") AS developer_name'),
+
                 'd.district as district_district',
                 'c.description_short as category_description')
             ->whereNull('p.deleted_at')
