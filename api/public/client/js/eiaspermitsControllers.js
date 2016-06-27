@@ -205,6 +205,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "date_fee_notification":
             case "date_fee_payed":
             case "fee_receipt_no":
+            case "expected_jobs_created":
                 return scope.userinfo.info.role_4;
             case "decision":
             case "date_decision":

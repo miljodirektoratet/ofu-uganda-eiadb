@@ -82,10 +82,8 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('status')" id="status" name="status" class="form-control input-sm" ng-model="data.eiapermit.status">
-                                        <option ng-repeat="v in valuelists.eiastatus" value="{{v.id}}">{{v.description1}}</option>
-                                    </select>
+                                    <label for="expected_jobs_created">Expected jobs created</label>
+                                    <input type="text" decimal="2" ng-blur="saveCurrentEiaPermit()" ng-readonly="!auth.canSave('expected_jobs_created')" class="form-control input-sm" id="expected_jobs_created" ng-model="data.eiapermit.expected_jobs_created"/>
                                 </div>
                             </div>
                             <div class="col-md-3">
