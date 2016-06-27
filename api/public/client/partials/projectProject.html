@@ -154,15 +154,8 @@
                     </div>
 
                     <div class="row">
-
                         <div class="col-md-12">
                             <div class="pull-right">
-                                <sero-delete-button class="delete-button" ng-hide="!auth.canSave()"
-                                        text="'Change Developer'"
-                                        warning="'You will now change the developer for this project. If the previous developer after the change no longer is connected to any projects, this developer will be automatically deleted.'"
-                                        button-class="'btn-warning'"
-                                        on-yes="changeDeveloper()"></sero-delete-button>
-
                                 <sero-delete-button class="delete-button" ng-hide="!auth.canDelete()"
                                         text="'Delete Project'"
                                         warning="'Do you really want to delete this project? If the organisation is no longer connected to any project, the organisation will also be deleted.'"
@@ -265,6 +258,18 @@
                             <div class="form-group">
                                 <label for="organisation_remarks">Remarks</label>
                                 <textarea ng-blur="saveCurrentOrganisation()" ng-readonly="!auth.canSave()" class="form-control input-sm" rows="3" id="organisation_remarks" ng-model="data.organisation.remarks"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <sero-delete-button class="delete-button" ng-hide="!auth.canSave()"
+                                        text="'Change Developer'"
+                                        warning="'You will now change the developer for this project. If the previous developer after the change no longer is connected to any projects, this developer will be automatically deleted.'"
+                                        button-class="'btn-warning'"
+                                        on-yes="changeDeveloper()"></sero-delete-button>
                             </div>
                         </div>
                     </div>
