@@ -68,7 +68,7 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
 
     scope.gridOptions.columnDefs = [
         {name: 'auditinspection_code', displayName: 'Number', width: 80, cellTooltip: true, headerTooltip: true},
-        {name: 'project_title', displayName: 'Project title', cellTooltip: true, headerTooltip: true},
+        {name: 'project_title', displayName: 'Project name', cellTooltip: true, headerTooltip: true},
         {name: 'developer_name', displayName: 'Developer name', cellTooltip: true, headerTooltip: true},
         {name: 'district_district', displayName: 'District', cellTooltip: true, headerTooltip: true},
         {name: 'auditinspection_type', displayName: 'Activity', cellTooltip: true, headerTooltip: true},
@@ -178,7 +178,7 @@ controllers.controller('SearchProjectsController', ['$scope', '$routeParams', '$
 
     scope.gridOptions.columnDefs = [
         {name: 'project_id', displayName: 'Id', type:'number', width: 50, cellTooltip: true, headerTooltip: true},
-        {name: 'project_title', displayName: 'Title', cellTooltip: true, headerTooltip: true},
+        {name: 'project_title', displayName: 'Name', cellTooltip: true, headerTooltip: true},
         {name: 'project_location', displayName: 'Location', cellTooltip: true, headerTooltip: true},
         {name: 'district_district', displayName: 'District', cellTooltip: true, headerTooltip: true},
         {name: 'category_description', displayName: 'Category', cellTooltip: true, headerTooltip: true},

@@ -9,7 +9,7 @@
       <form class="form-inline" role="form" ng-show="showFilter">
         <div class="form-group">
           <label class="sr-only" for="filterText">Filter</label>
-          <input type="text" class="form-control input-filter" id="filterText" placeholder="Filter (try anything, e.g. title, location, or organisation)" ng-model="filterText">
+          <input type="text" class="form-control input-filter" id="filterText" placeholder="Filter (try anything, e.g. name, location, or organisation)" ng-model="filterText">
         </div>
         <span>Showing {{(projects | filter:filterText).length}} of {{projectsCount}} projects</span>
       </form>
@@ -31,7 +31,7 @@
         <thead class="header">
         <tr>
           <th>Id</th>
-          <th>Title</th>
+          <th>Name</th>
           <th>Location</th>
           <th>Project District</th>
           <th>Category of project</th>
