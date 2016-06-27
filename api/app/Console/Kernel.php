@@ -1,6 +1,7 @@
 <?php namespace App\Console;
 
 use App\AuditInspection;
+use App\Organisation;
 use DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -29,6 +30,11 @@ class Kernel extends ConsoleKernel
         {
             $this->setDeadlinePassedStatus();
         })->everyTenMinutes();
+
+        $schedule->call(function ()
+        {
+            $this->deleteOrganisationIslands();
+        })->daily();
     }
 
     private function setDeadlinePassedStatus()
@@ -39,5 +45,11 @@ class Kernel extends ConsoleKernel
             ->where('status', '!=', 73)
             ->update(['status' => 73]);
     }
-}
 
+    private function deleteOrganisationIslands()
+    {
+        Organisation::where('deleted_at', '=', null)
+            ->whereRaw('id not in (select p.organisation_id from projects p where p.deleted_at is null)')
+            ->delete();
+    }
+}
