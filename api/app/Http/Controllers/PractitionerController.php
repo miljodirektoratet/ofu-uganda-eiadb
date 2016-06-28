@@ -35,7 +35,12 @@ class PractitionerController extends Controller
         // 	->where('id', $id)
         // 	->take(1)
         // 	->get();
-        $practitioner = Practitioner::with('practitionerCertificates')->find($id);
+
+
+        $practitioner = Practitioner::with(array('practitionerCertificates' => function ($query)
+        {
+            $query->orderBy('year', 'DESC')->orderBy('cert_type', 'DESC');
+        }))->find($id);
         return Response::json($practitioner, 200);
     }
 
