@@ -145,6 +145,14 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contact_person">Contact person</label>
+                                <input type="text" ng-blur="saveCurrentProject()" ng-readonly="!auth.canSave()" class="form-control input-sm" id="contact_person" ng-model="data.project.contact_person"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="project_remarks">Remarks</label>

@@ -8,7 +8,7 @@ class Project extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $fillable = ['title', 'category_id', 'district_id', 'location', 'longitude', 'latitude', 'has_industrial_waste_water', 'organisation_id', 'remarks', 'risk_level'];
+    protected $fillable = ['title', 'category_id', 'district_id', 'location', 'longitude', 'latitude', 'has_industrial_waste_water', 'organisation_id', 'remarks', 'risk_level', 'contact_person'];
     protected $hidden = ['deleted_at'];
 
     public function organisation()
