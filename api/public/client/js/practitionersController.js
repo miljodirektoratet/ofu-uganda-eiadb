@@ -12,34 +12,47 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
   scope.valuelists = Valuelists;
   scope.practitioners = Practitioner.query();//{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
-  var filterCertificates = function(certificates, certType, year)
+  var filterCertificates = function(certificates, certType, year, conditions)
   {
     if (!certificates) {return false;}
     var e = function(value)
     {
       if (value.cert_type != certType) {return false;}
       if (value.year !== year) {return false;}
+      if (conditions > 0 && value.conditions != conditions) {return false;}
       if (value.is_deleted) {return false;}
       if (value.is_cancelled) {return false;}
       return true;
     };
     return filter('filter')(certificates, e, true).length > 0;
   };
-  scope.hasEia = function(p)
-  {
-    var has = filterCertificates(p.practitioner_certificates, 50, scope.certificateYearValid);
-    p.cert_eia = has ? "eia":null;
-    return has;
-  };
-  scope.hasAudit = function(p)
-  {
-    var has = filterCertificates(p.practitioner_certificates, 51, scope.certificateYearValid);
-    p.cert_au = has ? "audit":null;
-    return has;
-  };
+    scope.hasEiaTL = function(p)
+    {
+        var has = filterCertificates(p.practitioner_certificates, 50, scope.certificateYearValid, 38);
+        p.cert_eia = has ? "eia":null;
+        return has;
+    };
+    scope.hasEiaTM = function(p)
+    {
+        var has = filterCertificates(p.practitioner_certificates, 50, scope.certificateYearValid, 39);
+        p.cert_eia = has ? "eia":null;
+        return has;
+    };
+    scope.hasAuditTL = function(p)
+    {
+        var has = filterCertificates(p.practitioner_certificates, 51, scope.certificateYearValid, 38);
+        p.cert_au = has ? "audit":null;
+        return has;
+    };
+    scope.hasAuditTM = function(p)
+    {
+        var has = filterCertificates(p.practitioner_certificates, 51, scope.certificateYearValid, 39);
+        p.cert_au = has ? "audit":null;
+        return has;
+    };
   scope.hasPartnership = function(p)
   {
-    var has = filterCertificates(p.practitioner_certificates, 52, scope.certificateYearValid);
+    var has = filterCertificates(p.practitioner_certificates, 52, scope.certificateYearValid, 0);
     p.cert_ep = has ? "partnership":null;
     return has;
   };

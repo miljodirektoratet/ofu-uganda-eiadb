@@ -15,7 +15,7 @@ class PractitionerController extends Controller
         $withFunction = function ($query)
         {
             $year = intval(date("Y"));
-            $query->select('id', 'practitioner_id', 'year', 'cert_type', 'is_cancelled')
+            $query->select('id', 'practitioner_id', 'year', 'cert_type', 'conditions', 'is_cancelled')
                 ->where('year', '=', $year);
         };
 

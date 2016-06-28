@@ -51,6 +51,7 @@
 
 .practitioners .practitioner .master .noCertificate {
     opacity: 0;
+    display:none;
 }
 
 .practitioners .practitioner .detail,
