@@ -94,6 +94,7 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
     else
     {
       c.is_deleted=true;
+      scope.currentForm.$setDirty();
     }
   };
   scope.newCertificate = function(p)
