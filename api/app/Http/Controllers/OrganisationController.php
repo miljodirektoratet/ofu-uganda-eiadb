@@ -13,7 +13,7 @@ class OrganisationController extends Controller
     public function index()
     {
         $organisations = Organisation::
-        get(array('id', 'name', 'visiting_address', 'city', 'contact_person'));
+        get(array('id', 'name', 'visiting_address', 'city', 'tin'));
 
         return Response::json($organisations->toArray(), 200);
     }
