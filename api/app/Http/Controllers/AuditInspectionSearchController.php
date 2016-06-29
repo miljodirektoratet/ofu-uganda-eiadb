@@ -34,14 +34,13 @@ class AuditInspectionSearchController extends Controller
             ->whereNull('p.deleted_at')
             ->whereNull('o.deleted_at');
 
-        $aliasDefinition = array();
-        $aliasDefinition["personnel.user_id"] = "ai.lead_officer";
-
         $criteriaDefinitions = array();
         $criteriaDefinitions["search"] = ["p.title", "o.name", "ai.code"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["ai.year"];
-        $criteriaDefinitions["multiple"] = ["d.id", "ai.action_taken", "c.id", "ai.type", "personnel.user_id", "ai.status", "ai.performance_level"];
+        $criteriaDefinitions["multiple"] = ["d.id", "ai.action_taken", "c.id", "ai.type", "ai.status", "ai.performance_level"];
+        $criteriaDefinitions["alias"] = ["personnel.user_id"];
+
         $criterias = getSearchCriterias([
             'project_title',
             'auditinspection_year',
@@ -56,10 +55,10 @@ class AuditInspectionSearchController extends Controller
             'auditinspection_performance_level'
         ]);
 
-        if (array_key_exists('personnel_user_id', $criterias))
-        {
-            $criterias['auditinspection_'] = $criterias['personnel_user_id'];
-        }
+//        if (array_key_exists('personnel_user_id', $criterias))
+//        {
+////            $criterias['auditinspection_'] = $criterias['personnel_user_id'];
+//        }
 
         foreach ($criterias as $word => $criteria)
         {
@@ -74,37 +73,30 @@ class AuditInspectionSearchController extends Controller
             {
                 $result = $result->where($word, 'like', '%' . $criteria . '%');
             }
-            else
+
+            elseif (in_array($word, $criteriaDefinitions["multiple_text"]))
             {
-                if (in_array($word, $criteriaDefinitions["multiple_text"]))
+                $criteriaArray = explode(",", $criteria);
+                $result = $result->whereIn($word, $criteriaArray);
+            }
+            elseif (in_array($word, $criteriaDefinitions["multiple"]))
+            {
+                $result = $result->whereIn($word, [$criteria]);
+            }
+            elseif (in_array($word, $criteriaDefinitions["exact"]))
+            {
+                $result = $result->where($word, '=', $criteria);
+            }
+            // Need to handle aliases special.
+            elseif (in_array($word, $criteriaDefinitions["alias"]))
+            {
+                if ($word === "personnel.user_id")
                 {
-                    $criteriaArray = explode(",", $criteria);
-                    $result = $result->whereIn($word, $criteriaArray);
-                }
-                else
-                {
-                    if (in_array($word, $criteriaDefinitions["multiple"]))
+                    $result = $result->where(function ($query) use ($word, $criteria)
                     {
-                        if (array_key_exists($word, $aliasDefinition))
-                        {
-                            $result = $result->where(function ($query) use ($word, $criteria, $aliasDefinition)
-                            {
-                                $query->whereIn($word, [$criteria])
-                                    ->whereIn($aliasDefinition[$word], [$criteria], 'or');
-                            });
-                        }
-                        else
-                        {
-                            $result = $result->whereIn($word, [$criteria]);
-                        }
-                    }
-                    else
-                    {
-                        if (in_array($word, $criteriaDefinitions["exact"]))
-                        {
-                            $result = $result->where($word, $criteria);
-                        }
-                    }
+                        $query->whereIn($word, [$criteria])
+                            ->whereIn("ai.lead_officer", [$criteria], 'or');
+                    });
                 }
             }
         }

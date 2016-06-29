@@ -24,10 +24,12 @@ class ProjectSearchController extends Controller
             ->whereNull('o.deleted_at');
 
         $criteriaDefinitions = array();
-        $criteriaDefinitions["search"] = ["p.title", "o.name", "p.location"];
+        $criteriaDefinitions["search"] = ["p.title", "p.location"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["p.id"];
         $criteriaDefinitions["multiple"] = ["d.id", "c.id", "o.id", "p.has_industrial_waste_water"];
+        $criteriaDefinitions["alias"] = ["o.name"];
+
         $criterias = getSearchCriterias([
             'project_title',
             'district_id',
@@ -61,7 +63,20 @@ class ProjectSearchController extends Controller
             }
             else if (in_array($word, $criteriaDefinitions["exact"]))
             {
-                $result = $result->where($word, $criteria);
+                $result = $result->where($word, '=', $criteria);
+            }
+            // Need to handle aliases special.
+            elseif (in_array($word, $criteriaDefinitions["alias"]))
+            {
+                if ($word === "o.name")
+                {
+                    $result = $result->where(function ($query) use ($word, $criteria)
+                    {
+                        $query->where($word, 'like', '%' . $criteria . '%')
+                            ->orWhere("o.id", '=', $criteria)
+                            ->orWhere("o.tin", '=', $criteria);
+                    });
+                }
             }
         }
 
