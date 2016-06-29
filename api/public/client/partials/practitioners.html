@@ -71,6 +71,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="organisation_name">Organisation Name</label>
+                  <span class="message-inline pull-right" ng-show="p.updated_by">Last changed by {{p.updated_by}}</span>
                   <input type="text" ng-readonly="!canSave()" ng-required="false" class="form-control input-sm" id="organisation_name" ng-model="p.organisation_name"/>
                 </div>
               </div>

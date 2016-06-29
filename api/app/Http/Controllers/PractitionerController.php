@@ -80,7 +80,12 @@ class PractitionerController extends Controller
         $inputData = Input::all();
         $this->updateValuesInResource($practitioner, $inputData);
         $practitioner->save();
-        $this->handleCertificates($practitioner, $inputData);
+        $certificatesChanged = $this->handleCertificates($practitioner, $inputData);
+        if ($certificatesChanged)
+        {
+            $practitioner->updated_by = Auth::user()->name;
+            $practitioner->save();
+        }
         return $this->show($practitioner->id);
     }
 
@@ -99,6 +104,7 @@ class PractitionerController extends Controller
 
     private function handleCertificates($practitioner, $inputData)
     {
+        $changed = false;
         foreach ($inputData["practitioner_certificates"] as $certificateInputData)
         {
             $certificate = null;
@@ -113,6 +119,7 @@ class PractitionerController extends Controller
                 if ($certificate)
                 {
                     $certificate->delete();
+                    $changed = true;
                 }
                 else
                 {
@@ -125,10 +132,15 @@ class PractitionerController extends Controller
                     $certificate = new PractitionerCertificate;
                     $certificate->practitioner()->associate($practitioner);
                 }
-                $this->updateValuesInResource($certificate, $certificateInputData);
+                $certificateChanged = $this->updateValuesInResource($certificate, $certificateInputData);
                 $certificate->save();
+                if ($certificateChanged)
+                {
+                    $changed = true;
+                }
             }
         }
+        return $changed;
     }
 
     private function updateValuesInResource($resource, $data)
@@ -169,6 +181,11 @@ class PractitionerController extends Controller
         {
             $resource["updated_by"] = Auth::user()->name;
             //$project->created_by = Auth::user()->name;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
