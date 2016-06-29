@@ -70,6 +70,7 @@ controllers.controller('SearchAuditsInspectionsController', ['$scope', '$routePa
         {name: 'auditinspection_code', displayName: 'Number', width: 80, cellTooltip: true, headerTooltip: true},
         {name: 'project_title', displayName: 'Project name', cellTooltip: true, headerTooltip: true},
         {name: 'developer_name', displayName: 'Developer name', cellTooltip: true, headerTooltip: true},
+        {name: 'developer_tin', displayName: 'TIN', type:'number', width: 90, cellTooltip: true, headerTooltip: true},
         {name: 'district_district', displayName: 'District', cellTooltip: true, headerTooltip: true},
         {name: 'auditinspection_type', displayName: 'Activity', cellTooltip: true, headerTooltip: true},
         {name: 'category_description', displayName: 'Category of project', width: 150, cellTooltip: true, headerTooltip: true},
@@ -182,7 +183,8 @@ controllers.controller('SearchProjectsController', ['$scope', '$routeParams', '$
         {name: 'project_location', displayName: 'Location', cellTooltip: true, headerTooltip: true},
         {name: 'district_district', displayName: 'District', cellTooltip: true, headerTooltip: true},
         {name: 'category_description', displayName: 'Category', cellTooltip: true, headerTooltip: true},
-        {name: 'developer_name', displayName: 'Developer name', cellTooltip: true, headerTooltip: true}
+        {name: 'developer_name', displayName: 'Developer name', cellTooltip: true, headerTooltip: true},
+        {name: 'developer_tin', displayName: 'TIN', type:'number', width: 90, cellTooltip: true, headerTooltip: true}
     ];
 
 

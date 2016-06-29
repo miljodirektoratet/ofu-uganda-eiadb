@@ -27,19 +27,20 @@ class AuditInspectionSearchController extends Controller
                 'p.id as project_id',
                 'p.title as project_title',
                 'performance_level.description1 as auditinspection_performance_level',
-                'o.name as developer_name',
+                DB::raw('CONCAT(o.name, " (id ", o.id, " )") AS developer_name'),
                 'd.district as district_district',
-                'c.description_short as category_description')
+                'c.description_short as category_description',
+                'o.tin as developer_tin')
             ->whereNull('ai.deleted_at')
             ->whereNull('p.deleted_at')
             ->whereNull('o.deleted_at');
 
         $criteriaDefinitions = array();
-        $criteriaDefinitions["search"] = ["p.title", "o.name", "ai.code"];
+        $criteriaDefinitions["search"] = ["p.title", "ai.code"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["ai.year"];
         $criteriaDefinitions["multiple"] = ["d.id", "ai.action_taken", "c.id", "ai.type", "ai.status", "ai.performance_level"];
-        $criteriaDefinitions["alias"] = ["personnel.user_id"];
+        $criteriaDefinitions["alias"] = ["personnel.user_id", "o.name"];
 
         $criterias = getSearchCriterias([
             'project_title',
@@ -96,6 +97,15 @@ class AuditInspectionSearchController extends Controller
                     {
                         $query->whereIn($word, [$criteria])
                             ->whereIn("ai.lead_officer", [$criteria], 'or');
+                    });
+                }
+                elseif ($word === "o.name")
+                {
+                    $result = $result->where(function ($query) use ($word, $criteria)
+                    {
+                        $query->where($word, 'like', '%' . $criteria . '%')
+                            ->orWhere("o.id", '=', $criteria)
+                            ->orWhere("o.tin", '=', $criteria);
                     });
                 }
             }
