@@ -34,6 +34,7 @@ module.exports = function(grunt)
                     'bower_components/angular-resource/angular-resource.min.js',
                     'bower_components/angular-animate/angular-animate.min.js',
                     'bower_components/angular-messages/angular-messages.min.js',
+                    'bower_components/angular-sanitize/angular-sanitize.min.js',
                     'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                     'bower_components/select2/select2.min.js',
                     'js/select2.js',

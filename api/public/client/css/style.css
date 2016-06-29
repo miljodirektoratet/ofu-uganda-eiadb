@@ -135,6 +135,11 @@
     min-width: 400px;
 }
 
+.projects .delete-button .btn-delete
+{
+    width:200px;
+}
+
 #infoMessageBox {
     top: 60px;
     left: 50%;

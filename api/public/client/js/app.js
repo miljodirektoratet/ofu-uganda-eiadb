@@ -13,6 +13,7 @@ var seroApp = angular.module('seroApp', [
     'ngResource',
     'ngAnimate',
     'ngMessages',
+    'ngSanitize',
     'ui.bootstrap',
     'ui.select2',
     'ngFileUpload',

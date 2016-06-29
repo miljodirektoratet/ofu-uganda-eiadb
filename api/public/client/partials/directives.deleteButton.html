@@ -1,18 +1,18 @@
 <div class="btn-group" dropdown auto-close="disabled" is-open="button.isopen">
 
-    <button ng-if="warning" type="button" class="btn btn-sm btn-delete" ng-class="buttonClass" dropdown-toggle>
+    <button ng-if="warning" type="button" class="btn btn-delete" ng-class="buttonClass" dropdown-toggle>
         {{text}}
     </button>
 
-    <button ng-if="!warning" type="button" class="btn btn-sm btn-delete" ng-class="buttonClass"  ng-click="onYes();">
+    <button ng-if="!warning" type="button" class="btn btn-delete" ng-class="buttonClass"  ng-click="onYes();">
         {{text}}
     </button>
 
     <ul class="dropdown-menu" role="menu">
         <li role="menuitem">
             <div class="row">
-                <div class="col-md-12">
-                    {{warning}}
+                <div class="col-md-12" ng-bind-html="warning">
+
                 </div>
             </div>
             <div class="row">

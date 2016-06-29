@@ -131,9 +131,9 @@ directives.directive('statisticsPanel', function ()
 {
     'use strict';
 
-    angular.module('seroApp.directives').directive('seroDeleteButton', directive);
+    angular.module('seroApp.directives').directive('seroDeleteButton', ['$sce', directive]);
 
-    function directive()
+    function directive($sce)
     {
         return {
             restrict: 'E',

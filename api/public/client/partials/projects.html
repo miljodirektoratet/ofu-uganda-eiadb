@@ -20,7 +20,14 @@
       </div>
     </div>
     <div class="col-md-4">
-      <button type="button" class="btn btn-success pull-right" ng-click="goto('/projects/new');" ng-hide="!canSave()">New project</button>
+      <!--<button type="button" class="btn btn-success pull-right" ng-click="goto('/projects/new');" ng-hide="!canSave()">New project</button>-->
+
+      <sero-delete-button class="delete-button pull-right" ng-hide="!canSave()"
+              text="'New project'"
+              warning="'Are you sure that you want to create a new <span class=\'warningfont\'>project</span>? You should only create a new project if it already doesn\'t exist.'"
+              button-class="'btn-success'"
+              on-yes="goto('/projects/new')"></sero-delete-button>
+
     </div>
     <div class="col-md-12"><hr/></div>
   </div>
