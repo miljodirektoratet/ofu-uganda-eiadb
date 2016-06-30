@@ -30,39 +30,6 @@ class PractitionerController extends Controller
 
     public function getPublic()
     {
-        $year = intval(date("Y"));
-
-//        $result = DB::table('practitioners as p')
-//            ->join('practitioner_certificates as pc', 'p.id', '=', 'pc.practitioner_id')
-//            ->select('p.id',
-//                'p.person',
-//                'p.tin',
-//                'p.organisation_name',
-//                'p.visiting_address',
-//                'p.box_no',
-//                'p.city',
-//                'p.phone',
-//                'p.fax',
-//                'p.email',
-//                'p.qualifications',
-//                'p.expertise',
-//                'p.remarks',
-//                'pc.id as certificate_id',
-//                'pc.year as certificate_year',
-//                'pc.cert_no as certificate_no'
-//            )
-//            ->whereIn('year', array($year - 1, $year))
-//            ->where('is_cancelled', '=', false)
-//            ->whereNull('p.deleted_at')
-//            ->whereNull('pc.deleted_at');
-//
-//        $result = $result->orderBy('p.person', 'asc');
-//        $result = $result->distinct();
-//        $result = $result->get();
-//
-//        return Response::json($result, 200);
-
-
         $practitioners = Practitioner::with('validCertificates')
             ->has('validCertificates')
             ->get(['id',
@@ -220,6 +187,7 @@ class PractitionerController extends Controller
                 if (!$certificate)
                 {
                     $certificate = new PractitionerCertificate;
+                    $certificate->created_by = Auth::user()->name;
                     $certificate->practitioner()->associate($practitioner);
                 }
                 $certificateChanged = $this->updateValuesInResource($certificate, $certificateInputData);
