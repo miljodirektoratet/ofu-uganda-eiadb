@@ -59,6 +59,11 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
     Route::resource('project.auditinspection', 'AuditInspectionController');
 });
 
+Route::group(['prefix' => 'api/v1'], function ()
+{
+    Route::get('practitioners', ['uses' => 'PractitionerController@getPublic']);
+});
+
 Route::group(['prefix' => 'search/v1', 'middleware' => 'auth'], function ()
 {
     Route::resource('project', 'ProjectSearchController');

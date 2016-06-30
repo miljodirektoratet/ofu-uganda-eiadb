@@ -6,6 +6,7 @@ use Input;
 use \DateTime;
 use \App\Practitioner;
 use \App\PractitionerCertificate;
+use DB;
 
 class PractitionerController extends Controller
 {
@@ -23,6 +24,95 @@ class PractitionerController extends Controller
         with(array('practitionerCertificates' => $withFunction))
             //->take(3)
             ->get(array('id', 'person', 'organisation_name', 'visiting_address', 'city'));
+
+        return Response::json($practitioners->toArray(), 200);
+    }
+
+    public function getPublic()
+    {
+        $year = intval(date("Y"));
+
+//        $result = DB::table('practitioners as p')
+//            ->join('practitioner_certificates as pc', 'p.id', '=', 'pc.practitioner_id')
+//            ->select('p.id',
+//                'p.person',
+//                'p.tin',
+//                'p.organisation_name',
+//                'p.visiting_address',
+//                'p.box_no',
+//                'p.city',
+//                'p.phone',
+//                'p.fax',
+//                'p.email',
+//                'p.qualifications',
+//                'p.expertise',
+//                'p.remarks',
+//                'pc.id as certificate_id',
+//                'pc.year as certificate_year',
+//                'pc.cert_no as certificate_no'
+//            )
+//            ->whereIn('year', array($year - 1, $year))
+//            ->where('is_cancelled', '=', false)
+//            ->whereNull('p.deleted_at')
+//            ->whereNull('pc.deleted_at');
+//
+//        $result = $result->orderBy('p.person', 'asc');
+//        $result = $result->distinct();
+//        $result = $result->get();
+//
+//        return Response::json($result, 200);
+
+
+        $practitioners = Practitioner::with('validCertificates')
+            ->has('validCertificates')
+            ->get(['id',
+                'person',
+                'tin',
+                'organisation_name',
+                'visiting_address',
+                'box_no',
+                'city',
+                'phone',
+                'fax',
+                'email',
+                'qualifications',
+                'expertise',
+                'remarks']);
+
+
+//
+        foreach ($practitioners as $p)
+        {
+            $cs = $p["validCertificates"];
+            // 50 = EIA
+            // 51 = EA
+            // 52 = EP
+            $eia = null;
+            $ea = null;
+            $ep = null;
+            foreach ($cs as $c)
+            {
+                unset($c["practitioner_id"]);
+                if (!$eia && $c->cert_type == 50)
+                {
+                    $eia = $c;
+                }
+                if (!$ea && $c->cert_type == 51)
+                {
+                    $ea = $c;
+                }
+                if (!$ep && $c->cert_type == 52)
+                {
+                    $ep = $c;
+                }
+            }
+
+            unset($p["validCertificates"]);
+
+            $p["certificate_eia"] = $eia;
+            $p["certificate_ea"] = $ea;
+            $p["certificate_ep"] = $ep;
+        }
 
         return Response::json($practitioners->toArray(), 200);
     }

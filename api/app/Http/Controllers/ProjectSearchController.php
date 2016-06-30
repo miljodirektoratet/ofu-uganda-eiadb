@@ -82,7 +82,7 @@ class ProjectSearchController extends Controller
 
         $result = $result->orderBy('p.id', 'desc');
         $result = $result->get();
-
+        
         return Response::json($result, 200);
     }
 }
