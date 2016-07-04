@@ -79,6 +79,7 @@ Route::group(['prefix' => 'statistics/v1', 'middleware' => 'auth'], function ()
 Route::group(['prefix' => 'edit/v1', 'middleware' => 'manager'], function ()
 {
     Route::resource('code', 'Edit\CodeController');
+    Route::resource('user', 'Edit\UserController');
 });
 
 

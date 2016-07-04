@@ -14,11 +14,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
   use SoftDeletes;
   use EntrustUserTrait;
 
+  public function roles()
+  {
+    return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id');
+  }
+
   protected $table = 'users';
   protected $dates = ['deleted_at'];  
   
   // remember_token???
-  protected $fillable = ['initials','name','job_position_code','job_position_name','email','password','remember_token','is_passive'];
-  protected $hidden = ['password', 'remember_token', 'deleted_at'];
+  protected $fillable = ['initials','name','job_position_code','job_position_name','email','password','remember_token','is_passive', 'deleted_at'];
+  protected $hidden = ['password', 'remember_token'];//, 'deleted_at'];
 
 }

@@ -46,7 +46,8 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/statistics', {redirectTo: '/statistics/projects'});
         $routeProvider.when('/statistics/projects', statisticsTabsOptions);
 
-        $routeProvider.when('/advanced', {templateUrl: 'partials/advanced.html', controller: 'AdvancedController'});
+        $routeProvider.when('/advanced/codes', {templateUrl: 'partials/advancedCodes.html', controller: 'AdvancedCodesController'});
+        $routeProvider.when('/advanced/users', {templateUrl: 'partials/advancedUsers.html', controller: 'AdvancedUsersController'});
 
         $routeProvider.when('/pirking', {templateUrl: 'partials/pirking.html', controller: 'PirkingController'});
 

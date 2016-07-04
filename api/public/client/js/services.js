@@ -150,6 +150,14 @@ services.factory('EditCode', ['$resource', function ($resource)
         });
 }]);
 
+services.factory('EditUser', ['$resource', function ($resource)
+{
+    return $resource('/edit/v1/user/:userId', {userId: '@id'},
+        {
+            'update': {method: 'PUT', isArray: false}
+        });
+}]);
+
 services.factory('AuditInspectionSearch', ['$resource', function ($resource)
 {
     return $resource('/search/v1/auditinspection');
