@@ -24,11 +24,11 @@ class ProjectSearchController extends Controller
             ->whereNull('o.deleted_at');
 
         $criteriaDefinitions = array();
-        $criteriaDefinitions["search"] = ["p.title", "p.location"];
+        $criteriaDefinitions["search"] = ["p.location"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["p.id"];
         $criteriaDefinitions["multiple"] = ["d.id", "c.id", "o.id", "p.has_industrial_waste_water"];
-        $criteriaDefinitions["alias"] = ["o.name"];
+        $criteriaDefinitions["alias"] = ["o.name", "p.title"];
 
         $criterias = getSearchCriterias([
             'project_title',
@@ -75,6 +75,14 @@ class ProjectSearchController extends Controller
                         $query->where($word, 'like', '%' . $criteria . '%')
                             ->orWhere("o.id", '=', $criteria)
                             ->orWhere("o.tin", '=', $criteria);
+                    });
+                }
+                elseif ($word === "p.title")
+                {
+                    $result = $result->where(function ($query) use ($word, $criteria)
+                    {
+                        $query->where($word, 'like', '%' . $criteria . '%')
+                            ->orWhere("p.id", '=', $criteria);
                     });
                 }
             }

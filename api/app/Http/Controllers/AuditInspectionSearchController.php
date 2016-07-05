@@ -36,11 +36,11 @@ class AuditInspectionSearchController extends Controller
             ->whereNull('o.deleted_at');
 
         $criteriaDefinitions = array();
-        $criteriaDefinitions["search"] = ["p.title", "ai.code"];
+        $criteriaDefinitions["search"] = ["ai.code"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["ai.year"];
         $criteriaDefinitions["multiple"] = ["d.id", "ai.action_taken", "c.id", "ai.type", "ai.status", "ai.performance_level"];
-        $criteriaDefinitions["alias"] = ["personnel.user_id", "o.name"];
+        $criteriaDefinitions["alias"] = ["personnel.user_id", "o.name", "p.title"];
 
         $criterias = getSearchCriterias([
             'project_title',
@@ -55,11 +55,6 @@ class AuditInspectionSearchController extends Controller
             'auditinspection_status',
             'auditinspection_performance_level'
         ]);
-
-//        if (array_key_exists('personnel_user_id', $criterias))
-//        {
-////            $criterias['auditinspection_'] = $criterias['personnel_user_id'];
-//        }
 
         foreach ($criterias as $word => $criteria)
         {
@@ -106,6 +101,14 @@ class AuditInspectionSearchController extends Controller
                         $query->where($word, 'like', '%' . $criteria . '%')
                             ->orWhere("o.id", '=', $criteria)
                             ->orWhere("o.tin", '=', $criteria);
+                    });
+                }
+                elseif ($word === "p.title")
+                {
+                    $result = $result->where(function ($query) use ($word, $criteria)
+                    {
+                        $query->where($word, 'like', '%' . $criteria . '%')
+                            ->orWhere("p.id", '=', $criteria);
                     });
                 }
             }
