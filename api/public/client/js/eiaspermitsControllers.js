@@ -72,7 +72,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         var updated = updateEiaPermitStatus(ep, scope.data.documents);
         if (updated)
         {
-            console.log(scope.parts.eiapermit);
+            // console.log(scope.parts.eiapermit);
             scope.parts.eiapermit.form.$setDirty();
         }
         return updated;

@@ -158,6 +158,11 @@ services.factory('EditUser', ['$resource', function ($resource)
         });
 }]);
 
+services.factory('EiaPermitSearch', ['$resource', function ($resource)
+{
+    return $resource('/search/v1/eiapermit');
+}]);
+
 services.factory('AuditInspectionSearch', ['$resource', function ($resource)
 {
     return $resource('/search/v1/auditinspection');
@@ -178,6 +183,43 @@ services.factory('GeneralStatistics', ['$resource', function ($resource)
     return $resource('/statistics/v1/general');
 }]);
 
+services.factory('EiaPermitSearchService', ['EiaPermitSearch', '$q', function (EiaPermitSearch, $q)
+{
+    var factory = {};
+    factory.criteria = {};
+    factory.allowCache = true;
+    factory.rows = [];
+
+    factory.search = function (criteria)
+    {
+        //console.log("allowCache", factory.allowCache);
+        var deferred = $q.defer();
+
+        var isSameCriteria = _.isEqual(factory.criteria, criteria);
+        //console.log("isSameCriteria", isSameCriteria, factory.criteria, criteria);
+
+        if (isSameCriteria && factory.allowCache)
+        {
+            //console.log("From cache");
+            deferred.resolve(factory.rows);
+        }
+        else
+        {
+            //console.log("From server");
+            factory.criteria = _.clone(criteria);
+            EiaPermitSearch.query(factory.criteria, function (rows)
+            {
+                //console.log("From server finished");
+                factory.rows = rows;
+                deferred.resolve(factory.rows);
+                factory.allowCache = true;
+            });
+        }
+        return deferred.promise;
+    };
+
+    return factory;
+}]);
 
 services.factory('SearchService', ['AuditInspectionSearch', '$q', function (AuditInspectionSearch, $q)
 {

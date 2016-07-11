@@ -343,11 +343,11 @@ function updateEiaPermitStatus(ep, documents)
 
     if (oldStatus != newStatus)
     {
-        //console.log("Status changed from", oldStatus, "to", newStatus);
+        // console.log("Status changed from", oldStatus, "to", newStatus);
         ep.status = newStatus;
         return true;
     }
 
-    //console.log("Status not changed", oldStatus, newStatus);
+    // console.log("Status not changed", oldStatus, newStatus);
     return false;
 };

@@ -4,9 +4,9 @@
         <li ng-class="{active: tab==SearchTabEnum.Projects}">
             <a ng-href="#/search/projects">Project</a>
         </li>
-        <!--<li ng-class="{active: tab==SearchTabEnum.EiasPermits}" class="disabled">-->
-            <!--<a href="#/search/eiaspermits">EIA and Permit</a>-->
-        <!--</li>-->
+        <li ng-class="{active: tab==SearchTabEnum.EiasPermits}">
+            <a href="#/search/eiaspermits">EIA and Permit</a>
+        </li>
         <li ng-class="{active: tab==SearchTabEnum.AuditsInspections}">
             <a href="#/search/auditsinspections">Audit and Inspection</a>
         </li>
@@ -17,7 +17,7 @@
         <div ng-controller="SearchProjectsController" ng-include="'partials/searchProjects.html'"></div>
     </div>
     <div ng-if="tab==SearchTabEnum.EiasPermits">
-        NOT IMPLEMENTED
+        <div ng-controller="SearchEiasPermitsController" ng-include="'partials/searchEiasPermits.html'"></div>
     </div>
     <div ng-if="tab==SearchTabEnum.AuditsInspections">
         <div ng-controller="SearchAuditsInspectionsController" ng-include="'partials/searchAuditsInspections.html'"></div>
