@@ -122,6 +122,7 @@ class UserController extends Controller
                 }
                 $res = $resource->roles()->sync($roleIds);
                 $changes = count($res["attached"]) + count($res["detached"]) + count($res["updated"]);
+                
                 if ($changes > 0)
                 {
                     $changed = true;
@@ -157,6 +158,7 @@ class UserController extends Controller
         if ($changed)
         {
             $resource["updated_by"] = Auth::user()->name;
+            $resource["updated_at"] = Carbon::now();
         }
     }
 
