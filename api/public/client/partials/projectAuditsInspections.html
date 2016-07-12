@@ -406,7 +406,7 @@
                                     <label for="date_deadline">Follow-up date</label>
                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                         <input type="text" ng-blur="saveCurrentAuditInspection()"
-                                                id="date_deadline"
+                                                ng-readonly="!auth.canSave('date_deadline')" id="date_deadline"
                                                 class="form-control input-sm input-date"
                                                 ng-model="data.auditinspection.date_deadline"
                                                 data-datepicker-popup="d MMM yyyy" data-is-open="opened"
