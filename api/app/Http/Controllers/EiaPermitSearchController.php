@@ -29,6 +29,7 @@ class EiaPermitSearchController extends Controller
 //                ,'doc.title'
 //                ,'doc.code'
 //                ,'doc.number'
+//                ,'doc.date_submitted'
             )
             ->whereNull('ep.deleted_at')
             ->whereNull('p.deleted_at')
@@ -37,10 +38,11 @@ class EiaPermitSearchController extends Controller
 
         $criteriaDefinitions = array();
         $criteriaDefinitions["search"] = ["ep.certificate_no", "doc.title"];
-        $criteriaDefinitions["exact"] = ["ep.id"];
-        $criteriaDefinitions["multiple_text"] = []; // "ep.year"
+        $criteriaDefinitions["exact"] = ["ep.id", "doc.type"];
+        $criteriaDefinitions["multiple_text"] = [];
         $criteriaDefinitions["multiple"] = ["ep.status"];
         $criteriaDefinitions["alias"] = ["personnel.user_id", "o.name", "p.title", "doc.code"];
+        $criteriaDefinitions["special"] = ["doc.year"];
 
         $criterias = getSearchCriterias([
             'project_title',
@@ -52,7 +54,9 @@ class EiaPermitSearchController extends Controller
             'eiapermit_status',
             'eiapermit_id',
             'document_code',
-            'document_title'
+            'document_type',
+            'document_title',
+            'document_year',
         ]);
 
         foreach ($criterias as $word => $criteria)
@@ -118,6 +122,13 @@ class EiaPermitSearchController extends Controller
                         $query->where($word, '=', $criteria)
                             ->orWhere("doc.number", '=', $criteria);
                     });
+                }
+            }
+            elseif (in_array($word, $criteriaDefinitions["special"]))
+            {
+                if ($word === "doc.year")
+                {
+                    $result = $result->whereRaw("YEAR(doc.date_submitted)=?", [$criteria]);
                 }
             }
         }

@@ -111,7 +111,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="latitude">Latitude</label>
-                                <input type="text" ng-blur="saveCurrentProject()" decimal ng-readonly="!auth.canSave()" class="form-control input-sm" id="latitude" ng-model="data.project.latitude"/>
+                                <input type="text" ng-blur="saveCurrentProject()" decimal negative-number="true" ng-readonly="!auth.canSave()" class="form-control input-sm" id="latitude" ng-model="data.project.latitude"/>
                             </div>
                         </div>
                         <div class="col-md-3">

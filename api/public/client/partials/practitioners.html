@@ -45,9 +45,10 @@
           <div class="col-md-2">
             <span class="label certificate-label" ng-class="hasAuditTL(p) ? 'label-success' :'label-default noCertificate'">EA-TL</span>
             <span class="label certificate-label" ng-class="hasAuditTM(p) ? 'label-success' :'label-default noCertificate'">EA-TM</span>
-            <span class="label certificate-label" ng-class="hasEiaTL(p) ? 'label-success' :'label-default noCertificate'">EIA-TL</span>
-            <span class="label certificate-label" ng-class="hasEiaTM(p) ? 'label-success' :'label-default noCertificate'">EIA-TM</span>
-            <span class="label certificate-label" ng-class="hasPartnership(p) ? 'label-success' :'label-default noCertificate'">EP</span>
+            <span class="label certificate-label" ng-class="hasEiaTL(p) ? 'label-info' :'label-default noCertificate'">EIA-TL</span>
+            <span class="label certificate-label" ng-class="hasEiaTM(p) ? 'label-info' :'label-default noCertificate'">EIA-TM</span>
+            <span class="label certificate-label" ng-class="hasPartnershipEia(p) ? 'label-warning' :'label-default noCertificate'">EP-EIA</span>
+            <span class="label certificate-label" ng-class="hasPartnershipEa(p) ? 'label-warning' :'label-default noCertificate'">EP-EA</span>
             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current!=p">{{canSave() ? "Edit" : "Open"}}</button>
             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master" ng-show="current==p">Close</button>
             <span class="loader pull-right" ng-show="loading==p"></span>

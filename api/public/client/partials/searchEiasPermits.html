@@ -25,14 +25,19 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="document_code">Document code or listed No.</label>
-                            <input type="text" class="form-control input-sm" id="document_code" ng-model="criteria.document_code"/>
+                            <label for="document_type">Document type</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="document_type" class="form-control input-sm"
+                                    ng-model="criteria.document_type">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.documenttype" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="eiapermit_certificate_no">Certificate No.</label>
-                            <input type="text" class="form-control input-sm" id="eiapermit_certificate_no" ng-model="criteria.eiapermit_certificate_no"/>
+                            <label for="document_code">Document code or listed No.</label>
+                            <input type="text" class="form-control input-sm" id="document_code" ng-model="criteria.document_code"/>
                         </div>
                     </div>
                 </div>
@@ -40,8 +45,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="eiapermit_year">Year</label>
-                            <input type="text" class="form-control input-sm" id="eiapermit_year" ng-model="criteria.eiapermit_year"/>
+                            <label for="document_year">Submission year</label>
+                            <input type="text" class="form-control input-sm" id="document_year" ng-model="criteria.document_year"/>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -59,6 +64,12 @@
                         <div class="form-group">
                             <label for="eiapermit_id">EIA and Permit ID</label>
                             <input type="text" class="form-control input-sm" id="eiapermit_id" ng-model="criteria.eiapermit_id"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="eiapermit_certificate_no">Certificate No.</label>
+                            <input type="text" class="form-control input-sm" id="eiapermit_certificate_no" ng-model="criteria.eiapermit_certificate_no"/>
                         </div>
                     </div>
                 </div>

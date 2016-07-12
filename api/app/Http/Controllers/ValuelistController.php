@@ -62,12 +62,14 @@ class ValuelistController extends Controller
 
     private function practitionertype()
     {
-        return $this->getCodesFromArray(array(50, 51, 52));
+        return $this->getCodesFromDrowdownName("cert_type");
+//        return $this->getCodesFromArray(array(50, 51, 52));
     }
 
     private function practitionermembertype()
     {
-        return $this->getCodesFromArray(array(38, 39, 53));
+        return $this->getCodesFromDrowdownName("practitioner");
+//        return $this->getCodesFromArray(array(38, 39, 53));
     }
 
     private function yesno()
