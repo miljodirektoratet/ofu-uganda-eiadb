@@ -413,7 +413,7 @@
                                                 data-datepicker-options="datepickerOptions"
                                                 data-show-button-bar="false"/>
                                             <span class="input-group-btn">
-                                              <button type="button"
+                                              <button type="button" ng-disabled="!auth.canSave('date_deadline')"
                                                       class="btn btn-default btn-sm" ng-click="open($event)"><span
                                                       class="glyphicon glyphicon-calendar"></span></button>
                                             </span>
