@@ -56,7 +56,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     scope.saveCurrentDocument = function ()
     {
         var document = scope.data.document;
-
+        
         scope.saveCurrent(scope.parts.document, document).then(function (d)
         {
             // Status has changed, make sure to update ep as well.
@@ -89,8 +89,18 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
 
     scope.newDocument = function ()
     {
-        ProjectFactory.createNewDocument(scope.data.eiapermit);
-        //scope.toggleDocument(scope.data.document);
+        // Make sure to close any opened documents.
+        // scope.data.document = {};
+
+        if (scope.data.document)
+        {
+            scope.toggleDocument(scope.data.document);
+        }
+
+        $timeout(function ()
+        {
+            ProjectFactory.createNewDocument(scope.data.eiapermit);
+        });
     };
 
     scope.deleteEiaPermit = function ()
