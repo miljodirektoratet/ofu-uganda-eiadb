@@ -80,7 +80,7 @@ controllers.controller('PractitionersController', ['$scope', '$filter', '$animat
     };
     scope.hasPartnershipEa = function (p)
     {
-        var has = filterCertificates(p.practitioner_certificates, 52, scope.certificateYearValid, 98);
+        var has = filterCertificates(p.practitioner_certificates, 52, scope.certificateYearValid, 97);
         p.cert_ep = has ? "partnership" : null;
         return has;
     };
