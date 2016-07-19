@@ -111,7 +111,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="latitude">Latitude</label>
-                                <input type="text" ng-blur="saveCurrentProject()" decimal negative-number="true" ng-readonly="!auth.canSave()" class="form-control input-sm" id="latitude" ng-model="data.project.latitude"/>
+                                <input type="text" ng-blur="saveCurrentProject()" decimal negative-number="true" min="-1.48" max="4.22" ng-change="checkInputForGoogleMaps(parts.project.form.latitude)" ng-readonly="!auth.canSave()" class="form-control input-sm" id="latitude" name="latitude" ng-model="data.project.latitude"/>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -121,7 +121,7 @@
                                         <span class="glyphicon glyphicon-map-marker"></span>
                                     </a>
                                 </label>
-                                <input type="text" ng-blur="saveCurrentProject()" decimal ng-readonly="!auth.canSave()" class="form-control input-sm" id="longitude" ng-model="data.project.longitude"/>
+                                <input type="text" ng-blur="saveCurrentProject()" decimal min="29.57" max="35.04" ng-change="checkInputForGoogleMaps(parts.project.form.longitude)" ng-readonly="!auth.canSave()" class="form-control input-sm" id="longitude" name="longitude" ng-model="data.project.longitude"/>
                             </div>
                         </div>
                     </div>

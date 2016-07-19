@@ -319,6 +319,20 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         scope.organisations = Organisation.query();
     };
 
+    scope.checkInputForGoogleMaps = function(formElement)
+    {
+        var rawValue = formElement.$viewValue;
+        if (rawValue && rawValue.contains(", "))
+        {
+            var coordinates = rawValue.split(", ");
+            var lat = coordinates[0];
+            var long = coordinates[1];
+
+            scope.data.project.latitude = lat;
+            scope.data.project.longitude = long;
+        }
+    };
+
     if (scope.routeParams.projectId == "new")
     {
         scope.selectOrganisationMode = true;
