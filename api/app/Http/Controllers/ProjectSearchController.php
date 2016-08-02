@@ -27,7 +27,7 @@ class ProjectSearchController extends Controller
         $criteriaDefinitions["search"] = ["p.location"];
         $criteriaDefinitions["exact"] = [];
         $criteriaDefinitions["multiple_text"] = ["p.id"];
-        $criteriaDefinitions["multiple"] = ["d.id", "c.id", "o.id", "p.has_industrial_waste_water"];
+        $criteriaDefinitions["multiple"] = ["d.id", "c.id", "o.id", "p.has_industrial_waste_water", "p.risk_level"];
         $criteriaDefinitions["alias"] = ["o.name", "p.title"];
 
         $criterias = getSearchCriterias([
@@ -38,7 +38,8 @@ class ProjectSearchController extends Controller
             'project_location',
             'project_id',
             'developer_id',
-            'project_has_industrial_waste_water'
+            'project_has_industrial_waste_water',
+            'project_risk_level'
         ]);
 
         foreach ($criterias as $word => $criteria)
@@ -90,7 +91,7 @@ class ProjectSearchController extends Controller
 
         $result = $result->orderBy('p.id', 'desc');
         $result = $result->get();
-        
+
         return Response::json($result, 200);
     }
 }
