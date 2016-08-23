@@ -29,6 +29,8 @@ class ValuelistController extends Controller
         $valuelists["teamleader"] = $this->teamleader();
         $valuelists["teammember"] = $this->teammember();
         $valuelists["officer"] = $this->officer();
+        $valuelists["officer_eia_permit"] = $this->officer_eia_permit();
+        $valuelists["officer_audit_inspection"] = $this->officer_audit_inspection();
         $valuelists["executivedirector"] = $this->executivedirector();
         $valuelists["currency"] = $this->currency();
         $valuelists["auditinspectiontype"] = $this->auditinspectiontype();
@@ -159,6 +161,28 @@ class ValuelistController extends Controller
     {
         $users = User::
         whereRaw("job_position_code in ('SEAO','EAM','EMO','SEI','NRM(B&R)','NRM(Aq)','EIAA','EAAA','EIAO','EAMA','PEI')")
+            ->get(array('id', 'name as description1'));
+        return $users;
+    }
+
+    private function officer_eia_permit()
+    {
+        $users = User::
+        whereHas('roles', function ($q)
+        {
+            $q->where('name', '=', 'Role 3');
+        })
+            ->get(array('id', 'name as description1'));
+        return $users;
+    }
+
+    private function officer_audit_inspection()
+    {
+        $users = User::
+        whereHas('roles', function ($q)
+        {
+            $q->where('name', '=', 'Role 7');
+        })
             ->get(array('id', 'name as description1'));
         return $users;
     }

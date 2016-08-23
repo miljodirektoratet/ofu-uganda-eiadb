@@ -147,7 +147,7 @@
                                             ng-disabled="!auth.canSave('lead_officer')" id="lead_officer"
                                             class="form-control input-sm"
                                             ng-model="data.auditinspection.lead_officer">
-                                        <option ng-repeat="v in valuelists.officer" value="{{v.id}}">
+                                        <option ng-repeat="v in valuelists.officer_audit_inspection" value="{{v.id}}">
                                             {{v.description1}}
                                         </option>
                                     </select>
@@ -161,7 +161,7 @@
                                             ng-disabled="!auth.canSave('personnel')" id="users"
                                             class="form-control input-sm"
                                             ng-model="data.auditinspection.user_ids">
-                                        <option ng-repeat="v in valuelists.officer" value="{{v.id}}">
+                                        <option ng-repeat="v in valuelists.officer_audit_inspection" value="{{v.id}}">
                                             {{v.description1}}
                                         </option>
                                     </select>
