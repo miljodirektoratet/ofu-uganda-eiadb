@@ -2,6 +2,7 @@
 
 use App\LeadAgency;
 use Response;
+use DB;
 use \App\Practitioner;
 use \App\Code;
 use \App\User;
@@ -167,23 +168,73 @@ class ValuelistController extends Controller
 
     private function officer_eia_permit()
     {
-        $users = User::
+        $admins = User::
+        whereHas('roles', function ($q)
+        {
+            $q->where('name', '=', 'Role 8');
+        })->get(array('id'));
+        $adminIds = [];
+        foreach ($admins as $admin)
+        {
+            $adminIds []= $admin->id;
+        }
+
+        $users3 = User::
         whereHas('roles', function ($q)
         {
             $q->where('name', '=', 'Role 3');
         })
             ->get(array('id', 'name as description1'));
+
+        $users = [];
+        foreach ($users3 as $user)
+        {
+            if (in_array($user->id, $adminIds))
+            {
+                continue;
+            }
+            else
+            {
+                $users []= $user;
+            }
+        }
+
         return $users;
     }
 
     private function officer_audit_inspection()
     {
-        $users = User::
+        $admins = User::
+        whereHas('roles', function ($q)
+        {
+            $q->where('name', '=', 'Role 8');
+        })->get(array('id'));
+        $adminIds = [];
+        foreach ($admins as $admin)
+        {
+            $adminIds []= $admin->id;
+        }
+
+        $users7 = User::
         whereHas('roles', function ($q)
         {
             $q->where('name', '=', 'Role 7');
         })
             ->get(array('id', 'name as description1'));
+
+        $users = [];
+        foreach ($users7 as $user)
+        {
+            if (in_array($user->id, $adminIds))
+            {
+                continue;
+            }
+            else
+            {
+                $users []= $user;
+            }
+        }
+
         return $users;
     }
 
