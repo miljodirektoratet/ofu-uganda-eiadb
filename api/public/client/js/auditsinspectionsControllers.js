@@ -206,8 +206,8 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 
     scope.deleteReport = function ()
     {
-        scope.data.auditinspection.file_metadata_id = null;
-        scope.parts.auditinspection.form.action_taken_letter.$setDirty();
+        scope.data.auditinspection.file_metadata_report_id = null;
+        scope.parts.auditinspection.form.report.$setDirty();
         scope.saveCurrentAuditInspection();
     };
 

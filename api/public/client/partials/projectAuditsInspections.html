@@ -304,11 +304,11 @@
                                                 ngf-max-size="{{fileUploadMaxSize}}">
                                             Select File
                                         </button>
-                                        <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingReport">
+                                        <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingFileReport">
                                             <div class="file">{{reportFile.name}}<br/>
                                                 <div class="progress">
                                                     <div class="progress-bar" role="progressbar" aria-valuenow="{{reportFile.progress}}" aria-valuemin="0" aria-valuemax="100"
-                                                            style="width: {{actionTakenLetterFile.progress}}%;">
+                                                            style="width: {{reportFile.progress}}%;">
                                                         {{reportFile.progress}}%
                                                     </div>
                                                 </div>
