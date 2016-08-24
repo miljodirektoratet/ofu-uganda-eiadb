@@ -172,7 +172,8 @@ class ValuelistController extends Controller
         whereHas('roles', function ($q)
         {
             $q->where('name', '=', 'Role 8');
-        })->get(array('id'));
+        })
+            ->get(array('id'));
         $adminIds = [];
         foreach ($admins as $admin)
         {
@@ -184,6 +185,7 @@ class ValuelistController extends Controller
         {
             $q->where('name', '=', 'Role 3');
         })
+            ->orderBy('name')
             ->get(array('id', 'name as description1'));
 
         $users = [];
@@ -220,6 +222,7 @@ class ValuelistController extends Controller
         {
             $q->where('name', '=', 'Role 7');
         })
+            ->orderBy('name')
             ->get(array('id', 'name as description1'));
 
         $users = [];
