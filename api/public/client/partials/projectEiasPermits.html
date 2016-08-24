@@ -402,19 +402,11 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="document.sub_final">Final submission</label>
-                                                            <select ui-select2 ng-change="saveCurrentDocument()" ng-disabled="!auth.canSave('document.sub_final')" id="document.sub_final" class="form-control input-sm" ng-model="data.document.sub_final">
-                                                                <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
                                                             <label for="document.sub_copy_no">No. of copies submitted</label>
                                                             <input type="text" integer ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.sub_copy_no')" class="form-control input-sm" id="document.sub_copy_no" ng-model="data.document.sub_copy_no" ng-change="calculateNumberOfCopiesOfDocument()"/>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="document.title">Document title</label>
                                                             <input type="text" ng-blur="saveCurrentDocument()" ng-required="true" ng-readonly="!auth.canSave('document.title')" class="form-control input-sm" id="document.title" ng-model="data.document.title"/>
@@ -578,8 +570,10 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="document.folio_no">File and foliono.</label>
-                                                            <input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.folio_no')" class="form-control input-sm" id="document.folio_no" ng-model="data.document.folio_no"/>
+                                                            <label for="document.sub_final">Final submission</label>
+                                                            <select ui-select2 ng-change="saveCurrentDocument()" ng-disabled="!auth.canSave('document.sub_final')" id="document.sub_final" class="form-control input-sm" ng-model="data.document.sub_final">
+                                                                <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -599,7 +593,13 @@
                                                             <textarea ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.remarks')" class="form-control input-sm" rows="2" id="document.remarks" ng-model="data.document.remarks"></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="document.folio_no">File and foliono.</label>
+                                                            <input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.folio_no')" class="form-control input-sm" id="document.folio_no" ng-model="data.document.folio_no"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
                                                         <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
                                                                 text="'Delete document'"
                                                                 warning="'Do you really want to delete this record?'"
