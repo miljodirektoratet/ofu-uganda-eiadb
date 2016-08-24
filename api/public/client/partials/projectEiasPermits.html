@@ -48,7 +48,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="teamleader_id">Team leader</label>
+                                    <label for="teamleader_id">Practitioner team leader</label>
                                     <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('teamleader_id')" id="teamleader_id" class="form-control input-sm" ng-model="data.eiapermit.teamleader_id">
                                         <option ng-repeat="v in valuelists.teamleader" value="{{v.id}}">{{v.description1}}</option>
                                     </select>
@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <label for="team_members">Team members</label>
+                                    <label for="team_members">Practitioner team members</label>
                                     <select ui-select2 multiple="true" placeholder="Click to pick" ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('practitioner_id')" id="team_members" class="form-control input-sm" ng-model="data.eiapermit.teammember_ids">
                                         <option ng-repeat="v in valuelists.teammember" value="{{v.id}}">{{v.description1}}</option>
                                     </select>
@@ -354,7 +354,7 @@
                                         <th>Document title</th>
                                         <th>Document code</th>
                                         <th>Date sent to Director</th>
-                                        <th>Date sent to coordinator from dep.secretary</th>
+                                        <th>Date sent to team leader from dep.secretary</th>
                                         <th>Date sent to the officer</th>
                                         <th>Conclusion (PB/Tor accepted)</th>
                                         <th>File</th>
@@ -515,7 +515,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="document.date_copies_coordinator">Date copies sent to coordinator</label>
+                                                            <label for="document.date_copies_coordinator">Date copies sent to team leader</label>
                                                             <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_copies_coordinator')" class="form-control input-sm" id="document.date_copies_coordinator" ng-model="data.document.date_copies_coordinator" />-->
                                                             <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                                                 <input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_copies_coordinator')" id="document.date_copies_coordinator" class="form-control input-sm input-date" ng-model="data.document.date_copies_coordinator" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
@@ -544,7 +544,7 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="document.date_sent_from_dep">Date sent to coordinator from dep.secretary</label>
+                                                            <label for="document.date_sent_from_dep">Date sent to team leader from dep.secretary</label>
                                                             <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_from_dep')" class="form-control input-sm" id="document.date_sent_from_dep" ng-model="data.document.date_sent_from_dep" />-->
                                                             <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                                                 <input type="text" ng-blur="saveCurrentDocument()" ng-readonly="!auth.canSave('document.date_sent_from_dep')" id="document.date_sent_from_dep" class="form-control input-sm input-date" ng-model="data.document.date_sent_from_dep" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
