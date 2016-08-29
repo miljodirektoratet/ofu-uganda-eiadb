@@ -264,7 +264,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var dData =
             {
                 eia_permit_id: ep.id,
-                sub_final: 42,
                 director_copy_no: 1,
                 is_new: true
             };
