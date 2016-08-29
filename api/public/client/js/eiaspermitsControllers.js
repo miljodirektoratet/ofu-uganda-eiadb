@@ -204,6 +204,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
                 return scope.userinfo.info.role_1;
             case "user_id":
             case "personnel":
+            case "document.date_sent_officer":
                 return scope.userinfo.info.role_2;
             case "inspection_recommended":
             case "date_inspection":
@@ -212,7 +213,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "fee_currency":
             case "remarks":
             case "date_sent_ded_approval":
-            case "document.date_sent_officer":
                 return scope.userinfo.info.role_3;
             case "date_fee_notification":
             case "date_fee_payed":
