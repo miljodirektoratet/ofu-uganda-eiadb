@@ -8,7 +8,7 @@ class Document extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at', 'date_submitted', 'date_sent_director', 'date_copies_coordinator', 'date_next_appointment', 'date_sent_from_dep', 'date_sent_officer'];
-    protected $fillable = ['date_submitted', 'sub_final', 'sub_copy_no', 'title', 'type', 'number', 'code', 'consultent', 'director_copy_no', 'date_sent_director', 'coordinator_copy_no', 'date_copies_coordinator', 'date_next_appointment', 'date_sent_from_dep', 'date_sent_officer', 'folio_no', 'conclusion', 'eia_permit_id', 'control_id', 'remarks', 'file_metadata_id'];
+    protected $fillable = ['date_submitted', 'sub_final', 'sub_copy_no', 'title', 'type', 'number', 'code', 'consultent', 'director_copy_no', 'date_sent_director', 'coordinator_copy_no', 'date_copies_coordinator', 'date_next_appointment', 'date_sent_from_dep', 'date_sent_officer', 'folio_no', 'conclusion', 'eia_permit_id', 'control_id', 'remarks', 'file_metadata_id', 'file_metadata_response_id'];
     protected $hidden = ['deleted_at'];
 
     public function eiaPermit()
@@ -19,6 +19,11 @@ class Document extends Model
     public function attachment()
     {
         return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_id');
+    }
+
+    public function response_document()
+    {
+        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_response_id');
     }
 
     public static function boot()

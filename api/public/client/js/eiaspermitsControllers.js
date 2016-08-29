@@ -117,6 +117,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     scope.toggleDocument = function (d)
     {
         scope.showUploadingAttachment = false;
+        scope.showUploadingResponseDocument = false;
 //    if (scope.loading)
 //    {
 //      //console.log("Currently loading. Please wait.");
@@ -266,6 +267,26 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         });
     };
 
+    scope.uploadResponseDocument = function (files)
+    {
+        if (!files)
+        {
+            return;
+        }
+        scope.showUploadingResponseDocument = true;
+        scope.responseDocumentFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.document.form.response_document, scope.responseDocumentFile);
+
+        promise.then(function (file)
+        {
+            scope.data.document.file_metadata_response_id = file.result.id;
+            scope.parts.document.form.response_document.$setDirty();
+            scope.saveCurrentDocument();
+        }, function (reason)
+        {
+        });
+    };
+
     scope.uploadCertificate = function (files)
     {
         if (!files)
@@ -296,6 +317,14 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         scope.showUploadingAttachment = false;
         scope.data.document.file_metadata_id = null;
         scope.parts.document.form.attachment.$setDirty();
+        scope.saveCurrentDocument();
+    };
+
+    scope.deleteResponseDocument = function ()
+    {
+        scope.showUploadingResponseDocument = false;
+        scope.data.document.file_metadata_response_id = null;
+        scope.parts.document.form.response_document.$setDirty();
         scope.saveCurrentDocument();
     };
 

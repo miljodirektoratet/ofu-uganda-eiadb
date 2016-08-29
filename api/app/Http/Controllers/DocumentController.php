@@ -18,11 +18,17 @@ class DocumentController extends Controller
             $query->select('id', 'filename');
         };
 
+        $withResponseDocument = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
+
         $documents = Project::find($projectId)
             ->eiapermits()->find($eiapermitId)
             ->documents()
             ->with(array('attachment'=>$withAttachment))
-            ->get(array('id', 'date_submitted', 'title', 'code', 'date_sent_director', 'date_sent_from_dep', 'date_sent_officer', 'conclusion', 'file_metadata_id','type'));
+            ->with(array('response_document'=>$withResponseDocument))
+            ->get(array('id', 'date_submitted', 'title', 'code', 'date_sent_director', 'date_sent_from_dep', 'date_sent_officer', 'conclusion', 'file_metadata_id', 'file_metadata_response_id','type'));
         return Response::json($documents, 200);
     }
 
@@ -39,10 +45,16 @@ class DocumentController extends Controller
             $query->select('id', 'filename');
         };
 
+        $withResponseDocument = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
+
         $document = Project::find($projectId)
             ->eiapermits()->find($eiapermitId)
             ->documents()
             ->with(array('attachment'=>$withAttachment))
+            ->with(array('response_document'=>$withResponseDocument))
             ->find($id);
         return Response::json($document, 200);
     }

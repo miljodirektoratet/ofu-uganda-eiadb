@@ -437,7 +437,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label>&nbsp;</label>
+                                                            <label>Document</label>
                                                             <div class="uploaded-file" ng-show="data.document.file_metadata_id">
                                                                 <a ng-href="{{downloadFileUrl(data.document.file_metadata_id)}}" ng-show="data.document.attachment">{{data.document.attachment.filename}}</a>
                                                                 <button type="button" class="delete btn btn-sm btn-link"
@@ -539,6 +539,49 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Response document</label>
+                                                            <div class="uploaded-file" ng-show="data.document.file_metadata_response_id">
+                                                                <a ng-href="{{downloadFileUrl(data.document.file_metadata_response_id)}}" ng-show="data.document.response_document">{{data.document.response_document.filename}}</a>
+                                                                <button type="button" class="delete btn btn-sm btn-link"
+                                                                        ng-click="deleteResponseDocument()"
+                                                                        ng-hide="!auth.canSave('delete')">delete
+                                                                </button>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-sm btn-default"
+                                                                        type="button"
+                                                                        ngf-select="uploadResponseDocument($files)"
+                                                                        accept="{{fileUploadPattern}}"
+                                                                        ngf-pattern="{{fileUploadNgfPattern}}"
+                                                                        ng-model="fake_response_document"
+                                                                        name="response_document"
+                                                                        ng-hide="data.document.file_metadata_response_id"
+                                                                        ng-disabled="!auth.canSave('delete')"
+                                                                        ngf-max-size="{{fileUploadMaxSize}}">
+                                                                    Select File
+                                                                </button>
+                                                                <div class="uploading-file" ng-show="showUploadingResponseDocument">
+                                                                    <div class="file">{{responseDocumentFile.name}}<br/>
+                                                                        <div class="progress">
+                                                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{responseDocumentFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                                                    style="width: {{responseDocumentFile.progress}}%;">
+                                                                                {{responseDocumentFile.progress}}%
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="errors" ng-messages="parts.document.form.response_document.$error" role="alert">
+                                                                        <div ng-message="pattern">The file type is not supported.</div>
+                                                                        <div ng-message="serverError">Something went wrong on the server.</div>
+                                                                        <div ng-message="maxSize">The file is to big.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="row">
