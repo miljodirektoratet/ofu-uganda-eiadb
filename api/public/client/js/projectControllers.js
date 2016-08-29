@@ -321,8 +321,10 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
 
     scope.checkInputForGoogleMaps = function(formElement)
     {
+        console.log("checkInputForGoogleMaps", formElement);
         var rawValue = formElement.$viewValue;
-        if (rawValue && rawValue.contains(", "))
+
+        if (rawValue && rawValue.indexOf(", ") !== -1)
         {
             var coordinates = rawValue.split(", ");
             var lat = coordinates[0];
