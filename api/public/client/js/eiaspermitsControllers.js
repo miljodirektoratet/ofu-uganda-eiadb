@@ -225,6 +225,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "certificate_no":
             case "date_cancelled":
             case "document.conclusion":
+            case "document.date_conclusion":
                 return scope.userinfo.info.role_5;
             case "status":
                 return false;
