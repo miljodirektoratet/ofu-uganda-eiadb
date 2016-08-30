@@ -232,6 +232,15 @@
                     </div>
 
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="physical_address">Physical address</label>
+                                <input type="text" ng-blur="saveCurrentOrganisation()" ng-readonly="!auth.canSave()" class="form-control input-sm" id="physical_address" ng-model="data.organisation.physical_address"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">Phone</label>

@@ -8,7 +8,7 @@ class Organisation extends Model
   use SoftDeletes;  
 
   protected $dates = ['deleted_at'];
-  protected $fillable = ['tin','name','visiting_address','box_no','city','phone','fax','email','remarks'];
+  protected $fillable = ['tin','name','visiting_address','physical_address','box_no','city','phone','fax','email','remarks'];
   protected $hidden = ['deleted_at'];
 
 
