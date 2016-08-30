@@ -256,7 +256,8 @@ class ValuelistController extends Controller
 
     private function leadagency()
     {
-        $la = LeadAgency::get(array('id', 'short_name as description1', 'long_name as description2'));
+        $la = LeadAgency::orderBy('short_name')
+            ->get(array('id', 'short_name as description1', 'long_name as description2'));
         return $la;
     }
 
