@@ -4,40 +4,41 @@ use App\Http\Controllers\Controller;
 use Response;
 use Auth;
 use Input;
+use Hash;
 use \DateTime;
 use Carbon\Carbon;
-use \App\Code;
+use \App\LeadAgency;
 
 
-class CodeController extends Controller
+class LeadAgencyController extends Controller
 {
 
     // GET /resource
     public function index()
     {
-        $codes = Code::withTrashed()->get();
-        return Response::json($codes->toArray(), 200);
+        $las = LeadAgency::withTrashed()->get();
+        return Response::json($las->toArray(), 200);
     }
 
     // GET /resource/:id
     public function show($id)
     {
-        $code = Code::withTrashed()->find($id);
-        if (!$code)
+        $la = LeadAgency::withTrashed()->find($id);
+        if (!$la)
         {
             return $id;
         }
-        return Response::json($code, 200);
+        return Response::json($la, 200);
     }
 
     // POST /resource
     public function store()
     {
-        $code = new Code();
-        $newId = Code::withTrashed()->max('id') + 1;
-        $code->id = $newId;
-        $code->created_by = $code->updated_by = Auth::user()->name;
-        $code->save();
+        $la = new LeadAgency();
+        $newId = LeadAgency::withTrashed()->max('id') + 1;
+        $la->id = $newId;
+        $la->created_by = $la->updated_by = Auth::user()->name;
+        $la->save();
 
         return $this->show($newId);
     }
@@ -45,8 +46,8 @@ class CodeController extends Controller
     // PUT/PATCH /resource/:id
     public function update($id)
     {
-        $code = Code::withTrashed()->find($id);
-        if (!$code)
+        $la = LeadAgency::withTrashed()->find($id);
+        if (!$la)
         {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
@@ -54,25 +55,25 @@ class CodeController extends Controller
         $inputData = Input::all();
 
         $updatedAtFromInput = Carbon::parse($inputData["updated_at"]);
-        $diff = $code->updated_at->diffInSeconds($updatedAtFromInput);
+        $diff = $la->updated_at->diffInSeconds($updatedAtFromInput);
         if ($diff != 0)
         {
             return Response::json(array('error' => true, 'message' => 'conflict'), 409);
         }
 
-        $this->updateValuesInResource($code, $inputData);
-        $code->save();
-        return $this->show($code->id);
+        $this->updateValuesInResource($la, $inputData);
+        $la->save();
+        return $this->show($la->id);
     }
 
     // DELETE /resource/:id
     public function destroy($id)
     {
-        $code = Code::find($id);
-        $code->updated_by = Auth::user()->name;
-        $code->save();
-        $code->delete();
-        return $this->show($code->id);
+        $la = LeadAgency::find($id);
+        $la->updated_by = Auth::user()->name;
+        $la->save();
+        $la->delete();
+        return $this->show($la->id);
     }
 
     private function updateValuesInResource($resource, $data)

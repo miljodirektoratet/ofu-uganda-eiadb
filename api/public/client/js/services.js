@@ -158,6 +158,14 @@ services.factory('EditUser', ['$resource', function ($resource)
         });
 }]);
 
+services.factory('EditLeadAgency', ['$resource', function ($resource)
+{
+    return $resource('/edit/v1/leadagency/:leadAgencyId', {leadAgencyId: '@id'},
+        {
+            'update': {method: 'PUT', isArray: false}
+        });
+}]);
+
 services.factory('EiaPermitSearch', ['$resource', function ($resource)
 {
     return $resource('/search/v1/eiapermit');

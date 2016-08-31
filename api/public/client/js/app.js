@@ -48,6 +48,7 @@ var seroApp = angular.module('seroApp', [
 
         $routeProvider.when('/advanced/codes', {templateUrl: 'partials/advancedCodes.html', controller: 'AdvancedCodesController'});
         $routeProvider.when('/advanced/users', {templateUrl: 'partials/advancedUsers.html', controller: 'AdvancedUsersController'});
+        $routeProvider.when('/advanced/leadagencies', {templateUrl: 'partials/advancedLeadAgency.html', controller: 'AdvancedLeadAgenciesController'});
 
         $routeProvider.when('/pirking', {templateUrl: 'partials/pirking.html', controller: 'PirkingController'});
 
