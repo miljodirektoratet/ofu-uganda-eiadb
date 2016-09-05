@@ -125,7 +125,7 @@ class ProjectStatisticsController extends Controller
         $data["parts"]["coordinates"] = ["title" => "The number of projects with and without coordinates", "label1" => "Coordinates present", "label2" => "Number", "rows" => $dataCoordinates];
         $data["parts"]["wasteWater"] = ["title" => "The number of projects with and without industrial waste water", "label1" => "Industrial waste water", "label2" => "Number", "rows" => $dataWasteWater];
         $data["parts"]["developers"] = ["title" => "The number of projects per developer. The list will show the ten developers with most number of projects", "label1" => "Top ten developers", "label2" => "Number", "rows" => $dataDevelopers];
-        $data["parts"]["riskLevel"] = ["title" => "Risk level", "label1" => "Risk level", "label2" => "Number", "rows" => $dataRiskLevels];
+        $data["parts"]["riskLevel"] = ["title" => "The number of projects per risk level", "label1" => "Risk level", "label2" => "Number", "rows" => $dataRiskLevels];
 
         return Response::json($data, 200);
     }
