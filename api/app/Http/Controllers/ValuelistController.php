@@ -117,8 +117,8 @@ class ValuelistController extends Controller
 
     private function district()
     {
-        $districts = District::
-        get(array('id', 'district as description1'));
+        $districts = District::orderBy('district')
+            ->get(array('id', 'district as description1'));
         return $districts;
     }
 
