@@ -96,3 +96,10 @@ Route::group(['prefix' => 'pirking/v1', 'middleware' => 'manager'], function ()
 {
     Route::get('eiaspermits', ['uses' => 'PirkingController@getEiasPermits']);
 });
+
+Route::group(['prefix' => 'export/v1'], function ()
+{
+    Route::get('445101cc8de29ef4dca8c78cefa15d3ee7b66c4b/maps', ['uses' => 'Export\ExportMapController@exportMap']);
+});
+
+
