@@ -21,7 +21,7 @@ class ExportMapController extends Controller
                 'p.district_id as district_id',
                 'd.district as district_name',
                 'p.category_id as category_id',
-                'c.description_short as category_description',
+                'c.description_long as category_description',
                 'p.longitude as longitude',
                 'p.latitude as latitude',
                 'o.name as organisation_name'
