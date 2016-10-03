@@ -599,7 +599,7 @@
                                                                 <a ng-href="{{downloadFileUrl(data.document.file_metadata_response_id)}}" ng-show="data.document.response_document">{{data.document.response_document.filename}}</a>
                                                                 <button type="button" class="delete btn btn-sm btn-link"
                                                                         ng-click="deleteResponseDocument()"
-                                                                        ng-hide="!auth.canSave('delete')">delete
+                                                                        ng-hide="!auth.canSave('document.file_metadata_response_id')">delete
                                                                 </button>
                                                             </div>
                                                             <div>
@@ -611,7 +611,7 @@
                                                                         ng-model="fake_response_document"
                                                                         name="response_document"
                                                                         ng-hide="data.document.file_metadata_response_id"
-                                                                        ng-disabled="!auth.canSave('delete')"
+                                                                        ng-disabled="!auth.canSave('document.file_metadata_response_id')"
                                                                         ngf-max-size="{{fileUploadMaxSize}}">
                                                                     Select File
                                                                 </button>
