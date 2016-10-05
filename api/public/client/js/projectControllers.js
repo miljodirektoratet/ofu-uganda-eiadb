@@ -279,9 +279,15 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
         }
     };
 
-    scope.auth.canSave = function ()
+    scope.auth.canSave = function (field)
     {
-        return scope.userinfo.info.role_1;
+        switch (field)
+        {
+            case "has_industrial_waste_water":
+                return scope.userinfo.info.role_3;
+            default:
+                return scope.userinfo.info.role_1;
+        }
     };
 
     scope.auth.canDelete = function ()
