@@ -29,7 +29,7 @@ class ValuelistController extends Controller
         $valuelists["category"] = $this->category();
         $valuelists["teamleader"] = $this->teamleader();
         $valuelists["teammember"] = $this->teammember();
-        $valuelists["officer"] = $this->officer();
+        $valuelists["team_leader_eia_permit"] = $this->team_leader_eia_permit();
         $valuelists["officer_eia_permit"] = $this->officer_eia_permit();
         $valuelists["officer_audit_inspection"] = $this->officer_audit_inspection();
         $valuelists["executivedirector"] = $this->executivedirector();
@@ -158,15 +158,7 @@ class ValuelistController extends Controller
         return $practitioners;
     }
 
-    private function officer()
-    {
-        $users = User::
-        whereRaw("job_position_code in ('SEAO','EAM','EMO','SEI','NRM(B&R)','NRM(Aq)','EIAA','EAAA','EIAO','EAMA','PEI')")
-            ->get(array('id', 'name as description1'));
-        return $users;
-    }
-
-    private function officer_eia_permit()
+    private function users_with_role($role)
     {
         $admins = User::
         whereHas('roles', function ($q)
@@ -180,65 +172,44 @@ class ValuelistController extends Controller
             $adminIds []= $admin->id;
         }
 
-        $users3 = User::
-        whereHas('roles', function ($q)
+        $usersInRole = User::
+        whereHas('roles', function ($q) use ($role)
         {
-            $q->where('name', '=', 'Role 3');
+
+            $q->where('name', '=', $role);
         })
             ->orderBy('name')
             ->get(array('id', 'name as description1'));
 
         $users = [];
-        foreach ($users3 as $user)
+        foreach ($usersInRole as $userInRole)
         {
-            if (in_array($user->id, $adminIds))
+            if (in_array($userInRole->id, $adminIds))
             {
                 continue;
             }
             else
             {
-                $users []= $user;
+                $users []= $userInRole;
             }
         }
 
         return $users;
     }
 
+    private function team_leader_eia_permit()
+    {
+        return $this->users_with_role("Role 2");
+    }
+
+    private function officer_eia_permit()
+    {
+        return $this->users_with_role("Role 3");
+    }
+
     private function officer_audit_inspection()
     {
-        $admins = User::
-        whereHas('roles', function ($q)
-        {
-            $q->where('name', '=', 'Role 8');
-        })->get(array('id'));
-        $adminIds = [];
-        foreach ($admins as $admin)
-        {
-            $adminIds []= $admin->id;
-        }
-
-        $users7 = User::
-        whereHas('roles', function ($q)
-        {
-            $q->where('name', '=', 'Role 7');
-        })
-            ->orderBy('name')
-            ->get(array('id', 'name as description1'));
-
-        $users = [];
-        foreach ($users7 as $user)
-        {
-            if (in_array($user->id, $adminIds))
-            {
-                continue;
-            }
-            else
-            {
-                $users []= $user;
-            }
-        }
-
-        return $users;
+        return $this->users_with_role("Role 7");
     }
 
     private function executivedirector()
