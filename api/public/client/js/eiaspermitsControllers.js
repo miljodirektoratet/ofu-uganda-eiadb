@@ -213,6 +213,8 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "remarks":
             case "date_sent_ded_approval":
             case "document.file_metadata_response_id":
+            case "document.conclusion":
+            case "document.date_conclusion":
                 return scope.userinfo.info.role_3;
             case "date_fee_notification":
             case "date_fee_payed":
@@ -224,8 +226,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "date_certificate":
             case "certificate_no":
             case "date_cancelled":
-            case "document.conclusion":
-            case "document.date_conclusion":
             case "user_id":
                 return scope.userinfo.info.role_5;
             case "status":
