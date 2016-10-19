@@ -160,20 +160,34 @@ class ValuelistController extends Controller
 
     private function users_with_role($role)
     {
-        $admins = User::
-        whereHas('roles', function ($q)
-        {
-            $q->where('name', '=', 'Role 8');
-        })
-            ->get(array('id'));
-        $adminIds = [];
-        foreach ($admins as $admin)
-        {
-            $adminIds []= $admin->id;
-        }
+//        $admins = User::
+//        whereHas('roles', function ($q)
+//        {
+//            $q->where('name', '=', 'Role 8');
+//        })
+//            ->get(array('id'));
+//        $adminIds = [];
+//        foreach ($admins as $admin)
+//        {
+//            $adminIds []= $admin->id;
+//        }
 
         $usersInRole = User::
-        whereHas('roles', function ($q) use ($role)
+            whereHas('roles', function ($q) use ($role)
+            {
+
+                $q->where('name', '=', $role);
+            })
+            ->whereDoesntHave('roles', function ($q)
+            {
+
+                $q->where('name', '=', 'Role 8');
+            })
+            ->orderBy('name')
+            ->get(array('id', 'name as description1'));
+
+        $passiveUsers = User::
+        whereDoesntHave('roles', function ($q) use ($role)
         {
 
             $q->where('name', '=', $role);
@@ -182,16 +196,27 @@ class ValuelistController extends Controller
             ->get(array('id', 'name as description1'));
 
         $users = [];
-        foreach ($usersInRole as $userInRole)
+        foreach ($usersInRole as $user)
         {
-            if (in_array($userInRole->id, $adminIds))
-            {
-                continue;
-            }
-            else
-            {
-                $users []= $userInRole;
-            }
+
+            $user->passive = false;
+            $users []= $user;
+//
+//            if (in_array($userInRole->id, $adminIds))
+//            {
+//                continue;
+//            }
+//            else
+//            {
+//                $userInRole->passive = false;
+//                $users []= $userInRole;
+//            }
+        }
+
+        foreach ($passiveUsers as $user)
+        {
+            $user->passive = true;
+            $users []= $user;
         }
 
         return $users;

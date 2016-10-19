@@ -124,7 +124,7 @@
     white-space: nowrap;
 }
 
-.container-datepicker .input-group-btn {
+.container-datepicker .input-group-btn{
     /* Fix for bug: https://github.com/twbs/bootstrap/issues/9950 */
     width: auto;
 }
@@ -231,11 +231,13 @@ textarea.ng-invalid,
     color: #808080;
 }
 
-.project .container-datepicker {
+.project .container-datepicker,
+.search .container-datepicker {
     width: 100%;
 }
 
-.project .container-datepicker .input-group-btn {
+.project .container-datepicker .input-group-btn,
+.search .container-datepicker .input-group-btn {
     width: 30px;
 }
 

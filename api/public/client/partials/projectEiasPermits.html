@@ -90,7 +90,7 @@
                                 <div class="form-group">
                                     <label for="user_id">Team leader</label>
                                     <select ui-select2 ng-change="saveCurrentEiaPermit()" ng-disabled="!auth.canSave('user_id')" id="user_id" class="form-control input-sm" ng-model="data.eiapermit.user_id">
-                                        <option ng-repeat="v in valuelists.team_leader_eia_permit" value="{{v.id}}">{{v.description1}}</option>
+                                        <option ng-repeat="v in valuelists.team_leader_eia_permit | filter:criteriaMatchOfficer1(data.eiapermit.user_id)" value="{{v.id}}">{{v.description1}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                                             ng-disabled="!auth.canSave('personnel')" id="users"
                                             class="form-control input-sm"
                                             ng-model="data.eiapermit.user_ids">
-                                        <option ng-repeat="v in valuelists.officer_eia_permit" value="{{v.id}}">
+                                        <option ng-repeat="v in valuelists.officer_eia_permit | filter:criteriaMatchOfficer(data.eiapermit.user_ids)" value="{{v.id}}">
                                             {{v.description1}}
                                         </option>
                                     </select>

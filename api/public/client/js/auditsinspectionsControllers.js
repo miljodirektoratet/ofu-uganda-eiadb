@@ -18,6 +18,35 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     scope.fileUploadNgfPattern = fileUploadNgfPattern;
     scope.fileUploadMaxSize = fileUploadMaxSize;
 
+    scope.criteriaMatchOfficer1 = function(currentId)
+    {
+        return function( item )
+        {
+            if (item.passive && currentId)
+            {
+                return item.id === currentId;
+            }
+
+            return item.passive === false;
+        };
+    };
+    scope.criteriaMatchOfficer = function(currentIds)
+    {
+        return function( item )
+        {
+            if (item.passive && currentIds)
+            {
+                for(var i=0; i<currentIds.length;i++)
+                {
+                    var currentId = currentIds[i];
+                    return item.id === currentId;
+                }
+            }
+
+            return item.passive === false;
+        };
+    };
+
     scope.isLoading = function ()
     {
         if (scope.parts.auditinspection.state == SavingStateEnum.Loading)

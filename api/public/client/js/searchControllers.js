@@ -97,6 +97,15 @@ controllers.controller('SearchEiasPermitsController', ['$scope', '$routeParams',
         {
             return;
         }
+
+        _.forOwn(scope.criteria, function(value, key)
+        {
+            if (value instanceof Date)
+            {
+                scope.criteria[key] = value.toJSON();
+            }
+        });
+
         var isSameCriteria = _.isEqual(EiaPermitSearchService.criteria, scope.criteria);
         if (isSameCriteria)
         {
