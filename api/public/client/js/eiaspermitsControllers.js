@@ -202,7 +202,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "document.remarks":
             case "expected_jobs_created":
                 return scope.userinfo.info.role_1;
-            case "user_id":
             case "personnel":
             case "document.date_sent_officer":
                 return scope.userinfo.info.role_2;
@@ -227,6 +226,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "date_cancelled":
             case "document.conclusion":
             case "document.date_conclusion":
+            case "user_id":
                 return scope.userinfo.info.role_5;
             case "status":
                 return false;
