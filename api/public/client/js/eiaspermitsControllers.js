@@ -210,7 +210,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "fee":
             case "fee_currency":
             case "remarks":
-            case "date_sent_ded_approval":
             case "document.file_metadata_response_id":
             case "document.conclusion":
             case "document.date_conclusion":
@@ -227,6 +226,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "date_cancelled":
             case "user_id":
             case "document.date_sent_from_dep":
+            case "date_sent_ded_approval":
                 return scope.userinfo.info.role_5;
             case "status":
                 return false;
