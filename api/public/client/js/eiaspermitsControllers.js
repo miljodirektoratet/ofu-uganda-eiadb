@@ -198,7 +198,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "document.date_copies_coordinator":
             case "document.date_next_appointment":
             case "document.folio_no":
-            case "document.remarks":
             case "expected_jobs_created":
                 return scope.userinfo.info.role_1;
             case "personnel":
@@ -213,6 +212,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "document.file_metadata_response_id":
             case "document.conclusion":
             case "document.date_conclusion":
+            case "document.remarks":
                 return scope.userinfo.info.role_3;
             case "date_fee_notification":
             case "date_fee_payed":
