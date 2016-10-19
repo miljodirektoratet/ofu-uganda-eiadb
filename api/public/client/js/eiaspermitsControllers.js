@@ -197,7 +197,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "document.coordinator_copy_no":
             case "document.date_copies_coordinator":
             case "document.date_next_appointment":
-            case "document.date_sent_from_dep":
             case "document.folio_no":
             case "document.remarks":
             case "expected_jobs_created":
@@ -227,6 +226,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "certificate_no":
             case "date_cancelled":
             case "user_id":
+            case "document.date_sent_from_dep":
                 return scope.userinfo.info.role_5;
             case "status":
                 return false;
