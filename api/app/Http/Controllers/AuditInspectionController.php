@@ -135,12 +135,13 @@ class AuditInspectionController extends Controller
     // DELETE /resource/:id/subresource/:subid
     public function destroy($projectId, $id)
     {
-        if (!$this::canSave('delete'))
+        $auditinspection = Project::find($projectId)->auditinspections()->find($id);
+
+        if (!$this::canSave('delete', $auditinspection))
         {
             return $this::notAuthorized();
         }
 
-        $auditinspection = Project::find($projectId)->auditinspections()->find($id);
         $auditinspection->delete();
         return Response::json(array('is_deleted' => true), 200);
     }
