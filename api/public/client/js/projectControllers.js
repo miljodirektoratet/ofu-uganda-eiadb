@@ -107,14 +107,18 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
                 params = _.omit(params, 'eiapermitId');
             }
 
-            ProjectFactory.save(params, part.form, resource).then
+            ProjectFactory.save(params, resource).then
             (
                 function (data)
                 {
-                    part.state = part.isNew ? SavingStateEnum.LoadingNew : SavingStateEnum.SavingFinished;
-                    part.form.$setPristine();
-                    part.saveInProgress = false;
-                    deferred.resolve(data);
+                    // User have navigated away if part.form is undefined.
+                    if (!_.isUndefined(part.form))
+                    {
+                        part.state = part.isNew ? SavingStateEnum.LoadingNew : SavingStateEnum.SavingFinished;
+                        part.form.$setPristine();
+                        part.saveInProgress = false;
+                        deferred.resolve(data);
+                    }
                 },
                 function (reason)
                 {
@@ -123,6 +127,7 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
                         console.log("Error on server:", reason);
                     }
                     ;
+
                     part.state = SavingStateEnum.SavingFailed;
                     part.saveInProgress = false;
                 }
@@ -327,7 +332,7 @@ controllers.controller('ProjectController', ['$scope', '$q', 'ProjectFactory', '
 
     scope.checkInputForGoogleMaps = function(formElement)
     {
-        console.log("checkInputForGoogleMaps", formElement);
+        //console.log("checkInputForGoogleMaps", formElement);
         var rawValue = formElement.$viewValue;
 
         if (rawValue && rawValue.indexOf(", ") !== -1)

@@ -127,6 +127,7 @@
           <root url="file://$MODULE_DIR$/api/vendor/symfony/yaml" />
           <root url="file://$MODULE_DIR$/api/vendor/vlucas/phpdotenv" />
           <root url="file://$MODULE_DIR$/api/vendor/zizaco/entrust" />
+          <root url="jar://$APPLICATION_HOME_DIR$/plugins/phpspec/lib/phpspec.jar!/phpspec_stub" />
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/api/vendor/barryvdh/laravel-ide-helper" />
@@ -188,6 +189,17 @@
           <root url="file://$MODULE_DIR$/api/vendor/symfony/yaml" />
           <root url="file://$MODULE_DIR$/api/vendor/vlucas/phpdotenv" />
           <root url="file://$MODULE_DIR$/api/vendor/zizaco/entrust" />
+          <root url="jar://$APPLICATION_HOME_DIR$/plugins/phpspec/lib/phpspec.jar!/phpspec_stub" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHP Runtime" type="php">
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard" />
+        </CLASSES>
+        <SOURCES>
+          <root url="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard" />
         </SOURCES>
       </library>
     </orderEntry>

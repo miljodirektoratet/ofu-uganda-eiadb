@@ -32,7 +32,7 @@ class EiaPermitController extends Controller
             ->eiapermits()
             ->with(array('user' => $withUserFunction))
             ->with(array('teamleader' => $withTeamLeaderFunction))
-            ->get(array('id', 'status', 'teamleader_id', 'user_id'));
+            ->get(array('id', 'status', 'teamleader_id', 'user_id', 'decision', 'date_certificate', 'certificate_no', 'file_metadata_id'));
 
         return Response::json($eiapermits, 200);
     }

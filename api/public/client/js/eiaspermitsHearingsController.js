@@ -1,0 +1,432 @@
+'use strict';
+
+controllers.controller('EiasPermitsHearingsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', function (scope, ProjectFactory, $timeout, Upload, $q, location)
+{
+    scope.parts =
+        {
+            eiapermit: {
+                form: null,
+                state: SavingStateEnum.Loading
+            },
+            document: {
+                form: null,
+                state: SavingStateEnum.None
+            }
+        };
+
+    scope.fileUploadPattern = fileUploadPattern;
+    scope.fileUploadNgfPattern = fileUploadNgfPattern;
+    scope.fileUploadMaxSize = fileUploadMaxSize;
+    scope.EiasPermitsTabEnum = EiasPermitsTabEnum;
+
+    var getCurrentTab = function (path)
+    {
+        if (_.contains(path, "hearings"))
+        {
+            return EiasPermitsTabEnum.Hearings;
+        }
+        if (_.contains(path, "documents"))
+        {
+            return EiasPermitsTabEnum.Documents;
+        }
+        return EiasPermitsTabEnum.EiaPermit;
+    };
+    scope.eptab = getCurrentTab(location.path());
+
+
+    scope.criteriaMatchOfficer1 = function (currentId)
+    {
+        return function (item)
+        {
+            if (item.passive && currentId)
+            {
+                return item.id === currentId;
+            }
+
+            return item.passive === false;
+        };
+    };
+    scope.criteriaMatchOfficer = function (currentIds)
+    {
+        return function (item)
+        {
+            if (item.passive && currentIds)
+            {
+                for (var i = 0; i < currentIds.length; i++)
+                {
+                    var currentId = currentIds[i];
+                    return item.id === currentId;
+                }
+            }
+
+            return item.passive === false;
+        };
+    };
+
+    scope.isLoading = function ()
+    {
+        if (scope.parts.eiapermit.state == SavingStateEnum.Loading)
+        {
+            if (scope.hasEiaPermit())
+            {
+                return true;
+            }
+            return false;
+        }
+        return scope.parts.eiapermit.state == SavingStateEnum.LoadingNew;
+    };
+
+    scope.hasEiaPermit = function ()
+    {
+        return !_.isEmpty(scope.data.eiapermit);
+    };
+
+    scope.hasEiasPermits = function ()
+    {
+        return !_.isEmpty(scope.data.eiaspermits);
+    };
+
+    scope.saveCurrentEiaPermit = function ()
+    {
+        var eiapermit = scope.data.eiapermit;
+        var isNew = eiapermit.is_new;
+        if (!isNew)
+        {
+            scope.updateStatus(eiapermit);
+        }
+        scope.saveCurrent(scope.parts.eiapermit, eiapermit, isNew).then(function (ep)
+        {
+            if (isNew)
+            {
+                scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + ep.id);
+            }
+        });
+    };
+
+    scope.saveCurrentDocument = function ()
+    {
+        var document = scope.data.document;
+
+        scope.saveCurrent(scope.parts.document, document).then(function (d)
+        {
+            // Status has changed, make sure to update ep as well.
+            if (scope.updateStatus(scope.data.eiapermit))
+            {
+                scope.saveCurrentEiaPermit();
+            }
+        });
+    };
+
+    scope.updateStatus = function (ep)
+    {
+        var updated = updateEiaPermitStatus(ep, scope.data.documents);
+        if (updated)
+        {
+            // console.log(scope.parts.eiapermit);
+            scope.parts.eiapermit.form.$setDirty();
+        }
+        return updated;
+    };
+
+
+    scope.newEiaPermit = function ()
+    {
+        scope.parts.eiapermit.state = SavingStateEnum.LoadingNew;
+        ProjectFactory.createNewEiaPermit(scope.data.project);
+        scope.parts.eiapermit.isNew = true;
+        scope.saveCurrentEiaPermit();
+    };
+
+    scope.newDocument = function ()
+    {
+        // Make sure to close any opened documents.
+        // scope.data.document = {};
+
+        if (scope.data.document)
+        {
+            scope.toggleDocument(scope.data.document);
+        }
+
+        $timeout(function ()
+        {
+            ProjectFactory.createNewDocument(scope.data.eiapermit);
+        });
+    };
+
+    scope.deleteEiaPermit = function ()
+    {
+        ProjectFactory.deleteEiaPermit(scope.routeParams);
+        scope.goto("/projects/" + scope.data.project.id);
+    };
+
+    scope.deleteDocument = function ()
+    {
+        ProjectFactory.deleteDocument(scope.routeParams);
+    };
+
+    scope.toggleEiaPermit = function (ep)
+    {
+        scope.showUploadingCertificate = false;
+
+        if (scope.data.eiapermit == ep)
+        {
+            scope.data.eiapermit = {};
+            scope.parts.eiapermit.state = SavingStateEnum.None;
+        }
+        else
+        {
+            if (ep.is_new)
+            {
+                scope.data.eiapermit = ep;
+                scope.parts.eiapermit.state = SavingStateEnum.Loaded;
+            }
+            else
+            {
+                scope.parts.eiapermit.state = SavingStateEnum.Loading;
+                ep.$get(scope.routeParams, function (ep)
+                {
+                    scope.data.eiapermit = ep;
+                    scope.parts.eiapermit.state = SavingStateEnum.Loaded;
+                });
+            }
+        }
+    };
+
+    scope.toggleDocument = function (d)
+    {
+        scope.showUploadingAttachment = false;
+        scope.showUploadingResponseDocument = false;
+//    if (scope.loading)
+//    {
+//      //console.log("Currently loading. Please wait.");
+//      return;
+//    }
+        if (scope.data.document == d)
+        {
+            scope.data.document = {};
+            scope.parts.document.state = SavingStateEnum.None;
+        }
+        else
+        {
+            if (d.is_new)
+            {
+                scope.data.document = d;
+            }
+            else
+            {
+                d.$get(scope.routeParams, function (d)
+                {
+                    scope.data.document = d;
+                });
+            }
+        }
+    };
+
+    scope.calculateNumberOfCopiesOfDocument = function ()
+    {
+        scope.data.document.director_copy_no = 1;
+        scope.data.document.coordinator_copy_no = scope.data.document.sub_copy_no - 1;
+    };
+
+    scope.calculateDocumentCode = function ()
+    {
+        var typeObject = _.find(scope.valuelists["documenttype"], {'id': parseInt(scope.data.document.type)});
+        var typeCode = typeObject ? typeObject.description1 : "";
+        var number = scope.data.document.number ? scope.data.document.number : "";
+        scope.data.document.code = typeCode + number;
+    };
+
+    scope.setDefaultDocumentConclusion = function ()
+    {
+        // 8 = Project Briefs
+        // 9 = TORs for EIA
+        // 80 = Pending conclusion
+        // 81 = Not relevant
+        if (_.indexOf(['8', '9'], scope.data.document.type) >= 0)
+        {
+            scope.data.document.conclusion = 80;
+        }
+        else
+        {
+            scope.data.document.conclusion = 81;
+        }
+    };
+
+    scope.auth.canSave = function (field)
+    {
+        switch (field)
+        {
+            case "new":
+            case "delete":
+                return scope.userinfo.info.role_1;
+            case "teamleader_id":
+            case "practitioner_id":
+            case "cost":
+            case "cost_currency":
+            case "document.date_submitted":
+            case "document.sub_copy_no":
+            case "document.title":
+            case "document.type":
+            case "document.number":
+            case "document.code":
+            case "document.consultent":
+            case "document.director_copy_no":
+            case "document.date_sent_director":
+            case "document.coordinator_copy_no":
+            case "document.date_copies_coordinator":
+            case "document.date_next_appointment":
+            case "document.folio_no":
+            case "expected_jobs_created":
+                return scope.userinfo.info.role_1;
+            case "personnel":
+            case "document.date_sent_officer":
+                return scope.userinfo.info.role_2;
+            case "inspection_recommended":
+            case "date_inspection":
+            case "officer_recommend":
+            case "fee":
+            case "fee_currency":
+            case "remarks":
+            case "document.file_metadata_response_id":
+            case "document.conclusion":
+            case "document.date_conclusion":
+            case "document.remarks":
+                return scope.userinfo.info.role_3;
+            case "date_fee_notification":
+            case "date_fee_payed":
+            case "fee_receipt_no":
+                return scope.userinfo.info.role_4;
+            case "decision":
+            case "date_decision":
+            case "designation":
+            case "date_certificate":
+            case "certificate_no":
+            case "date_cancelled":
+            case "user_id":
+            case "document.date_sent_from_dep":
+            case "date_sent_ded_approval":
+                return scope.userinfo.info.role_5;
+            case "status":
+                return false;
+//                return !scope.userinfo.info.features.notproduction;
+            default:
+                return false;
+        }
+    };
+
+    scope.isDisabledBasedOnRule = function (field)
+    {
+        // 81 = Not relevant
+        switch (field)
+        {
+            case "document.conclusion":
+                return scope.data.document.conclusion == 81;
+            default:
+                return false;
+        }
+    };
+
+    scope.uploadAttachment = function (files)
+    {
+        if (!files)
+        {
+            return;
+        }
+        scope.showUploadingAttachment = true;
+        scope.attachmentFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.document.form.attachment, scope.attachmentFile);
+
+        promise.then(function (file)
+        {
+            scope.data.document.file_metadata_id = file.result.id;
+            scope.parts.document.form.attachment.$setDirty();
+            scope.saveCurrentDocument();
+        }, function (reason)
+        {
+        });
+    };
+
+    scope.uploadResponseDocument = function (files)
+    {
+        if (!files)
+        {
+            return;
+        }
+        scope.showUploadingResponseDocument = true;
+        scope.responseDocumentFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.document.form.response_document, scope.responseDocumentFile);
+
+        promise.then(function (file)
+        {
+            scope.data.document.file_metadata_response_id = file.result.id;
+            scope.parts.document.form.response_document.$setDirty();
+            scope.saveCurrentDocument();
+        }, function (reason)
+        {
+        });
+    };
+
+    scope.uploadCertificate = function (files)
+    {
+        if (!files)
+        {
+            return;
+        }
+        scope.showUploadingCertificate = true;
+        scope.certificateFile = files[0];
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.eiapermit.form.certificate, scope.certificateFile);
+
+        promise.then(function (file)
+        {
+            scope.data.eiapermit.file_metadata_id = file.result.id;
+            scope.parts.eiapermit.form.certificate.$setDirty();
+            scope.saveCurrentEiaPermit();
+        }, function (reason)
+        {
+        });
+    };
+
+    scope.downloadFileUrl = function (id)
+    {
+        return "/file/v1/download/" + id;
+    };
+
+    scope.deleteAttachment = function ()
+    {
+        scope.showUploadingAttachment = false;
+        scope.data.document.file_metadata_id = null;
+        scope.parts.document.form.attachment.$setDirty();
+        scope.saveCurrentDocument();
+    };
+
+    scope.deleteResponseDocument = function ()
+    {
+        scope.showUploadingResponseDocument = false;
+        scope.data.document.file_metadata_response_id = null;
+        scope.parts.document.form.response_document.$setDirty();
+        scope.saveCurrentDocument();
+    };
+
+    scope.deleteCertificate = function ()
+    {
+        scope.showUploadingCertificate = false;
+        scope.data.eiapermit.file_metadata_id = null;
+        scope.parts.eiapermit.form.certificate.$setDirty();
+        scope.saveCurrentEiaPermit();
+    };
+
+    //console.log(scope.routeParams);
+    var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
+    promises[2].then(function (eps)
+    {
+        // if (eps.length > 0 && !scope.routeParams.eiapermitId)
+        // {
+        //     var ep = eps[0];
+        //     scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + ep.id);
+        // }
+    });
+    promises[3].then(function (ep)
+    {
+        scope.parts.eiapermit.state = SavingStateEnum.Loaded;
+    });
+}]);

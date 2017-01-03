@@ -1,26 +1,42 @@
 'use strict';
 
-controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', function (scope, ProjectFactory, $timeout, Upload, $q)
+controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', function (scope, ProjectFactory, $timeout, Upload, $q, location)
 {
     scope.parts =
-    {
-        eiapermit: {
-            form: null,
-            state: SavingStateEnum.Loading
-        },
-        document: {
-            form: null,
-            state: SavingStateEnum.None
-        }
-    };
+        {
+            eiapermit: {
+                form: null,
+                state: SavingStateEnum.Loading
+            },
+            document: {
+                form: null,
+                state: SavingStateEnum.None
+            }
+        };
 
     scope.fileUploadPattern = fileUploadPattern;
     scope.fileUploadNgfPattern = fileUploadNgfPattern;
     scope.fileUploadMaxSize = fileUploadMaxSize;
+    scope.EiasPermitsTabEnum = EiasPermitsTabEnum;
 
-    scope.criteriaMatchOfficer1 = function(currentId)
+    var getCurrentTab = function (path)
     {
-        return function( item )
+        if (_.contains(path, "hearings"))
+        {
+            return EiasPermitsTabEnum.Hearings;
+        }
+        if (_.contains(path, "documents"))
+        {
+            return EiasPermitsTabEnum.Documents;
+        }
+        return EiasPermitsTabEnum.EiaPermit;
+    };
+    scope.eptab = getCurrentTab(location.path());
+
+
+    scope.criteriaMatchOfficer1 = function (currentId)
+    {
+        return function (item)
         {
             if (item.passive && currentId)
             {
@@ -30,13 +46,13 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             return item.passive === false;
         };
     };
-    scope.criteriaMatchOfficer = function(currentIds)
+    scope.criteriaMatchOfficer = function (currentIds)
     {
-        return function( item )
+        return function (item)
         {
             if (item.passive && currentIds)
             {
-                for(var i=0; i<currentIds.length;i++)
+                for (var i = 0; i < currentIds.length; i++)
                 {
                     var currentId = currentIds[i];
                     return item.id === currentId;
@@ -65,6 +81,11 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         return !_.isEmpty(scope.data.eiapermit);
     };
 
+    scope.hasEiasPermits = function ()
+    {
+        return !_.isEmpty(scope.data.eiaspermits);
+    };
+
     scope.saveCurrentEiaPermit = function ()
     {
         var eiapermit = scope.data.eiapermit;
@@ -85,7 +106,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     scope.saveCurrentDocument = function ()
     {
         var document = scope.data.document;
-        
+
         scope.saveCurrent(scope.parts.document, document).then(function (d)
         {
             // Status has changed, make sure to update ep as well.
@@ -141,6 +162,34 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     scope.deleteDocument = function ()
     {
         ProjectFactory.deleteDocument(scope.routeParams);
+    };
+
+    scope.toggleEiaPermit = function (ep)
+    {
+        scope.showUploadingCertificate = false;
+
+        if (scope.data.eiapermit == ep)
+        {
+            scope.data.eiapermit = {};
+            scope.parts.eiapermit.state = SavingStateEnum.None;
+        }
+        else
+        {
+            if (ep.is_new)
+            {
+                scope.data.eiapermit = ep;
+                scope.parts.eiapermit.state = SavingStateEnum.Loaded;
+            }
+            else
+            {
+                scope.parts.eiapermit.state = SavingStateEnum.Loading;
+                ep.$get(scope.routeParams, function (ep)
+                {
+                    scope.data.eiapermit = ep;
+                    scope.parts.eiapermit.state = SavingStateEnum.Loaded;
+                });
+            }
+        }
     };
 
     scope.toggleDocument = function (d)
@@ -366,14 +415,15 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         scope.saveCurrentEiaPermit();
     };
 
+    //console.log(scope.routeParams);
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
     promises[2].then(function (eps)
     {
-        if (eps.length > 0 && !scope.routeParams.eiapermitId)
-        {
-            var ep = eps[0];
-            scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + ep.id);
-        }
+        // if (eps.length > 0 && !scope.routeParams.eiapermitId)
+        // {
+        //     var ep = eps[0];
+        //     scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + ep.id);
+        // }
     });
     promises[3].then(function (ep)
     {

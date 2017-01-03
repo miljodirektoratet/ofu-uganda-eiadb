@@ -23,7 +23,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var deferredAuditsInspections = $q.defer();
             var deferredAuditInspection = $q.defer();
 
-
             if (factory.project.id != params.projectId)
             {
                 factory.empty();
@@ -277,15 +276,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var onDelete = function (index)
             {
                 factory.eiaspermits.splice(index, 1);
-                if (factory.eiaspermits.length > 0)
-                {
-                    factory.eiapermit = factory.eiaspermits[0];
-                }
-                else
-                {
-                    factory.eiapermit = {};
-                }
-            }
+                factory.eiapermit = {};
+            };
             if (factory.eiapermit.is_new)
             {
                 onDelete(index);
@@ -392,7 +384,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         };
 
 
-        factory.save = function (params, form, resource)
+        factory.save = function (params, resource)
         {
             var deferred = $q.defer();
             if (resource.is_new)
