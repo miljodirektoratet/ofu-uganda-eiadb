@@ -251,7 +251,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     };
 
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
-    promises[4].then(function (ais)
+    promises[3].then(function (ais)
     {
         if (ais.length > 0 && !scope.routeParams.auditinspectionId)
         {
@@ -259,7 +259,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
             scope.goto("/projects/" + scope.data.project.id + "/auditsinspections/" + ai.id);
         }
     });
-    promises[5].then(function (ai)
+    promises[4].then(function (ai)
     {
         scope.parts.auditinspection.state = SavingStateEnum.Loaded;
     });

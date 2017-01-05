@@ -10,23 +10,37 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.eiapermit = {};
         factory.documents = [];
         factory.document = {};
+        factory.hearings = [];
+        factory.hearing = {};
         factory.auditsinspections = [];
         factory.auditinspection = {};
         factory.valuelists = Valuelists;
         factory.userinfo = UserInfo;
+
+        factory.hasData =
+            {
+                eiapermits: false,
+                eiapermit: false,
+                documents: false,
+                document: false,
+                hearings: false,
+                hearing: false
+            };
+
+
         factory.retrieveProjectData = function (params)
         {
             var deferredProject = $q.defer();
             var deferredOrganisation = $q.defer();
             var deferredEiasPermits = $q.defer();
-            var deferredEiaPermit = $q.defer();
             var deferredAuditsInspections = $q.defer();
             var deferredAuditInspection = $q.defer();
 
             if (factory.project.id != params.projectId)
             {
+                var simpleParams = _.omit(params,  ['eiapermitId', 'documentId', 'hearingId', 'auditinspectionId']);
                 factory.empty();
-                factory.project = Project.get(params, function (p)
+                factory.project = Project.get(simpleParams, function (p)
                 {
                     deferredProject.resolve(p);
                     factory.organisation = Organisation.get({organisationId: p.organisation_id}, function (o)
@@ -35,18 +49,12 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                     });
                 });
 
-                // params contains eiapermitId, so we can't user params directly.
-                factory.eiaspermits = EiaPermit.query(_.omit(params, 'eiapermitId'), function (eps)
+                factory.eiaspermits = EiaPermit.query(simpleParams, function (eps)
                 {
-                    factory.retrieveEiaPermit(params).then(function (ep)
-                    {
-                        deferredEiaPermit.resolve(ep);
-                    });
                     deferredEiasPermits.resolve(eps);
                 });
 
-                // params contains auditinspection, so we can't user params directly.
-                factory.auditsinspections = AuditInspection.query(_.omit(params, 'auditinspectionId'), function (ais)
+                factory.auditsinspections = AuditInspection.query(simpleParams, function (ais)
                 {
                     factory.retrieveAuditInspection(params).then(function (ai)
                     {
@@ -59,11 +67,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             {
                 deferredProject.resolve(factory.project);
                 deferredOrganisation.resolve(factory.organisation);
-
-                factory.retrieveEiaPermit(params).then(function (ep)
-                {
-                    deferredEiaPermit.resolve(ep);
-                });
                 deferredEiasPermits.resolve(factory.eiaspermits);
 
                 factory.retrieveAuditInspection(params).then(function (ai)
@@ -73,37 +76,73 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 deferredAuditsInspections.resolve(factory.auditsinspections);
             }
             return [deferredProject.promise, deferredOrganisation.promise,
-                deferredEiasPermits.promise, deferredEiaPermit.promise,
+                deferredEiasPermits.promise,
                 deferredAuditsInspections.promise, deferredAuditInspection.promise];
         };
 
         factory.retrieveEiaPermit = function (params)
         {
-            var deferred = $q.defer();
-            if (params.eiapermitId)
+            var deferredEiaPermit = $q.defer();
+            var deferredDocuments = $q.defer();
+
+            if (factory.eiapermit.id != params.eiapermitId)
             {
+                factory.emptyEiaPermit();
                 var hits = $filter('filter')(factory.eiaspermits, {'id': params.eiapermitId});
                 if (hits.length == 1)
                 {
                     factory.eiapermit = hits[0];
-                    factory.eiapermit.$get(params, function (ep)
+                    factory.eiapermit.$get(_.omit(params, ['documentId', 'hearingId']), function (ep)
                     {
-                        factory.documents = Document.query(params, function (ds)
+                        // params contains documentId, so we can't user params directly.
+                        factory.documents = Document.query(_.omit(params, ['documentId', 'hearingId']), function (ds)
                         {
-
+                            deferredDocuments.resolve(ds);
                         });
-                        deferred.resolve(ep);
+                        deferredEiaPermit.resolve(ep);
                     });
                 }
             }
-            /*        else if (factory.eiaspermits.length > 0)
-             {
-             if (_.isEmpty(factory.eiapermit))
-             {
-             factory.eiapermit = factory.eiaspermits[0];
-             }
-             }*/
-            return deferred.promise;
+            else
+            {
+                deferredEiaPermit.resolve(factory.eiapermit);
+                deferredDocuments.resolve(factory.documents);
+            }
+
+            return [deferredEiaPermit.promise, deferredDocuments.promise];
+        };
+
+        factory.retrieveDocument = function (params)
+        {
+            var deferredDocument = $q.defer();
+            var deferredHearings = $q.defer();
+
+            if (factory.document.id != params.documentId)
+            {
+                factory.emptyDocument();
+                var hits = $filter('filter')(factory.documents, {'id': params.documentId});
+                if (hits.length == 1)
+                {
+                    factory.document = hits[0];
+
+                    factory.document.$get(_.omit(params, ['hearingId']), function (d)
+                    {
+                        //factory.hearings = Hearing.query(_.omit(params, ['hearingId']), function (hs)
+                        //{
+                        //     deferredHearings.resolve(hs);
+                        //});
+
+                        deferredHearings.resolve([]);
+                        deferredDocument.resolve(d);
+                    });
+                }
+            }
+            else
+            {
+                deferredDocument.resolve(factory.document);
+                deferredHearings.resolve(factory.hearings);
+            }
+            return [deferredDocument.promise, deferredHearings.promise];
         };
 
         factory.retrieveAuditInspection = function (params)
@@ -218,13 +257,24 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             factory.project = {};
             factory.organisation = {};
             factory.eiaspermits = [];
-            factory.eiapermit = {};
-            factory.documents = [];
-            factory.document = {};
+            factory.emptyEiaPermit();
             factory.auditsinspections = [];
             factory.auditinspection = {};
         };
 
+        factory.emptyEiaPermit = function ()
+        {
+            factory.eiapermit = {};
+            factory.documents = [];
+            factory.emptyDocument();
+        };
+
+        factory.emptyDocument = function ()
+        {
+            factory.document = {};
+            factory.hearings = [];
+            factory.hearing = {};
+        };
         factory.createNewProject = function (o)
         {
             var pData =
@@ -256,6 +306,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             };
             factory.eiapermit = new EiaPermit(epData);
             factory.eiaspermits.push(factory.eiapermit);
+            factory.documents = [];
         };
 
         factory.createNewDocument = function (ep)
@@ -268,6 +319,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             };
             factory.document = new Document(dData);
             factory.documents.unshift(factory.document);
+            factory.hearings = [];
         };
 
         factory.deleteEiaPermit = function (params)
@@ -293,6 +345,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
 
         factory.deleteDocument = function (params)
         {
+            var deferred = $q.defer();
+
             var onDelete = function (index)
             {
                 factory.documents.splice(index, 1);
@@ -308,8 +362,11 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 factory.document.$delete(params, function ()
                 {
                     onDelete(index);
+                    deferred.resolve();
                 });
             }
+
+            return deferred.promise;
         };
 
         factory.createNewAuditInspection = function (p, year, type, reason)
@@ -389,7 +446,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var deferred = $q.defer();
             if (resource.is_new)
             {
-                //console.log(params);
                 var saveParams = _.omit(params, function (value)
                 {
                     return value == "new";

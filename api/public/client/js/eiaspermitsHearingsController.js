@@ -117,17 +117,6 @@ controllers.controller('EiasPermitsHearingsController', ['$scope', 'ProjectFacto
         });
     };
 
-    scope.updateStatus = function (ep)
-    {
-        var updated = updateEiaPermitStatus(ep, scope.data.documents);
-        if (updated)
-        {
-            // console.log(scope.parts.eiapermit);
-            scope.parts.eiapermit.form.$setDirty();
-        }
-        return updated;
-    };
-
 
     scope.newEiaPermit = function ()
     {
