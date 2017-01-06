@@ -22,7 +22,6 @@
     white-space: nowrap;
 }
 
-.practitioners .practitioner .master,
 .projects .project .master,
 .project .project-project-new .master {
     background-color: #f3f3f3;
@@ -37,6 +36,7 @@
     color: #808080;
 }
 
+.practitioners .practitioner .master,
 .edit-container .edit-row .master {
     background-color: #CCCCCC;
     font-size: 13px;
@@ -68,7 +68,7 @@
 }
 
 .practitioners .practitioner .selected {
-    background-color: #FCFCFC;
+    /*background-color: #FCFCFC;*/
 }
 
 .edit-container .edit-row .other-is-selected {
