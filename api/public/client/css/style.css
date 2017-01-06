@@ -31,15 +31,14 @@
     font-size: 13px;
 }
 
-.practitioners .message-inline
-{
+.practitioners .message-inline {
     padding: 4px;
     font-size: 12px;
     color: #808080;
 }
 
 .edit-container .edit-row .master {
-    background-color: #f3f3f3;
+    background-color: #CCCCCC;
     font-size: 13px;
 }
 
@@ -58,7 +57,7 @@
 
 .practitioners .practitioner .master .noCertificate {
     opacity: 0;
-    display:none;
+    display: none;
 }
 
 .practitioners .practitioner .detail,
@@ -68,9 +67,17 @@
     background-color: #FCFCFC;
 }
 
-.practitioners .practitioner .selected,
-.edit-container .edit-row .selected {
+.practitioners .practitioner .selected {
     background-color: #FCFCFC;
+}
+
+.edit-container .edit-row .other-is-selected {
+    opacity: 0.5;
+
+}
+
+.edit-container .edit-row .selected {
+
 }
 
 .edit-container .edit-row .detail td {
@@ -124,7 +131,7 @@
     white-space: nowrap;
 }
 
-.container-datepicker .input-group-btn{
+.container-datepicker .input-group-btn {
     /* Fix for bug: https://github.com/twbs/bootstrap/issues/9950 */
     width: auto;
 }
@@ -135,9 +142,8 @@
     min-width: 400px;
 }
 
-.projects .delete-button .btn-delete
-{
-    width:200px;
+.projects .delete-button .btn-delete {
+    width: 200px;
 }
 
 #infoMessageBox {
@@ -363,6 +369,6 @@ textarea.ng-invalid,
     width: 200px;
 }
 
-.edit-container .edit-row form{
-    margin-top:15px;
+.edit-container .edit-row form {
+    margin-top: 15px;
 }

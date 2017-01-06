@@ -8,6 +8,7 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th>Id</th>
                                 <th>Status</th>
                                 <th>Team leader</th>
                                 <th>Decision taken</th>
@@ -20,7 +21,8 @@
                             </tr>
                             </thead>
                             <tbody class="edit-row" ng-repeat="ep in data.eiaspermits">
-                            <tr class="master" ng-class="{selected: routeParams.eiapermitId==ep.id, notvalid: routeParams.eiapermitId==ep.id && parts.eiapermit.form.$invalid}">
+                            <tr class="master" ng-class="{selected: routeParams.eiapermitId==ep.id, 'other-is-selected': routeParams.eiapermitId && routeParams.eiapermitId!=ep.id, notvalid: routeParams.eiapermitId==ep.id && parts.eiapermit.form.$invalid}">
+                                <td>{{ep.id}}</td>
                                 <td>{{data.getCodeFromValuelist('eiastatus', ep.status)}}</td>
                                 <td>{{data.getCodeFromValuelist('team_leader_eia_permit', ep.user_id)}}</td>
                                 <td>{{data.getCodeFromValuelist('decision', ep.decision)}}</td>
@@ -41,7 +43,7 @@
                                 </td>
                             </tr>
                             <tr ng-if="shouldShowEiaPermit(ep)" class="detail">
-                                <td colspan="7">
+                                <td colspan="8">
                                     <form role="form" name="parts.eiapermit.form" novalidation>
 
                                         <div class="row">
