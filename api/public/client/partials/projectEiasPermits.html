@@ -21,7 +21,7 @@
                             </tr>
                             </thead>
                             <tbody class="edit-row" ng-repeat="ep in data.eiaspermits">
-                            <tr class="master" ng-class="{selected: routeParams.eiapermitId==ep.id, 'other-is-selected': routeParams.eiapermitId && routeParams.eiapermitId!=ep.id, notvalid: routeParams.eiapermitId==ep.id && parts.eiapermit.form.$invalid}">
+                            <tr class="master" ng-class="{selected: routeParams.eiapermitId==ep.id, notvalid: routeParams.eiapermitId==ep.id && parts.eiapermit.form.$invalid}">
                                 <td>{{ep.id}}</td>
                                 <td>{{data.getCodeFromValuelist('eiastatus', ep.status)}}</td>
                                 <td>{{data.getCodeFromValuelist('team_leader_eia_permit', ep.user_id)}}</td>

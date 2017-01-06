@@ -23,7 +23,7 @@
                             </tr>
                             </thead>
                             <tbody class="edit-row" ng-repeat="d in data.documents">
-                            <tr class="master" ng-class="{selected: routeParams.documentId==d.id, 'other-is-selected': routeParams.documentId && routeParams.documentId!=d.id, notvalid: routeParams.documentId==d.id && parts.document.form.$invalid}">
+                            <tr class="master" ng-class="{selected: routeParams.documentId==d.id, notvalid: routeParams.documentId==d.id && parts.document.form.$invalid}">
                                 <td>{{d.id}}</td>
                                 <td>{{d.date_submitted | date:'d MMM yyyy'}}</td>
                                 <td>{{d.title}}</td>
