@@ -322,6 +322,17 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             factory.hearings = [];
         };
 
+        factory.createNewHearing = function (d)
+        {
+            var hData =
+                {
+                    document_id: d.id,
+                    is_new: true
+                };
+            factory.hearing = new Hearing(hData);
+            factory.hearings.unshift(factory.hearing);
+        };
+
         factory.deleteEiaPermit = function (params)
         {
             var index = _.findIndex(factory.eiaspermits, {'id': factory.eiapermit.id});
@@ -360,6 +371,32 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             {
                 var index = _.findIndex(factory.documents, {'id': factory.document.id});
                 factory.document.$delete(params, function ()
+                {
+                    onDelete(index);
+                    deferred.resolve();
+                });
+            }
+
+            return deferred.promise;
+        };
+
+        factory.deleteHearing = function (params)
+        {
+            var deferred = $q.defer();
+
+            var onDelete = function (index)
+            {
+                factory.hearings.splice(index, 1);
+                factory.hearing = {};
+            };
+            if (factory.hearing.is_new)
+            {
+                onDelete(0);
+            }
+            else
+            {
+                var index = _.findIndex(factory.hearings, {'id': factory.hearing.id});
+                factory.hearing.$delete(params, function ()
                 {
                     onDelete(index);
                     deferred.resolve();

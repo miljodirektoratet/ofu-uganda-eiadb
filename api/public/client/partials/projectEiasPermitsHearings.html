@@ -1,1 +1,104 @@
-Hør hør
+<div class="project-eiasandpermits">
+
+    <div class="row" >
+        <div class="col-md-12">
+            <div class="edit-container">
+                <div class="row header visible-md visible-lg">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Lead agency</th>
+                                <th>Date dispatched</th>
+                                <th>Date expected</th>
+                                <th>Date received</th>
+                                <th>File</th>
+                                <th>
+                                    <button type="button" class="btn btn-xs btn-success pull-right" ng-disabled="routeParams.hearingId" ng-click="newHearing()" ng-hide="!auth.canSave('new')">New</button>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="edit-row" ng-repeat="h in data.hearings">
+                            <tr class="master" ng-class="{selected: routeParams.hearingId==h.id, notvalid: routeParams.hearingId==h.id && parts.hearing.form.$invalid}">
+                                <td>{{h.id}}</td>
+                                <td>{{data.getCodeFromValuelist('leadagency', h.lead_agency)}}</td>
+                                <td>{{h.date_dispatched | date:'d MMM yyyy'}}</td>
+                                <td>{{h.date_expected | date:'d MMM yyyy'}}</td>
+                                <td>{{h.date_received | date:'d MMM yyyy'}}</td>
+
+                                <td align="center">
+                                    <a ng-href="{{downloadFileUrl(h.file_metadata_id)}}" ng-show="h.attachment" ng-attr-alt="{{h.attachment.filename}}" ng-attr-title="{{h.attachment.filename}}">
+                                        <span class="glyphicon glyphicon-file"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <div style="min-width:65px;">
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(routeParams.hearingId, $event)" ng-disabled="routeParams.hearingId" ng-show="routeParams.hearingId!=h.id" ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}/documents/{{routeParams.documentId}}/hearings/{{h.id}}">{{auth.canSave('new') ? "Edit" : "Open"}}</a>
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(parts.hearing.state == SavingStateEnum.Loading, $event)" ng-disabled="parts.hearing.state == SavingStateEnum.Loading" ng-show="routeParams.hearingId==h.id" ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}/documents/{{routeParams.documentId}}/hearings">Close</a>
+                                        <span class="loader pull-right" ng-show="routeParams.hearingId==h.id && parts.hearing.state == SavingStateEnum.Loading"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="shouldShowHearing(h)" class="detail">
+                                <td colspan="10">
+                                    <form role="form" name="parts.hearing.form" novalidation>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="hearing.date_dispatched">Date dispatched</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentHearing(h)" ng-required="true" ng-readonly="!auth.canSave('hearing.date_dispatched')" id="hearing.date_dispatched" class="form-control input-sm input-date" ng-model="h.date_dispatched" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('hearing.date_dispatched')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                          </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="hearing.remarks">Remarks</label>
+                                                    <textarea ng-blur="saveCurrentHearing(h)" ng-readonly="!auth.canSave('hearing.remarks')" class="form-control input-sm" rows="2" id="hearing.remarks" ng-model="h.remarks"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                                        text="'Delete hearing'"
+                                                        warning="'Do you really want to delete this record?'"
+                                                        button-class="'btn-danger'"
+                                                        on-yes="deleteHearing()"></sero-delete-button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>(Dirty:{{parts.hearing.form.$dirty}}, valid:{{parts.hearing.form.$valid}})
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.hearing.state == SavingStateEnum.Loaded && !d.is_new">Last changed by {{d.updated_by}}</span>
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.hearing.state == SavingStateEnum.SavingStarted">Saving...</span>
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.hearing.state == SavingStateEnum.SavingFinished">All changes saved</span>
+                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.hearing.state == SavingStateEnum.SavingFailed">Saving failed</span>
+                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.hearing.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

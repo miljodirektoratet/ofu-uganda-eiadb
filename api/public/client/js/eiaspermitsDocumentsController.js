@@ -122,8 +122,6 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         scope.saveCurrentDocument();
     };
 
-
-
     scope.calculateNumberOfCopiesOfDocument = function ()
     {
         scope.data.document.director_copy_no = 1;
@@ -222,7 +220,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         });
     };
 
-    scope.parts.document == SavingStateEnum.Loading
+//    scope.parts.document == SavingStateEnum.Loading WHAT IS THIS???
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
     promises[2].then(function (eps)
     {

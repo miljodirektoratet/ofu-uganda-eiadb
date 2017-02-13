@@ -26,6 +26,11 @@ class Document extends Model
         return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_response_id');
     }
 
+    public function hearings()
+    {
+        return $this->hasMany('App\Hearing');
+    }
+
     public static function boot()
     {
         parent::boot();
