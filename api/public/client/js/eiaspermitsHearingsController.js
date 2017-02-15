@@ -84,14 +84,46 @@ controllers.controller('EiasPermitsHearingsController', ['$scope', 'ProjectFacto
                 return scope.userinfo.info.role_1;
             case "hearing.date_dispatched":
                 return scope.userinfo.info.role_1;
-            case "document.remarks":
+            case "hearing.remarks":
                 return scope.userinfo.info.role_3;
             default:
                 return false;
         }
     };
 
-    // NEXT
+    scope.loadHearing = function()
+    {
+        scope.parts.hearing.state = SavingStateEnum.Loading;
+
+        var promises = ProjectFactory.retrieveHearing(scope.routeParams);
+        promises[0].then(function (h)
+        {
+            scope.parts.hearing.state = SavingStateEnum.Loaded;
+        });
+    };
+
+    // Feels strange to have to load this, but we need to if one goes directly to hearing url.
+    scope.loadDocumentWithHearings = function()
+    {
+        scope.parts.document.state = SavingStateEnum.Loading;
+        scope.parts.hearings.state = SavingStateEnum.Loading;
+
+        var promises = ProjectFactory.retrieveDocument(scope.routeParams);
+        promises[0].then(function (d)
+        {
+            scope.parts.document.state = SavingStateEnum.Loaded;
+        });
+        promises[1].then(function (hs)
+        {
+            scope.parts.hearings.state = SavingStateEnum.Loaded;
+
+            // Get hearing if we got an hearingId.
+            if (!_.isUndefined(scope.routeParams.hearingId))
+            {
+                scope.loadHearing();
+            }
+        });
+    };
 
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
     promises[2].then(function (eps)

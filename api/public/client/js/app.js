@@ -35,7 +35,7 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId/documents', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId/documents/:documentId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId/documents/:documentId/hearings', projectTabsOptions);
-        $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId/documents/:documentId/hearings/hearingId', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId/documents/:documentId/hearings/:hearingId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/auditsinspections', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/auditsinspections/:auditinspectionId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/reports', projectTabsOptions);

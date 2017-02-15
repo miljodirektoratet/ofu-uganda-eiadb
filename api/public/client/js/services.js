@@ -51,6 +51,14 @@ services.factory('Document', ['$resource', function ($resource)
         });
 }]);
 
+services.factory('Hearing', ['$resource', function ($resource)
+{
+    return $resource('/api/v1/project/:projectId/eiapermit/:eiapermitId/document/:documentId/hearing/:hearingId', {hearingId: '@id'},
+        {
+            'update': {method: 'PUT', isArray: false}
+        });
+}]);
+
 services.factory('AuditInspection', ['$resource', function ($resource)
 {
     return $resource('/api/v1/project/:projectId/auditinspection/:auditinspectionId', {auditinspectionId: '@id'},

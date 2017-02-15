@@ -79,7 +79,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <p>(Dirty:{{parts.hearing.form.$dirty}}, valid:{{parts.hearing.form.$valid}})
-                                                    <span class="saving-message-inline pull-right" ng-show="parts.hearing.state == SavingStateEnum.Loaded && !d.is_new">Last changed by {{d.updated_by}}</span>
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.hearing.state == SavingStateEnum.Loaded && !h.is_new">Last changed by {{h.updated_by}}</span>
                                                     <span class="saving-message-inline pull-right" ng-show="parts.hearing.state == SavingStateEnum.SavingStarted">Saving...</span>
                                                     <span class="saving-message-inline pull-right" ng-show="parts.hearing.state == SavingStateEnum.SavingFinished">All changes saved</span>
                                                     <span class="saving-message-inline pull-right color-error" ng-show="parts.hearing.state == SavingStateEnum.SavingFailed">Saving failed</span>

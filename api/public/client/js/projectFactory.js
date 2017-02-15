@@ -1,7 +1,7 @@
 'use strict';
 
-services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'AuditInspection', 'Valuelists', 'UserInfo',
-    function ($q, $filter, Project, Organisation, EiaPermit, Document, AuditInspection, Valuelists, UserInfo)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Hearing', 'AuditInspection', 'Valuelists', 'UserInfo',
+    function ($q, $filter, Project, Organisation, EiaPermit, Document, Hearing, AuditInspection, Valuelists, UserInfo)
     {
         var factory = {};
         factory.project = {};
@@ -127,12 +127,11 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
 
                     factory.document.$get(_.omit(params, ['hearingId']), function (d)
                     {
-                        //factory.hearings = Hearing.query(_.omit(params, ['hearingId']), function (hs)
-                        //{
-                        //     deferredHearings.resolve(hs);
-                        //});
+                        factory.hearings = Hearing.query(_.omit(params, ['hearingId']), function (hs)
+                        {
+                             deferredHearings.resolve(hs);
+                        });
 
-                        deferredHearings.resolve([]);
                         deferredDocument.resolve(d);
                     });
                 }
@@ -144,6 +143,31 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             }
             return [deferredDocument.promise, deferredHearings.promise];
         };
+
+        factory.retrieveHearing = function (params)
+        {
+            var deferredHearing = $q.defer();
+
+            if (factory.hearing.id != params.hearingId)
+            {
+                factory.emptyHearing();
+                var hits = $filter('filter')(factory.hearings, {'id': params.hearingId});
+                if (hits.length == 1)
+                {
+                    factory.hearing = hits[0];
+                    factory.hearing.$get(params, function (h)
+                    {
+                        deferredHearing.resolve(h);
+                    });
+                }
+            }
+            else
+            {
+                deferredHearing.resolve(factory.hearing);
+            }
+            return [deferredHearing.promise];
+        };
+
 
         factory.retrieveAuditInspection = function (params)
         {
@@ -273,8 +297,14 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             factory.document = {};
             factory.hearings = [];
+            factory.emptyHearing();
+        };
+
+        factory.emptyHearing = function ()
+        {
             factory.hearing = {};
         };
+
         factory.createNewProject = function (o)
         {
             var pData =
