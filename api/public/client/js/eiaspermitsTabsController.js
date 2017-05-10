@@ -59,12 +59,15 @@ controllers.controller('EiasPermitsTabsController', ['$scope', '$location', 'Pro
     {
         if (scope.isDisabled(number))
         {
+            // console.log("isdisabled", number);
             return true;
         }
         if (scope.parts.documents.state == SavingStateEnum.Loading)
         {
+            // console.log("is loading", number);
             return true;
         }
+        // console.log("not disabled", number);
         return false;
     };
 

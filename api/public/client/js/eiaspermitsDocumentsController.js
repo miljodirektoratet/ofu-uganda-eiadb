@@ -220,7 +220,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         });
     };
 
-//    scope.parts.document == SavingStateEnum.Loading WHAT IS THIS???
+    scope.parts.document == SavingStateEnum.Loading;// WHAT IS THIS???
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
     promises[2].then(function (eps)
     {
@@ -230,6 +230,8 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         promises2[1].then(function (ds)
         {
             // Finished retrieving documents.
+
+            scope.parts.documents.state = SavingStateEnum.Loaded;
 
             // Get document if we got an documentId.
             if (!_.isUndefined(scope.routeParams.documentId))
