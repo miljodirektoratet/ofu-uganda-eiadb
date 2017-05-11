@@ -80,7 +80,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         {
             scope.data.document.file_metadata_id = file.result.id;
             scope.parts.document.form.attachment.$setDirty();
-            scope.saveCurrentDocument();
+            scope.saveCurrentDocument(scope.data.document);
         }, function (reason)
         {
         });
@@ -100,7 +100,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         {
             scope.data.document.file_metadata_response_id = file.result.id;
             scope.parts.document.form.response_document.$setDirty();
-            scope.saveCurrentDocument();
+            scope.saveCurrentDocument(scope.data.document);
         }, function (reason)
         {
         });
@@ -111,7 +111,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         scope.showUploadingAttachment = false;
         scope.data.document.file_metadata_id = null;
         scope.parts.document.form.attachment.$setDirty();
-        scope.saveCurrentDocument();
+        scope.saveCurrentDocument(scope.data.document);
     };
 
     scope.deleteResponseDocument = function ()
@@ -119,7 +119,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         scope.showUploadingResponseDocument = false;
         scope.data.document.file_metadata_response_id = null;
         scope.parts.document.form.response_document.$setDirty();
-        scope.saveCurrentDocument();
+        scope.saveCurrentDocument(scope.data.document);
     };
 
     scope.calculateNumberOfCopiesOfDocument = function ()

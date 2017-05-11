@@ -56,7 +56,7 @@ controllers.controller('EiasPermitsHearingsController', ['$scope', 'ProjectFacto
         {
             scope.data.hearing.file_metadata_id = file.result.id;
             scope.parts.hearing.form.attachment.$setDirty();
-            scope.saveCurrentHearing();
+            scope.saveCurrentHearing(scope.data.hearing);
         }, function (reason)
         {
         });
@@ -67,7 +67,7 @@ controllers.controller('EiasPermitsHearingsController', ['$scope', 'ProjectFacto
         scope.showUploadingAttachment = false;
         scope.data.hearing.file_metadata_id = null;
         scope.parts.hearing.form.attachment.$setDirty();
-        scope.saveCurrentHearing();
+        scope.saveCurrentHearing(scope.data.hearing);
     };
 
     scope.auth.canSave = function (field)
@@ -83,6 +83,18 @@ controllers.controller('EiasPermitsHearingsController', ['$scope', 'ProjectFacto
             case "delete":
                 return scope.userinfo.info.role_1;
             case "hearing.date_dispatched":
+                return scope.userinfo.info.role_1;
+            case "hearing.lead_agency":
+                return scope.userinfo.info.role_1;
+            case "hearing.district_id":
+                return scope.userinfo.info.role_1;
+            case "hearing.date_expected":
+                return scope.userinfo.info.role_1;
+            case "hearing.date_received":
+                return scope.userinfo.info.role_1;
+            case "hearing.recommendations":
+                return scope.userinfo.info.role_1;
+            case "hearing.document_id":
                 return scope.userinfo.info.role_1;
             case "hearing.remarks":
                 return scope.userinfo.info.role_3;
@@ -134,6 +146,7 @@ controllers.controller('EiasPermitsHearingsController', ['$scope', 'ProjectFacto
         promises2[1].then(function (ds)
         {
             // Finished retrieving documents.
+            scope.parts.documents.state = SavingStateEnum.Loaded;
 
             // Get document if we got an documentId.
             if (!_.isUndefined(scope.routeParams.documentId))

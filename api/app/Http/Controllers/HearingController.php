@@ -14,22 +14,35 @@ class HearingController extends Controller
     // GET /resource/:id/subresource/:subid/level3resource/:level3id/level4resource
     public function index($projectId, $eiapermitId, $documentId)
     {
+        $withAttachment = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
+
         $hearings = Project::find($projectId)
             ->eiapermits()->find($eiapermitId)
             ->documents()->find($documentId)
             ->hearings()
-            ->get(array('id', 'lead_agency', 'date_dispatched', 'date_expected', 'date_received'));
+            ->with(array('attachment'=>$withAttachment))
+            ->get(array('id', 'lead_agency', 'date_dispatched', 'date_expected', 'date_received', 'file_metadata_id'));
         return Response::json($hearings, 200);
     }
 
     // GET /resource/:id/subresource/:subid/level3resource/:level3id/level4resource/:level4id
     public function show($projectId, $eiapermitId, $documentId, $id)
     {
+        $withAttachment = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
+
         $document = Project::find($projectId)
             ->eiapermits()->find($eiapermitId)
             ->documents()->find($documentId)
             ->hearings()
+            ->with(array('attachment'=>$withAttachment))
             ->find($id);
+
         return Response::json($document, 200);
     }
 

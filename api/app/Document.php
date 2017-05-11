@@ -17,9 +17,9 @@ class Document extends Model
     }
 
     public function attachment()
-    {
-        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_id');
-    }
+{
+    return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_id');
+}
 
     public function response_document()
     {

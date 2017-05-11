@@ -32,7 +32,7 @@
                                 <td>{{d.date_sent_from_dep | date:'d MMM yyyy'}}</td>
                                 <td>{{d.date_sent_officer | date:'d MMM yyyy'}}</td>
                                 <td>{{data.getCodeFromValuelist('documentconclusion', d.conclusion)}}</td>
-                                <td align="center">
+                                <td align="left">
                                     <a ng-href="{{downloadFileUrl(d.file_metadata_id)}}" ng-show="d.attachment" ng-attr-alt="{{d.attachment.filename}}" ng-attr-title="{{d.attachment.filename}}">
                                         <span class="glyphicon glyphicon-file"></span>
                                     </a>

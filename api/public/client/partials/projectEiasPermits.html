@@ -28,7 +28,7 @@
                                 <td>{{data.getCodeFromValuelist('decision', ep.decision)}}</td>
                                 <td>{{ep.date_certificate | date:'d MMM yyyy'}}</td>
                                 <td>{{ep.certificate_no}}</td>
-                                <td align="center">
+                                <td align="left">
                                     <a ng-href="{{downloadFileUrl(ep.certificate.id)}}" ng-show="ep.certificate" ng-attr-alt="{{ep.certificate.filename}}" ng-attr-title="{{ep.certificate.filename}}">
                                         <span class="glyphicon glyphicon-file"></span>
                                     </a>

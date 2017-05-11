@@ -65,7 +65,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         {
             scope.data.eiapermit.file_metadata_id = file.result.id;
             scope.parts.eiapermit.form.certificate.$setDirty();
-            scope.saveCurrentEiaPermit();
+            scope.saveCurrentEiaPermit(scope.data.eiapermit);
         }, function (reason)
         {
         });
@@ -76,7 +76,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         scope.showUploadingCertificate = false;
         scope.data.eiapermit.file_metadata_id = null;
         scope.parts.eiapermit.form.certificate.$setDirty();
-        scope.saveCurrentEiaPermit();
+        scope.saveCurrentEiaPermit(scope.data.eiapermit);
     };
 
     scope.criteriaMatchOfficer1 = function (currentId)
