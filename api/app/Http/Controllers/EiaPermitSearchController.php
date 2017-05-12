@@ -29,7 +29,7 @@ class EiaPermitSearchController extends Controller
 //                ,'doc.title'
 //                ,'doc.code'
 //                ,'doc.number'
-//                ,'doc.date_submitted'
+                ,'doc.date_submitted'
             )
             ->whereNull('ep.deleted_at')
             ->whereNull('p.deleted_at')
@@ -42,12 +42,14 @@ class EiaPermitSearchController extends Controller
         $criteriaDefinitions["multiple_text"] = [];
         $criteriaDefinitions["multiple"] = ["ep.status"];
         $criteriaDefinitions["alias"] = ["personnel.user_id", "o.name", "p.title", "doc.code"];
-        $criteriaDefinitions["special"] = ["doc.year"];
+        $criteriaDefinitions["special"] = ["doc.year", "ep.date_submission_from", "ep.date_submission_to"];
 
         $criterias = getSearchCriterias([
             'project_title',
             'eiapermit_year',
             'eiapermit_certificate_no',
+            'eiapermit_date_submission_from',
+            'eiapermit_date_submission_to',
             'category_id',
             'developer_name',
             'personnel_user_id',
@@ -130,7 +132,16 @@ class EiaPermitSearchController extends Controller
                 {
                     $result = $result->whereRaw("YEAR(doc.date_submitted)=?", [$criteria]);
                 }
+                elseif ($word === "ep.date_submission_from")
+                {
+                    $result = $result->where("doc.date_submitted", '>=', [$criteria]);
+                }
+                elseif ($word === "ep.date_submission_to")
+                {
+                    $result = $result->where("doc.date_submitted", '<=', [$criteria]);
+                }
             }
+
         }
 
         // Need to have distinct because of leftJoin with audits_inspections_personnel.

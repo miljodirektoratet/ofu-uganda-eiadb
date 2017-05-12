@@ -19,6 +19,22 @@ controllers.controller('DatePickerController', ['$scope', function (scope)
     };
 }]);
 
+controllers.controller('DatePickerSearchController', ['$scope', function (scope)
+{
+    scope.open = function ($event)
+    {
+        $event.preventDefault();
+        $event.stopPropagation();
+        scope.opened = true;
+    };
+    scope.datepickerOptions =
+        {
+            startingDay: 1
+            //,showButtonBar: false // Not working
+        };
+}]);
+
+
 
 controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo', function (scope, location, UserInfo)
 {
