@@ -32,7 +32,7 @@
                                             ng-model="newButton.year"
                                             class="form-control input-sm"/>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label for="newButton.type">Activity</label>
                                     <select ui-select2 id="newButton.type" class="form-control input-sm"
                                             ng-required="true"
@@ -42,21 +42,37 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="newButton.reason">Type</label>
-                                        <select ui-select2 id="newButton.reason" class="form-control input-sm"
-                                                ng-change="saveCurrentAuditInspection()"
-                                                ng-required="true"
-                                                ng-model="newButton.reason">
-                                            <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}">
-                                                {{v.description1}}
-                                            </option>
-                                        </select>
+                                <div class="col-md-3">
+                                    <label for="newButton.reason">Type</label>
+                                    <select ui-select2 id="newButton.reason" class="form-control input-sm"
+                                            ng-change="saveCurrentAuditInspection()"
+                                            ng-required="true"
+                                            ng-model="newButton.reason">
+                                        <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}">
+                                            {{v.description1}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="newButton.date_carried_out">Date carried out</label>
+                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                        <input type="text"
+                                               ng-required="true"
+                                               id="newButton.date_carried_out"
+                                               class="form-control input-sm input-date"
+                                               ng-model="newButton.date_carried_out"
+                                               data-datepicker-popup="d MMM yyyy" data-is-open="opened"
+                                               data-datepicker-options="datepickerOptions"
+                                               data-show-button-bar="false"/>
+                                        <span class="input-group-btn">
+                                          <button type="button"
+                                                  class="btn btn-default btn-sm" ng-click="open($event)"><span
+                                                  class="glyphicon glyphicon-calendar"></span></button>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="newButton.create">&nbsp;</label>
+                                    <label for="newButton.create">&nbsp;</label><br>
                                     <button type="button" class="btn btn-sm btn-primary use-button pull-right"
                                             id="newButton.create"
                                             ng-disabled="newButton.form.$invalid"

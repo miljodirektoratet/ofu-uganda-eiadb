@@ -116,7 +116,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     {
         scope.parts.auditinspection.state = SavingStateEnum.LoadingNew;
         scope.newButton.isopen = false;
-        ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year, scope.newButton.type, scope.newButton.reason);
+        ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year, scope.newButton.type, scope.newButton.reason, scope.newButton.date_carried_out);
         scope.parts.auditinspection.isNew = true;
         scope.saveCurrentAuditInspection();
     };

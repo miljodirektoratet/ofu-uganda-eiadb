@@ -436,7 +436,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             return deferred.promise;
         };
 
-        factory.createNewAuditInspection = function (p, year, type, reason)
+        factory.createNewAuditInspection = function (p, year, type, reason, dateCarriedOut)
         {
             var aiData =
             {
@@ -444,6 +444,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 year: year,
                 type: type,
                 reason: reason,
+                date_carried_out: dateCarriedOut,
                 days: 1,
                 status: 70, // 70=Created
                 performance_level: 47, // 47=Unknown
