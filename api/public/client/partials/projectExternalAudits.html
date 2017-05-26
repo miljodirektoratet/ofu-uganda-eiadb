@@ -1,0 +1,362 @@
+<div class="project-externalaudits">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="edit-container">
+                <div class="row header visible-md visible-lg">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Status</th>
+                                <th>Team leader</th>
+                                <th>Decision taken</th>
+                                <th>Date on certificate</th>
+                                <th>Certificate number</th>
+                                <th>File</th>
+                                <th>
+                                    <button type="button" class="btn btn-xs btn-success pull-right" ng-disabled="routeParams.externalauditId" ng-click="newExternalAudit();" ng-hide="!auth.canSave('new')">New</button>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="edit-row" ng-repeat="ea in data.externalaudits">
+                            <tr class="master" ng-class="{selected: routeParams.externalauditId==ea.id, notvalid: routeParams.externalauditId==ea.id && parts.externalaudit.form.$invalid}">
+                                <td>{{ea.id}}</td>
+                                <td>{{data.getCodeFromValuelist('eiastatus', ea.status)}}</td>
+                                <td>{{data.getCodeFromValuelist('team_leader_eia_permit', ea.user_id)}}</td>
+                                <td>{{data.getCodeFromValuelist('decision', ea.decision)}}</td>
+                                <td>{{ea.date_certificate | date:'d MMM yyyy'}}</td>
+                                <td>{{ea.certificate_no}}</td>
+                                <td align="left">
+                                    <a ng-href="{{downloadFileUrl(ea.certificate.id)}}" ng-show="ea.certificate" ng-attr-alt="{{ea.certificate.filename}}" ng-attr-title="{{ea.certificate.filename}}">
+                                        <span class="glyphicon glyphicon-file"></span>
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <div style="min-width:65px;">
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(routeParams.externalauditId, $event)" ng-disabled="routeParams.externalauditId" ng-show="routeParams.externalauditId!=ea.id" ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{ea.id}}">{{auth.canSave('new') ? "Edit" : "Open"}}</a>
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(parts.externalaudit.state == SavingStateEnum.Loading, $event)" ng-disabled="parts.externalaudit.state == SavingStateEnum.Loading" ng-show="routeParams.externalauditId==ea.id" ng-href="#/projects/{{routeParams.projectId}}/externalaudits">Close</a>
+                                        <span class="loader pull-right" ng-show="routeParams.externalauditId==ea.id && parts.externalaudit.state == SavingStateEnum.Loading"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="shouldShowExternalAudit(ea)" class="detail">
+                                <td colspan="8">
+                                    <form role="form" name="parts.externalaudit.form" novalidation>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="teamleader_id">Practitioner team leader</label>
+                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('teamleader_id')" id="teamleader_id" class="form-control input-sm" ng-model="ea.teamleader_id">
+                                                        <option ng-repeat="v in valuelists.teamleader" value="{{v.id}}">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label for="team_members">Practitioner team members</label>
+                                                    <select ui-select2 multiple="true" placeholder="Click to pick" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('practitioner_id')" id="team_members" class="form-control input-sm" ng-model="ea.teammember_ids">
+                                                        <option ng-repeat="v in valuelists.teammember" value="{{v.id}}">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="cost">Cost of the proposed development</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" integer ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('cost')" class="form-control input-sm" id="cost" ng-model="ea.cost"/>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('cost_currency')" id="cost_currency" class="form-control input-sm" ng-model="ea.cost_currency">
+                                                                <option ng-repeat="v in valuelists.currency" value="{{v.id}}">{{v.description1}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="expected_jobs_created">Expected jobs created</label>
+                                                    <input type="text" decimal="1" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('expected_jobs_created')" class="form-control input-sm" id="expected_jobs_created" ng-model="ea.expected_jobs_created"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="user_id">Team leader</label>
+                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('user_id')" id="user_id" class="form-control input-sm" ng-model="ea.user_id">
+                                                        <option ng-repeat="v in valuelists.team_leader_eia_permit | filter:criteriaMatchOfficer1(ea.user_id)" value="{{v.id}}">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="users">Officers to handle</label>
+                                                    <select ui-select2 multiple="true" placeholder="Click to pick"
+                                                            ng-change="saveCurrentExternalAudit(ea)"
+                                                            ng-disabled="!auth.canSave('personnel')" id="users"
+                                                            class="form-control input-sm"
+                                                            ng-model="ea.user_ids">
+                                                        <option ng-repeat="v in valuelists.officer_eia_permit | filter:criteriaMatchOfficer(ea.user_ids)" value="{{v.id}}">
+                                                            {{v.description1}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inspection_recommended">Inspection before decision?</label>
+                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('inspection_recommended')" id="inspection_recommended" class="form-control input-sm" ng-model="ea.inspection_recommended">
+                                                        <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_inspection">Date of inspection</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_inspection')" class="form-control input-sm" id="date_inspection" ng-model="ea.date_inspection" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_inspection')" id="date_inspection" class="form-control input-sm input-date" ng-model="ea.date_inspection" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_inspection')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="officer_recommend">Recommendations by reviewer</label>
+                                                    <textarea ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('officer_recommend')" class="form-control input-sm" rows="2" id="officer_recommend" ng-model="ea.officer_recommend"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="fee">Expected fees</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" decimal="2" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="ea.fee"/>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('fee_currency')" id="fee_currency" class="form-control input-sm" ng-model="ea.fee_currency">
+                                                                <option ng-repeat="v in valuelists.currency" value="{{v.id}}">{{v.description1}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_sent_ded_approval">Date sent for approval</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_sent_ded_approval')" class="form-control input-sm" id="date_sent_ded_approval" ng-model="ea.date_sent_ded_approval" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_sent_ded_approval')" id="date_sent_ded_approval" class="form-control input-sm input-date" ng-model="ea.date_sent_ded_approval" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_sent_ded_approval')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="decision">Decision taken</label>
+                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('decision')" id="decision" class="form-control input-sm" ng-model="ea.decision">
+                                                        <option ng-repeat="v in valuelists.decision" value="{{v.id}}">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_decision">Date for decision</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_decision')" class="form-control input-sm" id="date_decision" ng-model="ea.date_decision" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_decision')" id="date_decision" class="form-control input-sm input-date" ng-model="ea.date_decision" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_decision')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_fee_notification">Date of invoicing</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_fee_notification')" class="form-control input-sm" id="date_fee_notification" ng-model="ea.date_fee_notification" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_fee_notification')" id="date_fee_notification" class="form-control input-sm input-date" ng-model="ea.date_fee_notification" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_fee_notification')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_fee_payed">Date invoice is payed</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_fee_payed')" class="form-control input-sm" id="date_fee_payed" ng-model="ea.date_fee_payed" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_fee_payed')" id="date_fee_payed" class="form-control input-sm input-date" ng-model="ea.date_fee_payed" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_fee_payed')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="fee_receipt_no">Fee receipt number</label>
+                                                    <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('fee_receipt_no')" class="form-control input-sm" id="fee_receipt_no" ng-model="ea.fee_receipt_no"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="designation">Signature on certificate</label>
+                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('designation')" id="designation" class="form-control input-sm" ng-model="ea.designation">
+                                                        <option ng-repeat="v in valuelists.executivedirector" value="{{v.id}}">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_certificate">Date on the certificate</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_certificate')" class="form-control input-sm" id="date_certificate" ng-model="ea.date_certificate" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_certificate')" id="date_certificate" class="form-control input-sm input-date" ng-model="ea.date_certificate" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('date_certificate')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="certificate_no">Certificate number</label>
+                                                    <input type="text" integer ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('certificate_no')" class="form-control input-sm" id="certificate_no" ng-model="ea.certificate_no"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_cancelled">Certificate cancelled date</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_cancelled')" class="form-control input-sm" id="date_cancelled" ng-model="ea.date_cancelled" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_cancelled')" id="date_cancelled" class="form-control input-sm input-date" ng-model="ea.date_cancelled" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_cancelled')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="remarks">Remarks</label>
+                                                    <textarea ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('remarks')" class="form-control input-sm" rows="2" id="remarks" ng-model="ea.remarks"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Certificate</label>
+                                                    <div class="uploaded-file" ng-show="ea.file_metadata_id">
+                                                        <a ng-href="{{downloadFileUrl(ea.file_metadata_id)}}" ng-show="ea.certificate">{{ea.certificate.filename}}</a>
+                                                        <button type="button" class="delete btn btn-sm btn-link"
+                                                                ng-click="deleteCertificate()"
+                                                                ng-hide="!auth.canSave('delete')">delete
+                                                        </button>
+                                                    </div>
+                                                    <div>
+                                                        <button class="btn btn-sm btn-default"
+                                                                type="button"
+                                                                ngf-select="uploadCertificate($files)"
+                                                                accept="{{fileUploadPattern}}"
+                                                                ngf-pattern="{{fileUploadNgfPattern}}"
+                                                                ng-model="fake_certificate"
+                                                                name="certificate"
+                                                                ng-hide="ea.file_metadata_id"
+                                                                ng-disabled="!auth.canSave('delete')"
+                                                                ngf-max-size="{{fileUploadMaxSize}}">
+                                                            Select File
+                                                        </button>
+                                                        <div class="uploading-file" ng-show="showUploadingCertificate">
+                                                            <div class="file">{{certificateFile.name}}<br/>
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{certificateFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                                            style="width: {{certificateFile.progress}}%;">
+                                                                        {{certificateFile.progress}}%
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="errors" ng-messages="parts.externalaudit.form.certificate.$error" role="alert">
+                                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                                <div ng-message="maxSize">The file is to big.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                                        text="'Delete EIA and Permit'"
+                                                        warning="'NB! Any documents linked to this EIA and Permit will also be deleted. Do you want to proceed?'"
+                                                        button-class="'btn-danger'"
+                                                        on-yes="deleteExternalAudit()"></sero-delete-button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>(Dirty:{{parts.externalaudit.form.$dirty}}, valid:{{parts.externalaudit.form.$valid}})
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.externalaudit.state == SavingStateEnum.Loaded && !ea.is_new">Last changed by {{ea.updated_by}}</span>
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.externalaudit.state == SavingStateEnum.SavingStarted">Saving...</span>
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.externalaudit.state == SavingStateEnum.SavingFinished">All changes saved</span>
+                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.externalaudit.state == SavingStateEnum.SavingFailed">Saving failed</span>
+                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.externalaudit.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
