@@ -49,9 +49,9 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
         {
             return ProjectTabEnum.AuditsInspections;
         }
-        if (_.contains(path, "reports"))
+        if (_.contains(path, "externalaudits"))
         {
-            return ProjectTabEnum.Reports;
+            return ProjectTabEnum.ExternalAudits;
         }
         return ProjectTabEnum.Project;
     };

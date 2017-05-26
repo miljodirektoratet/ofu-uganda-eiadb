@@ -37,9 +37,15 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId/documents/:documentId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId/documents/:documentId/hearings', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId/documents/:documentId/hearings/:hearingId', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits/:externalauditId', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits/:externalaudit/documents', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits/:externalaudit/documents/:documentId', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits/:externalaudit/documents/:documentId/hearings', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits/:externalaudit/documents/:documentId/hearings/:hearingId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/auditsinspections', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/auditsinspections/:auditinspectionId', projectTabsOptions);
-        $routeProvider.when('/projects/:projectId/reports', projectTabsOptions);
+
 
         var searchTabsOptions = {templateUrl: 'partials/searchTabs.html', controller: 'SearchTabsController'};
         $routeProvider.when('/search', {redirectTo: '/search/projects'});
@@ -107,12 +113,19 @@ var ProjectTabEnum =
     Project: 'Project',
     EiasPermits: 'Eias and Permits',
     AuditsInspections: 'Audits and Inspections',
-    Reports: 'Reports'
+    ExternalAudits: 'External audits'
 };
 
 var EiasPermitsTabEnum =
+{
+    EiaPermit: 'Eia and Permit',
+    Documents: 'Documents',
+    Hearings: 'Hearings'
+};
+
+var ExternalAuditsTabEnum =
     {
-        EiaPermit: 'Eia and Permit',
+        ExternalAudit: 'External audit',
         Documents: 'Documents',
         Hearings: 'Hearings'
     };

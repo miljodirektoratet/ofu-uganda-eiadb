@@ -12,10 +12,33 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.document = {};
         factory.hearings = [];
         factory.hearing = {};
+
+        factory.externalaudits = [];
+        factory.externalaudit = {};
+        factory.documents_ea = [];
+        factory.document_ea = {};
+        factory.hearings_ea = [];
+        factory.hearing_ea = {};
+
         factory.auditsinspections = [];
         factory.auditinspection = {};
         factory.valuelists = Valuelists;
         factory.userinfo = UserInfo;
+
+        factory.project2 =
+            {
+                externalaudits: [],
+                externalaudit:
+                    {
+                        documents: [],
+                        document:
+                            {
+                                hearings: [],
+                                hearing: {}
+                            }
+                    }
+            };
+
 
         factory.hasData =
             {
@@ -38,7 +61,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
 
             if (factory.project.id != params.projectId)
             {
-                var simpleParams = _.omit(params,  ['eiapermitId', 'documentId', 'hearingId', 'auditinspectionId']);
+                var simpleParams = _.omit(params,  ['eiapermitId', 'externalauditId',  'documentId', 'hearingId', 'auditinspectionId']);
                 factory.empty();
                 factory.project = Project.get(simpleParams, function (p)
                 {
@@ -110,6 +133,38 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             }
 
             return [deferredEiaPermit.promise, deferredDocuments.promise];
+        };
+
+        factory.retrieveExternalAudit = function (params)
+        {
+            var deferredExternalAudit = $q.defer();
+            var deferredDocuments = $q.defer();
+
+            if (factory.externalaudit.id != params.externalauditId)
+            {
+                factory.emptyExternalAudit();
+                var hits = $filter('filter')(factory.externalaudits, {'id': params.externalauditId});
+                if (hits.length == 1)
+                {
+                    factory.externalaudit = hits[0];
+                    factory.externalaudit.$get(_.omit(params, ['documentId', 'hearingId']), function (ea)
+                    {
+                        // params contains documentId, so we can't user params directly.
+                        factory.documents = Document.query(_.omit(params, ['documentId', 'hearingId']), function (ds)
+                        {
+                            deferredDocuments.resolve(ds);
+                        });
+                        deferredExternalAudit.resolve(ea);
+                    });
+                }
+            }
+            else
+            {
+                deferredExternalAudit.resolve(factory.eiapermit);
+                deferredDocuments.resolve(factory.documents);
+            }
+
+            return [deferredExternalAudit.promise, deferredDocuments.promise];
         };
 
         factory.retrieveDocument = function (params)

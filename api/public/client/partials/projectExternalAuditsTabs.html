@@ -1,0 +1,29 @@
+<div class="project-externalaudits">
+
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" role="tablist">
+                <li ng-class="{active: eatab==ExternalAuditsTabEnum.ExternalAudit}">
+                    <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}">External audit</a>
+                </li>
+                <li ng-click="preventClickIfDisabled(isDocumentsDisabled(routeParams.externalauditId), $event)" ng-class="{active: eatab==ExternalAuditsTabEnum.Documents, disabled: isDocumentsDisabled(routeParams.externalauditId) }">
+                    <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}/documents/{{routeParams.documentId}}">Documents{{isDocumentsDisabled(routeParams.externalauditId) ? "" : " (" + data.documents.length + ")"}}</a>
+                </li>
+                <li ng-click="preventClickIfDisabled(isHearingsDisabled(routeParams.documentId), $event)" ng-class="{active: eatab==ExternalAuditsTabEnum.Hearings, disabled: isHearingsDisabled(routeParams.documentId)}">
+                    <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}/documents/{{routeParams.documentId}}/hearings">Hearings{{isHearingsDisabled(routeParams.documentId) ? "" : " (" + data.hearings.length + ")"}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div ng-if="eatab==ExternalAuditsTabEnum.ExternalAudit">
+        <div ng-controller="ExternalAuditsController" ng-include="'partials/projectExternalAudits.html'"></div>
+    </div>
+    <div ng-if="eatab==ExternalAuditsTabEnum.Documents">
+        <div ng-controller="ExternalAuditsDocumentsController" ng-include="'partials/projectExternalAuditsDocuments.html'"></div>
+    </div>
+    <div ng-if="eatab==ExternalAuditsTabEnum.Hearings">
+        <div ng-controller="ExternalAuditsHearingsController" ng-include="'partials/projectExternalAuditsHearings.html'"></div>
+    </div>
+
+</div>
