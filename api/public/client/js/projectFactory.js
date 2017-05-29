@@ -1,11 +1,12 @@
 'use strict';
 
-services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Hearing', 'AuditInspection', 'Valuelists', 'UserInfo',
-    function ($q, $filter, Project, Organisation, EiaPermit, Document, Hearing, AuditInspection, Valuelists, UserInfo)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Hearing', 'ExternalAudit', 'DocumentEA', 'HearingEA', 'AuditInspection', 'Valuelists', 'UserInfo',
+    function ($q, $filter, Project, Organisation, EiaPermit, Document, Hearing, ExternalAudit, DocumentEA, HearingEA, AuditInspection, Valuelists, UserInfo)
     {
         var factory = {};
         factory.project = {};
         factory.organisation = {};
+
         factory.eiaspermits = [];
         factory.eiapermit = {};
         factory.documents = [];
@@ -25,21 +26,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.valuelists = Valuelists;
         factory.userinfo = UserInfo;
 
-        factory.project2 =
-            {
-                externalaudits: [],
-                externalaudit:
-                    {
-                        documents: [],
-                        document:
-                            {
-                                hearings: [],
-                                hearing: {}
-                            }
-                    }
-            };
-
-
         factory.hasData =
             {
                 eiapermits: false,
@@ -47,7 +33,13 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 documents: false,
                 document: false,
                 hearings: false,
-                hearing: false
+                hearing: false,
+                externalaudits: false,
+                externalaudit: false,
+                documents_ea: false,
+                document_ea: false,
+                hearings_ea: false,
+                hearing_ea: false
             };
 
 
@@ -56,6 +48,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var deferredProject = $q.defer();
             var deferredOrganisation = $q.defer();
             var deferredEiasPermits = $q.defer();
+            var deferredExternalAudits = $q.defer();
             var deferredAuditsInspections = $q.defer();
             var deferredAuditInspection = $q.defer();
 
@@ -77,6 +70,11 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                     deferredEiasPermits.resolve(eps);
                 });
 
+                factory.externalaudits = ExternalAudit.query(simpleParams, function (eas)
+                {
+                    deferredExternalAudits.resolve(eas);
+                });
+
                 factory.auditsinspections = AuditInspection.query(simpleParams, function (ais)
                 {
                     factory.retrieveAuditInspection(params).then(function (ai)
@@ -91,6 +89,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 deferredProject.resolve(factory.project);
                 deferredOrganisation.resolve(factory.organisation);
                 deferredEiasPermits.resolve(factory.eiaspermits);
+                deferredExternalAudits.resolve(factory.externalaudits);
 
                 factory.retrieveAuditInspection(params).then(function (ai)
                 {
@@ -100,7 +99,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             }
             return [deferredProject.promise, deferredOrganisation.promise,
                 deferredEiasPermits.promise,
-                deferredAuditsInspections.promise, deferredAuditInspection.promise];
+                deferredAuditsInspections.promise, deferredAuditInspection.promise, deferredExternalAudits.promise];
         };
 
         factory.retrieveEiaPermit = function (params)
@@ -133,38 +132,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             }
 
             return [deferredEiaPermit.promise, deferredDocuments.promise];
-        };
-
-        factory.retrieveExternalAudit = function (params)
-        {
-            var deferredExternalAudit = $q.defer();
-            var deferredDocuments = $q.defer();
-
-            if (factory.externalaudit.id != params.externalauditId)
-            {
-                factory.emptyExternalAudit();
-                var hits = $filter('filter')(factory.externalaudits, {'id': params.externalauditId});
-                if (hits.length == 1)
-                {
-                    factory.externalaudit = hits[0];
-                    factory.externalaudit.$get(_.omit(params, ['documentId', 'hearingId']), function (ea)
-                    {
-                        // params contains documentId, so we can't user params directly.
-                        factory.documents = Document.query(_.omit(params, ['documentId', 'hearingId']), function (ds)
-                        {
-                            deferredDocuments.resolve(ds);
-                        });
-                        deferredExternalAudit.resolve(ea);
-                    });
-                }
-            }
-            else
-            {
-                deferredExternalAudit.resolve(factory.eiapermit);
-                deferredDocuments.resolve(factory.documents);
-            }
-
-            return [deferredExternalAudit.promise, deferredDocuments.promise];
         };
 
         factory.retrieveDocument = function (params)
@@ -223,6 +190,93 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             return [deferredHearing.promise];
         };
 
+        factory.retrieveExternalAudit = function (params)
+        {
+            var deferredExternalAudit = $q.defer();
+            var deferredDocuments = $q.defer();
+
+            if (factory.externalaudit.id != params.externalauditId)
+            {
+                factory.emptyExternalAudit();
+                var hits = $filter('filter')(factory.externalaudits, {'id': params.externalauditId});
+                if (hits.length == 1)
+                {
+                    factory.externalaudit = hits[0];
+                    factory.externalaudit.$get(_.omit(params, ['documentId', 'hearingId']), function (ea)
+                    {
+                        // params contains documentId, so we can't user params directly.
+                        factory.documents_ea = DocumentEA.query(_.omit(params, ['documentId', 'hearingId']), function (ds)
+                        {
+                            deferredDocuments.resolve(ds);
+                        });
+                        deferredExternalAudit.resolve(ea);
+                    });
+                }
+            }
+            else
+            {
+                deferredExternalAudit.resolve(factory.eiapermit);
+                deferredDocuments.resolve(factory.documents);
+            }
+
+            return [deferredExternalAudit.promise, deferredDocuments.promise];
+        };
+
+        factory.retrieveDocumentEA = function (params)
+        {
+            var deferredDocument = $q.defer();
+            var deferredHearings = $q.defer();
+
+            if (factory.document.id != params.documentId)
+            {
+                factory.emptyDocumentEA();
+                var hits = $filter('filter')(factory.documents_ea, {'id': params.documentId});
+                if (hits.length == 1)
+                {
+                    factory.document_ea = hits[0];
+
+                    factory.document_ea.$get(_.omit(params, ['hearingId']), function (d)
+                    {
+                        factory.hearings_ea = HearingEA.query(_.omit(params, ['hearingId']), function (hs)
+                        {
+                            deferredHearings.resolve(hs);
+                        });
+
+                        deferredDocument.resolve(d);
+                    });
+                }
+            }
+            else
+            {
+                deferredDocument.resolve(factory.document_ea);
+                deferredHearings.resolve(factory.hearings_ea);
+            }
+            return [deferredDocument.promise, deferredHearings.promise];
+        };
+
+        factory.retrieveHearingEA = function (params)
+        {
+            var deferredHearing = $q.defer();
+
+            if (factory.hearing_ea.id != params.hearingId)
+            {
+                factory.emptyHearingEA();
+                var hits = $filter('filter')(factory.hearings_ea, {'id': params.hearingId});
+                if (hits.length == 1)
+                {
+                    factory.hearing_ea = hits[0];
+                    factory.hearing_ea.$get(params, function (h)
+                    {
+                        deferredHearing.resolve(h);
+                    });
+                }
+            }
+            else
+            {
+                deferredHearing.resolve(factory.hearing_ea);
+            }
+            return [deferredHearing.promise];
+        };
 
         factory.retrieveAuditInspection = function (params)
         {
@@ -337,6 +391,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             factory.organisation = {};
             factory.eiaspermits = [];
             factory.emptyEiaPermit();
+            factory.emptyExternalAudit();
             factory.auditsinspections = [];
             factory.auditinspection = {};
         };
@@ -358,6 +413,25 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.emptyHearing = function ()
         {
             factory.hearing = {};
+        };
+
+        factory.emptyExternalAudit = function ()
+        {
+            factory.externalaudit = {};
+            factory.documents_ea = [];
+            factory.emptyDocumentEA();
+        };
+
+        factory.emptyDocumentEA = function ()
+        {
+            factory.document_ea = {};
+            factory.hearings_ea = [];
+            factory.emptyHearingEA();
+        };
+
+        factory.emptyHearingEA = function ()
+        {
+            factory.hearing_ea = {};
         };
 
         factory.createNewProject = function (o)
@@ -491,6 +565,116 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             return deferred.promise;
         };
 
+        factory.createNewExternalAudit = function (p)
+        {
+            var eaData =
+                {
+                    project_id: p.id,
+                    //inspection_recommended: 42, // Unknown
+                    is_new: true
+                };
+            factory.externalaudit = new ExternalAudit(eaData);
+            factory.externalaudits.push(factory.externalaudit);
+            factory.documents_ea = [];
+        };
+
+        factory.createNewDocumentEA = function (ep)
+        {
+            var dData =
+                {
+                    external_audit_id: ep.id,
+                    director_copy_no: 1,
+                    is_new: true
+                };
+            factory.document_ea = new Document(dData);
+            factory.documents_ea.unshift(factory.document_ea);
+            factory.hearings_ea = [];
+        };
+
+        factory.createNewHearingEA = function (d)
+        {
+            var hData =
+                {
+                    document_id: d.id,
+                    is_new: true
+                };
+            factory.hearing_ea = new Hearing(hData);
+            factory.hearings_ea.unshift(factory.hearing_ea);
+        };
+
+        factory.deleteExternalAudit = function (params)
+        {
+            var index = _.findIndex(factory.externalaudits, {'id': factory.externalaudit.id});
+            var onDelete = function (index)
+            {
+                factory.externalaudits.splice(index, 1);
+                factory.externalaudit = {};
+            };
+            if (factory.externalaudit.is_new)
+            {
+                onDelete(index);
+            }
+            else
+            {
+                factory.externalaudit.$delete(params, function ()
+                {
+                    onDelete(index);
+                });
+            }
+        };
+
+        factory.deleteDocumentEA = function (params)
+        {
+            var deferred = $q.defer();
+
+            var onDelete = function (index)
+            {
+                factory.documents_ea.splice(index, 1);
+                factory.document_ea = {};
+            };
+            if (factory.document_ea.is_new)
+            {
+                onDelete(0);
+            }
+            else
+            {
+                var index = _.findIndex(factory.documents_ea, {'id': factory.document_ea.id});
+                factory.document_ea.$delete(params, function ()
+                {
+                    onDelete(index);
+                    deferred.resolve();
+                });
+            }
+
+            return deferred.promise;
+        };
+
+        factory.deleteHearingEA = function (params)
+        {
+            var deferred = $q.defer();
+
+            var onDelete = function (index)
+            {
+                factory.hearings_ea.splice(index, 1);
+                factory.hearing_ea = {};
+            };
+            if (factory.hearing_ea.is_new)
+            {
+                onDelete(0);
+            }
+            else
+            {
+                var index = _.findIndex(factory.hearings_ea, {'id': factory.hearing_ea.id});
+                factory.hearing_ea.$delete(params, function ()
+                {
+                    onDelete(index);
+                    deferred.resolve();
+                });
+            }
+
+            return deferred.promise;
+        };
+
         factory.createNewAuditInspection = function (p, year, type, reason, dateCarriedOut)
         {
             var aiData =
@@ -524,7 +708,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 {
                     factory.auditinspection = {};
                 }
-            }
+            };
             if (factory.auditinspection.is_new)
             {
                 onDelete(index);

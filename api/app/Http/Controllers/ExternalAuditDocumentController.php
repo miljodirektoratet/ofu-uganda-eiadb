@@ -11,7 +11,7 @@ class ExternalAuditDocumentController extends Controller
 {
 
     // GET /resource/:id/subresource/:subid/level3resource
-    public function index($projectId, $eiapermitId)
+    public function index($projectId, $externalauditId)
     {
         $withAttachment = function ($query)
         {
@@ -24,7 +24,7 @@ class ExternalAuditDocumentController extends Controller
         };
 
         $documents = Project::find($projectId)
-            ->eiapermits()->find($eiapermitId)
+            ->externalaudits()->find($externalauditId)
             ->documents()
             ->with(array('attachment'=>$withAttachment))
             ->with(array('response_document'=>$withResponseDocument))
@@ -33,7 +33,7 @@ class ExternalAuditDocumentController extends Controller
     }
 
     // GET /resource/:id/subresource/:subid/level3resource/:level3id
-    public function show($projectId, $eiapermitId, $id)
+    public function show($projectId, $externalauditId, $id)
     {
         $withTeamLeaderFunction = function ($query)
         {
@@ -51,7 +51,7 @@ class ExternalAuditDocumentController extends Controller
         };
 
         $document = Project::find($projectId)
-            ->eiapermits()->find($eiapermitId)
+            ->externalaudits()->find($externalauditId)
             ->documents()
             ->with(array('attachment'=>$withAttachment))
             ->with(array('response_document'=>$withResponseDocument))
@@ -61,7 +61,7 @@ class ExternalAuditDocumentController extends Controller
 
 
     // POST /resource/:id/subresource/:subid/level3resource
-    public function store($projectId, $eiapermitId)
+    public function store($projectId, $externalauditId)
     {
         if (!$this::canSave())
         {
@@ -73,19 +73,19 @@ class ExternalAuditDocumentController extends Controller
         $this->updateValuesInResource($document, $inputData);
         $document->created_by = Auth::user()->name;
         $project = Project::find($projectId);
-        $project->eiapermits()->find($eiapermitId)->documents()->save($document);
-        return $this->show($project->id, $eiapermitId, $document->id);
+        $project->externalaudits()->find($externalauditId)->documents()->save($document);
+        return $this->show($project->id, $externalauditId, $document->id);
     }
 
     // PUT/PATCH /resource/:id/subresource/:subid/level3resource/:level3id
-    public function update($projectId, $eiapermitId, $id)
+    public function update($projectId, $externalauditId, $id)
     {
         if (!$this::canSave())
         {
             return $this::notAuthorized();
         }
 
-        $document = Project::find($projectId)->eiapermits()->find($eiapermitId)->documents()->find($id);
+        $document = Project::find($projectId)->externalaudits()->find($externalauditId)->documents()->find($id);
         if (!$document)
         {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
@@ -94,18 +94,18 @@ class ExternalAuditDocumentController extends Controller
         $inputData = Input::all();
         $this->updateValuesInResource($document, $inputData);
         $document->save();
-        return $this->show($projectId, $eiapermitId, $id);
+        return $this->show($projectId, $externalauditId, $id);
     }
 
     // DELETE /resource/:id/subresource/:subid/level3resource/:level3id
-    public function destroy($projectId, $eiapermitId, $id)
+    public function destroy($projectId, $externalauditId, $id)
     {
         if (!$this::canSave())
         {
             return $this::notAuthorized();
         }
 
-        $document = Project::find($projectId)->eiapermits()->find($eiapermitId)->documents()->find($id);
+        $document = Project::find($projectId)->externalaudits()->find($externalauditId)->documents()->find($id);
         $document->delete();
         return Response::json(array('is_deleted' => true), 200);
     }

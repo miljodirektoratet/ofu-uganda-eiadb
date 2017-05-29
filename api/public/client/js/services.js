@@ -59,6 +59,30 @@ services.factory('Hearing', ['$resource', function ($resource)
         });
 }]);
 
+services.factory('ExternalAudit', ['$resource', function ($resource)
+{
+    return $resource('/api/v1/project/:projectId/externalaudit/:externalauditId', {externalauditId: '@id'},
+        {
+            'update': {method: 'PUT', isArray: false}
+        });
+}]);
+
+services.factory('DocumentEA', ['$resource', function ($resource)
+{
+    return $resource('/api/v1/project/:projectId/externalaudit/:externalauditId/document/:documentId', {documentId: '@id'},
+        {
+            'update': {method: 'PUT', isArray: false}
+        });
+}]);
+
+services.factory('HearingEA', ['$resource', function ($resource)
+{
+    return $resource('/api/v1/project/:projectId/externalaudit/:externalauditId/document/:documentId/hearing/:hearingId', {hearingId: '@id'},
+        {
+            'update': {method: 'PUT', isArray: false}
+        });
+}]);
+
 services.factory('AuditInspection', ['$resource', function ($resource)
 {
     return $resource('/api/v1/project/:projectId/auditinspection/:auditinspectionId', {auditinspectionId: '@id'},

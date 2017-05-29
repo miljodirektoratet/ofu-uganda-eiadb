@@ -7,10 +7,10 @@
                     <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}">External audit</a>
                 </li>
                 <li ng-click="preventClickIfDisabled(isDocumentsDisabled(routeParams.externalauditId), $event)" ng-class="{active: eatab==ExternalAuditsTabEnum.Documents, disabled: isDocumentsDisabled(routeParams.externalauditId) }">
-                    <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}/documents/{{routeParams.documentId}}">Documents{{isDocumentsDisabled(routeParams.externalauditId) ? "" : " (" + data.documents.length + ")"}}</a>
+                    <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}/documents/{{routeParams.documentId}}">Documents{{isDocumentsDisabled(routeParams.externalauditId) ? "" : " (" + data.documents_ea.length + ")"}}</a>
                 </li>
                 <li ng-click="preventClickIfDisabled(isHearingsDisabled(routeParams.documentId), $event)" ng-class="{active: eatab==ExternalAuditsTabEnum.Hearings, disabled: isHearingsDisabled(routeParams.documentId)}">
-                    <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}/documents/{{routeParams.documentId}}/hearings">Hearings{{isHearingsDisabled(routeParams.documentId) ? "" : " (" + data.hearings.length + ")"}}</a>
+                    <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}/documents/{{routeParams.documentId}}/hearings">Hearings{{isHearingsDisabled(routeParams.documentId) ? "" : " (" + data.hearings_ea.length + ")"}}</a>
                 </li>
             </ul>
         </div>
