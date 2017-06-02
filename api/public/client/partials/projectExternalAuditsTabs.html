@@ -9,9 +9,6 @@
                 <li ng-click="preventClickIfDisabled(isDocumentsDisabled(routeParams.externalauditId), $event)" ng-class="{active: eatab==ExternalAuditsTabEnum.Documents, disabled: isDocumentsDisabled(routeParams.externalauditId) }">
                     <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}/documents/{{routeParams.documentId}}">Documents{{isDocumentsDisabled(routeParams.externalauditId) ? "" : " (" + data.documents_ea.length + ")"}}</a>
                 </li>
-                <li ng-click="preventClickIfDisabled(isHearingsDisabled(routeParams.documentId), $event)" ng-class="{active: eatab==ExternalAuditsTabEnum.Hearings, disabled: isHearingsDisabled(routeParams.documentId)}">
-                    <a ng-href="#/projects/{{routeParams.projectId}}/externalaudits/{{routeParams.externalauditId}}/documents/{{routeParams.documentId}}/hearings">Hearings{{isHearingsDisabled(routeParams.documentId) ? "" : " (" + data.hearings_ea.length + ")"}}</a>
-                </li>
             </ul>
         </div>
     </div>
@@ -21,9 +18,6 @@
     </div>
     <div ng-if="eatab==ExternalAuditsTabEnum.Documents">
         <div ng-controller="ExternalAuditsDocumentsController" ng-include="'partials/projectExternalAuditsDocuments.html'"></div>
-    </div>
-    <div ng-if="eatab==ExternalAuditsTabEnum.Hearings">
-        <div ng-controller="ExternalAuditsHearingsController" ng-include="'partials/projectExternalAuditsHearings.html'"></div>
     </div>
 
 </div>

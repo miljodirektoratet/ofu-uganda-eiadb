@@ -38,7 +38,7 @@ class ExternalAuditController extends Controller
             ->with(array('user' => $withUserFunction))
             ->with(array('teamleader' => $withTeamLeaderFunction))
             ->with(array('response_document'=>$withResponseDocument))
-            ->get(array('id', 'status', 'teamleader_id', 'user_id', 'date_inspection', 'file_metadata_response_id'));
+            ->get(array('id', 'status', 'teamleader_id', 'user_id', 'date_inspection', 'file_metadata_response_id', 'type'));
 
         return Response::json($rows, 200);
     }

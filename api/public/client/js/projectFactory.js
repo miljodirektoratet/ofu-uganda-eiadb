@@ -1,7 +1,7 @@
 'use strict';
 
-services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Hearing', 'ExternalAudit', 'DocumentEA', 'HearingEA', 'AuditInspection', 'Valuelists', 'UserInfo',
-    function ($q, $filter, Project, Organisation, EiaPermit, Document, Hearing, ExternalAudit, DocumentEA, HearingEA, AuditInspection, Valuelists, UserInfo)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Hearing', 'ExternalAudit', 'DocumentEA', 'AuditInspection', 'Valuelists', 'UserInfo',
+    function ($q, $filter, Project, Organisation, EiaPermit, Document, Hearing, ExternalAudit, DocumentEA, AuditInspection, Valuelists, UserInfo)
     {
         var factory = {};
         factory.project = {};
@@ -18,8 +18,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.externalaudit = {};
         factory.documents_ea = [];
         factory.document_ea = {};
-        factory.hearings_ea = [];
-        factory.hearing_ea = {};
 
         factory.auditsinspections = [];
         factory.auditinspection = {};
@@ -37,9 +35,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 externalaudits: false,
                 externalaudit: false,
                 documents_ea: false,
-                document_ea: false,
-                hearings_ea: false,
-                hearing_ea: false
+                document_ea: false
             };
 
 
@@ -202,10 +198,10 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 if (hits.length == 1)
                 {
                     factory.externalaudit = hits[0];
-                    factory.externalaudit.$get(_.omit(params, ['documentId', 'hearingId']), function (ea)
+                    factory.externalaudit.$get(_.omit(params, ['documentId']), function (ea)
                     {
                         // params contains documentId, so we can't user params directly.
-                        factory.documents_ea = DocumentEA.query(_.omit(params, ['documentId', 'hearingId']), function (ds)
+                        factory.documents_ea = DocumentEA.query(_.omit(params, ['documentId']), function (ds)
                         {
                             deferredDocuments.resolve(ds);
                         });
@@ -225,7 +221,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.retrieveDocumentEA = function (params)
         {
             var deferredDocument = $q.defer();
-            var deferredHearings = $q.defer();
 
             if (factory.document.id != params.documentId)
             {
@@ -237,11 +232,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
 
                     factory.document_ea.$get(_.omit(params, ['hearingId']), function (d)
                     {
-                        factory.hearings_ea = HearingEA.query(_.omit(params, ['hearingId']), function (hs)
-                        {
-                            deferredHearings.resolve(hs);
-                        });
-
                         deferredDocument.resolve(d);
                     });
                 }
@@ -249,33 +239,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             else
             {
                 deferredDocument.resolve(factory.document_ea);
-                deferredHearings.resolve(factory.hearings_ea);
             }
-            return [deferredDocument.promise, deferredHearings.promise];
-        };
-
-        factory.retrieveHearingEA = function (params)
-        {
-            var deferredHearing = $q.defer();
-
-            if (factory.hearing_ea.id != params.hearingId)
-            {
-                factory.emptyHearingEA();
-                var hits = $filter('filter')(factory.hearings_ea, {'id': params.hearingId});
-                if (hits.length == 1)
-                {
-                    factory.hearing_ea = hits[0];
-                    factory.hearing_ea.$get(params, function (h)
-                    {
-                        deferredHearing.resolve(h);
-                    });
-                }
-            }
-            else
-            {
-                deferredHearing.resolve(factory.hearing_ea);
-            }
-            return [deferredHearing.promise];
+            return [deferredDocument.promise];
         };
 
         factory.retrieveAuditInspection = function (params)
@@ -425,13 +390,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.emptyDocumentEA = function ()
         {
             factory.document_ea = {};
-            factory.hearings_ea = [];
-            factory.emptyHearingEA();
-        };
-
-        factory.emptyHearingEA = function ()
-        {
-            factory.hearing_ea = {};
         };
 
         factory.createNewProject = function (o)
@@ -578,28 +536,17 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             factory.documents_ea = [];
         };
 
-        factory.createNewDocumentEA = function (ep)
+        factory.createNewDocumentEA = function (ea)
         {
             var dData =
                 {
-                    external_audit_id: ep.id,
+                    external_audit_id: ea.id,
                     director_copy_no: 1,
                     is_new: true
                 };
-            factory.document_ea = new Document(dData);
+            console.log(dData);
+            factory.document_ea = new DocumentEA(dData);
             factory.documents_ea.unshift(factory.document_ea);
-            factory.hearings_ea = [];
-        };
-
-        factory.createNewHearingEA = function (d)
-        {
-            var hData =
-                {
-                    document_id: d.id,
-                    is_new: true
-                };
-            factory.hearing_ea = new Hearing(hData);
-            factory.hearings_ea.unshift(factory.hearing_ea);
         };
 
         factory.deleteExternalAudit = function (params)
@@ -640,32 +587,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             {
                 var index = _.findIndex(factory.documents_ea, {'id': factory.document_ea.id});
                 factory.document_ea.$delete(params, function ()
-                {
-                    onDelete(index);
-                    deferred.resolve();
-                });
-            }
-
-            return deferred.promise;
-        };
-
-        factory.deleteHearingEA = function (params)
-        {
-            var deferred = $q.defer();
-
-            var onDelete = function (index)
-            {
-                factory.hearings_ea.splice(index, 1);
-                factory.hearing_ea = {};
-            };
-            if (factory.hearing_ea.is_new)
-            {
-                onDelete(0);
-            }
-            else
-            {
-                var index = _.findIndex(factory.hearings_ea, {'id': factory.hearing_ea.id});
-                factory.hearing_ea.$delete(params, function ()
                 {
                     onDelete(index);
                     deferred.resolve();

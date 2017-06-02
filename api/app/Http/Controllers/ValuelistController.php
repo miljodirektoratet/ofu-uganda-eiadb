@@ -41,6 +41,7 @@ class ValuelistController extends Controller
 
         $valuelists["audit_inspection_reason"] = $this->audit_inspection_reason();
         $valuelists["project_risk_level"] = $this->project_risk_level();
+        $valuelists["external_audit_type"] = $this->external_audit_type();
 
 
         return Response::json($valuelists, 200);
@@ -270,6 +271,11 @@ class ValuelistController extends Controller
     private function project_risk_level()
     {
         return $this->getCodesFromDrowdownName("project_risk_level");
+    }
+
+    private function external_audit_type()
+    {
+        return $this->getCodesFromDrowdownName("external_audit_type");
     }
 
     private function getCodesFromArray($codeIds)

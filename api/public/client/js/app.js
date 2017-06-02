@@ -39,10 +39,10 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/projects/:projectId/eiaspermits/:eiapermitId/documents/:documentId/hearings/:hearingId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/externalaudits', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/externalaudits/:externalauditId', projectTabsOptions);
-        $routeProvider.when('/projects/:projectId/externalaudits/:externalaudit/documents', projectTabsOptions);
-        $routeProvider.when('/projects/:projectId/externalaudits/:externalaudit/documents/:documentId', projectTabsOptions);
-        $routeProvider.when('/projects/:projectId/externalaudits/:externalaudit/documents/:documentId/hearings', projectTabsOptions);
-        $routeProvider.when('/projects/:projectId/externalaudits/:externalaudit/documents/:documentId/hearings/:hearingId', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits/:externalauditId/documents', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits/:externalauditId/documents/:documentId', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits/:externalauditId/documents/:documentId/hearings', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/externalaudits/:externalauditId/documents/:documentId/hearings/:hearingId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/auditsinspections', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/auditsinspections/:auditinspectionId', projectTabsOptions);
 

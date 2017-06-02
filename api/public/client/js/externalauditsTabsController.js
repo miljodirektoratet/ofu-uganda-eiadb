@@ -96,16 +96,17 @@ controllers.controller('ExternalAuditsTabsController', ['$scope', '$location', '
 
     scope.updateStatus = function (ea)
     {
-        var updated = updateExternalAuditStatus(ea, scope.data.project2.externalaudit.documents);
-        // console.log(updated, scope.data.documents);
-        if (updated)
-        {
-            if (scope.parts.externalaudit.form)
-            {
-                scope.parts.externalaudit.form.$setDirty();
-            }
-        }
-        return updated;
+        // Should we use status to something?
+        // var updated = updateExternalAuditStatus(ea, scope.data.documents_ea);
+        // // console.log(updated, scope.data.documents_ea);
+        // if (updated)
+        // {
+        //     if (scope.parts.externalaudit.form)
+        //     {
+        //         scope.parts.externalaudit.form.$setDirty();
+        //     }
+        // }
+        // return updated;
     };
 
     scope.loadExternalAuditWithDocuments = function()
@@ -126,7 +127,7 @@ controllers.controller('ExternalAuditsTabsController', ['$scope', '$location', '
 
     scope.parts.externalaudits.state = SavingStateEnum.Loading;
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
-    promises[2].then(function (eas)
+    promises[5].then(function (eas)
     {
         scope.parts.externalaudits.state = SavingStateEnum.Loaded;
 

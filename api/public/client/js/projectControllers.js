@@ -105,6 +105,7 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
             {
                 params = _.omit(params, 'auditinspectionId');
                 params = _.omit(params, 'eiapermitId');
+                params = _.omit(params, 'externalauditId');
             }
 
             ProjectFactory.save(params, resource).then
