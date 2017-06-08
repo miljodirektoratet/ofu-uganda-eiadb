@@ -40,7 +40,7 @@ class EiaPermitSearchController extends Controller
         $criteriaDefinitions["search"] = ["ep.certificate_no", "doc.title"];
         $criteriaDefinitions["exact"] = ["ep.id", "doc.type"];
         $criteriaDefinitions["multiple_text"] = [];
-        $criteriaDefinitions["multiple"] = ["ep.status"];
+        $criteriaDefinitions["multiple"] = ["ep.status", "c.id"];
         $criteriaDefinitions["alias"] = ["personnel.user_id", "o.name", "p.title", "doc.code"];
         $criteriaDefinitions["special"] = ["doc.year", "ep.date_submission_from", "ep.date_submission_to"];
 
