@@ -8,7 +8,6 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Control number</th>
                                 <th>Status</th>
                                 <th>Type</th>
@@ -89,7 +88,6 @@
                             </thead>
                             <tbody class="edit-row" ng-repeat="ai in data.auditsinspections">
                             <tr class="master" ng-class="{selected: routeParams.auditinspectionId==ai.id, notvalid: routeParams.auditinspectionId==ai.id && parts.auditinspection.form.$invalid}">
-                                <td>{{ai.id}}</td>
                                 <td>{{ai.code}}</td>
                                 <td>{{data.getCodeFromValuelist('auditinspectionstatus', ai.status)}}</td>
                                 <td>{{data.getCodeFromValuelist('auditinspectiontype', ai.type)}}</td>
