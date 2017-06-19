@@ -25,9 +25,15 @@ class AuditInspectionController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
+        $withFileMetadata = function ($query)
+        {
+            $query->select('id', 'filename');
+        };
+
         $auditinspections = Project::find($projectId)
             ->auditinspections()
-            ->get(array('id', 'status', 'year', 'number', 'code', 'reason'));
+            ->with(array('actionTakenLetter' => $withFileMetadata))
+            ->get(array('id', 'status', 'year', 'number', 'code', 'reason', 'lead_officer', 'type', 'date_carried_out', 'date_action_taken'));
         return Response::json($auditinspections, 200);
     }
 

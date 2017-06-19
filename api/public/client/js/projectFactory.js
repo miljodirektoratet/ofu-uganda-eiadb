@@ -21,6 +21,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
 
         factory.auditsinspections = [];
         factory.auditinspection = {};
+
         factory.valuelists = Valuelists;
         factory.userinfo = UserInfo;
 
@@ -46,7 +47,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var deferredEiasPermits = $q.defer();
             var deferredExternalAudits = $q.defer();
             var deferredAuditsInspections = $q.defer();
-            var deferredAuditInspection = $q.defer();
+            var deferredUNUSEDpromise = $q.defer();
 
             if (factory.project.id != params.projectId)
             {
@@ -73,10 +74,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
 
                 factory.auditsinspections = AuditInspection.query(simpleParams, function (ais)
                 {
-                    factory.retrieveAuditInspection(params).then(function (ai)
-                    {
-                        deferredAuditInspection.resolve(ai);
-                    });
                     deferredAuditsInspections.resolve(ais);
                 });
             }
@@ -86,16 +83,11 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 deferredOrganisation.resolve(factory.organisation);
                 deferredEiasPermits.resolve(factory.eiaspermits);
                 deferredExternalAudits.resolve(factory.externalaudits);
-
-                factory.retrieveAuditInspection(params).then(function (ai)
-                {
-                    deferredAuditInspection.resolve(ai);
-                });
                 deferredAuditsInspections.resolve(factory.auditsinspections);
             }
             return [deferredProject.promise, deferredOrganisation.promise,
                 deferredEiasPermits.promise,
-                deferredAuditsInspections.promise, deferredAuditInspection.promise, deferredExternalAudits.promise];
+                deferredAuditsInspections.promise, deferredUNUSEDpromise.promise, deferredExternalAudits.promise];
         };
 
         factory.retrieveEiaPermit = function (params)
@@ -265,7 +257,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
              factory.auditinspection = factory.auditsinspections[0];
              }
              }*/
-            return deferred.promise;
+            return [deferred.promise];
         };
 
         factory.getProjectSummary = function (currentTab)
@@ -280,29 +272,6 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             //    return p.title + " (Performance: " + factory.getCodeFromValuelist("grade", p.grade) + ")";
             //}
             return p.title;
-        };
-
-        factory.getEiaPermitSummary = function (ep)
-        {
-            var ep = ep || factory.eiapermit;
-            if (_.isEmpty(ep))
-            {
-                return "";
-            }
-            return "Status for id " + ep.id + ": " + factory.getCodeFromValuelist("eiastatus", ep.status);
-        };
-
-        factory.getAuditInspectionSummary = function (ai)
-        {
-            var ai = ai || factory.auditinspection;
-            if (_.isEmpty(ai))
-            {
-                return "";
-            }
-            // Example: "Number 2015.033 (Baseline inspection): Created".
-            var reason = factory.getCodeFromValuelist("audit_inspection_reason", ai.reason);
-            var status = factory.getCodeFromValuelist("auditinspectionstatus", ai.status);
-            return "Number " + ai.code + " (" + reason + "): " + status;
         };
 
         factory.getCodeFromValuelist = function (valuelistName, id)

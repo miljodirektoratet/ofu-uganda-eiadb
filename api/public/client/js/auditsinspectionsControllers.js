@@ -6,10 +6,13 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 {
     scope.parts =
     {
+        auditsinspections: {
+            state: SavingStateEnum.None
+        },
         auditinspection: {
             form: null,
-            state: SavingStateEnum.Loading
-        }
+            state: SavingStateEnum.None
+        },
     };
     scope.newButton = {};
     scope.newButton.year = new Date().getFullYear();
@@ -17,6 +20,19 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     scope.fileUploadPattern = fileUploadPattern;
     scope.fileUploadNgfPattern = fileUploadNgfPattern;
     scope.fileUploadMaxSize = fileUploadMaxSize;
+
+    scope.shouldShowAuditInspection = function(ai)
+    {
+        if (scope.parts.auditinspection.state == SavingStateEnum.Loading)
+        {
+            return false;
+        }
+        if (scope.routeParams.auditinspectionId==ai.id)
+        {
+            return true;
+        }
+        return false;
+    };
 
     scope.criteriaMatchOfficer1 = function(currentId)
     {
@@ -124,7 +140,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     scope.deleteAuditInspection = function ()
     {
         ProjectFactory.deleteAuditInspection(scope.routeParams);
-        scope.goto("/projects/" + scope.data.project.id);
+        scope.goto("/projects/" + scope.data.project.id + "/auditsinspections/");
     };
 
     scope.auth.canSave = function (field)
@@ -250,18 +266,28 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         scope.saveCurrentAuditInspection();
     };
 
+    scope.loadAuditInspection = function()
+    {
+        scope.parts.auditinspection.state = SavingStateEnum.Loading;
+
+        var promises = ProjectFactory.retrieveAuditInspection(scope.routeParams);
+        promises[0].then(function (ai)
+        {
+            scope.parts.auditinspection.state = SavingStateEnum.Loaded;
+        });
+    };
+
+    scope.parts.auditinspection.state = SavingStateEnum.Loading;
     var promises = ProjectFactory.retrieveProjectData(scope.routeParams);
     promises[3].then(function (ais)
     {
-        if (ais.length > 0 && !scope.routeParams.auditinspectionId)
+        scope.parts.auditsinspections.state = SavingStateEnum.Loaded;
+
+        // Get auditinspection if we got an auditinspectionId.
+        if (!_.isUndefined(scope.routeParams.auditinspectionId))
         {
-            var ai = ais[0];
-            scope.goto("/projects/" + scope.data.project.id + "/auditsinspections/" + ai.id);
+            scope.loadAuditInspection();
         }
-    });
-    promises[4].then(function (ai)
-    {
-        scope.parts.auditinspection.state = SavingStateEnum.Loaded;
     });
 
 }]);
