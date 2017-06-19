@@ -9,12 +9,13 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Control number</th>
                                 <th>Status</th>
-                                <th>Lead officer</th>
                                 <th>Type</th>
+                                <th>Lead officer</th>
                                 <th>Date carried out</th>
                                 <th>Date of response</th>
-                                <th>File</th>
+                                <th>Activity report</th>
                                 <th>
                                     <div class="btn-group new-button pull-right" dropdown auto-close="disabled" is-open="newButton.isopen" ng-hide="!auth.canSave('new')">
                                         <button type="button" class="btn btn-xs btn-success pull-right" dropdown-toggle ng-disabled="routeParams.auditinspectionId" ng-hide="!auth.canSave('new')">
@@ -89,13 +90,14 @@
                             <tbody class="edit-row" ng-repeat="ai in data.auditsinspections">
                             <tr class="master" ng-class="{selected: routeParams.auditinspectionId==ai.id, notvalid: routeParams.auditinspectionId==ai.id && parts.auditinspection.form.$invalid}">
                                 <td>{{ai.id}}</td>
+                                <td>{{ai.code}}</td>
                                 <td>{{data.getCodeFromValuelist('auditinspectionstatus', ai.status)}}</td>
-                                <td>{{data.getCodeFromValuelist('officer_audit_inspection', ai.lead_officer)}}</td>
                                 <td>{{data.getCodeFromValuelist('auditinspectiontype', ai.type)}}</td>
+                                <td>{{data.getCodeFromValuelist('officer_audit_inspection', ai.lead_officer)}}</td>
                                 <td>{{ai.date_carried_out | date:'d MMM yyyy'}}</td>
                                 <td>{{ai.date_action_taken | date:'d MMM yyyy'}}</td>
                                 <td align="left">
-                                    <a ng-href="{{downloadFileUrl(ai.action_taken_letter.id)}}" ng-show="ai.action_taken_letter" ng-attr-alt="{{ai.action_taken_letter.filename}}" ng-attr-title="{{ai.action_taken_letter.filename}}">
+                                    <a ng-href="{{downloadFileUrl(ai.report_file.id)}}" ng-show="ai.report_file" ng-attr-alt="{{ai.report_file.filename}}" ng-attr-title="{{ai.report_file.filename}}">
                                         <span class="glyphicon glyphicon-file"></span>
                                     </a>
                                 </td>
