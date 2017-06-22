@@ -117,7 +117,7 @@
                                                 <div class="form-group">
                                                     <label for="document.type">Type of document</label>
                                                     <select ui-select2 ng-change="setDefaultDocumentConclusion();calculateDocumentCode();saveCurrentDocument(d);" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="d.type">
-                                                        <option ng-repeat="v in valuelists.documenttype" value="{{v.id}}">{{v.description2}}</option>
+                                                        <option ng-repeat="v in valuelists.documenttypeexternalaudits" value="{{v.id}}">{{v.description2}}</option>
                                                     </select>
                                                 </div>
                                             </div>

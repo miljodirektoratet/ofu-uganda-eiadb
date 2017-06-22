@@ -25,6 +25,7 @@ class ValuelistController extends Controller
         $valuelists["eiastatus"] = $this->eiastatus();
         $valuelists["auditinspectionstatus"] = $this->auditinspectionstatus();
         $valuelists["documenttype"] = $this->documenttype();
+        $valuelists["documenttypeexternalaudits"] = $this->documenttypeexternalaudits();
         $valuelists["district"] = $this->district();
         $valuelists["category"] = $this->category();
         $valuelists["teamleader"] = $this->teamleader();
@@ -106,9 +107,19 @@ class ValuelistController extends Controller
         return $this->getCodesFromDrowdownName("audit_inspection_type");
     }
 
+//    private function documenttype()
+//    {
+//        return $this->getCodesFromArray(array(8, 9, 10, 11, 12, 13));
+//    }
+
     private function documenttype()
     {
-        return $this->getCodesFromArray(array(8, 9, 10, 11, 12, 13));
+        return $this->getCodesFromDrowdownName("document_type");
+    }
+
+    private function documenttypeexternalaudits()
+    {
+        return $this->getCodesFromDrowdownName("document_type_ea");
     }
 
     private function documentconclusion()
