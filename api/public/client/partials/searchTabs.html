@@ -10,6 +10,9 @@
         <li ng-class="{active: tab==SearchTabEnum.AuditsInspections}">
             <a href="#/search/auditsinspections">Audit and Inspection</a>
         </li>
+        <li ng-class="{active: tab==SearchTabEnum.ExternalAudits}">
+            <a href="#/search/externalaudits">External audit</a>
+        </li>
     </ul>
 
 
@@ -21,6 +24,9 @@
     </div>
     <div ng-if="tab==SearchTabEnum.AuditsInspections">
         <div ng-controller="SearchAuditsInspectionsController" ng-include="'partials/searchAuditsInspections.html'"></div>
+    </div>
+    <div ng-if="tab==SearchTabEnum.ExternalAudits">
+        <div ng-controller="SearchExternalAuditsController" ng-include="'partials/searchExternalAudits.html'"></div>
     </div>
 
 </div>

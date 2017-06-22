@@ -22,6 +22,10 @@ controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$loca
         {
             return SearchTabEnum.AuditsInspections;
         }
+        if (_.contains(path, "externalaudits"))
+        {
+            return SearchTabEnum.ExternalAudits;
+        }
         return null;
     };
     scope.tab = getCurrentTab(location.path());
