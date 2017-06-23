@@ -130,7 +130,7 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
 
     scope.calculateDocumentCode = function ()
     {
-        var typeObject = _.find(scope.valuelists["documenttype"], {'id': parseInt(scope.data.document_ea.type)});
+        var typeObject = _.find(scope.valuelists["documenttypeexternalaudits"], {'id': parseInt(scope.data.document_ea.type)});
         var typeCode = typeObject ? typeObject.description1 : "";
         var number = scope.data.document_ea.number ? scope.data.document_ea.number : "";
         scope.data.document_ea.code = typeCode + number;
@@ -138,11 +138,10 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
 
     scope.setDefaultDocumentConclusion = function ()
     {
-        // 8 = Project Briefs
-        // 9 = TORs for EIA
+        // 11 = TORs for EA
         // 80 = Pending conclusion
         // 81 = Not relevant
-        if (_.indexOf(['8', '9'], scope.data.document_ea.type) >= 0)
+        if (_.indexOf(['11'], scope.data.document_ea.type) >= 0)
         {
             scope.data.document_ea.conclusion = 80;
         }
