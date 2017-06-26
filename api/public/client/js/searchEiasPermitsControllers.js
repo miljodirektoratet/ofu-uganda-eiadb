@@ -32,7 +32,7 @@ controllers.controller('SearchEiasPermitsController', ['$scope', '$routeParams',
     scope.gridOptions.columnDefs = [
         {name: 'eiapermit_id', displayName: 'EIA Id', type:'number', width: 80, cellTooltip: true, headerTooltip: true},
         {name: 'eiapermit_status', displayName: 'Status', cellTooltip: true, headerTooltip: true},
-        {name: 'eiapermit_officer_assigned', displayName: 'Officer assigned', cellTooltip: true, headerTooltip: true},
+        {name: 'eiapermit_officer_assigned', displayName: 'Team leader', cellTooltip: true, headerTooltip: true},
         {name: 'project_title', displayName: 'Project name', cellTooltip: true, headerTooltip: true},
         {name: 'eiapermit_certificate_no', displayName: 'Certificate No.', cellTooltip: true, headerTooltip: true}
     ];
