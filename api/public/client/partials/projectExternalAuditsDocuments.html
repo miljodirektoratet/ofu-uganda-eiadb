@@ -15,7 +15,7 @@
                                 <th>Date sent to Director</th>
                                 <th>Date sent to team leader from dep.secretary</th>
                                 <th>Date sent to the officer</th>
-                                <th>Conclusion (PB/Tor accepted)</th>
+                                <th>Conclusion (Tor)</th>
                                 <th>File</th>
                                 <th>
                                     <button type="button" class="btn btn-xs btn-success pull-right" ng-disabled="routeParams.documentId" ng-click="newDocument()" ng-hide="!auth.canSave('new')">New</button>
@@ -234,7 +234,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="document.conclusion">Conclusion (Tor accepted)</label>
+                                                    <label for="document.conclusion">Conclusion (Tor)</label>
                                                     <select ui-select2 ng-change="saveCurrentDocument(d);" ng-disabled="!auth.canSave('document.conclusion') || isDisabledBasedOnRule('document.conclusion')" id="document.conclusion" class="form-control input-sm" ng-model="d.conclusion">
                                                         <option ng-repeat="v in valuelists.documentconclusion" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
