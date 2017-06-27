@@ -65,7 +65,7 @@
                                                     <label for="hearing.district_id">District</label>
                                                     <select ui-select2
                                                             ng-change="saveCurrentHearing(h)"
-                                                            ng-disabled="!auth.canSave('hearing.district_id')" id="hearing.district_id"
+                                                            ng-disabled="!auth.canSave('hearing.district_id') || isDisabledBasedOnRule('hearing.district_id')" id="hearing.district_id"
                                                             class="form-control input-sm"
                                                             ng-model="h.district_id">
                                                         <option ng-repeat="v in valuelists.district" value="{{v.id}}">

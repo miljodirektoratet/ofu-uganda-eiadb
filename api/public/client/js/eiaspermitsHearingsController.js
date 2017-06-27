@@ -70,6 +70,24 @@ controllers.controller('EiasPermitsHearingsController', ['$scope', 'ProjectFacto
         scope.saveCurrentHearing(scope.data.hearing);
     };
 
+    scope.isDisabledBasedOnRule = function (field)
+    {
+        // 81 = Not relevant
+        switch (field)
+        {
+            // Lead agency" is "District local government" or "Municipality".
+            case "hearing.district_id":
+                if(scope.data.hearing.lead_agency != 7 && scope.data.hearing.lead_agency != 8)
+                {
+                    scope.data.hearing.district_id = null;
+                    return true;
+                }
+                return false;
+            default:
+                return false;
+        }
+    };
+
     scope.auth.canSave = function (field)
     {
         if (scope.data.hearing.is_new && scope.parts.hearing.state == SavingStateEnum.SavingStarted)
