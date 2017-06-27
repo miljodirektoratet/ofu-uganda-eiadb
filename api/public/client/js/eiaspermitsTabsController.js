@@ -55,6 +55,51 @@ controllers.controller('EiasPermitsTabsController', ['$scope', '$location', 'Pro
         }
     };
 
+    scope.stopPropagation = function($event)
+    {
+        $event.stopPropagation();
+    };
+
+    scope.openEiapermit = function(id, $event)
+    {
+        if (scope.routeParams.eiapermitId == id)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/eiaspermits");
+        }
+        else if (!scope.routeParams.eiapermitId)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + id);
+        }
+    };
+
+    scope.openEiapermitDocument = function(id, $event)
+    {
+        if (scope.routeParams.documentId == id)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + scope.data.eiapermit.id + "/documents");
+
+        }
+        else if (!scope.routeParams.documentId)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + scope.data.eiapermit.id + "/documents/" + id);
+        }
+    };
+
+    scope.openEiapermitDocumentHearing = function(id, $event)
+    {
+        if (scope.routeParams.hearingId == id)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + scope.data.eiapermit.id + "/documents/" + scope.data.document.id + "/hearings");
+
+        }
+        else if (!scope.routeParams.hearingId)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + scope.data.eiapermit.id + "/documents/" + scope.data.document.id + "/hearings/" + id);
+        }
+    };
+
+
+
     scope.isDocumentsDisabled = function(number)
     {
         if (scope.isDisabled(number))

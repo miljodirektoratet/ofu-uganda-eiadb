@@ -20,7 +20,8 @@
                             </tr>
                             </thead>
                             <tbody class="edit-row" ng-repeat="h in data.hearings">
-                            <tr class="master" ng-class="{selected: routeParams.hearingId==h.id, notvalid: routeParams.hearingId==h.id && parts.hearing.form.$invalid}">
+                            <tr class="master" ng-class="{selected: routeParams.hearingId==h.id, notvalid: routeParams.hearingId==h.id && parts.hearing.form.$invalid}"
+                                ng-click="openEiapermitDocumentHearing(h.id, $event)">
                                 <td>{{h.id}}</td>
                                 <td>{{data.getCodeFromValuelist('leadagency', h.lead_agency)}}</td>
                                 <td>{{h.date_dispatched | date:'d MMM yyyy'}}</td>
@@ -28,7 +29,7 @@
                                 <td>{{h.date_received | date:'d MMM yyyy'}}</td>
 
                                 <td align="left">
-                                    <a ng-href="{{downloadFileUrl(h.file_metadata_id)}}" ng-show="h.attachment" ng-attr-alt="{{h.attachment.filename}}" ng-attr-title="{{h.attachment.filename}}">
+                                    <a ng-href="{{downloadFileUrl(h.file_metadata_id)}}" ng-click="stopPropagation($event)" ng-show="h.attachment" ng-attr-alt="{{h.attachment.filename}}" ng-attr-title="{{h.attachment.filename}}">
                                         <span class="glyphicon glyphicon-file"></span>
                                     </a>
                                 </td>

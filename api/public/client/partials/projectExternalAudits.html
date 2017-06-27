@@ -20,14 +20,15 @@
                             </tr>
                             </thead>
                             <tbody class="edit-row" ng-repeat="ea in data.externalaudits">
-                            <tr class="master" ng-class="{selected: routeParams.externalauditId==ea.id, notvalid: routeParams.externalauditId==ea.id && parts.externalaudit.form.$invalid}">
+                            <tr class="master" ng-class="{selected: routeParams.externalauditId==ea.id, notvalid: routeParams.externalauditId==ea.id && parts.externalaudit.form.$invalid}"
+                                ng-click="openExternalaudit(ea.id, $event)">
                                 <td>{{ea.id}}</td>
                                 <td>{{data.getCodeFromValuelist('eiastatus', ea.status)}}</td>
                                 <td>{{data.getCodeFromValuelist('team_leader_eia_permit', ea.user_id)}}</td>
                                 <td>{{data.getCodeFromValuelist('external_audit_type', ea.type)}}</td>
                                 <td>{{ea.date_inspection | date:'d MMM yyyy'}}</td>
                                 <td align="left">
-                                    <a ng-href="{{downloadFileUrl(ea.response_document.id)}}" ng-show="ea.response_document" ng-attr-alt="{{ea.response_document.filename}}" ng-attr-title="{{ea.response_document.filename}}">
+                                    <a ng-href="{{downloadFileUrl(ea.response_document.id)}}" ng-click="stopPropagation($event)" ng-show="ea.response_document" ng-attr-alt="{{ea.response_document.filename}}" ng-attr-title="{{ea.response_document.filename}}">
                                         <span class="glyphicon glyphicon-file"></span>
                                     </a>
                                 </td>

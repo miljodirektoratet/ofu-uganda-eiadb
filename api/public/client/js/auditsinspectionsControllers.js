@@ -111,6 +111,24 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
         }
     };
 
+    scope.openAuditInspection = function(id, $event)
+    {
+        if (scope.routeParams.auditinspectionId == id)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/auditsinspections");
+
+        }
+        else if (!scope.routeParams.auditinspectionId)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/auditsinspections/" + id);
+        }
+    };
+
+    scope.stopPropagation = function($event)
+    {
+        $event.stopPropagation();
+    };
+
     scope.saveCurrentAuditInspection = function ()
     {
         var auditinspection = scope.data.auditinspection;

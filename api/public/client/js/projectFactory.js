@@ -513,7 +513,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                     director_copy_no: 1,
                     is_new: true
                 };
-            console.log(dData);
+            // console.log(dData);
             factory.document_ea = new DocumentEA(dData);
             factory.documents_ea.unshift(factory.document_ea);
         };

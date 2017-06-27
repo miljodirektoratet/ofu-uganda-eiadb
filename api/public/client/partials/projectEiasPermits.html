@@ -21,7 +21,8 @@
                             </tr>
                             </thead>
                             <tbody class="edit-row" ng-repeat="ep in data.eiaspermits">
-                            <tr class="master" ng-class="{selected: routeParams.eiapermitId==ep.id, notvalid: routeParams.eiapermitId==ep.id && parts.eiapermit.form.$invalid}">
+                            <tr class="master" ng-class="{selected: routeParams.eiapermitId==ep.id, notvalid: routeParams.eiapermitId==ep.id && parts.eiapermit.form.$invalid}"
+                                ng-click="openEiapermit(ep.id, $event)">
                                 <td>{{ep.id}}</td>
                                 <td>{{data.getCodeFromValuelist('eiastatus', ep.status)}}</td>
                                 <td>{{data.getCodeFromValuelist('team_leader_eia_permit', ep.user_id)}}</td>
@@ -29,7 +30,7 @@
                                 <td>{{ep.date_certificate | date:'d MMM yyyy'}}</td>
                                 <td>{{ep.certificate_no}}</td>
                                 <td align="left">
-                                    <a ng-href="{{downloadFileUrl(ep.certificate.id)}}" ng-show="ep.certificate" ng-attr-alt="{{ep.certificate.filename}}" ng-attr-title="{{ep.certificate.filename}}">
+                                    <a ng-href="{{downloadFileUrl(ep.certificate.id)}}" ng-click="stopPropagation($event)" ng-show="ep.certificate" ng-attr-alt="{{ep.certificate.filename}}" ng-attr-title="{{ep.certificate.filename}}">
                                         <span class="glyphicon glyphicon-file"></span>
                                     </a>
                                 </td>

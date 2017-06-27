@@ -36,10 +36,15 @@
     color: #808080;
 }
 
-.practitioners .practitioner .master,
+.practitioners .practitioner .master {
+    background-color: #CCCCCC;
+    font-size: 13px;
+
+}
 .edit-container .edit-row .master {
     background-color: #CCCCCC;
     font-size: 13px;
+    cursor: pointer;
 }
 
 .edit-container .edit-row .master .btn-download-file {

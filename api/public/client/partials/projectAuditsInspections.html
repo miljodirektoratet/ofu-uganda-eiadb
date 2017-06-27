@@ -87,7 +87,8 @@
                             </tr>
                             </thead>
                             <tbody class="edit-row" ng-repeat="ai in data.auditsinspections">
-                            <tr class="master" ng-class="{selected: routeParams.auditinspectionId==ai.id, notvalid: routeParams.auditinspectionId==ai.id && parts.auditinspection.form.$invalid}">
+                            <tr class="master" ng-class="{selected: routeParams.auditinspectionId==ai.id, notvalid: routeParams.auditinspectionId==ai.id && parts.auditinspection.form.$invalid}"
+                                ng-click="openAuditInspection(ai.id, $event)">
                                 <td>{{ai.code}}</td>
                                 <td>{{data.getCodeFromValuelist('auditinspectionstatus', ai.status)}}</td>
                                 <td>{{data.getCodeFromValuelist('auditinspectiontype', ai.type)}}</td>
@@ -95,7 +96,7 @@
                                 <td>{{ai.date_carried_out | date:'d MMM yyyy'}}</td>
                                 <td>{{ai.date_action_taken | date:'d MMM yyyy'}}</td>
                                 <td align="left">
-                                    <a ng-href="{{downloadFileUrl(ai.report_file.id)}}" ng-show="ai.report_file" ng-attr-alt="{{ai.report_file.filename}}" ng-attr-title="{{ai.report_file.filename}}">
+                                    <a ng-href="{{downloadFileUrl(ai.report_file.id)}}" ng-click="stopPropagation($event)" ng-show="ai.report_file" ng-attr-alt="{{ai.report_file.filename}}" ng-attr-title="{{ai.report_file.filename}}">
                                         <span class="glyphicon glyphicon-file"></span>
                                     </a>
                                 </td>

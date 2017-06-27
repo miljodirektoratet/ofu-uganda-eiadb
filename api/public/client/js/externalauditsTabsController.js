@@ -47,12 +47,43 @@ controllers.controller('ExternalAuditsTabsController', ['$scope', '$location', '
     };
     scope.eatab = getCurrentTab(location.path());
 
+    scope.openExternalaudit = function(id, $event)
+    {
+        if (scope.routeParams.externalauditId == id)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/externalaudits");
+
+        }
+        else if (!scope.routeParams.externalauditId)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/externalaudits/" + id);
+        }
+    };
+
+    scope.openExternalauditDocument = function(id, $event)
+    {
+        if (scope.routeParams.documentId == id)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/externalaudits/" + scope.data.externalaudit.id + "/documents");
+
+        }
+        else if (!scope.routeParams.documentId)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/externalaudits/" + scope.data.externalaudit.id + "/documents/" + id);
+        }
+    };
+
     scope.preventClickIfDisabled = function(isDisabled, $event)
     {
         if (isDisabled)
         {
             $event.preventDefault();
         }
+    };
+
+    scope.stopPropagation = function($event)
+    {
+        $event.stopPropagation();
     };
 
     scope.isDocumentsDisabled = function(number)
