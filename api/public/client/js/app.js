@@ -110,14 +110,14 @@ var SavingStateEnum =
 var ProjectTabEnum =
 {
     Project: 'Project',
-    EiasPermits: 'Eias and Permits',
+    EiasPermits: 'EIAS',
     AuditsInspections: 'Audits and Inspections',
     ExternalAudits: 'External audits'
 };
 
 var EiasPermitsTabEnum =
 {
-    EiaPermit: 'Eia and Permit',
+    EiaPermit: 'EIA',
     Documents: 'Documents',
     Hearings: 'Hearings'
 };
@@ -132,7 +132,7 @@ var ExternalAuditsTabEnum =
 var SearchTabEnum =
 {
     Projects: 'Projects',
-    EiasPermits: 'Eias and Permits',
+    EiasPermits: 'EIAS',
     AuditsInspections: 'Audits and Inspections',
     ExternalAudits: 'External audits'
 };
@@ -140,7 +140,7 @@ var SearchTabEnum =
 var StatisticsTabEnum =
 {
     Projects: 'Projects',
-    EiasPermits: 'Eias and Permits',
+    EiasPermits: 'EIAS',
     AuditsInspections: 'Audits and Inspections'
 };
 

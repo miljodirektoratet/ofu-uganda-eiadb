@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <ul class="nav nav-tabs" role="tablist">
                 <li ng-class="{active: eptab==EiasPermitsTabEnum.EiaPermit}">
-                    <a ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}">EIA and Permit</a>
+                    <a ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}">EIA</a>
                 </li>
                 <li ng-click="preventClickIfDisabled(isDocumentsDisabled(routeParams.eiapermitId), $event)" ng-class="{active: eptab==EiasPermitsTabEnum.Documents, disabled: isDocumentsDisabled(routeParams.eiapermitId) }">
                     <a ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}/documents/{{routeParams.documentId}}">Documents{{isDocumentsDisabled(routeParams.eiapermitId) ? "" : " (" + data.documents.length + ")"}}</a>
