@@ -17,13 +17,15 @@ class GeneralStatisticsController extends Controller
         $countPractitioners = DB::table('practitioners')->whereNull('deleted_at')->count();
         $countEiasPermits = DB::table('eias_permits')->whereNull('deleted_at')->count();
         $countAuditsInspections = DB::table('audits_inspections')->whereNull('deleted_at')->count();
+        $countExternalAudits = DB::table('external_audits')->whereNull('deleted_at')->count();
 
         $dataCounts = [
             "projects" => $countProjects,
             "developers" => $countDevelopers,
             "practitioners" => $countPractitioners,
             "eiaspermits" => $countEiasPermits,
-            "auditsinspections" => $countAuditsInspections
+            "auditsinspections" => $countAuditsInspections,
+            "externalaudits" => $countExternalAudits
         ];
 
         $data["timestamp"] = Carbon::now()->toDateTimeString(); // Utc date. The rest is fixed in javascript.
