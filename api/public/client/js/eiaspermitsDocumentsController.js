@@ -196,6 +196,8 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
             case "document.conclusion":
             case "document.date_conclusion":
             case "document.remarks":
+            case "document.remarks_director":
+            case "document.remarks_team_leader":
                 return scope.userinfo.info.role_3;
             case "document.date_sent_from_dep":
                 return scope.userinfo.info.role_5;

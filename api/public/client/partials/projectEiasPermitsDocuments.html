@@ -134,15 +134,6 @@
                                                     <input type="text" ng-readonly="true" class="form-control input-sm" id="document.code" ng-model="d.code"/>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="document.sub_copy_no">No. of copies submitted</label>
-                                                    <input type="text" integer ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.sub_copy_no')" class="form-control input-sm" id="document.sub_copy_no" ng-model="d.sub_copy_no" ng-change="calculateNumberOfCopiesOfDocument()"/>
-                                                </div>
-                                            </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.date_next_appointment">Date of next appointment</label>
@@ -156,20 +147,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="document.consultent">Consulting team for PB & TOR</label>
-                                                    <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.consultent')" class="form-control input-sm" id="document.consultent" ng-model="d.consultent"/>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="document.coordinator_copy_no">No. of copies to team leader</label>
-                                                    <input type="text" integer ng-blur="saveCurrentDocument(d)" ng-readonly="true" class="form-control input-sm" id="document.coordinator_copy_no" ng-model="d.coordinator_copy_no"/>
+                                                    <label for="document.sub_copy_no">No. of copies submitted</label>
+                                                    <input type="text" integer ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.sub_copy_no')" class="form-control input-sm" id="document.sub_copy_no" ng-model="d.sub_copy_no" ng-change="calculateNumberOfCopiesOfDocument()"/>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div style="padding-top:15px;"><ng-pluralize count="d.director_copy_no" when="{'one': '1 copy', 'other': '{} copies'}"></ng-pluralize> to director,</div>
+                                                <div><ng-pluralize count="d.coordinator_copy_no" when="{'one': '1 copy', 'other': '{} copies'}"></ng-pluralize> to team leader</div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
@@ -185,15 +174,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="document.director_copy_no">No. of to copies Director</label>
-                                                    <input type="text" integer ng-blur="saveCurrentDocument(d)" ng-readonly="true" class="form-control input-sm" id="document.director_copy_no" ng-model="d.director_copy_no"/>
+                                                    <label for="document.consultent">Consulting team for PB & TOR</label>
+                                                    <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.consultent')" class="form-control input-sm" id="document.consultent" ng-model="d.consultent"/>
                                                 </div>
                                             </div>
+                                        </div>
+
+
+
+                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.date_sent_director">Date sent to Director</label>
@@ -207,6 +198,15 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label for="document.remarks_director">Remarks by Director</label>
+                                                    <textarea ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.remarks_director')" class="form-control input-sm" rows="1" id="document.remarks_director" ng-model="d.remarks_director"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.date_sent_from_dep">Date sent to team leader from dep.</label>
@@ -221,6 +221,15 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label for="document.remarks_team_leader">Remarks by team leader</label>
+                                                    <textarea ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.remarks_team_leader')" class="form-control input-sm" rows="1" id="document.remarks_team_leader" ng-model="d.remarks_team_leader"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.date_sent_officer">Date sent to the officer</label>
@@ -235,7 +244,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label for="document.remarks">Remarks by Reviewer</label>
+                                                    <textarea ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.remarks')" class="form-control input-sm" rows="1" id="document.remarks" ng-model="d.remarks"></textarea>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">
@@ -249,7 +263,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="document.date_sent_officer">Date of conclusion for PB & TOR</label>
+                                                    <label for="document.date_conclusion">Date of conclusion for PB & TOR</label>
                                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                                         <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.date_conclusion')" id="document.date_conclusion" class="form-control input-sm input-date" ng-model="d.date_conclusion" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
                                                         <span class="input-group-btn">
@@ -310,13 +324,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="document.remarks">Remarks</label>
-                                                    <textarea ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.remarks')" class="form-control input-sm" rows="2" id="document.remarks" ng-model="d.remarks"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
                                                         text="'Delete document'"
                                                         warning="'Do you really want to delete this record?'"
