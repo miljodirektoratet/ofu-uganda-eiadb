@@ -59,6 +59,14 @@ services.factory('Hearing', ['$resource', function ($resource)
         });
 }]);
 
+services.factory('PermitLicense', ['$resource', function ($resource)
+{
+    return $resource('/api/v1/project/:projectId/permitlicense/:permitlicenseId', {permitLicenseId: '@id'},
+        {
+            'update': {method: 'PUT', isArray: false}
+        });
+}]);
+
 services.factory('ExternalAudit', ['$resource', function ($resource)
 {
     return $resource('/api/v1/project/:projectId/externalaudit/:externalauditId', {externalauditId: '@id'},

@@ -53,6 +53,10 @@ controllers.controller('ProjectTabsController', ['$scope', '$routeParams', '$loc
         {
             return ProjectTabEnum.ExternalAudits;
         }
+        if (_.contains(path, "permitslicenses"))
+        {
+            return ProjectTabEnum.PermitsLicenses;
+        }
         return ProjectTabEnum.Project;
     };
     scope.tab = getCurrentTab(location.path());

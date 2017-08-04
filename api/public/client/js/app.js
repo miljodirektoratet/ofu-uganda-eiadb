@@ -43,6 +43,8 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/projects/:projectId/externalaudits/:externalauditId/documents/:documentId', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/auditsinspections', projectTabsOptions);
         $routeProvider.when('/projects/:projectId/auditsinspections/:auditinspectionId', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/permitslicenses', projectTabsOptions);
+        $routeProvider.when('/projects/:projectId/permitslicenses/:permitlicenseId', projectTabsOptions);
 
 
         var searchTabsOptions = {templateUrl: 'partials/searchTabs.html', controller: 'SearchTabsController'};
@@ -111,6 +113,7 @@ var ProjectTabEnum =
 {
     Project: 'Project',
     EiasPermits: 'EIAS',
+    PermitsLicenses: 'Permits and Licenses',
     AuditsInspections: 'Audits and Inspections',
     ExternalAudits: 'External audits'
 };

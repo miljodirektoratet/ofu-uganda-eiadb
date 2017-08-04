@@ -1,7 +1,7 @@
 'use strict';
 
-services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Hearing', 'ExternalAudit', 'DocumentEA', 'AuditInspection', 'Valuelists', 'UserInfo',
-    function ($q, $filter, Project, Organisation, EiaPermit, Document, Hearing, ExternalAudit, DocumentEA, AuditInspection, Valuelists, UserInfo)
+services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Hearing', 'ExternalAudit', 'DocumentEA', 'AuditInspection', 'Valuelists', 'UserInfo', 'PermitLicense',
+    function ($q, $filter, Project, Organisation, EiaPermit, Document, Hearing, ExternalAudit, DocumentEA, AuditInspection, Valuelists, UserInfo, PermitLicense)
     {
         var factory = {};
         factory.project = {};
@@ -13,6 +13,9 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.document = {};
         factory.hearings = [];
         factory.hearing = {};
+
+        factory.permitslicenses = [];
+        factory.permitlicense = {};
 
         factory.externalaudits = [];
         factory.externalaudit = {};
@@ -33,6 +36,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 document: false,
                 hearings: false,
                 hearing: false,
+                permitslicenses: false,
+                permitlicense: false,
                 externalaudits: false,
                 externalaudit: false,
                 documents_ea: false,
@@ -47,11 +52,11 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var deferredEiasPermits = $q.defer();
             var deferredExternalAudits = $q.defer();
             var deferredAuditsInspections = $q.defer();
-            var deferredUNUSEDpromise = $q.defer();
+            var deferredPermitsLicenses = $q.defer();
 
             if (factory.project.id != params.projectId)
             {
-                var simpleParams = _.omit(params,  ['eiapermitId', 'externalauditId',  'documentId', 'hearingId', 'auditinspectionId']);
+                var simpleParams = _.omit(params,  ['eiapermitId', 'externalauditId',  'documentId', 'hearingId', 'permitlicenseId', 'auditinspectionId']);
                 factory.empty();
                 factory.project = Project.get(simpleParams, function (p)
                 {
@@ -65,6 +70,11 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 factory.eiaspermits = EiaPermit.query(simpleParams, function (eps)
                 {
                     deferredEiasPermits.resolve(eps);
+                });
+
+                factory.permitslicenses = PermitLicense.query(simpleParams, function (pls)
+                {
+                    deferredPermitsLicenses.resolve(pls);
                 });
 
                 factory.externalaudits = ExternalAudit.query(simpleParams, function (eas)
@@ -82,12 +92,13 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 deferredProject.resolve(factory.project);
                 deferredOrganisation.resolve(factory.organisation);
                 deferredEiasPermits.resolve(factory.eiaspermits);
+                deferredPermitsLicenses.resolve(factory.permitslicenses);
                 deferredExternalAudits.resolve(factory.externalaudits);
                 deferredAuditsInspections.resolve(factory.auditsinspections);
             }
             return [deferredProject.promise, deferredOrganisation.promise,
                 deferredEiasPermits.promise,
-                deferredAuditsInspections.promise, deferredUNUSEDpromise.promise, deferredExternalAudits.promise];
+                deferredAuditsInspections.promise, deferredPermitsLicenses.promise, deferredExternalAudits.promise];
         };
 
         factory.retrieveEiaPermit = function (params)
@@ -259,6 +270,26 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
              }*/
             return [deferred.promise];
         };
+
+        factory.retrievePermitLicense = function (params)
+        {
+            var deferred = $q.defer();
+            if (params.permitlicenseId)
+            {
+                var hits = $filter('filter')(factory.permitslicenses, {'id': params.permitlicenseId});
+                if (hits.length == 1)
+                {
+                    factory.permitlicense = hits[0];
+                    factory.permitlicense.$get(params, function (pl)
+                    {
+                        deferred.resolve(pl);
+                    });
+                }
+            }
+            return [deferred.promise];
+        };
+
+
 
         factory.getProjectSummary = function (currentTab)
         {

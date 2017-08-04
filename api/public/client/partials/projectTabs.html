@@ -10,6 +10,9 @@
         <li ng-class="{active: tab==ProjectTabEnum.EiasPermits}">
             <a ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{data.eiapermit.id}}">EIAS ({{data.eiaspermits.length}})</a>
         </li>
+        <li ng-class="{active: tab==ProjectTabEnum.PermitsLicenses}">
+            <a ng-href="#/projects/{{routeParams.projectId}}/permitslicenses/{{data.permitlicense.id}}">Permits and Licenses ({{data.permitslicenses.length}})</a>
+        </li>
         <li ng-class="{active: tab==ProjectTabEnum.AuditsInspections}">
             <a ng-href="#/projects/{{routeParams.projectId}}/auditsinspections/{{data.auditinspection.id}}">Audits and Inspections ({{data.auditsinspections.length}})</a>
         </li>
@@ -23,6 +26,9 @@
     </div>
     <div ng-if="tab==ProjectTabEnum.EiasPermits">
         <div ng-controller="EiasPermitsTabsController" ng-include="'partials/projectEiasPermitsTabs.html'"></div>
+    </div>
+    <div ng-if="tab==ProjectTabEnum.PermitsLicenses">
+        <div ng-controller="PermitsLicensesController" ng-include="'partials/projectPermitsLicenses.html'"></div>
     </div>
     <div ng-if="tab==ProjectTabEnum.AuditsInspections">
         <div ng-controller="AuditsInspectionsController" ng-include="'partials/projectAuditsInspections.html'"></div>

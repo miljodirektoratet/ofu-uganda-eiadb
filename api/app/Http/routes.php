@@ -62,6 +62,8 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
     Route::resource('project.externalaudit.document', 'ExternalAuditDocumentController');
 
     Route::resource('project.auditinspection', 'AuditInspectionController');
+
+    Route::resource('project.permitlicense', 'PermitLicenseController');
 });
 
 Route::group(['prefix' => 'api/v1'], function ()

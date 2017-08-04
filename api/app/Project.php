@@ -36,6 +36,11 @@ class Project extends Model
         return $this->hasMany('App\EiaPermit');
     }
 
+    public function permitlicenses()
+    {
+        return $this->hasMany('App\PermitLicense');
+    }
+
     public function externalaudits()
     {
         return $this->hasMany('App\ExternalAudit');

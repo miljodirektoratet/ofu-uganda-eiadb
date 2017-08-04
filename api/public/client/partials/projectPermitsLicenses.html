@@ -1,0 +1,113 @@
+<div class="project-permitslicenses">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="edit-container">
+                <div class="row header visible-md visible-lg">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Status</th>
+                                <th>Date of submission</th>
+                                <th>Team leader</th>
+                                <th>Decision taken</th>
+                                <th>Date on permit/license</th>
+                                <th>
+                                    <button type="button" class="btn btn-xs btn-success pull-right" ng-disabled="routeParams.permitlicenseId" ng-click="newPermitLicense();" ng-hide="!auth.canSave('new')">New</button>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="edit-row" ng-repeat="pl in data.permitslicenses">
+                            <tr class="master" ng-class="{selected: routeParams.permitlicenseId==pl.id, notvalid: routeParams.permitlicenseId==pl.id && parts.permitlicense.form.$invalid}"
+                                ng-click="openPermitlicense(pl.id, $event)">
+                                <td>{{pl.id}}</td>
+                                <td>{{data.getCodeFromValuelist('eiastatus', pl.status)}}</td>
+                                <td>{{ep.date_submitted | date:'d MMM yyyy'}}</td>
+                                <td>{{data.getCodeFromValuelist('team_leader_eia_permit', pl.user_id)}}</td>
+                                <td>{{data.getCodeFromValuelist('decision', pl.decision)}}</td>
+                                <td>{{pl.date_permit_license | date:'d MMM yyyy'}}</td>
+                                <td>
+                                    <div style="min-width:65px;">
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(routeParams.permitlicenseId, $event)" ng-disabled="routeParams.permitlicenseId" ng-show="routeParams.permitlicenseId!=pl.id" ng-href="#/projects/{{routeParams.projectId}}/permitslicenses/{{pl.id}}">{{auth.canSave('new') ? "Edit" : "Open"}}</a>
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(parts.permitlicense.state == SavingStateEnum.Loading, $event)" ng-disabled="parts.permitlicense.state == SavingStateEnum.Loading" ng-show="routeParams.permitlicenseId==pl.id" ng-href="#/projects/{{routeParams.projectId}}/permitslicenses">Close</a>
+                                        <span class="loader pull-right" ng-show="routeParams.permitlicenseId==pl.id && parts.permitlicense.state == SavingStateEnum.Loading"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="shouldShowPermitLicense(pl)" class="detail">
+                                <td colspan="8">
+                                    <form role="form" name="parts.permitlicense.form" novalidation>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="user_id">Team leader</label>
+                                                    <select ui-select2 ng-change="saveCurrentPermitLicense(pl)" ng-disabled="!auth.canSave('user_id')" id="user_id" class="form-control input-sm" ng-model="pl.user_id">
+                                                        <option ng-repeat="v in valuelists.team_leader_eia_permit | filter:criteriaMatchOfficer1(pl.user_id)" value="{{v.id}}">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="users">Officers to handle</label>
+                                                    <select ui-select2 multiple="true" placeholder="Click to pick"
+                                                            ng-change="saveCurrentPermitLicense(pl)"
+                                                            ng-disabled="!auth.canSave('personnel')" id="users"
+                                                            class="form-control input-sm"
+                                                            ng-model="pl.user_ids">
+                                                        <option ng-repeat="v in valuelists.officer_eia_permit | filter:criteriaMatchOfficer(pl.user_ids)" value="{{v.id}}">
+                                                            {{v.description1}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="inspection_recommended">Inspection before decision?</label>
+                                                    <select ui-select2 ng-change="saveCurrentPermitLicense(pl)" ng-disabled="!auth.canSave('inspection_recommended')" id="inspection_recommended" class="form-control input-sm" ng-model="pl.inspection_recommended">
+                                                        <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                                        text="'Delete permit/license'"
+                                                        warning="'Do you want to proceed?'"
+                                                        button-class="'btn-danger'"
+                                                        on-yes="deletePermitLicense()"></sero-delete-button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>(Dirty:{{parts.permitlicense.form.$dirty}}, valid:{{parts.permitlicense.form.$valid}})
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.permitlicense.state == SavingStateEnum.Loaded && !pl.is_new">Last changed by {{pl.updated_by}}</span>
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.permitlicense.state == SavingStateEnum.SavingStarted">Saving...</span>
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.permitlicense.state == SavingStateEnum.SavingFinished">All changes saved</span>
+                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.permitlicense.state == SavingStateEnum.SavingFailed">Saving failed</span>
+                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.permitlicense.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
