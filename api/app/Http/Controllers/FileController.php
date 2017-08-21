@@ -15,6 +15,7 @@ class FileController extends Controller
     public function upload()
     {
         $file = Request::file('file');
+        $tag = Request::input('tag');
 
         // When testing uploading of files.
         if ($file->getClientOriginalName() == "SKAL FEILE.pdf")
@@ -36,6 +37,7 @@ class FileController extends Controller
         $fileMetadata->mime = $mime;
         $fileMetadata->size_bytes = $size;
         $fileMetadata->size_human_readable = $sizeHumanReadable;
+        $fileMetadata->tag = $tag;
         $fileMetadata->storage_filename = $storageFilename;
         $fileMetadata->updated_by = Auth::user()->name;
         $fileMetadata->created_by = Auth::user()->name;

@@ -28,4 +28,9 @@ class PermitLicense extends Model
     {
         return $this->belongsToMany('App\User', 'permits_licenses_personnel');
     }
+
+    public function documentation()
+    {
+        return $this->belongsToMany('App\FileMetadata', 'permits_licenses_documentation')->select(array('file_metadata_id as id', 'filename', 'file_metadata.tag'));
+    }
 }

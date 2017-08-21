@@ -11,6 +11,6 @@ class FileMetadata extends Model
 
     protected $table = 'file_metadata';
     protected $dates = ['deleted_at'];
-    protected $fillable = ['filename', 'storage_filename', 'extension', 'mime', 'size_bytes', 'size_human_readable'];
+    protected $fillable = ['filename', 'storage_filename', 'extension', 'mime', 'size_bytes', 'size_human_readable', 'tag'];
     protected $hidden = ['deleted_at'];
 }

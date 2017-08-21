@@ -147,6 +147,14 @@ var StatisticsTabEnum =
     AuditsInspections: 'Audits and Inspections'
 };
 
+var DocumentTagEnum =
+{
+    PermitLicenseApplicationForm: 'Application form',
+    PermitLicensePermitLicense: 'Permit or license',
+    PermitLicenseAttachments: 'Attachment to the application'
+
+};
+
 var fileUploadPattern = "image/*,application/pdf,application/vnd.openxmlformats*,application/msword,text/plain,text/csv,application/octet-stream,binary/octet-stream";
 var fileUploadNgfPattern = "'image/*,application/pdf,application/vnd.openxmlformats*,application/msword,text/plain,text/csv,application/octet-stream,binary/octet-stream'";
 var fileUploadMaxSize = "20MB";
@@ -211,7 +219,7 @@ seroApp.config(["$httpProvider", function ($httpProvider)
     });
 }]);
 
-var uploadFile = function ($q, $timeout, Upload, partInForm, file)
+var uploadFile = function ($q, $timeout, Upload, partInForm, file, tag)
 {
     partInForm.$setValidity("serverError", true);
 
@@ -221,7 +229,8 @@ var uploadFile = function ($q, $timeout, Upload, partInForm, file)
     {
         file.upload = Upload.upload({
             url: '/file/v1/upload',
-            file: file
+            file: file,
+            fields: {tag:tag}
         });
 
         file.upload.then(function (response)

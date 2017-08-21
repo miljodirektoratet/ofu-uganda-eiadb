@@ -643,6 +643,46 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             }
         };
 
+        factory.createNewPermitLicense = function (p, regulation, ecosystem, regulation_activity, area, unit, approved_by_the_lc1, approved_by_the_dec, waste_license_type)
+        {
+            var plData =
+                {
+                    project_id: p.id,
+                    regulation: regulation,
+                    ecosystem: ecosystem,
+                    regulation_activity: regulation_activity,
+                    area: area,
+                    unit: unit,
+                    approved_by_the_lc1: approved_by_the_lc1,
+                    approved_by_the_dec: approved_by_the_dec,
+                    waste_license_type: waste_license_type,
+                    is_new: true
+                };
+            factory.permitlicense = new PermitLicense(plData);
+            factory.permitslicenses.push(factory.permitlicense);
+        };
+
+        factory.deletePermitLicense = function (params)
+        {
+            var index = _.findIndex(factory.permitslicenses, {'id': factory.permitlicense.id});
+            var onDelete = function (index)
+            {
+                factory.permitslicenses.splice(index, 1);
+                factory.permitlicense = {};
+            };
+            if (factory.permitlicense.is_new)
+            {
+                onDelete(index);
+            }
+            else
+            {
+                factory.permitlicense.$delete(params, function ()
+                {
+                    onDelete(index);
+                });
+            }
+        };
+
         factory.deleteProject = function (params)
         {
             var deferred = $q.defer();

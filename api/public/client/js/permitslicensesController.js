@@ -3,15 +3,33 @@
 controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', function (scope, ProjectFactory, $timeout, Upload, $q, location)
 {
     scope.parts =
-        {
-            permitslicenses: {
-                state: SavingStateEnum.None
-            },
-            permitlicense: {
-                form: null,
-                state: SavingStateEnum.None
-            },
-        };
+    {
+        permitslicenses: {
+            state: SavingStateEnum.None
+        },
+        permitlicense: {
+            form: null,
+            state: SavingStateEnum.None
+        }
+    };
+
+    scope.newButton = {};
+    scope.newButton.approved_by_the_lc1 = false;
+    scope.newButton.approved_by_the_dec = false;
+
+    scope.fileUploadPattern = fileUploadPattern;
+    scope.fileUploadNgfPattern = fileUploadNgfPattern;
+    scope.fileUploadMaxSize = fileUploadMaxSize;
+
+    scope.DocumentTagEnum = DocumentTagEnum;
+    scope.documentationData = {
+        ApplicationForm: {formField: 'documentation_applicationform', tag: DocumentTagEnum.PermitLicenseApplicationForm},
+        PermitLicense: {formField: 'documentation_permitlicense', tag: DocumentTagEnum.PermitLicensePermitLicense},
+        Attachments: {formField: 'documentation_attachments', tag: DocumentTagEnum.PermitLicenseAttachments}
+    };
+
+    scope.idPermit = 118;
+    scope.idLicense = 119;
 
     scope.shouldShowPermitLicense = function(pl)
     {
@@ -24,6 +42,19 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
             return true;
         }
         return false;
+    };
+
+    scope.openPermitLicense = function(id, $event)
+    {
+        if (scope.routeParams.permitlicenseId == id)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/permitslicenses");
+
+        }
+        else if (!scope.routeParams.permitlicenseId)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/permitslicenses/" + id);
+        }
     };
 
     scope.saveCurrentPermitLicense = function (permitlicense)
@@ -44,17 +75,86 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
         });
     };
 
+    scope.updateStatus = function (pi)
+    {
+    };
+
     scope.newPermitLicense = function ()
     {
         scope.parts.permitlicense.state = SavingStateEnum.LoadingNew;
-        ProjectFactory.createNewPermitLicense(scope.data.project);
+
+        scope.newButton.isopen = false;
+        ProjectFactory.createNewPermitLicense(scope.data.project, scope.newButton.regulation, scope.newButton.ecosystem, scope.newButton.regulation_activity, scope.newButton.area, scope.newButton.unit, scope.newButton.approved_by_the_lc1, scope.newButton.approved_by_the_dec, scope.newButton.waste_license_type);
+        //scope.saveCurrentPermitLicense(scope.data.permitlicense);
     };
 
     scope.deletePermitLicense = function ()
     {
-        ProjectFactory.deleteExternalAudit(scope.routeParams);
-        scope.goto("/projects/" + scope.data.project.id + "/externalaudits");
+        ProjectFactory.deletePermitLicense(scope.routeParams);
+        scope.goto("/projects/" + scope.data.project.id + "/permitslicenses");
     };
+
+    scope.calculateDateFeedbackToApplicants = function()
+    {
+        scope.data.permitlicense.date_feedback_to_applicants =  addDays(scope.data.permitlicense.date_submitted, 21);
+    };
+
+    scope.uploadDocumentation = function (pl, documentationData, files)
+    {
+        if (!files)
+        {
+            return;
+        }
+
+        documentationData.showUploading = true;
+        documentationData.file = files[0];
+
+        var promise = uploadFile($q, $timeout, Upload, scope.parts.permitlicense.form[documentationData.formField], documentationData.file, documentationData.tag);
+        promise.then(function (file)
+        {
+            pl.documentation_ids.push(file.result.id);
+            scope.parts.permitlicense.form[documentationData.formField].$setDirty();
+            scope.saveCurrentPermitLicense(pl);
+
+            $timeout(function ()
+            {
+                documentationData.showUploading = false;
+            }, 3000);
+
+        }, function (reason)
+        {
+        });
+    };
+
+    scope.deleteDocumentation = function (pl, id, documentationData)
+    {
+        _.remove(pl.documentation_ids, function (n)
+        {
+            return n === id
+        });
+        scope.parts.permitlicense.form[documentationData.formField].$setDirty();
+        scope.saveCurrentPermitLicense(pl);
+    };
+
+    scope.hasDocumentationTag = function(documentation, tag)
+    {
+        var result = false;
+        _.forEach(documentation, function (d)
+        {
+            // console.log(d.tag, tag);
+          if (d.tag == tag)
+          {
+              result = true;
+          }
+        });
+      return result;
+    };
+
+    scope.downloadFileUrl = function (id)
+    {
+        return "/file/v1/download/" + id;
+    };
+
 
     scope.auth.canSave = function (field)
     {
@@ -67,27 +167,39 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
         {
             case "new":
             case "delete":
-                return scope.userinfo.info.role_1;
-            case "teamleader_id":
-            case "practitioner_id":
-            case "type":
-                return scope.userinfo.info.role_1;
-            case "personnel":
-                return scope.userinfo.info.role_2;
-            case "verification_inspection":
-            case "date_inspection":
-            case "date_response":
-            case "fee":
-            case "fee_currency":
-            case "remarks":
-                return scope.userinfo.info.role_3;
-            // case "":
-            //     return scope.userinfo.info.role_4;
-            case "response":
-            case "review_findings":
-            case "date_deadline_compliance":
+            case "regulation":
+            case "date_submitted":
+            case "waste_license_type":
+            case "ecosystem":
+            case "regulation_activity":
+            case "area":
+            case "unit":
+            case "approved_by_the_lc1":
+            case "approved_by_the_dec":
+            case "application_number":
+            case "application_fee_receipt_number":
+            case "date_feedback_to_applicants":
+            case "date_sent_to_director":
+            case "date_sent_from_dep":
+            case "date_sent_officer":
             case "user_id":
-                return scope.userinfo.info.role_5;
+            case "application_evaluation_by_officer":
+            case "date_of_evaluation":
+            case "folio_no":
+            case "inspection_recommended":
+            case "date_inspection":
+            case "officer_recommend":
+            case "fee_receipt_no":
+            case "date_fee_payed":
+            case "date_sent_to_ed_for_decision":
+            case "decision":
+            case "date_decision":
+            case "signature_on_permit_license":
+            case "date_permit_license":
+            case "permit_license_no":
+            case "date_permit_license_expired":
+            case "personnel":
+                return scope.userinfo.info.role_1;
             case "status":
                 return false;
             default:

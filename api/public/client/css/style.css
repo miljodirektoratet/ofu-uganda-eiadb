@@ -293,7 +293,13 @@ textarea.ng-invalid,
     width: 65px;
 }*/
 
-.project-auditsandinspections .new-button form {
+.project-auditsandinspections .new-button form
+{
+    width: 800px;
+}
+
+.project-permitslicenses .new-button form
+{
     width: 800px;
 }
 

@@ -44,8 +44,45 @@ class ValuelistController extends Controller
         $valuelists["project_risk_level"] = $this->project_risk_level();
         $valuelists["external_audit_type"] = $this->external_audit_type();
 
+        $valuelists["permit_license_ecosystem"] = $this->permit_license_ecosystem();
+        $valuelists["permit_license_regulation_activity_wetland"] = $this->permit_license_regulation_activity_wetland();
+        $valuelists["permit_license_regulations"] = $this->permit_license_regulations();
+        $valuelists["permit_license_area_units"] = $this->permit_license_area_units();
+        $valuelists["permit_license_waste_license_type"] = $this->permit_license_waste_license_type();
+        $valuelists["permit_license_application_evaluation"] = $this->permit_license_application_evaluation();
+
 
         return Response::json($valuelists, 200);
+    }
+
+    private function permit_license_ecosystem()
+    {
+        return $this->getCodesFromDrowdownName("ecosystem");
+    }
+
+    private function permit_license_regulation_activity_wetland()
+    {
+        return $this->getCodesFromDrowdownName("regulation_activity_wetland");
+    }
+
+    private function permit_license_regulations()
+    {
+        return $this->getCodesFromDrowdownName("regulations");
+    }
+
+    private function permit_license_area_units()
+    {
+        return $this->getCodesFromDrowdownName("area_units");
+    }
+
+    private function permit_license_waste_license_type()
+    {
+        return $this->getCodesFromDrowdownName("waste_license_type");
+    }
+
+    private function permit_license_application_evaluation()
+    {
+        return $this->getCodesFromDrowdownName("application_evaluation");
     }
 
     // GET /resource/:id
@@ -289,6 +326,9 @@ class ValuelistController extends Controller
     {
         return $this->getCodesFromDrowdownName("external_audit_type");
     }
+
+
+
 
     private function getCodesFromArray($codeIds)
     {

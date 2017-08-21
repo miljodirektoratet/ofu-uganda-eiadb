@@ -69,14 +69,13 @@ class CreatePermitsLicenses extends Migration
             $table->foreign('user_id')->references('id')->on('users');
         });
 
-        Schema::create('permits_licenses_documents', function(Blueprint $table)
+        Schema::create('permits_licenses_documentation', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('permits_licenses_id')->unsigned()->nullable();
-            $table->foreign('permits_licenses_id')->references('id')->on('permits_licenses');
+            $table->integer('permit_license_id')->unsigned()->nullable();
+            $table->foreign('permit_license_id')->references('id')->on('permits_licenses');
             $table->integer('file_metadata_id')->unsigned()->nullable();
             $table->foreign('file_metadata_id')->references('id')->on('file_metadata');
-            $table->integer('tag')->unsigned()->nullable();
         });
     }
 
@@ -87,7 +86,7 @@ class CreatePermitsLicenses extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permits_licenses_documents', function(Blueprint $table){});
+        Schema::dropIfExists('permits_licenses_documentation', function(Blueprint $table){});
         Schema::dropIfExists('permits_licenses_personnel', function(Blueprint $table){});
         Schema::dropIfExists('permits_licenses', function(Blueprint $table){});
     }
