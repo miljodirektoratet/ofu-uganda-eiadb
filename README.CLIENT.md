@@ -11,3 +11,6 @@ Uses AngularJS.
 - Install grunt-cli globally: `sudo npm install -g grunt-cli`
 - Install bower globally: `sudo npm install -g bower`
 - Install/update dependencies: `sudo npm install`
+
+### hosts
+192.168.10.10 uganda.app
