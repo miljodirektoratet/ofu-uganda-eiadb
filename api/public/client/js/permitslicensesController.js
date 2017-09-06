@@ -210,7 +210,6 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
     scope.loadPermitLicense = function()
     {
         scope.parts.permitlicense.state = SavingStateEnum.Loading;
-
         var promises = ProjectFactory.retrievePermitLicense(scope.routeParams);
         promises[0].then(function (pl)
         {

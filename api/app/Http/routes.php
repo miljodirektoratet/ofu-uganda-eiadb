@@ -76,6 +76,7 @@ Route::group(['prefix' => 'search/v1', 'middleware' => 'auth'], function ()
     Route::resource('project', 'ProjectSearchController');
     Route::resource('auditinspection', 'AuditInspectionSearchController');
     Route::resource('eiapermit', 'EiaPermitSearchController');
+    Route::resource('permitlicense', 'PermitLicenseSearchController');
     Route::resource('externalaudit', 'ExternalAuditSearchController');
 });
 

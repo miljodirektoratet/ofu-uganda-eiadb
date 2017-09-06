@@ -18,6 +18,10 @@ controllers.controller('SearchTabsController', ['$scope', '$routeParams', '$loca
         {
             return SearchTabEnum.EiasPermits;
         }
+        if (_.contains(path, "permitslicenses"))
+        {
+            return SearchTabEnum.PermitsLicenses;
+        }
         if (_.contains(path, "auditsinspections"))
         {
             return SearchTabEnum.AuditsInspections;

@@ -51,6 +51,7 @@ var seroApp = angular.module('seroApp', [
         $routeProvider.when('/search', {redirectTo: '/search/projects'});
         $routeProvider.when('/search/projects', searchTabsOptions);
         $routeProvider.when('/search/eiaspermits', searchTabsOptions);
+        $routeProvider.when('/search/permitslicenses', searchTabsOptions);
         $routeProvider.when('/search/auditsinspections', searchTabsOptions);
         $routeProvider.when('/search/externalaudits', searchTabsOptions);
 
@@ -136,6 +137,7 @@ var SearchTabEnum =
 {
     Projects: 'Projects',
     EiasPermits: 'EIAS',
+    PermitsLicenses: 'Permits and Licenses',
     AuditsInspections: 'Audits and Inspections',
     ExternalAudits: 'External audits'
 };

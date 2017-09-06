@@ -1,5 +1,5 @@
 'use strict';
-
+var data1 = {};
 services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 'EiaPermit', 'Document', 'Hearing', 'ExternalAudit', 'DocumentEA', 'AuditInspection', 'Valuelists', 'UserInfo', 'PermitLicense',
     function ($q, $filter, Project, Organisation, EiaPermit, Document, Hearing, ExternalAudit, DocumentEA, AuditInspection, Valuelists, UserInfo, PermitLicense)
     {
@@ -109,7 +109,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             if (factory.eiapermit.id != params.eiapermitId)
             {
                 factory.emptyEiaPermit();
-                var hits = $filter('filter')(factory.eiaspermits, {'id': params.eiapermitId});
+                var hits = _.where(factory.eiaspermits, {'id': parseInt(params.eiapermitId)});
                 if (hits.length == 1)
                 {
                     factory.eiapermit = hits[0];
@@ -141,7 +141,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             if (factory.document.id != params.documentId)
             {
                 factory.emptyDocument();
-                var hits = $filter('filter')(factory.documents, {'id': params.documentId});
+                var hits = _.where(factory.documents, {'id': parseInt(params.documentId)});
                 if (hits.length == 1)
                 {
                     factory.document = hits[0];
@@ -172,7 +172,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             if (factory.hearing.id != params.hearingId)
             {
                 factory.emptyHearing();
-                var hits = $filter('filter')(factory.hearings, {'id': params.hearingId});
+                var hits = _.where(factory.hearings, {'id': parseInt(params.hearingId)});
                 if (hits.length == 1)
                 {
                     factory.hearing = hits[0];
@@ -197,7 +197,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             if (factory.externalaudit.id != params.externalauditId)
             {
                 factory.emptyExternalAudit();
-                var hits = $filter('filter')(factory.externalaudits, {'id': params.externalauditId});
+                var hits = _.where(factory.externalaudits, {'id': parseInt(params.externalauditId)});
                 if (hits.length == 1)
                 {
                     factory.externalaudit = hits[0];
@@ -228,7 +228,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             if (factory.document.id != params.documentId)
             {
                 factory.emptyDocumentEA();
-                var hits = $filter('filter')(factory.documents_ea, {'id': params.documentId});
+                var hits = _.where(factory.documents_ea, {'id': parseInt(params.documentId)});
                 if (hits.length == 1)
                 {
                     factory.document_ea = hits[0];
@@ -251,7 +251,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var deferred = $q.defer();
             if (params.auditinspectionId)
             {
-                var hits = $filter('filter')(factory.auditsinspections, {'id': params.auditinspectionId});
+                var hits = _.where(factory.auditsinspections, {'id': parseInt(params.auditinspectionId)});
                 if (hits.length == 1)
                 {
                     factory.auditinspection = hits[0];
@@ -273,10 +273,11 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
 
         factory.retrievePermitLicense = function (params)
         {
+            data1 = factory.permitslicenses;
             var deferred = $q.defer();
             if (params.permitlicenseId)
             {
-                var hits = $filter('filter')(factory.permitslicenses, {'id': params.permitlicenseId});
+                var hits = _.where(factory.permitslicenses, {'id': parseInt(params.permitlicenseId)});
                 if (hits.length == 1)
                 {
                     factory.permitlicense = hits[0];
