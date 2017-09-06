@@ -89,6 +89,9 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             }
             else
             {
+                // Clean up possible unsaved children.
+                _.remove(factory.permitslicenses, function(item) {return item.is_new;});
+
                 deferredProject.resolve(factory.project);
                 deferredOrganisation.resolve(factory.organisation);
                 deferredEiasPermits.resolve(factory.eiaspermits);

@@ -44,9 +44,34 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
         return false;
     };
 
+    scope.notOkToEditOrCreateNew = function()
+    {
+        if (scope.routeParams.permitlicenseId)
+        {
+            return true;
+        }
+        if (scope.data.permitlicense.is_new)
+        {
+            return true;
+        }
+        return false;
+    };
+
+    scope.preventClickIfDisabled = function(isDisabled, $event)
+    {
+        if (isDisabled)
+        {
+            $event.preventDefault();
+        }
+    };
+
     scope.openPermitLicense = function(id, $event)
     {
-        if (scope.routeParams.permitlicenseId == id)
+        if (scope.data.permitlicense.is_new)
+        {
+            // Do nothing.
+        }
+        else if (scope.routeParams.permitlicenseId == id)
         {
             scope.goto("/projects/" + scope.data.project.id + "/permitslicenses");
 

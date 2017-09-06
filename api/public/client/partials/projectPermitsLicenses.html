@@ -17,7 +17,7 @@
                                 <th>Date on permit/license</th>
                                 <th>
                                     <div class="btn-group new-button pull-right" dropdown auto-close="disabled" is-open="newButton.isopen" ng-hide="!auth.canSave('new')">
-                                        <button type="button" class="btn btn-xs btn-success pull-right" dropdown-toggle ng-disabled="routeParams.permitlicenseId" ng-hide="!auth.canSave('new')">
+                                        <button type="button" class="btn btn-xs btn-success pull-right" dropdown-toggle ng-disabled="notOkToEditOrCreateNew()" ng-hide="!auth.canSave('new')">
                                             New<span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
@@ -146,8 +146,8 @@
                                 <td>{{pl.date_permit_license | date:'d MMM yyyy'}}</td>
                                 <td>
                                     <div style="min-width:65px;">
-                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(routeParams.permitlicenseId, $event)" ng-disabled="routeParams.permitlicenseId" ng-show="routeParams.permitlicenseId!=pl.id" ng-href="#/projects/{{routeParams.projectId}}/permitslicenses/{{pl.id}}">{{auth.canSave('new') ? "Edit" : "Open"}}</a>
-                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(parts.permitlicense.state == SavingStateEnum.Loading, $event)" ng-disabled="parts.permitlicense.state == SavingStateEnum.Loading" ng-show="routeParams.permitlicenseId==pl.id" ng-href="#/projects/{{routeParams.projectId}}/permitslicenses">Close</a>
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(notOkToEditOrCreateNew(), $event)" ng-disabled="notOkToEditOrCreateNew()" ng-show="routeParams.permitlicenseId!=pl.id" ng-href="#/projects/{{routeParams.projectId}}/permitslicenses/{{pl.id}}">{{auth.canSave('new') ? "Edit" : "Open"}}</a>
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(parts.permitlicense.state == SavingStateEnum.Loading, $event)" ng-disabled="parts.permitlicense.state == SavingStateEnum.Loading" ng-show="routeParams.permitlicenseId==pl.id && !data.permitlicense.is_new" ng-href="#/projects/{{routeParams.projectId}}/permitslicenses">Close</a>
                                         <span class="loader pull-right" ng-show="routeParams.permitlicenseId==pl.id && parts.permitlicense.state == SavingStateEnum.Loading"></span>
                                     </div>
                                 </td>
