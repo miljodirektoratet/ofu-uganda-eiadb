@@ -26,7 +26,7 @@ class PermitLicenseController extends Controller
         $rows = Project::find($projectId)
             ->permitlicenses()
             ->with(array('user' => $withUserFunction))
-            ->get(array('id', 'status', 'date_submitted', 'user_id', 'decision', 'date_permit_license'));
+            ->get(array('id', 'status', 'date_submitted', 'regulation', 'user_id', 'decision', 'date_permit_license'));
 
         return Response::json($rows, 200);
     }

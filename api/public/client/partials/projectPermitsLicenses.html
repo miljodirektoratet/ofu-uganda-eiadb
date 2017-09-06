@@ -11,6 +11,7 @@
                                 <th>Id</th>
                                 <th>Status</th>
                                 <th>Date of submission</th>
+                                <th>Regulation</th>
                                 <th>Team leader</th>
                                 <th>Decision taken</th>
                                 <th>Date on permit/license</th>
@@ -139,6 +140,7 @@
                                 <td>{{pl.id}}</td>
                                 <td>{{data.getCodeFromValuelist('eiastatus', pl.status)}}</td>
                                 <td>{{pl.date_submitted | date:'d MMM yyyy'}}</td>
+                                <td>{{data.getCodeFromValuelist('permit_license_regulations', pl.regulation)}}</td>
                                 <td>{{data.getCodeFromValuelist('team_leader_eia_permit', pl.user_id)}}</td>
                                 <td>{{data.getCodeFromValuelist('decision', pl.decision)}}</td>
                                 <td>{{pl.date_permit_license | date:'d MMM yyyy'}}</td>
