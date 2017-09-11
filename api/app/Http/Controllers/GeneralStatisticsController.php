@@ -16,6 +16,7 @@ class GeneralStatisticsController extends Controller
         $countDevelopers = DB::table('organisations')->whereNull('deleted_at')->count();
         $countPractitioners = DB::table('practitioners')->whereNull('deleted_at')->count();
         $countEiasPermits = DB::table('eias_permits')->whereNull('deleted_at')->count();
+        $countPermitsLicenses = DB::table('permits_licenses')->whereNull('deleted_at')->count();
         $countAuditsInspections = DB::table('audits_inspections')->whereNull('deleted_at')->count();
         $countExternalAudits = DB::table('external_audits')->whereNull('deleted_at')->count();
 
@@ -24,6 +25,7 @@ class GeneralStatisticsController extends Controller
             "developers" => $countDevelopers,
             "practitioners" => $countPractitioners,
             "eiaspermits" => $countEiasPermits,
+            "permitslicenses" => $countPermitsLicenses,
             "auditsinspections" => $countAuditsInspections,
             "externalaudits" => $countExternalAudits
         ];
