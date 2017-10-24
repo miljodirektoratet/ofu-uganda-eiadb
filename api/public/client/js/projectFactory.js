@@ -118,12 +118,13 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                     factory.eiapermit = hits[0];
                     factory.eiapermit.$get(_.omit(params, ['documentId', 'hearingId']), function (ep)
                     {
+                        deferredEiaPermit.resolve(ep);
                         // params contains documentId, so we can't user params directly.
                         factory.documents = Document.query(_.omit(params, ['documentId', 'hearingId']), function (ds)
                         {
                             deferredDocuments.resolve(ds);
                         });
-                        deferredEiaPermit.resolve(ep);
+
                     });
                 }
             }
@@ -497,6 +498,30 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                     deferred.resolve();
                 });
             }
+
+            return deferred.promise;
+        };
+
+        factory.moveDocument = function (params, newEiaId)
+        {
+            var deferred = $q.defer();
+
+            var onMove = function (index)
+            {
+                factory.documents.splice(index, 1);
+                factory.document = {};
+            };
+
+            var index = _.findIndex(factory.documents, {'id': factory.document.id});
+            factory.document.eia_permit_id = newEiaId;
+            factory.document.$update(params, function (data)
+            {
+                onMove(index);
+                deferred.resolve(data);
+            }, function ()
+            {
+                deferred.reject("Moving failed");
+            });
 
             return deferred.promise;
         };

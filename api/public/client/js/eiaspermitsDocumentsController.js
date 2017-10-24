@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', function (scope, ProjectFactory, $timeout, Upload, $q, location)
+controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', 'EiaPermitSearchService', function (scope, ProjectFactory, $timeout, Upload, $q, location, EiaPermitSearchService)
 {
     scope.shouldShowDocument = function(d)
     {
@@ -13,6 +13,43 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
             return true;
         }
         return false;
+    };
+
+    scope.moveButton = {};
+
+    scope.moveDocument = function()
+    {
+        scope.moveButton.error = "";
+
+        // Check if id is ok to move to
+        EiaPermitSearchService.search({eiapermit_id: scope.moveButton.id}).then(function (rows)
+        {
+            // Ok.
+            if (rows.length === 1)
+            {
+                var projectId = rows[0].project_id;
+                var eiaId = rows[0].eiapermit_id;
+                var documentId = scope.data.document.id;
+                ProjectFactory.moveDocument(scope.routeParams, scope.moveButton.id).then(function()
+                {
+                    scope.updateStatusBasedOnDocument();
+                    //scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + scope.moveButton.id + "/documents" );
+                    scope.goto("/projects/" + projectId + "/eiaspermits/" + eiaId + "/documents/" + documentId );
+                });
+            }
+            // Not ok.
+            else
+            {
+                scope.moveButton.error = "Not a valid EIA ID.";
+            }
+        });
+
+
+
+
+        //scope.updateStatusBasedOnDocument();
+        //scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + scope.moveButton.id + "/documents/" + scope.data.document.id );
+        //console.log("moving", scope.moveButton.id);
     };
 
     scope.updateStatusBasedOnDocument = function()
@@ -201,6 +238,8 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
                 return scope.userinfo.info.role_3;
             case "document.date_sent_from_dep":
                 return scope.userinfo.info.role_5;
+            case "move":
+                return scope.userinfo.info.role_8;
             default:
                 return false;
         }
@@ -227,12 +266,10 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
     promises[2].then(function (eps)
     {
         // Finished retrieving eiapermits.
-
         var promises2 = ProjectFactory.retrieveEiaPermit(scope.routeParams);
         promises2[1].then(function (ds)
         {
             // Finished retrieving documents.
-
             scope.parts.documents.state = SavingStateEnum.Loaded;
 
             // Get document if we got an documentId.

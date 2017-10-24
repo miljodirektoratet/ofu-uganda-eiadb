@@ -322,30 +322,66 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
-                                                        text="'Delete document'"
-                                                        warning="'Do you really want to delete this record?'"
-                                                        button-class="'btn-danger'"
-                                                        on-yes="deleteDocument()"></sero-delete-button>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p>(Dirty:{{parts.document.form.$dirty}}, valid:{{parts.document.form.$valid}})
-                                                    <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.Loaded && !d.is_new">Last changed by {{d.updated_by}}</span>
-                                                    <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.SavingStarted">Saving...</span>
-                                                    <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.SavingFinished">All changes saved</span>
-                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.document.state == SavingStateEnum.SavingFailed">Saving failed</span>
-                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.document.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
-                                                </p>
-                                            </div>
-                                        </div>
-
                                     </form>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                                                text="'Delete document'"
+                                                                warning="'Do you really want to delete this record?'"
+                                                                button-class="'btn-danger'"
+                                                                on-yes="deleteDocument()"></sero-delete-button>
+
+                                            <div class="btn-group move-button pull-right" dropdown auto-close="disabled" is-open="moveButton.isopen" ng-hide="!auth.canSave('move') || d.is_new">
+                                                <button type="button" class="btn btn-warning pull-right" dropdown-toggle ng-hide="!auth.canSave('new')">
+                                                    Move document<span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li role="menuitem">
+                                                        <form role="form" name="moveButton.form" novalidation>
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <label for="moveButton.id">EIA ID</label>
+                                                                    <input type="text" integer
+                                                                           id="moveButton.id"
+                                                                           ng-required="true"
+                                                                           ng-model="moveButton.id"
+                                                                           class="form-control input-sm"/>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label for="moveButton.move">&nbsp;</label><br>
+                                                                    <button type="button" class="btn btn-sm btn-primary use-button pull-right"
+                                                                            id="moveButton.move"
+                                                                            ng-disabled="moveButton.form.$invalid"
+                                                                            ng-click="moveDocument()">Move
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" ng-show="moveButton.error">
+                                                                <div class="col-md-12">
+                                                                    {{moveButton.error}}
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>(Dirty:{{parts.document.form.$dirty}}, valid:{{parts.document.form.$valid}})
+                                                <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.Loaded && !d.is_new">Last changed by {{d.updated_by}}</span>
+                                                <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.SavingStarted">Saving...</span>
+                                                <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.SavingFinished">All changes saved</span>
+                                                <span class="saving-message-inline pull-right color-error" ng-show="parts.document.state == SavingStateEnum.SavingFailed">Saving failed</span>
+                                                <span class="saving-message-inline pull-right color-error" ng-show="parts.document.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+                                            </p>
+                                        </div>
+                                    </div>
+
                                 </td>
                             </tr>
                             </tbody>

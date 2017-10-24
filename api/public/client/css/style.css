@@ -361,7 +361,7 @@ textarea.ng-invalid,
     margin-bottom: 0px;
 }
 
-.new-button .row, .delete-button .row {
+.new-button .row, .delete-button .row, .move-button .row  {
     margin-left: 0px;
     margin-right: 0px;
 }
@@ -375,6 +375,12 @@ textarea.ng-invalid,
     margin-top: 35px;
 }
 
+.edit-container .edit-row .move-button {
+    margin-top: 35px;
+    margin-right: 10px;
+
+}
+
 .project-eiasandpermits .btn-delete,
 .project-project .btn-delete {
     width: 200px;
@@ -382,4 +388,9 @@ textarea.ng-invalid,
 
 .edit-container .edit-row form {
     margin-top: 15px;
+}
+
+.move-button form {
+    width: 200px;
+    margin-top: 0px !important;
 }
