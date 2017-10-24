@@ -25,7 +25,7 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
         ExternalAuditSearchService.search({externalaudit_id: scope.moveButton.id}).then(function (rows)
         {
             // Ok.
-            if (rows.length === 1)
+            if (rows.length >= 1)
             {
                 var projectId = rows[0].project_id;
                 var eaId = rows[0].externalaudit_id;

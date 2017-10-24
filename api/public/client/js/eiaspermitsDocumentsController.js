@@ -25,7 +25,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         EiaPermitSearchService.search({eiapermit_id: scope.moveButton.id}).then(function (rows)
         {
             // Ok.
-            if (rows.length === 1)
+            if (rows.length >= 1)
             {
                 var projectId = rows[0].project_id;
                 var eiaId = rows[0].eiapermit_id;
