@@ -28,7 +28,7 @@ class ExternalAuditSearchController extends Controller
 //                ,'doc.title'
 //                ,'doc.code'
 //                ,'doc.number'
-                ,'doc.date_submitted'
+              //  ,'doc.date_submitted'
             )
             ->whereNull('ea.deleted_at')
             ->whereNull('p.deleted_at')
