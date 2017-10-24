@@ -33,7 +33,6 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
                 ProjectFactory.moveDocument(scope.routeParams, scope.moveButton.id).then(function()
                 {
                     scope.updateStatusBasedOnDocument();
-                    //scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + scope.moveButton.id + "/documents" );
                     scope.goto("/projects/" + projectId + "/eiaspermits/" + eiaId + "/documents/" + documentId );
                 });
             }
@@ -43,13 +42,6 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
                 scope.moveButton.error = "Not a valid EIA ID.";
             }
         });
-
-
-
-
-        //scope.updateStatusBasedOnDocument();
-        //scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + scope.moveButton.id + "/documents/" + scope.data.document.id );
-        //console.log("moving", scope.moveButton.id);
     };
 
     scope.updateStatusBasedOnDocument = function()

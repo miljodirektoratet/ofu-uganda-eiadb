@@ -229,7 +229,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         {
             var deferredDocument = $q.defer();
 
-            if (factory.document.id != params.documentId)
+            if (factory.document_ea.id != params.documentId) // ?
             {
                 factory.emptyDocumentEA();
                 var hits = _.where(factory.documents_ea, {'id': parseInt(params.documentId)});
@@ -515,6 +515,30 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var index = _.findIndex(factory.documents, {'id': factory.document.id});
             factory.document.eia_permit_id = newEiaId;
             factory.document.$update(params, function (data)
+            {
+                onMove(index);
+                deferred.resolve(data);
+            }, function ()
+            {
+                deferred.reject("Moving failed");
+            });
+
+            return deferred.promise;
+        };
+
+        factory.moveDocumentEA = function (params, newEaId)
+        {
+            var deferred = $q.defer();
+
+            var onMove = function (index)
+            {
+                factory.documents_ea.splice(index, 1);
+                factory.document_ea = {};
+            };
+
+            var index = _.findIndex(factory.documents_ea, {'id': factory.document_ea.id});
+            factory.document_ea.external_audit_id = newEaId;
+            factory.document_ea.$update(params, function (data)
             {
                 onMove(index);
                 deferred.resolve(data);

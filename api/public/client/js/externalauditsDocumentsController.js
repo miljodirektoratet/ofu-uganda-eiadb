@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', function (scope, ProjectFactory, $timeout, Upload, $q, location)
+controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', 'ExternalAuditSearchService', function (scope, ProjectFactory, $timeout, Upload, $q, location, ExternalAuditSearchService)
 {
     scope.shouldShowDocument = function(d)
     {
@@ -13,6 +13,35 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
             return true;
         }
         return false;
+    };
+
+    scope.moveButton = {};
+
+    scope.moveDocument = function()
+    {
+        scope.moveButton.error = "";
+
+        // Check if id is ok to move to
+        ExternalAuditSearchService.search({externalaudit_id: scope.moveButton.id}).then(function (rows)
+        {
+            // Ok.
+            if (rows.length === 1)
+            {
+                var projectId = rows[0].project_id;
+                var eaId = rows[0].externalaudit_id;
+                var documentId = scope.data.document_ea.id;
+                ProjectFactory.moveDocumentEA(scope.routeParams, scope.moveButton.id).then(function()
+                {
+                    scope.updateStatusBasedOnDocument();
+                    scope.goto("/projects/" + projectId + "/externalaudits/" + eaId + "/documents/" + documentId );
+                });
+            }
+            // Not ok.
+            else
+            {
+                scope.moveButton.error = "Not a valid EA ID.";
+            }
+        });
     };
 
     scope.updateStatusBasedOnDocument = function()
@@ -198,6 +227,8 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
                 return scope.userinfo.info.role_3;
             case "document.date_sent_from_dep":
                 return scope.userinfo.info.role_5;
+            case "move":
+                return scope.userinfo.info.role_8;
             default:
                 return false;
         }
