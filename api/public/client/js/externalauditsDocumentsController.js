@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', 'ExternalAuditSearchService', function (scope, ProjectFactory, $timeout, Upload, $q, location, ExternalAuditSearchService)
+controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', 'ExternalAuditSearch', function (scope, ProjectFactory, $timeout, Upload, $q, location, ExternalAuditSearch)
 {
     scope.shouldShowDocument = function(d)
     {
@@ -22,7 +22,7 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
         scope.moveButton.error = "";
 
         // Check if id is ok to move to
-        ExternalAuditSearchService.search({externalaudit_id: scope.moveButton.id}).then(function (rows)
+        ExternalAuditSearch.query({externalaudit_id: scope.moveButton.id}, function (rows)
         {
             // Ok.
             if (rows.length >= 1)
@@ -30,6 +30,7 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
                 var projectId = rows[0].project_id;
                 var eaId = rows[0].externalaudit_id;
                 var documentId = scope.data.document_ea.id;
+                console.log(projectId, eaId, documentId);
                 ProjectFactory.moveDocumentEA(scope.routeParams, scope.moveButton.id).then(function()
                 {
                     scope.updateStatusBasedOnDocument();

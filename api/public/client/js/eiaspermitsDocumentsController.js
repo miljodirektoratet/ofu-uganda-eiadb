@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', 'EiaPermitSearchService', function (scope, ProjectFactory, $timeout, Upload, $q, location, EiaPermitSearchService)
+controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', 'EiaPermitSearch', function (scope, ProjectFactory, $timeout, Upload, $q, location, EiaPermitSearch)
 {
     scope.shouldShowDocument = function(d)
     {
@@ -22,7 +22,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         scope.moveButton.error = "";
 
         // Check if id is ok to move to
-        EiaPermitSearchService.search({eiapermit_id: scope.moveButton.id}).then(function (rows)
+        EiaPermitSearch.query({eiapermit_id: scope.moveButton.id}, function (rows)
         {
             // Ok.
             if (rows.length >= 1)
