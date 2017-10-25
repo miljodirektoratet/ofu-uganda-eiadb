@@ -30,6 +30,12 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
 
     scope.idPermit = 118;
     scope.idLicense = 119;
+    scope.idWetland = 123;
+
+    scope.isEcosystemWetland = function (pl)
+    {
+        return pl.ecosystem == scope.idWetland;
+    };
 
     scope.shouldShowPermitLicense = function(pl)
     {
@@ -86,6 +92,11 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
     {
         var isNew = permitlicense.is_new;
 
+        if (!scope.isEcosystemWetland(permitlicense))
+        {
+            permitlicense.regulation_activity = null;
+        }
+
         if (!isNew)
         {
             scope.updateStatus(permitlicense);
@@ -100,7 +111,7 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
         });
     };
 
-    scope.updateStatus = function (pi)
+    scope.updateStatus = function (pl)
     {
     };
 
@@ -109,7 +120,12 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
         scope.parts.permitlicense.state = SavingStateEnum.LoadingNew;
 
         scope.newButton.isopen = false;
-        ProjectFactory.createNewPermitLicense(scope.data.project, scope.newButton.regulation, scope.newButton.ecosystem, scope.newButton.regulation_activity, scope.newButton.area, scope.newButton.unit, scope.newButton.approved_by_the_lc1, scope.newButton.approved_by_the_dec, scope.newButton.waste_license_type);
+        var  regulationActivity = null;
+        if (scope.isEcosystemWetland(scope.newButton))
+        {
+            regulationActivity = scope.newButton.regulation_activity;
+        }
+        ProjectFactory.createNewPermitLicense(scope.data.project, scope.newButton.regulation, scope.newButton.ecosystem, regulationActivity, scope.newButton.area, scope.newButton.unit, scope.newButton.approved_by_the_lc1, scope.newButton.approved_by_the_dec, scope.newButton.waste_license_type);
         //scope.saveCurrentPermitLicense(scope.data.permitlicense);
     };
 

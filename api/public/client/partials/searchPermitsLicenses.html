@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form ng-submit="setSearchUrl()">
+            <form name="parts.form" ng-submit="setSearchUrl()">
 
                 <div class="row">
                     <div class="col-md-3">
@@ -18,7 +18,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="permitlicense_waste_license_type">Waste license type</label>
-                            <select ui-select2="{allowClear:true}" id="permitlicense_waste_license_type" class="form-control input-sm" ng-model="criteria.permitlicense_waste_license_type">
+                            <select ui-select2="{allowClear:true}" id="permitlicense_waste_license_type" class="form-control input-sm" ng-model="criteria.permitlicense_waste_license_type" ng-disabled="isDisabled('permitlicense_waste_license_type')">
                                 <option></option>
                                 <option ng-repeat="v in valuelists.permit_license_waste_license_type" value="{{v.id}}">{{v.description1}}</option>
                             </select>
@@ -27,7 +27,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="permitlicense_ecosystem">Ecosystem</label>
-                            <select ui-select2="{allowClear:true}" id="permitlicense_ecosystem" class="form-control input-sm" ng-model="criteria.permitlicense_ecosystem">
+                            <select ui-select2="{allowClear:true}" id="permitlicense_ecosystem" class="form-control input-sm" ng-model="criteria.permitlicense_ecosystem" ng-disabled="isDisabled('permitlicense_ecosystem')">
                                 <option></option>
                                 <option ng-repeat="v in valuelists.permit_license_ecosystem" value="{{v.id}}">{{v.description1}}</option>
                             </select>
@@ -36,7 +36,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="permitlicense_regulation_activity">Regulation activities</label>
-                            <select ui-select2="{allowClear:true}" id="permitlicense_regulation_activity" class="form-control input-sm" ng-model="criteria.permitlicense_regulation_activity">
+                            <select ui-select2="{allowClear:true}" id="permitlicense_regulation_activity" class="form-control input-sm" ng-model="criteria.permitlicense_regulation_activity" ng-disabled="isDisabled('permitlicense_regulation_activity')">
                                 <option></option>
                                 <option ng-repeat="v in valuelists.permit_license_regulation_activity_wetland" value="{{v.id}}">{{v.description1}}</option>
                             </select>

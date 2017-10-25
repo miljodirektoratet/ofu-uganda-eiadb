@@ -37,7 +37,26 @@ controllers.controller('SearchPermitsLicensesController', ['$scope', '$routePara
         {name: 'project_title', displayName: 'Project name', cellTooltip: true, headerTooltip: true}
     ];
 
+    scope.idPermit = 118;
+    scope.idLicense = 119;
+    scope.idWetland = 123;
+    scope.idRB = 124;
+    scope.idLS = 125;
 
+    scope.isDisabled = function(field)
+    {
+        switch (field) {
+
+            case "permitlicense_ecosystem":
+                return scope.criteria.permitlicense_regulation==scope.idLicense;
+            case "permitlicense_waste_license_type":
+                return scope.criteria.permitlicense_regulation==scope.idPermit;
+            case "permitlicense_regulation_activity":
+                return scope.criteria.permitlicense_regulation==scope.idLicense || scope.criteria.permitlicense_ecosystem==scope.idRB || scope.criteria.permitlicense_ecosystem==scope.idLS;
+            default:
+                return false;
+        }
+    };
 
     //var openRow = function (row)
     //{
@@ -57,6 +76,8 @@ controllers.controller('SearchPermitsLicensesController', ['$scope', '$routePara
 
     scope.setSearchUrl = function ()
     {
+        scope.removeDisabledSearchCriteria();
+
         _.forOwn(scope.dateCriteria, function(value, key)
         {
             if (value instanceof Date)
@@ -83,6 +104,17 @@ controllers.controller('SearchPermitsLicensesController', ['$scope', '$routePara
         {
             location.search(scope.criteria);
         }
+    };
+
+    scope.removeDisabledSearchCriteria = function()
+    {
+        _.forOwn(scope.criteria, function(value, key)
+        {
+            if (scope.isDisabled(key))
+            {
+                scope.criteria[key] = null;
+            }
+        });
     };
 
     scope.search = function ()

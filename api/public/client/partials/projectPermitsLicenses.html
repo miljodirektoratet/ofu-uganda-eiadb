@@ -46,7 +46,8 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="newButton.regulation_activity">Regulation activities</label>
-                                                                <select ui-select2 ng-disabled="!auth.canSave('regulation_activity')" id="newButton.regulation_activity" class="form-control input-sm" ng-model="newButton.regulation_activity" ng-required="true">
+                                                                <select ui-select2 ng-disabled="!auth.canSave('regulation_activity') || !isEcosystemWetland(newButton)" id="newButton.regulation_activity" class="form-control input-sm"
+                                                                        ng-model="newButton.regulation_activity" ng-required="isEcosystemWetland(newButton)">
                                                                     <option ng-repeat="v in valuelists.permit_license_regulation_activity_wetland" value="{{v.id}}">{{v.description1}}</option>
                                                                 </select>
                                                             </div>
@@ -179,7 +180,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="regulation_activity">Regulation activities</label>
-                                                    <select ui-select2 ng-change="saveCurrentPermitLicense(pl)" ng-disabled="!auth.canSave('regulation_activity')" id="regulation_activity" class="form-control input-sm" ng-model="pl.regulation_activity" ng-required="true">
+                                                    <select ui-select2 ng-change="saveCurrentPermitLicense(pl)" ng-disabled="!auth.canSave('regulation_activity') || !isEcosystemWetland(pl)" id="regulation_activity" class="form-control input-sm"
+                                                            ng-model="pl.regulation_activity" ng-required="isEcosystemWetland(pl)">
                                                         <option ng-repeat="v in valuelists.permit_license_regulation_activity_wetland" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
