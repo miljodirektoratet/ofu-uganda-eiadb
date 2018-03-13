@@ -115,7 +115,6 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
         switch (field)
         {
             case "new":
-            case "delete":
                 return scope.userinfo.info.role_1;
             case "teamleader_id":
             case "practitioner_id":
@@ -129,12 +128,13 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
             case "fee":
             case "fee_currency":
             case "remarks":
-                return scope.userinfo.info.role_3;
-            // case "":
-            //     return scope.userinfo.info.role_4;
-            case "response":
             case "review_findings":
+            case "response":
             case "date_deadline_compliance":
+            case "delete":
+            case "upload_documentation_response_letter":
+            case "delete_documentation_response_letter":
+                return scope.userinfo.info.role_3;
             case "user_id":
                 return scope.userinfo.info.role_5;
             case "status":

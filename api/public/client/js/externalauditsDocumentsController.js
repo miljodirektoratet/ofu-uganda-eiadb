@@ -218,13 +218,13 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
             case "document.date_copies_coordinator":
             case "document.date_next_appointment":
             case "document.folio_no":
+            case "document.remarks":
                 return scope.userinfo.info.role_1;
             case "document.date_sent_officer":
                 return scope.userinfo.info.role_2;
             case "document.file_metadata_response_id":
             case "document.conclusion":
             case "document.date_conclusion":
-            case "document.remarks":
                 return scope.userinfo.info.role_3;
             case "document.date_sent_from_dep":
                 return scope.userinfo.info.role_5;

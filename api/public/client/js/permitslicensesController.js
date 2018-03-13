@@ -223,24 +223,30 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
             case "date_sent_to_director":
             case "date_sent_from_dep":
             case "date_sent_officer":
-            case "user_id":
+            case "folio_no":
+                return scope.userinfo.info.role_1;
+            case "personnel":
+                return scope.userinfo.info.role_2;
             case "application_evaluation_by_officer":
             case "date_of_evaluation":
-            case "folio_no":
             case "inspection_recommended":
             case "date_inspection":
             case "officer_recommend":
+            case "date_sent_to_ed_for_decision":
+                return scope.userinfo.info.role_3;
             case "fee_receipt_no":
             case "date_fee_payed":
-            case "date_sent_to_ed_for_decision":
+                return scope.userinfo.info.role_4;
+            case "user_id":
             case "decision":
             case "date_decision":
             case "signature_on_permit_license":
             case "date_permit_license":
             case "permit_license_no":
             case "date_permit_license_expired":
-            case "personnel":
-                return scope.userinfo.info.role_1;
+            case "upload_documentation_permit_license":
+            case "delete_documentation_permit_license":
+                return scope.userinfo.info.role_5;
             case "status":
                 return false;
             default:

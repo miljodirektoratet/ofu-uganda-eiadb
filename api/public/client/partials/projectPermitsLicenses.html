@@ -559,7 +559,7 @@
                                                             <a ng-href="{{downloadFileUrl(d.id)}}">{{d.filename}}</a>
                                                             <button type="button" class="delete btn btn-sm btn-link"
                                                                     ng-click="deleteDocumentation(pl, d.id, documentationData.PermitLicense)"
-                                                                    ng-hide="!auth.canSave('delete')">delete
+                                                                    ng-hide="!auth.canSave('delete_documentation_permit_license')">delete
                                                             </button>
                                                         </div>
                                                     </div>
@@ -572,7 +572,7 @@
                                                                 ng-model="fake_documentation_permitlicense"
                                                                 name="documentation_permitlicense"
                                                                 ng-hide="hasDocumentationTag(pl.documentation, documentationData.PermitLicense.tag)"
-                                                                ng-disabled="!auth.canSave('new')"
+                                                                ng-disabled="!auth.canSave('upload_documentation_permit_license')"
                                                                 ngf-max-size="{{fileUploadMaxSize}}">
                                                             Select File
                                                         </button>
