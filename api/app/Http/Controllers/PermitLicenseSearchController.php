@@ -102,7 +102,11 @@ class PermitLicenseSearchController extends Controller
                     {
                         $query->where($word, 'like', '%' . $criteria . '%')
                             ->orWhere("o.id", '=', $criteria)
-                            ->orWhere("o.tin", '=', $criteria);
+                            //->orWhere("o.tin", '=', $criteria);
+                            ->orWhere(function ($query2) {
+                                $query2->where('o.tin', '>', 0)
+                                      ->where('o.tin', '=', $criteria);
+                            });
                     });
                 }
                 elseif ($word === "p.title")
