@@ -103,7 +103,7 @@ class PermitLicenseSearchController extends Controller
                         $query->where($word, 'like', '%' . $criteria . '%')
                             ->orWhere("o.id", '=', $criteria)
                             //->orWhere("o.tin", '=', $criteria);
-                            ->orWhere(function ($query2) {
+                            ->orWhere(function ($query2) use ($criteria) {
                                 $query2->where('o.tin', '>', 0)
                                       ->where('o.tin', '=', $criteria);
                             });
