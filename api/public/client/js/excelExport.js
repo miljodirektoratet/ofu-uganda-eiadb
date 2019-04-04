@@ -20,7 +20,8 @@ var excelExport = function (data, fieldsToRename, fieldsToRemove, dateFields) {
   var hour = dt.getHours();
   var mins = dt.getMinutes();
   var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
-  var a = document.createElement("a");
+  var link = document.createElement("a");
+  var a = document.body.appendChild(link);
   a.href = excel;
   a.download = "exported_table_" + postfix + ".xls";
   a.click();
