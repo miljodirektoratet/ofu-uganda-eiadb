@@ -2,7 +2,7 @@
 
 var excelExport = function (data, fieldsToRename, fieldsToRemove, dateFields) {
 
-  var exportHelpers = {};
+  exportHelpers = {};
   exportHelpers.renameFields = function (data, fieldsToRename) {
     var data = JSON.parse(JSON.stringify(data));
     var count = data.length;
