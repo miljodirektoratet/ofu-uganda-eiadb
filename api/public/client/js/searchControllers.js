@@ -220,6 +220,10 @@ controllers.controller("SearchAuditsInspectionsController", [
       scope.showResultGrid = false;
     };
 
+    scope.exportAuditAndInspectionResults = function(data) {
+      exportObj.exportData(data, "auditAndInspection");
+    };
+
     scope.criteria = location.search();
 
     if (_.isEmpty(scope.criteria) && !_.isEmpty(SearchService.criteria)) {
@@ -375,45 +379,8 @@ controllers.controller("SearchProjectsController", [
       scope.search();
     }
 
-    scope.exportData = function(data) {
-      excelExport(
-        data,
-        {
-          project_id: "Project ID",
-          project_location: "Location",
-          project_title: "Project name",
-          project_longitude: "Longitude",
-          project_latitude: "Latitude",
-          category_description: "Category",
-          district_district: "District",
-          project_contact_person: "Contact person",
-          project_remarks: "Project remarks",
-          project_risk_level: "Risk level",
-          project_has_industrial_waste_water: "Industrial waste water?",
-          developer_id: "TIN",
-          developer_name: "Developer name",
-          organization_visiting_address: "Visting address",
-          organization_physical_address: "Physical address",
-          organization_box_no: "PO box",
-          organization_city: "City",
-          organization_phone: "Phone",
-          organization_fax: "Fax",
-          organization_remarks: "Developer Remarks"
-        },
-        [
-          "developer_tin",
-          "developer_name",
-          "organization_box_no",
-          "organization_physical_address",
-          "organization_box_no",
-          "organization_city",
-          "organization_phone",
-          "organization_fax",
-          "organization_remarks",
-          "organization_id"
-        ],
-        []
-      );
+    scope.exportProjects = function(data) {
+      exportObj.exportData(data, "project");
     };
   }
 ]);
