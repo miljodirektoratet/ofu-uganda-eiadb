@@ -27,7 +27,7 @@ var excelExport = function(data, fieldsToRename, fieldsToRemove, dateFields) {
   a.click();
 };
 
-exportHelpers = {};
+var exportHelpers = {};
 exportHelpers.renameFields = function(data, fieldsToRename) {
   var data = JSON.parse(JSON.stringify(data));
   var count = data.length;
@@ -75,9 +75,9 @@ exportHelpers.replaceNullValues = function(data) {
     if (typeof obj !== "object") {
       continue;
     }
-    for (k in obj) {
+    for (var k in obj) {
       if (!obj.hasOwnProperty(k)) continue;
-      v = obj[k];
+      var v = obj[k];
       if (v === null || v === undefined) {
         obj[k] = "NA";
       }
