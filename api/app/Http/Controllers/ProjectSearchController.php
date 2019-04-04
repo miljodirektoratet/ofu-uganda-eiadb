@@ -12,16 +12,18 @@ class ProjectSearchController extends Controller
             ->join('organisations as o', 'p.organisation_id', '=', 'o.id')
             ->join('categories as c', 'p.category_id', '=', 'c.id')
             ->join('districts as d', 'p.district_id', '=', 'd.id')
+            ->join('codes as risk', 'p.risk_level', '=', 'risk.id')
+            ->join('codes as yes_no', 'p.has_industrial_waste_water', '=', 'yes_no.id')
             ->select(
                 'p.id as project_id',
+                'risk.description1 as project_risk_level',
                 'p.title as project_title',
                 'p.location as project_location',
                 'p.longitude as project_longitude',
                 'p.latitude as project_latitude',
                 'p.contact_person as project_contact_person',
                 'p.remarks as project_remarks',
-                'p.risk_level as project_risk_level',
-                'p.has_industrial_waste_water as project_has_industrial_waste_water',
+                'yes_no.description1 as project_has_industrial_waste_water',
                 DB::raw('CONCAT(o.name, " (id ", o.id, " )") AS developer_name'),
                 'd.district as district_district',
                 'c.description_short as category_description',
