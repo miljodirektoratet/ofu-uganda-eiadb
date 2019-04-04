@@ -2,7 +2,7 @@
 .env
 /public/client/node_modules
 /public/client/bower_components
-
-
-
+api/node_modules/
+api/package-lock.json
+api/public/client/package-lock.json
 
