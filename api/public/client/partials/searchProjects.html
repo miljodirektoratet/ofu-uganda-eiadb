@@ -62,6 +62,7 @@
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary">Search</button>
                         <button type="button" class="btn btn-link" ng-click="reset()">Reset search criteria</button>
+                        <button type="button" class="btn btn-success pull-right" ng-show="showResultGrid" ng-click="exportData(gridOptions.data)">Export to excel</button>
                     </div>
                 </div>
             </form>
@@ -83,5 +84,4 @@
             <div ui-grid="gridOptions" ui-grid-resize-columns ui-grid-move-columns ui-grid-selection class="result-grid"></div>
         </div>
     </div>
-
 </div>

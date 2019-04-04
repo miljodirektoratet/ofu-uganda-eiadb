@@ -1,25 +1,42 @@
 <?php namespace App\Http\Controllers;
 
-use Response;
 use DB;
-use Input;
+use Response;
 
 class ProjectSearchController extends Controller
 {
-// GET /resource/:id/subresource
+    // GET /resource/:id/subresource
     public function index()
     {
         $result = DB::table('projects as p')
             ->join('organisations as o', 'p.organisation_id', '=', 'o.id')
             ->join('categories as c', 'p.category_id', '=', 'c.id')
             ->join('districts as d', 'p.district_id', '=', 'd.id')
-            ->select('p.id as project_id',
+            ->select(
+                'p.id as project_id',
                 'p.title as project_title',
                 'p.location as project_location',
+                'p.longitude as project_longitude',
+                'p.latitude as project_latitude',
+                'p.contact_person as project_contact_person',
+                'p.remarks as project_remarks',
+                'p.risk_level as project_risk_level',
+                'p.has_industrial_waste_water as project_has_industrial_waste_water',
                 DB::raw('CONCAT(o.name, " (id ", o.id, " )") AS developer_name'),
                 'd.district as district_district',
                 'c.description_short as category_description',
-                'o.tin as developer_tin')
+                'o.tin as developer_tin',
+                'o.id as organization_id',
+                'o.visiting_address as organization_visiting_address',
+                'o.physical_address as organization_physical_address',
+                'o.box_no as organization_box_no',
+                'o.city as organization_city',
+                'o.phone as organization_phone',
+                'o.fax as organization_fax',
+                'o.email as organization_email',
+                'o.remarks as organization_remarks'
+
+            )
             ->whereNull('p.deleted_at')
             ->whereNull('o.deleted_at');
 
@@ -39,54 +56,39 @@ class ProjectSearchController extends Controller
             'project_id',
             'developer_id',
             'project_has_industrial_waste_water',
-            'project_risk_level'
+            'project_risk_level',
         ]);
 
-        foreach ($criterias as $word => $criteria)
-        {
+        foreach ($criterias as $word => $criteria) {
             $word = str_replace('project_', 'p.', $word);
             $word = str_replace('district_', 'd.', $word);
             $word = str_replace('category_', 'c.', $word);
             $word = str_replace('developer_', 'o.', $word);
 
-            if (in_array($word, $criteriaDefinitions["search"]))
-            {
+            if (in_array($word, $criteriaDefinitions["search"])) {
                 $result = $result->where($word, 'like', '%' . $criteria . '%');
-            }
-            else if (in_array($word, $criteriaDefinitions["multiple_text"]))
-            {
+            } elseif (in_array($word, $criteriaDefinitions["multiple_text"])) {
                 $criteriaArray = explode(",", $criteria);
                 $result = $result->whereIn($word, $criteriaArray);
-            }
-            else if (in_array($word, $criteriaDefinitions["multiple"]))
-            {
+            } elseif (in_array($word, $criteriaDefinitions["multiple"])) {
                 $result = $result->whereIn($word, [$criteria]);
-            }
-            else if (in_array($word, $criteriaDefinitions["exact"]))
-            {
+            } elseif (in_array($word, $criteriaDefinitions["exact"])) {
                 $result = $result->where($word, '=', $criteria);
             }
             // Need to handle aliases special.
-            elseif (in_array($word, $criteriaDefinitions["alias"]))
-            {
-                if ($word === "o.name")
-                {
-                    $result = $result->where(function ($query) use ($word, $criteria)
-                    {
+            elseif (in_array($word, $criteriaDefinitions["alias"])) {
+                if ($word === "o.name") {
+                    $result = $result->where(function ($query) use ($word, $criteria) {
                         $query->where($word, 'like', '%' . $criteria . '%')
                             ->orWhere("o.id", '=', $criteria)
-                            //->orWhere("o.tin", '=', $criteria);
+                        //->orWhere("o.tin", '=', $criteria);
                             ->orWhere(function ($query2) use ($criteria) {
                                 $query2->where('o.tin', '>', 0)
-                                      ->where('o.tin', '=', $criteria);
+                                    ->where('o.tin', '=', $criteria);
                             });
-                            
                     });
-                }
-                elseif ($word === "p.title")
-                {
-                    $result = $result->where(function ($query) use ($word, $criteria)
-                    {
+                } elseif ($word === "p.title") {
+                    $result = $result->where(function ($query) use ($word, $criteria) {
                         $query->where($word, 'like', '%' . $criteria . '%')
                             ->orWhere("p.id", '=', $criteria);
                     });
