@@ -66,7 +66,9 @@ module.exports = function(grunt)
                     'js/advancedController.js', 'js/loginController.js',
                     'js/directives.js', 'js/filters.js',
                     'js/services.js', 'js/projectFactory.js', 'js/advancedFactory',
-                    'js/validations.js'
+                    'js/validations.js',
+                    'js/excelLib.js',
+                    'js/excelExport.js'
                 ]
             }
         }
