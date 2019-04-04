@@ -252,23 +252,41 @@ var fileUploadMaxSize = "20MB";
 var exportObj = {};
 exportObj.exportMetaData = {};
 exportObj.exportData = function(data, tabName) {
-  console.log("sdslkl", data);
-  return;
   var dataMeta = this.exportMetaData[tabName];
   //excelExport.js
-  excelExport(
-    data,
-    dataMeta["fieldRemap"],
-    dataMeta["uneededFields"],
-    dataMeta["dateFields"]
-  );
+  excelExport(data, dataMeta);
 };
 exportObj.exportMetaData["auditAndInspection"] = {
   fieldRemap: {},
   uneededFields: [],
   dateFields: []
 };
+
 exportObj.exportMetaData["project"] = {
+  orderedKeys: [
+    "Project ID",
+    "Project name",
+    "Category",
+    "District",
+    "Location",
+    "Longitude",
+    "Latitude",
+    "Industrial waste water?",
+    "Risk level",
+    "Contact person",
+    "Project remarks",
+    "Developer ID",
+    "Developer name",
+    "TIN",
+    "Visiting address",
+    "Physical address",
+    "PO box",
+    "City",
+    "Phone",
+    "Fax",
+    "Email",
+    "Developer remarks"
+  ],
   fieldRemap: {
     project_id: "Project ID",
     project_location: "Location",
@@ -283,13 +301,15 @@ exportObj.exportMetaData["project"] = {
     project_has_industrial_waste_water: "Industrial waste water?",
     developer_id: "TIN",
     developer_name: "Developer name",
-    organization_visiting_address: "Visting address",
+    organization_visiting_address: "Visiting address",
     organization_physical_address: "Physical address",
     organization_box_no: "PO box",
     organization_city: "City",
     organization_phone: "Phone",
     organization_fax: "Fax",
-    organization_remarks: "Developer Remarks"
+    organization_email: "Email",
+    organization_id: "Developer ID",
+    organization_remarks: "Developer remarks"
   },
   uneededFields: [
     "developer_tin",

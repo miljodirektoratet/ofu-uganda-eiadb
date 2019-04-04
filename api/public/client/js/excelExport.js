@@ -1,9 +1,10 @@
 "use strict";
 
-var excelExport = function(data, fieldsToRename, fieldsToRemove, dateFields) {
-  data = exportHelpers.renameFields(data, fieldsToRename);
-  data = exportHelpers.reformatDateFields(data, dateFields);
-  data = exportHelpers.removeFields(data, fieldsToRemove);
+var excelExport = function(data, dataMeta) {
+  data = exportHelpers.renameFields(data, dataMeta["fieldRemap"]);
+  data = exportHelpers.reformatDateFields(data, dataMeta["uneededFields"]);
+  // data = exportHelpers.removeFields(data, dataMeta["dateFields"]);
+  data = exportHelpers.sortObj(data, dataMeta["orderedKeys"]);
   data = exportHelpers.replaceNullValues(data);
 
   var excel = $("#dvjson").excelexportjs({
@@ -85,4 +86,20 @@ exportHelpers.replaceNullValues = function(data) {
     }
   }
   return output;
+};
+
+exportHelpers.sortObj = function(data, orderedKeys) {
+  var data = JSON.parse(JSON.stringify(data));
+  var orderedData = [];
+
+  for (var i = 0; i < data.length; i++) {
+    var eachObj = data[i];
+    var newObj = {};
+    for (var j = 0; j < orderedKeys.length; j++) {
+      var key = orderedKeys[j];
+      newObj[key] = eachObj[key];
+    }
+    orderedData.push(newObj);
+  }
+  return orderedData;
 };
