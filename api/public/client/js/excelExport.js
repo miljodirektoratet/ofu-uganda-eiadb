@@ -1,67 +1,68 @@
 "use strict";
 
-var exportHelpers = {};
-exportHelpers.renameFields = function (data, fieldsToRename) {
-  var data = JSON.parse(JSON.stringify(data));
-  var count = data.length;
+var excelExport = function (data, fieldsToRename, fieldsToRemove, dateFields) {
 
-  for (var oldKey in fieldsToRename) {
-    if (!fieldsToRename.hasOwnProperty(oldKey)) {
-      continue;
+  var exportHelpers = {};
+  exportHelpers.renameFields = function (data, fieldsToRename) {
+    var data = JSON.parse(JSON.stringify(data));
+    var count = data.length;
+
+    for (var oldKey in fieldsToRename) {
+      if (!fieldsToRename.hasOwnProperty(oldKey)) {
+        continue;
+      }
+      var newKey = fieldsToRename[oldKey];
+      for (var i = 0; i < count; i++) {
+        var value = data[i][oldKey];
+        data[i][newKey] = value;
+        delete data[i][oldKey];
+      }
     }
-    var newKey = fieldsToRename[oldKey];
+    return data;
+  };
+
+  exportHelpers.removeFields = function (data, unNeededFields) {
+    var data = JSON.parse(JSON.stringify(data));
+    var count = data.length;
+
     for (var i = 0; i < count; i++) {
-      var value = data[i][oldKey];
-      data[i][newKey] = value;
-      delete data[i][oldKey];
-    }
-  }
-  return data;
-};
-
-exportHelpers.removeFields = function (data, unNeededFields) {
-  var data = JSON.parse(JSON.stringify(data));
-  var count = data.length;
-
-  for (var i = 0; i < count; i++) {
-    var singleRecord = data[i];
-    for (var key in singleRecord) {
-      if (singleRecord.hasOwnProperty(key)) {
-        if (unNeededFields.includes(key)) {
-          delete data[i][key];
+      var singleRecord = data[i];
+      for (var key in singleRecord) {
+        if (singleRecord.hasOwnProperty(key)) {
+          if (unNeededFields.includes(key)) {
+            delete data[i][key];
+          }
         }
       }
     }
-  }
-  return data;
-};
+    return data;
+  };
 
-exportHelpers.reformatDateFields = function (data, dateFields) {
-  return data;
-};
+  exportHelpers.reformatDateFields = function (data, dateFields) {
+    return data;
+  };
 
-exportHelpers.replaceNullValues = function (data) {
-  var output = [];
+  exportHelpers.replaceNullValues = function (data) {
+    var output = [];
 
-  for (var i = 0; i < data.length; i++) {
-    var obj = data[i];
-    if (typeof obj !== "object") {
-      continue;
-    }
-    for (k in obj) {
-      if (!obj.hasOwnProperty(k)) continue;
-      v = obj[k];
-      if (v === null || v === undefined) {
-        obj[k] = "NA";
+    for (var i = 0; i < data.length; i++) {
+      var obj = data[i];
+      if (typeof obj !== "object") {
+        continue;
       }
-      output.push(obj);
+      for (k in obj) {
+        if (!obj.hasOwnProperty(k)) continue;
+        v = obj[k];
+        if (v === null || v === undefined) {
+          obj[k] = "NA";
+        }
+        output.push(obj);
+      }
     }
-  }
-  return output;
-};
+    return output;
+  };
 
 
-var excelExport = function (data, fieldsToRename, fieldsToRemove, dateFields) {
   data = exportHelpers.renameFields(data, fieldsToRename);
   data = exportHelpers.reformatDateFields(data, dateFields);
   data = exportHelpers.removeFields(data, fieldsToRemove);
