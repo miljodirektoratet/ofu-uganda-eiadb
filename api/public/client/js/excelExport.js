@@ -1,10 +1,10 @@
 "use strict";
 
 var excelExport = function (data, fieldsToRename, fieldsToRemove, dateFields) {
-  data = window.exportHelpers.renameFields(data, fieldsToRename);
-  data = window.exportHelpers.reformatDateFields(data, dateFields);
-  data = window.exportHelpers.removeFields(data, fieldsToRemove);
-  data = window.exportHelpers.replaceNullValues(data);
+  data = exportHelpers.renameFields(data, fieldsToRename);
+  data = exportHelpers.reformatDateFields(data, dateFields);
+  data = exportHelpers.removeFields(data, fieldsToRemove);
+  data = exportHelpers.replaceNullValues(data);
 
   var excel = $("#dvjson").excelexportjs({
     containerid: "dvjson",
@@ -26,8 +26,8 @@ var excelExport = function (data, fieldsToRename, fieldsToRemove, dateFields) {
   a.click();
 };
 
-window.exportHelpers = {};
-window.exportHelpers.renameFields = function (data, fieldsToRename) {
+exportHelpers = {};
+exportHelpers.renameFields = function (data, fieldsToRename) {
   var data = JSON.parse(JSON.stringify(data));
   var count = data.length;
 
@@ -45,7 +45,7 @@ window.exportHelpers.renameFields = function (data, fieldsToRename) {
   return data;
 };
 
-window.exportHelpers.removeFields = function (data, unNeededFields) {
+exportHelpers.removeFields = function (data, unNeededFields) {
   var data = JSON.parse(JSON.stringify(data));
   var count = data.length;
 
@@ -62,11 +62,11 @@ window.exportHelpers.removeFields = function (data, unNeededFields) {
   return data;
 };
 
-window.exportHelpers.reformatDateFields = function (data, dateFields) {
+exportHelpers.reformatDateFields = function (data, dateFields) {
   return data;
 };
 
-window.exportHelpers.replaceNullValues = function (data) {
+exportHelpers.replaceNullValues = function (data) {
   var output = [];
 
   for (var i = 0; i < data.length; i++) {
