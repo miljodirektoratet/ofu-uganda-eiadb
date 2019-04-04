@@ -76,7 +76,7 @@ window.exportHelpers.replaceNullValues = function (data) {
     }
     for (var k in obj) {
       if (!obj.hasOwnProperty(k)) continue;
-      v = obj[k];
+      var v = obj[k];
       if (v === null || v === undefined) {
         obj[k] = "NA";
       }
