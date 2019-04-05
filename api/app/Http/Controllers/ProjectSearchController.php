@@ -12,8 +12,8 @@ class ProjectSearchController extends Controller
             ->join('organisations as o', 'p.organisation_id', '=', 'o.id')
             ->join('categories as c', 'p.category_id', '=', 'c.id')
             ->join('districts as d', 'p.district_id', '=', 'd.id')
-            ->join('codes as risk', 'p.risk_level', '=', 'risk.id')
-            ->join('codes as yes_no', 'p.has_industrial_waste_water', '=', 'yes_no.id')
+            ->leftJoin('codes as risk', 'p.risk_level', '=', 'risk.id')
+            ->leftJoin('codes as yes_no', 'p.has_industrial_waste_water', '=', 'yes_no.id')
             ->select(
                 'p.id as project_id',
                 'risk.description1 as project_risk_level',
