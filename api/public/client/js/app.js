@@ -258,49 +258,25 @@ exportObj.exportData = function(data, tabName) {
 };
 exportObj.exportMetaData["auditAndInspection"] = {
   fieldRemap: {},
-  uneededFields: [],
   dateFields: []
 };
 
 exportObj.exportMetaData["project"] = {
-  orderedKeys: [
-    "Project ID",
-    "Project name",
-    "Category",
-    "District",
-    "Location",
-    "Longitude",
-    "Latitude",
-    "Industrial waste water?",
-    "Risk level",
-    "Contact person",
-    "Project remarks",
-    "Developer ID",
-    "Developer name",
-    "TIN",
-    "Visiting address",
-    "Physical address",
-    "PO box",
-    "City",
-    "Phone",
-    "Fax",
-    "Email",
-    "Developer remarks"
-  ],
-  fieldRemap: {
+  fieldmap: {
     project_id: "Project ID",
-    project_location: "Location",
     project_title: "Project name",
-    project_longitude: "Longitude",
-    project_latitude: "Latitude",
     category_description: "Category",
     district_district: "District",
+    project_location: "Location",
+    project_longitude: "Longitude",
+    project_latitude: "Latitude",
+    project_has_industrial_waste_water: "Industrial waste water?",
+    project_risk_level: "Risk level",
     project_contact_person: "Contact person",
     project_remarks: "Project remarks",
-    project_risk_level: "Risk level",
-    project_has_industrial_waste_water: "Industrial waste water?",
-    developer_id: "TIN",
+    organization_id: "Developer ID",
     developer_name: "Developer name",
+    developer_id: "TIN",
     organization_visiting_address: "Visiting address",
     organization_physical_address: "Physical address",
     organization_box_no: "PO box",
@@ -308,21 +284,8 @@ exportObj.exportMetaData["project"] = {
     organization_phone: "Phone",
     organization_fax: "Fax",
     organization_email: "Email",
-    organization_id: "Developer ID",
     organization_remarks: "Developer remarks"
   },
-  uneededFields: [
-    "developer_tin",
-    "developer_name",
-    "organization_box_no",
-    "organization_physical_address",
-    "organization_box_no",
-    "organization_city",
-    "organization_phone",
-    "organization_fax",
-    "organization_remarks",
-    "organization_id"
-  ],
   dateFields: []
 };
 //End of export script

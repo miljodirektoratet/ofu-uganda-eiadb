@@ -1,10 +1,9 @@
 "use strict";
 
 var excelExport = function(data, dataMeta) {
-  data = exportHelpers.renameFields(data, dataMeta["fieldRemap"]);
-  data = exportHelpers.reformatDateFields(data, dataMeta["uneededFields"]);
-  // data = exportHelpers.removeFields(data, dataMeta["dateFields"]);
-  data = exportHelpers.sortObj(data, dataMeta["orderedKeys"]);
+  data = exportHelpers.renameFields(data, dataMeta["fieldmap"]);
+  data = exportHelpers.reformatDateFields(data, dataMeta["dateFields"]);
+  data = exportHelpers.sortObj(data, Object.values(dataMeta["fieldmap"]));
   data = exportHelpers.replaceNullValues(data);
 
   var excel = $("#dvjson").excelexportjs({
