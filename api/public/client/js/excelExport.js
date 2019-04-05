@@ -1,11 +1,12 @@
 "use strict";
 
 var excelExport = function(data, dataMeta) {
-  data = exportHelpers.renameFields(data, dataMeta["fieldmap"]);
   data = exportHelpers.reformatDateFields(data, dataMeta["dateFields"]);
+  data = exportHelpers.renameFields(data, dataMeta["fieldmap"]);
   data = exportHelpers.sortObj(data, Object.values(dataMeta["fieldmap"]));
   data = exportHelpers.replaceNullValues(data);
-
+  console.log(data, "final output");
+  return;
   var excel = $("#dvjson").excelexportjs({
     containerid: "dvjson",
     datatype: "json",
@@ -64,7 +65,27 @@ exportHelpers.removeFields = function(data, unNeededFields) {
 };
 
 exportHelpers.reformatDateFields = function(data, dateFields) {
-  return data;
+  reverseDate = function(date) {
+    if (!date) {
+      return date;
+    }
+    return date
+      .split("-")
+      .reverse()
+      .join("-");
+  };
+  var results = [];
+  for (var i = 0; i < data.length; i++) {
+    var obj = data[i];
+    for (var key in obj) {
+      if (!obj.hasOwnProperty(key)) continue;
+      if (dateFields.includes(key)) {
+        obj[key] = reverseDate(obj[key]);
+      }
+    }
+    results.push(obj);
+  }
+  return results;
 };
 
 exportHelpers.replaceNullValues = function(data) {
@@ -78,11 +99,11 @@ exportHelpers.replaceNullValues = function(data) {
     for (var k in obj) {
       if (!obj.hasOwnProperty(k)) continue;
       var v = obj[k];
-      if (v === null || v === undefined) {
+      if (v === null || v === undefined || v == "") {
         obj[k] = "NA";
       }
-      output.push(obj);
     }
+    output.push(obj);
   }
   return output;
 };

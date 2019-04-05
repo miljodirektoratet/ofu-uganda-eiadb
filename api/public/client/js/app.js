@@ -257,10 +257,43 @@ exportObj.exportData = function(data, tabName) {
   excelExport(data, dataMeta);
 };
 exportObj.exportMetaData["auditAndInspection"] = {
-  fieldRemap: {},
-  dateFields: []
+  fieldmap: {
+    auditinspection_code: "Control number",
+    auditinspection_status: "Audit and inspection status",
+    auditinspection_year: "Year",
+    auditinspection_type: "Activity",
+    auditinspection_reason: "Type",
+    lead_officer_name: "Lead officer",
+    other_officer_name: "Other officers",
+    auditinspection_date_carried_out: "Date carried out",
+    auditinspection_days: "Number of days",
+    auditinspection_external_participants:
+      "Participants from lead agencies, facilities etc.",
+    auditinspection_coordinated: "Multisectoral",
+    lead_agency_name: "Lead agencies",
+    auditinspection_date_deadline: "Date of response",
+    auditinspection_action_taken: "Response",
+    advance_notice: "Advanced notice",
+    auditinspection_findings: "Description of findings",
+    auditinspection_performance_level: "Performance level",
+    auditinspection_recommendations: "Recommendations",
+    auditinspection_date_action_taken: "Follow-up date",
+    auditinspection_date_closing: "Activity ended",
+    auditinspection_remarks: "Remarks",
+    project_id: "Project ID",
+    project_title: "Project name",
+    category_description: "Category",
+    district_district: "District",
+    organisation_id: "Developer ID",
+    developer_name: "Developer name"
+  },
+  dateFields: [
+    "auditinspection_date_carried_out",
+    "auditinspection_date_deadline",
+    "auditinspection_date_closing",
+    "auditinspection_date_action_taken"
+  ]
 };
-
 exportObj.exportMetaData["project"] = {
   fieldmap: {
     project_id: "Project ID",
