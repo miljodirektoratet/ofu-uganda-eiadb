@@ -294,6 +294,7 @@ exportObj.exportMetaData["auditAndInspection"] = {
     "auditinspection_date_action_taken"
   ]
 };
+
 exportObj.exportMetaData["project"] = {
   fieldmap: {
     project_id: "Project ID",
@@ -321,6 +322,62 @@ exportObj.exportMetaData["project"] = {
   },
   dateFields: []
 };
+
+exportObj.exportMetaData["exportPermitsLicenses"] = {
+  fieldmap: {
+    permitlicense_id: "Permit and license ID",
+    permitlicense_regulation: "Regulation",
+    permitlicense_date_submitted: "Date of submission",
+    permitlicense_waste_license_type: "Waste license type",
+    permitlicense_ecosystem: "Ecosystem",
+    permitlicense_regulation_activity: "Regulation activity",
+    permitlicense_area: "Area",
+    permitlicense_unit: "Unit",
+    permitlicense_approved_by_the_lc1: "LC1 approved",
+    permitlicense_approved_by_the_dec: "DEC approved",
+    permitlicense_application_number: "Application number",
+    permitlicense_application_fee_receipt_number:
+      "Application fee receipt number",
+    permitlicense_application_fee_receipt_number: "Date feedback to applicants",
+    permitlicense_date_sent_to_director: "Date sent to Director",
+    permitlicense_date_sent_from_dep: "Date sent to team leader from dep",
+    permitlicense_date_sent_officer: "Date sent to the officer",
+    permitlicense_officer_assigned: "Team leader",
+    permitlicense_handling_officer: "Application evaluation by officer",
+    permitlicense_date_of_evaluation: "Date of evaluation",
+    permitlicense_folio_no: "File and foliono.",
+    permitlicense_inspection_recommended: "Inspection before decision ?",
+    permitlicense_date_inspection: "Date of inspection",
+    permitlicense_officer_recommend: "Recommendations by reviewer",
+    permitlicense_fee_receipt_no: "Permit/license fee receipt number",
+    permitlicense_date_fee_payed: "Date permit / license fee paid",
+    permitlicense_date_sent_to_ed_for_decision: "Date to ED for decision",
+    permitlicense_decision: "Decision taken",
+    permitlicense_signature_on_permit_license: "Signature on permit / license",
+    permitlicense_date_permit_license: "Date on the permit / licence",
+    permitlicense_permit_license_no: "Permit / license number",
+    permitlicense_date_permit_license_expired: "Date permit / license expired",
+    project_id: "Project ID",
+    project_title: "Project name",
+    category_name: "Category",
+    district_district: "District",
+    organization_id: "Developer ID",
+    organization_name: "Developer name"
+  },
+  dateFields: [
+    "permitlicense_date_submitted",
+    "permitlicense_date_sent_to_director",
+    "permitlicense_date_sent_from_dep",
+    "permitlicense_date_sent_officer",
+    "permitlicense_date_of_evaluation",
+    "permitlicense_date_inspection",
+    "permitlicense_date_fee_payed",
+    "permitlicense_date_sent_to_ed_for_decision",
+    "permitlicense_date_permit_license",
+    "permitlicense_date_permit_license_expired"
+  ]
+};
+
 //End of export script
 
 //var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;

@@ -138,6 +138,10 @@ controllers.controller('SearchPermitsLicensesController', ['$scope', '$routePara
         scope.showResultGrid = false;
     };
 
+    scope.exportPermitsLicensesResults = function (data) {
+        exportObj.exportData(data, "exportPermitsLicenses");
+    };
+
     scope.criteria = location.search();
     scope.dateCriteria = {};
     if (scope.criteria.permitlicense_date_submission_from)
