@@ -51,8 +51,8 @@ class AuditInspectionSearchController extends Controller
                 'c.description_short as category_description',
                 'o.tin as developer_tin',
                 '`lead_officer`.name as lead_officer_name',
-                DB::raw('GROUP_CONCAT(other_personnel.name) AS other_officer_name'),
-                DB::raw('GROUP_CONCAT(lead_agency.long_name) AS lead_agency_name')
+                DB::raw('GROUP_CONCAT(DISTINCT other_personnel.name) AS other_officer_name'),
+                DB::raw('GROUP_CONCAT(DISTINCT lead_agency.long_name) AS lead_agency_name')
             )
             ->whereNull('ai.deleted_at')
             ->whereNull('p.deleted_at')
