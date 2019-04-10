@@ -64,7 +64,7 @@ exportHelpers.removeFields = function(data, unNeededFields) {
 };
 
 exportHelpers.reformatDateFields = function(data, dateFields) {
-  reverseDate = function(date) {
+  var reverseDate = function(date) {
     if (!date) {
       return date;
     }
