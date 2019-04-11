@@ -20,9 +20,11 @@ var excelExport = function(data, dataMeta) {
   var hour = dt.getHours();
   var mins = dt.getMinutes();
   var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+  var blob = exportHelpers.b64toBlob(excel, "application/vnd.ms-excel");
+  var blobUrl = URL.createObjectURL(blob);
   var link = document.createElement("a");
   var a = document.body.appendChild(link);
-  a.href = excel;
+  a.href = blobUrl;
   a.download = "exported_table_" + postfix + ".xls";
   a.click();
 };
@@ -124,4 +126,24 @@ exportHelpers.sortObj = function(data, orderedKeys) {
     orderedData.push(newObj);
   }
   return orderedData;
+};
+
+exportHelpers.b64toBlob = function(b64Data, contentType) {
+  sliceSize = 512;
+  var byteCharacters = atob(b64Data);
+  var byteArrays = [];
+
+  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    var byteNumbers = new Array(slice.length);
+    for (var i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    var byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+  var blob = new Blob(byteArrays, { type: contentType });
+  return blob;
 };
