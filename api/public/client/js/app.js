@@ -378,6 +378,51 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
   ]
 };
 
+exportObj.exportMetaData["eiaspermits"] = {
+  fieldmap: {
+    eiapermit_id: "EIA and permit ID",
+    eiapermit_status: "EIA status",
+    practitioner_teamleader: "Practitioner team leader",
+    cost: "Cost of the proposed development",
+    eiapermit_cost_currency: "Cost currency",
+    eiapermit_expected_jobs_created: "Expected jobs created",
+    team_leader_name: "Team leader",
+    personnel_officers_name: "Officers to handle",
+    eias_permits_inspection_recommendation: "Inspection before decision?",
+    eiapermit_date_inspection: "Date of inspection",
+    eiapermit_officer_recommend: "Recommendations by reviewer",
+    eiapermit_fee: "Expected fees",
+    eiapermit_fee_currency: "Fee currency",
+    eiapermit_date_sent_ded_approval: "Date sent for approval",
+    eiapermit_decision: "Decision taken",
+    eiapermit_date_decision: "Date for decision",
+    eiapermit_date_fee_notification: "Date of invoicing",
+    eiapermit_date_fee_payed: "Date invoice is payed",
+    eiapermit_fee_receipt_no: "Fee receipt number",
+    eiapermit_designation: "Signature on certificate",
+    eiapermit_date_certificate: "Date on the certificate",
+    eiapermit_certificate_no: "Certificate number",
+    eiapermit_date_cancelled: "Certificate canceled date",
+    eiapermit_remarks: "Remarks",
+    document_codes: "Documents",
+    project_id: "Project ID",
+    project_title: "Project name",
+    category_description: "Category",
+    district_district: "District",
+    developer_id: "Developer ID",
+    developer_name: "Developer name"
+  },
+  dateFields: [
+    "eiapermit_date_inspection",
+    "eiapermit_date_sent_ded_approval",
+    "eiapermit_date_decision",
+    "eiapermit_date_fee_notification",
+    "eiapermit_date_fee_payed",
+    "eiapermit_date_certificate",
+    "eiapermit_date_cancelled"
+  ]
+};
+
 //End of export script
 
 //var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
