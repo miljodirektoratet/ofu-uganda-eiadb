@@ -56,7 +56,8 @@ class AuditInspectionSearchController extends Controller
             )
             ->whereNull('ai.deleted_at')
             ->whereNull('p.deleted_at')
-            ->whereNull('o.deleted_at');
+            ->whereNull('o.deleted_at')
+            ->groupBy('auditinspection_id');
 
         $criteriaDefinitions = array();
         $criteriaDefinitions["search"] = ["ai.code"];
