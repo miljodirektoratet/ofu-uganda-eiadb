@@ -23,15 +23,14 @@ class PermitLicenseSearchController extends Controller
             ->leftJoin('codes as regulation_activity', 'pl.regulation_activity', '=', 'regulation_activity.id')
             ->leftJoin('codes as unit', 'pl.unit', '=', 'unit.id')
             ->leftJoin('codes as inspection', 'pl.inspection_recommended', '=', 'inspection.id')
-            ->leftJoin('permits_licenses_personnel as personnel', 'pl.id', '=', 'personnel.permit_license_id')
-            ->leftJoin('permits_licenses_personnel as handling_officer', 'pl.id', '=', 'personnel.permit_license_id')
+            ->leftJoin('permits_licenses_personnel as handling_officer', 'pl.id', '=', 'handling_officer.permit_license_id')
             ->leftJoin('users as handling_officer_users  ', 'handling_officer.user_id', '=', 'handling_officer_users.id')
             ->leftJoin('users as signature', 'signature.id', '=', 'pl.signature_on_permit_license')
             ->leftJoin('codes as decision  ', 'decision.id', '=', 'pl.decision')
             ->select(
                 'pl.id as permitlicense_id',
                 'regulation.description1 as permitlicense_regulation',
-                'p.id as    ',
+                'p.id as project_id',
                 'p.title as project_title',
                 'pl.area as permitlicense_area',
                 DB::raw('if(pl.approved_by_the_lc1, "Yes", "No") as permitlicense_approved_by_the_lc1'),
@@ -71,7 +70,8 @@ class PermitLicenseSearchController extends Controller
             ->whereNull('pl.deleted_at')
             ->whereNull('p.deleted_at')
             ->whereNull('u.deleted_at')
-            ->whereNull('o.deleted_at');
+            ->whereNull('o.deleted_at')
+            ->groupBy('permitlicense_id');
 
         $criteriaDefinitions = array();
         $criteriaDefinitions["search"] = [];
