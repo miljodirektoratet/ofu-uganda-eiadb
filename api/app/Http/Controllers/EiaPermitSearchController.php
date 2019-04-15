@@ -27,10 +27,11 @@ class EiaPermitSearchController extends Controller
             ->leftJoin('codes as decision_list', 'decision_list.id', '=', 'ep.decision')
             ->leftJoin('users as designation_list', 'designation_list.id', '=', 'ep.designation')
             ->leftJoin('documents', 'documents.eia_permit_id', '=', 'ep.id')
+            ->leftJoin('codes as fee_currency_list', 'fee_currency_list.id', '=', 'ep.fee_currency')
             ->select(
                 'ep.id as eiapermit_id',
                 'ep.date_inspection as eiapermit_date_inspection',
-                'ep.fee as eiapermit_fee',
+                DB::raw('FLOOR(ep.fee) as eiapermit_fee'),
                 'ep.date_fee_payed as eiapermit_date_fee_payed',
                 'ep.fee_receipt_no as eiapermit_fee_receipt_no',
                 'ep.date_certificate as eiapermit_date_certificate',
@@ -40,7 +41,7 @@ class EiaPermitSearchController extends Controller
                 'designation_list.name as eiapermit_designation',
                 'ep.date_decision as eiapermit_date_decision',
                 'ep.date_fee_notification as eiapermit_date_fee_notification',
-                'ep.expected_jobs_created as eiapermit_expected_jobs_created',
+                DB::raw('FLOOR(ep.expected_jobs_created) as eiapermit_expected_jobs_created'),
                 'ep.date_sent_ded_approval as eiapermit_date_sent_ded_approval',
                 'p.id as project_id',
                 'status.description1 as eiapermit_status',
@@ -54,11 +55,13 @@ class EiaPermitSearchController extends Controller
                 DB::raw('GROUP_CONCAT(DISTINCT handle_officers.name) as personnel_officers_name'),
                 DB::raw('GROUP_CONCAT(DISTINCT documents.code) as document_codes'),
                 'inspection_recommendation_list.description1 as eias_permits_inspection_recommendation',
+                'ep.officer_recommend as eiapermit_officer_recommend',
                 'o.id as developer_id',
                 'o.name as developer_name',
                 'd.district as district_district',
                 'p.category_id as project_category_id',
-                'c.description_short as category_description'
+                'c.description_short as category_description',
+                'fee_currency_list.description1 as eiapermit_fee_currency'
 
 //                ,'doc.title'
                 //                ,'doc.code'
