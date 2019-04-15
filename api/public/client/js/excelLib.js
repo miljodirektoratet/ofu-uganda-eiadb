@@ -108,7 +108,8 @@
     }
 
     function ConvertDataStructureToTable() {
-      var result = "<table id='tabledata' style='table-layout:inherit'>";
+      var result =
+        "<table id='tabledata' style='table-layout:inherit;white-space: nowrap;'>";
 
       result += "<thead><tr>";
       $($settings.columns).each(function(key, value) {
