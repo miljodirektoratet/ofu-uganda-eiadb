@@ -5,8 +5,7 @@ var excelExport = function(data, dataMeta) {
   data = exportHelpers.renameFields(data, dataMeta["fieldmap"]);
   data = exportHelpers.sortObj(data, Object.values(dataMeta["fieldmap"]));
   data = exportHelpers.replaceNullValues(data);
-  console.log(data);
-  return;
+
   var excel = $("#dvjson").excelexportjs({
     containerid: "dvjson",
     datatype: "json",
