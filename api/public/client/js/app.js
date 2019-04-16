@@ -273,7 +273,7 @@ exportObj.exportMetaData["auditAndInspection"] = {
     lead_agency_name: "Lead agencies",
     auditinspection_date_deadline: "Date of response",
     auditinspection_action_taken: "Response",
-    advance_notice: "Advanced notice",
+    auditinspection_advance_notice: "Advanced notice",
     auditinspection_findings: "Description of findings",
     auditinspection_performance_level: "Performance level",
     auditinspection_recommendations: "Recommendations",

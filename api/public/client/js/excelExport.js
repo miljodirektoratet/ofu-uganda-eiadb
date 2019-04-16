@@ -129,7 +129,7 @@ exportHelpers.sortObj = function(data, orderedKeys) {
 };
 
 exportHelpers.b64toBlob = function(b64Data, contentType) {
-  var sliceSize = 512;
+  sliceSize = 512;
   var byteCharacters = atob(b64Data);
   var byteArrays = [];
 
