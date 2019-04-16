@@ -338,7 +338,7 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
     permitlicense_application_number: "Application number",
     permitlicense_application_fee_receipt_number:
       "Application fee receipt number",
-    permitlicense_application_fee_receipt_number: "Date feedback to applicants",
+    permitlicense_date_sent_officer: "Date feedback to applicants",
     permitlicense_date_sent_to_director: "Date sent to Director",
     permitlicense_date_sent_from_dep: "Date sent to team leader from dep",
     permitlicense_date_sent_officer: "Date sent to the officer",
@@ -361,8 +361,8 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
     project_title: "Project name",
     category_name: "Category",
     district_district: "District",
-    organization_id: "Developer ID",
-    organization_name: "Developer name"
+    organisation_id: "Developer ID",
+    organisation_name: "Developer name"
   },
   dateFields: [
     "permitlicense_date_submitted",
