@@ -1,12 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use Response;
 use DB;
-use Input;
+use Response;
 
 class ExternalAuditSearchController extends Controller
 {
-// GET /resource/:id/subresource
+    // GET /resource/:id/subresource
     public function index()
     {
 //        DB::enableQueryLog();
@@ -20,20 +19,40 @@ class ExternalAuditSearchController extends Controller
             ->leftJoin('codes as status', 'ea.status', '=', 'status.id')
             ->leftJoin('external_audits_personnel as personnel', 'ea.id', '=', 'personnel.external_audit_id')
             ->leftJoin('documents as doc', 'ea.id', '=', 'doc.external_audit_id')
-            ->select('ea.id as externalaudit_id',
+            ->leftJoin('users as team_leader_list', 'team_leader_list.id', '=', 'ea.teamleader_id')
+            ->leftJoin('users as handling_officer_list', 'handling_officer_list.id', '=', 'ea.user_id')
+            ->select(
+                'ea.id as externalaudit_id',
                 'p.id as project_id',
+                'ea.type as ea_type',
+                'team_leader_list.name as team_leader',
                 'status.description1 as externalaudit_status',
                 'u.name as externalaudit_officer_assigned',
-                'p.title as project_title'
-//                ,'doc.title'
-//                ,'doc.code'
-//                ,'doc.number'
-              //  ,'doc.date_submitted'
+                'p.title as project_title',
+                DB::raw('GROUP_CONCAT(DISTINCT handling_officer_list.name) as handling_officers'),
+                'ea.verification_inspection as verification_inspection',
+                'ea.date_inspection as date_inspection',
+                "ea.date_response as date_response",
+                DB::raw('if(ea.file_metadata_response_id, "Yes", "No") as file_metadata_response_id'),
+                "ea.date_deadline_compliance as date_deadline_compliance",
+                "ea.review_findings as review_findings",
+                "ea.response as response",
+                DB::raw('GROUP_CONCAT(DISTINCT doc.code) as doc_code'),
+                'p.title as project_project_name',
+                'o.name as organisation_name',
+                'o.id as organisation_id',
+                'd.district as district_district',
+                'c.description_short as category_name'
+                // , 'doc.title'
+                //                ,'doc.code'
+                //                ,'doc.number'
+                //  ,'doc.date_submitted'
             )
             ->whereNull('ea.deleted_at')
             ->whereNull('p.deleted_at')
             ->whereNull('u.deleted_at')
-            ->whereNull('o.deleted_at');
+            ->whereNull('o.deleted_at')
+            ->groupBy('externalaudit_id');
 
         $criteriaDefinitions = array();
         $criteriaDefinitions["search"] = ["doc.title"];
@@ -59,8 +78,7 @@ class ExternalAuditSearchController extends Controller
             'document_year',
         ]);
 
-        foreach ($criterias as $word => $criteria)
-        {
+        foreach ($criterias as $word => $criteria) {
             $word = str_replace('project_', 'p.', $word);
             $word = str_replace('externalaudit_', 'ea.', $word);
             $word = str_replace('district_', 'd.', $word);
@@ -69,81 +87,53 @@ class ExternalAuditSearchController extends Controller
             $word = str_replace('personnel_', 'personnel.', $word);
             $word = str_replace('document_', 'doc.', $word);
 
-            if (in_array($word, $criteriaDefinitions["search"]))
-            {
+            if (in_array($word, $criteriaDefinitions["search"])) {
                 $result = $result->where($word, 'like', '%' . $criteria . '%');
-            }
-
-            elseif (in_array($word, $criteriaDefinitions["multiple_text"]))
-            {
+            } elseif (in_array($word, $criteriaDefinitions["multiple_text"])) {
                 $criteriaArray = explode(",", $criteria);
                 $result = $result->whereIn($word, $criteriaArray);
-            }
-            elseif (in_array($word, $criteriaDefinitions["multiple"]))
-            {
+            } elseif (in_array($word, $criteriaDefinitions["multiple"])) {
                 $result = $result->whereIn($word, [$criteria]);
-            }
-            elseif (in_array($word, $criteriaDefinitions["exact"]))
-            {
+            } elseif (in_array($word, $criteriaDefinitions["exact"])) {
                 $result = $result->where($word, '=', $criteria);
             }
             // Need to handle aliases special.
-            elseif (in_array($word, $criteriaDefinitions["alias"]))
-            {
-                if ($word === "personnel.user_id")
-                {
-                    $result = $result->where(function ($query) use ($word, $criteria)
-                    {
+            elseif (in_array($word, $criteriaDefinitions["alias"])) {
+                if ($word === "personnel.user_id") {
+                    $result = $result->where(function ($query) use ($word, $criteria) {
                         $query->whereIn($word, [$criteria])
                             ->whereIn("ea.user_id", [$criteria], 'or');
                     });
-                }
-                elseif ($word === "o.name")
-                {
-                    $result = $result->where(function ($query) use ($word, $criteria)
-                    {
+                } elseif ($word === "o.name") {
+                    $result = $result->where(function ($query) use ($word, $criteria) {
                         $query->where($word, 'like', '%' . $criteria . '%')
                             ->orWhere("o.id", '=', $criteria)
-                            //->orWhere("o.tin", '=', $criteria);
+                        //->orWhere("o.tin", '=', $criteria);
                             ->orWhere(function ($query2) use ($criteria) {
                                 $query2->where('o.tin', '>', 0)
-                                      ->where('o.tin', '=', $criteria);
+                                    ->where('o.tin', '=', $criteria);
                             });
                     });
-                }
-                elseif ($word === "p.title")
-                {
-                    $result = $result->where(function ($query) use ($word, $criteria)
-                    {
+                } elseif ($word === "p.title") {
+                    $result = $result->where(function ($query) use ($word, $criteria) {
                         $query->where($word, 'like', '%' . $criteria . '%')
                             ->orWhere("p.id", '=', $criteria);
                     });
-                }
-                elseif ($word === "doc.code")
-                {
-                    $result = $result->where(function ($query) use ($word, $criteria)
-                    {
+                } elseif ($word === "doc.code") {
+                    $result = $result->where(function ($query) use ($word, $criteria) {
                         $query->where($word, '=', $criteria)
                             ->orWhere("doc.number", '=', $criteria);
                     });
                 }
-            }
-            elseif (in_array($word, $criteriaDefinitions["special"]))
-            {
-                if ($word === "doc.year")
-                {
+            } elseif (in_array($word, $criteriaDefinitions["special"])) {
+                if ($word === "doc.year") {
                     $result = $result->whereRaw("YEAR(doc.date_submitted)=?", [$criteria]);
-                }
-                elseif ($word === "ea.date_submission_from")
-                {
+                } elseif ($word === "ea.date_submission_from") {
                     $result = $result->where("doc.date_submitted", '>=', [$criteria]);
-                }
-                elseif ($word === "ea.date_submission_to")
-                {
+                } elseif ($word === "ea.date_submission_to") {
                     $result = $result->where("doc.date_submitted", '<=', [$criteria]);
                 }
             }
-
         }
 
         // Need to have distinct because of leftJoin with audits_inspections_personnel.

@@ -380,7 +380,6 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
     "permitlicense_date_permit_license_expired"
   ]
 };
-
 exportObj.exportMetaData["eiaspermits"] = {
   fieldmap: {
     eiapermit_id: "EIA and permit ID",
@@ -424,6 +423,31 @@ exportObj.exportMetaData["eiaspermits"] = {
     "eiapermit_date_certificate",
     "eiapermit_date_cancelled"
   ]
+};
+
+exportObj.exportMetaData["externalAudit"] = {
+  fieldmap: {
+    externalaudit_id: "External audit ID",
+    project_id: "Project ID",
+    ea_type: "Type of external audit",
+    team_leader: "Team leader",
+    handling_officers: "Officers to handle",
+    verification_inspection: "Verification inspection?",
+    date_inspection: "Date of inspection",
+    date_response: "Date of response",
+    file_metadata_response_id: "Response letter",
+    review_findings: "Review findings",
+    response: "Response",
+    date_deadline_compliance: "Date for complete compliance",
+    doc_code: "Documents",
+    // project_project_id: "Project ID",
+    project_project_name: "Project name",
+    category_name: "Category",
+    district_district: "District",
+    organisation_id: "Developer ID",
+    organisation_name: "Developer name"
+  },
+  dateFields: ["date_inspection", "date_response"]
 };
 
 //End of export script
