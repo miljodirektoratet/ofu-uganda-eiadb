@@ -338,12 +338,15 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
     permitlicense_application_number: "Application number",
     permitlicense_application_fee_receipt_number:
       "Application fee receipt number",
+    permitlicense_officers_name: "Officers to handle",
+
     permitlicense_date_sent_officer: "Date feedback to applicants",
     permitlicense_date_sent_to_director: "Date sent to Director",
     permitlicense_date_sent_from_dep: "Date sent to team leader from dep",
     permitlicense_date_sent_officer: "Date sent to the officer",
     permitlicense_officer_assigned: "Team leader",
-    permitlicense_handling_officer: "Application evaluation by officer",
+    permitlicense_handling_officer: "Officers to handle",
+    permitlicense_officer_evaluation: "Application evaluation by officer",
     permitlicense_date_of_evaluation: "Date of evaluation",
     permitlicense_folio_no: "File and foliono.",
     permitlicense_inspection_recommended: "Inspection before decision ?",

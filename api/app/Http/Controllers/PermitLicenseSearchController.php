@@ -26,7 +26,8 @@ class PermitLicenseSearchController extends Controller
             ->leftJoin('permits_licenses_personnel as handling_officer', 'pl.id', '=', 'handling_officer.permit_license_id')
             ->leftJoin('users as handling_officer_users  ', 'handling_officer.user_id', '=', 'handling_officer_users.id')
             ->leftJoin('users as signature', 'signature.id', '=', 'pl.signature_on_permit_license')
-            ->leftJoin('codes as decision  ', 'decision.id', '=', 'pl.decision')
+            ->leftJoin('codes as decision', 'decision.id', '=', 'pl.decision')
+            ->leftJoin('codes as evaluation_list', 'evaluation_list.id', '=', 'pl.application_evaluation_by_officer')
             ->select(
                 'pl.id as permitlicense_id',
                 'regulation.description1 as permitlicense_regulation',
@@ -53,9 +54,10 @@ class PermitLicenseSearchController extends Controller
                 'pl.date_sent_to_ed_for_decision as permitlicense_date_sent_to_ed_for_decision',
                 'pl.date_permit_license as permitlicense_date_permit_license',
                 'signature.name as permitlicense_signature_on_permit_license',
-                'decision as permitlicense_decision',
+                'decision.description1 as permitlicense_decision',
                 'inspection.description1 as permitlicense_inspection_recommended',
                 DB::raw('GROUP_CONCAT(DISTINCT handling_officer_users.name) as permitlicense_handling_officer'),
+                'evaluation_list.description1 as permitlicense_officer_evaluation',
                 'status.description1 as permitlicense_status',
                 'waste_license.description2 as permitlicense_waste_license_type',
                 'ecosystem.description2 as permitlicense_ecosystem',
