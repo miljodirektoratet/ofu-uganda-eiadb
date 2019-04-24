@@ -1,6 +1,6 @@
 "use strict";
 
-var excelExport = function(data, dataMeta) {
+var excelExport = function(data, dataMeta, tabName) {
   data = exportHelpers.reformatDateFields(data, dataMeta["dateFields"]);
   data = exportHelpers.renameFields(data, dataMeta["fieldmap"]);
   data = exportHelpers.sortObj(data, Object.values(dataMeta["fieldmap"]));
@@ -25,7 +25,7 @@ var excelExport = function(data, dataMeta) {
   var link = document.createElement("a");
   var a = document.body.appendChild(link);
   a.href = blobUrl;
-  a.download = "exported_table_" + postfix + ".xls";
+  a.download = tabName + "_" + postfix + ".xls";
   a.click();
 };
 

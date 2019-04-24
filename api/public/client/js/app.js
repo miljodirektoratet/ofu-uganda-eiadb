@@ -254,7 +254,7 @@ exportObj.exportMetaData = {};
 exportObj.exportData = function(data, tabName) {
   var dataMeta = this.exportMetaData[tabName];
   //excelExport.js
-  excelExport(data, dataMeta);
+  excelExport(data, dataMeta, tabName);
 };
 exportObj.exportMetaData["auditAndInspection"] = {
   fieldmap: {
