@@ -21,6 +21,12 @@ class ExternalAuditSearchController extends Controller
             ->leftJoin('documents as doc', 'ea.id', '=', 'doc.external_audit_id')
             ->leftJoin('users as team_leader_list', 'team_leader_list.id', '=', 'ea.teamleader_id')
             ->leftJoin('users as handling_officer_list', 'handling_officer_list.id', '=', 'ea.user_id')
+            ->leftJoin(
+                'codes as verification_inspection_list',
+                'verification_inspection_list.id',
+                '=',
+                'ea.verification_inspection'
+            )
             ->select(
                 'ea.id as externalaudit_id',
                 'p.id as project_id',
@@ -30,7 +36,7 @@ class ExternalAuditSearchController extends Controller
                 'u.name as externalaudit_officer_assigned',
                 'p.title as project_title',
                 DB::raw('GROUP_CONCAT(DISTINCT handling_officer_list.name) as handling_officers'),
-                'ea.verification_inspection as verification_inspection',
+                'verification_inspection_list.description1 as verification_inspection',
                 'ea.date_inspection as date_inspection',
                 "ea.date_response as date_response",
                 DB::raw('if(ea.file_metadata_response_id, "Yes", "No") as file_metadata_response_id'),
