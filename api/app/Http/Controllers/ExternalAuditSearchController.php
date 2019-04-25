@@ -27,10 +27,12 @@ class ExternalAuditSearchController extends Controller
                 '=',
                 'ea.verification_inspection'
             )
+            ->leftJoin('codes as ea_type_list', 'ea_type_list.id', '=', 'ea.type')
+            ->leftJoin('codes as response_list', 'response_list.id', '=', 'ea.response')
             ->select(
                 'ea.id as externalaudit_id',
                 'p.id as project_id',
-                'ea.type as ea_type',
+                'ea_type_list.description1 as ea_type',
                 'team_leader_list.name as team_leader',
                 'status.description1 as externalaudit_status',
                 'u.name as externalaudit_officer_assigned',
@@ -42,7 +44,7 @@ class ExternalAuditSearchController extends Controller
                 DB::raw('if(ea.file_metadata_response_id, "Yes", "No") as file_metadata_response_id'),
                 "ea.date_deadline_compliance as date_deadline_compliance",
                 "ea.review_findings as review_findings",
-                "ea.response as response",
+                "response_list.description1 as response",
                 DB::raw('GROUP_CONCAT(DISTINCT doc.code) as doc_code'),
                 'p.title as project_project_name',
                 'o.name as organisation_name',
