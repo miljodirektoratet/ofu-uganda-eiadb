@@ -338,7 +338,7 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
     permitlicense_application_number: "Application number",
     permitlicense_application_fee_receipt_number:
       "Application fee receipt number",
-    permitlicense_officers_name: "Officers to handle",
+    permitlicense_date_feedback_to_applicants: "Date feedback to applicants",
 
     permitlicense_date_sent_officer: "Date feedback to applicants",
     permitlicense_date_sent_to_director: "Date sent to Director",
@@ -360,6 +360,7 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
     permitlicense_date_permit_license: "Date on the permit / licence",
     permitlicense_permit_license_no: "Permit / license number",
     permitlicense_date_permit_license_expired: "Date permit / license expired",
+    permitlicense_documentation_files: "Soft copy",
     project_id: "Project ID",
     project_title: "Project name",
     category_name: "Category",
@@ -377,7 +378,8 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
     "permitlicense_date_fee_payed",
     "permitlicense_date_sent_to_ed_for_decision",
     "permitlicense_date_permit_license",
-    "permitlicense_date_permit_license_expired"
+    "permitlicense_date_permit_license_expired",
+    "permitlicense_date_feedback_to_applicants"
   ]
 };
 exportObj.exportMetaData["eiaspermits"] = {
