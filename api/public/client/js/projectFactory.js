@@ -327,6 +327,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
         factory.setOrganisation = function (o)
         {
             var deferred = $q.defer();
+            o = new Organisation(o);
             factory.organisation = o;
             o.$get({}, function (o)
             {

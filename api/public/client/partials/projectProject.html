@@ -1,19 +1,22 @@
 <div class="row project-project">
-
     <div class="col-md-12 project-project-new" ng-if="selectOrganisationMode">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title">Select developer for the new project</h2>
+                <h2 class="panel-title">Select developer for the new project
+
+                    <span class="pull-right">Result count: {{totalCount}}</span>
+                </h2>
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-8">
                         <form class="form-inline" role="form">
                             <div class="form-group">
-                                <label class="sr-only" for="filterText">Filter</label>
-                                <input type="text" focus="true" class="form-control input-filter" id="filterText" placeholder="Filter" ng-model="filterText">
+                                <label class="sr-only" for="filterText">Search</label>
+                                <input type="text" focus="true" class="form-control input-filter" id="filterText" placeholder="Search" ng-model="data.searchWord">
+                                
+                                <button ng-click="search()" class="btn btn-success">Search</button>
                             </div>
-                            <span>Count: {{(organisations | filter:filterText).length}}</span>
                         </form>
                     </div>
                     <div class="col-md-4">
@@ -33,7 +36,7 @@
                     <div class="col-md-1"></div>
                 </div>
 
-                <div class="row project" ng-repeat="o in organisations | filter:filterText">
+                <div class="row project" ng-repeat="o in organisations">
                     <div class="col-md-12">
                         <div class="row master" ng-click="newProjectExisitingOrganisation(o)">
                             <div class="col-md-1">{{o.id}}</div>
@@ -45,9 +48,13 @@
                         </div>
                     </div>
                 </div>
+                <center>
+                    <br>
+                        <button class=" btn-lg btn-block btn btn-success" ng-hide="(totalCount == organisations.length)" ng-click="loadMore()">Load more</button>
+                </center>
+                </div>
             </div>
         </div>
-    </div>
 
     <div class="col-md-6 project-project-project" ng-if="!selectOrganisationMode">
         <div class="panel panel-default">

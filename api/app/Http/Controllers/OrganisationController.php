@@ -1,21 +1,43 @@
 <?php namespace App\Http\Controllers;
 
-use Response;
 use Auth;
 use Input;
-use \DateTime;
+use Request;
+use Response;
 use \App\Organisation;
+use \DateTime;
 
 class OrganisationController extends Controller
 {
 
     // GET /resource
-    public function index()
+    public function index(Request $request)
     {
-        $organisations = Organisation::
-        get(array('id', 'name', 'visiting_address', 'city', 'tin'));
+        $offset = (int) (Input::get('offset') ?? 0);
+        $query = Organisation::skip($offset)->take(20);
 
-        return Response::json($organisations->toArray(), 200);
+        if ($searchWord = Input::get('searchWord')) {
+            $query = $query->where(function ($mainQuery) use ($searchWord) {
+
+                $mainQuery->orWhere('name', 'LIKE', "%$searchWord%")
+                    ->orWhere('tin', 'LIKE', "%$searchWord%")
+                    ->orWhere('visiting_address', 'LIKE', "%$searchWord%")
+                    ->orWhere('city', 'LIKE', "%$searchWord%");
+            });
+        }
+
+        $organisations = $query
+            ->get(array('id', 'name', 'visiting_address', 'city', 'tin'));
+        // die(var_dump($query->toSql()));
+        $totalCount = $query->count();
+        $currentCount = count($organisations);
+
+        $responsePayload = [[
+            'organisations' => $organisations,
+            'properties' => ['currentCount' => $currentCount, 'totalCount' => $totalCount],
+        ]];
+
+        return Response::json($responsePayload, 200);
     }
 
     // GET /resource/:id
@@ -28,8 +50,7 @@ class OrganisationController extends Controller
     // POST /resource
     public function store()
     {
-        if (!$this::canSave())
-        {
+        if (!$this::canSave()) {
             return $this::notAuthorized();
         }
 
@@ -45,14 +66,12 @@ class OrganisationController extends Controller
     // PUT/PATCH /resource/:id
     public function update($id)
     {
-        if (!$this::canSave())
-        {
+        if (!$this::canSave()) {
             return $this::notAuthorized();
         }
 
         $organisation = Organisation::find($id);
-        if (!$organisation)
-        {
+        if (!$organisation) {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
@@ -65,8 +84,7 @@ class OrganisationController extends Controller
     // DELETE /resource/:id
     public function destroy($id)
     {
-        if (!$this::canSave())
-        {
+        if (!$this::canSave()) {
             return $this::notAuthorized();
         }
 
@@ -79,37 +97,29 @@ class OrganisationController extends Controller
     {
         $dates = $resource->getDates();
         $changed = false;
-        foreach ($data as $key => $value)
-        {
-            if (in_array($key, $resource["fillable"], true))
-            {
-                if ($value === "")
-                {
+        foreach ($data as $key => $value) {
+            if (in_array($key, $resource["fillable"], true)) {
+                if ($value === "") {
                     $value = null;
                 }
-                if ($value && in_array($key, $dates))
-                {
+                if ($value && in_array($key, $dates)) {
                     $timestamp = strtotime($value);
-                    if ($timestamp === false)
-                    {
+                    if ($timestamp === false) {
                         $value = null;
-                    } else
-                    {
+                    } else {
                         $value = new DateTime();
                         $value->setTimestamp($timestamp);
                     }
                 }
 
-                if ($resource[$key] != $value)
-                {
+                if ($resource[$key] != $value) {
                     // TODO: Validate.
                     $resource[$key] = $value;
                     $changed = true;
                 }
             }
         }
-        if ($changed)
-        {
+        if ($changed) {
             $resource["updated_by"] = Auth::user()->name;
         }
     }
