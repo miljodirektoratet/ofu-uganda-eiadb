@@ -19,8 +19,7 @@ class ExternalAuditSearchController extends Controller
             ->leftJoin('codes as status', 'ea.status', '=', 'status.id')
             ->leftJoin('external_audits_personnel as personnel', 'ea.id', '=', 'personnel.external_audit_id')
             ->leftJoin('documents as doc', 'ea.id', '=', 'doc.external_audit_id')
-            ->leftJoin('users as team_leader_list', 'team_leader_list.id', '=', 'ea.teamleader_id')
-            ->leftJoin('users as handling_officer_list', 'handling_officer_list.id', '=', 'ea.user_id')
+            ->leftJoin('users as handling_officer_list', 'handling_officer_list.id', '=', 'personnel.user_id')
             ->leftJoin(
                 'codes as verification_inspection_list',
                 'verification_inspection_list.id',
@@ -33,7 +32,7 @@ class ExternalAuditSearchController extends Controller
                 'ea.id as externalaudit_id',
                 'p.id as project_id',
                 'ea_type_list.description1 as ea_type',
-                'team_leader_list.name as team_leader',
+                'u.name as team_leader',
                 'status.description1 as externalaudit_status',
                 'u.name as externalaudit_officer_assigned',
                 'p.title as project_title',
