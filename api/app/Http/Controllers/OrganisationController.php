@@ -13,7 +13,7 @@ class OrganisationController extends Controller
     // GET /resource
     public function index(Request $request)
     {
-        $offset = (int) (Input::get('offset') ?? 0);
+        $offset = (int) (Input::get('offset')) ? Input::get('offset') : 0;
         $query = Organisation::skip($offset)->take(20);
 
         if ($searchWord = Input::get('searchWord')) {
