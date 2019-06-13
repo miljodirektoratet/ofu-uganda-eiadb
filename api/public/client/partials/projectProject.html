@@ -15,7 +15,7 @@
                                 <label class="sr-only" for="filterText">Search</label>
                                 <input type="text" focus="true" class="form-control input-filter" id="filterText" placeholder="Search" ng-model="data.searchWord">
                                 
-                                <button ng-click="search()" class="btn btn-success">Search</button>
+                                <button ng-click="search()" class="btn btn-success">{{searchBtnTxt}}</button>
                             </div>
                         </form>
                     </div>
@@ -50,7 +50,7 @@
                 </div>
                 <center>
                     <br>
-                        <button class=" btn-lg btn-block btn btn-success" ng-hide="(totalCount == organisations.length)" ng-click="loadMore()">Load more</button>
+                        <button class=" btn-lg btn-block btn btn-success" ng-hide="(totalCount == organisations.length)" ng-click="loadMore()">{{loadMoreBtnTxt}}</button>
                 </center>
                 </div>
             </div>

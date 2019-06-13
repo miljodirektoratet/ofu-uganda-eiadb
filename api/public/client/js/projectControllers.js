@@ -57,6 +57,8 @@ controllers.controller("ProjectTabsController", [
     scope.userinfo = UserInfo;
     scope.valuelists = Valuelists;
     scope.data = ProjectFactory;
+    scope.loadMoreBtnTxt = "Load more";
+    scope.searchBtnTxt = "search";
     var getCurrentTab = function(path) {
       if (_.contains(path, "eiaspermits")) {
         return ProjectTabEnum.EiasPermits;
@@ -198,7 +200,8 @@ controllers.controller("ProjectController", [
       scope.parts.organisation.isNew = true;
     };
 
-    scope.loadMore = function() {
+    scope.loadMore = function(e) {
+      scope.loadMoreBtnTxt = "Loading...";
       paginationCount += 20;
       var searchWord = scope.data.searchWord;
       var promise = Organisation.query({
@@ -206,23 +209,26 @@ controllers.controller("ProjectController", [
         searchWord: searchWord
       });
       var prevList = scope.organisations;
+      var self = this;
       promise.$promise.then(function(organisations) {
         var newList = organisations[0].organisations;
         scope.organisations = prevList.concat(newList);
         scope.currentCount = organisations[0].properties.currentCount;
+        scope.loadMoreBtnTxt = "Load more";
       });
     };
 
     scope.search = function() {
+      scope.searchBtnTxt = "searching...";
       var searchWord = scope.data.searchWord;
       paginationCount = 0;
       var promise = Organisation.query({ searchWord: searchWord });
       promise.$promise.then(function(organisations) {
         var newList = organisations[0].organisations;
         scope.organisations = newList;
-        console.log(organisations[0].properties.totalCount);
         scope.totalCount = organisations[0].properties.totalCount;
         scope.currentCount = organisations[0].properties.currentCount;
+        scope.searchBtnTxt = "search";
       });
     };
     scope.saveCurrentProject = function(evenIfPristine) {
