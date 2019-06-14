@@ -61,7 +61,8 @@ class EiaPermitSearchController extends Controller
                 'd.district as district_district',
                 'p.category_id as project_category_id',
                 'c.description_short as category_description',
-                'fee_currency_list.description1 as eiapermit_fee_currency'
+                'fee_currency_list.description1 as eiapermit_fee_currency', 
+                DB::raw('if(ep.file_metadata_id, "Yes", "No") as file_metadata')
 
 //                ,'doc.title'
                 //                ,'doc.code'

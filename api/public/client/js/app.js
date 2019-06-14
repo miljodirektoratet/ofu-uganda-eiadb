@@ -408,6 +408,7 @@ exportObj.exportMetaData["eiaspermits"] = {
     eiapermit_certificate_no: "Certificate number",
     eiapermit_date_cancelled: "Certificate canceled date",
     eiapermit_remarks: "Remarks",
+    file_metadata: "Soft copy of certificate",
     document_codes: "Documents",
     project_id: "Project ID",
     project_title: "Project name",
