@@ -59,6 +59,7 @@ controllers.controller("ProjectTabsController", [
     scope.data = ProjectFactory;
     scope.loadMoreBtnTxt = "Load more";
     scope.searchBtnTxt = "search";
+    scope.organisations = [];
     var getCurrentTab = function(path) {
       if (_.contains(path, "eiaspermits")) {
         return ProjectTabEnum.EiasPermits;
@@ -367,7 +368,6 @@ controllers.controller("ProjectController", [
       scope.parts.project.isNew = true;
       ProjectFactory.empty();
       var promise = Organisation.query();
-      scope.data.searchWord;
       promise.$promise.then(function(organisations) {
         scope.organisations = organisations[0].organisations;
         scope.totalCount = organisations[0].properties.totalCount;

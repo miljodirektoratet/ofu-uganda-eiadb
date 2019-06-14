@@ -32,7 +32,8 @@
                     <div class="col-md-3">Name</div>
                     <div class="col-md-3">Address</div>
                     <div class="col-md-2">City</div>
-                    <div class="col-md-2">TIN</div>
+                    <div class="col-md-1">TIN</div>
+                    <div class="col-md-1">Number of Projects</div>
                     <div class="col-md-1"></div>
                 </div>
 
@@ -43,7 +44,8 @@
                             <div class="col-md-3">{{o.name}}</div>
                             <div class="col-md-3">{{o.visiting_address}}</div>
                             <div class="col-md-2">{{o.city}}</div>
-                            <div class="col-md-2 hidden-xs">{{o.tin}}</div>
+                            <div class="col-md-1 hidden-xs">{{o.tin}}</div>
+                            <div class="col-md-1 hidden-xs">{{o.projects.length}}</div>
                             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master">Select</button>
                         </div>
                     </div>

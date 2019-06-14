@@ -14,7 +14,8 @@ class OrganisationController extends Controller
     public function index(Request $request)
     {
         $offset = (int) (Input::get('offset')) ? Input::get('offset') : 0;
-        $query = Organisation::skip($offset)->take(20);
+        $query = Organisation::skip($offset)->take(20)->with('projects');
+        // ->leftJoin('projects', 'projects.organisation_id', '=', 'organisations.id');
 
         if ($searchWord = Input::get('searchWord')) {
             $query = $query->where(function ($mainQuery) use ($searchWord) {
@@ -27,8 +28,8 @@ class OrganisationController extends Controller
         }
 
         $organisations = $query
-            ->get(array('id', 'name', 'visiting_address', 'city', 'tin'));
-        // die(var_dump($query->toSql()));
+            ->get(array('organisations.id', 'organisations.name', 'organisations.visiting_address',
+                'organisations.city', 'organisations.tin'));
         $totalCount = $query->count();
         $currentCount = count($organisations);
 
