@@ -15,7 +15,6 @@ class OrganisationController extends Controller
     {
         $offset = (int) (Input::get('offset')) ? Input::get('offset') : 0;
         $query = Organisation::skip($offset)->take(20)->with('projects');
-        // ->leftJoin('projects', 'projects.organisation_id', '=', 'organisations.id');
 
         if ($searchWord = Input::get('searchWord')) {
             $query = $query->where(function ($mainQuery) use ($searchWord) {

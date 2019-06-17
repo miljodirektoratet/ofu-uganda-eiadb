@@ -213,7 +213,8 @@ controllers.controller("ProjectController", [
       var self = this;
       promise.$promise.then(function(organisations) {
         var newList = organisations[0].organisations;
-        scope.organisations = prevList.concat(newList);
+        organisationUnion = prevList.concat(newList);
+        scope.organisations = organisationUnion.sort(scope.projectSortScript);
         scope.currentCount = organisations[0].properties.currentCount;
         scope.loadMoreBtnTxt = "Load more";
       });
@@ -225,7 +226,9 @@ controllers.controller("ProjectController", [
       paginationCount = 0;
       var promise = Organisation.query({ searchWord: searchWord });
       promise.$promise.then(function(organisations) {
-        var newList = organisations[0].organisations;
+        var newList = organisations[0].organisations.sort(
+          scope.projectSortScript
+        );
         scope.organisations = newList;
         scope.totalCount = organisations[0].properties.totalCount;
         scope.currentCount = organisations[0].properties.currentCount;
@@ -342,7 +345,9 @@ controllers.controller("ProjectController", [
       scope.selectOrganisationMode = true;
       var promise = Organisation.query();
       promise.$promise.then(function(organisations) {
-        scope.organisations = organisations[0].organisations;
+        scope.organisations = organisations[0].organisations.sort(
+          scope.projectSortScript
+        );
         scope.totalCount = organisations[0].totalCount;
         scope.currentCount = organisations[0].currentCount;
       });
@@ -369,7 +374,9 @@ controllers.controller("ProjectController", [
       ProjectFactory.empty();
       var promise = Organisation.query();
       promise.$promise.then(function(organisations) {
-        scope.organisations = organisations[0].organisations;
+        scope.organisations = organisations[0].organisations.sort(
+          scope.projectSortScript
+        );
         scope.totalCount = organisations[0].properties.totalCount;
         scope.currentCount = organisations[0].properties.currentCount;
       });
@@ -382,5 +389,11 @@ controllers.controller("ProjectController", [
         scope.parts.organisation.state = SavingStateEnum.Loaded;
       });
     }
+
+    scope.projectSortScript = function(a, b) {
+      if (a.projects.length < b.projects.length) return 1;
+      if (a.projects.length > b.projects.length) return -1;
+      return 0;
+    };
   }
 ]);
