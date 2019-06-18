@@ -6,19 +6,14 @@
 
   <div class="row">
     <div class="col-md-8">
-      <form class="form-inline" role="form" ng-show="showFilter">
+      <form class="form-inline" role="form" >
         <div class="form-group">
           <label class="sr-only" for="filterText">Filter</label>
-          <input type="text" class="form-control input-filter" id="filterText" placeholder="Filter (try anything, e.g. name, location, or organisation)" ng-model="filterText">
+          <input type="text" class="form-control input-filter" id="filterText" placeholder="Search (try anything, e.g. name, location, or organisation)" ng-model="searchWord">
+        <button class="btn btn-success" ng-click="searchProjects()">{{projectSearchTxt}}</button>
         </div>
-        <span>Showing {{(projects | filter:filterText).length}} of {{projectsCount}} projects</span>
       </form>
-      <div ng-show="!showFilter">
-        <span>Showing {{(projects | filter:filterText).length}} of {{projectsCount}} projects</span>
-        &nbsp;&nbsp;
-        <button type="button" class="btn btn-primary" ng-click="getAllProjects()">Show all projects</button>
-      </div>
-    </div>
+     </div>
     <div class="col-md-4">
       <!--<button type="button" class="btn btn-success pull-right" ng-click="goto('/projects/new');" ng-hide="!canSave()">New project</button>-->
 
@@ -60,6 +55,7 @@
       </table>
     </div>
   </div>
+  <button class="btn btn-block btn-success" ng-hide="hideProjectLoader" ng-click="loadMoreProjects()">{{loadMoreProjectsTxt}}</button><br>
 
 </div>
 

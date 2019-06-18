@@ -2,7 +2,7 @@
 
 var testy1 = "x";
 var paginationCount = 20;
-
+var projectPagerOffset = 0;
 controllers.controller("ProjectsController", [
   "$scope",
   "$location",
@@ -10,8 +10,11 @@ controllers.controller("ProjectsController", [
   "Project",
   "UserInfo",
   function(scope, location, filter, Project, UserInfo) {
-    scope.showFilter = false;
-    scope.projects = Project.query({ count: 50 });
+    scope.projectSearchTxt = "Search";
+    scope.loadMoreProjectsTxt = "Load more";
+    scope.projects = Project.query({
+      count: 20
+    });
     scope.projectsCount = 0;
     Project.query({ countOnly: 1 }, function(data) {
       scope.projectsCount = data[0];
@@ -25,9 +28,32 @@ controllers.controller("ProjectsController", [
       return scope.userinfo.info.role_1;
     };
 
-    scope.getAllProjects = function() {
-      scope.projects = Project.query();
-      scope.showFilter = true;
+    scope.loadMoreProjects = function() {
+      scope.loadMoreProjectsTxt = "Loading..";
+      projectPagerOffset += 20;
+      Project.query(
+        { count: 20, offset: projectPagerOffset, searchWord: scope.searchWord },
+        function(response) {
+          if (response.length == 0) {
+            scope.hideProjectLoader = true;
+            return;
+          }
+          var newList = scope.projects.concat(response);
+          scope.projects = newList;
+          scope.loadMoreProjectsTxt = "Load more";
+        }
+      );
+    };
+
+    scope.searchProjects = function() {
+      scope.projectSearchTxt = "Searching...";
+      Project.query({ count: 20, searchWord: scope.searchWord }, function(
+        response
+      ) {
+        scope.hideProjectLoader = false;
+        scope.projects = response;
+        scope.projectSearchTxt = "Search";
+      });
     };
   }
 ]);
