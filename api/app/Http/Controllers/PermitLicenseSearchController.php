@@ -28,6 +28,8 @@ class PermitLicenseSearchController extends Controller
             ->leftJoin('users as signature', 'signature.id', '=', 'pl.signature_on_permit_license')
             ->leftJoin('codes as decision', 'decision.id', '=', 'pl.decision')
             ->leftJoin('codes as evaluation_list', 'evaluation_list.id', '=', 'pl.application_evaluation_by_officer')
+            ->leftJoin('permits_licenses_documentation as pld', 'pld.permit_license_id', '=', 'pl.id')
+            ->leftJoin('file_metadata', 'file_metadata.id', '=', 'pld.file_metadata_id')
             ->select(
                 'pl.id as permitlicense_id',
                 'regulation.description1 as permitlicense_regulation',
@@ -57,6 +59,7 @@ class PermitLicenseSearchController extends Controller
                 'decision.description1 as permitlicense_decision',
                 'inspection.description1 as permitlicense_inspection_recommended',
                 DB::raw('GROUP_CONCAT(DISTINCT handling_officer_users.name) as permitlicense_handling_officer'),
+                DB::raw('GROUP_CONCAT(DISTINCT if(length(file_metadata.tag), file_metadata.tag, "No")) as permitlicense_documentation_files'),
                 'evaluation_list.description1 as permitlicense_officer_evaluation',
                 'status.description1 as permitlicense_status',
                 'waste_license.description2 as permitlicense_waste_license_type',
@@ -67,7 +70,8 @@ class PermitLicenseSearchController extends Controller
                 'c.description_short as category_name',
                 'd.district as district_district',
                 'o.id as organisation_id',
-                'o.name as organisation_name'
+                'o.name as organisation_name',
+                'pl.date_feedback_to_applicants as permitlicense_date_feedback_to_applicants'
             )
             ->whereNull('pl.deleted_at')
             ->whereNull('p.deleted_at')

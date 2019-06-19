@@ -540,7 +540,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="pl.date_permit_license_expired">Date {{pl.regulation==idPermit ? "permit" : "license"}} expired</label>
+                                                    <label for="pl.date_permit_license_expired">Date {{pl.regulation==idPermit ? "permit" : "license"}} expire</label>
                                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                                         <input type="text" ng-blur="saveCurrentPermitLicense(pl)" ng-required="false" ng-readonly="!auth.canSave('date_permit_license_expired')" id="pl.date_permit_license_expired" class="form-control input-sm input-date" ng-model="pl.date_permit_license_expired" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
                                                         <span class="input-group-btn">

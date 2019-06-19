@@ -1,12 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use Response;
-use Input;
 use Auth;
-use \DateTime;
-use \App\Project;
+use Input;
+use Response;
 use \App\Organisation;
-use DB;
+use \App\Project;
+use \DateTime;
 
 class ProjectController extends Controller
 {
@@ -14,9 +13,10 @@ class ProjectController extends Controller
     // GET /resource
     public function index()
     {
+        $offset = (int) Input::get('offset');
         $countOnly = Input::get('countOnly');
-        if ($countOnly)
-        {
+        $searchWord = Input::get('searchWord');
+        if ($countOnly) {
             return [Project::count()];
         }
 
@@ -26,35 +26,46 @@ class ProjectController extends Controller
 
         // dd($criterias);
 
-        $withFunction = function ($query)
-        {
+        $withFunction = function ($query) use ($searchWord) {
+            if ($searchWord) {
+                $query->where('name', 'LIKE', "%$searchWord%");
+            }
             $query->select('id', 'name', 'city');
+
         };
-        $withFunction2 = function ($query)
-        {
+        $withFunction2 = function ($query) use ($searchWord) {
+
             $query->select('id', 'district');
         };
-        $withFunction3 = function ($query)
-        {
+        $withFunction3 = function ($query) use ($searchWord) {
             $query->select('id', 'description_short as description');
         };
 
         $projects = Project::with(array('organisation' => $withFunction, 'district' => $withFunction2, 'category' => $withFunction3));
-        foreach ($criterias as $word => $criteria)
-        {
+        foreach ($criterias as $word => $criteria) {
             $projects = $projects->where($word, 'like', '%' . $criteria . '%');
         }
 
         $projects = $projects->orderBy('id', 'desc');
         $projects = $projects->take($count);
-        $projects = $projects->get(array('id', 'title', 'category_id', 'district_id', 'location', 'organisation_id'));
+        if ($offset) {
+            $projects = $projects->skip($offset);
+        }
+        if ($searchWord) {
+            $projects = $projects->where(function ($mainQuery) use ($searchWord) {
 
+                $mainQuery->orWhere('title', 'LIKE', "%$searchWord%")
+                    ->orWhere('location', 'LIKE', "%$searchWord%");
+            });
+        }
+
+        $projects = $projects->get(array('id', 'title', 'category_id', 'district_id', 'location', 'organisation_id'));
 
         /*foreach ($projects as $project)
         {
-          $project["testy1"] = "hei";
-          //print($project);
-          //exit();
+        $project["testy1"] = "hei";
+        //print($project);
+        //exit();
         } */
 
         return Response::json($projects->toArray(), 200);
@@ -64,17 +75,15 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::
-        with('districts')// I'd like to limit the belongsToMany to only the district id, but this is not currently possible in Laravel.
-        ->find($id);
+            with('districts') // I'd like to limit the belongsToMany to only the district id, but this is not currently possible in Laravel.
+            ->find($id);
 
-        if (!$project)
-        {
+        if (!$project) {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
         $districtIds = array();
-        foreach ($project->districts as $district)
-        {
+        foreach ($project->districts as $district) {
             array_push($districtIds, $district->id);
         }
         $project["district_ids"] = $districtIds;
@@ -85,8 +94,7 @@ class ProjectController extends Controller
     // POST /resource
     public function store()
     {
-        if (!$this::canSave())
-        {
+        if (!$this::canSave()) {
             return $this::notAuthorized();
         }
 
@@ -102,14 +110,12 @@ class ProjectController extends Controller
     // PUT/PATCH /resource/:id
     public function update($id)
     {
-        if (!$this::canSave())
-        {
+        if (!$this::canSave()) {
             return $this::notAuthorized();
         }
 
         $project = Project::with('districts')->find($id);
-        if (!$project)
-        {
+        if (!$project) {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
@@ -122,11 +128,9 @@ class ProjectController extends Controller
         $this->handleAdditionalDistricts($project, $inputData);
         $project->save();
 
-        if ($oldOrganisationId != $newOrganisationId)
-        {
+        if ($oldOrganisationId != $newOrganisationId) {
             $oldOrganisation = Organisation::find($oldOrganisationId);
-            if ($oldOrganisation->projects()->count() === 0)
-            {
+            if ($oldOrganisation->projects()->count() === 0) {
                 $oldOrganisation->delete();
             }
         }
@@ -137,15 +141,13 @@ class ProjectController extends Controller
     // DELETE /resource/:id
     public function destroy($id)
     {
-        if (!$this::canSave())
-        {
+        if (!$this::canSave()) {
             return $this::notAuthorized();
         }
-        
+
         $project = Project::find($id);
 
-        if ($project->eiapermits()->count() > 0 || $project->auditinspections()->count() > 0)
-        {
+        if ($project->eiapermits()->count() > 0 || $project->auditinspections()->count() > 0) {
             return $this::notAuthorized();
         }
 
@@ -153,8 +155,7 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        if ($organisation->projects()->count() === 0)
-        {
+        if ($organisation->projects()->count() === 0) {
             $organisation->delete();
         }
 
@@ -164,14 +165,12 @@ class ProjectController extends Controller
     private function handleAdditionalDistricts($project, $inputData)
     {
         $districtIds = array();
-        if (array_key_exists("district_ids", $inputData))
-        {
+        if (array_key_exists("district_ids", $inputData)) {
             $districtIds = $inputData["district_ids"];
         }
         $res = $project->districts()->sync($districtIds);
         $changes = count($res["attached"]) + count($res["detached"]) + count($res["updated"]);
-        if ($changes > 0)
-        {
+        if ($changes > 0) {
             $project["updated_by"] = Auth::user()->name;
         }
     }
@@ -180,38 +179,29 @@ class ProjectController extends Controller
     {
         $dates = $resource->getDates();
         $changed = false;
-        foreach ($data as $key => $value)
-        {
-            if (in_array($key, $resource["fillable"], true))
-            {
-                if ($value === "")
-                {
+        foreach ($data as $key => $value) {
+            if (in_array($key, $resource["fillable"], true)) {
+                if ($value === "") {
                     $value = null;
                 }
-                if ($value && in_array($key, $dates))
-                {
+                if ($value && in_array($key, $dates)) {
                     $timestamp = strtotime($value . " + 12 hours");
-                    if ($timestamp === false)
-                    {
+                    if ($timestamp === false) {
                         $value = null;
-                    }
-                    else
-                    {
+                    } else {
                         $value = new DateTime();
                         $value->setTimestamp($timestamp);
                     }
                 }
 
-                if ($resource[$key] != $value)
-                {
+                if ($resource[$key] != $value) {
                     // TODO: Validate.
                     $resource[$key] = $value;
                     $changed = true;
                 }
             }
         }
-        if ($changed)
-        {
+        if ($changed) {
             $resource["updated_by"] = Auth::user()->name;
             //$project->created_by = Auth::user()->name;
         }

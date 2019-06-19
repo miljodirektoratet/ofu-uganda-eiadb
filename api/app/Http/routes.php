@@ -53,6 +53,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
     Route::resource('practitioner', 'PractitionerController');
     Route::resource('valuelist', 'ValuelistController');
     Route::resource('project', 'ProjectController');
+    Route::get('organisation/{offset}/{search}','OrganisationController@index');
     Route::resource('organisation', 'OrganisationController');
     Route::resource('project.eiapermit', 'EiaPermitController');
     Route::resource('project.eiapermit.document', 'DocumentController');
