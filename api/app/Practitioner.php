@@ -8,7 +8,7 @@ class Practitioner extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $fillable = ['person', 'tin', 'organisation_name', 'visiting_address', 'box_no', 'city', 'phone', 'fax', 'email', 'qualifications', 'expertise', 'remarks'];
+    protected $fillable = ['practitioner_title_id', 'person', 'tin', 'organisation_name', 'visiting_address', 'box_no', 'city', 'phone', 'fax', 'email', 'qualifications', 'expertise', 'remarks'];
     protected $hidden = ['deleted_at'];
 
     public function practitionerCertificates()

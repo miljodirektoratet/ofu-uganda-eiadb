@@ -2,16 +2,14 @@
 
 use App\LeadAgency;
 use Response;
-use DB;
-use \App\Practitioner;
-use \App\Code;
-use \App\User;
-use \App\District;
 use \App\Category;
+use \App\Code;
+use \App\District;
+use \App\Practitioner;
+use \App\User;
 
 class ValuelistController extends Controller
 {
-
 
     // GET /resource
     public function index()
@@ -50,11 +48,15 @@ class ValuelistController extends Controller
         $valuelists["permit_license_area_units"] = $this->permit_license_area_units();
         $valuelists["permit_license_waste_license_type"] = $this->permit_license_waste_license_type();
         $valuelists["permit_license_application_evaluation"] = $this->permit_license_application_evaluation();
-
+        $valuelists["practitioner_title"] = $this->practitioner_title();
 
         return Response::json($valuelists, 200);
     }
 
+    private function practitioner_title()
+    {
+        return $this->getCodesFromDrowdownName("practitioner_title");
+    }
     private function permit_license_ecosystem()
     {
         return $this->getCodesFromDrowdownName("ecosystem");
@@ -88,15 +90,13 @@ class ValuelistController extends Controller
     // GET /resource/:id
     public function show($id)
     {
-        if ($id === "all")
-        {
+        if ($id === "all") {
             return $this->index();
         }
 
         // Not in use?
         $codes = array();
-        if (method_exists($this, $id))
-        {
+        if (method_exists($this, $id)) {
             $codes = call_user_func(array($this, $id));
         }
         return Response::json($codes, 200);
@@ -145,9 +145,9 @@ class ValuelistController extends Controller
     }
 
 //    private function documenttype()
-//    {
-//        return $this->getCodesFromArray(array(8, 9, 10, 11, 12, 13));
-//    }
+    //    {
+    //        return $this->getCodesFromArray(array(8, 9, 10, 11, 12, 13));
+    //    }
 
     private function documenttype()
     {
@@ -174,20 +174,19 @@ class ValuelistController extends Controller
     private function category()
     {
         $districts = Category::
-        get(array('id', 'description_long as description1'));
+            get(array('id', 'description_long as description1'));
         return $districts;
     }
 
     private function teamleader()
     {
         $practitioners = Practitioner::
-        whereHas('practitionerCertificates', function ($q)
-        {
+            whereHas('practitionerCertificates', function ($q) {
             $year = intval(date("Y"));
             $q
 //                ->whereIn('year', array($year - 1, $year))
-//                ->where('is_cancelled', '=', false)
-                ->whereRaw('conditions in (38,53)');
+            //                ->where('is_cancelled', '=', false)
+            ->whereRaw('conditions in (38,53)');
         })
             ->get(array('id', 'person as description1'));
         return $practitioners;
@@ -197,39 +196,37 @@ class ValuelistController extends Controller
     {
         $practitioners = Practitioner::
 //        whereHas('practitionerCertificates', function ($q)
-//        {
-//            $year = intval(date("Y"));
-//            $q
-//                ->whereIn('year', array($year - 1, $year))
-//                ->where('is_cancelled', '=', false);
-//        })
-//            ->get(array('id', 'person as description1'));
-        get(array('id', 'person as description1'));
+            //        {
+            //            $year = intval(date("Y"));
+            //            $q
+            //                ->whereIn('year', array($year - 1, $year))
+            //                ->where('is_cancelled', '=', false);
+            //        })
+            //            ->get(array('id', 'person as description1'));
+            get(array('id', 'person as description1'));
         return $practitioners;
     }
 
     private function users_with_role($role)
     {
 //        $admins = User::
-//        whereHas('roles', function ($q)
-//        {
-//            $q->where('name', '=', 'Role 8');
-//        })
-//            ->get(array('id'));
-//        $adminIds = [];
-//        foreach ($admins as $admin)
-//        {
-//            $adminIds []= $admin->id;
-//        }
+        //        whereHas('roles', function ($q)
+        //        {
+        //            $q->where('name', '=', 'Role 8');
+        //        })
+        //            ->get(array('id'));
+        //        $adminIds = [];
+        //        foreach ($admins as $admin)
+        //        {
+        //            $adminIds []= $admin->id;
+        //        }
 
         $usersInRole = User::
-            whereHas('roles', function ($q) use ($role)
-            {
+            whereHas('roles', function ($q) use ($role) {
 
-                $q->where('name', '=', $role);
-            })
-            ->whereDoesntHave('roles', function ($q)
-            {
+            $q->where('name', '=', $role);
+        })
+            ->whereDoesntHave('roles', function ($q) {
 
                 $q->where('name', '=', 'Role 8');
             })
@@ -237,8 +234,7 @@ class ValuelistController extends Controller
             ->get(array('id', 'name as description1'));
 
         $passiveUsers = User::
-        whereDoesntHave('roles', function ($q) use ($role)
-        {
+            whereDoesntHave('roles', function ($q) use ($role) {
 
             $q->where('name', '=', $role);
         })
@@ -246,27 +242,25 @@ class ValuelistController extends Controller
             ->get(array('id', 'name as description1'));
 
         $users = [];
-        foreach ($usersInRole as $user)
-        {
+        foreach ($usersInRole as $user) {
 
             $user->passive = false;
-            $users []= $user;
+            $users[] = $user;
 //
-//            if (in_array($userInRole->id, $adminIds))
-//            {
-//                continue;
-//            }
-//            else
-//            {
-//                $userInRole->passive = false;
-//                $users []= $userInRole;
-//            }
+            //            if (in_array($userInRole->id, $adminIds))
+            //            {
+            //                continue;
+            //            }
+            //            else
+            //            {
+            //                $userInRole->passive = false;
+            //                $users []= $userInRole;
+            //            }
         }
 
-        foreach ($passiveUsers as $user)
-        {
+        foreach ($passiveUsers as $user) {
             $user->passive = true;
-            $users []= $user;
+            $users[] = $user;
         }
 
         return $users;
@@ -290,7 +284,7 @@ class ValuelistController extends Controller
     private function executivedirector()
     {
         $users = User::
-        whereRaw("job_position_code in ('DED','ED')")
+            whereRaw("job_position_code in ('DED','ED')")
             ->get(array('id', 'name as description1'));
         return $users;
     }
@@ -326,9 +320,6 @@ class ValuelistController extends Controller
     {
         return $this->getCodesFromDrowdownName("external_audit_type");
     }
-
-
-
 
     private function getCodesFromArray($codeIds)
     {
