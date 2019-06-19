@@ -4,6 +4,21 @@ Located under api/public/client.
 
 Uses AngularJS.
 
+### Build
+
+##### When it is a simple build. This is how to build version
+- On developers machine: 
+-- grunt publish (creates for instance version v4.16.0)
+- On server:
+-- cd sero
+-- git fetch
+-- git checkout v4.16.0 (or whatever version was created)
+
+##### When we also have changes like db in Laravel.
+- Same steps as over.
+- Use artisan to handle db changes.
+
+
 ### Requirements
 
 ### Requirements (should only be needed for dev)
