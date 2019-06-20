@@ -16,7 +16,27 @@ controllers.controller("PractitionersController", [
     scope.currentForm = null;
     scope.userinfo = UserInfo;
     scope.valuelists = Valuelists;
-    scope.practitioners = Practitioner.query(); //{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
+    Practitioner.query(function(data) {
+      var persons = _.map(data, function(o) {
+        if (
+          o.practitioner_certificates.length > 0 &&
+          o.practitioner_certificates[0].cert_type < 52
+        ) {
+          return o;
+        }
+      });
+      var org = _.map(data, function(o) {
+        if (
+          o.practitioner_certificates.length > 0 &&
+          o.practitioner_certificates[0].cert_type == 52
+        ) {
+          return o;
+        }
+      });
+      persons = _.without(persons, undefined);
+      org = _.without(org, undefined);
+      scope.practitioners = persons.concat(org);
+    }); //{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
     var filterCertificates = function(
       certificates,
@@ -186,7 +206,6 @@ controllers.controller("PractitionersController", [
       }
       // Save.
       if (scope.canSave() && scope.current) {
-        console.log("came here", scope.current, scope.currentForm);
         var oldP = scope.current;
         var form = scope.currentForm;
         if (form.$invalid) {

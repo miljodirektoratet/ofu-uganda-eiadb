@@ -1,28 +1,27 @@
 <?php namespace App\Http\Controllers;
 
-use Response;
 use Auth;
 use Input;
-use \DateTime;
+use Response;
 use \App\Practitioner;
 use \App\PractitionerCertificate;
-use DB;
+use \DateTime;
 
 class PractitionerController extends Controller
 {
     // GET /resource
     public function index()
     {
-        $withFunction = function ($query)
-        {
-            $year = intval(date("Y"));
-            $query->select('id', 'practitioner_id', 'year', 'cert_type', 'conditions', 'is_cancelled')
-                ->where('year', '=', $year);
+        $withFunction = function ($query) {
+            //$year = intval(date("Y"));
+            $query->select('id', 'practitioner_id', 'year', 'cert_type', 'conditions', 'is_cancelled');
+            // ->where('year', '=', $year);
         };
 
         $practitioners = Practitioner::
-        with(array('practitionerCertificates' => $withFunction))
-            //->take(3)
+            with(array('practitionerCertificates' => $withFunction))
+            ->orderBy('person', 'ASC')
+        //->take(3)
             ->get(array('id', 'person', 'organisation_name', 'visiting_address', 'city'));
 
         return Response::json($practitioners->toArray(), 200);
@@ -46,10 +45,8 @@ class PractitionerController extends Controller
                 'expertise',
                 'remarks']);
 
-
 //
-        foreach ($practitioners as $p)
-        {
+        foreach ($practitioners as $p) {
             $cs = $p["validCertificates"];
             // 50 = EIA
             // 51 = EA
@@ -57,19 +54,15 @@ class PractitionerController extends Controller
             $eia = null;
             $ea = null;
             $ep = null;
-            foreach ($cs as $c)
-            {
+            foreach ($cs as $c) {
                 unset($c["practitioner_id"]);
-                if (!$eia && $c->cert_type == 50)
-                {
+                if (!$eia && $c->cert_type == 50) {
                     $eia = $c;
                 }
-                if (!$ea && $c->cert_type == 51)
-                {
+                if (!$ea && $c->cert_type == 51) {
                     $ea = $c;
                 }
-                if (!$ep && $c->cert_type == 52)
-                {
+                if (!$ep && $c->cert_type == 52) {
                     $ep = $c;
                 }
             }
@@ -89,13 +82,11 @@ class PractitionerController extends Controller
     {
         // Make sure current user owns the requested resource
         // $practitioner = Practitioner::with('practitionerCertificates')
-        // 	->where('id', $id)
-        // 	->take(1)
-        // 	->get();
+        //     ->where('id', $id)
+        //     ->take(1)
+        //     ->get();
 
-
-        $practitioner = Practitioner::with(array('practitionerCertificates' => function ($query)
-        {
+        $practitioner = Practitioner::with(array('practitionerCertificates' => function ($query) {
             $query->orderBy('year', 'DESC')->orderBy('cert_type', 'DESC');
         }))->find($id);
         return Response::json($practitioner, 200);
@@ -104,8 +95,7 @@ class PractitionerController extends Controller
     // POST /resource
     public function store()
     {
-        if (!$this::canSave())
-        {
+        if (!$this::canSave()) {
             return $this::notAuthorized();
         }
 
@@ -123,14 +113,12 @@ class PractitionerController extends Controller
     // PUT/PATCH /resource/:id
     public function update($id)
     {
-        if (!$this::canSave())
-        {
+        if (!$this::canSave()) {
             return $this::notAuthorized();
         }
 
         $practitioner = Practitioner::with('practitionerCertificates')->find($id);
-        if (!$practitioner)
-        {
+        if (!$practitioner) {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
@@ -138,8 +126,7 @@ class PractitionerController extends Controller
         $this->updateValuesInResource($practitioner, $inputData);
         $practitioner->save();
         $certificatesChanged = $this->handleCertificates($practitioner, $inputData);
-        if ($certificatesChanged)
-        {
+        if ($certificatesChanged) {
             $practitioner->updated_by = Auth::user()->name;
             $practitioner->save();
         }
@@ -149,8 +136,7 @@ class PractitionerController extends Controller
     // DELETE /resource/:id
     public function destroy($id)
     {
-        if (!$this::canSave())
-        {
+        if (!$this::canSave()) {
             return $this::notAuthorized();
         }
 
@@ -162,38 +148,28 @@ class PractitionerController extends Controller
     private function handleCertificates($practitioner, $inputData)
     {
         $changed = false;
-        foreach ($inputData["practitioner_certificates"] as $certificateInputData)
-        {
+        foreach ($inputData["practitioner_certificates"] as $certificateInputData) {
             $certificate = null;
-            if (array_key_exists("id", $certificateInputData))
-            {
+            if (array_key_exists("id", $certificateInputData)) {
                 $certificateId = $certificateInputData["id"];
                 $certificate = $practitioner["practitionerCertificates"]->find($certificateId);
             }
             $isDeleted = array_key_exists("is_deleted", $certificateInputData) && $certificateInputData["is_deleted"] === true;
-            if ($isDeleted)
-            {
-                if ($certificate)
-                {
+            if ($isDeleted) {
+                if ($certificate) {
                     $certificate->delete();
                     $changed = true;
-                }
-                else
-                {
+                } else {
                 } // New and deleted, ignore
-            }
-            else
-            {
-                if (!$certificate)
-                {
+            } else {
+                if (!$certificate) {
                     $certificate = new PractitionerCertificate;
                     $certificate->created_by = Auth::user()->name;
                     $certificate->practitioner()->associate($practitioner);
                 }
                 $certificateChanged = $this->updateValuesInResource($certificate, $certificateInputData);
                 $certificate->save();
-                if ($certificateChanged)
-                {
+                if ($certificateChanged) {
                     $changed = true;
                 }
             }
@@ -205,44 +181,33 @@ class PractitionerController extends Controller
     {
         $dates = $resource->getDates();
         $changed = false;
-        foreach ($data as $key => $value)
-        {
-            if (in_array($key, $resource["fillable"], true))
-            {
-                if ($value === "")
-                {
+        foreach ($data as $key => $value) {
+            if (in_array($key, $resource["fillable"], true)) {
+                if ($value === "") {
                     $value = null;
                 }
-                if ($value && in_array($key, $dates))
-                {
+                if ($value && in_array($key, $dates)) {
                     $timestamp = strtotime($value . " + 12 hours");
-                    if ($timestamp === false)
-                    {
+                    if ($timestamp === false) {
                         $value = null;
-                    }
-                    else
-                    {
+                    } else {
                         $value = new DateTime();
                         $value->setTimestamp($timestamp);
                     }
                 }
 
-                if ($resource[$key] != $value)
-                {
+                if ($resource[$key] != $value) {
                     // TODO: Validate.
                     $resource[$key] = $value;
                     $changed = true;
                 }
             }
         }
-        if ($changed)
-        {
+        if ($changed) {
             $resource["updated_by"] = Auth::user()->name;
             //$project->created_by = Auth::user()->name;
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -259,13 +224,12 @@ class PractitionerController extends Controller
 
 }
 
-
 /*
 $rules = array('city' => 'required|min:2');
 $validator = Validator::make($data, $rules);
 if ($validator->fails())
 {
-  var_dump($validator);
-  exit();
+var_dump($validator);
+exit();
 }*/
 //return Response::json(array('message' => "Could not save."), 500);
