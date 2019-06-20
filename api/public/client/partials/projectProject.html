@@ -45,14 +45,14 @@
                             <div class="col-md-3">{{o.visiting_address}}</div>
                             <div class="col-md-2">{{o.city}}</div>
                             <div class="col-md-1 hidden-xs">{{o.tin}}</div>
-                            <div class="col-md-1 hidden-xs">{{o.projects.length}}</div>
+                            <div class="col-md-1 hidden-xs">{{o.projectCount}}</div>
                             <button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master">Select</button>
                         </div>
                     </div>
                 </div>
                 <center>
                     <br>
-                        <button class=" btn-lg btn-block btn btn-success" ng-hide="(totalCount == organisations.length)" ng-click="loadMore()">{{loadMoreBtnTxt}}</button>
+                        <button class=" btn-lg btn-block btn btn-success" ng-hide="(totalCount == organisations.length)" ng-click="loadMoreDevelopers()">{{loadMoreBtnTxt}}</button>
                 </center>
                 </div>
             </div>

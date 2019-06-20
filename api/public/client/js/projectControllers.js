@@ -227,7 +227,7 @@ controllers.controller("ProjectController", [
       scope.parts.organisation.isNew = true;
     };
 
-    scope.loadMore = function(e) {
+    scope.loadMoreDevelopers = function(e) {
       scope.loadMoreBtnTxt = "Loading...";
       paginationCount += 20;
       var searchWord = scope.data.searchWord;
@@ -239,7 +239,7 @@ controllers.controller("ProjectController", [
       var self = this;
       promise.$promise.then(function(organisations) {
         var newList = organisations[0].organisations;
-        organisationUnion = prevList.concat(newList);
+        var organisationUnion = prevList.concat(newList);
         scope.organisations = organisationUnion.sort(scope.projectSortScript);
         scope.currentCount = organisations[0].properties.currentCount;
         scope.loadMoreBtnTxt = "Load more";
@@ -417,8 +417,8 @@ controllers.controller("ProjectController", [
     }
 
     scope.projectSortScript = function(a, b) {
-      if (a.projects.length < b.projects.length) return 1;
-      if (a.projects.length > b.projects.length) return -1;
+      if (a.projectCount < b.projectCount) return 1;
+      if (a.projectCount > b.projectCount) return -1;
       return 0;
     };
   }
