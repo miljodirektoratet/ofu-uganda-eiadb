@@ -58,7 +58,7 @@ module.exports = function(grunt)
                     'js/app.js',
                     'js/controllers.js', 'js/practitionersController.js',
                     'js/projectControllers.js',
-                    'js/eiasPermitsTabsController.js', 'js/eiasPermitsController.js', 'js/eiasPermitsDocumentsController.js', 'js/eiasPermitsHearingsController.js',
+                    'js/eiaspermitsTabsController.js', 'js/eiaspermitsController.js', 'js/eiasPermitsDocumentsController.js', 'js/eiasPermitsHearingsController.js',
                     'js/externalauditsTabsController.js', 'js/externalauditsController.js', 'js/externalauditsDocumentsController.js',
                     'js/auditsInspectionsControllers.js',
                     'js/permitslicensesController.js',
