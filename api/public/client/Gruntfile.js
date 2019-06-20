@@ -64,7 +64,7 @@ module.exports = function(grunt) {
           "js/externalauditsTabsController.js",
           "js/externalauditsController.js",
           "js/externalauditsDocumentsController.js",
-          "js/auditsInspectionsControllers.js",
+          "js/auditsinspectionsControllers.js",
           "js/permitslicensesController.js",
           "js/searchControllers.js",
           "js/searchEiasPermitsControllers.js",
