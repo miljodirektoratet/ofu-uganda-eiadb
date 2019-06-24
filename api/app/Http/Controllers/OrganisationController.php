@@ -22,9 +22,7 @@ class OrganisationController extends Controller
             ->whereNull('o.deleted_at')
             ->whereNull('p.deleted_at')
             ->groupBy('o.id')
-            ->orderByRaw('COUNT(o.id) desc, o.name asc')
-            ->skip($offset)
-            ->take(20);
+            ->orderByRaw('COUNT(o.id) desc, o.name asc');
 
         if ($searchWord = Input::get('searchWord')) {
             $query = $query->where(function ($mainQuery) use ($searchWord) {
@@ -35,10 +33,13 @@ class OrganisationController extends Controller
                     ->orWhere('city', 'LIKE', "%$searchWord%");
             });
         }
+        //not the best way to make the count TODO:Fix query above
+        $totalCount = count($query->get());
+        $query = $query->skip($offset)
+            ->take(20);
 
         $organisations = $query
             ->get();
-        $totalCount = $query->count();
         $currentCount = count($organisations);
 
         $responsePayload = [[
