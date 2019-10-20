@@ -36,10 +36,10 @@ controllers.controller('DatePickerSearchController', ['$scope', function (scope)
 
 
 
-controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo', function (scope, location, UserInfo)
+controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo','EnvInfo', function (scope, location, UserInfo, EnvInfo)
 {
     scope.userinfo = UserInfo;
-
+    EnvInfo(function(env){scope.envinfo = env.env})
     scope.isActive = function (viewLocation)
     {
         return viewLocation === location.path();

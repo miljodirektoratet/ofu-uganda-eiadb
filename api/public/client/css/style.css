@@ -394,3 +394,7 @@ textarea.ng-invalid,
     width: 200px;
     margin-top: 0px !important;
 }
+
+.env-badge {
+    background-color:red;
+}

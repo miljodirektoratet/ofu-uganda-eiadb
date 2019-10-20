@@ -2,7 +2,7 @@
 
 /* Services */
 
-var version = { version: "4.24.0" };
+var version = { version: "4.25.0" };
 
 var services = angular.module("seroApp.services");
 
@@ -144,6 +144,19 @@ services.factory("Valuelist", [
   "$resource",
   function($resource) {
     return $resource("/api/v1/valuelist/:id", { id: "@id" });
+  }
+]);
+
+services.factory("EnvInfo", [
+  "$http",
+   function($http) {
+      return function(callback) {
+        $http.get("/env").success(function(data) {
+            return callback(data);
+        }); 
+
+      } 
+    
   }
 ]);
 

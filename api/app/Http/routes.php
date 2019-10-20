@@ -24,6 +24,10 @@ Route::get('/', function ()
     return redirect(env('CLIENT'));
 });
 
+Route::get('/env', function(){
+    return ['env'=>env('APP_SETUP')];
+});
+
 Route::group(['middleware' => 'auth'], function ()
 {
     Route::get('info', function ()
