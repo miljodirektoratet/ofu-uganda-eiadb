@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
 
@@ -138,7 +138,7 @@ module.exports = function(grunt) {
         {
           expand: true,
           flatten: true,
-          src: ["bower_components/select2/select2.png"],
+          src: ["bower_components/select2/select2.png", "bower_components/select2/select2x2.png"],
           dest: "<%= paths.buildPath %>vendor/",
           filter: "isFile"
         },
