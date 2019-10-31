@@ -125,8 +125,9 @@
               <div class="col-md-1">
                 <div class="form-group">
                   <label for="person">Title</label>
-                  <select ui-select2 ng-disabled="!canSave()" ng-required="true" id="p_title" class="form-control input-sm input-conditions"
+                  <select ui-select2="{allowClear:true}" ng-disabled="!canSave()" ng-required="true" id="p_title" class="form-control input-sm input-conditions"
                     ng-model="p.practitioner_title_id">
+                    <option></option>
                     <option ng-repeat="v in valuelists.practitioner_title" value="{{ v.id }}">{{ v.description1 }}</option>
                   </select>
                 </div>
@@ -395,7 +396,7 @@
                       </td>
                       <td>
                         <select
-                          ui-select2
+                          ui-select2="{allowClear:true}"
                           ng-disabled="!canSave()"
                           id="c_cert_type"
                           ng-required="true"
@@ -403,6 +404,7 @@
                           class="form-control input-sm"
                           ng-model="c.cert_type"
                         >
+                          <option></option>
                           <option
                             ng-repeat="v in valuelists.practitionertype"
                             value="{{ v.id }}"
@@ -434,13 +436,14 @@
                       </td>
                       <td>
                         <select
-                          ui-select2
+                        ui-select2="{allowClear:true}"
                           ng-disabled="!canSave()"
                           ng-required="true"
                           id="c_conditions"
                           class="form-control input-sm input-conditions"
                           ng-model="c.conditions"
                         >
+                        <option></option>
                           <option
                             ng-repeat="v in valuelists.practitionermembertype"
                             value="{{ v.id }}"

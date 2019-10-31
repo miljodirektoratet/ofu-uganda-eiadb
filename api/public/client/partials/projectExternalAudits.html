@@ -49,7 +49,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="teamleader_id">Practitioner team leader</label>
-                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('teamleader_id')" id="teamleader_id" class="form-control input-sm" ng-model="ea.teamleader_id">
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('teamleader_id')" id="teamleader_id" class="form-control input-sm" ng-model="ea.teamleader_id">
+                                                        <option></option>
                                                         <option ng-repeat="v in valuelists.teamleader" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
@@ -57,7 +58,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label for="team_members">Practitioner team members</label>
-                                                    <select ui-select2 multiple="true" placeholder="Click to pick" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('practitioner_id')" id="team_members" class="form-control input-sm" ng-model="ea.teammember_ids">
+                                                    <select ui-select2="{allowClear:true}" multiple="true" placeholder="Click to pick" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('practitioner_id')" id="team_members" class="form-control input-sm" ng-model="ea.teammember_ids">
+                                                       <option></option>
                                                         <option ng-repeat="v in valuelists.teammember" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
@@ -68,7 +70,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="type">Type of external audit</label>
-                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('type')" id="type" class="form-control input-sm" ng-model="ea.type">
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('type')" id="type" class="form-control input-sm" ng-model="ea.type">
+                                                        <option></option>
                                                         <option ng-repeat="v in valuelists.external_audit_type" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
@@ -79,7 +82,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="user_id">Team leader</label>
-                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('user_id')" id="user_id" class="form-control input-sm" ng-model="ea.user_id">
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('user_id')" id="user_id" class="form-control input-sm" ng-model="ea.user_id">
+                                                        <option></option>
                                                         <option ng-repeat="v in valuelists.team_leader_eia_permit | filter:criteriaMatchOfficer1(ea.user_id)" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
@@ -101,7 +105,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="verification_inspection">Verification inspection?</label>
-                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('verification_inspection')" id="verification_inspection" class="form-control input-sm" ng-model="ea.verification_inspection">
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('verification_inspection')" id="verification_inspection" class="form-control input-sm" ng-model="ea.verification_inspection">
+                                                       <option></option>
                                                         <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
@@ -191,7 +196,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="response">Response</label>
-                                                    <select ui-select2 ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('response')" id="response" class="form-control input-sm" ng-model="ea.response">
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('response')" id="response" class="form-control input-sm" ng-model="ea.response">
+                                                       <option></option>
                                                         <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>

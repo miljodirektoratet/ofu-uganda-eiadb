@@ -34,9 +34,10 @@
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label for="newButton.type">Activity</label>
-                                                            <select ui-select2 id="newButton.type" class="form-control input-sm"
+                                                            <select ui-select2="{allowClear:true}" id="newButton.type" class="form-control input-sm"
                                                                     ng-required="true"
                                                                     ng-model="newButton.type">
+                                                                    <option></option>
                                                                 <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">
                                                                     {{v.description1}}
                                                                 </option>
@@ -44,10 +45,11 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label for="newButton.reason">Type</label>
-                                                            <select ui-select2 id="newButton.reason" class="form-control input-sm"
+                                                            <select ui-select2="{allowClear:true}" id="newButton.reason" class="form-control input-sm"
                                                                     ng-required="true"
                                                                     ng-model="newButton.reason">
-                                                                <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}">
+                                                                    <option></option>
+                                                                    <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}">
                                                                     {{v.description1}}
                                                                 </option>
                                                             </select>
@@ -125,11 +127,12 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="type">Activity</label>
-                                                    <select ui-select2 id="type" class="form-control input-sm"
+                                                    <select ui-select2="{allowClear:true}" id="type" class="form-control input-sm"
                                                             ng-change="saveCurrentAuditInspection()"
                                                             ng-required="true"
                                                             ng-disabled="!auth.canSave('type')"
                                                             ng-model="data.auditinspection.type">
+                                                        <option></option>    
                                                         <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">
                                                             {{v.description1}}
                                                         </option>
@@ -139,11 +142,12 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="reason">Type</label>
-                                                    <select ui-select2 id="reason" class="form-control input-sm"
+                                                    <select ui-select2="{allowClear:true}" id="reason" class="form-control input-sm"
                                                             ng-change="saveCurrentAuditInspection()"
                                                             ng-required="true"
                                                             ng-disabled="!auth.canSave('reason')"
                                                             ng-model="data.auditinspection.reason">
+                                                        <option></option>    
                                                         <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}">
                                                             {{v.description1}}
                                                         </option>
@@ -153,11 +157,12 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="lead_officer">Lead officer</label>
-                                                    <select ui-select2
+                                                    <select ui-select2="{allowClear:true}"
                                                             ng-change="saveCurrentAuditInspection()"
                                                             ng-disabled="!auth.canSave('lead_officer')" id="lead_officer"
                                                             class="form-control input-sm"
                                                             ng-model="data.auditinspection.lead_officer">
+                                                        <option></option>
                                                         <option ng-repeat="v in valuelists.officer_audit_inspection | filter:criteriaMatchOfficer1(data.auditinspection.lead_officer)" value="{{v.id}}">
                                                             {{v.description1}}
                                                         </option>
@@ -254,9 +259,10 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="action_taken">Response</label>
-                                                    <select ui-select2 ng-change="saveCurrentAuditInspection()"
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentAuditInspection()"
                                                             ng-disabled="!auth.canSave('action_taken')" id="action_taken" class="form-control input-sm"
                                                             ng-model="data.auditinspection.action_taken">
+                                                        <option></option>
                                                         <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">
                                                             {{v.description1}}
                                                         </option>
@@ -389,10 +395,11 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="performance_level">Performance level</label>
-                                                    <select ui-select2 ng-change="saveCurrentAuditInspection()"
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentAuditInspection()"
                                                             ng-disabled="!auth.canSave('action_taken')" id="performance_level" class="form-control input-sm"
                                                             ng-model="data.auditinspection.performance_level">
-                                                        <option ng-repeat="v in valuelists.grade" value="{{v.id}}">
+                                                            <option></option>
+                                                            <option ng-repeat="v in valuelists.grade" value="{{v.id}}">
                                                             {{v.description1}}
                                                         </option>
                                                     </select>

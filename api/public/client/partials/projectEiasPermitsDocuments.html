@@ -117,7 +117,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.type">Type of document</label>
-                                                    <select ui-select2 ng-change="setDefaultDocumentConclusion();calculateDocumentCode();saveCurrentDocument(d);" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="d.type">
+                                                    <select ui-select2="{allowClear:true}" ng-change="setDefaultDocumentConclusion();calculateDocumentCode();saveCurrentDocument(d);" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="d.type">
+                                                        <option></option>
                                                         <option ng-repeat="v in valuelists.documenttype" value="{{v.id}}">{{v.description2}}</option>
                                                     </select>
                                                 </div>
@@ -256,7 +257,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.conclusion">Conclusion (PB/Tor)</label>
-                                                    <select ui-select2 ng-change="saveCurrentDocument(d);" ng-disabled="!auth.canSave('document.conclusion') || isDisabledBasedOnRule('document.conclusion')" id="document.conclusion" class="form-control input-sm" ng-model="d.conclusion">
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentDocument(d);" ng-disabled="!auth.canSave('document.conclusion') || isDisabledBasedOnRule('document.conclusion')" id="document.conclusion" class="form-control input-sm" ng-model="d.conclusion">
+                                                        <option></option>
                                                         <option ng-repeat="v in valuelists.documentconclusion" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
