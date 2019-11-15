@@ -188,6 +188,8 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
         {
             case "document.conclusion":
                 return scope.data.document_ea.conclusion == 81;
+            case "document.type":
+                return scope.data.document_ea.type == 12;
             default:
                 return false;
         }

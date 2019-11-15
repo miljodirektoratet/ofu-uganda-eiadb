@@ -63,7 +63,7 @@ controllers.controller("SearchExternalAuditsController", [
       },
       {
         name: "externalaudit_officer_assigned",
-        displayName: "Officer assigned",
+        displayName: "Team leader",
         cellTooltip: true,
         headerTooltip: true
       },

@@ -188,6 +188,9 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         {
             case "document.conclusion":
                 return scope.data.document.conclusion == 81;
+            
+            case "document.type":
+                return scope.data.document.type == 10;
             default:
                 return false;
         }

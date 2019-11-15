@@ -266,10 +266,11 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.date_conclusion">Date of conclusion for PB & TOR</label>
-                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                                                        <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.date_conclusion')" id="document.date_conclusion" class="form-control input-sm input-date" ng-model="d.date_conclusion" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                    <div class="input-group container-datepicker"  
+                                                    ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentDocument(d)" ng-disabled="isDisabledBasedOnRule('document.type')" ng-readonly="!auth.canSave('document.date_conclusion')" id="document.date_conclusion" class="form-control input-sm input-date" ng-model="d.date_conclusion" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
                                                         <span class="input-group-btn">
-                                                                    <button type="button" ng-disabled="!auth.canSave('document.date_conclusion')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                    <button type="button" ng-disabled="!auth.canSave('document.date_conclusion') || isDisabledBasedOnRule('document.type')" class="btn btn-default btn-sm" ng-click="open($event)">
                                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                                     </button>
                                                                   </span>
