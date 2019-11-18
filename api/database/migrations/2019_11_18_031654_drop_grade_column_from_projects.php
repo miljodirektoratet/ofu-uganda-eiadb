@@ -16,7 +16,7 @@ class DropGradeColumnFromProjects extends Migration
       public function down()
       {
           Schema::table('projects', function($table) {
-             $table->string('grade')->nullable();
+            $table->integer('grade')->unsigned()->nullable();
           });
       }
   
