@@ -404,7 +404,7 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             {
                 has_industrial_waste_water: 42, // 42=Unknown
                 organisation_id: o.id,
-                risk_level: 96, // 96=Unknown
+                risk_level: null, // 96=Unknown
                 is_new: true
             };
             factory.project = new Project(pData);

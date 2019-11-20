@@ -17,8 +17,8 @@ class AddRiskLevelToProjects extends Migration
             $table->integer('risk_level')->unsigned()->nullable()->after('remarks');
         });
 
-        $sql = 'update `projects` set `risk_level`=96 where `risk_level` is null';
-        DB::connection()->getPdo()->exec($sql);
+        // $sql = 'update `projects` set `risk_level`=96 where `risk_level` is null';
+        // DB::connection()->getPdo()->exec($sql);
     }
 
     /**
