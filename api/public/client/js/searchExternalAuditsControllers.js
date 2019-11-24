@@ -62,6 +62,18 @@ controllers.controller("SearchExternalAuditsController", [
         headerTooltip: true
       },
       {
+        name: "verification_inspection",
+        displayName: "Verification inspection",
+        cellTooltip: true,
+        headerTooltip: true
+      },
+      {
+        name: "response",
+        displayName: "Response",
+        cellTooltip: true,
+        headerTooltip: true
+      },
+      {
         name: "externalaudit_officer_assigned",
         displayName: "Team leader",
         cellTooltip: true,
