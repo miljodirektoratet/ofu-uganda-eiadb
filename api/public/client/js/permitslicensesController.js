@@ -73,6 +73,7 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
 
     scope.openPermitLicense = function(id, $event)
     {
+        console.log(scope.routeParams.permitlicenseId, id);
         if (scope.data.permitlicense.is_new)
         {
             // Do nothing.
@@ -82,8 +83,15 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
             scope.goto("/projects/" + scope.data.project.id + "/permitslicenses");
 
         }
+        else if (scope.routeParams.permitlicenseId && scope.routeParamspermitlicenseId != id)
+        {
+            scope.goto("/projects/" + scope.data.project.id + "/permitslicenses/" + id);
+       
+
+        }
         else if (!scope.routeParams.permitlicenseId)
         {
+            console.log("it says its not set")
             scope.goto("/projects/" + scope.data.project.id + "/permitslicenses/" + id);
         }
     };
