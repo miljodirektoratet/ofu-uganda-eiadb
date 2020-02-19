@@ -356,6 +356,7 @@ controllers.controller("SearchProjectsController", [
       scope.showResultGrid = false;
       ProjectSearchService.search(scope.criteria).then(function(rows) {
         scope.gridOptions.data = rows;
+        localStorage.projectData = JSON.stringify(rows);
         scope.isSearching = false;
         scope.showResultGrid = true;
       });
