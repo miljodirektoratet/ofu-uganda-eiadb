@@ -15,6 +15,10 @@
   cursor: pointer;
 
 }
+
+.active-category {
+  color: red;
+}
 </style>
   <body>
 
@@ -135,7 +139,7 @@ function categoriesListing() {
   });
   var uniqueCategories = categories.filter( onlyUnique );
   for(var i = 0; i < uniqueCategories.length; i++){
-      categoryList.innerHTML += '<span class="category-cover" onclick="plotByCategory(\''+uniqueCategories[i]+'\')">&nbsp;&nbsp;<span class="dot" style="background-color: '+intToRGB(hashCode(uniqueCategories[i]))+'"></span>&nbsp;&nbsp;<span>'+uniqueCategories[i]+' ('+ countDataPoints(categories, uniqueCategories[i])+')</span><span><br>';
+      categoryList.innerHTML += '<span id="tab-'+uniqueCategories[i]+'" class="category-cover" onclick="plotByCategory(\''+uniqueCategories[i]+'\')">&nbsp;&nbsp;<span class="dot" style="background-color: '+intToRGB(hashCode(uniqueCategories[i]))+'"></span>&nbsp;&nbsp;<span>'+uniqueCategories[i]+' ('+ countDataPoints(categories, uniqueCategories[i])+')</span><span><br>';
   }
 }
 function onlyUnique(value, index, self) { 
@@ -143,6 +147,12 @@ function onlyUnique(value, index, self) {
 }
 
 function plotByCategory(category) {
+  if(window.currentSelectedCategory) {
+    document.getElementById('tab-'+window.currentSelectedCategory).classList.remove("active-category")
+    
+  } 
+  document.getElementById('tab-'+category).classList.add("active-category")
+  window.currentSelectedCategory = category;
   plotMap(category);
 }
 
