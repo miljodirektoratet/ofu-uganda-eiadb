@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function ()
     {
         phpinfo();
     });
+    Route::get('plot-projects', ['uses' => 'DisplayMapController@plotProjects']);
+
 });
 
 
@@ -41,6 +43,7 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function ()
 {
