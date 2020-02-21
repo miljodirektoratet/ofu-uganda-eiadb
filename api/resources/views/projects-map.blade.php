@@ -138,6 +138,7 @@ function categoriesListing() {
     return data.category_description;
   });
   var uniqueCategories = categories.filter( onlyUnique );
+  uniqueCategories.sort();
   for(var i = 0; i < uniqueCategories.length; i++){
       categoryList.innerHTML += '<span id="tab-'+uniqueCategories[i]+'" class="category-cover" onclick="plotByCategory(\''+uniqueCategories[i]+'\')">&nbsp;&nbsp;<span class="dot" style="background-color: '+intToRGB(hashCode(uniqueCategories[i]))+'"></span>&nbsp;&nbsp;<span>'+uniqueCategories[i]+' ('+ countDataPoints(categories, uniqueCategories[i])+')</span><span><br>';
   }
