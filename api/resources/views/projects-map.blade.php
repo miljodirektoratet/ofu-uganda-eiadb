@@ -52,7 +52,7 @@
       <li class="nav-item">
         </li>
       </ul>
-      <a class="nav-link btn btn-success" href="#" onclick="toggleCategory()" id="category-toggle">Hide Category Menu</a>
+      <a class="nav-link btn btn-success" href="#" onclick="toggleCategory()" id="category-toggle">Hide category menu</a>
   </div>
 </nav>
 
@@ -211,11 +211,11 @@ function toggleCategory() {
   var categoryToggleBtn = document.getElementById('category-toggle');
   var menuIsHidden = categoryMenu.classList.toggle('hide-map');
   if(menuIsHidden) {
-    categoryToggleBtn.textContent = "Show Category Menu";
+    categoryToggleBtn.textContent = "Show category menu";
     mapPan.classList.remove('col-8');
     mapPan.classList.add('col-12');
   } else {
-    categoryToggleBtn.textContent = "Hide Category Menu"
+    categoryToggleBtn.textContent = "Hide category menu"
     mapPan.classList.remove('col-12');
     mapPan.classList.add('col-8');
   }
