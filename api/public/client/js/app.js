@@ -455,6 +455,17 @@ exportObj.exportMetaData["externalAudit"] = {
 
 //End of export script
 
+//coordinate check 
+function isCoordinateWithinUganda(lat, long, callback) {
+    fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat="+lat+"&lon="+long, {"headers":{"content-type":"application/json"},"method":"GET","mode":"cors"}).then(function(resp){
+      return resp.json();
+  }).then(function(resp){
+    if(!resp.address || resp.address.country_code != 'ug') {
+      return callback(false, resp);
+    }
+    return callback(true, resp);
+  });
+}
 //var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
 var regexIso8601 = /^(\d{4}-\d{2}-\d{2} \d{2}\:\d{2}\:\d{2})$/;
 function convertDateStringsToDates(input) {

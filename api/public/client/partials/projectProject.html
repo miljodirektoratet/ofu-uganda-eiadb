@@ -112,7 +112,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row inline-err-margin">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="location">Location</label>
@@ -135,8 +135,9 @@
                                 <input type="text" ng-blur="saveCurrentProject()" decimal min="29.57" max="35.04" ng-change="checkInputForGoogleMaps(parts.project.form.longitude)" ng-readonly="!auth.canSave()" class="form-control input-sm" id="longitude" name="longitude" ng-model="data.project.longitude"/>
                             </div>
                         </div>
+                        <span class="pull-right inline-err" ng-show="coordinateError">Coordinate is outside Uganda, please fix it &nbsp;</span>
                     </div>
-
+                   
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

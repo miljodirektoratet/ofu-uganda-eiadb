@@ -398,3 +398,11 @@ textarea.ng-invalid,
 .env-badge {
     background-color:red;
 }
+
+.inline-err {
+    color: red;
+}
+
+.inline-err-margin {
+    margin-bottom: 2%;
+}

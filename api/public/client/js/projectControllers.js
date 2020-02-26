@@ -180,6 +180,7 @@ controllers.controller("ProjectController", [
   function(scope, $q, ProjectFactory, Organisation, $timeout) {
     scope.selectOrganisationMode = false;
     scope.isNewProject = false;
+    scope.coordinateError = false;
 
     scope.parts = {
       project: {
@@ -380,17 +381,15 @@ controllers.controller("ProjectController", [
     };
 
     scope.checkInputForGoogleMaps = function(formElement) {
-      //console.log("checkInputForGoogleMaps", formElement);
-      var rawValue = formElement.$viewValue;
-
-      if (rawValue && rawValue.indexOf(", ") !== -1) {
-        var coordinates = rawValue.split(", ");
-        var lat = coordinates[0];
-        var long = coordinates[1];
-
-        scope.data.project.latitude = lat;
-        scope.data.project.longitude = long;
-      }
+      var lat = scope.data.project.latitude;
+      var long = scope.data.project.longitude;
+      isCoordinateWithinUganda(lat, long, function(isInUganda, data){
+        console.log(data);
+        if(!isInUganda) {
+          return scope.coordinateError = true;
+        }
+        scope.coordinateError = false;
+      });
     };
 
     if (scope.routeParams.projectId == "new") {
