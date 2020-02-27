@@ -56,7 +56,7 @@
   </div>
 </nav>
 
-<div class="row" style="margin-top:5%;margin-left:2%">
+<div class="row" style="margin-top:5%;">
     <div id="category-menu" class="col-4">
       <!-- <h1>Projects Plotting</h1> -->
       <h4>Categories</h4>

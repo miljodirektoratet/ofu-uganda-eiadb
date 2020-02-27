@@ -126,10 +126,11 @@ controllers.controller("ProjectTabsController", [
 
       part.saveInProgress = true;
       var deferred = $q.defer();
+      console.log(this.coordinateError, this.checkingCoordinates)
       if (part.form.$pristine && !evenIfPristine) {
         part.saveInProgress = false;
         deferred.reject();
-      } else if (part.form.$invalid && !(part.isNew && evenIfPristine)) {
+      } else if ((part.form.$invalid || this.coordinateError) && !(part.isNew && evenIfPristine)) {
         part.state = SavingStateEnum.Invalid;
         part.saveInProgress = false;
         deferred.reject();
@@ -181,7 +182,10 @@ controllers.controller("ProjectController", [
     scope.selectOrganisationMode = false;
     scope.isNewProject = false;
     scope.coordinateError = false;
-
+    scope.coordinateNetworkIssues = false;
+    scope.checkingCoordinates = false;
+    scope.currentLong = "";
+    scope.currentLat = "";
     scope.parts = {
       project: {
         form: null,
@@ -192,7 +196,6 @@ controllers.controller("ProjectController", [
         state: SavingStateEnum.Loading
       }
     };
-
     scope.newProjectExisitingOrganisation = function(o) {
       scope.selectOrganisationMode = false;
       ProjectFactory.setOrganisation(o).then(function(o) {
@@ -297,7 +300,7 @@ controllers.controller("ProjectController", [
       var projectPart = scope.parts.project;
       var organisationPart = scope.parts.organisation;
 
-      if (projectPart.form.$invalid) {
+      if (projectPart.form.$invalid || this.coordinateError) {
         scope.parts.project.state = SavingStateEnum.Invalid;
         if (organisationPart.form.$dirty) {
           scope.parts.organisation.state = SavingStateEnum.MissingDependency;
@@ -380,15 +383,53 @@ controllers.controller("ProjectController", [
       });
     };
 
-    scope.checkInputForGoogleMaps = function(formElement) {
+    scope.verifyCoordinates = function(data) {
       var lat = scope.data.project.latitude;
       var long = scope.data.project.longitude;
-      isCoordinateWithinUganda(lat, long, function(isInUganda, data){
-        console.log(data);
-        if(!isInUganda) {
-          return scope.coordinateError = true;
+      function checkingCoordinate(state) {
+        console.log(state);
+        if(state) {
+          scope.coordinateError = state;
         }
+        scope.checkingCoordinates = state;
+      };
+      if(scope.isNewProject && !lat && !long) {
         scope.coordinateError = false;
+        return;
+      }
+
+      if(scope.parts.project.state == SavingStateEnum.Loading) {
+            return;
+          }
+        
+        if(scope.currentLong == long && scope.currentLat == lat) {
+          return;
+        }
+        if(!lat && !long) {
+          scope.coordinateError = false;
+          return;
+        }
+        scope.currentLat = lat;
+        scope.currentLong = long;
+        // console.log("called", data, lat, long, SavingStateEnum.Loading, scope.currentLong, scope.currentLat, "edmond")
+        checkingCoordinate(true);
+      isCoordinateWithinUganda(lat, long, function(isInUganda, data){
+        scope.$apply( function () {
+        if(!isInUganda) {
+          //TODO remove view function
+          document.getElementById('latitude').classList.remove('ng-valid');
+          document.getElementById('longitude').classList.remove('ng-valid');
+          scope.coordinateError = true;
+          if(data.error == "network") {
+            scope.coordinateNetworkIssues = true;
+          } else {
+            scope.coordinateNetworkIssues = false;
+          }
+        } else {  
+          scope.coordinateError = false;
+        }
+        checkingCoordinate(false);
+      })
       });
     };
 
@@ -420,5 +461,7 @@ controllers.controller("ProjectController", [
       if (a.projectCount > b.projectCount) return -1;
       return 0;
     };
+
   }
+    
 ]);

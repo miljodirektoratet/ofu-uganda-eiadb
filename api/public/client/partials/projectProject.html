@@ -112,7 +112,7 @@
                         </div>
                     </div>
 
-                    <div class="row inline-err-margin">
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="location">Location</label>
@@ -122,7 +122,10 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="latitude">Latitude</label>
-                                <input type="text" ng-blur="saveCurrentProject()" decimal negative-number="true" min="-1.48" max="4.22" ng-change="checkInputForGoogleMaps(parts.project.form.latitude)" ng-readonly="!auth.canSave()" class="form-control input-sm" id="latitude" name="latitude" ng-model="data.project.latitude"/>
+                                <input type="text"
+                              ng-blur="saveCurrentProject()" 
+                              ng-class="{'ng-invalid': coordinateError || (!data.project.latitude && !isNewProject) }" 
+                              ng-change="verifyCoordinates(parts.project.form.latitude)" ng-readonly="!auth.canSave()" class="form-control input-sm" id="latitude" name="latitude" ng-model="data.project.latitude"/>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -132,12 +135,22 @@
                                         <span class="glyphicon glyphicon-map-marker"></span>
                                     </a>
                                 </label>
-                                <input type="text" ng-blur="saveCurrentProject()" decimal min="29.57" max="35.04" ng-change="checkInputForGoogleMaps(parts.project.form.longitude)" ng-readonly="!auth.canSave()" class="form-control input-sm" id="longitude" name="longitude" ng-model="data.project.longitude"/>
+                                <input type="text" ng-blur="saveCurrentProject()" 
+                                ng-change="verifyCoordinates(parts.project.form.longitude)" 
+                                ng-class="{'ng-invalid': coordinateError || (!data.project.latitude && !isNewProject)}" ng-readonly="!auth.canSave()" class="form-control input-sm" id="longitude" name="longitude" ng-model="data.project.longitude"/>
                             </div>
                         </div>
-                        <span class="pull-right inline-err" ng-show="coordinateError">Coordinate is outside Uganda, please fix it &nbsp;</span>
                     </div>
-                   
+                   <div class="row inline-err">
+                       <div class="col-md-6"></div>
+                       <div class="col-md-6">
+                        <span  ng-show="(coordinateError && !coordinateNetworkIssues) && !checkingCoordinates">Coordinate is outside Uganda, please fix it &nbsp;</span>
+                        {{(!isNewProject && data.project )?verifyCoordinates(data.project):''}}
+                        
+                        <span  ng-show="coordinateNetworkIssues">Coordinate verification failed, check your internet connections and refresh the page &nbsp;</span>
+                        <span  ng-show="(!data.project.longitude && !data.project.latitude) && !isNewProject">The coordinate is missing &nbsp;</span>
+                       </div>
+                   </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

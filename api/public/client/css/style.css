@@ -401,8 +401,5 @@ textarea.ng-invalid,
 
 .inline-err {
     color: red;
-}
-
-.inline-err-margin {
     margin-bottom: 2%;
 }
