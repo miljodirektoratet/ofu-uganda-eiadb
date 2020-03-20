@@ -387,7 +387,6 @@ controllers.controller("ProjectController", [
       var lat = scope.data.project.latitude;
       var long = scope.data.project.longitude;
       function checkingCoordinate(state) {
-        console.log(state);
         if(state) {
           scope.coordinateError = state;
         }
@@ -411,6 +410,7 @@ controllers.controller("ProjectController", [
         }
         scope.currentLat = lat;
         scope.currentLong = long;
+        console.log("got here on one", long, lat)
         // console.log("called", data, lat, long, SavingStateEnum.Loading, scope.currentLong, scope.currentLat, "edmond")
         checkingCoordinate(true);
       isCoordinateWithinUganda(lat, long, function(isInUganda, data){
