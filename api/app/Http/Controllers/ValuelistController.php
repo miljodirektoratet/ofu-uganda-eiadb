@@ -220,7 +220,7 @@ class ValuelistController extends Controller
         })
         ->where('is_passive', 0)
         ->orderBy('name')
-        ->get(array('id', 'name as description1'));
+        ->get(array('id', 'name as description1', \DB::raw("'false' as passive")));
 
         return $users;
 }

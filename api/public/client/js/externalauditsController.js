@@ -79,12 +79,7 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
     {
         return function (item)
         {
-            if (item.passive && currentId)
-            {
-                return item.id === currentId;
-            }
-
-            return item.passive === false;
+            return true;
         };
     };
 
@@ -92,16 +87,7 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
     {
         return function (item)
         {
-            if (item.passive && currentIds)
-            {
-                for (var i = 0; i < currentIds.length; i++)
-                {
-                    var currentId = currentIds[i];
-                    return item.id === currentId;
-                }
-            }
-
-            return item.passive === false;
+            return true;
         };
     };
 
