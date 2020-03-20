@@ -212,13 +212,10 @@ class ValuelistController extends Controller
         $users = User::
         whereHas('roles', function ($q) use ($role) {
 
-        $q->where('name', '=', $role);
+        $q->where('name', '=', $role)->orWhere(function($q){
+            $q->where('name', '=', 'Role 8')->where('users.is_passive', 0);
+        });
     })
-        ->whereDoesntHave('roles', function ($q) {
-
-            $q->where('name', '=', 'Role 8');
-        })
-        ->where('is_passive', 0)
         ->orderBy('name')
         ->get(array('id', 'name as description1', \DB::raw("'false' as passive")));
 
