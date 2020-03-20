@@ -209,11 +209,21 @@ class ValuelistController extends Controller
 
     private function users_with_role($role)
     {
-        $users = User::where('is_passive', 0)
-            ->orderBy('name')
-            ->get(array('id', 'name as description1', \DB::raw("'false' as passive")));
+        $users = User::
+        whereHas('roles', function ($q) use ($role) {
+
+        $q->where('name', '=', $role);
+    })
+        ->whereDoesntHave('roles', function ($q) {
+
+            $q->where('name', '=', 'Role 8');
+        })
+        ->where('is_passive', 0)
+        ->orderBy('name')
+        ->get(array('id', 'name as description1'));
+
         return $users;
-    }
+}
 
     private function team_leader_eia_permit()
     {
