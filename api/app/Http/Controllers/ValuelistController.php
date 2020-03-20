@@ -209,60 +209,9 @@ class ValuelistController extends Controller
 
     private function users_with_role($role)
     {
-//        $admins = User::
-        //        whereHas('roles', function ($q)
-        //        {
-        //            $q->where('name', '=', 'Role 8');
-        //        })
-        //            ->get(array('id'));
-        //        $adminIds = [];
-        //        foreach ($admins as $admin)
-        //        {
-        //            $adminIds []= $admin->id;
-        //        }
-
-        $usersInRole = User::
-            whereHas('roles', function ($q) use ($role) {
-
-            $q->where('name', '=', $role);
-        })
-            ->whereDoesntHave('roles', function ($q) {
-
-                $q->where('name', '=', 'Role 8');
-            })
+        $users = User::where('is_passive', 0)
             ->orderBy('name')
-            ->get(array('id', 'name as description1'));
-
-        $passiveUsers = User::
-            whereDoesntHave('roles', function ($q) use ($role) {
-
-            $q->where('name', '=', $role);
-        })
-            ->orderBy('name')
-            ->get(array('id', 'name as description1'));
-
-        $users = [];
-        foreach ($usersInRole as $user) {
-
-            $user->passive = false;
-            $users[] = $user;
-//
-            //            if (in_array($userInRole->id, $adminIds))
-            //            {
-            //                continue;
-            //            }
-            //            else
-            //            {
-            //                $userInRole->passive = false;
-            //                $users []= $userInRole;
-            //            }
-        }
-
-        foreach ($passiveUsers as $user) {
-            $user->passive = true;
-            $users[] = $user;
-        }
-
+            ->get(array('id', 'name as description1', \DB::raw("'false' as passive")));
         return $users;
     }
 
