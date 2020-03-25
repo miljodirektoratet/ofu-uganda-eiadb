@@ -209,17 +209,25 @@ class ValuelistController extends Controller
 
     private function users_with_role($role)
     {
-        $users = User::
-        whereHas('roles', function ($q) use ($role) {
+        $systemManagers = User::whereHas('roles', function($q){
+            $q->where('name', 'Role 8');
+        })->get();
 
-        $q->where('name', '=', $role)->orWhere(function($q){
-            $q->where('name', '=', 'Role 8')->where('users.is_passive', 0);
-        });
-    })
-        ->orderBy('name')
-        ->get(array('id', 'name as description1', \DB::raw("'false' as passive")));
-
+        $usersWithRequestedRoles = User::whereHas('roles', function ($q) use ($role) {
+            $q->where('name', '=', $role);
+            })->orderBy('name')
+        ->get(array('id', 'name as description1', 'is_passive'))->toArray();
+        
+        $users = [];
+        foreach($usersWithRequestedRoles as $user) {
+            $manager = $systemManagers->where('id', $user['id'])->first();
+                 if($manager && $manager->is_passive) {
+                   continue;
+                }
+            $users[] = $user;
+        }
         return $users;
+
 }
 
     private function team_leader_eia_permit()

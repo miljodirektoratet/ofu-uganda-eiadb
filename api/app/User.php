@@ -19,8 +19,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id');
   }
 
+   public function getPassiveAttribute($value)
+   {
+     return true;
+     return ($value)? true:false;
+   }
   protected $table = 'users';
-  protected $dates = ['deleted_at'];  
+  protected $dates = ['deleted_at'];
+  protected $appends = ['passive'];
   
   // remember_token???
   protected $fillable = ['initials','name','job_position_code','job_position_name','email','password','remember_token','is_passive', 'deleted_at'];
