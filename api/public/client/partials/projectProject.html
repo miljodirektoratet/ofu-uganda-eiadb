@@ -124,7 +124,7 @@
                                 <label for="latitude">Latitude</label>
                                 <input type="text"
                               ng-blur="saveCurrentProject()" 
-                              ng-class="{'ng-invalid': coordinateError || (!data.project.latitude && !isNewProject) ||(data.project.latitude && isNewProject) }" 
+                              ng-class="{'ng-invalid': coordinateError }" 
                               ng-change="verifyCoordinates(parts.project.form.latitude)" ng-readonly="!auth.canSave()" class="form-control input-sm" id="latitude" name="latitude" ng-model="data.project.latitude"/>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                                 </label>
                                 <input type="text" ng-blur="saveCurrentProject()" 
                                 ng-change="verifyCoordinates(parts.project.form.longitude)" 
-                                ng-class="{'ng-invalid': coordinateError || (!data.project.latitude && !isNewProject ||(data.project.latitude && isNewProject))}" ng-readonly="!auth.canSave()" class="form-control input-sm" id="longitude" name="longitude" ng-model="data.project.longitude"/>
+                                ng-class="{'ng-invalid': coordinateError}" ng-readonly="!auth.canSave()" class="form-control input-sm" id="longitude" name="longitude" ng-model="data.project.longitude"/>
                             </div>
                         </div>
                     </div>
