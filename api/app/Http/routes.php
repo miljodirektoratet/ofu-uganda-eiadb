@@ -35,6 +35,9 @@ Route::group(['middleware' => 'auth'], function ()
         phpinfo();
     });
     Route::get('plot-projects', ['uses' => 'DisplayMapController@plotProjects']);
+    Route::group(['prefix' => '/tiles'], function() {
+        Route::get('{file?}', ['uses' => 'CoordinatesController@fetchTile'])->where('file', '.*');
+    });
 
 });
 

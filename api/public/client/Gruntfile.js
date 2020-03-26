@@ -80,7 +80,8 @@ module.exports = function (grunt) {
           "js/advancedFactory",
           "js/validations.js",
           "js/excelLib.js",
-          "js/excelExport.js"
+          "js/excelExport.js",
+          "js/maplib.js"
         ]
       }
     }
