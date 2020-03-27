@@ -386,8 +386,10 @@ controllers.controller("ProjectController", [
       if(loading) {
         return;
       }
-      var lat = scope.data.project.latitude;
-      var long = scope.data.project.longitude;
+      var lat = scope.data.project.latitude.trim();
+      var long = scope.data.project.longitude.trim();
+      scope.data.project.latitude = lat;
+      scope.data.project.longitude = long;
       function checkingCoordinate(state) {
         if(state) {
           scope.coordinateError = state;
