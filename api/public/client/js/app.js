@@ -454,7 +454,9 @@ exportObj.exportMetaData["externalAudit"] = {
 };
 
 //End of export script
-
+function so() {
+  console.log("ca")
+}
 //coordinate check 
 function isCoordinateWithinUganda(lat, long, callback) {
     if(!lat && !long) {
@@ -462,7 +464,6 @@ function isCoordinateWithinUganda(lat, long, callback) {
     }
     var grid = codegrid.CodeGrid();
     grid.getCode (parseFloat(lat),parseFloat(long), function (err, code) {
-      console.log(code, "get code", lat, long);
         if(code != 'ug') {
           return callback(false, {error:err});
         }

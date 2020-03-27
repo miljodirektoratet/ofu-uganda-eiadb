@@ -124,6 +124,7 @@
                                 <label for="latitude">Latitude</label>
                                 <input type="text"
                               ng-blur="saveCurrentProject()" 
+                              ng-paste="splitCoordinates('latitude')"
                               ng-class="{'ng-invalid': coordinateError }" 
                               ng-change="verifyCoordinates(parts.project.form.latitude)" ng-readonly="!auth.canSave()" class="form-control input-sm" id="latitude" name="latitude" ng-model="data.project.latitude"/>
                             </div>
@@ -135,7 +136,7 @@
                                         <span class="glyphicon glyphicon-map-marker"></span>
                                     </a>
                                 </label>
-                                <input type="text" ng-blur="saveCurrentProject()" 
+                                <input type="text" ng-paste="splitCoordinates('longitude')" ng-blur="saveCurrentProject()" 
                                 ng-change="verifyCoordinates(parts.project.form.longitude)" 
                                 ng-class="{'ng-invalid': coordinateError}" ng-readonly="!auth.canSave()" class="form-control input-sm" id="longitude" name="longitude" ng-model="data.project.longitude"/>
                             </div>

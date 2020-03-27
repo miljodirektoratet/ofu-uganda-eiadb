@@ -126,7 +126,6 @@ controllers.controller("ProjectTabsController", [
 
       part.saveInProgress = true;
       var deferred = $q.defer();
-      console.log(this.coordinateError, this.checkingCoordinates)
       if (part.form.$pristine && !evenIfPristine) {
         part.saveInProgress = false;
         deferred.reject();
@@ -410,8 +409,6 @@ controllers.controller("ProjectController", [
         }
         scope.currentLat = lat;
         scope.currentLong = long;
-        console.log("got here on one", long, lat)
-        // console.log("called", data, lat, long, SavingStateEnum.Loading, scope.currentLong, scope.currentLat, "edmond")
         checkingCoordinate(true);
       isCoordinateWithinUganda(lat, long, function(isInUganda, data){
         scope.$apply( function () {
@@ -432,6 +429,18 @@ controllers.controller("ProjectController", [
       })
       });
     };
+
+    scope.splitCoordinates = function(type) {
+      setTimeout(function() {
+        var splitValues = document.getElementById(type).value.split(",");
+        if(splitValues.length < 2) {
+          return;
+        }
+        scope.data.project.latitude = splitValues[0];
+        scope.data.project.longitude = splitValues[1];
+    }, 0);
+     
+    }
 
     if (scope.routeParams.projectId == "new") {
       scope.selectOrganisationMode = true;
