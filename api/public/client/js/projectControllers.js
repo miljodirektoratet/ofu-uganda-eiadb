@@ -388,8 +388,8 @@ controllers.controller("ProjectController", [
         return;
       }
       scope.pageRendered = true;
-      var lat = scope.data.project.latitude.trim();
-      var long = scope.data.project.longitude.trim();
+      var lat = (scope.data.project.latitude)? scope.data.project.latitude.trim(): scope.data.project.latitude;
+      var long = (scope.data.project.longitude)? scope.data.project.longitude.trim(): scope.data.project.longitude;
       scope.data.project.latitude = lat;
       scope.data.project.longitude = long;
       function checkingCoordinate(state) {
