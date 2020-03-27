@@ -185,6 +185,7 @@ controllers.controller("ProjectController", [
     scope.checkingCoordinates = false;
     scope.currentLong = "";
     scope.currentLat = "";
+    scope. pageRendered = false;
     scope.parts = {
       project: {
         form: null,
@@ -383,9 +384,10 @@ controllers.controller("ProjectController", [
     };
 
     scope.verifyCoordinates = function(data, loading) {
-      if(loading) {
+      if(loading && scope.pageRendered) {
         return;
       }
+      scope.pageRendered = true;
       var lat = scope.data.project.latitude.trim();
       var long = scope.data.project.longitude.trim();
       scope.data.project.latitude = lat;
