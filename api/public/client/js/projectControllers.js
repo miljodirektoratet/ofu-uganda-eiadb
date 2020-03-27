@@ -382,7 +382,10 @@ controllers.controller("ProjectController", [
       });
     };
 
-    scope.verifyCoordinates = function(data) {
+    scope.verifyCoordinates = function(data, loading) {
+      if(loading) {
+        return;
+      }
       var lat = scope.data.project.latitude;
       var long = scope.data.project.longitude;
       function checkingCoordinate(state) {
@@ -395,10 +398,10 @@ controllers.controller("ProjectController", [
         scope.coordinateError = false;
         return;
       }
-
+      
       if(scope.parts.project.state == SavingStateEnum.Loading) {
-            return;
-          }
+        return;
+      }
         
         if(scope.currentLong == long && scope.currentLat == lat) {
           return;
@@ -424,6 +427,7 @@ controllers.controller("ProjectController", [
           }
         } else {  
           scope.coordinateError = false;
+            scope.saveCurrentProject();
         }
         checkingCoordinate(false);
       })
