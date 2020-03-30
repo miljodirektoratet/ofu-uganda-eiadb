@@ -17,25 +17,7 @@ controllers.controller("PractitionersController", [
     scope.userinfo = UserInfo;
     scope.valuelists = Valuelists;
     Practitioner.query(function(data) {
-      var persons = _.map(data, function(o) {
-        if (
-          o.practitioner_certificates.length > 0 &&
-          o.practitioner_certificates[0].cert_type < 52
-        ) {
-          return o;
-        }
-      });
-      var org = _.map(data, function(o) {
-        if (
-          o.practitioner_certificates.length > 0 &&
-          o.practitioner_certificates[0].cert_type == 52
-        ) {
-          return o;
-        }
-      });
-      persons = _.without(persons, undefined);
-      org = _.without(org, undefined);
-      scope.practitioners = persons.concat(org);
+      scope.practitioners = data;
     }); //{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
     var filterCertificates = function(

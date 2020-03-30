@@ -38,7 +38,9 @@ class Practitioner extends Model
         // Soft delete children as well
         static::deleted(function ($practitioner)
         {
-            $practitioner->practitionerCertificates()->delete();
+            if($practitioner->practitionerCertificates()->count()) {
+                $practitioner->practitionerCertificates()->delete();
+            }
         });
     }
 }
