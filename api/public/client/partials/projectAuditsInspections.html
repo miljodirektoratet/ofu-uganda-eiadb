@@ -303,10 +303,14 @@
                                                     <label>Activity report</label>
                                                     <div class="uploaded-file" ng-show="data.auditinspection.file_metadata_report_id">
                                                         <a ng-href="{{downloadFileUrl(data.auditinspection.file_metadata_report_id)}}" ng-show="data.auditinspection.report_file">{{data.auditinspection.report_file.filename}}</a>
-                                                        <button type="button" class="delete btn btn-sm btn-link"
-                                                                ng-click="deleteReport()"
-                                                                ng-hide="!auth.canSave('delete')">delete
-                                                        </button>
+                                                        
+                                                        <sero-delete-button class="delete-button" 
+                                                        text="'delete'"
+                                                        warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                        button-class="'delete btn btn-sm btn-link'"
+                                                        ng-hide="!auth.canSave('delete')"
+                                                        on-yes="deleteReport()"></sero-delete-button>
+
                                                     </div>
                                                     <div>
                                                         <button class="btn btn-sm btn-default"
@@ -344,10 +348,18 @@
                                                     <label>Response document</label>
                                                     <div class="uploaded-file" ng-show="data.auditinspection.file_metadata_id">
                                                         <a ng-href="{{downloadFileUrl(data.auditinspection.file_metadata_id)}}" ng-show="data.auditinspection.action_taken_letter">{{data.auditinspection.action_taken_letter.filename}}</a>
-                                                        <button type="button" class="delete btn btn-sm btn-link"
+
+                                                        <sero-delete-button class="delete-button" 
+                                                        text="'delete'"
+                                                        warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                        button-class="'delete btn btn-sm btn-link'"
+                                                        ng-hide="!auth.canSave('delete')"
+                                                        on-yes="deleteActionTakenLetter()"></sero-delete-button>
+
+                                                        <!-- <button type="button" class="delete btn btn-sm btn-link"
                                                                 ng-click="deleteActionTakenLetter()"
                                                                 ng-hide="!auth.canSave('delete')">delete
-                                                        </button>
+                                                        </button> -->
                                                     </div>
                                                     <div>
                                                         <button class="btn btn-sm btn-default"
@@ -475,10 +487,16 @@
                                                     <div class="uploaded-files" ng-show="data.auditinspection.documentation">
                                                         <div class="file" ng-repeat="d in data.auditinspection.documentation">
                                                             <a ng-href="{{downloadFileUrl(d.id)}}">{{d.filename}}</a>
-                                                            <button type="button" class="delete btn btn-sm btn-link"
+                                                            <sero-delete-button class="delete-button" 
+                                                            text="'delete'"
+                                                            warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                            button-class="'delete btn btn-sm btn-link'"
+                                                            ng-hide="!auth.canSave('delete')"
+                                                            on-yes="deleteDocumentation(d.id)"></sero-delete-button>
+                                                            <!-- <button type="button" class="delete btn btn-sm btn-link"
                                                                     ng-click="deleteDocumentation(d.id)"
                                                                     ng-hide="!auth.canSave('delete')">delete
-                                                            </button>
+                                                            </button> -->
                                                         </div>
                                                     </div>
                                                     <div>

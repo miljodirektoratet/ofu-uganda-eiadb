@@ -298,10 +298,13 @@
                                                     <label>Certificate</label>
                                                     <div class="uploaded-file" ng-show="ep.file_metadata_id">
                                                         <a ng-href="{{downloadFileUrl(ep.file_metadata_id)}}" ng-show="ep.certificate">{{ep.certificate.filename}}</a>
-                                                        <button type="button" class="delete btn btn-sm btn-link"
-                                                                ng-click="deleteCertificate()"
-                                                                ng-hide="!auth.canSave('delete')">delete
-                                                        </button>
+                                                        <sero-delete-button class="delete-button" 
+                                                        text="'delete'"
+                                                        warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                        button-class="'delete btn btn-sm btn-link'"
+                                                        ng-hide="!auth.canSave('delete')"
+                                                        on-yes="deleteCertificate()"></sero-delete-button>
+
                                                     </div>
                                                     <div>
                                                         <button class="btn btn-sm btn-default"

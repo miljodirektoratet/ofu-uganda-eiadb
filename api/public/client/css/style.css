@@ -381,10 +381,9 @@ textarea.ng-invalid,
 
 }
 
-.project-eiasandpermits .btn-delete,
-.project-project .btn-delete {
+/* .project-project .btn-delete {
     width: 200px;
-}
+} */
 
 .edit-container .edit-row form {
     margin-top: 15px;

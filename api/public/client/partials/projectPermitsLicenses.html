@@ -272,10 +272,13 @@
                                                     <div class="uploaded-files">
                                                         <div class="file" ng-repeat="d in pl.documentation | filter:documentationData.ApplicationForm.tag">
                                                             <a ng-href="{{downloadFileUrl(d.id)}}">{{d.filename}}</a>
-                                                            <button type="button" class="delete btn btn-sm btn-link"
-                                                                    ng-click="deleteDocumentation(pl, d.id, documentationData.ApplicationForm)"
-                                                                    ng-hide="!auth.canSave('delete')">delete
-                                                            </button>
+                                                            <sero-delete-button class="delete-button" 
+                                                            text="'delete'"
+                                                            warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                            button-class="'delete btn btn-sm btn-link'"
+                                                            ng-hide="!auth.canSave('delete')"
+                                                            on-yes="deleteDocumentation(pl, d.id, documentationData.ApplicationForm)"></sero-delete-button>
+
                                                         </div>
                                                     </div>
                                                     <div>
@@ -557,10 +560,14 @@
                                                     <div class="uploaded-files">
                                                         <div class="file" ng-repeat="d in pl.documentation | filter:documentationData.PermitLicense.tag">
                                                             <a ng-href="{{downloadFileUrl(d.id)}}">{{d.filename}}</a>
-                                                            <button type="button" class="delete btn btn-sm btn-link"
-                                                                    ng-click="deleteDocumentation(pl, d.id, documentationData.PermitLicense)"
-                                                                    ng-hide="!auth.canSave('delete_documentation_permit_license')">delete
-                                                            </button>
+
+                                                            <sero-delete-button class="delete-button" 
+                                                            text="'delete'"
+                                                            warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                            button-class="'delete btn btn-sm btn-link'"
+                                                            ng-hide="!auth.canSave('delete_documentation_permit_license')"
+                                                            on-yes="deleteDocumentation(pl, d.id, documentationData.PermitLicense)"></sero-delete-button>
+    
                                                         </div>
                                                     </div>
                                                     <div>
@@ -600,10 +607,14 @@
                                                     <div class="uploaded-files">
                                                         <div class="file" ng-repeat="d in pl.documentation | filter:documentationData.Attachments.tag">
                                                             <a ng-href="{{downloadFileUrl(d.id)}}">{{d.filename}}</a>
-                                                            <button type="button" class="delete btn btn-sm btn-link"
-                                                                    ng-click="deleteDocumentation(pl, d.id, documentationData.Attachments)"
-                                                                    ng-hide="!auth.canSave('delete')">delete
-                                                            </button>
+
+                                                            <sero-delete-button class="delete-button" 
+                                                            text="'delete'"
+                                                            warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                            button-class="'delete btn btn-sm btn-link'"
+                                                            ng-hide="!auth.canSave('delete')"
+                                                            on-yes="deleteDocumentation(pl, d.id, documentationData.Attachments)"></sero-delete-button>
+    
                                                         </div>
                                                     </div>
                                                     <div>

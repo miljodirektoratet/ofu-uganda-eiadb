@@ -146,10 +146,17 @@
                                                     <label>Response letter</label>
                                                     <div class="uploaded-file" ng-show="ea.file_metadata_response_id">
                                                         <a ng-href="{{downloadFileUrl(ea.file_metadata_response_id)}}" ng-show="ea.response_document">{{ea.response_document.filename}}</a>
-                                                        <button type="button" class="delete btn btn-sm btn-link"
+                                                        <sero-delete-button class="delete-button" 
+                                                        text="'delete'"
+                                                        warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                        button-class="'delete btn btn-sm btn-link'"
+                                                        ng-hide="!auth.canSave('delete_documentation_response_letter')"
+                                                        on-yes="deleteResponseDocument()"></sero-delete-button>
+
+                                                        <!-- <button type="button" class="delete btn btn-sm btn-link"
                                                                 ng-click="deleteResponseDocument()"
                                                                 ng-hide="!auth.canSave('delete_documentation_response_letter')">delete
-                                                        </button>
+                                                        </button> -->
                                                     </div>
                                                     <div>
                                                         <button class="btn btn-sm btn-default"
