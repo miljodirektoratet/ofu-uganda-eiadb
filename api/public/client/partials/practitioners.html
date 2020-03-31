@@ -301,16 +301,12 @@
                 <h4>Certificates</h4>
               </div>
               <div class="col-md-4">
-                <button
-                  type="button"
-                  class="btn btn-danger btn-sm pull-right"
-                  ng-click="deletePractitioner($index, p)"
-                  ng-hide="!canSave()"
-                >
-                  {{
-                    p.is_new ? "Cancel new practitioner" : "Delete practitioner"
-                  }}
-                </button>
+                <sero-delete-button class="delete-button pull-right" 
+                text=" p.is_new ? 'Cancel new practitioner' : 'Delete practitioner'"
+                warning="'NB! You are now going to delete this practitioner. Do you want to proceed?'"
+                button-class="'btn btn-danger btn-sm pull-right'"
+                ng-hide="!canSave()"
+                on-yes="deletePractitioner($index, p)"></sero-delete-button>
               </div>
             </div>
 
@@ -472,14 +468,12 @@
                         />
                       </td>
                       <td>
-                        <button
-                          type="button"
-                          ng-hide="!canSave()"
-                          class="btn btn-danger btn-sm btn-delete-certificate"
-                          ng-click="deleteCertificate($index, p, c)"
-                        >
-                          {{ c.is_new ? "Cancel" : "Delete" }}
-                        </button>
+                        <sero-delete-button class="delete-button" 
+                        text=" c.is_new ? 'Cancel' : 'Delete'"
+                        warning="'NB! You are now going to delete this certificate. Do you want to proceed?'"
+                        button-class="'btn btn-danger btn-sm pull-right'"
+                        ng-hide="!canSave()"
+                        on-yes="deleteCertificate($index, p, c)"></sero-delete-button>
                       </td>
                     </tr>
                   </tbody>
