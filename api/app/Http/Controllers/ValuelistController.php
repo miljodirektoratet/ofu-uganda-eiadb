@@ -194,17 +194,17 @@ class ValuelistController extends Controller
 
     private function teammember()
     {
-        $practitioners = Practitioner::
-//        whereHas('practitionerCertificates', function ($q)
-            //        {
-            //            $year = intval(date("Y"));
-            //            $q
-            //                ->whereIn('year', array($year - 1, $year))
-            //                ->where('is_cancelled', '=', false);
-            //        })
-            //            ->get(array('id', 'person as description1'));
-            get(array('id', 'person as description1'));
-        return $practitioners;
+//         $practitioners = Practitioner::
+// //        whereHas('practitionerCertificates', function ($q)
+//             //        {
+//             //            $year = intval(date("Y"));
+//             //            $q
+//             //                ->whereIn('year', array($year - 1, $year))
+//             //                ->where('is_cancelled', '=', false);
+//             //        })
+//             //            ->get(array('id', 'person as description1'));
+//             get(array('id', 'person as description1'));
+        return $this->teamleader();
     }
 
     private function users_with_role($role)
