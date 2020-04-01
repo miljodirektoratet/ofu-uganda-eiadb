@@ -142,6 +142,8 @@ controllers.controller("PractitionersController", [
       } else {
         c.is_deleted = true;
         scope.currentForm.$setDirty();
+        scope.toggleRow(p);
+        scope.toggleRow(p);
       }
     };
     scope.newCertificate = function(p) {
