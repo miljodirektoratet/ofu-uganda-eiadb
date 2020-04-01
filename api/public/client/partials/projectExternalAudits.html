@@ -51,7 +51,7 @@
                                                     <label for="teamleader_id">Practitioner team leader</label>
                                                     <select ui-select2="{allowClear:true}" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('teamleader_id')" id="teamleader_id" class="form-control input-sm" ng-model="ea.teamleader_id">
                                                         <option></option>
-                                                        <option ng-repeat="v in valuelists.teamleader" value="{{v.id}}">{{v.description1}}</option>
+                                                        <option ng-repeat="v in valuelists.teamleader" ng-show="v.is_passive == 'false' || ea.teamleader_id == v.id" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -60,7 +60,7 @@
                                                     <label for="team_members">Practitioner team members</label>
                                                     <select ui-select2="{allowClear:true}" multiple="true" placeholder="Click to pick" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('practitioner_id')" id="team_members" class="form-control input-sm" ng-model="ea.teammember_ids">
                                                        <option></option>
-                                                        <option ng-repeat="v in valuelists.teammember" value="{{v.id}}">{{v.description1}}</option>
+                                                        <option ng-repeat="v in valuelists.teammember" ng-show="v.is_passive == 'false' || ea.teammember_ids.includes(v.id)" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
                                             </div>

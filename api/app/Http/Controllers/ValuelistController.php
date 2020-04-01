@@ -177,34 +177,28 @@ class ValuelistController extends Controller
             get(array('id', 'description_long as description1'));
         return $districts;
     }
+    private function practitionerList()
+    {
+        $practitionersWithCert = Practitioner::
+        whereHas('practitionerCertificates', function ($q) {
+            $q->whereRaw('conditions in (38,53)');
+        })
+        ->get(array('id', 'person as description1', \DB::raw("'false' as is_passive")));
 
+        $practitionersWithoutCert = Practitioner::
+        has('practitionerCertificates', 0)
+        ->get(array('id', 'person as description1', \DB::raw("'true' as is_passive")));
+
+        return collect($practitionersWithCert)->merge($practitionersWithoutCert);
+    }
     private function teamleader()
     {
-        $practitioners = Practitioner::
-            whereHas('practitionerCertificates', function ($q) {
-            $year = intval(date("Y"));
-            $q
-//                ->whereIn('year', array($year - 1, $year))
-            //                ->where('is_cancelled', '=', false)
-            ->whereRaw('conditions in (38,53)');
-        })
-            ->get(array('id', 'person as description1'));
-        return $practitioners;
+        return $this->practitionerList();
     }
 
     private function teammember()
     {
-//         $practitioners = Practitioner::
-// //        whereHas('practitionerCertificates', function ($q)
-//             //        {
-//             //            $year = intval(date("Y"));
-//             //            $q
-//             //                ->whereIn('year', array($year - 1, $year))
-//             //                ->where('is_cancelled', '=', false);
-//             //        })
-//             //            ->get(array('id', 'person as description1'));
-//             get(array('id', 'person as description1'));
-        return $this->teamleader();
+        return $this->practitionerList();
     }
 
     private function users_with_role($role)
