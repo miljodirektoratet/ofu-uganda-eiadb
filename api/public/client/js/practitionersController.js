@@ -142,8 +142,7 @@ controllers.controller("PractitionersController", [
       } else {
         c.is_deleted = true;
         scope.currentForm.$setDirty();
-        scope.toggleRow(p);
-        scope.toggleRow(p);
+        scope.toggleRow(p, true);
       }
     };
     scope.newCertificate = function(p) {
@@ -183,7 +182,7 @@ controllers.controller("PractitionersController", [
       }
     };
 
-    scope.toggleRow = function(newP) {
+    scope.toggleRow = function(newP, certDelete) {
       if (scope.loading) {
         //console.log("Currently loading. Please wait.");
         return;
@@ -206,7 +205,7 @@ controllers.controller("PractitionersController", [
       }
 
       // Set current.
-      if (scope.current == newP) {
+      if (scope.current == newP && !certDelete ) {
         scope.current = null;
       } else {
         if (newP.is_new) {
