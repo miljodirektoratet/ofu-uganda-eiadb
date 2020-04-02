@@ -24,15 +24,15 @@
                                             <li role="menuitem">
                                                 <form role="form" name="parts.auditinspection.form" novalidation>
                                                     <div class="row">
-                                                        <div class="col-md-2">
+                                                        <!-- <div class="col-md-2">
                                                             <label for="newButton.year">Year</label>
                                                             <input type="text" integer
                                                                    id="newButton.year"
                                                                    ng-required="true"
                                                                    ng-model="newButton.year"
                                                                    class="form-control input-sm"/>
-                                                        </div>
-                                                        <div class="col-md-2">
+                                                        </div> -->
+                                                        <div class="col-md-3">
                                                             <label for="newButton.type">Activity</label>
                                                             <select ui-select2="{allowClear:true}" id="newButton.type" class="form-control input-sm"
                                                                     ng-required="true"
@@ -43,7 +43,7 @@
                                                                 </option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <label for="newButton.reason">Type</label>
                                                             <select ui-select2="{allowClear:true}" id="newButton.reason" class="form-control input-sm"
                                                                     ng-required="true"
@@ -493,10 +493,7 @@
                                                             button-class="'delete btn btn-sm btn-link'"
                                                             ng-hide="!auth.canSave('delete')"
                                                             on-yes="deleteDocumentation(d.id)"></sero-delete-button>
-                                                            <!-- <button type="button" class="delete btn btn-sm btn-link"
-                                                                    ng-click="deleteDocumentation(d.id)"
-                                                                    ng-hide="!auth.canSave('delete')">delete
-                                                            </button> -->
+
                                                         </div>
                                                     </div>
                                                     <div>

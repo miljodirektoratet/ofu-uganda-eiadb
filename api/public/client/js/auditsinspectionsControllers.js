@@ -117,7 +117,9 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 
     scope.saveCurrentAuditInspection = function ()
     {
+        scope.data.auditinspection.year = new Date(scope.data.auditinspection.date_carried_out).getFullYear();
         var auditinspection = scope.data.auditinspection;
+        console.log(auditinspection, "about to save");
         var isNew = auditinspection.is_new;
         if (!isNew)
         {
@@ -136,6 +138,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
     {
         scope.parts.auditinspection.state = SavingStateEnum.LoadingNew;
         scope.newButton.isopen = false;
+        scope.newButton.year = new Date(scope.newButton.date_carried_out).getFullYear();
         ProjectFactory.createNewAuditInspection(scope.data.project, scope.newButton.year, scope.newButton.type, scope.newButton.reason, scope.newButton.date_carried_out);
         scope.parts.auditinspection.isNew = true;
         scope.saveCurrentAuditInspection();
