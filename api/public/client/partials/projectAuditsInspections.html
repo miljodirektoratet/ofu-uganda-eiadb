@@ -239,65 +239,17 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="date_action_taken">Date of response</label>
-                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                                                        <input type="text" ng-blur="saveCurrentAuditInspection()"
-                                                                ng-readonly="!auth.canSave('date_action_taken')" id="date_action_taken"
-                                                                class="form-control input-sm input-date"
-                                                                ng-model="data.auditinspection.date_action_taken"
-                                                                data-datepicker-popup="d MMM yyyy" data-is-open="opened"
-                                                                data-datepicker-options="datepickerOptions"
-                                                                data-show-button-bar="false"/>
-                                                            <span class="input-group-btn">
-                                                              <button type="button" ng-disabled="!auth.canSave('date_action_taken')"
-                                                                      class="btn btn-default btn-sm" ng-click="open($event)"><span
-                                                                      class="glyphicon glyphicon-calendar"></span></button>
-                                                            </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="action_taken">Response</label>
+                                                    <label for="performance_level">Performance level</label>
                                                     <select ui-select2="{allowClear:true}" ng-change="saveCurrentAuditInspection()"
-                                                            ng-disabled="!auth.canSave('action_taken')" id="action_taken" class="form-control input-sm"
-                                                            ng-model="data.auditinspection.action_taken">
-                                                        <option></option>
-                                                        <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">
+                                                            ng-disabled="!auth.canSave('action_taken')" id="performance_level" class="form-control input-sm"
+                                                            ng-model="data.auditinspection.performance_level">
+                                                            <option></option>
+                                                            <option ng-repeat="v in valuelists.grade" value="{{v.id}}">
                                                             {{v.description1}}
                                                         </option>
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="lead_agencies">Lead agencies</label>
-                                                    <select ui-select2 multiple="true" placeholder="Click to pick"
-                                                            ng-change="saveCurrentAuditInspection()"
-                                                            ng-disabled="!auth.canSave('lead_agencies')" id="lead_agencies"
-                                                            class="form-control input-sm"
-                                                            ng-model="data.auditinspection.leadagency_ids">
-                                                        <option ng-repeat="v in valuelists.leadagency" value="{{v.id}}">
-                                                            {{v.description2}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label for="advance_notice">Advanced notice</label>
-                                                    <input type="checkbox" class="checkbox-small form-control input-sm"
-                                                            id="advance_notice"
-                                                            ng-model="fake_advance_notice"
-                                                            ng-checked="data.auditinspection.advance_notice"
-                                                            ng-click="data.auditinspection.advance_notice = !data.auditinspection.advance_notice; saveCurrentAuditInspection()"
-                                                            ng-disabled="!auth.canSave('advance_notice')"/>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Activity report</label>
@@ -343,6 +295,80 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="lead_agencies">Lead agencies</label>
+                                                    <select ui-select2 multiple="true" placeholder="Click to pick"
+                                                            ng-change="saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('lead_agencies')" id="lead_agencies"
+                                                            class="form-control input-sm"
+                                                            ng-model="data.auditinspection.leadagency_ids">
+                                                        <option ng-repeat="v in valuelists.leadagency" value="{{v.id}}">
+                                                            {{v.description2}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="advance_notice">Advanced notice</label>
+                                                    <input type="checkbox" class="checkbox-small form-control input-sm"
+                                                            id="advance_notice"
+                                                            ng-model="fake_advance_notice"
+                                                            ng-checked="data.auditinspection.advance_notice"
+                                                            ng-click="data.auditinspection.advance_notice = !data.auditinspection.advance_notice; saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('advance_notice')"/>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                          
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_action_taken">Date of response</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                                                ng-readonly="!auth.canSave('date_action_taken')" id="date_action_taken"
+                                                                class="form-control input-sm input-date"
+                                                                ng-model="data.auditinspection.date_action_taken"
+                                                                data-datepicker-popup="d MMM yyyy" data-is-open="opened"
+                                                                data-datepicker-options="datepickerOptions"
+                                                                data-show-button-bar="false"/>
+                                                            <span class="input-group-btn">
+                                                              <button type="button" ng-disabled="!auth.canSave('date_action_taken')"
+                                                                      class="btn btn-default btn-sm" ng-click="open($event)"><span
+                                                                      class="glyphicon glyphicon-calendar"></span></button>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="action_taken">Response</label>
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('action_taken')" id="action_taken" class="form-control input-sm"
+                                                            ng-model="data.auditinspection.action_taken">
+                                                        <option></option>
+                                                        <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">
+                                                            {{v.description1}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="findings">Description of findings</label>
+                                                    <textarea class="form-control input-sm" rows="2" id="findings"
+                                                            ng-blur="saveCurrentAuditInspection()"
+                                                            ng-readonly="!auth.canSave('findings')"
+                                                            ng-model="data.auditinspection.findings"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Response document</label>
@@ -392,32 +418,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="findings">Description of findings</label>
-                                                    <textarea class="form-control input-sm" rows="2" id="findings"
-                                                            ng-blur="saveCurrentAuditInspection()"
-                                                            ng-readonly="!auth.canSave('findings')"
-                                                            ng-model="data.auditinspection.findings"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="performance_level">Performance level</label>
-                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentAuditInspection()"
-                                                            ng-disabled="!auth.canSave('action_taken')" id="performance_level" class="form-control input-sm"
-                                                            ng-model="data.auditinspection.performance_level">
-                                                            <option></option>
-                                                            <option ng-repeat="v in valuelists.grade" value="{{v.id}}">
-                                                            {{v.description1}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
+                                                
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
