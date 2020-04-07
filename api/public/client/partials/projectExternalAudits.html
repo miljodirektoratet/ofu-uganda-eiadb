@@ -11,7 +11,7 @@
                                 <th>Id</th>
                                 <th>Status</th>
                                 <th>Team leader</th>
-                                <th>Type</th>
+                                <th>Latest submission date</th>
                                 <th>Date of inspection</th>
                                 <th>File</th>
                                 <th>
@@ -19,13 +19,13 @@
                                 </th>
                             </tr>
                             </thead>
-                            <tbody class="edit-row" ng-repeat="ea in data.externalaudits">
+                            <tbody class="edit-row" ng-repeat="ea in data.externalaudits | filterByDateSubmission">
                             <tr class="master" ng-class="{selected: routeParams.externalauditId==ea.id, notvalid: routeParams.externalauditId==ea.id && parts.externalaudit.form.$invalid}"
                                 ng-click="openExternalaudit(ea.id, $event)">
                                 <td>{{ea.id}}</td>
                                 <td>{{data.getCodeFromValuelist('eiastatus', ea.status)}}</td>
                                 <td>{{data.getCodeFromValuelist('team_leader_eia_permit', ea.user_id)}}</td>
-                                <td>{{data.getCodeFromValuelist('external_audit_type', ea.type)}}</td>
+                                <td>{{ea.documents[0].date_submitted | date:'d MMM yyyy'}}</td>
                                 <td>{{ea.date_inspection | date:'d MMM yyyy'}}</td>
                                 <td align="left">
                                     <a ng-href="{{downloadFileUrl(ea.response_document.id)}}" ng-click="stopPropagation($event)" ng-show="ea.response_document" ng-attr-alt="{{ea.response_document.filename}}" ng-attr-title="{{ea.response_document.filename}}">

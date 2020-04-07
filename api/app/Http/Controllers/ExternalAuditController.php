@@ -32,9 +32,15 @@ class ExternalAuditController extends Controller
             $query->select('id', 'filename');
         };
 
+        $withDocument = function ($query)
+        {
+            $query->orderBy('date_submitted', 'desc')
+                ->select();
+        };
 
         $rows = Project::find($projectId)
             ->externalaudits()
+            ->with(array('documents' => $withDocument))
             ->with(array('user' => $withUserFunction))
             ->with(array('teamleader' => $withTeamLeaderFunction))
             ->with(array('response_document'=>$withResponseDocument))
@@ -54,9 +60,15 @@ class ExternalAuditController extends Controller
         {
             $query->select('id', 'filename');
         };
+        $withDocument = function ($query)
+        {
+            $query->orderBy('date_submitted', 'desc')
+                ->select();
+        };
 
         $row = Project::find($projectId)->externalaudits()
             ->with('users')
+            ->with(array('documents' => $withDocument))
             ->with(array('teamleader' => $withTeamLeaderFunction))
             ->with(array('response_document' => $withResponseDocument))
             ->with('teammembers')
