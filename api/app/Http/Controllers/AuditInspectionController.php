@@ -201,7 +201,7 @@ class AuditInspectionController extends Controller
     private function generateCode($auditinspection)
     {
         $year = $auditinspection->year;
-        $maxNumber = AuditInspection::where('year', $year)->max('number');
+        $maxNumber = AuditInspection::where('year', $year)->withTrashed()->max('number');
         $number = $maxNumber + 1;
         $auditinspection->number = $number;
         $auditinspection->code = sprintf("%d.%03d", $year, $number);
