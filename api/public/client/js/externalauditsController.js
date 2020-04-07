@@ -133,9 +133,10 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
     scope.filterByDateSubmission = function(data) {
         if(!data.length && !data[0].documents){return;}
         data.sort(function(a,b){
-            var date1 =  (a.documents)?a.documents[0].date_submitted:"";
+            console.log()
+            var date1 =  (a.documents && a.documents[0])?a.documents[0].date_submitted:"";
 
-            var date2 = (b.documents)?b.documents[0].date_submitted:"";
+            var date2 = (b.documents && b.documents[0])?b.documents[0].date_submitted:"";
 
             return date1 < date2 ? -1 : 1;
           })
