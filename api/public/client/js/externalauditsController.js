@@ -129,4 +129,13 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
                 return false;
         }
     };
+
+    scope.filterByDateSubmission = function(data) {
+        data.sort(function(a,b){
+            var date1 =  a.documents[0].date_submitted
+            var date2 = b.documents[0].date_submitted
+            return date1 < date2 ? -1 : 1;
+          })
+        return data.reverse();
+    };
 }]);
