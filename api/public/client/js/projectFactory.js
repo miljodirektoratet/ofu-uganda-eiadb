@@ -198,28 +198,20 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             var deferredExternalAudit = $q.defer();
             var deferredDocuments = $q.defer();
 
-            if (factory.externalaudit.id != params.externalauditId)
+            factory.emptyExternalAudit();
+            var hits = _.where(factory.externalaudits, {'id': parseInt(params.externalauditId)});
+            if (hits.length == 1)
             {
-                factory.emptyExternalAudit();
-                var hits = _.where(factory.externalaudits, {'id': parseInt(params.externalauditId)});
-                if (hits.length == 1)
+                factory.externalaudit = hits[0];
+                factory.externalaudit.$get(_.omit(params, ['documentId']), function (ea)
                 {
-                    factory.externalaudit = hits[0];
-                    factory.externalaudit.$get(_.omit(params, ['documentId']), function (ea)
+                    // params contains documentId, so we can't user params directly.
+                    factory.documents_ea = DocumentEA.query(_.omit(params, ['documentId']), function (ds)
                     {
-                        // params contains documentId, so we can't user params directly.
-                        factory.documents_ea = DocumentEA.query(_.omit(params, ['documentId']), function (ds)
-                        {
-                            deferredDocuments.resolve(ds);
-                        });
-                        deferredExternalAudit.resolve(ea);
+                        deferredDocuments.resolve(ds);
                     });
-                }
-            }
-            else
-            {
-                deferredExternalAudit.resolve(factory.eiapermit);
-                deferredDocuments.resolve(factory.documents);
+                    deferredExternalAudit.resolve(ea);
+                });
             }
 
             return [deferredExternalAudit.promise, deferredDocuments.promise];
