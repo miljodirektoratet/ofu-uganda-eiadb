@@ -84,9 +84,8 @@ class PermitLicenseSearchController extends Controller
         $criteriaDefinitions["exact"] = ["pl.id", "pl.application_number", "pl.permit_license_no"];
         $criteriaDefinitions["multiple_text"] = [];
         $criteriaDefinitions["multiple"] = ["pl.status", "c.id", "pl.regulation", "pl.waste_license_type", "pl.ecosystem", "pl.regulation_activity"];
-        $criteriaDefinitions["alias"] = ["personnel.user_id", "o.name", "p.title"];
+        $criteriaDefinitions["alias"] = ["handling_officer.user_id", "o.name", "p.title"];
         $criteriaDefinitions["special"] = ["pl.date_submission_from", "pl.date_submission_to"];
-
         $criterias = getSearchCriterias([
             'project_title',
             'permitlicense_date_submission_from',
@@ -103,14 +102,13 @@ class PermitLicenseSearchController extends Controller
             'permitlicense_application_number',
             'permitlicense_permit_license_no',
         ]);
-
         foreach ($criterias as $word => $criteria) {
             $word = str_replace('project_', 'p.', $word);
             $word = str_replace('permitlicense_', 'pl.', $word);
             $word = str_replace('district_', 'd.', $word);
             $word = str_replace('category_', 'c.', $word);
             $word = str_replace('developer_', 'o.', $word);
-            $word = str_replace('personnel_', 'personnel.', $word);
+            $word = str_replace('personnel_', 'handling_officer.', $word);
 
             if (in_array($word, $criteriaDefinitions["search"])) {
                 $result = $result->where($word, 'like', '%' . $criteria . '%');
@@ -124,10 +122,10 @@ class PermitLicenseSearchController extends Controller
             }
             // Need to handle aliases special.
             elseif (in_array($word, $criteriaDefinitions["alias"])) {
-                if ($word === "personnel.user_id") {
+                if ($word === "handling_officer.user_id") {
                     $result = $result->where(function ($query) use ($word, $criteria) {
                         $query->whereIn($word, [$criteria])
-                            ->whereIn("pl.user_id", [$criteria], 'or');
+                            ->whereIn("pl.user_id", [$criteria]);
                     });
                 } elseif ($word === "o.name") {
                     $result = $result->where(function ($query) use ($word, $criteria) {
