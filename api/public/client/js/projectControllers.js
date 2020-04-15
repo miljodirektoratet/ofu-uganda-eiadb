@@ -180,8 +180,13 @@ controllers.controller("ProjectController", [
   function(scope, $q, ProjectFactory, Organisation, $timeout) {
     scope.selectOrganisationMode = false;
     scope.isNewProject = false;
-    scope.coordinateError = false;
-    scope.coordinateNetworkIssues = false;
+    scope.coordinateError = DisplayStateEnum.Hide;
+    scope.districtState = {
+      isError: DisplayStateEnum.Hide,
+      suggestion: ""
+    };
+    scope.currentCoordinateObject = {};
+    scope.coordinateNetworkIssues = DisplayStateEnum.Hide;
     scope.checkingCoordinates = false;
     scope.currentLong = "";
     scope.currentLat = "";
@@ -398,7 +403,7 @@ controllers.controller("ProjectController", [
         scope.checkingCoordinates = state;
       };
       if(scope.isNewProject && !lat && !long) {
-        scope.coordinateError = false;
+        scope.coordinateError = DisplayStateEnum.Hide;
         return;
       }
       
@@ -410,7 +415,7 @@ controllers.controller("ProjectController", [
           return;
         }
         if(!lat && !long) {
-          scope.coordinateError = false;
+          scope.coordinateError = DisplayStateEnum.Hide;
           return;
         }
         scope.currentLat = lat;
@@ -422,20 +427,44 @@ controllers.controller("ProjectController", [
           //TODO remove view function
           document.getElementById('latitude').classList.remove('ng-valid');
           document.getElementById('longitude').classList.remove('ng-valid');
-          scope.coordinateError = true;
+          scope.coordinateError = DisplayStateEnum.Show;
           if(data.error == "network") {
-            scope.coordinateNetworkIssues = true;
+            scope.coordinateNetworkIssues = DisplayStateEnum.Show;
           } else {
-            scope.coordinateNetworkIssues = false;
+            scope.coordinateNetworkIssues = DisplayStateEnum.Hide;
           }
-        } else {  
-          scope.coordinateError = false;
+        } else {
+          scope.currentCoordinateObject = data;
+          scope.coordinateError = DisplayStateEnum.Hide;
+          
+          //check if districts match
+          isDistrictMatching(data);
+
             scope.saveCurrentProject();
         }
         checkingCoordinate(false);
       })
       });
     };
+
+    scope.onDistrictChange = function() {
+      console.log(scope.currentCoordinateObject);
+      isDistrictMatching(scope.currentCoordinateObject);
+      scope.saveCurrentProject();
+    }
+    
+    function isDistrictMatching(data) {
+      var currentDistrict = _.find(scope.valuelists.district, 'id', parseInt(scope.data.project.district_id));
+      console.log(currentDistrict, scope.data.project.district_id)
+      if(currentDistrict.description1.toLowerCase() != data.address.state.toLowerCase()) {
+        scope.districtState.isError = DisplayStateEnum.Show;
+        scope.districtState.suggestion =data.address.state;
+        return false;
+      } else {
+        scope.districtState.isError = DisplayStateEnum.Hide;
+        return true;
+      }
+    }
 
     scope.splitCoordinates = function(type) {
       setTimeout(function() {

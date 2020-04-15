@@ -202,6 +202,11 @@ var SavingStateEnum = {
   MissingDependency: "Missing dependency in other form"
 };
 
+var DisplayStateEnum = {
+  Show: true, 
+  Hide: false
+}
+
 var ProjectTabEnum = {
   Project: "Project",
   EiasPermits: "EIAS",

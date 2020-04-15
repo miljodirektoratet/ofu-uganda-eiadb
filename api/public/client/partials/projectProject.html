@@ -96,7 +96,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="district_id">District</label>
-                                <select ui-select2="{allowClear:true}" ng-change="saveCurrentProject()" ng-disabled="!auth.canSave()" id="district_id" ng-required="true" class="form-control input-sm" ng-model="data.project.district_id">
+                                <select ui-select2="{allowClear:true}" ng-change="onDistrictChange()" ng-disabled="!auth.canSave()" id="district_id" ng-required="true" class="form-control input-sm" ng-model="data.project.district_id">
                                    <option></option>
                                     <option ng-repeat="v in valuelists.district" value="{{v.id}}">{{v.description1}}</option>
                                 </select>
@@ -111,7 +111,12 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="row inline-err">
+                        <div class="col-md-6">
+                         <span  ng-show="(districtState.isError)">District name does not match given coordinates. It should be '{{districtState.suggestion}}'&nbsp;</span>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
