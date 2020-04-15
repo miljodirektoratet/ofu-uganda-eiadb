@@ -125,7 +125,7 @@ class PermitLicenseSearchController extends Controller
                 if ($word === "handling_officer.user_id") {
                     $result = $result->where(function ($query) use ($word, $criteria) {
                         $query->whereIn($word, [$criteria])
-                            ->whereIn("pl.user_id", [$criteria]);
+                            ->orWhereIn("pl.user_id", [$criteria]);
                     });
                 } elseif ($word === "o.name") {
                     $result = $result->where(function ($query) use ($word, $criteria) {
