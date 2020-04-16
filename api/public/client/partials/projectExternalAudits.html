@@ -23,7 +23,7 @@
                             <tr class="master" ng-class="{selected: routeParams.externalauditId==ea.id, notvalid: routeParams.externalauditId==ea.id && parts.externalaudit.form.$invalid}"
                                 ng-click="openExternalaudit(ea.id, $event)">
                                 <td>{{ea.id}}</td>
-                                <td>{{data.getCodeFromValuelist('eiastatus', ea.status)}}</td>
+                                <td>{{data.getCodeFromValuelist('eastatus', ea.status)}}</td>
                                 <td>{{data.getCodeFromValuelist('team_leader_eia_permit', ea.user_id)}}</td>
                                 <td>{{ea.documents[0].date_submitted | date:'d MMM yyyy'}}</td>
                                 <td>{{ea.date_inspection | date:'d MMM yyyy'}}</td>

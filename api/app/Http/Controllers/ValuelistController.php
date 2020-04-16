@@ -21,6 +21,7 @@ class ValuelistController extends Controller
         $valuelists["grade"] = $this->grade();
         $valuelists["decision"] = $this->decision();
         $valuelists["eiastatus"] = $this->eiastatus();
+        $valuelists["eastatus"] = $this->eastatus();
         $valuelists["auditinspectionstatus"] = $this->auditinspectionstatus();
         $valuelists["documenttype"] = $this->documenttype();
         $valuelists["documenttypeexternalaudits"] = $this->documenttypeexternalaudits();
@@ -132,6 +133,11 @@ class ValuelistController extends Controller
     private function eiastatus()
     {
         return $this->getCodesFromDrowdownName("eia_status");
+    }
+
+    private function eastatus()
+    {
+        return $this->getCodesFromDrowdownName("ea_status");
     }
 
     private function auditinspectionstatus()

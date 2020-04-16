@@ -577,6 +577,55 @@ function addDays(date, days) {
   return result;
 }
 
+function updateExternalAuditStatus(ea, documents) {
+  var newStatus = null;
+
+  var documentsByType = _.groupBy(documents, function(document) {
+    return document.type;
+  });
+
+  var setStatusByDocument = function(document, docMap) {
+    var keys = Object.keys(docMap);
+    for(var i = 0; i < keys.length; i++) {
+      if(document[keys[i]]) {
+        newStatus = docMap[keys[i]];
+      }
+    }
+  }
+
+  if(ea.date_deadline_compliance) {
+    ea.status = 147;
+    return true;
+  } else if (ea.date_response) {
+    ea.status = 146;
+    return true;
+  } else if(documents.length) {
+      if(documentsByType[12]) {
+        var document = documentsByType[12][0];
+        var docMap = {
+          date_submitted: 142,
+          date_sent_director: 143,
+          date_sent_from_dep: 144,
+          date_sent_officer: 145, 
+        }
+        setStatusByDocument(document, docMap);
+      } else if(documentsByType[11]) {
+        var document = documentsByType[11][0];
+        var docMap = {
+          date_submitted: 137,
+          date_sent_director: 138,
+          date_sent_from_dep: 139,
+          date_sent_officer: 140, 
+          date_conclusion: 141
+        }
+        setStatusByDocument(document, docMap);
+      }
+      ea.status = newStatus;
+      return true;
+  }
+  return false;
+}
+
 function updateEiaPermitStatus(ep, documents) {
   //if (!scope.userinfo.info.features.notproduction)
   //{

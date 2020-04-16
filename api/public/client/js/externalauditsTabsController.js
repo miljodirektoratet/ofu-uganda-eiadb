@@ -127,17 +127,15 @@ controllers.controller('ExternalAuditsTabsController', ['$scope', '$location', '
 
     scope.updateStatus = function (ea)
     {
-        // Should we use status to something?
-        // var updated = updateExternalAuditStatus(ea, scope.data.documents_ea);
-        // // console.log(updated, scope.data.documents_ea);
-        // if (updated)
-        // {
-        //     if (scope.parts.externalaudit.form)
-        //     {
-        //         scope.parts.externalaudit.form.$setDirty();
-        //     }
-        // }
-        // return updated;
+        var updated = updateExternalAuditStatus(ea, scope.data.documents_ea);
+        if (updated)
+        {
+            if (scope.parts.externalaudit.form)
+            {
+                scope.parts.externalaudit.form.$setDirty();
+            }
+        }
+        return updated;
     };
 
     scope.loadExternalAuditWithDocuments = function()
