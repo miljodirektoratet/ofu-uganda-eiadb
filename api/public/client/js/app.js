@@ -608,7 +608,6 @@ function updateExternalAuditStatus(ea, documents) {
           date_sent_from_dep: 144,
           date_sent_officer: 145, 
         }
-        setStatusByDocument(document, docMap);
       } else if(documentsByType[11]) {
         var document = documentsByType[11][0];
         var docMap = {
@@ -618,8 +617,8 @@ function updateExternalAuditStatus(ea, documents) {
           date_sent_officer: 140, 
           date_conclusion: 141
         }
-        setStatusByDocument(document, docMap);
       }
+      setStatusByDocument(document, docMap);
       ea.status = newStatus;
       return true;
   }
