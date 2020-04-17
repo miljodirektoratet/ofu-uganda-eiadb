@@ -115,6 +115,8 @@ Route::group(['prefix' => 'file/v1', 'middleware' => 'auth'], function ()
 Route::group(['prefix' => 'pirking/v1', 'middleware' => 'manager'], function ()
 {
     Route::get('eiaspermits', ['uses' => 'PirkingController@getEiasPermits']);
+
+    Route::get('externalAuditList', ['uses' => 'PirkingController@getExternalAudit']);
 });
 
 Route::group(['prefix' => 'export/v1'], function ()

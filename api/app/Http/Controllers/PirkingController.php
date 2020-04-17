@@ -35,6 +35,30 @@ class PirkingController extends Controller
         return Response::json($result, 200);
     }
 
+    // GET /resource
+    public function getExternalAudit()
+    {
+        $from = Input::get('from');
+        $to = Input::get('to');
+
+        $result = DB::table('external_audits as ea')
+            ->join('projects as p', 'ea.project_id', '=', 'p.id')
+            ->leftJoin('codes as status', 'ea.status', '=', 'status.id')
+            ->select('ea.id as externalaudit_id',
+                'p.id as project_id',
+                'p.title as project_title',
+                'status.id as status_id',
+                'status.description1 as status_description',
+            'ea.updated_at as externalaudit_updated_at')
+            ->whereNull('ea.deleted_at')
+            ->whereNull('p.deleted_at')
+            ->whereBetween('ea.id', [$from, $to]);
+
+        $result = $result->get();
+
+        return Response::json($result, 200);
+    }
+
     // GET /resource/:id
     public function show($id)
     {

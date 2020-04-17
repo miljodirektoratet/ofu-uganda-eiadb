@@ -137,10 +137,13 @@ var seroApp = angular
         templateUrl: "partials/advancedLeadAgency.html",
         controller: "AdvancedLeadAgenciesController"
       });
-
-      $routeProvider.when("/pirking", {
-        templateUrl: "partials/pirking.html",
-        controller: "PirkingController"
+      $routeProvider.when("/advanced/pirking/statusEIA", {
+        templateUrl: "partials/eiapermit-pirking.html",
+        controller: "EiapermitPirkingController"
+      });
+      $routeProvider.when("/advanced/pirking/statusEA", {
+        templateUrl: "partials/externalAudit-pirking.html",
+        controller: "EaPirkingController"
       });
 
       $routeProvider.when("/about", { templateUrl: "partials/about.html" });

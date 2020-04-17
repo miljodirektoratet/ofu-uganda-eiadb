@@ -73,6 +73,7 @@ module.exports = function (grunt) {
           "js/searchExternalAuditsControllers.js",
           "js/advancedController.js",
           "js/loginController.js",
+          "js/PirkingController.js",
           "js/directives.js",
           "js/filters.js",
           "js/services.js",
