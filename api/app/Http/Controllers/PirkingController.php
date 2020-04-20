@@ -59,6 +59,28 @@ class PirkingController extends Controller
         return Response::json($result, 200);
     }
 
+    public function getAuditInspection()
+    {
+        $from = Input::get('from');
+        $to = Input::get('to');
+
+        $result = DB::table('audits_inspections as ai')
+            ->join('projects as p', 'ai.project_id', '=', 'p.id')
+            ->leftJoin('codes as status', 'ai.status', '=', 'status.id')
+            ->select('ai.id as auditsInspections_id',
+                'p.id as project_id',
+                'p.title as project_title',
+                'status.id as status_id',
+                'status.description1 as status_description',
+            'ai.updated_at as auditsInspections_updated_at')
+            ->whereNull('ai.deleted_at')
+            ->whereNull('p.deleted_at')
+            ->whereBetween('ai.id', [$from, $to]);
+
+        $result = $result->get();
+
+        return Response::json($result, 200);
+    }
     // GET /resource/:id
     public function show($id)
     {

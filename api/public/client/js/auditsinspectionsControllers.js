@@ -69,32 +69,7 @@ controllers.controller('AuditsInspectionsController', ['$scope', 'ProjectFactory
 
     scope.updateStatus = function (ai)
     {
-        // 70 = Created
-        // 71 = Carried out
-        // 72 = Action taken
-        // 73 = Deadline passed
-        // 74 = Corrections received
-        // 75 = Closed
-        if (ai.date_closing)
-        {
-            ai.status = 75;
-        }
-        else if (ai.date_received)
-        {
-            ai.status = 74;
-        }
-        else if (ai.date_deadline && ai.date_deadline < new Date())
-        {
-            ai.status = 73;
-        }
-        else if (ai.action_taken)
-        {
-            ai.status = 72;
-        }
-        else if (ai.date_carried_out)
-        {
-            ai.status = 71;
-        }
+      updateAuditInspectionStatus(ai);
     };
 
     scope.openAuditInspection = function(id, $event)

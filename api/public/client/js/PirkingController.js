@@ -158,7 +158,7 @@ controllers.controller('EiapermitPirkingController', ['$scope', '$http', 'EiaPer
     }
 }]);
 
-controllers.controller('EaPirkingController', ['$scope', '$http', 'ProjectFactory', 'Document', 'Valuelists', '$q', function (scope, $http, ProjectFactory, Document, Valuelists, $q)
+controllers.controller('ExternalAudiPirkingController', ['$scope', '$http', 'ProjectFactory', 'Document', 'Valuelists', '$q', function (scope, $http, ProjectFactory, Document, Valuelists, $q)
 {
     scope.lastId = "..";
     scope.criteria = {};
@@ -241,7 +241,7 @@ controllers.controller('EaPirkingController', ['$scope', '$http', 'ProjectFactor
                 eaMini.status_id_new = ea.status;
                 eaMini.status_description_new = getStatusCodeFromValuelist(ea.status);
                 console.log(eaMini, ea, "data")
-                if (change && (parseInt(eaMini.status_id)  != parseInt(eaMini.status_id)))
+                if (change && (parseInt(eaMini.status_id_new)  != parseInt(eaMini.status_id)))
                 {
                     if (scope.dryrun)
                     {
@@ -307,6 +307,161 @@ controllers.controller('EaPirkingController', ['$scope', '$http', 'ProjectFactor
         }
 
         doAsyncSeries(scope.EaData).then(function ()
+            {
+                console.log("beginUpdate finished");
+                scope.working = false;
+            }
+        );
+    }
+}]);
+
+controllers.controller('AuditInspecitionPirkingController', ['$scope', '$http', 'ProjectFactory', 'Valuelists', '$q', function (scope, $http, ProjectFactory, Valuelists, $q)
+{
+    scope.lastId = "..";
+    scope.criteria = {};
+    scope.dryrun = true;
+    scope.aiData = [];
+    scope.working = false;
+    scope.info = {
+        error: 0,
+        nochange: 0,
+        changed: 0,
+        finished: function ()
+        {
+            return this.error + this.nochange + this.changed;
+        },
+        progress: function ()
+        {
+            if (scope.aiData.length == 0)
+            {
+                return 0;
+            }
+            return Math.round(100.0*this.finished()/scope.aiData.length);
+        }
+    };
+
+    scope.beginPirking = function ()
+    {
+        scope.info.error = 0;
+        scope.info.nochange = 0;
+        scope.info.changed = 0;
+
+        console.log("beginPirking");
+        console.log("dryrun:", scope.dryrun);
+        scope.working = true;
+        $http({
+            method: 'GET',
+            url: '/pirking/v1/auditInspection',
+            params: scope.criteria
+        }).then(function successCallback(response)
+        {
+            scope.aiData = response.data;
+            console.log("beginPirking finished");
+            scope.beginUpdate();
+
+        }, function errorCallback(response)
+        {
+            console.log("oh noes");
+        });
+    };
+
+    var getStatusCodeFromValuelist = function (id)
+    {
+        var code = _.find(Valuelists["auditinspectionstatus"], {'id': id});
+        if (code)
+        {
+            return code.description1;
+        }
+        return "";
+    };
+
+    scope.beginUpdate = function ()
+    {
+        console.log("beginUpdate");
+        function handleAuditInspectionAsync(aiMini)
+        {
+            aiMini.updating = true;
+
+            var params = {
+                projectId: aiMini.project_id,
+                auditinspectionId: aiMini.auditsInspections_id
+            };
+            var aiPromises = ProjectFactory.retrieveProjectData(params);
+            // console.log(aiPromises);
+            var deferred = $q.defer();
+            $q.all([aiPromises[3]]).then(function (results)
+            {
+                var ai = results[0][0];
+
+                var change = updateAuditInspectionStatus(ai);
+                aiMini.status_id_new = ai.status;
+                aiMini.status_description_new = getStatusCodeFromValuelist(ai.status);
+                console.log(aiMini, ai, "data")
+                if (change && (parseInt(aiMini.status_id_new)  != parseInt(aiMini.status_id)))
+                {
+                    if (scope.dryrun)
+                    {
+                        aiMini.changed = true;
+                        aiMini.result = "CHANGED";
+                        scope.info.changed += 1;
+                        aiMini.updating = false;
+                        deferred.resolve();
+                    }
+                    else
+                    {
+                        ai.pirking = true;
+                        ai.$update(params, function (savedAi)
+                        {
+                            aiMini.changed = true;
+                            aiMini.result = "CHANGED";
+                            scope.info.changed += 1;
+                            aiMini.updating = false;
+                            aiMini.externalaudit_updated_at = savedAi.updated_at;
+                            deferred.resolve();
+                        });
+                    }
+                }
+                else
+                {
+                    aiMini.nochange = true;
+                    aiMini.result = "NO CHANGE";
+                    scope.info.nochange += 1;
+                    aiMini.updating = false;
+                    deferred.resolve();
+                }
+            }, function (error)
+            {
+                aiMini.updating = false;
+                aiMini.error = true;
+                aiMini.result = "ERROR";
+                scope.info.error += 1;
+                deferred.reject("Server Error");
+            });
+            console.log(deferred)
+            return deferred.promise;
+        }
+
+        function doAsyncSeriesParallel(arr)
+        {
+            return $q.all(arr.map(handleAuditInspectionAsync));
+        }
+
+        function doAsyncSeries(arr)
+        {
+            return arr.reduce(function (promise, aiMini)
+            {
+                return promise.then(function ()
+                {
+                    var output = handleAuditInspectionAsync(aiMini);
+                    return output; 
+                }).catch(function (error)
+                {
+                    console.log("ERROR:", error)
+                });
+            }, $q.when());
+        }
+
+        doAsyncSeries(scope.aiData).then(function ()
             {
                 console.log("beginUpdate finished");
                 scope.working = false;

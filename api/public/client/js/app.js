@@ -143,7 +143,11 @@ var seroApp = angular
       });
       $routeProvider.when("/advanced/pirking/statusEA", {
         templateUrl: "partials/externalAudit-pirking.html",
-        controller: "EaPirkingController"
+        controller: "ExternalAudiPirkingController"
+      });
+      $routeProvider.when("/advanced/pirking/statusAI", {
+        templateUrl: "partials/auditInspection-pirking.html",
+        controller: "AuditInspecitionPirkingController"
       });
 
       $routeProvider.when("/about", { templateUrl: "partials/about.html" });
@@ -628,6 +632,35 @@ function updateExternalAuditStatus(ea, documents) {
   return false;
 }
 
+function updateAuditInspectionStatus(ai) {
+    // 70 = Created
+        // 71 = Carried out
+        // 72 = Action taken
+        // 73 = Deadline passed
+        // 74 = Corrections received
+        // 75 = Closed
+        if (ai.date_closing)
+        {
+            ai.status = 75;
+        }
+        else if (ai.date_received)
+        {
+            ai.status = 74;
+        }
+        else if (ai.date_deadline && ai.date_deadline < new Date())
+        {
+            ai.status = 73;
+        }
+        else if (ai.action_taken)
+        {
+            ai.status = 72;
+        }
+        else if (ai.date_carried_out)
+        {
+            ai.status = 71;
+        }
+        return ([71,72,73,74,75].includes(ai.status))? true:false;
+}
 function updateEiaPermitStatus(ep, documents) {
   //if (!scope.userinfo.info.features.notproduction)
   //{
