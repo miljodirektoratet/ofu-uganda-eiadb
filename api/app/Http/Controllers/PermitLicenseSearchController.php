@@ -53,7 +53,7 @@ class PermitLicenseSearchController extends Controller
                 'pl.date_fee_payed as permitlicense_date_fee_payed',
                 'pl.permit_license_no as permitlicense_permit_license_no',
                 'pl.date_permit_license_expired as permitlicense_date_permit_license_expired',
-                'pl.date_sent_to_ed_for_decision as permitlicense_date_sent_to_ed_for_decision',
+                'pl.date_sent_for_decision as permitlicense_date_sent_for_decision',
                 'pl.date_permit_license as permitlicense_date_permit_license',
                 'signature.name as permitlicense_signature_on_permit_license',
                 'decision.description1 as permitlicense_decision',
