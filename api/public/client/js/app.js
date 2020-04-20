@@ -366,7 +366,7 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
     permitlicense_officer_recommend: "Recommendations by reviewer",
     permitlicense_fee_receipt_no: "Permit/license fee receipt number",
     permitlicense_date_fee_payed: "Date permit / license fee paid",
-    permitlicense_date_sent_to_ed_for_decision: "Date to ED for decision",
+    permitlicense_date_sent_for_decision: "Date sent for decision",
     permitlicense_decision: "Decision taken",
     permitlicense_signature_on_permit_license: "Signature on permit / license",
     permitlicense_date_permit_license: "Date on the permit / licence",
@@ -388,7 +388,7 @@ exportObj.exportMetaData["exportPermitsLicenses"] = {
     "permitlicense_date_of_evaluation",
     "permitlicense_date_inspection",
     "permitlicense_date_fee_payed",
-    "permitlicense_date_sent_to_ed_for_decision",
+    "permitlicense_date_sent_for_decision",
     "permitlicense_date_permit_license",
     "permitlicense_date_permit_license_expired",
     "permitlicense_date_feedback_to_applicants"
