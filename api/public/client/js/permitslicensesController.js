@@ -240,7 +240,7 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
             case "inspection_recommended":
             case "date_inspection":
             case "officer_recommend":
-            case "date_sent_to_ed_for_decision":
+            case "date_sent_for_decision":
                 return scope.userinfo.info.role_3;
             case "fee_receipt_no":
             case "date_fee_payed":
