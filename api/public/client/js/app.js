@@ -180,10 +180,12 @@ var seroApp = angular
     function($q, $location) {
       return {
         responseError: function(rejection) {
-          if ($location.path().indexOf("/password/reset/") == 0) {
+          if ($location.path().indexOf("/password/reset/" == 0)) {
             // No redirect.
           } else if (rejection.status === 401) {
-            $location.path("/login");
+            if($location.path().indexOf("/practitioners") != 0) {
+              $location.path("/login");
+            }
           }
           return $q.reject(rejection);
         }

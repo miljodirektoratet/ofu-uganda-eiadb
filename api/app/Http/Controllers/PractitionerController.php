@@ -12,6 +12,10 @@ class PractitionerController extends Controller
     // GET /resource
     public function index()
     {
+        if (!$this::canSave()) {
+            return  $this->getPublic();
+        }
+
         $withFunction = function ($query) {
             //$year = intval(date("Y"));
             $query->select('id', 'practitioner_id', 'year', 'cert_type', 'conditions', 'is_cancelled');
@@ -214,7 +218,10 @@ class PractitionerController extends Controller
 
     private function canSave()
     {
-        return Auth::user()->hasRole("Role 6");
+        if($user = Auth::user()) {
+            return $user->hasRole("Role 6");
+        }
+        return false;
     }
 
     private function notAuthorized()

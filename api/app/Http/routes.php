@@ -58,9 +58,13 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function ()
     Route::get('all', ['uses' => 'UserController@getAll']);
 });
 
-Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
+Route::group(['prefix' => 'api/v1'], function ()
 {
     Route::resource('practitioner', 'PractitionerController');
+});
+
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
+{
     Route::resource('valuelist', 'ValuelistController');
     Route::resource('project', 'ProjectController');
     Route::get('organisation/{offset}/{search}','OrganisationController@index');
@@ -75,11 +79,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
     Route::resource('project.auditinspection', 'AuditInspectionController');
 
     Route::resource('project.permitlicense', 'PermitLicenseController');
-});
-
-Route::group(['prefix' => 'api/v1'], function ()
-{
-    Route::get('practitioners', ['uses' => 'PractitionerController@getPublic']);
 });
 
 Route::group(['prefix' => 'search/v1', 'middleware' => 'auth'], function ()

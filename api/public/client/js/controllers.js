@@ -39,6 +39,9 @@ controllers.controller('DatePickerSearchController', ['$scope', function (scope)
 controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo','EnvInfo', function (scope, location, UserInfo, EnvInfo)
 {
     scope.userinfo = UserInfo;
+    if(UserInfo.info != "Not signed in" && location.path().indexOf('/practitioners') != 0) {
+        document.querySelector("[role='navigation']").style.display = "block";
+    }
     EnvInfo(function(env){scope.envinfo = env.env})
     scope.isActive = function (viewLocation)
     {

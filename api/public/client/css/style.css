@@ -402,3 +402,7 @@ textarea.ng-invalid,
     color: red;
     margin-bottom: 2%;
 }
+
+.navbar {
+    display: none;
+}
