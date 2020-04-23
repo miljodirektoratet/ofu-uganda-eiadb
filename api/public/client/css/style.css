@@ -403,6 +403,6 @@ textarea.ng-invalid,
     margin-bottom: 2%;
 }
 
-.navbar {
+.navbar-nav, .navbar-right {
     display: none;
 }

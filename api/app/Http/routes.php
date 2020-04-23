@@ -35,10 +35,6 @@ Route::group(['middleware' => 'auth'], function ()
         phpinfo();
     });
     Route::get('plot-projects', ['uses' => 'DisplayMapController@plotProjects']);
-    Route::group(['prefix' => '/tiles'], function() {
-        Route::get('{file?}', ['uses' => 'CoordinatesController@fetchTile'])->where('file', '.*');
-    });
-
 });
 
 
@@ -65,6 +61,7 @@ Route::group(['prefix' => 'api/v1'], function ()
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
 {
+    // Route::resource('practitioner', 'PractitionerController');
     Route::resource('valuelist', 'ValuelistController');
     Route::resource('project', 'ProjectController');
     Route::get('organisation/{offset}/{search}','OrganisationController@index');

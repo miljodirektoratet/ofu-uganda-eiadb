@@ -12,7 +12,8 @@ class PractitionerController extends Controller
     // GET /resource
     public function index()
     {
-        if (!$this::canSave()) {
+        //return public list if user is not logged in
+        if (!Auth::check()) {
             return  $this->getPublic();
         }
 

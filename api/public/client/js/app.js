@@ -171,6 +171,12 @@ var seroApp = angular
         templateUrl: "partials/practitioners.html",
         controller: "PractitionersController"
       });
+
+      $routeProvider.when("/public/practitioners", {
+        templateUrl: "partials/publicPractitioners.html",
+        controller: "PractitionersController"
+      });
+
       $routeProvider.otherwise({ redirectTo: "/" });
     }
   ])
@@ -178,14 +184,13 @@ var seroApp = angular
     "$q",
     "$location",
     function($q, $location) {
+      console.log($location.path());
       return {
         responseError: function(rejection) {
-          if ($location.path().indexOf("/password/reset/" == 0)) {
+          if ($location.path().indexOf("/password/reset/") == 0 || $location.path() == "/public/practitioners") {
             // No redirect.
           } else if (rejection.status === 401) {
-            if($location.path().indexOf("/practitioners") != 0) {
               $location.path("/login");
-            }
           }
           return $q.reject(rejection);
         }

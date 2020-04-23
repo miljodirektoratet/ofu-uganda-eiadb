@@ -39,9 +39,14 @@ controllers.controller('DatePickerSearchController', ['$scope', function (scope)
 controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo','EnvInfo', function (scope, location, UserInfo, EnvInfo)
 {
     scope.userinfo = UserInfo;
-    if(UserInfo.info != "Not signed in" && location.path().indexOf('/practitioners') != 0) {
-        document.querySelector("[role='navigation']").style.display = "block";
-    }
+
+    scope.$watch('userinfo', function(newUserInfo, oldName) {
+        if (location.path() != '/public/practitioners' || (location.path() == '/public/practitioners' && newUserInfo.info.name != "Not signed in") ) {
+            var el = document.querySelectorAll(".navbar-nav, .navbar-right");
+            el[0].style.display =  el[1].style.display = "block";
+        }
+    });
+
     EnvInfo(function(env){scope.envinfo = env.env})
     scope.isActive = function (viewLocation)
     {
