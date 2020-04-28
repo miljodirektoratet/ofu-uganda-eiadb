@@ -19,10 +19,12 @@ class Practitioner extends Model
     public function validCertificates()
     {
         $year = intval(date("Y"));
-
+        $currentMonth = intval(date("m"));
+        $startingYr = ($currentMonth > 2)? $year : $year - 1;
+        $endingYr = $year;
         return $this->hasMany('App\PractitionerCertificate')
             ->select('id', 'practitioner_id', 'year', 'cert_type', 'conditions', 'cert_no')
-            ->whereIn('year', array($year - 1, $year))
+            ->whereIn('year', array($startingYr, $endingYr))
             ->where('is_cancelled', '=', false)
             ->orderBy('year', 'desc')
             ->orderBy('cert_type', 'asc')

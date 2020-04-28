@@ -34,7 +34,15 @@ class PractitionerController extends Controller
 
     public function getPublic()
     {
+        $withFunction = function ($query) {
+            //$year = intval(date("Y"));
+            $query->select('id', 'practitioner_id', 'year', 'cert_type', 'conditions', 'is_cancelled');
+            // ->where('year', '=', $year);
+        };
+
         $practitioners = Practitioner::with('validCertificates')
+            ->with(array('practitionerCertificates' => $withFunction))
+                ->orderBy('person', 'ASC')
             ->has('validCertificates')
             ->get(['id',
                 'person',
