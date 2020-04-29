@@ -269,5 +269,13 @@ controllers.controller("PractitionersController", [
         c.date_of_entry = filter("date")(tempDate, "d. MMM yyyy");
       });
     }
+
+    scope.find = function(list, key, value) {
+      console.log(list, key, value);
+      if(!list || !key || !value ) {
+        return;
+      }
+      return _.find(list, key, value);
+    }
   }
 ]);

@@ -57,12 +57,12 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function ()
 Route::group(['prefix' => 'api/v1'], function ()
 {
     Route::resource('practitioner', 'PractitionerController');
+    Route::resource('valuelist', 'ValuelistController');
 });
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
 {
     // Route::resource('practitioner', 'PractitionerController');
-    Route::resource('valuelist', 'ValuelistController');
     Route::resource('project', 'ProjectController');
     Route::get('organisation/{offset}/{search}','OrganisationController@index');
     Route::resource('organisation', 'OrganisationController');

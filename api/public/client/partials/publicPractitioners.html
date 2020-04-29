@@ -1,7 +1,4 @@
 <div class="top-header">
-  <center>
-    <h1>Practitioners</h1>
-  </center>
   <p class="text-center lead">LIST OF CERTIFIED AND REGISTERED ENVIRONMENTAL PRACTITIONERS IN UGANDA</p>
 <div class="row">
   <div class="col-lg-6" >
@@ -13,12 +10,8 @@
     </P>
   </div>
   <div class="col-lg-6">
-    <b>The Practitioners have been registered under the following</b>categories:
+    <b>The Practitioners have been registered under the following categories:</b>
     <table style="width:100%">
-      <tr>
-        <th>Type</th>
-        <th>Tag</th>
-      </tr>
       <tr>
         <td>ENVIRONMENTAL IMPACT ASSESSORS
         </td>
@@ -180,11 +173,14 @@
               <div class="col-md-2">
                 <div class="form-group">
                   <label for="person">Title</label>
-                  <select ui-select2="{allowClear:true}" ng-disabled="!canSave()" ng-required="true" id="p_title" class="form-control input-sm input-conditions"
-                    ng-model="p.practitioner_title_id">
-                    <option></option>
-                    <option ng-repeat="v in valuelists.practitioner_title" value="{{ v.id }}">{{ v.description1 }}</option>
-                  </select>
+                  <input
+                  type="text"
+                  ng-readonly="!canSave()"
+                  id="p_title"
+                  ng-required="true"
+                  class="form-control input-sm"
+                  ng-model="find(valuelists.practitioner_title, 'id', p.practitioner_title_id).description1"
+                />
                 </div>
               </div>
               <div class="col-md-3">
@@ -217,9 +213,6 @@
               <div class="col-md-5">
                 <div class="form-group">
                   <label for="organisation_name">Organisation Name</label>
-                  <span class="message-inline pull-right" ng-show="p.updated_by"
-                    >Last changed by {{ p.updated_by }}</span
-                  >
                   <input
                     type="text"
                     ng-readonly="!canSave()"
@@ -379,14 +372,6 @@
                       <th>Cancelled?</th>
                       <th>Remarks</th>
                       <th>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm btn-add-certificate"
-                          ng-click="newCertificate(p)"
-                          ng-hide="!canSave()"
-                        >
-                          New
-                        </button>
                       </th>
                     </tr>
                   </thead>
@@ -421,19 +406,9 @@
                             class="form-control input-sm input-date"
                             ng-model="c.date_of_entry"
                             data-datepicker-popup="d MMM yyyy"
-                            data-is-open="opened"
-                            data-datepicker-options="datepickerOptions"
                             data-show-button-bar="false"
                           />
                           <span class="input-group-btn">
-                            <button
-                              type="button"
-                              ng-disabled="!canSave()"
-                              class="btn btn-default btn-sm"
-                              ng-click="open($event)"
-                            >
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </button>
                           </span>
                         </div>
 
@@ -446,22 +421,15 @@
                         <!--</div>-->
                       </td>
                       <td>
-                        <select
-                          ui-select2="{allowClear:true}"
-                          ng-disabled="!canSave()"
+                        <input
+                          type="text"
+                          ng-readonly="!canSave()"
                           id="c_cert_type"
                           ng-required="true"
-                          ng-change="calculateCertificateNumber(c)"
                           class="form-control input-sm"
-                          ng-model="c.cert_type"
-                        >
-                          <option></option>
-                          <option
-                            ng-repeat="v in valuelists.practitionertype"
-                            value="{{ v.id }}"
-                            >{{ v.description1 }}</option
-                          >
-                        </select>
+                          ng-model="find(valuelists.practitionertype, 'id', c.cert_type).description1"
+                        />
+
                       </td>
                       <td>
                         <input
@@ -486,21 +454,14 @@
                         />
                       </td>
                       <td>
-                        <select
-                        ui-select2="{allowClear:true}"
-                          ng-disabled="!canSave()"
-                          ng-required="true"
-                          id="c_conditions"
-                          class="form-control input-sm input-conditions"
-                          ng-model="c.conditions"
-                        >
-                        <option></option>
-                          <option
-                            ng-repeat="v in valuelists.practitionermembertype"
-                            value="{{ v.id }}"
-                            >{{ v.description2 }}</option
-                          >
-                        </select>
+                        <input
+                        type="text"
+                        ng-readonly="!canSave()"
+                        id="c_conditions"
+                        ng-required="true"
+                        class="form-control input-sm"
+                        ng-model="find(valuelists.practitionermembertype, 'id', c.conditions).description2"
+                      />
                       </td>
                       <td>
                         <input
@@ -523,12 +484,7 @@
                         />
                       </td>
                       <td>
-                        <sero-delete-button class="delete-button" 
-                        text=" c.is_new ? 'Cancel' : 'Delete'"
-                        warning="'NB! You are now going to delete this certificate. Do you want to proceed?'"
-                        button-class="'btn btn-danger btn-sm pull-right'"
-                        ng-hide="!canSave()"
-                        on-yes="deleteCertificate($index, p, c)"></sero-delete-button>
+
                       </td>
                     </tr>
                   </tbody>
