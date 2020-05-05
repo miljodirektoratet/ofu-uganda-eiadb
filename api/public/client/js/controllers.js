@@ -56,6 +56,10 @@ controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo','E
     {
         return location.path().indexOf(viewLocation) == 0;
     };
+    scope.hasAccess = function (viewLocation)
+    {
+        return true;
+    }
 }]);
 
 controllers.controller('HomeController', ['$scope', 'GeneralStatistics', function (scope, GeneralStatistics)

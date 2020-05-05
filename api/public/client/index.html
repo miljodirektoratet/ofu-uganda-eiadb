@@ -39,20 +39,26 @@
                 <li ng-class="{ active: isAdvancedActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
                 <li ng-class="{ active: isAdvancedActive('/search')}"><a href="#/search">Search</a></li>
                 <li ng-class="{ active: isAdvancedActive('/statistics')}"><a href="#/statistics">Statistics</tatistics></a></li>
-                <!--<li ng-class="{ active: isAdvancedActive('/advanced')}" ng-show="hasAccess('/advanced')"><a href="#/advanced">Advanced</a></li>-->
-                <!--          <li class="dropdown" ng-class="{ active: isAdvancedActive('/advanced', true)}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                              <li ng-class="{ active: isAdvancedActive('/advanced/practitioners')}"><a href="#/advanced/practitioners">Practitioners</a></li>
-                            </ul>
-                          </li>-->
+                <!-- <li ng-class="{ active: isAdvancedActive('/advanced')}" ng-show="hasAccess('/advanced')"><a href="#/advanced">Advanced</a></li> -->
                 <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
-                <li> 
-                    <a href="#" onclick="return false;" class="version"><app-version/></a></li>
+                
+                    <li class="dropdown" ng-show="hasAccess('/advanced')" ng-class="{ active: isAdvancedActive('/advanced', true)}" >
+                        <a class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/codes')}"><a href="#/advanced/codes">Manage Codes</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/users')}"><a href="#/advanced/users">Manage Users</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusEIA')}"><a href="#/advanced/pirking/statusEIA">Update status for EIA</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusEA')}"><a href="#/advanced/pirking/statusEA">Update status for External audits</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusPL')}"><a href="#/advanced/pirking/statusPL">Update status for Permit and license</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusAI')}"><a href="#/advanced/pirking/statusAI">Update status for Audits and inspection</a></li>
+                        </ul>
+                      </li>
+                      <li> 
+                        <a href="#" onclick="return false;" class="version"><app-version/></a></li>
             </ul>
             <p class="navbar-text navbar-right">
                 
-                Logged in as <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a>
+                User: <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a>
             </p>
         </div>
         <!--/.nav-collapse -->
@@ -114,9 +120,9 @@
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>
 <script src="js/validations.js"></script>
-<script src="js/maplib.js"></script>
 <script src="js/excelLib.js"></script>
 <script src="js/excelExport.js"></script>
+<script src="js/bootstrap.js"></script>
 <!-- Script end -->
 <div class="forceload"><img src="img/loader.gif" alt="loader"/></div>
 </body>

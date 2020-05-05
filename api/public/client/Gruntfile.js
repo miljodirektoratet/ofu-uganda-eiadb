@@ -82,7 +82,7 @@ module.exports = function (grunt) {
           "js/validations.js",
           "js/excelLib.js",
           "js/excelExport.js",
-          "js/maplib.js"
+          "js/bootstrap.js",
         ]
       }
     }
