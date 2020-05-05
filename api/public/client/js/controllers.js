@@ -58,6 +58,9 @@ controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo','E
     };
     scope.hasAccess = function (viewLocation)
     {
+        if(!scope.userinfo.info.role_8) {
+            return false;
+        }
         return true;
     }
 }]);
