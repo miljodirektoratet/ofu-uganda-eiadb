@@ -184,7 +184,6 @@ var seroApp = angular
     "$q",
     "$location",
     function($q, $location) {
-      console.log($location.path());
       return {
         responseError: function(rejection) {
           if ($location.path().indexOf("/password/reset/") == 0 || $location.path() == "/public/practitioners") {

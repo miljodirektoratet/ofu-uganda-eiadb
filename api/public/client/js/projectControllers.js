@@ -454,11 +454,17 @@ controllers.controller("ProjectController", [
     }
     
     function isDistrictMatching(data) {
+      var apacKwanCheck = function(currentDistrict, returnedDistrict) {
+        var matchingDistricts = ['kwania', 'apac'];
+        var output  = (matchingDistricts.includes(currentDistrict) && matchingDistricts.includes(returnedDistrict));
+        return output;
+      }
       var currentDistrict = _.find(scope.valuelists.district, 'id', parseInt(scope.data.project.district_id));
-      console.log(currentDistrict, scope.data.project.district_id)
-      if(currentDistrict.description1.toLowerCase() != data.address.state.toLowerCase()) {
+      var currentDistrictStr = currentDistrict.description1.toLowerCase();
+      var returnedDistrict = data.address.state.toLowerCase();
+      if(( currentDistrictStr != returnedDistrict) && !apacKwanCheck(currentDistrictStr, returnedDistrict) ) {
         scope.districtState.isError = DisplayStateEnum.Show;
-        scope.districtState.suggestion =data.address.state;
+        scope.districtState.suggestion = (data.address.state.toLowerCase() == 'apac')? 'Apac/Kwania': data.address.state;
         return false;
       } else {
         scope.districtState.isError = DisplayStateEnum.Hide;
