@@ -448,7 +448,6 @@ controllers.controller("ProjectController", [
     };
 
     scope.onDistrictChange = function() {
-      console.log(scope.currentCoordinateObject);
       isDistrictMatching(scope.currentCoordinateObject);
       scope.saveCurrentProject();
     }
@@ -459,12 +458,32 @@ controllers.controller("ProjectController", [
         var output  = (matchingDistricts.includes(currentDistrict) && matchingDistricts.includes(returnedDistrict));
         return output;
       }
+
+      function extractDistrict(data)
+      {
+        var district = 'None';
+        if(data.address.state) {
+          district = data.address.state;
+        } else {
+          var addressSplit = data.display_name.split(",");
+          var addressSize = addressSplit.length;
+          for(var i = 0; i < addressSize; i++) {
+              var output = _.find(scope.valuelists.district, function(districtItem){
+                return (districtItem.description1.trim().toLowerCase() == addressSplit[i].trim().toLowerCase()); 
+              });
+              if(output) {
+                return district = output.description1;
+              }
+          }
+        }
+        return district.trim().toLowerCase();
+      }
       var currentDistrict = _.find(scope.valuelists.district, 'id', parseInt(scope.data.project.district_id));
-      var currentDistrictStr = currentDistrict.description1.toLowerCase();
-      var returnedDistrict = data.address.state.toLowerCase();
+      var currentDistrictStr = currentDistrict.description1.trim().toLowerCase();
+      var returnedDistrict = extractDistrict(data);
       if(( currentDistrictStr != returnedDistrict) && !apacKwanCheck(currentDistrictStr, returnedDistrict) ) {
         scope.districtState.isError = DisplayStateEnum.Show;
-        scope.districtState.suggestion = (data.address.state.toLowerCase() == 'apac')? 'Apac/Kwania': data.address.state;
+        scope.districtState.suggestion = (extractDistrict(data) == 'apac')? 'Apac/Kwania': extractDistrict(data);
         return false;
       } else {
         scope.districtState.isError = DisplayStateEnum.Hide;
