@@ -472,7 +472,7 @@ controllers.controller("ProjectController", [
                 return (districtItem.description1.trim().toLowerCase() == addressSplit[i].trim().toLowerCase()); 
               });
               if(output) {
-                return district = output.description1;
+                district = output.description1;
               }
           }
         }
