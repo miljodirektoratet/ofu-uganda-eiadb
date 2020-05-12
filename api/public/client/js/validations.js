@@ -96,7 +96,7 @@ validations.directive('certificateNumber', function ()
         require: 'ngModel',
         link: function (scope, elm, attrs, ctrl)
         {
-            var regexp = new RegExp('^CC\/(EIA|EA|EP)\/[0-9]{3}\/[0-9]{2}$');
+            var regexp = new RegExp('^CC\/(EIA|EA|EP|FP)\/[0-9]{3}\/[0-9]{2}$');
 
             ctrl.$validators.certificateNumber = function (modelValue, viewValue)
             {

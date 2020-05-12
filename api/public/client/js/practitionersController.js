@@ -114,6 +114,50 @@ controllers.controller("PractitionersController", [
       return has;
     };
 
+    scope.hasForeignPractitionerTL = function(p) {
+      var has = filterCertificates(
+        p.practitioner_certificates,
+        148,
+        scope.certificateYearValid,
+        38
+      );
+      p.cert_ep = has ? "ForeignPractitioner" : null;
+      return has;
+    };
+
+    scope.hasForeignPractitionerTM = function(p) {
+      var has = filterCertificates(
+        p.practitioner_certificates,
+        148,
+        scope.certificateYearValid,
+        39
+      );
+      p.cert_ep = has ? "ForeignPractitioner" : null;
+      return has;
+    };
+
+    scope.hasForeignPractitionerPEIA = function(p) {
+      var has = filterCertificates(
+        p.practitioner_certificates,
+        148,
+        scope.certificateYearValid,
+        53
+      );
+      p.cert_ep = has ? "ForeignPractitioner" : null;
+      return has;
+    };
+
+    scope.hasForeignPractitionerPEA = function(p) {
+      var has = filterCertificates(
+        p.practitioner_certificates,
+        148,
+        scope.certificateYearValid,
+        97
+      );
+      p.cert_ep = has ? "ForeignPractitioner" : null;
+      return has;
+    };
+
     scope.newPractitioner = function() {
       if (scope.currentForm && scope.currentForm.$invalid) {
         alert("Current form not valid. Can't create new practitioner.");
@@ -191,6 +235,7 @@ controllers.controller("PractitionersController", [
       if (scope.canSave() && scope.current) {
         var oldP = scope.current;
         var form = scope.currentForm;
+        console.log(form.$error, form, scope.currentForm)
         if (form.$invalid) {
           alert("Form not valid. Can't save.");
           return;
