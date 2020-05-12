@@ -144,6 +144,26 @@
               ng-class="hasPartnershipEa(p) ? 'label-warning' :'label-default noCertificate'"
               >EP-EA</span
             >
+            <span
+            class="label certificate-label"
+            ng-class="hasForeignPractitionerTL(p) ? 'label-danger' :'label-default noCertificate'"
+            >FP-TL</span
+            >
+            <span
+            class="label certificate-label"
+            ng-class="hasForeignPractitionerTM(p) ? 'label-danger' :'label-default noCertificate'"
+            >FP-TM</span
+            >
+            <span
+            class="label certificate-label"
+            ng-class="hasForeignPractitionerPEIA(p) ? 'label-danger' :'label-default noCertificate'"
+            >FP-EIA</span
+            >
+            <span
+            class="label certificate-label"
+            ng-class="hasForeignPractitionerPEA(p) ? 'label-danger' :'label-default noCertificate'"
+            >FP-EA</span
+            >
             <button
               type="button"
               class="btn btn-xs btn-link pull-right text-right"
