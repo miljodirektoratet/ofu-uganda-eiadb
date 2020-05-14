@@ -8,6 +8,17 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label for="status">Status</label>
+                            <select ui-select2="{allowClear:true}"
+                                    id="status" class="form-control input-sm"
+                                    ng-model="criteria.externalaudit_status">
+                                <option></option>
+                                <option ng-repeat="v in valuelists.eastatus" value="{{v.id}}">{{v.description1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label for="document_title">Document title</label>
                             <input type="text" class="form-control input-sm" id="document_title" ng-model="criteria.document_title"/>
                         </div>

@@ -449,7 +449,7 @@ exportObj.exportMetaData["eiaspermits"] = {
 exportObj.exportMetaData["externalAudit"] = {
   fieldmap: {
     externalaudit_id: "External audit ID",
-    project_id: "Project ID",
+    externalaudit_status: "Status",
     ea_type: "Type of external audit",
     team_leader: "Team leader",
     handling_officers: "Officers to handle",
@@ -462,6 +462,7 @@ exportObj.exportMetaData["externalAudit"] = {
     date_deadline_compliance: "Date for complete compliance",
     doc_code: "Documents",
     // project_project_id: "Project ID",
+    project_id: "Project ID",
     project_project_name: "Project name",
     category_name: "Category",
     district_district: "District",

@@ -62,14 +62,9 @@ controllers.controller("SearchExternalAuditsController", [
         headerTooltip: true
       },
       {
-        name: "verification_inspection",
-        displayName: "Verification inspection",
-        cellTooltip: true,
-        headerTooltip: true
-      },
-      {
-        name: "response",
-        displayName: "Response",
+        name: "externalaudit_status",
+        displayName: "Status",
+        width: 200,
         cellTooltip: true,
         headerTooltip: true
       },
@@ -84,7 +79,21 @@ controllers.controller("SearchExternalAuditsController", [
         displayName: "Project name",
         cellTooltip: true,
         headerTooltip: true
-      }
+      },
+      {
+        name: "verification_inspection",
+        displayName: "Verification inspection",
+        width: 162,
+        cellTooltip: true,
+        headerTooltip: true
+      },
+      {
+        name: "response",
+        displayName: "Response",
+        width: 80,
+        cellTooltip: true,
+        headerTooltip: true
+      },
     ];
 
     //var openRow = function (row)
