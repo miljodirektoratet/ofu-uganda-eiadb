@@ -357,7 +357,8 @@
                   </thead>
                   <tbody>
                     <!--<tr ng-class="{'bg-success':c.is_new}" ng-repeat="c in p.practitioner_certificates | orderBy:['-year', 'cert_type']" ng-hide="c.is_deleted">-->
-                    <tr
+                      
+                      <tr
                       ng-repeat="c in p.practitioner_certificates"
                       ng-hide="c.is_deleted"
                     >
@@ -370,8 +371,8 @@
                           integer
                           min="{{ certificateYearMin }}"
                           max="{{ certificateYearMax }}"
+                          id="c_year_{{c.id}}"
                           class="form-control input-sm input-year"
-                          id="c_year"
                           ng-model="c.year"
                         />
                       </td>

@@ -184,9 +184,15 @@ controllers.controller("PractitionersController", [
       if (c.is_new) {
         p.practitioner_certificates.splice(index, 1);
       } else {
-        c.is_deleted = true;
-        scope.currentForm.$setDirty();
-        scope.toggleRow(p, true);
+          c.year = 2000;
+          c.date_of_entry = new Date();
+          c.cert_type =  51;
+          c.cert_no = "CC/EA/022/00";
+          c.number =  22;
+          c.conditions =  39;
+          c.is_deleted = true;
+          scope.currentForm.$setDirty();
+          scope.toggleRow(p, true);
       }
     };
     scope.newCertificate = function(p) {
@@ -235,18 +241,21 @@ controllers.controller("PractitionersController", [
       if (scope.canSave() && scope.current) {
         var oldP = scope.current;
         var form = scope.currentForm;
-        console.log(form.$error, form, scope.currentForm)
-        if (form.$invalid) {
-          alert("Form not valid. Can't save.");
-          return;
-        }
-        if (form.$dirty) {
-          savePractitioner(oldP);
-          // TODO: This is happening before the callback. Tsk tsk.
-          form.$setPristine();
-        } else {
-          //        console.log("No changes to save.");
-        }
+        //use timeout to wait on reactive change for cert delete
+        setTimeout(function(){
+          if (form.$invalid) {
+              alert("Form not valid. Can't save.");
+
+              return;
+            }
+            if (form.$dirty) {
+              savePractitioner(oldP);
+              // TODO: This is happening before the callback. Tsk tsk.
+              form.$setPristine();
+            } else {
+              //        console.log("No changes to save.");
+            }
+        },0)
       }
 
       // Set current.
