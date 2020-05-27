@@ -114,46 +114,9 @@ controllers.controller("PractitionersController", [
       return has;
     };
 
-    scope.hasForeignPractitionerTL = function(p) {
-      var has = filterCertificates(
-        p.practitioner_certificates,
-        148,
-        scope.certificateYearValid,
-        38
-      );
-      p.cert_ep = has ? "ForeignPractitioner" : null;
-      return has;
-    };
-
-    scope.hasForeignPractitionerTM = function(p) {
-      var has = filterCertificates(
-        p.practitioner_certificates,
-        148,
-        scope.certificateYearValid,
-        39
-      );
-      p.cert_ep = has ? "ForeignPractitioner" : null;
-      return has;
-    };
-
-    scope.hasForeignPractitionerPEIA = function(p) {
-      var has = filterCertificates(
-        p.practitioner_certificates,
-        148,
-        scope.certificateYearValid,
-        53
-      );
-      p.cert_ep = has ? "ForeignPractitioner" : null;
-      return has;
-    };
-
-    scope.hasForeignPractitionerPEA = function(p) {
-      var has = filterCertificates(
-        p.practitioner_certificates,
-        148,
-        scope.certificateYearValid,
-        97
-      );
+    scope.hasForeignPractitioner = function(p) {
+      var output = _.find( p.practitioner_certificates, "cert_type", 148)
+      var has = (typeof(output) == "object");
       p.cert_ep = has ? "ForeignPractitioner" : null;
       return has;
     };

@@ -13,45 +13,45 @@
     <b>The Practitioners have been registered under the following categories:</b>
     <table style="width:100%">
       <tr>
-        <td>ENVIRONMENTAL IMPACT ASSESSORS
+        <td>&nbsp;ENVIRONMENTAL IMPACT ASSESSORS
         </td>
-        <td>EIA - TM
-        </td>
-      </tr>
-      <tr>
-        <td>ENVIRONMENTAL AUDITORS
-        </td>
-        <td>EA - TM
+        <td>&nbsp;<span class="label label-info">EIA - TM</span>
         </td>
       </tr>
       <tr>
-        <td>FOREIGN PRACTITIONERS
+        <td>&nbsp;ENVIRONMENTAL AUDITORS
         </td>
-        <td>FP
-        </td>
-      </tr>
-      <tr>
-        <td>ENVIRONMENTAL PARTNERSHIPS (EIA)
-        </td>
-        <td>EP - EIA
+        <td>&nbsp;<span class="label label-success">EA - TM</span>
         </td>
       </tr>
       <tr>
-        <td>ENVIRONMENTAL PARTNERSHIPS (EA)
+        <td>&nbsp;FOREIGN PRACTITIONERS
         </td>
-        <td>EP - EA
-        </td>
-      </tr>
-      <tr>
-        <td>TEAM LEADERS (EIA)
-        </td>
-        <td>EIA - TL
+        <td>&nbsp;<span class="label label-danger">FP</span>
         </td>
       </tr>
       <tr>
-        <td>TEAM LEADERS (EA)
+        <td>&nbsp;ENVIRONMENTAL PARTNERSHIPS (EIA)
         </td>
-        <td>EA - TL
+        <td>&nbsp;<span class="label label-warning">EP - EIA</span>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;ENVIRONMENTAL PARTNERSHIPS (EA)
+        </td>
+        <td>&nbsp;<span class="label label-warning">EP - EA</span>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;TEAM LEADERS (EIA)
+        </td>
+        <td>&nbsp;<span class="label label-info">EIA - TL</span>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;TEAM LEADERS (EA)
+        </td>
+        <td>&nbsp;<span class="label label-success">EA - TL</span>
         </td>
       </tr>
     </table>
@@ -146,23 +146,8 @@
             >
             <span
             class="label certificate-label"
-            ng-class="hasForeignPractitionerTL(p) ? 'label-danger' :'label-default noCertificate'"
-            >FP-TL</span
-            >
-            <span
-            class="label certificate-label"
-            ng-class="hasForeignPractitionerTM(p) ? 'label-danger' :'label-default noCertificate'"
-            >FP-TM</span
-            >
-            <span
-            class="label certificate-label"
-            ng-class="hasForeignPractitionerPEIA(p) ? 'label-danger' :'label-default noCertificate'"
-            >FP-EIA</span
-            >
-            <span
-            class="label certificate-label"
-            ng-class="hasForeignPractitionerPEA(p) ? 'label-danger' :'label-default noCertificate'"
-            >FP-EA</span
+            ng-class="hasForeignPractitioner(p) ? 'label-danger' :'label-default noCertificate'"
+            >FP</span
             >
             <button
               type="button"
