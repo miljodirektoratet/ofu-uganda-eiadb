@@ -794,7 +794,8 @@ function showNavBarItems(show) {
   el[0].style.display =  el[1].style.display = show ? "block" : "none";
 }
 
-function toggleNavBarItems(userInfo, location = false) {
+function toggleNavBarItems(userInfo, location) {
+  location = location ? location : false;
   var publicPath = '/public/';
   if(location == false) {
     location = {path: function(){
