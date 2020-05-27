@@ -20,6 +20,8 @@ controllers.controller("PractitionersController", [
       scope.practitioners = data;
     }); //{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
+    toggleNavBarItems(UserInfo);//hide navbar items if its public/practitioner
+
     var filterCertificates = function(
       certificates,
       certType,

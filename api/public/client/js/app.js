@@ -788,3 +788,21 @@ function updateEiaPermitStatus(ep, documents) {
   // console.log("Status not changed", oldStatus, newStatus);
   return false;
 }
+
+function showNavBarItems(show) {
+  var el = document.querySelectorAll(".navbar-nav, .navbar-right");
+  el[0].style.display =  el[1].style.display = show ? "block" : "none";
+}
+
+function toggleNavBarItems(userInfo, location = false) {
+  var publicPath = '/public/';
+  if(location == false) {
+    location = {path: function(){
+      return publicPath;
+    }}
+  }
+  if (location.path().startsWith("/public/") == false  || (location.path().startsWith("/public/") == true && userInfo.info.name != "Not signed in") ) {
+      return showNavBarItems(true);
+    }
+    showNavBarItems(false);
+}

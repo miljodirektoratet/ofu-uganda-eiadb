@@ -39,12 +39,8 @@ controllers.controller('DatePickerSearchController', ['$scope', function (scope)
 controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo','EnvInfo', function (scope, location, UserInfo, EnvInfo)
 {
     scope.userinfo = UserInfo;
-
     scope.$watch('userinfo', function(newUserInfo, oldName) {
-        if (location.path() != '/public/practitioners' || (location.path() == '/public/practitioners' && newUserInfo.info.name != "Not signed in") ) {
-            var el = document.querySelectorAll(".navbar-nav, .navbar-right");
-            el[0].style.display =  el[1].style.display = "block";
-        }
+       toggleNavBarItems(newUserInfo, location);
     });
 
     EnvInfo(function(env){scope.envinfo = env.env})
@@ -77,6 +73,7 @@ controllers.controller('HomeController', ['$scope', 'GeneralStatistics', functio
 
 controllers.controller('UserController', ['$scope', 'UserInfo', function (scope, UserInfo)
 {
+    showNavBarItems(true);//shows navbar items incase they are hidden
     scope.userinfo = UserInfo;
     scope.userid_to_impersonate = null;
     scope.impersonate = function ()
