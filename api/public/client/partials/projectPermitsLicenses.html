@@ -469,25 +469,6 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="pl.fee_receipt_no">{{pl.regulation==idPermit ? "Permit" : "License"}} fee receipt number</label>
-                                                    <input type="text" decimal ng-blur="saveCurrentPermitLicense(pl)" ng-readonly="!auth.canSave('fee_receipt_no')" class="form-control input-sm" id="pl.fee_receipt_no" ng-model="pl.fee_receipt_no"/>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="pl.date_fee_payed">Date {{pl.regulation==idPermit ? "permit" : "license"}} fee paid</label>
-                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                                                        <input type="text" ng-blur="saveCurrentPermitLicense(pl)" ng-required="false" ng-readonly="!auth.canSave('date_fee_payed')" id="pl.date_fee_payed" class="form-control input-sm input-date" ng-model="pl.date_fee_payed" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
-                                                        <span class="input-group-btn">
-                                                            <button type="button" ng-disabled="!auth.canSave('date_fee_payed')" class="btn btn-default btn-sm" ng-click="open($event)">
-                                                                <span class="glyphicon glyphicon-calendar"></span>
-                                                            </button>
-                                                          </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
                                                     <label for="pl.date_sent_for_decision">Date to {{pl.regulation==idPermit ? "ED" : "committee"}} for decision</label>
                                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                                         <input type="text" ng-blur="saveCurrentPermitLicense(pl)" ng-required="false" ng-readonly="!auth.canSave('date_sent_for_decision')" id="pl.date_sent_for_decision" class="form-control input-sm input-date" ng-model="pl.date_sent_for_decision" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
@@ -499,9 +480,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="pl.decision">Decision taken</label>
@@ -517,6 +495,28 @@
                                                     <select ui-select2 ng-change="saveCurrentPermitLicense(pl)" ng-disabled="!auth.canSave('signature_on_permit_license')" id="pl.signature_on_permit_license" class="form-control input-sm" ng-model="pl.signature_on_permit_license">
                                                         <option ng-repeat="v in valuelists.executivedirector" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="pl.fee_receipt_no">{{pl.regulation==idPermit ? "Permit" : "License"}} fee receipt number</label>
+                                                    <input type="text" decimal ng-blur="saveCurrentPermitLicense(pl)" ng-readonly="!auth.canSave('fee_receipt_no')" class="form-control input-sm" id="pl.fee_receipt_no" ng-model="pl.fee_receipt_no"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="pl.date_fee_payed">Date {{pl.regulation==idPermit ? "permit" : "license"}} fee paid</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentPermitLicense(pl)" ng-required="false" ng-readonly="!auth.canSave('date_fee_payed')" id="pl.date_fee_payed" class="form-control input-sm input-date" ng-model="pl.date_fee_payed" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('date_fee_payed')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                          </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
