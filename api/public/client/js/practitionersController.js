@@ -207,7 +207,7 @@ controllers.controller("PractitionersController", [
         var oldP = scope.current;
         var form = scope.currentForm;
         //use timeout to wait on reactive change for cert delete
-        setTimeout(function(){
+        // setTimeout(function(){
           if (form.$invalid) {
               alert("Form not valid. Can't save.");
 
@@ -220,7 +220,7 @@ controllers.controller("PractitionersController", [
             } else {
               //        console.log("No changes to save.");
             }
-        },0)
+        // },0)
       }
 
       // Set current.
