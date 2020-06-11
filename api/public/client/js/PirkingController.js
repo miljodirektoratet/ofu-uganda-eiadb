@@ -236,11 +236,10 @@ controllers.controller('ExternalAudiPirkingController', ['$scope', '$http', 'Pro
             {
                 var ea = results[0][0];
                 // var ds = results[1];
-                console.log(eaMini, "data")
+                console.log(ea, "data")
                 var change = updateExternalAuditStatus(ea, ea.documents);
                 eaMini.status_id_new = ea.status;
                 eaMini.status_description_new = getStatusCodeFromValuelist(ea.status);
-                console.log(eaMini, ea, "data")
                 if (change && (parseInt(eaMini.status_id_new)  != parseInt(eaMini.status_id)))
                 {
                     if (scope.dryrun)
@@ -281,7 +280,6 @@ controllers.controller('ExternalAudiPirkingController', ['$scope', '$http', 'Pro
                 scope.info.error += 1;
                 deferred.reject("Server Error");
             });
-            console.log(deferred)
             return deferred.promise;
         }
 

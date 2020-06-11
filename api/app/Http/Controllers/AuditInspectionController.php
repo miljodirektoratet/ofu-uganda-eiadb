@@ -33,7 +33,7 @@ class AuditInspectionController extends Controller
         $auditinspections = Project::find($projectId)
             ->auditinspections()
             ->with(array('reportFile' => $withFileMetadata))
-            ->get(array('id', 'status', 'year', 'number', 'code', 'reason', 'lead_officer', 'type', 'date_carried_out', 'date_action_taken', 'file_metadata_report_id'));
+            ->get();
         return Response::json($auditinspections, 200);
     }
 
