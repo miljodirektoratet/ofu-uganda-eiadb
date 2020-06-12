@@ -234,7 +234,7 @@ controllers.controller('ExternalAudiPirkingController', ['$scope', '$http', 'Pro
             var deferred = $q.defer();
             $q.all([eaPromises[5]]).then(function (results)
             {
-                var ea = results[0][0];
+                var ea = _.find(results[0], {"id": eaMini.externalaudit_id});
                 // var ds = results[1];
                 console.log(ea, "data")
                 var change = updateExternalAuditStatus(ea, ea.documents);
@@ -379,22 +379,18 @@ controllers.controller('AuditInspecitionPirkingController', ['$scope', '$http', 
         function handleAuditInspectionAsync(aiMini)
         {
             aiMini.updating = true;
-
             var params = {
                 projectId: aiMini.project_id,
                 auditinspectionId: aiMini.auditsInspections_id
             };
             var aiPromises = ProjectFactory.retrieveProjectData(params);
-            // console.log(aiPromises);
             var deferred = $q.defer();
             $q.all([aiPromises[3]]).then(function (results)
             {
-                var ai = results[0][0];
-
+                var ai = _.find(results[0], {"id":aiMini.auditsInspections_id});
                 var change = updateAuditInspectionStatus(ai);
                 aiMini.status_id_new = ai.status;
                 aiMini.status_description_new = getStatusCodeFromValuelist(ai.status);
-                console.log(aiMini, ai, "data")
                 if (change && (parseInt(aiMini.status_id_new)  != parseInt(aiMini.status_id)))
                 {
                     if (scope.dryrun)
@@ -435,7 +431,6 @@ controllers.controller('AuditInspecitionPirkingController', ['$scope', '$http', 
                 scope.info.error += 1;
                 deferred.reject("Server Error");
             });
-            console.log(deferred)
             return deferred.promise;
         }
 

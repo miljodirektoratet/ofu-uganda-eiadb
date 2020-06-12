@@ -609,12 +609,14 @@ function updateExternalAuditStatus(ea, documents) {
   }
 
   if(ea.date_deadline_compliance) {
+    console.log(ea);
     ea.status = 147;
     return true;
   } else if (ea.date_response) {
     ea.status = 146;
     return true;
   } else if(documents.length) {
+      console.log(ea);
       if(documentsByType[12]) {
         var document = documentsByType[12][0];
         var docMap = {
@@ -667,6 +669,8 @@ function updateAuditInspectionStatus(ai) {
         {
             ai.status = 71;
         }
+        // console.log(ai.id, ai.project_id, ai.status, "75 =>", ai.date_closing, "74 =>",ai.date_received, "73 =>",ai.date_deadline, "72 =>",ai.action_taken,"71 =>", ai.date_carried_out, ai.status, "finishing status");
+        
         return ([71,72,73,74,75].includes(ai.status))? true:false;
 }
 function updateEiaPermitStatus(ep, documents) {
