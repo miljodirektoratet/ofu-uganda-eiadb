@@ -105,10 +105,7 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
             permitlicense.regulation_activity = null;
         }
 
-        if (!isNew)
-        {
-            scope.updateStatus(permitlicense);
-        }
+        scope.updateStatus(permitlicense);
 
         scope.saveCurrent(scope.parts.permitlicense, permitlicense, isNew).then(function (pl)
         {
