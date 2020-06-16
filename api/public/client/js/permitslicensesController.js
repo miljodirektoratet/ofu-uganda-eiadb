@@ -121,6 +121,7 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
 
     scope.updateStatus = function (pl)
     {
+        updatePermitLicense(pl);
     };
 
     scope.newPermitLicense = function ()

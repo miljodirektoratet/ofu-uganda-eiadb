@@ -139,7 +139,7 @@
                             <tr class="master" ng-class="{selected: routeParams.permitlicenseId==pl.id, notvalid: routeParams.permitlicenseId==pl.id && parts.permitlicense.form.$invalid}"
                                 ng-click="openPermitLicense(pl.id, $event)">
                                 <td>{{pl.id}}</td>
-                                <td>{{data.getCodeFromValuelist('eiastatus', pl.status)}}</td>
+                                <td>{{data.getCodeFromValuelist('permitlicencestatus', pl.status)}}</td>
                                 <td>{{pl.date_submitted | date:'d MMM yyyy'}}</td>
                                 <td>{{data.getCodeFromValuelist('permit_license_regulations', pl.regulation)}}</td>
                                 <td>{{data.getCodeFromValuelist('team_leader_eia_permit', pl.user_id)}}</td>

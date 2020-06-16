@@ -794,6 +794,29 @@ function updateEiaPermitStatus(ep, documents) {
   return false;
 }
 
+function updatePermitLicense(pl) {
+ if(pl.date_permit_license_expired && pl.date_permit_license_expired < new Date()) {
+   pl.status = 157;
+ } else if(pl.permit_license_no) {
+    pl.status = 156;
+ } else if(pl.date_sent_for_decision) {
+   pl.status = 155;
+ } else if(pl.fee_receipt_no) {
+   pl.status = 154;
+ } else if(pl.date_of_evaluation) {
+   pl.status = 153;
+ } else if(pl.date_sent_officer) {
+   pl.status = 152;
+ } else if(pl.date_sent_from_dep) {
+   pl.status = 151;
+ } else if(pl.date_sent_to_director) {
+   pl.status = 150;
+ } else if(pl.date_submitted) {
+   pl.status = 149;
+ }
+  return true;
+}
+
 function showNavBarItems(show) {
   var el = document.querySelectorAll(".navbar-nav, .navbar-right");
   el[0].style.display =  el[1].style.display = show ? "block" : "none";
