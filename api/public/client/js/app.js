@@ -798,11 +798,11 @@ function updatePermitLicense(pl) {
  if(pl.date_permit_license_expired && pl.date_permit_license_expired < new Date()) {
    pl.status = 157;
  } else if(pl.permit_license_no) {
-    pl.status = 156;
- } else if(pl.date_sent_for_decision) {
-   pl.status = 155;
+   pl.status = 156;
  } else if(pl.fee_receipt_no) {
    pl.status = 154;
+ } else if(pl.date_sent_for_decision) {
+   pl.status = 155;
  } else if(pl.date_of_evaluation) {
    pl.status = 153;
  } else if(pl.date_sent_officer) {
