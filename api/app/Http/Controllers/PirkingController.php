@@ -81,6 +81,29 @@ class PirkingController extends Controller
 
         return Response::json($result, 200);
     }
+
+    public function getPermitLicense()
+    {
+        $from = Input::get('from');
+        $to = Input::get('to');
+
+        $result = DB::table('permits_licenses as pl')
+            ->join('projects as p', 'pl.project_id', '=', 'p.id')
+            ->leftJoin('codes as status', 'pl.status', '=', 'status.id')
+            ->select('pl.id as permitLicense_id',
+                'p.id as project_id',
+                'p.title as project_title',
+                'status.id as status_id',
+                'status.description1 as status_description',
+            'pl.updated_at as permitLicense_updated_at')
+            ->whereNull('pl.deleted_at')
+            ->whereNull('p.deleted_at')
+            ->whereBetween('pl.id', [$from, $to]);
+
+        $result = $result->get();
+
+        return Response::json($result, 200);
+    }
     // GET /resource/:id
     public function show($id)
     {

@@ -462,3 +462,156 @@ controllers.controller('AuditInspecitionPirkingController', ['$scope', '$http', 
         );
     }
 }]);
+
+controllers.controller('PermitLicensePirkingController', ['$scope', '$http', 'ProjectFactory', 'Valuelists', '$q', function (scope, $http, ProjectFactory, Valuelists, $q)
+{
+    scope.lastId = "..";
+    scope.criteria = {};
+    scope.dryrun = true;
+    scope.plData = [];
+    scope.working = false;
+    scope.info = {
+        error: 0,
+        nochange: 0,
+        changed: 0,
+        finished: function ()
+        {
+            return this.error + this.nochange + this.changed;
+        },
+        progress: function ()
+        {
+            if (scope.plData.length == 0)
+            {
+                return 0;
+            }
+            return Math.round(100.0*this.finished()/scope.plData.length);
+        }
+    };
+
+    scope.beginPirking = function ()
+    {
+        scope.info.error = 0;
+        scope.info.nochange = 0;
+        scope.info.changed = 0;
+
+        console.log("beginPirking");
+        console.log("dryrun:", scope.dryrun);
+        scope.working = true;
+        $http({
+            method: 'GET',
+            url: '/pirking/v1/permitLicense',
+            params: scope.criteria
+        }).then(function successCallback(response)
+        {
+            scope.plData = response.data;
+            console.log("beginPirking finished");
+            scope.beginUpdate();
+
+        }, function errorCallback(response)
+        {
+            console.log("oh noes");
+        });
+    };
+
+    var getStatusCodeFromValuelist = function (id)
+    {
+        var code = _.find(Valuelists["permitlicencestatus"], {'id': id});
+        if (code)
+        {
+            return code.description1;
+        }
+        return "";
+    };
+
+    scope.beginUpdate = function ()
+    {
+        console.log("beginUpdate");
+        function handlePermitLicenseAsync(plMini)
+        {
+            var params = {
+                projectId: plMini.project_id,
+                permitlicenseId: plMini.permitLicense_id
+            };
+            var plPromises = ProjectFactory.retrieveProjectData(params);
+            var deferred = $q.defer();
+            $q.all([plPromises[4]]).then(function (results)
+            {
+                var pl = _.find(results[0], {"id":plMini.permitLicense_id});
+                if(!pl) {
+                    return;
+                }
+                console.log("before the change", pl);
+                var change = updatePermitLicenseStatus(pl);
+                plMini.status_id_new = pl.status;
+                plMini.status_description_new = getStatusCodeFromValuelist(pl.status);
+                if (change && (parseInt(plMini.status_id_new)  != parseInt(plMini.status_id)))
+                {
+                    if (scope.dryrun)
+                    {
+                        plMini.changed = true;
+                        plMini.result = "CHANGED";
+                        scope.info.changed += 1;
+                        plMini.updating = false;
+                        deferred.resolve();
+                    }
+                    else
+                    {
+                        pl.pirking = true;
+                        pl.$update(params, function (savedpl)
+                        {
+                            plMini.changed = true;
+                            plMini.result = "CHANGED";
+                            scope.info.changed += 1;
+                            plMini.updating = false;
+                            plMini.externalaudit_updated_at = savedpl.updated_at;
+                            deferred.resolve();
+                        });
+                    }
+                }
+                else
+                {
+                    plMini.nochange = true;
+                    plMini.result = "NO CHANGE";
+                    scope.info.nochange += 1;
+                    plMini.updating = false;
+                    deferred.resolve();
+                }
+            }, function (error)
+            {
+                plMini.updating = false;
+                plMini.error = true;
+                plMini.result = "ERROR";
+                scope.info.error += 1;
+                deferred.reject("Server Error");
+            });
+            return deferred.promise;
+        }
+
+        function doAsyncSeriesParallel(arr)
+        {
+            return $q.all(arr.map(handlePermitLicenseAsync));
+        }
+
+        function doAsyncSeries(arr)
+        {
+            return arr.reduce(function (promise, plMini)
+            {
+                return promise.then(function ()
+                {
+                    var output = handlePermitLicenseAsync(plMini);
+                    return output; 
+                }).catch(function (error)
+                {
+                    console.log("ERROR:", error)
+                });
+            }, $q.when());
+        }
+
+        doAsyncSeries(scope.plData).then(function ()
+            {
+                console.log("beginUpdate finished");
+                scope.working = false;
+            }
+        );
+    }
+}]);

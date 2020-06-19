@@ -149,6 +149,10 @@ var seroApp = angular
         templateUrl: "partials/auditInspection-pirking.html",
         controller: "AuditInspecitionPirkingController"
       });
+      $routeProvider.when("/advanced/pirking/statusPL", {
+        templateUrl: "partials/permitlicense-pirking.html",
+        controller: "PermitLicensePirkingController"
+      });
 
       $routeProvider.when("/about", { templateUrl: "partials/about.html" });
       $routeProvider.when("/login", {
@@ -794,7 +798,7 @@ function updateEiaPermitStatus(ep, documents) {
   return false;
 }
 
-function updatePermitLicense(pl) {
+function updatePermitLicenseStatus(pl) {
  if(pl.date_permit_license_expired && pl.date_permit_license_expired < new Date()) {
    pl.status = 157;
  } else if(pl.permit_license_no) {
