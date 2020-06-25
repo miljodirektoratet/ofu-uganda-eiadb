@@ -157,7 +157,9 @@ controllers.controller("PractitionersController", [
           c.conditions =  39;
           c.is_deleted = true;
           scope.currentForm.$setDirty();
-          scope.toggleRow(p, true);
+          setTimeout(function(){
+            scope.toggleRow(p, true);
+          },0)
       }
     };
     scope.newCertificate = function(p) {
@@ -208,9 +210,9 @@ controllers.controller("PractitionersController", [
         var form = scope.currentForm;
         //use timeout to wait on reactive change for cert delete
         // setTimeout(function(){
+          console.log(form.$invalid, form, "what is not valid");
           if (form.$invalid) {
               alert("Form not valid. Can't save.");
-
               return;
             }
             if (form.$dirty) {
