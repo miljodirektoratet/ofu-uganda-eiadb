@@ -1,6 +1,5 @@
 "use strict";
 
-var testy1 = "x";
 var paginationCount = 20;
 var projectPagerOffset = 0;
 controllers.controller("ProjectsController", [
