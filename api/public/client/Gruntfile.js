@@ -82,6 +82,7 @@ module.exports = function (grunt) {
           "js/validations.js",
           "js/excelLib.js",
           "js/excelExport.js",
+          "js/unsavedDataProtection.js",
           "js/bootstrap.js",
         ]
       }

@@ -200,40 +200,16 @@ var seroApp = angular
       };
     }
   ])
-  .factory("dataCheck", [
+  .factory("unsavedDataProtection", [
     "$q",
     "$location",
     function($q, $location) {
-      var wordStore = '';
       return {
         request: function(config) {
           if(config.method != 'GET') {
-            wordStore = '';
+            window.globalWordCount = '';
           }
-
-          document.addEventListener('keypress', function(e){
-              var keyCode = e.which;
-              if((parseInt(keyCode) >= 97 && parseInt(keyCode) <= 122) ||
-                  parseInt(keyCode) >= 65 && parseInt(keyCode) <= 90 ||
-                  (parseInt(keyCode) >= 48 && parseInt(keyCode) <= 57)
-              ) {
-                wordStore = keyCode;
-              }
-            });
-
-            if(wordStore > 0 && config.method == 'GET') {
-              var leave = confirm("If you continue you will loose everything, press cancel to stay");
-              wordStore = '';
-              if(!leave) {
-                config = [];
-              }
-            }
             return config;
-            // config.transformResponse = [function(data) {
-            //   // console.log("response data:", data);
-            //   return data;
-            // }]
-          // }
         }
       };
     }
@@ -242,7 +218,7 @@ var seroApp = angular
     "$httpProvider",
     function($httpProvider) {
       $httpProvider.interceptors.push("authHttpResponseInterceptor");
-      $httpProvider.interceptors.push("dataCheck");
+      $httpProvider.interceptors.push("unsavedDataProtection");
     }
   ]);
 
