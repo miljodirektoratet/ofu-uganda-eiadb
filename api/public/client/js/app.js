@@ -208,6 +208,8 @@ var seroApp = angular
         request: function(config) {
           if(config.method != 'GET') {
             window.globalWordCount = '';
+          } else {
+            window.interceptPageNavigation();
           }
             return config;
         }
@@ -854,3 +856,15 @@ function toggleNavBarItems(userInfo, location) {
     }
     showNavBarItems(false);
 }
+window.unsavedDataProtectionIgnoredSubPaths = [
+   '#/practitioners',
+   '/#/search',
+   '#/statistics',
+   '#/about',
+   '#/advanced',
+   '/#/user'
+ ]
+
+window.unsavedDataProtectionIgnoredExactPaths = [
+  '#/projects',
+]

@@ -1,4 +1,4 @@
-(function(){
+window.interceptPageNavigation = function(){
   var links = document.getElementsByTagName('a');
   window.globalWordCount = '';
 
@@ -15,12 +15,24 @@
 
     //append click listner
     var navigationIntervension = function() {
+        var currentPath              = window.location.href;
+        var currentHash              = window.location.hash;
+        var isAblackListedPath       = window.unsavedDataProtectionIgnoredSubPaths.find(a => a.includes(currentPath));
+        var isAblackListedExactPaths = window.unsavedDataProtectionIgnoredExactPaths.includes(currentHash);
+
+        console.log(this.hash,isAblackListedExactPaths,"no path found");
+        if(this.classList.contains('dropdown-toggle') || 
+            isAblackListedPath                        ||
+            isAblackListedExactPaths
+        ) {
+            return true;
+        }
         event.preventDefault();
         if(window.globalWordCount > 0) {
-            var leave = confirm("If you continue you will loose everything, press cancel to stay");
+            var leave = confirm("You seem to have unsaved work, if you leave you will loose everything, press cancel to stay");
             if(leave) {
                 window.globalWordCount = '';
-                window.location.href = this.href;
+                window.location.href   = this.href;
             }
         } else {
             window.location.href = this.href;
@@ -31,4 +43,5 @@
         links[i].onclick = navigationIntervension;
     }
 
-})(window);
+};
+window.interceptPageNavigation();
