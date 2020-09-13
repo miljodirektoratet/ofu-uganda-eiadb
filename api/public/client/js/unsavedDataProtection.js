@@ -17,10 +17,11 @@ window.interceptPageNavigation = function(){
     var navigationIntervension = function() {
         var currentPath              = window.location.href;
         var currentHash              = window.location.hash;
-        var isAblackListedPath       = window.unsavedDataProtectionIgnoredSubPaths.find(a => a.includes(currentPath));
+        var isAblackListedPath       = window.unsavedDataProtectionIgnoredSubPaths.find(function(a){
+            return a.includes(currentPath); 
+        });
         var isAblackListedExactPaths = window.unsavedDataProtectionIgnoredExactPaths.includes(currentHash);
 
-        console.log(this.hash,isAblackListedExactPaths,"no path found");
         if(this.classList.contains('dropdown-toggle') || 
             isAblackListedPath                        ||
             isAblackListedExactPaths
