@@ -88,7 +88,11 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="expected_jobs_created">Expected jobs created</label>
-                                                    <input type="text" decimal="1" ng-blur="saveCurrentEiaPermit(ep)" ng-readonly="!auth.canSave('expected_jobs_created')" class="form-control input-sm" id="expected_jobs_created" ng-model="ep.expected_jobs_created"/>
+                                                    <input type="text" 
+                                                            type="number"
+                                                            step=".0"
+                                                            ng-blur="saveCurrentEiaPermit(ep)" ng-readonly="!auth.canSave('expected_jobs_created')" 
+                                                    ng-change="modifyInputDecimals()" class="form-control input-sm" id="expected_jobs_created" ng-model="ep.expected_jobs_created"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -154,7 +158,10 @@
                                                     <label for="fee">Expected fees</label>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <input type="text" decimal="2" ng-blur="saveCurrentEiaPermit(ep)" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="ep.fee"/>
+                                                            <input 
+                                                            type="text"
+                                                            ng-blur="saveCurrentEiaPermit(ep)"
+                                                            ng-change="modifyInputDecimals()" ng-readonly="!auth.canSave('fee')" class="form-control input-sm" id="fee" ng-model="ep.fee"/>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <select ui-select2="{allowClear:true}" ng-change="saveCurrentEiaPermit(ep)" ng-disabled="!auth.canSave('fee_currency')" id="fee_currency" class="form-control input-sm" ng-model="ep.fee_currency">

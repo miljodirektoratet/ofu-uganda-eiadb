@@ -41,7 +41,7 @@ window.interceptPageNavigation = function(){
     }
     var linkCount = links.length;
     for(var i = 0; i < linkCount; i++) {
-        links[i].onclick = navigationIntervension;
+        // links[i].onclick = navigationIntervension;
     }
 
 };

@@ -77,6 +77,12 @@ class EiaPermitController extends Controller
 
         // Users (personnel).
         $userIds = array();
+        $eiaFee = $eiapermit->fee;
+        $expectedJobCreated = $eiapermit->expected_jobs_created;
+        ($eiaFee) ?
+            $eiapermit->fee = number_format((float)$eiaFee, 2, '.', '') :$eiaFee;
+        ($expectedJobCreated) ?
+            $eiapermit->expected_jobs_created = number_format((float)$expectedJobCreated, 1, '.', '') :$expectedJobCreated;
         foreach ($eiapermit->users as $user)
         {
             array_push($userIds, $user->id);

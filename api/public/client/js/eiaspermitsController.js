@@ -95,6 +95,16 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         };
     };
 
+    scope.modifyInputDecimals = function () {
+        var originalFee = parseFloat(scope.data.eiapermit.fee);
+        var originalExpectedJobCreated = parseFloat(scope.data.eiapermit.expected_jobs_created);
+        if(originalFee && originalFee.countDecimals() > 2) {
+            scope.data.eiapermit.fee = originalFee.truncateDecimal(2);
+        }
+        if(originalExpectedJobCreated && originalExpectedJobCreated.countDecimals() > 1) {
+            scope.data.eiapermit.expected_jobs_created = originalExpectedJobCreated.truncateDecimal(1);
+        }
+    }
     scope.auth.canSave = function (field)
     {
         if (scope.data.eiapermit.is_new && scope.parts.eiapermit.state == SavingStateEnum.SavingStarted)
