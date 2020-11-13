@@ -67,7 +67,7 @@ return [
 	|
 	*/
 
-	'encryption' => 'tls',
+	'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -119,6 +119,6 @@ return [
 	|
 	*/
 
-	'pretend' => false,
+	'pretend' => env('MAIL_PRETEND', false),
 
 ];
