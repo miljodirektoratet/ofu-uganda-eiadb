@@ -80,7 +80,7 @@ return [
 	|
 	*/
 
-	'username' => env('MAIL_USERNAME'),
+	'username' => env('MAIL_USERNAME', 'no-reply@nema.go.ug'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -120,5 +120,7 @@ return [
 	*/
 
 	'pretend' => env('MAIL_PRETEND', false),
+
+	'name' => env('NAME', 'NEMA'),
 
 ];
