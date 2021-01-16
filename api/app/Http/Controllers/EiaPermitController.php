@@ -6,6 +6,7 @@ use Input;
 use \DateTime;
 use \App\Project;
 use \App\EiaPermit;
+use \App\EmailOrder;
 
 class EiaPermitController extends Controller
 {
@@ -89,7 +90,9 @@ class EiaPermitController extends Controller
         }
         $eiapermit["user_ids"] = $userIds;
         unset($eiapermit["users"]);
+        $emailOrder = EmailOrder::where('foreign_id', $eiapermit->id)->first();
 
+        $eiapermit['email_order'] = $emailOrder;
         return Response::json($eiapermit, 200);
     }
 

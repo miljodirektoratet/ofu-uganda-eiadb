@@ -38,14 +38,14 @@ class EmailOrder extends Command
      */
     public function handle()
     {
-        $unprocessedOrderList = EmailOrderModel::where('order_status', 1)->get();
+        $unprocessedOrderList = EmailOrderModel::where('order_status', 2)->get();
         
         foreach($unprocessedOrderList as $order) {
             try {
-                $output = $this->mailer(explode(',', $order->recipient), $order->subject, 'emails.orderTemplate', ['content' => $order->body], $order->cc, $order->bcc);
+                $output = $this->mailer(explode(';', $order->recipient), $order->subject, 'emails.orderTemplate', ['content' => $order->body], $order->cc, $order->bcc);
                 $order->update([
                     'number_of_attempts' => \DB::raw('number_of_attempts + 1'),
-                    'order_status' => 2,
+                    'order_status' => 3,
                     'remarks_from_service' => null,
                     'updated_by' => 'Email Service',
                     ]);

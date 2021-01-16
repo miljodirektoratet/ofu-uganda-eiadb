@@ -281,7 +281,8 @@
                                                     <label for="date_cancelled">Certificate cancelled date</label>
                                                     <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit(ep)" ng-readonly="!auth.canSave('date_cancelled')" class="form-control input-sm" id="date_cancelled" ng-model="ep.date_cancelled" />-->
                                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                                                        <input type="text" ng-blur="saveCurrentEiaPermit(ep)" ng-readonly="!auth.canSave('date_cancelled')" id="date_cancelled" class="form-control input-sm input-date" ng-model="ep.date_cancelled" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <input type="text" 
+                                                        ng-readonly="!auth.canSave('date_cancelled')" id="date_cancelled" class="form-control input-sm input-date" ng-model="ep.date_cancelled" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
                                                         <span class="input-group-btn">
                                                           <button type="button" ng-disabled="!auth.canSave('date_cancelled')" class="btn btn-default btn-sm" ng-click="open($event)">
                                                               <span class="glyphicon glyphicon-calendar"></span>
@@ -301,18 +302,27 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Certificate</label>
-                                                    <div class="uploaded-file" ng-show="ep.file_metadata_id">
-                                                        <a ng-href="{{downloadFileUrl(ep.file_metadata_id)}}" ng-show="ep.certificate">{{ep.certificate.filename}}</a>
-                                                        <sero-delete-button class="delete-button" 
-                                                        text="'delete'"
-                                                        warning="'NB! You are now going to delete this document. Do you want to proceed?'"
-                                                        button-class="'delete btn btn-sm btn-link'"
-                                                        ng-hide="!auth.canSave('delete')"
-                                                        on-yes="deleteCertificate()"></sero-delete-button>
-
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Certificate</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <label ng-hide="!auth.canSave('recipient_email')" >Recipient Email (;)</label>
+                                                        </div>
                                                     </div>
-                                                    <div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="uploaded-file" ng-show="ep.file_metadata_id">
+                                                                <a ng-href="{{downloadFileUrl(ep.file_metadata_id)}}" ng-show="ep.certificate">{{ep.certificate.filename}}</a>
+                                                                <sero-delete-button class="delete-button" 
+                                                                text="'delete'"
+                                                                warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                                button-class="'delete btn btn-sm btn-link'"
+                                                                ng-hide="!auth.canSave('delete')"
+                                                                on-yes="deleteCertificate()"></sero-delete-button>
+        
+                                                            </div>
+                                                            <div class="form-group">
                                                         <button class="btn btn-sm btn-default"
                                                                 type="button"
                                                                 ngf-select="uploadCertificate($files)"
@@ -325,6 +335,14 @@
                                                                 ngf-max-size="{{fileUploadMaxSize}}">
                                                             Select File
                                                         </button>
+                                                        </div></div>
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                        <input type="text" ng-hide="!auth.canSave('recipient_email')" class="form-control input-sm"
+                                                        ng-blur="saveCurrentEiaPermit(ep)" id="email_contact" ng-model="ep.email_contact"/>
+                                                        <span ng-show="invalidRecipients" class="text-danger">Invalid email format.Separate multiple emails with semicolons (;)</span>
+                                                        </div>
+                                                    </div>
                                                         <div class="uploading-file" ng-show="showUploadingCertificate">
                                                             <div class="file">{{certificateFile.name}}<br/>
                                                                 <div class="progress">
@@ -343,8 +361,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                            <br>
+                                            <div class="col-md-1">
+                                                <button ng-hide="!auth.canSave('can_email')"
+                                                ng-click="createEmailOrder('EIA', ep.id, ep)"
+                                                ng-disabled="!ep.email_contact || invalidRecipients || ep.email_order"
+                                                class="btn btn-success pull-left"
+                                                >{{getEmailerObj(ep).btnMsg}} </button>
+                                                {{eiapermit.email_order}}
+                                                <span ng-show="ep.email_order.order_status == 4" class="text-danger">
+                                                    Contact an admin to fix issue with email services
+                                                </span>
+                                                <span ng-show="failedToSendMail" class="text-danger">
+                                                    We could not send the email because you haven’t added the email address or another mandatory information is missing
+                                                </span>
+                                            </div>
+                                            <div  class="col-md-1" style="width:3.7%"></div>
+                                            <div class="col-md-1">
+                                                <sero-delete-button class="delete-button" ng-hide="!auth.canSave('delete')"
                                                         text="'Delete EIA'"
                                                         warning="'NB! Any documents linked to this EIA will also be deleted. Do you want to proceed?'"
                                                         button-class="'btn-danger'"

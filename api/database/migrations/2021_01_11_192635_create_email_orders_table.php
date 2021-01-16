@@ -16,7 +16,7 @@ class CreateEmailOrdersTable extends Migration
             $table->increments('id');
             $table->integer('foreign_id')->unsigned()->nullable();
             $table->string('foreign_type', 10);
-            $table->integer('order_status')->unsigned()->default(1);
+            $table->integer('order_status')->unsigned()->default(2);
             $table->string('subject', 255);
             $table->string('body', 3000);
             $table->string('recipient', 255);

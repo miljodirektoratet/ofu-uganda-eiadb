@@ -869,6 +869,59 @@ window.unsavedDataProtectionIgnoredExactPaths = [
   '#/projects',
 ]
 
+window.verifyEmailList = function(emailList) {
+      var emails = emailList;
+      emails = emails.split(";");
+      var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var invalidEmails = [];
+      
+      for (var i = 0; i < emails.length; i++) {
+          emails[i] = emails[i].trim();
+          if( emails[i] == "" || ! regex.test(emails[i])){
+              invalidEmails.push(emails[i]);
+          }
+      }
+
+      if(invalidEmails.length != 0) {
+          return false;
+      }
+
+      return true;
+}
+
+window.createEmailOrder = function(orderType, entityId, callback) {
+  fetch('/api/v1/create-email-order/'+orderType+'/'+entityId)
+    .then(response => response.json()).then(function(data) {
+        callback(data);
+        fetch("/cron-route");
+  });
+}
+
+//status is marked by id of of the array
+window.emailerStatusObj = [
+  {
+    index: 0,
+    type: "non_existent",
+    btnMsg: "Send email",
+  },
+  {
+    index: 1,
+    type: "processing",
+    btnMsg: "Sending email...",
+  },{
+    index: 2,
+    type: "processing",
+    btnMsg: "Sending email...",
+  },{
+    index: 3,
+    type: "processed",
+    btnMsg: "Email sent",
+  },{
+    index: 4,
+    type: "failed",
+    btnMsg: "Email failed",
+  }
+]
 Number.prototype.countDecimals = function () {
   if(Math.floor(this.valueOf()) === this.valueOf()) return 0;
   return this.toString().split(".")[1].length || 0; 
