@@ -3,6 +3,8 @@
 controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', function (scope, ProjectFactory, $timeout, Upload, $q, location)
 {
     scope.showUploadingResponseDocument = false;
+    scope.invalidRecipients = false;
+    scope.ep = scope.data.eiaspermits[0];
 
     scope.shouldShowExternalAudit = function(ea)
     {
@@ -105,6 +107,7 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
             case "teamleader_id":
             case "practitioner_id":
             case "type":
+            case "recipient_email":
                 return scope.userinfo.info.role_1;
             case "personnel":
                 return scope.userinfo.info.role_2;
@@ -142,4 +145,20 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
           })
         return data.reverse();
     };
+
+    scope.customValidation = function(eiapermit) {
+        if(eiapermit.email_contact && !window.verifyEmailList(eiapermit.email_contact)) {
+          scope.invalidRecipients = true;
+          return false;
+        }
+        scope.invalidRecipients = false;
+        return true;
+    }
+
+    scope.saveCurrentEiaPermit = function(ep) {
+        if(!scope.customValidation(ep)) {
+            return false;
+        }
+        scope.saveCurrent(scope.parts.externalaudit, ep);
+    }
 }]);

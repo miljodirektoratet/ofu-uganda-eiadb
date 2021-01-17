@@ -2,6 +2,9 @@
 
 controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', 'EiaPermitSearch', function (scope, ProjectFactory, $timeout, Upload, $q, location, EiaPermitSearch)
 {
+    scope.failedToSendMail = false;
+    scope.ep = scope.data.eiapermit;
+
     scope.shouldShowDocument = function(d)
     {
         if (scope.parts.document.state == SavingStateEnum.Loading)
@@ -181,6 +184,25 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         }
     };
 
+    scope.getEmailerObj = function (ep) {
+        var index = (ep.email_order && ep.email_order.order_status) ? ep.email_order.order_status : 0; 
+        return window.emailerStatusObj[index];
+    }
+
+    scope.createEmailOrder = function(orderType, entityId, documentId, ep) {
+        ep.email_order = {};
+        window.createEmailOrder(orderType, entityId, documentId, function(response) {
+            scope.$apply(function(){
+                if(response.order_status == 0) {
+                    scope.data.eiapermit.email_order = null;
+                    scope.failedToSendMail = true;
+                } else {
+                    scope.data.eiapermit.email_order = response;
+                }
+
+        })});
+    }
+
     scope.isDisabledBasedOnRule = function (field)
     {
         // 81 = Not relevant
@@ -208,6 +230,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
             case "new":
             case "delete":
                 return scope.userinfo.info.role_1;
+            case "can_email":
             case "document.date_submitted":
             case "document.sub_copy_no":
             case "document.title":

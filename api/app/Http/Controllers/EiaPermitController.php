@@ -39,7 +39,7 @@ class EiaPermitController extends Controller
             ->with(array('user' => $withUserFunction))
             ->with(array('teamleader' => $withTeamLeaderFunction))
             ->with(array('certificate'=>$withCertificate))
-            ->get(array('id', 'status', 'teamleader_id', 'user_id', 'decision', 'date_certificate', 'certificate_no', 'file_metadata_id'));
+            ->get(array('id', 'status', 'teamleader_id', 'user_id', 'decision', 'date_certificate', 'certificate_no', 'file_metadata_id', 'email_contact'));
 
         return Response::json($eiapermits, 200);
     }
@@ -90,7 +90,7 @@ class EiaPermitController extends Controller
         }
         $eiapermit["user_ids"] = $userIds;
         unset($eiapermit["users"]);
-        $emailOrder = EmailOrder::where('foreign_id', $eiapermit->id)->first();
+        $emailOrder = EmailOrder::where('foreign_id', $eiapermit->id)->where('foreign_type', 'eia')->first();
 
         $eiapermit['email_order'] = $emailOrder;
         return Response::json($eiapermit, 200);

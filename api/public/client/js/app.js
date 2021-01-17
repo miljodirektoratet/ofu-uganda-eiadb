@@ -889,8 +889,8 @@ window.verifyEmailList = function(emailList) {
       return true;
 }
 
-window.createEmailOrder = function(orderType, entityId, callback) {
-  fetch('/api/v1/create-email-order/'+orderType+'/'+entityId)
+window.createEmailOrder = function(orderType, entityId, documentId, callback) {
+  fetch('/api/v1/create-email-order/'+(orderType.toLowerCase())+'/'+entityId+'/'+documentId)
     .then(response => response.json()).then(function(data) {
         callback(data);
         fetch("/cron-route");

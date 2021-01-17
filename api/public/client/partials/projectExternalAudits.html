@@ -225,7 +225,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="form-group col-md-5" ng-hide="!auth.canSave('recipient_email')">
+                                                <label>Recipient Emails (;)</label>
+                                                <input type="text"  class="form-control input-sm"
+                                                ng-blur="saveCurrentEiaPermit(ep)" id="email_contact" ng-model="ep.email_contact"/>
+                                                <span ng-show="invalidRecipients" class="text-danger">Invalid email format.Separate multiple emails with semicolons (;)</span>
+                                                </div>
+                                            <div class="col-md-4">
                                                 <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
                                                                     text="'Delete External audit'"
                                                                     warning="'NB! Any documents linked to this External audit will also be deleted. Do you want to proceed?'"

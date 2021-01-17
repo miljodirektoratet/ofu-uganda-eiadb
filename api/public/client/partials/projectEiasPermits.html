@@ -307,7 +307,7 @@
                                                             <label>Certificate</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <label ng-hide="!auth.canSave('recipient_email')" >Recipient Email (;)</label>
+                                                            <label ng-hide="!auth.canSave('recipient_email')" >Recipient Emails (;)</label>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -361,31 +361,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <br>
-                                            <div class="col-md-1">
-                                                <button ng-hide="!auth.canSave('can_email')"
-                                                ng-click="createEmailOrder('EIA', ep.id, ep)"
-                                                ng-disabled="!ep.email_contact || invalidRecipients || ep.email_order"
-                                                class="btn btn-success pull-left"
-                                                >{{getEmailerObj(ep).btnMsg}} </button>
-                                                {{eiapermit.email_order}}
-                                                <span ng-show="ep.email_order.order_status == 4" class="text-danger">
-                                                    Contact an admin to fix issue with email services
-                                                </span>
-                                                <span ng-show="failedToSendMail" class="text-danger">
-                                                    We could not send the email because you haven’t added the email address or another mandatory information is missing
-                                                </span>
-                                            </div>
-                                            <div  class="col-md-1" style="width:3.7%"></div>
-                                            <div class="col-md-1">
-                                                <sero-delete-button class="delete-button" ng-hide="!auth.canSave('delete')"
+                                            <div class="col-md-3">
+                                                <!-- <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
                                                         text="'Delete EIA'"
                                                         warning="'NB! Any documents linked to this EIA will also be deleted. Do you want to proceed?'"
-                                                        button-class="'btn-danger'"
-                                                        on-yes="deleteEiaPermit()"></sero-delete-button>
+                                                        button-class="'btn-danger pull-right'"
+                                                        on-yes="deleteEiaPermit()"></sero-delete-button> -->
                                             </div>
                                         </div>
-
+                                        <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                        text="'Delete EIA'"
+                                        warning="'NB! Any documents linked to this EIA will also be deleted. Do you want to proceed?'"
+                                        button-class="'btn-danger pull-right'"
+                                        on-yes="deleteEiaPermit()"></sero-delete-button>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <p>(Dirty:{{parts.eiapermit.form.$dirty}}, valid:{{parts.eiapermit.form.$valid}})

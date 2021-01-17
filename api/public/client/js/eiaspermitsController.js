@@ -4,7 +4,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
 {
     scope.showUploadingCertificate = false;
     scope.invalidRecipients = false;
-    scope.failedToSendMail = false;
+
     //scope.data.eiapermit = {}; // ???
 
     scope.shouldShowEiaPermit = function(ep)
@@ -19,28 +19,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
         }
         return false;
     };
-
-    scope.getEmailerObj = function (ep) {
-        var index = (ep.email_order && ep.email_order.order_status) ? ep.email_order.order_status : 0; 
-        return window.emailerStatusObj[index];
-    }
-
-    scope.createEmailOrder = function(orderType, entityId, ep) {
-        ep.email_order = {};
-        window.createEmailOrder(orderType, entityId, function(response) {
-            scope.$apply(function(){
-                console.log(scope.data, "response");
-                if(response.order_status == 0) {
-                    scope.data.eiapermit.email_order = null;
-                    scope.failedToSendMail = true;
-                    console.log("came failed", scope.failedToSendMail);
-                } else {
-                    console.log("succesffuk");
-                    scope.data.eiapermit.email_order = response;
-                }
-
-        })});
-    }
 
     scope.customValidation = function(eiapermit) {
         if(eiapermit.email_contact && !window.verifyEmailList(eiapermit.email_contact)) {
@@ -157,7 +135,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             case "cost":
             case "cost_currency":
             case "recipient_email":
-            case "can_email":
             case "expected_jobs_created":
                 return scope.userinfo.info.role_1;
             case "personnel":

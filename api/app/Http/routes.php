@@ -28,6 +28,11 @@ Route::get('/cron-route', function ()
 {
     return  Artisan::call("email:process");
 });
+Route::get('/test', function ()
+{
+
+        echo view('emails.eiaEmailOrderBody', ['projectTitle'=> 'test title', 'documentId'=> '243243', 'documentCode'=> 'code5']);
+});
 
 Route::get('/env', function(){
     return ['env'=>env('APP_SETUP')];
@@ -81,7 +86,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
     Route::resource('project.auditinspection', 'AuditInspectionController');
 
     Route::resource('project.permitlicense', 'PermitLicenseController');
-    Route::get('create-email-order/{orderType}/{entityId}','EmailOrderController@orderRequest');
+    Route::get('create-email-order/{orderType}/{entityId}/{documentId}','EmailOrderController@orderRequest');
 });
 
 Route::group(['prefix' => 'search/v1', 'middleware' => 'auth'], function ()

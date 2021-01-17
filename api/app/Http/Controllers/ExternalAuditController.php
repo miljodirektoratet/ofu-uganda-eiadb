@@ -6,6 +6,7 @@ use Input;
 use \DateTime;
 use \App\Project;
 use \App\ExternalAudit;
+use \App\EmailOrder;
 
 class ExternalAuditController extends Controller
 {
@@ -95,6 +96,10 @@ class ExternalAuditController extends Controller
         }
         $row["user_ids"] = $userIds;
         unset($row["users"]);
+
+        $emailOrder = EmailOrder::where('foreign_id', $row->id)->where('foreign_type', 'ea')->first();
+
+        $row['email_order'] = $emailOrder;
 
         return Response::json($row, 200);
     }

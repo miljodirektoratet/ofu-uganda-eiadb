@@ -2,6 +2,8 @@
 
 controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', 'ExternalAuditSearch', function (scope, ProjectFactory, $timeout, Upload, $q, location, ExternalAuditSearch)
 {
+    scope.ep = scope.data.eiaspermits[0];
+    scope.ea = scope.data.externalaudit;
     scope.shouldShowDocument = function(d)
     {
         if (scope.parts.document.state == SavingStateEnum.Loading)
@@ -207,6 +209,7 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
             case "new":
             case "delete":
                 return scope.userinfo.info.role_1;
+            case "can_email":
             case "document.date_submitted":
             case "document.sub_copy_no":
             case "document.title":
@@ -268,5 +271,25 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
             }
         });
     });
+
+    scope.getEmailerObj = function (ea) {
+        var index = (ea.email_order && ea.email_order.order_status) ? ea.email_order.order_status : 0; 
+        return window.emailerStatusObj[index];
+    }
+
+    scope.failedToSendMail = false;
+    scope.createEmailOrder = function(orderType, entityId, documentId, ea) {
+        ea.email_order = {};
+        window.createEmailOrder(orderType, entityId, documentId, function(response) {
+            scope.$apply(function(){
+                if(response.order_status == 0) {
+                    scope.ea.email_order = null;
+                    scope.failedToSendMail = true;
+                } else {
+                    scope.ea.email_order = response;
+                }
+
+        })});
+    }
 
 }]);

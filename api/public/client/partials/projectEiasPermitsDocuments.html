@@ -336,13 +336,17 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-
                                             <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
                                                                 text="'Delete document'"
                                                                 warning="'Do you really want to delete this record?'"
                                                                 button-class="'btn-danger'"
                                                                 on-yes="deleteDocument()"></sero-delete-button>
-
+                                                                <button ng-hide="!auth.canSave('can_email')"
+                                                                ng-click="createEmailOrder('EIA', ep.id, d.id, ep)"
+                                                                ng-disabled="!ep.email_contact || ep.email_order"
+                                                                class="btn btn-success pull-right"
+                                                                style="margin-top:35px;margin-right:10px"
+                                                                >{{(ep.id)?getEmailerObj(ep).btnMsg : 'Send email'}} </button>
                                             <div class="btn-group move-button pull-right" dropdown auto-close="disabled" is-open="moveButton.isopen" ng-hide="!auth.canSave('move') || d.is_new">
                                                 <button type="button" class="btn btn-warning pull-right" dropdown-toggle ng-hide="!auth.canSave('new')">
                                                     Move document<span class="caret"></span>
@@ -378,6 +382,12 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                        <span ng-show="ep.email_order.order_status == 4" class="text-danger pull-right">
+                                            Contact an admin to fix issue with email services
+                                        </span>
+                                        <span  ng-show="failedToSendMail" class="text-danger pull-right">
+                                            We could not send the email because you haven’t added the email address or another mandatory information is missing
+                                        </span>
                                     </div>
 
                                     <div class="row">
