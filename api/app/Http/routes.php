@@ -28,11 +28,6 @@ Route::get('/cron-route', function ()
 {
     return  Artisan::call("email:process");
 });
-Route::get('/test', function ()
-{
-
-        echo view('emails.eiaEmailOrderBody', ['projectTitle'=> 'test title', 'documentId'=> '243243', 'documentCode'=> 'code5']);
-});
 
 Route::get('/env', function(){
     return ['env'=>env('APP_SETUP')];

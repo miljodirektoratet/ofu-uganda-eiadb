@@ -42,7 +42,6 @@ class EmailOrderController extends Controller
             }
             return $this->createEmailOrder($orderType, $entity);
         } catch(\Exception $e) {
-            var_dump($e);die;
             return $this->failedEmailOrder;
         }
     }
