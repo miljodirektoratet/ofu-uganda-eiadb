@@ -6,6 +6,7 @@ use Input;
 use \DateTime;
 use \App\Project;
 use \App\PermitLicense;
+use \App\EmailOrder;
 
 class PermitLicenseController extends Controller
 {
@@ -55,6 +56,9 @@ class PermitLicenseController extends Controller
             array_push($documentationIds, $documentationEntity->id);
         }
         $row["documentation_ids"] = $documentationIds;
+
+        $emailOrder = EmailOrder::where('foreign_id', $row->id)->where('foreign_type', 'pl')->first();
+        $row['email_order'] = $emailOrder;
 
         return Response::json($row, 200);
     }

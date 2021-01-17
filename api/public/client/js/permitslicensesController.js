@@ -2,6 +2,7 @@
 
 controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory', '$timeout', 'Upload', '$q', '$location', function (scope, ProjectFactory, $timeout, Upload, $q, location)
 {
+    scope.invalidRecipients = false;
     scope.parts =
     {
         permitslicenses: {
@@ -96,10 +97,21 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
         }
     };
 
+    scope.customValidation = function(pl) {
+        if(pl.email_contact && !window.verifyEmailList(pl.email_contact)) {
+          scope.invalidRecipients = true;
+          return false;
+        }
+        scope.invalidRecipients = false;
+        return true;
+    }
+
     scope.saveCurrentPermitLicense = function (permitlicense)
     {
         var isNew = permitlicense.is_new;
-
+        if(!scope.customValidation(permitlicense)) {
+            return false;
+        }
         if (!scope.isEcosystemWetland(permitlicense))
         {
             permitlicense.regulation_activity = null;
@@ -253,12 +265,36 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
             case "upload_documentation_permit_license":
             case "delete_documentation_permit_license":
                 return scope.userinfo.info.role_5;
+            case "recipient_email":
+            case "can_email":
+                return scope.userinfo.info.role_7;
             case "status":
                 return false;
             default:
                 return false;
         }
     };
+
+    scope.getEmailerObj = function (pl) {
+        var index = (pl.email_order && pl.email_order.order_status) ? pl.email_order.order_status : 0; 
+        return window.emailerStatusObj[index];
+    }
+
+    scope.failedToSendMail = false;
+    scope.pl = scope.data.permitlicense;
+    scope.createEmailOrder = function(orderType, entityId, documentId, pl) {
+        pl.email_order = {};
+        window.createEmailOrder(orderType, entityId, documentId, function(response) {
+            scope.$apply(function(){
+                if(response.order_status == 0) {
+                    pl.email_order = null;
+                    scope.failedToSendMail = true;
+                } else {
+                    pl.email_order = response;
+                }
+
+        })});
+    }
 
     scope.loadPermitLicense = function()
     {

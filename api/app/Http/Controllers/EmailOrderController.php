@@ -22,7 +22,8 @@ class EmailOrderController extends Controller
     ];
     private $model = [
         'eia' => 'EiaPermit',
-        'ea' => 'ExternalAudit'
+        'ea' => 'ExternalAudit',
+        'pl' => 'PermitLicense',
     ];
 
     private $failedEmailOrder = [
@@ -73,6 +74,26 @@ class EmailOrderController extends Controller
         return false;
     }
 
+    private function plIsValid($orderType, $entityId, $documentId=null)
+    {
+        $model = '\App\\'.$this->model[$orderType];
+        $entity = $model::with('project')->find($entityId);
+        if(!$entity) {
+            return false;
+        }
+        if(
+            $entity->id > 0 &&
+            in_array($entity->regulation,[118, 119]) &&
+            $entity->application_number > 0 && 
+            strlen($entity->email_contact) &&
+            strlen($entity->project->title)
+            ) {
+            return $entity;
+        }
+        
+        return false;
+    }
+
     private function createEmailOrder($orderType, $entity)
     {
         $emailOrderObj = [
@@ -102,10 +123,10 @@ class EmailOrderController extends Controller
 
     private function plBody($entity)
     {
-        return view('emails.eiaEmailOrderBody', [
-            'projectTitle'=> Project::find($entity->project_id)->title,
-            'documentId'=> $entity->documents[0]->id,
-            'documentCode'=> $entity->documents[0]->code,
-        ]);
+        return view('emails.plEmailOrderBody', [
+            'projectTitle'=> $entity->project->title,
+            'permitLicensesId'=> $entity->id,
+            'permitLicensesApplicationNumber'=> $entity->application_number,
+        ])->render();
     }
 }
