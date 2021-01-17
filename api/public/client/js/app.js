@@ -892,7 +892,7 @@ window.verifyEmailList = function(emailList) {
 window.createEmailOrder = function(orderType, entityId, documentId, callback) {
   fetch('/api/v1/create-email-order/'+(orderType.toLowerCase())+'/'+entityId+'/'+documentId)
     .then(function(response) {
-      response.json()
+      return response.json();
     }).then(function(data) {
         callback(data);
         fetch("/cron-route");
