@@ -38,7 +38,7 @@ class EmailOrder extends Command
      */
     public function handle()
     {
-        $unprocessedOrderList = EmailOrderModel::where('order_status', 2)->get();
+        $unprocessedOrderList = EmailOrderModel::where('order_status', 2)->orWhere('order_status', 1)->get();
         
         foreach($unprocessedOrderList as $order) {
             try {
