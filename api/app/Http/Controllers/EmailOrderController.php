@@ -100,7 +100,7 @@ class EmailOrderController extends Controller
             'foreign_type' => $orderType,
             'subject' => config('emailOrder.subject'),
             'body' => $this->{$this->emailBody[$orderType]}($entity),
-            'bcc' => config('emailOrder.bcc'),
+            'bcc' => ( env('EMAIL_ORDER_BCC')) ? env('EMAIL_ORDER_BCC') : config('emailOrder.bcc'),
             'user_id' => Auth::user()->id,
             'recipient' => $entity->email_contact,
             'created_by' => Auth::user()->name,
