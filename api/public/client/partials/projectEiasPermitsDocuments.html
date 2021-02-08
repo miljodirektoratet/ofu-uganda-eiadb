@@ -343,10 +343,10 @@
                                                                 on-yes="deleteDocument()"></sero-delete-button>
                                                                 <button ng-hide="!auth.canSave('can_email')"
                                                                 ng-click="createEmailOrder('EIA', ep.id, d.id, ep)"
-                                                                ng-disabled="!ep.email_contact || ep.email_order"
+                                                                ng-disabled="!ep.email_contact || d.email_order"
                                                                 class="btn btn-success pull-right"
                                                                 style="margin-top:35px;margin-right:10px"
-                                                                >{{(ep.id)?getEmailerObj(ep).btnMsg : 'Send email'}} </button>
+                                                                >{{(d.id)?getEmailerObj(d).btnMsg : 'Send email'}} </button>
                                             <div class="btn-group move-button pull-right" dropdown auto-close="disabled" is-open="moveButton.isopen" ng-hide="!auth.canSave('move') || d.is_new">
                                                 <button type="button" class="btn btn-warning pull-right" dropdown-toggle ng-hide="!auth.canSave('new')">
                                                     Move document<span class="caret"></span>

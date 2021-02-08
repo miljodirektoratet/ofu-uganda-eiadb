@@ -6,6 +6,7 @@ use Input;
 use \DateTime;
 use \App\Project;
 use \App\Document;
+use \App\EmailOrder;
 
 class DocumentController extends Controller
 {
@@ -56,6 +57,11 @@ class DocumentController extends Controller
             ->with(array('attachment'=>$withAttachment))
             ->with(array('response_document'=>$withResponseDocument))
             ->find($id);
+        
+        $emailOrder = EmailOrder::where('foreign_id', $document->id)->where('foreign_type', 'eia')->first();
+
+        $document['email_order'] = $emailOrder;
+
         return Response::json($document, 200);
     }
 

@@ -272,21 +272,21 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
         });
     });
 
-    scope.getEmailerObj = function (ea) {
-        var index = (ea.email_order && ea.email_order.order_status) ? ea.email_order.order_status : 0; 
+    scope.getEmailerObj = function (doc) {
+        var index = (doc.email_order && doc.email_order.order_status) ? doc.email_order.order_status : 0; 
         return window.emailerStatusObj[index];
     }
 
     scope.failedToSendMail = false;
     scope.createEmailOrder = function(orderType, entityId, documentId, ea) {
-        ea.email_order = {};
+        scope.data.document_ea.email_order = {};
         window.createEmailOrder(orderType, entityId, documentId, function(response) {
             scope.$apply(function(){
                 if(response.order_status == 0) {
-                    scope.ea.email_order = null;
+                    scope.data.document_ea.email_order = null;
                     scope.failedToSendMail = true;
                 } else {
-                    scope.ea.email_order = response;
+                    scope.data.document_ea.email_order = response;
                 }
 
         })});

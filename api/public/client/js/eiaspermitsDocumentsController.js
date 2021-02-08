@@ -184,21 +184,21 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         }
     };
 
-    scope.getEmailerObj = function (ep) {
-        var index = (ep.email_order && ep.email_order.order_status) ? ep.email_order.order_status : 0; 
+    scope.getEmailerObj = function (doc) {
+        var index = (doc.email_order && doc.email_order.order_status) ? doc.email_order.order_status : 0; 
         return window.emailerStatusObj[index];
     }
 
     scope.createEmailOrder = function(orderType, entityId, documentId, ep) {
-        ep.email_order = {};
+        scope.data.document.email_order = {};
         window.createEmailOrder(orderType, entityId, documentId, function(response) {
             scope.$apply(function(){
                 if(response.order_status == 0) {
-                    scope.data.eiapermit.email_order = null;
+                    scope.data.document.email_order = null;
                     scope.failedToSendMail = true;
                 } else {
-                    scope.data.eiapermit.email_order = response;
-                }
+                    scope.data.document.email_order = response;
+                }x
 
         })});
     }

@@ -40,7 +40,7 @@ class EmailOrderController extends Controller
             if(! $entity = $this->$validator($orderType, $entityId, $documentId)) {
                 return $this->failedEmailOrder;
             }
-            return $this->createEmailOrder($orderType, $entity);
+            return $this->createEmailOrder($orderType, $entity, $documentId);
         } catch(\Exception $e) {
             return $this->failedEmailOrder;
         }
@@ -93,10 +93,10 @@ class EmailOrderController extends Controller
         return false;
     }
 
-    private function createEmailOrder($orderType, $entity)
+    private function createEmailOrder($orderType, $entity, $documentId=null)
     {
         $emailOrderObj = [
-            'foreign_id' => $entity->id,
+            'foreign_id' => $documentId,
             'foreign_type' => $orderType,
             'subject' => config('emailOrder.subject'),
             'body' => $this->{$this->emailBody[$orderType]}($entity),
