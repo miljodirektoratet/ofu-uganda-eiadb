@@ -461,7 +461,14 @@ controllers.controller("ProjectController", [
       function extractDistrict(data)
       {
         var district = 'None';
-        if(data.address.state) {
+        if(data.address.city) {
+          var output = _.find(scope.valuelists.district, function(districtItem){
+            return (districtItem.description1.trim().toLowerCase() == data.address.city.trim().toLowerCase()); 
+          });
+          if(output) {
+            district = output.description1;
+          }
+        } else if(data.address.state) {
           district = data.address.state;
         } else {
           var addressSplit = data.display_name.split(",");
