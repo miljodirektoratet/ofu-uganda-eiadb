@@ -256,3 +256,81 @@ controllers.controller('AdvancedLeadAgenciesController', ['$scope', '$routeParam
         scope.gridOptions.data = cs;
     });
 }]);
+
+
+controllers.controller('AdvancedEmailOrderController', ['$scope', '$routeParams', 'EditEmailOrder', '$timeout', '$q', '$interval', 'uiGridConstants', function (scope, $routeParams, EditEmailOrder, $timeout, $q, $interval, uiGridConstants)
+{
+    scope.routeParams = $routeParams;
+
+    scope.parts =
+    {
+        code: {
+            form: null,
+            state: SavingStateEnum.Loading
+        }
+    };
+
+    scope.gridOptions = {};
+    scope.gridOptions.enableCellEditOnFocus = true;
+    scope.gridOptions.showGridFooter = true;
+    scope.gridOptions.minRowsToShow = 15;
+    scope.gridOptions.rowEditWaitInterval = 1000;
+    scope.gridOptions.enableFiltering = true;
+
+
+    scope.gridOptions.columnDefs = [
+        {name: 'id', type: 'number', enableCellEdit: false, width: 60},
+        {name: 'foreign_id', enableCellEdit: false, width: 80},
+        {name: 'foreign_type', enableCellEdit: false, width: 80},
+        {name: 'order_status', enableCellEdit: true, width: 80},
+        {name: 'subject', enableCellEdit: false, width: 120},
+        {name: 'body', enableCellEdit: false, width: 160},
+        {name: 'recipient', enableCellEdit: true, width: 160},
+        {name: 'cc', enableCellEdit: false, width: 120},
+        {name: 'bcc', enableCellEdit: false, width: 120},
+        {name: 'remark_from_service', enableCellEdit: false, width: 120},
+        {name: 'remarks', enableCellEdit: true, width: 120},
+        {name: 'updated_by', enableCellEdit: false, width: 120},
+        {name: 'updated_at', enableCellEdit: false, enableFiltering: false, type: 'date', cellFilter: 'date:"d MMM yyyy HH:mm:ss"', width: 160},
+        {name: 'created_by', enableCellEdit: false, enableFiltering: false, type: 'date', cellFilter: 'date:"d MMM yyyy HH:mm:ss"', width: 160},
+        {
+            name: 'delete',
+            displayName: '',
+            enableSorting: false,
+            enableCellEdit: false,
+            enableFiltering: false,
+            enableColumnMenu: false,
+            width: 80,
+            cellTemplate: '<div><button ng-show="row.entity.deleted_at" ng-click="grid.appScope.undeleteRow(row.entity)" class="btn undelete btn-sm btn-link">undelete</button><button ng-hide="row.entity.deleted_at" ng-click="grid.appScope.deleteRow(row.entity)" class="btn delete btn-sm btn-link">delete</button></div>'
+        }
+    ];
+
+    scope.saveRow = function (rowEntity)
+    {
+        var promise = rowEntity.$update();
+        scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+    };
+
+    scope.deleteRow = function (rowEntity)
+    {
+        var promise = rowEntity.$delete({});
+        scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+    };
+
+    scope.undeleteRow = function (rowEntity)
+    {
+        rowEntity.deleted_at = null;
+        scope.saveRow(rowEntity);
+    };
+
+    scope.gridOptions.onRegisterApi = function (gridApi)
+    {
+        scope.gridApi = gridApi;
+        gridApi.rowEdit.on.saveRow(scope, scope.saveRow);
+    };
+
+    EditEmailOrder.query({}, function (cs)
+    {
+        scope.gridOptions.data = cs;
+    });
+}]);

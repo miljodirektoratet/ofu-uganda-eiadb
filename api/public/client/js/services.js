@@ -254,6 +254,19 @@ services.factory("EditUser", [
   }
 ]);
 
+services.factory("EditEmailOrder", [
+  "$resource",
+  function($resource) {
+    return $resource(
+      "/edit/v1/emailOrder/:emailOrderId",
+      { emailOrderId: "@id" },
+      {
+        update: { method: "PUT", isArray: false }
+      }
+    );
+  }
+]);
+
 services.factory("EditLeadAgency", [
   "$resource",
   function($resource) {

@@ -103,6 +103,7 @@ Route::group(['prefix' => 'edit/v1', 'middleware' => 'manager'], function ()
 {
     Route::resource('code', 'Edit\CodeController');
     Route::resource('user', 'Edit\UserController');
+    Route::resource('emailOrder', 'Edit\EmailOrderController');
     Route::resource('leadagency', 'Edit\LeadAgencyController');
 });
 

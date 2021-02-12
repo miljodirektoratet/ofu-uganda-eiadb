@@ -133,6 +133,10 @@ var seroApp = angular
         templateUrl: "partials/advancedUsers.html",
         controller: "AdvancedUsersController"
       });
+      $routeProvider.when("/advanced/emailOrders", {
+        templateUrl: "partials/advancedEmailOrder.html",
+        controller: "AdvancedEmailOrderController"
+      });
       $routeProvider.when("/advanced/leadagencies", {
         templateUrl: "partials/advancedLeadAgency.html",
         controller: "AdvancedLeadAgenciesController"
