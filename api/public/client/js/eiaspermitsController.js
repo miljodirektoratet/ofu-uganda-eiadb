@@ -109,8 +109,12 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     };
 
     scope.modifyInputDecimals = function () {
-        var originalFee = parseFloat(scope.data.eiapermit.fee);
-        var originalExpectedJobCreated = parseFloat(scope.data.eiapermit.expected_jobs_created);
+        var inputFee = (scope.data.eiapermit.fee) ? scope.data.eiapermit.fee : '';
+        var inputJobCreated = (scope.data.eiapermit.expected_jobs_created) ? scope.data.eiapermit.expected_jobs_created : '';
+        var originalFee = parseFloat(inputFee.replaceAll(',', '.'));
+
+        var originalExpectedJobCreated = parseFloat(inputJobCreated.replaceAll(',', '.'));
+
         if(originalFee && originalFee.countDecimals() > 2) {
             scope.data.eiapermit.fee = originalFee.truncateDecimal(2);
         }
