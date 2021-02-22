@@ -228,7 +228,7 @@
                                             <div class="form-group col-md-5" ng-hide="!auth.canSave('recipient_email')">
                                                 <label>Recipient Emails (;)</label>
                                                 <input type="text"  class="form-control input-sm"
-                                                ng-blur="saveCurrentEiaPermit(ep)" id="email_contact" ng-model="ep.email_contact"/>
+                                                ng-blur="saveCurrentEmailContact(ea)" id="email_contact" ng-model="ea.email_contact"/>
                                                 <span ng-show="invalidRecipients" class="text-danger">Invalid email format.Separate multiple emails with semicolons (;)</span>
                                                 </div>
                                             <div class="col-md-4">

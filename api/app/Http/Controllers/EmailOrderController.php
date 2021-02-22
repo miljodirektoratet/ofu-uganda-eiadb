@@ -57,10 +57,10 @@ class EmailOrderController extends Controller
         if(!$entity) {
             return false;
         }
-        if($orderType == 'ea') {
-            $contactObj = \App\EiaPermit::where('project_id', $entity->project_id)->first(['email_contact']);
-            $entity->email_contact = $contactObj->email_contact;
-        }
+        // if($orderType == 'ea') {
+        //     $contactObj = \App\ExternalAudit::where('project_id', $entity->project_id)->first(['email_contact']);
+        //     $entity->email_contact = $contactObj->email_contact;
+        // }
         if(strlen($entity->project_id) && 
         count($entity->documents) &&
         in_array($entity->documents[0]->type,[8, 9, 10, 11, 12, 13]) &&
