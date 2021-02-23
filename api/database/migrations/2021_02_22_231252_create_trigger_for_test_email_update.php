@@ -18,7 +18,7 @@ class CreateTriggerForTestEmailUpdate extends Migration
             CREATE TRIGGER `mutate_email_insert` BEFORE INSERT ON `organisations`
             FOR EACH ROW 
             BEGIN
-            SET NEW.email = CONCAT(REPLACE(REPLACE(TRIM(TRAILING '.nema.gdpr' FROM NEW.email ), '.nema.gdpr;', ';'), ';', '.nema.gdpr;'), '.', 'nema.gdpr');
+            SET NEW.email = REGEXP_REPLACE(REGEXP_REPLACE(NEW.email,'@([^;]*);','@nema.gdpr;'), '@([^;]*)$','@nema.gdpr');
             END
             ");
 
@@ -26,7 +26,7 @@ class CreateTriggerForTestEmailUpdate extends Migration
             CREATE TRIGGER `mutate_email_update` BEFORE UPDATE ON `organisations`
             FOR EACH ROW 
             BEGIN
-            SET NEW.email =CONCAT(REPLACE(REPLACE(TRIM(TRAILING '.nema.gdpr' FROM NEW.email ), '.nema.gdpr;', ';'), ';', '.nema.gdpr;'), '.', 'nema.gdpr');
+            SET NEW.email = REGEXP_REPLACE(REGEXP_REPLACE(NEW.email,'@([^;]*);','@nema.gdpr;'), '@([^;]*)$','@nema.gdpr');
             END
             ");
 
