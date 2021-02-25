@@ -288,7 +288,7 @@ controllers.controller('AdvancedEmailOrderController', ['$scope', '$routeParams'
         {name: 'recipient', enableCellEdit: true, width: 160},
         {name: 'cc', enableCellEdit: false, width: 120},
         {name: 'bcc', enableCellEdit: false, width: 120},
-        {name: 'remark_from_service', enableCellEdit: false, width: 120},
+        {name: 'remarks_from_service', enableCellEdit: false, width: 200},
         {name: 'remarks', enableCellEdit: true, width: 120},
         {name: 'updated_by', enableCellEdit: false, width: 120},
         {name: 'updated_at', enableCellEdit: false, enableFiltering: false, type: 'date', cellFilter: 'date:"d MMM yyyy HH:mm:ss"', width: 160},
