@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 
-    <link rel="stylesheet" href="vendor/vendor.min.css?v=5.25.0"/>
-	<link rel="stylesheet" href="app.min.css?v=5.25.0"/>
+    <link rel="stylesheet" href="vendor/vendor.min.css?v=5.26.0"/>
+	<link rel="stylesheet" href="app.min.css?v=5.26.0"/>
 </head>
 <body>
     <div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController">
@@ -38,6 +38,7 @@
                     <li class="dropdown" ng-show="hasAccess('/advanced')" ng-class="{ active: isAdvancedActive('/advanced', true)}" >
                         <a class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                            <li ng-hide="envinfo != 'TEST'" ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/anonymize-data')}"><a href="#/advanced/anonymize-data">Anonymize data</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/codes')}"><a href="#/advanced/codes">Manage Codes</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/users')}"><a href="#/advanced/users">Manage Users</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/users')}"><a href="#/advanced/emailOrders">Manage Email
@@ -46,7 +47,7 @@
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusEA')}"><a href="#/advanced/pirking/statusEA">Update status for External audits</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusAI')}"><a href="#/advanced/pirking/statusAI">Update status for Audits and inspection</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusPL')}"><a href="#/advanced/pirking/statusPL">Update status for Permit and License</a></li>
-                            <li ng-hide="envinfo != 'TEST'" ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/anonymize-data')}"><a href="#/advanced/anonymize-data">Anonymize data</a></li>
+                           
                         </ul>
                       </li>
                       <li> 
@@ -71,9 +72,9 @@
 </div>
 <div id="dvjson"></div>
 
-<script src="vendor/vendor.min.js?v=5.25.0"></script>
-	<script src="app.min.js?v=5.25.0"></script>
-	<script src="partials.min.js?v=5.25.0"></script>
+<script src="vendor/vendor.min.js?v=5.26.0"></script>
+	<script src="app.min.js?v=5.26.0"></script>
+	<script src="partials.min.js?v=5.26.0"></script>
 <div class="forceload"><img src="img/loader.gif" alt="loader"/></div>
 </body>
 </html>
