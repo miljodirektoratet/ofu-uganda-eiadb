@@ -14,23 +14,6 @@ class CreateTriggerForTestEmailUpdate extends Migration
     {
         if(config('app.env') == 'test') {
 
-            DB::unprepared("
-            CREATE TRIGGER `mutate_email_insert` BEFORE INSERT ON `organisations`
-            FOR EACH ROW 
-            BEGIN
-            SET NEW.email = REGEXP_REPLACE(REGEXP_REPLACE(NEW.email,'@([^;]*);','@nema.gdpr;'), '@([^;]*)$','@nema.gdpr');
-            END
-            ");
-
-            DB::unprepared("
-            CREATE TRIGGER `mutate_email_update` BEFORE UPDATE ON `organisations`
-            FOR EACH ROW 
-            BEGIN
-            SET NEW.email = REGEXP_REPLACE(REGEXP_REPLACE(NEW.email,'@([^;]*);','@nema.gdpr;'), '@([^;]*)$','@nema.gdpr');
-            END
-            ");
-
-            DB::table('organisations')->update(['updated_by'=>'system']);
         }
     }
 
