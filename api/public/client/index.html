@@ -53,6 +53,7 @@
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusEA')}"><a href="#/advanced/pirking/statusEA">Update status for External audits</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusAI')}"><a href="#/advanced/pirking/statusAI">Update status for Audits and inspection</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusPL')}"><a href="#/advanced/pirking/statusPL">Update status for Permit and License</a></li>
+                            <li ng-hide="envinfo != 'TEST'" ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/anonymize-data')}"><a href="#/advanced/anonymize-data">Anonymize data</a></li>
                         </ul>
                       </li>
                       <li> 
@@ -119,6 +120,7 @@
 <script src="js/advancedController.js"></script>
 <script src="js/loginController.js"></script>
 <script src="js/PirkingController.js"></script>
+<script src="js/DataAnonymizerController.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>
 <script src="js/validations.js"></script>

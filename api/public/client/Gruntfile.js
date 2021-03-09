@@ -74,6 +74,7 @@ module.exports = function (grunt) {
           "js/advancedController.js",
           "js/loginController.js",
           "js/PirkingController.js",
+          "js/DataAnonymizerController.js",
           "js/directives.js",
           "js/filters.js",
           "js/services.js",

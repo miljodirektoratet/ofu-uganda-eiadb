@@ -18,6 +18,7 @@ module.exports = function(config){
             'app/js/auditsInspectionsControllers.js',
             'app/js/loginController.js',
             'app/js/PirkingController.js',
+            'app/js/DataAnonymizerController.js',
             'app/js/filters.js',
             'app/js/directives.js',
             'app/js/validations.js',

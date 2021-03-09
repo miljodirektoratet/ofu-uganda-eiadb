@@ -157,6 +157,10 @@ var seroApp = angular
         templateUrl: "partials/permitlicense-pirking.html",
         controller: "PermitLicensePirkingController"
       });
+      $routeProvider.when("/advanced/anonymize-data", {
+        templateUrl: "partials/anonymize-data.html",
+        controller: "DataAnonymizerController"
+      });
 
       $routeProvider.when("/about", { templateUrl: "partials/about.html" });
       $routeProvider.when("/login", {

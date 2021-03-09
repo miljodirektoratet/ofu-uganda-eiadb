@@ -131,4 +131,6 @@ Route::group(['prefix' => 'export/v1'], function ()
     Route::get('445101cc8de29ef4dca8c78cefa15d3ee7b66c4b/maps', ['uses' => 'Export\ExportMapController@exportMap']);
 });
 
+Route::get('anonymizerData/v1/{action}', ['uses' => 'DataAnonymizerController@index']);
+
 
