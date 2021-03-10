@@ -95,12 +95,14 @@ class EmailOrderController extends Controller
 
     private function createEmailOrder($orderType, $entity, $documentId=null)
     {
+        // var_dump($entity->teamleader());die;
         $emailOrderObj = [
             'foreign_id' => ($documentId != 'null') ? $documentId : $entity->id,
             'foreign_type' => $orderType,
             'subject' => config('emailOrder.subject'),
             'body' => $this->{$this->emailBody[$orderType]}($entity),
             'bcc' => ( env('MAIL_ORDER_BCC')) ? env('MAIL_ORDER_BCC') : config('emailOrder.bcc'),
+            'cc' => (in_array($orderType, ['ea', 'eia']) && $entity->teamleader()->first())? $entity->teamleader()->first()->email : null,
             'user_id' => Auth::user()->id,
             'recipient' => $entity->email_contact,
             'created_by' => Auth::user()->name,
