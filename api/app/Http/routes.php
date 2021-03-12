@@ -26,7 +26,8 @@ Route::get('/', function ()
 
 Route::get('/cron-route', function ()
 {
-    return  Artisan::call("email:process");
+    Artisan::call("email:process");
+    return Artisan::output();
 });
 
 Route::get('/env', function(){

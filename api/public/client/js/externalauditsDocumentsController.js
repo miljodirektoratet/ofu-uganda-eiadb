@@ -280,6 +280,7 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
     scope.failedToSendMail = false;
     scope.createEmailOrder = function(orderType, entityId, documentId, ea) {
         scope.data.document_ea.email_order = {};
+        scope.data.document_ea.email_order.order_status = 1;
         window.createEmailOrder(orderType, entityId, documentId, function(response) {
             scope.$apply(function(){
                 if(response.order_status == 0) {

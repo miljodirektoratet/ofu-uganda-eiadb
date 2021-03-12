@@ -191,6 +191,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
 
     scope.createEmailOrder = function(orderType, entityId, documentId, ep) {
         scope.data.document.email_order = {};
+        scope.data.document.email_order.order_status = 1;
         window.createEmailOrder(orderType, entityId, documentId, function(response) {
             scope.$apply(function(){
                 if(response.order_status == 0) {

@@ -95,7 +95,6 @@ class EmailOrderController extends Controller
 
     private function createEmailOrder($orderType, $entity, $documentId=null)
     {
-        // var_dump($entity->teamleader());die;
         $emailOrderObj = [
             'foreign_id' => ($documentId != 'null') ? $documentId : $entity->id,
             'foreign_type' => $orderType,

@@ -58,11 +58,10 @@ class EmailOrder extends Command
                         'number_of_attempts' => \DB::raw('number_of_attempts + 1'),
                         'updated_by' => 'Email Service',
                         ]);
-                        return $error;
+                        return $this->info(json_encode(['order_status' => 4]));
                 }
         }
-        return "done";
-
+        return $this->info(json_encode(['order_status' => 3]));
     }
 
     private function mailer($toAddresses, $subject, $template, $templateData = [], $ccAddresses = [], $bccAddresses = [])

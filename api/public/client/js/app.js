@@ -902,8 +902,12 @@ window.createEmailOrder = function(orderType, entityId, documentId, callback) {
     .then(function(response) {
       return response.json();
     }).then(function(data) {
-        callback(data);
-        fetch("/cron-route");
+        fetch("/cron-route").then(function(response) {
+          return response.json();
+        }).then(function(cronOutput) {
+            data.order_status = cronOutput.order_status;
+            callback(data);
+      });
   });
 }
 
