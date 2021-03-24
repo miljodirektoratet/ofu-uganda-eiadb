@@ -84,7 +84,7 @@ class EmailOrder extends Command
     private function mutateMailParams($paramList)
     {
         extract($paramList);
-
+        $modifiedSubject = $subject;
         if(config('app.env') == 'test') {
             $modifiedSubject = 'TEST ('.$subject.' )';
         }
