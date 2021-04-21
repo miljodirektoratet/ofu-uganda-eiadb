@@ -118,9 +118,6 @@ return [
 	| you may inspect the message. This is great for local development.
 	|
 	*/
-
-	'pretend' => env('MAIL_PRETEND', false),
-
 	'name' => env('NAME', 'NEMA'),
 
 ];

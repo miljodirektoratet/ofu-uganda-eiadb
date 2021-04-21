@@ -19,6 +19,11 @@
     }
 });*/
 
+//should be here till laravel version is at 5.6
+if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
+    error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+}
+
 Route::get('/', function ()
 {
     return redirect(env('CLIENT'));
@@ -31,7 +36,7 @@ Route::get('/cron-route', function ()
 });
 
 Route::get('/env', function(){
-    return ['env'=>env('APP_SETUP')];
+    return ['env' => env('APP_SETUP'), 'lv_version' => app()->version()];
 });
 
 Route::group(['middleware' => 'auth'], function ()

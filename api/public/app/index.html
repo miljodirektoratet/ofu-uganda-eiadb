@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController">
-        <div class="container">
+        <div class="container" style="width: 1205px;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
                     <span class="sr-only">Toggle navigation</span>
@@ -24,7 +24,10 @@
                     <img class="navbar-left" src="img/NEMA-logo-small.png" alt="NEMA logo" style="padding-right:5px;"/>
                 </a>
               
-            <a class="navbar-brand" href="#/">EIA Database   <b class="badge env-badge">{{envinfo}}</b></a>
+            <a class="navbar-brand" href="#/">EIA Database 
+                <b class="badge env-badge">{{envinfo}}</b>
+                <b class="badge env-badge">{{lvVersion}}</b>
+            </a>
         </div>
         <div class="navbar-collapse" collapse="isCollapsed">
             <ul class="nav navbar-nav">
