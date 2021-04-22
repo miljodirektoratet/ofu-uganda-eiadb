@@ -138,7 +138,7 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
         'Illuminate\Broadcasting\BroadcastServiceProvider',
-
+		'Illuminate\Notifications\NotificationServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
@@ -201,7 +201,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 
 		'Entrust' => 'Zizaco\Entrust\EntrustFacade',
-
+		'Notification' => 'Illuminate\Support\Facades\Notification',
 	],
 
 ];
