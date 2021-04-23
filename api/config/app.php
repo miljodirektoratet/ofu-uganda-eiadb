@@ -12,7 +12,7 @@ return [
 	| application. If disabled, a simple generic error page is shown.
 	|
 	*/
-
+	'name' => 'NEMA',
 	'debug' => env('APP_DEBUG', false),
 	'env' => env('APP_ENV', 'prod'), // test
 
@@ -148,6 +148,7 @@ return [
 		 */
 		'App\Providers\AppServiceProvider',
 		// 'App\Providers\BusServiceProvider',
+		// App\Providers\BroadcastServiceProvider::class,
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
