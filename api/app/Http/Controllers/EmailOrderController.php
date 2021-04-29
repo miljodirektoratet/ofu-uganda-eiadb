@@ -105,6 +105,7 @@ class EmailOrderController extends Controller
             'user_id' => Auth::user()->id,
             'recipient' => $entity->email_contact,
             'created_by' => Auth::user()->name,
+            'created_at' => \Carbon\Carbon::now(),
             'updated_by' => Auth::user()->name,
             'order_status' => 2
         ];

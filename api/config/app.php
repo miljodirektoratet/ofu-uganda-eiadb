@@ -12,10 +12,10 @@ return [
 	| application. If disabled, a simple generic error page is shown.
 	|
 	*/
-	'name' => 'NEMA',
+	'name' =>  env('APP_NAME', 'NEMA'),
 	'debug' => env('APP_DEBUG', false),
 	'env' => env('APP_ENV', 'prod'), // test
-
+	'setup' => env('APP_SETUP'), // For test flag
 	/*
 	|--------------------------------------------------------------------------
 	| Application URL
@@ -152,6 +152,7 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+		'Laravel\Tinker\TinkerServiceProvider',
 
 	],
 
@@ -172,6 +173,7 @@ return [
 		'Artisan'   => 'Illuminate\Support\Facades\Artisan',
 		'Auth'      => 'Illuminate\Support\Facades\Auth',
 		'Blade'     => 'Illuminate\Support\Facades\Blade',
+		'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
 		'Bus'       => 'Illuminate\Support\Facades\Bus',
 		'Cache'     => 'Illuminate\Support\Facades\Cache',
 		'Config'    => 'Illuminate\Support\Facades\Config',

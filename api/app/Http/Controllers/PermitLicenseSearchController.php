@@ -24,7 +24,7 @@ class PermitLicenseSearchController extends Controller
             ->leftJoin('codes as unit', 'pl.unit', '=', 'unit.id')
             ->leftJoin('codes as inspection', 'pl.inspection_recommended', '=', 'inspection.id')
             ->leftJoin('permits_licenses_personnel as handling_officer', 'pl.id', '=', 'handling_officer.permit_license_id')
-            ->leftJoin('users as handling_officer_users  ', 'handling_officer.user_id', '=', 'handling_officer_users.id')
+            ->leftJoin('users as handling_officer_users', 'handling_officer.user_id', '=', 'handling_officer_users.id')
             ->leftJoin('users as signature', 'signature.id', '=', 'pl.signature_on_permit_license')
             ->leftJoin('codes as decision', 'decision.id', '=', 'pl.decision')
             ->leftJoin('codes as evaluation_list', 'evaluation_list.id', '=', 'pl.application_evaluation_by_officer')

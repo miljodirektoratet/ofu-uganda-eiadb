@@ -36,7 +36,7 @@ Route::get('/cron-route', function ()
 });
 
 Route::get('/env', function(){
-    return ['env' => env('APP_SETUP'), 'lv_version' => app()->version()];
+    return ['env' => config('app.setup'), 'lv_version' => app()->version()];
 });
 
 Route::group(['middleware' => 'auth'], function ()
