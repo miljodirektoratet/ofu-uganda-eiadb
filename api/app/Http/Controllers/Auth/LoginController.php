@@ -65,9 +65,9 @@ class LoginController extends Controller
         'initials' => 'required', 'password' => 'required',
         ]);
 
-        $credentials = $request->only('initials', 'password');
+        $credentials = $request->all('initials', 'password');
 
-        if ($output = \Auth::attempt($credentials, $request->has('remember')))
+        if ($output = \Auth::attempt($credentials, $request->filled('remember')))
         {
         return Response::json(['message' => trans('messages.logged_in')], 200);
         }
