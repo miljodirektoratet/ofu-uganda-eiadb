@@ -9,3 +9,5 @@ documentation/~*
 **/.idea/workspace.xml
 **/.idea/tasks.xml
 .vscode
+npm-debug.log
+yarn-error.log
