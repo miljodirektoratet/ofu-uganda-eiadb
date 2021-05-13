@@ -128,7 +128,7 @@ class UserController extends Controller
                     $changed = true;
                 }
             }
-            elseif (in_array($key, $resource["fillable"], true))
+            elseif (in_array($key, $resource->getFillable(), true))
             {
                 if ($value === "")
                 {

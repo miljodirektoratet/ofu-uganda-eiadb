@@ -180,7 +180,7 @@ class ProjectController extends Controller
         $dates = $resource->getDates();
         $changed = false;
         foreach ($data as $key => $value) {
-            if (in_array($key, $resource["fillable"], true)) {
+            if (in_array($key, $resource->getFillable(), true)) {
                 if ($value === "") {
                     $value = null;
                 }

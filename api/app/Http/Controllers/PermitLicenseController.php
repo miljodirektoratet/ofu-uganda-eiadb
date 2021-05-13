@@ -166,7 +166,7 @@ class PermitLicenseController extends Controller
             {
                 continue;
             }
-            if (in_array($key, $resource["fillable"], true))
+            if (in_array($key, $resource->getFillable(), true))
             {
                 if ($value === "")
                 {
