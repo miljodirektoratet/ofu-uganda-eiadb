@@ -2,8 +2,9 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
-class Authenticate {
+class Authenticate extends Middleware {
 
   /**
    * The Guard implementation.
@@ -39,4 +40,17 @@ class Authenticate {
     
     return $next($request);
   }
+
+    /**
+     * Get the path the user should be redirected to when they are not authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string
+     */
+    protected function redirectTo($request)
+    {
+        if (! $request->expectsJson()) {
+            return route('login');
+        }
+    }
 }
