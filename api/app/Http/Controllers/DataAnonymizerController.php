@@ -34,7 +34,7 @@ class DataAnonymizerController extends Controller
     public function index(Request $request, $action)
     {
 
-        if(strtolower(config('app.env')) != 'test') {
+        if(config('app.setup') != 'test') {
             return Response::json(['status' => 0], 200);
         }
         try {

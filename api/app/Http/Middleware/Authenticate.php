@@ -31,7 +31,7 @@ class Authenticate extends Middleware {
    * @param  \Closure  $next
    * @return mixed
    */
-  public function handle($request, Closure $next)
+  public function handle($request, Closure $next, ...$guards)
   {        
     if ($this->auth->guest())
     {      

@@ -36,7 +36,7 @@ return [
     |
     */
 	'env' => env('APP_ENV', 'prod'), // test
-	'setup' => env('APP_SETUP'), // For test flag
+	'setup' => strtolower(env('APP_SETUP', 'prod')), // For test flag
 
 	/*
 	|--------------------------------------------------------------------------

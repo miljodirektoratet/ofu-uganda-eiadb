@@ -48,7 +48,7 @@
                     <li class="dropdown" ng-show="hasAccess('/advanced')" ng-class="{ active: isAdvancedActive('/advanced', true)}" >
                         <a class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li ng-hide="envinfo != 'TEST'" ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/anonymize-data')}"><a href="#/advanced/anonymize-data">Anonymize data</a></li>
+                            <li ng-hide="envinfo  != 'test'" ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/anonymize-data')}"><a href="#/advanced/anonymize-data">Anonymize data</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/codes')}"><a href="#/advanced/codes">Manage Codes</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/users')}"><a href="#/advanced/users">Manage Users</a></li>
                             <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/users')}"><a href="#/advanced/emailOrders">Manage Email
