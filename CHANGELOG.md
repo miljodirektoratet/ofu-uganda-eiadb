@@ -1,5 +1,91 @@
 # Release Notes
 
+## [v5.8.35 (2019-09-09)](https://github.com/laravel/laravel/compare/v5.8.17...v5.8.35)
+
+### Added
+- Add DYNAMODB_ENDPOINT to the cache config ([#5034](https://github.com/laravel/laravel/pull/5034))
+- Added support for new redis URL property ([#5037](https://github.com/laravel/laravel/pull/5037))
+- Add .env.backup to gitignore ([#5046](https://github.com/laravel/laravel/pull/5046))
+- Using environment variable to set redis prefix ([#5062](https://github.com/laravel/laravel/pull/5062))
+
+### Changed
+- Update axios package ([#5038](https://github.com/laravel/laravel/pull/5038))
+- Use generic default db config ([6f3d68f](https://github.com/laravel/laravel/commit/6f3d68f67f3dab0e0d853719696ede8dfd9cc4e1))
+- Update deprecated pusher option ([#5058](https://github.com/laravel/laravel/pull/5058))
+- Move TrustProxies to highest priority ([#5055](https://github.com/laravel/laravel/pull/5055))
+
+### Fixed
+- Fixed lodash version ([#5060](https://github.com/laravel/laravel/pull/5060))
+
+### Removed
+- Remove Stripe config settings ([#5075](https://github.com/laravel/laravel/pull/5075), [bb43372](https://github.com/laravel/laravel/commit/bb433725483803a27f21d3b21317072610bc3e9c))
+- Remove unnecessary X-CSRF-TOKEN header from our Axios instance ([#5083](https://github.com/laravel/laravel/pull/5083))
+
+
+## [v5.8.17 (2019-05-14)](https://github.com/laravel/laravel/compare/v5.8.16...v5.8.17)
+
+### Added
+- Add ends_with validation message ([#5020](https://github.com/laravel/laravel/pull/5020))
+
+### Fixed
+- Fix type hint for case of trusting all proxies (string) ([#5025](https://github.com/laravel/laravel/pull/5025))
+
+
+## [v5.8.16 (2019-05-07)](https://github.com/laravel/laravel/compare/v5.8.3...v5.8.16)
+
+### Added
+- Add IDE type-hint to UserFactory ([#4990](https://github.com/laravel/laravel/pull/4990))
+- Update database config relating to Url addition ([#5018](https://github.com/laravel/laravel/pull/5018), [b0e0bdc](https://github.com/laravel/laravel/commit/b0e0bdc060ce068b73371919b904f3c7f0c1cfa6))
+
+### Changed
+- Upgrade the collision dependency from v2 to v3 ([#4963](https://github.com/laravel/laravel/pull/4963))
+- Ignore SQLite journals ([#4971](https://github.com/laravel/laravel/pull/4971))
+- Prefix redis database connection by default ([#4982](https://github.com/laravel/laravel/pull/4982), [#4986](https://github.com/laravel/laravel/pull/4986), [#4987](https://github.com/laravel/laravel/pull/4987))
+
+### Removed
+- Remove `.navbar-laravel` CSS class ([65f8271](https://github.com/laravel/laravel/commit/65f8271032c113883fb3f1e8e7b3279821148ad1))
+
+
+## [v5.8.3 (2019-03-05)](https://github.com/laravel/laravel/compare/v5.8.0...v5.8.3)
+
+### Added
+- Add AWS S3 Bucket to `.env.example` ([f84a69e](https://github.com/laravel/laravel/commit/f84a69ee852bd44363042a61995d330574b6b8c3))
+
+### Changed
+- Set default AWS region ([ff4f40f](https://github.com/laravel/laravel/commit/ff4f40fbabcefcb87facb1346fcfe5b8266eb40d), [#4956](https://github.com/laravel/laravel/pull/4956))
+
+### Fixed
+- Comment out non-existing model class and policy example ([f4ff4f4](https://github.com/laravel/laravel/commit/f4ff4f4176f7d931e301f36b95a46285ac61b8b8))
+- Only apply MySQL PDO options when extension exists ([3001f3c](https://github.com/laravel/laravel/commit/3001f3c6e232ba7ce2ecdbdfe6e43b4c64ee05ad))
+
+
+## [v5.8.0 (2019-02-26)](https://github.com/laravel/laravel/compare/v5.7.28...v5.8.0)
+
+### Added
+- Added DynamoDB configuration ([1be5e29](https://github.com/laravel/laravel/commit/1be5e29753d3592d0305db17d0bffcf312ef5625))
+- Add env variable for mysql ssl cert ([9180f64](https://github.com/laravel/laravel/commit/9180f646d3a99e22d2d2a957df6ed7b550214b2f))
+- Add beanstalk queue block_for config key ([#4913](https://github.com/laravel/laravel/pull/4913))
+- Add `hash` config param to api auth driver ([d201c69](https://github.com/laravel/laravel/commit/d201c69a8bb6cf7407ac3a6c0a0e89f183061682))
+- Add postmark token ([4574265](https://github.com/laravel/laravel/commit/45742652ccb0de5e569c23ec826f6106a8550432))
+- Add `Arr` and `Str` aliases by default ([#4951](https://github.com/laravel/laravel/pull/4951))
+
+### Changed
+- Change password min length to 8 ([#4794](https://github.com/laravel/laravel/pull/4794)) 
+- Update UserFactory password ([#4797](https://github.com/laravel/laravel/pull/4797))
+- Update AWS env variables ([87667b2](https://github.com/laravel/laravel/commit/87667b25ae57308f8bbc47f45222d2d1de3ffeed))
+- Update minimum PHPUnit version to 7.5 ([7546842](https://github.com/laravel/laravel/commit/75468420a4c6c28b980319240056e884b4647d63))
+- Replace string helper ([fae44ee](https://github.com/laravel/laravel/commit/fae44eeb26d549a695a1ea0267b117adf55f83e8))
+- Use `$_SERVER` instead of `$_ENV` for PHPUnit ([#4943](https://github.com/laravel/laravel/pull/4943))
+- Add `REDIS_CLIENT` env variable ([ea7fc0b](https://github.com/laravel/laravel/commit/ea7fc0b3361a3d3dc2cb9f83f030669bbcb31e1d))
+- Use bigIncrements by default ([#4946](https://github.com/laravel/laravel/pull/4946))
+
+### Fixed
+- Fix unterminated statements ([#4952](https://github.com/laravel/laravel/pull/4952))
+
+### Removed
+- Removed error svgs ([cfc2220](https://github.com/laravel/laravel/commit/cfc2220109dd0813ad5d19702b58b3b1a0a2222e))
+
+
 ## [v5.7.28 (2019-02-05)](https://github.com/laravel/laravel/compare/v5.7.19...v5.7.28)
 
 ### Added
