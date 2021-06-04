@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
   use Authenticatable, CanResetPassword;
-  use SoftDeletes;
+  use SoftDeletes { SoftDeletes::restore insteadof EntrustUserTrait; }
   use EntrustUserTrait;
   use Notifiable;
 

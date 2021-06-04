@@ -6,21 +6,22 @@ use Response;
 use \App\Organisation;
 use \App\Project;
 use \DateTime;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
 
     // GET /resource
-    public function index()
+    public function index(Request $request)
     {
-        $offset = (int) Input::get('offset');
-        $countOnly = Input::get('countOnly');
-        $searchWord = Input::get('searchWord');
+        $offset = (int) $request->input('offset');
+        $countOnly = $request->input('countOnly');
+        $searchWord = $request->input('searchWord');
         if ($countOnly) {
             return [Project::count()];
         }
 
-        $count = Input::get('count');
+        $count = $request->input('count');
 
         $criterias = getSearchCriterias(['title', 'location']);
 
