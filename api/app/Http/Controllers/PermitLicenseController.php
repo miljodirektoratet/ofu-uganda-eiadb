@@ -71,7 +71,7 @@ class PermitLicenseController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $row = new PermitLicense();
         $this->updateValuesInResource($row, $inputData);
         $row->created_by = Auth::user()->name;
@@ -102,7 +102,7 @@ class PermitLicenseController extends Controller
             $except = ['lead_officer'];
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $this->updateValuesInResource($row, $inputData, $except);
         $this->handleUsers($row, $inputData);
         $this->handleDocumentation($row, $inputData);

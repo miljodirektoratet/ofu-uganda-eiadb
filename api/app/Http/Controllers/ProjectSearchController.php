@@ -60,7 +60,7 @@ class ProjectSearchController extends Controller
             'project_has_industrial_waste_water',
             'project_risk_level',
         ]);
-
+        // dd($criterias);
         foreach ($criterias as $word => $criteria) {
             $word = str_replace('project_', 'p.', $word);
             $word = str_replace('district_', 'd.', $word);

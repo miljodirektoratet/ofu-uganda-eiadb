@@ -96,7 +96,7 @@ class AuditInspectionController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $auditinspection = new AuditInspection();
         $this->updateValuesInResource($auditinspection, $inputData);
         $this->generateCode($auditinspection);
@@ -129,7 +129,7 @@ class AuditInspectionController extends Controller
             $except = ['lead_officer'];
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $this->updateValuesInResource($auditinspection, $inputData, $except);
         $this->generateCode($auditinspection);
         $this->handleUsers($auditinspection, $inputData);

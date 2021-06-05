@@ -99,7 +99,7 @@ class ProjectController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $project = new Project();
         $this->updateValuesInResource($project, $inputData);
         $project->created_by = Auth::user()->name;
@@ -120,7 +120,7 @@ class ProjectController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
 
         $oldOrganisationId = $project->organisation_id;
         $newOrganisationId = $inputData['organisation_id'];

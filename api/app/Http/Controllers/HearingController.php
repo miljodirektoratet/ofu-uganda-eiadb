@@ -55,7 +55,7 @@ class HearingController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $hearing = new Hearing();
         $this->updateValuesInResource($hearing, $inputData);
         $hearing->created_by = Auth::user()->name;
@@ -83,7 +83,7 @@ class HearingController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $this->updateValuesInResource($hearing, $inputData);
         $hearing->save();
         return $this->show($projectId, $eiapermitId, $documentId, $id);

@@ -101,7 +101,7 @@ class EiaPermitController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $eiapermit = new EiaPermit();
         $this->updateValuesInResource($eiapermit, $inputData);
         $eiapermit->created_by = Auth::user()->name;
@@ -127,7 +127,7 @@ class EiaPermitController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $this->updateValuesInResource($eiapermit, $inputData);
         $this->handleTeamMembers($eiapermit, $inputData);
         $this->handleUsers($eiapermit, $inputData);

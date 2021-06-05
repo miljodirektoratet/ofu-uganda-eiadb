@@ -51,7 +51,7 @@ class CodeController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
 
         $updatedAtFromInput = Carbon::parse($inputData["updated_at"]);
         $diff = $code->updated_at->diffInSeconds($updatedAtFromInput);

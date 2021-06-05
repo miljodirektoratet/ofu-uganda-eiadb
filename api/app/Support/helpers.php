@@ -6,14 +6,13 @@ if (!function_exists('getSearchCriterias'))
 {
     function getSearchCriterias(array $words)
     {
-        $passedParams = collect(request()->query);
         $criterias = [];
         foreach ($words as $word)
         {
-            $param = $passedParams->get($word);
+            $param = request()->input($word);
             if ($param)
             {
-                $criterias[$word] = param;
+                $criterias[$word] = $param;
             }
         }
         return $criterias;
