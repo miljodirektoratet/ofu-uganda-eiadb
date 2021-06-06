@@ -12,4 +12,8 @@ documentation/~*
 npm-debug.log
 yarn-error.log
 .phpunit.result.cache
+docker-compose.override.yml
 .env
+.env.backup
+/.idea
+/.vscode

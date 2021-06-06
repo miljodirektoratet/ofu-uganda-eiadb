@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -15,6 +16,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
   use SoftDeletes { SoftDeletes::restore insteadof EntrustUserTrait; }
   use EntrustUserTrait;
   use Notifiable;
+  use HasFactory;
 
   public function roles()
   {

@@ -1,4 +1,5 @@
 <?php
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ class DatabaseSeeder extends Seeder
         //DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         //$this->call('ExcelDataTableSeeder');
         //DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        $this->call(TestUserSeeder::class);
+        // $this->call(TestUserSeeder::class);
         // Eloquent::reguard();
     }
 

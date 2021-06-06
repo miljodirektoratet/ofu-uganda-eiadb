@@ -2,6 +2,37 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DisplayMapController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PractitionerController;
+use App\Http\Controllers\ValuelistController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\OrganisationController;
+use App\Http\Controllers\EiaPermitController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\HearingController;
+use App\Http\Controllers\ExternalAuditController;
+use App\Http\Controllers\ExternalAuditDocumentController;
+use App\Http\Controllers\AuditInspectionController;
+use App\Http\Controllers\PermitLicenseController;
+use App\Http\Controllers\EmailOrderController;
+use App\Http\Controllers\ProjectSearchController;
+use App\Http\Controllers\AuditInspectionSearchController;
+use App\Http\Controllers\EiaPermitSearchController;
+use App\Http\Controllers\PermitLicenseSearchController;
+use App\Http\Controllers\ExternalAuditSearchController;
+use App\Http\Controllers\ProjectStatisticsController;
+use App\Http\Controllers\GeneralStatisticsController;
+use App\Http\Controllers\Edit\CodeController;
+use App\Http\Controllers\Edit\UserController as EditUserController;
+use App\Http\Controllers\Edit\EmailOrderController as EditEmailOrderController;
+use App\Http\Controllers\Edit\LeadAgencyController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\PirkingController;
+use App\Http\Controllers\DataAnonymizerController;
+use App\Http\Controllers\Export\ExportMapController;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -21,10 +52,10 @@ use Illuminate\Support\Facades\Route;
     }
 });*/
 
-//should be here till laravel version is at 5.6
-if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
-    error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
-}
+// Route::get('password/reset/{token}', function($token){
+//     dd("got here", $token);
+//     return redirect(url(env('CLIENT_RESET_LINK').$token));
+// });
 
 Route::get('/', function ()
 {
@@ -47,96 +78,95 @@ Route::group(['middleware' => 'auth'], function ()
     {
         phpinfo();
     });
-    Route::get('plot-projects', ['uses' => 'DisplayMapController@plotProjects']);
+    Route::get('plot-projects', [DisplayMapController::class, 'plotProjects']);
 });
-
 
 Auth::routes();
-Route::post('auth/login', ['uses' => 'Auth\LoginController@login']);
-Route::get('auth/logout', ['uses' => 'Auth\LoginController@logout']);
+Route::post('auth/login', [LoginController::class, 'login']);
+Route::get('auth/logout', [LoginController::class, 'logout']);
 
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function ()
+Route::prefix('user')->middleware('auth')->group(function ()
 {
-    Route::get('info', ['uses' => 'UserController@getInfo']);
+    Route::get('info', [UserController::class, 'getInfo']);
     if (App::environment() !== "production")
     {
-        Route::get('impersonate/{id}', ['uses' => 'UserController@impersonate']);
+        Route::get('impersonate/{id}', [UserController::class, 'impersonate']);
     }
-    Route::get('all', ['uses' => 'UserController@getAll']);
+    Route::get('all', [UserController::class, 'getAll']);
 });
 
-Route::group(['prefix' => 'api/v1'], function ()
+Route::prefix('api/v1')->group(function ()
 {
-    Route::resource('practitioner', 'PractitionerController');
-    Route::resource('valuelist', 'ValuelistController');
+    Route::resource('practitioner', PractitionerController::class);
+    Route::resource('valuelist', ValuelistController::class);
 });
 
-Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function ()
+Route::prefix('api/v1')->middleware('auth')->group(function ()
 {
     // Route::resource('practitioner', 'PractitionerController');
-    Route::resource('project', 'ProjectController');
-    Route::get('organisation/{offset}/{search}','OrganisationController@index');
-    Route::resource('organisation', 'OrganisationController');
-    Route::resource('project.eiapermit', 'EiaPermitController');
-    Route::resource('project.eiapermit.document', 'DocumentController');
-    Route::resource('project.eiapermit.document.hearing', 'HearingController');
+    Route::resource('project', ProjectController::class);
+    Route::get('organisation/{offset}/{search}',[OrganisationController::class, 'index']);
+    Route::resource('organisation', OrganisationController::class);
+    Route::resource('project.eiapermit', EiaPermitController::class);
+    Route::resource('project.eiapermit.document', DocumentController::class);
+    Route::resource('project.eiapermit.document.hearing', HearingController::class);
 
-    Route::resource('project.externalaudit', 'ExternalAuditController');
-    Route::resource('project.externalaudit.document', 'ExternalAuditDocumentController');
+    Route::resource('project.externalaudit', ExternalAuditController::class);
+    Route::resource('project.externalaudit.document', ExternalAuditDocumentController::class);
 
-    Route::resource('project.auditinspection', 'AuditInspectionController');
+    Route::resource('project.auditinspection', AuditInspectionController::class);
 
-    Route::resource('project.permitlicense', 'PermitLicenseController');
-    Route::get('create-email-order/{orderType}/{entityId}/{documentId}','EmailOrderController@orderRequest');
+    Route::resource('project.permitlicense', PermitLicenseController::class);
+    Route::get('create-email-order/{orderType}/{entityId}/{documentId}',[EmailOrderController::class, 'orderRequest']);
 });
 
-Route::group(['prefix' => 'search/v1', 'middleware' => 'auth'], function ()
+Route::prefix('search/v1')->middleware('auth')->group(function ()
 {
-    Route::resource('project', 'ProjectSearchController');
-    Route::resource('auditinspection', 'AuditInspectionSearchController');
-    Route::resource('eiapermit', 'EiaPermitSearchController');
-    Route::resource('permitlicense', 'PermitLicenseSearchController');
-    Route::resource('externalaudit', 'ExternalAuditSearchController');
+    Route::resource('project', ProjectSearchController::class);
+    Route::resource('auditinspection', AuditInspectionSearchController::class);
+    Route::resource('eiapermit', EiaPermitSearchController::class);
+    Route::resource('permitlicense', PermitLicenseSearchController::class);
+    Route::resource('externalaudit', ExternalAuditSearchController::class);
 });
 
-Route::group(['prefix' => 'statistics/v1', 'middleware' => 'auth'], function ()
+Route::prefix('statistics/v1')->middleware('auth')->group(function ()
 {
-    Route::resource('project', 'ProjectStatisticsController');
-    Route::resource('general', 'GeneralStatisticsController');
+    Route::resource('project', ProjectStatisticsController::class);
+    Route::resource('general', GeneralStatisticsController::class);
 });
 
-Route::group(['prefix' => 'edit/v1', 'middleware' => 'manager'], function ()
+Route::prefix('edit/v1')->middleware('manager')->group(function ()
 {
-    Route::resource('code', 'Edit\CodeController');
-    Route::resource('user', 'Edit\UserController');
-    Route::resource('emailOrder', 'Edit\EmailOrderController');
-    Route::resource('leadagency', 'Edit\LeadAgencyController');
+    Route::resource('code', CodeController::class);
+    Route::resource('user', EditUserController::class);
+    Route::resource('emailOrder', EditEmailOrderController::class);
+    Route::resource('leadagency', LeadAgencyController::class);
 });
 
 
-Route::group(['prefix' => 'file/v1', 'middleware' => 'auth'], function ()
+Route::prefix('file/v1')->middleware('auth')->group(function ()
 {
-    Route::post('upload', ['uses' => 'FileController@upload']);
-    Route::get('download/{id}', ['uses' => 'FileController@download']);
-    Route::get('delete/{id}', ['uses' => 'FileController@delete']);
+    Route::post('upload', [FileController::class, 'upload']);
+    Route::get('download/{id}', [FileController::class, 'download']);
+    Route::get('delete/{id}', [FileController::class, 'delete']);
 });
 
-Route::group(['prefix' => 'pirking/v1', 'middleware' => 'manager'], function ()
+Route::prefix('pirking/v1')->middleware('manager')->group(function ()
 {
-    Route::get('eiaspermits', ['uses' => 'PirkingController@getEiasPermits']);
+    Route::get('eiaspermits', [PirkingController::class, 'getEiasPermits']);
 
-    Route::get('externalAuditList', ['uses' => 'PirkingController@getExternalAudit']);
+    Route::get('externalAuditList', [PirkingController::class, 'getExternalAudit']);
 
-    Route::get('auditInspection', ['uses' => 'PirkingController@getAuditInspection']);
+    Route::get('auditInspection', [PirkingController::class, 'getAuditInspection']);
 
-    Route::get('permitLicense', ['uses' => 'PirkingController@getPermitLicense']);
+    Route::get('permitLicense', [PirkingController::class, 'getPermitLicense']);
 });
 
-Route::group(['prefix' => 'export/v1'], function ()
+Route::prefix('export/v1')->group(function ()
 {
-    Route::get('445101cc8de29ef4dca8c78cefa15d3ee7b66c4b/maps', ['uses' => 'Export\ExportMapController@exportMap']);
+    Route::get('445101cc8de29ef4dca8c78cefa15d3ee7b66c4b/maps', [ExportMapController::class, 'exportMap']);
 });
 
-Route::get('anonymizerData/v1/{action}', ['uses' => 'DataAnonymizerController@index']);
+Route::get('anonymizerData/v1/{action}', [DataAnonymizerController::class, 'index']);
 
 

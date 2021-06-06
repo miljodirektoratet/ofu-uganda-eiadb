@@ -53,11 +53,7 @@ class ForgotPasswordController extends Controller
   {
     $this->validate($request, ['email' => 'required|email']);
 
-    $response = \Password::sendResetLink($request->all('email'), function($m)
-    {
-      $m->subject($this->getEmailSubject());
-      //$m->body("Click here to reset your password: ");// . url('password/reset/'.$token));
-    });
+    $response = \Password::sendResetLink($request->only('email'));
 
     switch ($response)
     {

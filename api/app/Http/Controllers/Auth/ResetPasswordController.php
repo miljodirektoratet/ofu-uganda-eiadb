@@ -67,11 +67,7 @@ class ResetPasswordController extends Controller
   {
     $this->validate($request, ['email' => 'required|email']);
 
-    $response = \Password::sendResetLink($request->all('email'), function($m)
-    {
-      $m->subject($this->getEmailSubject());
-      //$m->body("Click here to reset your password: ");// . url('password/reset/'.$token));
-    });
+    $response = \Password::sendResetLink($request->only('email'));
 
     switch ($response)
     {
@@ -112,6 +108,11 @@ class ResetPasswordController extends Controller
       default:
         return Response::json(['error' => trans($response)], 422);
     }
+  }
+
+  public function showResetForm(Request $request, $token)
+  {
+    return redirect(url(env('CLIENT_RESET_LINK').$token));
   }
 
 }
