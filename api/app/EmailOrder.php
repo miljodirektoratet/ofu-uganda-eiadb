@@ -9,7 +9,7 @@ class EmailOrder extends Model
 {
     use SoftDeletes;
     protected $table = 'email_orders';
-    protected $fillable = ['number_of_attempts', 'remarks_from_service', 'remarks', 'order_status', 'updated_by', 'recipient'];
+    protected $fillable = ['number_of_attempts', 'remarks_from_service', 'remarks', 'order_status', 'updated_by', 'recipient', 'deleted_at'];
     protected $dates = [
         'created_at',
         'updated_at',
