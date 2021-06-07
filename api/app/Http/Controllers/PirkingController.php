@@ -2,7 +2,6 @@
 
 use App\EiaPermit;
 use Response;
-use Input;
 use Auth;
 use \DateTime;
 use \App\Project;

@@ -1,11 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
-use Input;
-use Request;
 use Response;
 use \App\Organisation;
 use \DateTime;
+use Illuminate\Http\Request;
 
 class OrganisationController extends Controller
 {
