@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DateFormatTrait;
 
 class FileMetadata extends Model
 {
     use SoftDeletes;
+    use DateFormatTrait;
 
     protected $table = 'file_metadata';
     protected $dates = ['deleted_at'];

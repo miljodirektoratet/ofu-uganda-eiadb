@@ -2,10 +2,12 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DateFormatTrait;
 
 class Practitioner extends Model
 {
     use SoftDeletes;
+    use DateFormatTrait;
 
     protected $dates = ['deleted_at'];
     protected $fillable = ['practitioner_title_id', 'person', 'tin', 'organisation_name', 'visiting_address', 'box_no', 'city', 'phone', 'fax', 'email', 'qualifications', 'expertise', 'remarks'];

@@ -2,10 +2,12 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DateFormatTrait;
 
 class Project extends Model
 {
     use SoftDeletes;
+    use DateFormatTrait;
 
     protected $dates = ['deleted_at'];
     protected $table = 'projects';

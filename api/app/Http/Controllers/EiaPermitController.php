@@ -89,7 +89,6 @@ class EiaPermitController extends Controller
         }
         $eiapermit["user_ids"] = $userIds;
         unset($eiapermit["users"]);
-
         return Response::json($eiapermit, 200);
     }
 

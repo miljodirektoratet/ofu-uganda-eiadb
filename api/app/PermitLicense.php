@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DateFormatTrait;
 
 class PermitLicense extends Model
 {
     use SoftDeletes;
+    use DateFormatTrait;
 
     protected $table = 'permits_licenses';
     protected $dates = ['date_submitted','date_feedback_to_applicants','date_sent_to_director','date_sent_from_dep','date_sent_officer','date_of_evaluation','date_inspection','date_fee_payed','date_sent_for_decision','date_decision','date_permit_license','date_permit_license_expired'];
