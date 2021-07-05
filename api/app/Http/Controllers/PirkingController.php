@@ -36,7 +36,7 @@ class PirkingController extends Controller
     }
 
     // GET /resource
-    public function getExternalAudit()
+    public function getExternalAudit(Request $request)
     {
         $from = $request->input('from');
         $to = $request->input('to');
@@ -59,7 +59,7 @@ class PirkingController extends Controller
         return Response::json($result, 200);
     }
 
-    public function getAuditInspection()
+    public function getAuditInspection(Request $request)
     {
         $from = $request->input('from');
         $to = $request->input('to');
@@ -82,7 +82,7 @@ class PirkingController extends Controller
         return Response::json($result, 200);
     }
 
-    public function getPermitLicense()
+    public function getPermitLicense(Request $request)
     {
         $from = $request->input('from');
         $to = $request->input('to');
