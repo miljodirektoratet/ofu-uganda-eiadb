@@ -199,15 +199,6 @@ class PractitionerController extends Controller
                 if ($value === "") {
                     $value = null;
                 }
-                if ($value && in_array($key, $dates)) {
-                    $timestamp = strtotime($value . " + 12 hours");
-                    if ($timestamp === false) {
-                        $value = null;
-                    } else {
-                        $value = new DateTime();
-                        $value->setTimestamp($timestamp);
-                    }
-                }
 
                 if ($resource[$key] != $value) {
                     // TODO: Validate.
