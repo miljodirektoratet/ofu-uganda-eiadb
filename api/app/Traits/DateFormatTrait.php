@@ -5,6 +5,6 @@ trait DateFormatTrait
 {
     protected function serializeDate(\DateTimeInterface $date)
     {
-        return $date->format('Y-m-d h:m:s');
+        return $date->format('Y-m-d 00:00:00');
     }
 }

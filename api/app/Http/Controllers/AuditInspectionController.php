@@ -234,6 +234,7 @@ class AuditInspectionController extends Controller
                     {
                         $value = new DateTime();
                         $value->setTimestamp($timestamp);
+                        // $value->setTime(0, 0, 0);
                     }
                 }
 
