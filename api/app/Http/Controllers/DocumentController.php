@@ -122,11 +122,23 @@ class DocumentController extends Controller
         $changed = false;
         foreach ($data as $key => $value)
         {
-            if (in_array($key, $resource->getFillable(), true))
+            if (in_array($key, $resource["fillable"], true))
             {
                 if ($value === "")
                 {
                     $value = null;
+                }
+                if ($value && in_array($key, $dates))
+                {
+                    $timestamp = strtotime($value . " + 12 hours");
+                    if ($timestamp === false)
+                    {
+                        $value = null;
+                    } else
+                    {
+                        $value = new DateTime();
+                        $value->setTimestamp($timestamp);
+                    }
                 }
 
                 if ($resource[$key] != $value)

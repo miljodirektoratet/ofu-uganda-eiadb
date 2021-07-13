@@ -192,6 +192,7 @@ class EiaPermitController extends Controller
                 if ($value && in_array($key, $dates))
                 {
                     $timestamp = strtotime($value . " + 12 hours");
+                    // var_dump($value, $timestamp, date('m/d/Y', $timestamp));
                     if ($timestamp === false)
                     {
                         $value = null;
