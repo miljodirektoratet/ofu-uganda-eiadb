@@ -4,6 +4,11 @@
 
 var controllers = angular.module('seroApp.controllers');
 
+controllers.config(function($rootScopeProvider) {
+    console.log("digest",$rootScopeProvider );
+    $rootScopeProvider.digestTtl(100); //some number bigger then 10
+})
+
 controllers.controller('DatePickerController', ['$scope', function (scope)
 {
     scope.open = function ($event)
