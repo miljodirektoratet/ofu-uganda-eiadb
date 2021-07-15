@@ -224,7 +224,9 @@ textarea.ng-invalid,
 
 .project .project-project,
 .project .project-eiasandpermits,
-.project .project-auditsandinspections {
+.project .project-auditsandinspections,
+.project-externalaudits,
+.project-permitslicenses {
     padding-top: 15px;
 }
 
