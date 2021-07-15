@@ -33,7 +33,9 @@ var seroApp = angular
   ])
   .config([
     "$routeProvider",
-    function($routeProvider) {
+    "$rootScopeProvider",
+    function($routeProvider, $rootScopeProvider) {
+      $rootScopeProvider.digestTtl(500);
       var projectTabsOptions = {
         templateUrl: "partials/projectTabs.html",
         controller: "ProjectTabsController"
