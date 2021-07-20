@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Traits\DateFormatTrait;
+// use App\Traits\DateFormatTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
   use EntrustUserTrait;
   use Notifiable;
   use HasFactory;
-  use DateFormatTrait;
+  // use DateFormatTrait;
 
   public function roles()
   {
