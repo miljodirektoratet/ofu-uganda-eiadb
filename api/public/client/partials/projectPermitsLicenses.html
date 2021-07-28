@@ -27,7 +27,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="newButton.regulation">Regulation</label>
-                                                                <select ui-select2 ng-disabled="!auth.canSave('regulation')" id="newButton.regulation" class="form-control input-sm" ng-model="newButton.regulation">
+                                                                <select ui-select2 ng-disabled="!auth.canSave('regulation')" id="newButton.regulation" class="form-control input-sm" ng-model="newButton.regulation"  ng-required="true">
                                                                     <option ng-repeat="v in valuelists.permit_license_regulations" value="{{v.id}}">{{v.description1}}</option>
                                                                 </select>
                                                             </div>
