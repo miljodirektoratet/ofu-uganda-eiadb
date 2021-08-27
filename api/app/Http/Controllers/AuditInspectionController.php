@@ -131,7 +131,7 @@ class AuditInspectionController extends Controller
 
         $inputData = request()->all();
         $this->updateValuesInResource($auditinspection, $inputData, $except);
-        $this->generateCode($auditinspection);
+        // $this->generateCode($auditinspection);
         $this->handleUsers($auditinspection, $inputData);
         $this->handleLeadAgencies($auditinspection, $inputData);
         $this->handleDocumentation($auditinspection, $inputData);
