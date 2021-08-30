@@ -130,8 +130,14 @@ class AuditInspectionController extends Controller
         }
 
         $inputData = request()->all();
+        $newYear = date('Y', strtotime($inputData['date_carried_out']));
+        $oldYear = $auditinspection->date_carried_out->format('Y');
+
         $this->updateValuesInResource($auditinspection, $inputData, $except);
-        // $this->generateCode($auditinspection);
+        if($newYear != $oldYear)
+        {
+            $this->generateCode($auditinspection);
+        }
         $this->handleUsers($auditinspection, $inputData);
         $this->handleLeadAgencies($auditinspection, $inputData);
         $this->handleDocumentation($auditinspection, $inputData);
