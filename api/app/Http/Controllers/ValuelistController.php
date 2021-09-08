@@ -189,28 +189,23 @@ class ValuelistController extends Controller
             get(array('id', 'description_long as description1'));
         return $districts;
     }
-    private function practitionerList()
-    {
-        $practitionersWithCert = Practitioner::
-        whereHas('practitionerCertificates', function ($q) {
-            $q->whereRaw('conditions in (38,53)');
-        })
-        ->get(array('id', 'person as description1', \DB::raw("'false' as is_passive")));
 
-        $practitionersWithoutCert = Practitioner::
-        has('practitionerCertificates', 0)
-        ->get(array('id', 'person as description1', \DB::raw("'true' as is_passive")));
-
-        return collect($practitionersWithCert)->merge($practitionersWithoutCert);
-    }
     private function teamleader()
     {
-        return $this->practitionerList();
+        return Practitioner::
+        whereHas('practitionerCertificates', function ($q) {
+            $q->whereRaw('conditions in (38)')->whereRaw('cert_type in (50,51)');
+        })
+        ->get(array('id', 'person as description1', \DB::raw("'false' as is_passive")));
     }
 
     private function teammember()
     {
-        return $this->practitionerList();
+        return Practitioner::
+        whereHas('practitionerCertificates', function ($q) {
+            $q->whereRaw('conditions in (38,39)')->whereRaw('cert_type in (50,51,148)');
+        })
+        ->get(array('id', 'person as description1', \DB::raw("'false' as is_passive")));
     }
 
     private function users_with_role($role)

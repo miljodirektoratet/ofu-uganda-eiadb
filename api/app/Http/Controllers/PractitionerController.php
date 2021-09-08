@@ -112,7 +112,7 @@ class PractitionerController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $practitioner = new Practitioner();
         $this->updateValuesInResource($practitioner, $inputData);
         $practitioner->created_by = Auth::user()->name;
@@ -135,7 +135,7 @@ class PractitionerController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $this->updateValuesInResource($practitioner, $inputData);
         $practitioner->save();
         $certificatesChanged = $this->handleCertificates($practitioner, $inputData);
@@ -195,7 +195,7 @@ class PractitionerController extends Controller
         $dates = $resource->getDates();
         $changed = false;
         foreach ($data as $key => $value) {
-            if (in_array($key, $resource["fillable"], true)) {
+            if (in_array($key, $resource->getFillable(), true)) {
                 if ($value === "") {
                     $value = null;
                 }

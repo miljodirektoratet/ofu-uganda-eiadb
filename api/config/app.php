@@ -3,6 +3,17 @@
 return [
 
 	/*
+    |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of your application. This value is used when the
+    | framework needs to place the application's name in a notification or
+    | any other location as required by the application or its packages.
+    |
+    */
+	'name' =>  env('APP_NAME', 'NEMA'),
+	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
 	|--------------------------------------------------------------------------
@@ -12,9 +23,20 @@ return [
 	| application. If disabled, a simple generic error page is shown.
 	|
 	*/
+	'debug' => (bool) env('APP_DEBUG', false),
 
-	'debug' => env('APP_DEBUG', false),
+	/*
+    |--------------------------------------------------------------------------
+    | Application Environment
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the "environment" your application is currently
+    | running in. This may determine how you prefer to configure various
+    | services the application utilizes. Set this in your ".env" file.
+    |
+    */
 	'env' => env('APP_ENV', 'prod'), // test
+	'setup' => strtolower(env('APP_SETUP', 'prod')), // For test flag
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,6 +50,8 @@ return [
 	*/
 
 	'url' => 'http://localhost',
+
+	'asset_url' => env('ASSET_URL', null),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -70,6 +94,19 @@ return [
 	'fallback_locale' => 'en',
 
 	/*
+    |--------------------------------------------------------------------------
+    | Faker Locale
+    |--------------------------------------------------------------------------
+    |
+    | This locale will be used by the Faker PHP library when generating fake
+    | data for your database seeds. For example, this will be used to get
+    | localized telephone numbers, street address information and more.
+    |
+    */
+
+    'faker_locale' => 'en_US',
+
+	/*
 	|--------------------------------------------------------------------------
 	| Encryption Key
 	|--------------------------------------------------------------------------
@@ -83,21 +120,6 @@ return [
 	'key' => env('APP_KEY', 'SomeRandomString'),
 
 	'cipher' => 'AES-256-CBC',
-
-	/*
-	|--------------------------------------------------------------------------
-	| Logging Configuration
-	|--------------------------------------------------------------------------
-	|
-	| Here you may configure the log settings for your application. Out of
-	| the box, Laravel uses the Monolog PHP logging library. This gives
-	| you a variety of powerful log handlers / formatters to utilize.
-	|
-	| Available Settings: "single", "daily", "syslog", "errorlog"
-	|
-	*/
-
-	'log' => 'daily',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -120,7 +142,7 @@ return [
 		'Illuminate\Bus\BusServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
 		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
-		'Illuminate\Routing\ControllerServiceProvider',
+		// 'Illuminate\Routing\ControllerServiceProvider',
 		'Illuminate\Cookie\CookieServiceProvider',
 		'Illuminate\Database\DatabaseServiceProvider',
 		'Illuminate\Encryption\EncryptionServiceProvider',
@@ -138,7 +160,7 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
         'Illuminate\Broadcasting\BroadcastServiceProvider',
-
+		'Illuminate\Notifications\NotificationServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
@@ -147,7 +169,8 @@ return [
 		 * Application Service Providers...
 		 */
 		'App\Providers\AppServiceProvider',
-		'App\Providers\BusServiceProvider',
+		// 'App\Providers\BusServiceProvider',
+		// App\Providers\BroadcastServiceProvider::class,
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
@@ -168,14 +191,17 @@ return [
 	'aliases' => [
 
 		'App'       => 'Illuminate\Support\Facades\App',
+		'Arr'       => Illuminate\Support\Arr::class,
 		'Artisan'   => 'Illuminate\Support\Facades\Artisan',
 		'Auth'      => 'Illuminate\Support\Facades\Auth',
 		'Blade'     => 'Illuminate\Support\Facades\Blade',
+		'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
 		'Bus'       => 'Illuminate\Support\Facades\Bus',
 		'Cache'     => 'Illuminate\Support\Facades\Cache',
 		'Config'    => 'Illuminate\Support\Facades\Config',
 		'Cookie'    => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'     => 'Illuminate\Support\Facades\Crypt',
+		'Date'      => Illuminate\Support\Facades\Date::class,
 		'DB'        => 'Illuminate\Support\Facades\DB',
 		'Eloquent'  => 'Illuminate\Database\Eloquent\Model',
 		'Event'     => 'Illuminate\Support\Facades\Event',
@@ -183,25 +209,27 @@ return [
 		'Hash'      => 'Illuminate\Support\Facades\Hash',
 		'Input'     => 'Illuminate\Support\Facades\Input',
 		'Inspiring' => 'Illuminate\Foundation\Inspiring',
+		'Http'      => Illuminate\Support\Facades\Http::class,
 		'Lang'      => 'Illuminate\Support\Facades\Lang',
 		'Log'       => 'Illuminate\Support\Facades\Log',
 		'Mail'      => 'Illuminate\Support\Facades\Mail',
 		'Password'  => 'Illuminate\Support\Facades\Password',
 		'Queue'     => 'Illuminate\Support\Facades\Queue',
 		'Redirect'  => 'Illuminate\Support\Facades\Redirect',
-		'Redis'     => 'Illuminate\Support\Facades\Redis',
+		// 'Redis'     => 'Illuminate\Support\Facades\Redis',
 		'Request'   => 'Illuminate\Support\Facades\Request',
 		'Response'  => 'Illuminate\Support\Facades\Response',
 		'Route'     => 'Illuminate\Support\Facades\Route',
 		'Schema'    => 'Illuminate\Support\Facades\Schema',
 		'Session'   => 'Illuminate\Support\Facades\Session',
 		'Storage'   => 'Illuminate\Support\Facades\Storage',
+		'Str'       => Illuminate\Support\Str::class,
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
 		'Entrust' => 'Zizaco\Entrust\EntrustFacade',
-
+		'Notification' => 'Illuminate\Support\Facades\Notification',
 	],
 
 ];

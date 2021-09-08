@@ -2,10 +2,12 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DateFormatTrait;
 
 class EiaPermit extends Model
 {
     use SoftDeletes;
+    use DateFormatTrait;
 
     protected $table = 'eias_permits';
     protected $dates = ['deleted_at','date_inspection','date_sent_ded_approval','date_decision','date_fee_notification','date_fee_payed','date_certificate','date_cancelled'];

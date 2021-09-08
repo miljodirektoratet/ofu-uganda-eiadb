@@ -9,9 +9,10 @@ if (!function_exists('getSearchCriterias'))
         $criterias = [];
         foreach ($words as $word)
         {
-            if (Input::has($word))
+            $param = request()->input($word);
+            if ($param)
             {
-                $criterias[$word] = Input::get($word);
+                $criterias[$word] = $param;
             }
         }
         return $criterias;

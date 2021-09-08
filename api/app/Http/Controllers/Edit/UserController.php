@@ -57,7 +57,7 @@ class UserController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
 
         $updatedAtFromInput = Carbon::parse($inputData["updated_at"]);
         $diff = $user->updated_at->diffInSeconds($updatedAtFromInput);
@@ -128,7 +128,7 @@ class UserController extends Controller
                     $changed = true;
                 }
             }
-            elseif (in_array($key, $resource["fillable"], true))
+            elseif (in_array($key, $resource->getFillable(), true))
             {
                 if ($value === "")
                 {

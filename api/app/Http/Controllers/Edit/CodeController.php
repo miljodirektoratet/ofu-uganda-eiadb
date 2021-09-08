@@ -51,7 +51,7 @@ class CodeController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
 
         $updatedAtFromInput = Carbon::parse($inputData["updated_at"]);
         $diff = $code->updated_at->diffInSeconds($updatedAtFromInput);
@@ -60,7 +60,7 @@ class CodeController extends Controller
             return Response::json(array('error' => true, 'message' => 'conflict'), 409);
         }
 
-        $this->updateValuesInResource($code, $inputData);
+        $resource = $this->updateValuesInResource($code, $inputData);
         $code->save();
         return $this->show($code->id);
     }
@@ -81,7 +81,7 @@ class CodeController extends Controller
         $changed = false;
         foreach ($data as $key => $value)
         {
-            if (in_array($key, $resource["fillable"], true))
+            if (in_array($key,  $resource->getFillable(), true))
             {
                 if ($value === "")
                 {
@@ -113,6 +113,7 @@ class CodeController extends Controller
             $resource["updated_by"] = Auth::user()->name;
             $resource["updated_at"] = Carbon::now();
         }
+        return $resource;
     }
 
 }

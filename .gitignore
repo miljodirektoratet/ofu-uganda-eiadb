@@ -8,3 +8,12 @@ api/_ide_helper.php
 documentation/~*
 **/.idea/workspace.xml
 **/.idea/tasks.xml
+.vscode
+npm-debug.log
+yarn-error.log
+.phpunit.result.cache
+docker-compose.override.yml
+.env
+.env.backup
+/.idea
+/.vscode

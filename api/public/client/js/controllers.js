@@ -43,7 +43,11 @@ controllers.controller('NavBarController', ['$scope', '$location', 'UserInfo','E
        toggleNavBarItems(newUserInfo, location);
     });
 
-    EnvInfo(function(env){scope.envinfo = env.env})
+    EnvInfo(function(env){
+        scope.envinfo = env.env;
+        scope.lvVersion = env.lv_version;
+    });
+
     scope.isActive = function (viewLocation)
     {
         return viewLocation === location.path();

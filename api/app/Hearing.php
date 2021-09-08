@@ -2,10 +2,12 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DateFormatTrait;
 
 class Hearing extends Model
 {
     use SoftDeletes;
+    use DateFormatTrait;
 
     protected $dates = ['deleted_at', 'date_dispatched', 'date_expected', 'date_received'];
     protected $fillable = ['lead_agency', 'district_id', 'date_dispatched', 'date_expected', 'date_received', 'recommendations', 'document_id', 'remarks', 'file_metadata_id'];

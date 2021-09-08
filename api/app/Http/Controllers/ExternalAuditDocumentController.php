@@ -74,7 +74,7 @@ class ExternalAuditDocumentController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $document = new Document();
         $this->updateValuesInResource($document, $inputData);
         $document->created_by = Auth::user()->name;
@@ -97,7 +97,7 @@ class ExternalAuditDocumentController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $this->updateValuesInResource($document, $inputData);
         $document->save();
         return $this->show($projectId, $externalauditId, $id);
@@ -122,7 +122,7 @@ class ExternalAuditDocumentController extends Controller
         $changed = false;
         foreach ($data as $key => $value)
         {
-            if (in_array($key, $resource["fillable"], true))
+            if (in_array($key, $resource->getFillable(), true))
             {
                 if ($value === "")
                 {

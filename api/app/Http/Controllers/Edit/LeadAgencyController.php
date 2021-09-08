@@ -52,7 +52,7 @@ class LeadAgencyController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
 
         $updatedAtFromInput = Carbon::parse($inputData["updated_at"]);
         $diff = $la->updated_at->diffInSeconds($updatedAtFromInput);
@@ -82,7 +82,7 @@ class LeadAgencyController extends Controller
         $changed = false;
         foreach ($data as $key => $value)
         {
-            if (in_array($key, $resource["fillable"], true))
+            if (in_array($key, $resource->getFillable(), true))
             {
                 if ($value === "")
                 {

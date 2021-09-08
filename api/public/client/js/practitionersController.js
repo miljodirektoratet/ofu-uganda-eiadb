@@ -20,8 +20,9 @@ controllers.controller("PractitionersController", [
       scope.practitioners = data;
     }); //{}, function(){scope.setNewCurrent(scope.practitioners[0]);});
 
-    toggleNavBarItems(UserInfo);//hide navbar items if its public/practitioner
-
+    setTimeout(function(){ 
+      toggleNavBarItems(UserInfo);//hide navbar items if its public/practitioner
+    }, 3000);
     var filterCertificates = function(
       certificates,
       certType,

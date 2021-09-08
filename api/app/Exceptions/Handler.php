@@ -1,42 +1,38 @@
 <?php namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
 class Handler extends ExceptionHandler {
 
 	/**
-	 * A list of the exception types that should not be reported.
+	 * A list of the exception types that are not reported.
 	 *
 	 * @var array
 	 */
 	protected $dontReport = [
-		'Symfony\Component\HttpKernel\Exception\HttpException'
+		//
+	];
+
+	
+	/**
+	 * A list of the inputs that are never flashed for validation exceptions.
+	 *
+	 * @var array
+	 */
+	protected $dontFlash = [
+		'current_password',
+		'password',
+		'password_confirmation',
 	];
 
 	/**
-	 * Report or log an exception.
-	 *
-	 * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-	 *
-	 * @param  \Exception  $e
-	 * @return void
-	 */
-	public function report(Exception $e)
+     * Register the exception handling callbacks for the application.
+	**/
+    public function register()
 	{
-		return parent::report($e);
+        $this->reportable(function (Throwable $e) {
+            //
+        });
 	}
-
-	/**
-	 * Render an exception into an HTTP response.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Exception  $e
-	 * @return \Illuminate\Http\Response
-	 */
-	public function render($request, Exception $e)
-	{
-		return parent::render($request, $e);
-	}
-
 }

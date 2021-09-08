@@ -89,7 +89,6 @@ class EiaPermitController extends Controller
         }
         $eiapermit["user_ids"] = $userIds;
         unset($eiapermit["users"]);
-
         return Response::json($eiapermit, 200);
     }
 
@@ -101,7 +100,7 @@ class EiaPermitController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $eiapermit = new EiaPermit();
         $this->updateValuesInResource($eiapermit, $inputData);
         $eiapermit->created_by = Auth::user()->name;
@@ -127,7 +126,7 @@ class EiaPermitController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $this->updateValuesInResource($eiapermit, $inputData);
         $this->handleTeamMembers($eiapermit, $inputData);
         $this->handleUsers($eiapermit, $inputData);
@@ -184,7 +183,7 @@ class EiaPermitController extends Controller
         $changed = false;
         foreach ($data as $key => $value)
         {
-            if (in_array($key, $resource["fillable"], true))
+            if (in_array($key, $resource->getFillable(), true))
             {
                 if ($value === "")
                 {
@@ -193,6 +192,7 @@ class EiaPermitController extends Controller
                 if ($value && in_array($key, $dates))
                 {
                     $timestamp = strtotime($value . " + 12 hours");
+                    // var_dump($value, $timestamp, date('m/d/Y', $timestamp));
                     if ($timestamp === false)
                     {
                         $value = null;

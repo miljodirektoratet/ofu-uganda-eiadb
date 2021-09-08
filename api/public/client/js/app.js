@@ -33,7 +33,9 @@ var seroApp = angular
   ])
   .config([
     "$routeProvider",
-    function($routeProvider) {
+    "$rootScopeProvider",
+    function($routeProvider, $rootScopeProvider) {
+      $rootScopeProvider.digestTtl(500);
       var projectTabsOptions = {
         templateUrl: "partials/projectTabs.html",
         controller: "ProjectTabsController"
@@ -357,7 +359,7 @@ exportObj.exportMetaData["project"] = {
     project_remarks: "Project remarks",
     organization_id: "Developer ID",
     developer_name: "Developer name",
-    developer_id: "TIN",
+    developer_tin: "TIN",
     organization_visiting_address: "Visiting address",
     organization_physical_address: "Physical address",
     organization_box_no: "PO box",

@@ -2,20 +2,20 @@
 
 use App\EiaPermit;
 use Response;
-use Input;
 use Auth;
 use \DateTime;
 use \App\Project;
 use DB;
+use Illuminate\Http\Request;
 
 class PirkingController extends Controller
 {
 
     // GET /resource
-    public function getEiasPermits()
+    public function getEiasPermits(Request $request)
     {
-        $from = Input::get('from');
-        $to = Input::get('to');
+        $from = $request->input('from');
+        $to = $request->input('to');
 
         $result = DB::table('eias_permits as ep')
             ->join('projects as p', 'ep.project_id', '=', 'p.id')
@@ -36,10 +36,10 @@ class PirkingController extends Controller
     }
 
     // GET /resource
-    public function getExternalAudit()
+    public function getExternalAudit(Request $request)
     {
-        $from = Input::get('from');
-        $to = Input::get('to');
+        $from = $request->input('from');
+        $to = $request->input('to');
 
         $result = DB::table('external_audits as ea')
             ->join('projects as p', 'ea.project_id', '=', 'p.id')
@@ -59,10 +59,10 @@ class PirkingController extends Controller
         return Response::json($result, 200);
     }
 
-    public function getAuditInspection()
+    public function getAuditInspection(Request $request)
     {
-        $from = Input::get('from');
-        $to = Input::get('to');
+        $from = $request->input('from');
+        $to = $request->input('to');
 
         $result = DB::table('audits_inspections as ai')
             ->join('projects as p', 'ai.project_id', '=', 'p.id')
@@ -82,10 +82,10 @@ class PirkingController extends Controller
         return Response::json($result, 200);
     }
 
-    public function getPermitLicense()
+    public function getPermitLicense(Request $request)
     {
-        $from = Input::get('from');
-        $to = Input::get('to');
+        $from = $request->input('from');
+        $to = $request->input('to');
 
         $result = DB::table('permits_licenses as pl')
             ->join('projects as p', 'pl.project_id', '=', 'p.id')

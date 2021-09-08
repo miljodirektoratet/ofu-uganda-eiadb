@@ -112,7 +112,7 @@ class ExternalAuditController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $row = new ExternalAudit();
         $this->updateValuesInResource($row, $inputData);
         $row->created_by = Auth::user()->name;
@@ -138,7 +138,7 @@ class ExternalAuditController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $this->updateValuesInResource($row, $inputData);
         $this->handleTeamMembers($row, $inputData);
         $this->handleUsers($row, $inputData);
@@ -195,7 +195,7 @@ class ExternalAuditController extends Controller
         $changed = false;
         foreach ($data as $key => $value)
         {
-            if (in_array($key, $resource["fillable"], true))
+            if (in_array($key, $resource->getFillable(), true))
             {
                 if ($value === "")
                 {

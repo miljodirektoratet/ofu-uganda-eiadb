@@ -7,6 +7,7 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
 
     scope.shouldShowExternalAudit = function(ea)
     {
+        console.log("was called")
         if (scope.parts.externalaudit.state == SavingStateEnum.Loading)
         {
             return false;
@@ -133,9 +134,10 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
     };
 
     scope.filterByDateSubmission = function(data) {
+        console.log("filter called")
         if(!data.length && !data[0].documents){return;}
         data.sort(function(a,b){
-            console.log()
+            console.log("sort is running")
             var date1 =  (a.documents && a.documents[0])?a.documents[0].date_submitted:"";
 
             var date2 = (b.documents && b.documents[0])?b.documents[0].date_submitted:"";

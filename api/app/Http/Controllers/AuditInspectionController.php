@@ -96,7 +96,7 @@ class AuditInspectionController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $auditinspection = new AuditInspection();
         $this->updateValuesInResource($auditinspection, $inputData);
         $this->generateCode($auditinspection);
@@ -129,9 +129,15 @@ class AuditInspectionController extends Controller
             $except = ['lead_officer'];
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
+        $newYear = date('Y', strtotime($inputData['date_carried_out']));
+        $oldYear = $auditinspection->date_carried_out->format('Y');
+
         $this->updateValuesInResource($auditinspection, $inputData, $except);
-        $this->generateCode($auditinspection);
+        if($newYear != $oldYear)
+        {
+            $this->generateCode($auditinspection);
+        }
         $this->handleUsers($auditinspection, $inputData);
         $this->handleLeadAgencies($auditinspection, $inputData);
         $this->handleDocumentation($auditinspection, $inputData);
@@ -217,7 +223,7 @@ class AuditInspectionController extends Controller
             {
                 continue;
             }
-            if (in_array($key, $resource["fillable"], true))
+            if (in_array($key, $resource->getFillable(), true))
             {
                 if ($value === "")
                 {
@@ -234,6 +240,7 @@ class AuditInspectionController extends Controller
                     {
                         $value = new DateTime();
                         $value->setTimestamp($timestamp);
+                        // $value->setTime(0, 0, 0);
                     }
                 }
 

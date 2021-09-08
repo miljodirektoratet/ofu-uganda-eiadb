@@ -1,6 +1,7 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		Route::singularResourceParameters(false);
 		$this->app->bind(
 			'Illuminate\Contracts\Auth\Registrar',
 			'App\Services\Registrar'

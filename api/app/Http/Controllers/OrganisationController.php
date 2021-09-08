@@ -1,11 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
-use Input;
-use Request;
 use Response;
 use \App\Organisation;
 use \DateTime;
+use Illuminate\Http\Request;
 
 class OrganisationController extends Controller
 {
@@ -13,7 +12,7 @@ class OrganisationController extends Controller
     // GET /resource
     public function index(Request $request)
     {
-        $offset = (int) (Input::get('offset')) ? Input::get('offset') : 0;
+        $offset = (int) ($request->input('offset')) ? $request->input('offset') : 0;
         // $query = Organisation::skip($offset)->take(20)->with('projects');
         $query = \DB::table('organisations as o')
             ->join('projects as p', 'o.id', '=', 'p.organisation_id')
@@ -24,7 +23,7 @@ class OrganisationController extends Controller
             ->groupBy('o.id')
             ->orderByRaw('COUNT(o.id) desc, o.name asc');
 
-        if ($searchWord = Input::get('searchWord')) {
+        if ($searchWord = $request->input('searchWord')) {
             $query = $query->where(function ($mainQuery) use ($searchWord) {
 
                 $mainQuery->orWhere('name', 'LIKE', "%$searchWord%")
@@ -64,7 +63,7 @@ class OrganisationController extends Controller
             return $this::notAuthorized();
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $organisation = new Organisation();
         $this->updateValuesInResource($organisation, $inputData);
         $organisation->created_by = Auth::user()->name;
@@ -85,7 +84,7 @@ class OrganisationController extends Controller
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
 
-        $inputData = Input::all();
+        $inputData = request()->all();
         $this->updateValuesInResource($organisation, $inputData);
         $organisation->save();
         return $this->show($organisation->id);
@@ -108,7 +107,7 @@ class OrganisationController extends Controller
         $dates = $resource->getDates();
         $changed = false;
         foreach ($data as $key => $value) {
-            if (in_array($key, $resource["fillable"], true)) {
+            if (in_array($key, $resource->getFillable(), true)) {
                 if ($value === "") {
                     $value = null;
                 }

@@ -2,10 +2,12 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DateFormatTrait;
 
 class AuditInspection extends Model
 {
     use SoftDeletes;
+    use DateFormatTrait;
 
     protected $table = 'audits_inspections';
     protected $dates = ['deleted_at','date_carried_out','date_action_taken','date_deadline','date_closing'];

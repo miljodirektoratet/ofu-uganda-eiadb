@@ -34,13 +34,12 @@ class DataAnonymizerController extends Controller
     public function index(Request $request, $action)
     {
 
-        if(config('app.env') != 'test') {
+        if(config('app.setup') != 'test') {
             return Response::json(['status' => 0], 200);
         }
         try {
             $this->fieldUpdate($action);
         } catch(\Exception $e) {
-            var_dump($e->getMessage());
             return Response::json(['status' => 0], 200);
         }
         return Response::json(['status' => 1], 200);
@@ -50,7 +49,7 @@ class DataAnonymizerController extends Controller
     {
         $field = $this->action[$action]['field'];
         $model = $this->action[$action]['model'];
-        (app('\App\\'.$model))::chunk(900, function($recordList) use($field, $model)
+        (app('\App\\'.$model))::orderBy('id')->chunk(900, function($recordList) use($field, $model)
         {
             foreach ($recordList as $record)
             {
