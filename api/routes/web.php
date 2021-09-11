@@ -120,6 +120,8 @@ Route::prefix('api/v1')->middleware('auth')->group(function ()
     Route::get('create-email-order/{orderType}/{entityId}/{documentId}',[EmailOrderController::class, 'orderRequest']);
 });
 
+Route::get('/resolveLink/emailOrder/{orderType}/{identifier}',[EmailOrderController::class, 'resolveDocumentLink']);
+
 Route::prefix('search/v1')->middleware('auth')->group(function ()
 {
     Route::resource('project', ProjectSearchController::class);

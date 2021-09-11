@@ -19,9 +19,9 @@ class Document extends Model
 //    }
 
     public function attachment()
-{
-    return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_id');
-}
+    {
+        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_id');
+    }
 
     public function response_document()
     {
@@ -31,6 +31,16 @@ class Document extends Model
     public function hearings()
     {
         return $this->hasMany('App\Hearing');
+    }
+
+    public function eiaPermit()
+    {
+        return $this->belongsTo('App\EiaPermit');
+    }
+
+    public function externalAudit()
+    {
+        return $this->belongsTo('App\ExternalAudit');
     }
 
     public static function boot()

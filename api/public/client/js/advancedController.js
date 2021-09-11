@@ -280,7 +280,12 @@ controllers.controller('AdvancedEmailOrderController', ['$scope', '$routeParams'
 
     scope.gridOptions.columnDefs = [
         {name: 'id', type: 'number', enableCellEdit: false, width: 60},
-        {name: 'foreign_id', enableCellEdit: false, width: 80},
+        {
+            name: 'foreign_id',
+            enableCellEdit: false,
+            width: 80,
+            cellTemplate: '<a href="/resolveLink/emailOrder/{{row.entity.foreign_type}}/{{row.entity.foreign_id}}" ng-click="grid.appScope.visitLink(row.entity)">{{row.entity.foreign_id}}</a>'
+        },
         {name: 'foreign_type', enableCellEdit: false, width: 80},
         {name: 'order_status', enableCellEdit: true, width: 80},
         {name: 'subject', enableCellEdit: false, width: 120},
@@ -304,6 +309,11 @@ controllers.controller('AdvancedEmailOrderController', ['$scope', '$routeParams'
             cellTemplate: '<div><button ng-show="row.entity.deleted_at" ng-click="grid.appScope.undeleteRow(row.entity)" class="btn undelete btn-sm btn-link">undelete</button><button ng-hide="row.entity.deleted_at" ng-click="grid.appScope.deleteRow(row.entity)" class="btn delete btn-sm btn-link">delete</button></div>'
         }
     ];
+
+    scope.visitLink = function (link)
+    {
+        console.log(link, "link names came first");
+    }
 
     scope.saveRow = function (rowEntity)
     {

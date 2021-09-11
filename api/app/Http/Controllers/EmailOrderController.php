@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use \App\EmailOrder;
 use \App\EiaPermit;
 use \App\Project;
+use \App\Document;
+use \App\PermitLicense;
 
 class EmailOrderController extends Controller
 {
@@ -25,7 +27,12 @@ class EmailOrderController extends Controller
         'ea' => 'ExternalAudit',
         'pl' => 'PermitLicense',
     ];
-
+    private $routePath = [
+        'eia' => '/app/#/projects/%s/eiaspermits/%s/documents/%s',
+        'ea' => '/app/#/projects/%s/externalaudits/%s/documents/%s',
+        'pl' => '/app/#/projects/%s/permitslicenses/%s',
+        'manager' => '/app/#/advanced/emailOrders',
+    ];
     private $failedEmailOrder = [
         'order_status' => 0
     ];
@@ -44,6 +51,27 @@ class EmailOrderController extends Controller
         } catch(\Exception $e) {
             return $this->failedEmailOrder;
         }
+    }
+
+    public function resolveDocumentLink($orderType, $identifier)
+    {
+        try {
+            if($orderType != 'pl') {
+                $document = Document::where('id', $identifier)->first();
+                $entity = $document->{$this->model[$orderType]};
+            } else {
+                $entity = PermitLicense::where('id', $identifier)->first();
+            }
+
+            $entityId = $entity->id;
+            $projectId = $entity->project->id;
+            $returnURL = sprintf($this->routePath[$orderType], $projectId, $entityId, $identifier);
+        } catch(\Exception $e) {
+            dd($e);
+            $returnURL = $this->routePath['manager'];
+        }
+
+        return redirect($returnURL);
     }
 
     private function eiaeaIsValid($orderType, $entityId, $documentId)
