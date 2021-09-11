@@ -156,12 +156,16 @@ Route::prefix('file/v1')->middleware('auth')->group(function ()
 Route::prefix('pirking/v1')->middleware('manager')->group(function ()
 {
     Route::get('eiaspermits', [PirkingController::class, 'getEiasPermits']);
+    Route::get('eiaspermits/stats', [PirkingController::class, 'getEiasPermitsStats']);
 
     Route::get('externalAuditList', [PirkingController::class, 'getExternalAudit']);
+    Route::get('externalAuditList/stats', [PirkingController::class, 'getExternalAuditStats']);
 
     Route::get('auditInspection', [PirkingController::class, 'getAuditInspection']);
+    Route::get('auditInspection/stats', [PirkingController::class, 'getAuditInspectionStats']);
 
     Route::get('permitLicense', [PirkingController::class, 'getPermitLicense']);
+    Route::get('permitLicense/stats', [PirkingController::class, 'getPermitLicenseStats']);
 });
 
 Route::prefix('export/v1')->group(function ()

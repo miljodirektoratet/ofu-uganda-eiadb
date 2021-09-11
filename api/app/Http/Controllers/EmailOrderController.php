@@ -28,10 +28,10 @@ class EmailOrderController extends Controller
         'pl' => 'PermitLicense',
     ];
     private $routePath = [
-        'eia' => '/app/#/projects/%s/eiaspermits/%s/documents/%s',
-        'ea' => '/app/#/projects/%s/externalaudits/%s/documents/%s',
-        'pl' => '/app/#/projects/%s/permitslicenses/%s',
-        'manager' => '/app/#/advanced/emailOrders',
+        'eia' => '/#/projects/%s/eiaspermits/%s/documents/%s',
+        'ea' => '/#/projects/%s/externalaudits/%s/documents/%s',
+        'pl' => '/#/projects/%s/permitslicenses/%s',
+        'manager' => '/#/advanced/emailOrders',
     ];
     private $failedEmailOrder = [
         'order_status' => 0
@@ -65,10 +65,9 @@ class EmailOrderController extends Controller
 
             $entityId = $entity->id;
             $projectId = $entity->project->id;
-            $returnURL = sprintf($this->routePath[$orderType], $projectId, $entityId, $identifier);
+            $returnURL = env('CLIENT').sprintf($this->routePath[$orderType], $projectId, $entityId, $identifier);
         } catch(\Exception $e) {
-            dd($e);
-            $returnURL = $this->routePath['manager'];
+            $returnURL = env('CLIENT').$this->routePath['manager'];
         }
 
         return redirect($returnURL);

@@ -1,5 +1,5 @@
 <div class="top-header">
-    <h1>PL Pirking</h1>
+    <h1>PL Status Update</h1>
 </div>
 
 <div class="pirking">
@@ -32,14 +32,14 @@
                 <label for="criteria.begin">&nbsp;</label><br/>
                 <button type="submit" class="btn btn-sm btn-primary"
                         id="criteria.begin"
-                        ng-disabled="criteriaForm.$invalid || working">Begin pirking
+                        ng-disabled="criteriaForm.$invalid || working">Begin Status Update
                 </button>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <br/>
-                <span class="label label-info" ng-show="dryrun">Do it the chicken way: Try without saving the status back to the database.</span>
+                <span class="label label-info" ng-show="dryrun">Try without saving the status back to the database.</span>
                 <span class="label label-danger" ng-hide="dryrun">This will save any changes back to the database.</span>
             </div>
         </div>

@@ -1,6 +1,9 @@
 <?php namespace App\Http\Controllers;
 
 use App\EiaPermit;
+use App\ExternalAudit;
+use App\PermitLicense;
+use App\AuditInspection;
 use Response;
 use Auth;
 use \DateTime;
@@ -35,6 +38,11 @@ class PirkingController extends Controller
         return Response::json($result, 200);
     }
 
+    public function getEiasPermitsStats(Request $request)
+    {
+        return Response::json(EiaPermit::latest()->first()->id, 200);
+    }
+
     // GET /resource
     public function getExternalAudit(Request $request)
     {
@@ -57,6 +65,11 @@ class PirkingController extends Controller
         $result = $result->get();
 
         return Response::json($result, 200);
+    }
+
+    public function getExternalAuditStats(Request $request)
+    {
+        return Response::json(ExternalAudit::latest()->first()->id, 200);
     }
 
     public function getAuditInspection(Request $request)
@@ -82,6 +95,11 @@ class PirkingController extends Controller
         return Response::json($result, 200);
     }
 
+    public function getAuditInspectionStats(Request $request)
+    {
+        return Response::json(AuditInspection::latest()->first()->id, 200);
+    }
+
     public function getPermitLicense(Request $request)
     {
         $from = $request->input('from');
@@ -103,6 +121,11 @@ class PirkingController extends Controller
         $result = $result->get();
 
         return Response::json($result, 200);
+    }
+
+    public function getPermitLicenseStats(Request $request)
+    {
+        return Response::json(PermitLicense::latest()->first()->id, 200);
     }
     // GET /resource/:id
     public function show($id)

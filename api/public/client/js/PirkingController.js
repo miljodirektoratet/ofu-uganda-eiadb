@@ -29,6 +29,18 @@ controllers.controller('EiapermitPirkingController', ['$scope', '$http', 'EiaPer
         }
     };
 
+    $http({
+        method: 'GET',
+        url: '/pirking/v1/eiaspermits/stats',
+    }).then(function successCallback(response)
+    {
+        scope.lastId = response.data;
+
+    }, function errorCallback(response)
+    {
+        console.log("couldn't fetch stats");
+    });
+
     scope.beginPirking = function ()
     {
         scope.info.error = 0;
@@ -160,7 +172,7 @@ controllers.controller('EiapermitPirkingController', ['$scope', '$http', 'EiaPer
 
 controllers.controller('ExternalAudiPirkingController', ['$scope', '$http', 'ProjectFactory', 'Document', 'Valuelists', '$q', function (scope, $http, ProjectFactory, Document, Valuelists, $q)
 {
-    scope.lastId = "..";
+    scope.lastId = "sdjshdfj..";
     scope.criteria = {};
     scope.dryrun = true;
     scope.EaData = [];
@@ -182,6 +194,18 @@ controllers.controller('ExternalAudiPirkingController', ['$scope', '$http', 'Pro
             return Math.round(100.0*this.finished()/scope.EaData.length);
         }
     };
+
+    $http({
+        method: 'GET',
+        url: '/pirking/v1/externalAuditList/stats',
+    }).then(function successCallback(response)
+    {
+        scope.lastId = response.data;
+
+    }, function errorCallback(response)
+    {
+        console.log("couldn't fetch stats");
+    });
 
     scope.beginPirking = function ()
     {
@@ -338,6 +362,18 @@ controllers.controller('AuditInspecitionPirkingController', ['$scope', '$http', 
         }
     };
 
+    $http({
+        method: 'GET',
+        url: '/pirking/v1/auditInspection/stats',
+    }).then(function successCallback(response)
+    {
+        scope.lastId = response.data;
+
+    }, function errorCallback(response)
+    {
+        console.log("couldn't fetch stats");
+    });
+
     scope.beginPirking = function ()
     {
         scope.info.error = 0;
@@ -487,6 +523,18 @@ controllers.controller('PermitLicensePirkingController', ['$scope', '$http', 'Pr
             return Math.round(100.0*this.finished()/scope.plData.length);
         }
     };
+
+    $http({
+        method: 'GET',
+        url: '/pirking/v1/permitLicense/stats',
+    }).then(function successCallback(response)
+    {
+        scope.lastId = response.data;
+
+    }, function errorCallback(response)
+    {
+        console.log("couldn't fetch stats");
+    });
 
     scope.beginPirking = function ()
     {
