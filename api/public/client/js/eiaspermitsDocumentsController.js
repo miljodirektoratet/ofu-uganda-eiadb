@@ -210,7 +210,7 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
         switch (field)
         {
             case "document.conclusion":
-                return scope.data.document.conclusion == 81;
+                return scope.data.document.conclusion == 81 &&  scope.data.document.type != 9 &&  scope.data.document.type != 8;
             
             case "document.type":
                 return scope.data.document.type == 10;

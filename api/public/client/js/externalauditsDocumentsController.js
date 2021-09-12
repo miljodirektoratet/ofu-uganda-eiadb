@@ -189,7 +189,7 @@ controllers.controller('ExternalAuditsDocumentsController', ['$scope', 'ProjectF
         switch (field)
         {
             case "document.conclusion":
-                return scope.data.document_ea.conclusion == 81;
+                return scope.data.document_ea.conclusion == 81 && scope.data.document_ea.type != 11;
             case "document.type":
                 return scope.data.document_ea.type == 12;
             default:
