@@ -310,10 +310,9 @@ controllers.controller('AdvancedEmailOrderController', ['$scope', '$routeParams'
         }
     ];
 
-    scope.visitLink = function (link)
-    {
-        console.log(link, "link names came first");
-    }
+    scope.exportEmailOrders = function(data) {
+        exportObj.exportData(data, "emailOrders");
+    };
 
     scope.saveRow = function (rowEntity)
     {

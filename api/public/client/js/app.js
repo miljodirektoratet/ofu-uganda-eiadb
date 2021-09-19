@@ -305,6 +305,32 @@ exportObj.exportData = function(data, tabName) {
   //excelExport.js
   excelExport(data, dataMeta, tabName);
 };
+exportObj.exportMetaData['emailOrders'] = {
+  fieldmap: {
+    id: "ID",
+    foreign_id: "Document ID",
+    foreign_type: "Document Type",
+    order_status: "Order Status",
+    subject: "Subject",
+    body: "Body",
+    recipient: "Recipient",
+    cc: "CC",
+    bcc: "BCC",
+    remarks_from_service: "Remarks from Service",
+    remarks: "Remarks",
+    number_of_attempts: "Number of Attempts",
+    created_by: "Created By",
+    created_at: "Created On",
+    updated_by: "Updated By",
+    updated_at: "Updated On",
+    deleted_at: "Deleted On",
+  },
+  dateFields: [
+    "created_at",
+    "updated_at",
+    "deleted_at",
+  ]
+}
 exportObj.exportMetaData["auditAndInspection"] = {
   fieldmap: {
     auditinspection_code: "Control number",
