@@ -66,7 +66,7 @@ class LoginController extends Controller
         'initials' => 'required', 'password' => 'required',
         ]);
 
-        $credentials = $request->all('initials', 'password');
+        $credentials = $request->all('initials', 'password') + ['is_passive' => 0];
 
         if ($output = \Auth::attempt($credentials, $request->filled('remember')))
         {
