@@ -7,7 +7,7 @@ use Input;
 use \DateTime;
 use Carbon\Carbon;
 use \App\EmailOrder;
-
+use \App\Document;
 
 class EmailOrderController  extends Controller
 {
@@ -38,8 +38,12 @@ class EmailOrderController  extends Controller
         {
             return Response::json(array('error' => true, 'message' => 'not found'), 404);
         }
-
-        $inputData = request()->all();
+        $document = Document::where('id', $emailOrder->foreign_id)->first();
+        if(!$document) {
+            $inputData = ['remarks_from_service' => 'Reason for Failure: Registration has been deleted, Email can no longer be sent', 'updated_by' => 'Email Service', 'updated_at' => request()->input('updated_at') ];
+        } else {
+            $inputData = request()->all();
+        }
 
         $updatedAtFromInput = Carbon::parse($inputData["updated_at"]);
         $diff = $emailOrder->updated_at->diffInSeconds($updatedAtFromInput);
@@ -99,7 +103,11 @@ class EmailOrderController  extends Controller
         if ($changed)
         {
             $resource["user_id"] = Auth::user()->id;
-            $resource["updated_by"] = Auth::user()->name;
+           if(isset($data['updated_by'])) {
+             $resource["updated_by"] = $data['updated_by'];
+           } else {
+             $resource["updated_by"] = Auth::user()->name;
+            }
             $resource["updated_at"] = Carbon::now();
         }
     }
