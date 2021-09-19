@@ -295,7 +295,7 @@ var fileUploadPattern =
   "image/*,application/pdf,application/vnd.openxmlformats*,application/msword,text/plain,text/csv,application/octet-stream,binary/octet-stream,.xls,.xlsx,.docx";
 var fileUploadNgfPattern =
   "'image/*,application/pdf,application/vnd.openxmlformats*,application/msword,text/plain,text/csv,application/octet-stream,binary/octet-stream,.xls,.xlsx,.docx'";
-var fileUploadMaxSize = "20MB";
+var fileUploadMaxSize = "50MB";
 
 //start of export script
 var exportObj = {};
