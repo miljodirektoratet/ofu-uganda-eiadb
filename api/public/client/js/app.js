@@ -312,7 +312,7 @@ exportObj.exportMetaData['emailOrders'] = {
     foreign_type: "Document Type",
     order_status: "Order Status",
     subject: "Subject",
-    body: "Body",
+    unformatted_body: "Body",
     recipient: "Recipient",
     cc: "CC",
     bcc: "BCC",
@@ -320,15 +320,15 @@ exportObj.exportMetaData['emailOrders'] = {
     remarks: "Remarks",
     number_of_attempts: "Number of Attempts",
     created_by: "Created By",
-    created_at: "Created On",
+    formatted_created_at: "Created On",
     updated_by: "Updated By",
-    updated_at: "Updated On",
-    deleted_at: "Deleted On",
+    formatted_updated_at: "Updated On",
+    formatted_deleted_at: "Deleted On",
   },
   dateFields: [
-    "created_at",
-    "updated_at",
-    "deleted_at",
+    "formatted_created_at",
+    "formatted_updated_at",
+    "formatted_deleted_at",
   ]
 }
 exportObj.exportMetaData["auditAndInspection"] = {

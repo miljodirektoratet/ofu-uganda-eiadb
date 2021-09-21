@@ -311,6 +311,7 @@ controllers.controller('AdvancedEmailOrderController', ['$scope', '$routeParams'
     ];
 
     scope.exportEmailOrders = function(data) {
+        // console.log(data, "data to export");
         exportObj.exportData(data, "emailOrders");
     };
 
