@@ -36,9 +36,14 @@ class EmailOrder extends Model
 
     public function getFormattedCreatedAtAttribute()
     {
-        if($this->created_at) {
-            return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('Y-m-d');
+        try {
+            if($this->created_at) {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('Y-m-d');
+            }
+        } catch(\Exception $e) {
+            dump($this->created_at, $e);
         }
+        return $this->created_at;
     }
 
     public function getFormattedUpdatedAtAttribute()

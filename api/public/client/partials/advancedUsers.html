@@ -1,12 +1,14 @@
 <div class="top-header">
-    <h1>Advanced</h1>
+    <h1>User Management</h1>
 </div>
 
 <div class="advanced">
 
     <div class="row">
         <div class="col-md-8">
-            Users
+            <div class="alert alert-warning">
+                <b>NB:</b> Users wth `Is Passive` set to 1 will not be able to login or be displayed in any drop-down lists. Users marked with :non_essential on the Job position code will be able to login, but not show in drop-down lists.
+            </div>
         </div>
         <div class="col-md-4">
             <button type="button" class="btn btn-success pull-right" ng-click="addRow()">New user</button>
