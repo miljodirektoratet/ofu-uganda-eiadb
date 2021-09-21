@@ -41,24 +41,30 @@ class EmailOrder extends Model
                 return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('Y-m-d');
             }
         } catch(\Exception $e) {
-            dump($this->created_at, $e);
+            return null;
         }
-        return $this->created_at;
     }
 
     public function getFormattedUpdatedAtAttribute()
     {
-        if($this->updated_at) {
-            return Carbon::createFromFormat('Y-m-d H:i:s', $this->updated_at)->format('Y-m-d');
+        try {
+            if($this->updated_at) {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $this->updated_at)->format('Y-m-d');
+            }
+        } catch(\Exception $e) {
+            return null;
         }
     }
 
     public function getFormattedDeletedAtAttribute()
     {
-        if($this->deleted_at) {
-            return Carbon::createFromFormat('Y-m-d H:i:s', $this->deleted_at)->format('Y-m-d');
+        try {
+            if($this->deleted_at) {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $this->deleted_at)->format('Y-m-d');
+            }
+        } catch(\Exception $e) {
+            return null;
         }
-        return $this->deleted_at;
     }
 
     public function getUnformattedBodyAttribute()
