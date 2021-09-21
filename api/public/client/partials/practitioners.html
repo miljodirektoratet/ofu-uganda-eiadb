@@ -133,7 +133,7 @@
                   <select ui-select2="{allowClear:true}" ng-disabled="!canSave()" ng-required="true" id="p_title" class="form-control input-sm input-conditions"
                     ng-model="p.practitioner_title_id">
                     <option></option>
-                    <option ng-repeat="v in valuelists.practitioner_title" value="{{ v.id }}">{{ v.description1 }}</option>
+                    <option ng-repeat="v in valuelists.practitioner_title" value="{{ v.id }}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{ v.description1 }}</option>
                   </select>
                 </div>
               </div>
@@ -410,6 +410,7 @@
                           <option
                             ng-repeat="v in valuelists.practitionertype"
                             value="{{ v.id }}"
+                            ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false"
                             >{{ v.description1 }}</option
                           >
                         </select>
@@ -449,6 +450,7 @@
                           <option
                             ng-repeat="v in valuelists.practitionermembertype"
                             value="{{ v.id }}"
+                            ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false"
                             >{{ v.description2 }}</option
                           >
                         </select>

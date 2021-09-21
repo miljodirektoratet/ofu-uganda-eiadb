@@ -38,7 +38,7 @@
                                                                     ng-required="true"
                                                                     ng-model="newButton.type">
                                                                     <option></option>
-                                                                <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">
+                                                                <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
                                                                     {{v.description1}}
                                                                 </option>
                                                             </select>
@@ -49,7 +49,7 @@
                                                                     ng-required="true"
                                                                     ng-model="newButton.reason">
                                                                     <option></option>
-                                                                    <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}">
+                                                                    <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
                                                                     {{v.description1}}
                                                                 </option>
                                                             </select>
@@ -133,7 +133,7 @@
                                                             ng-disabled="!auth.canSave('type')"
                                                             ng-model="data.auditinspection.type">
                                                         <option></option>    
-                                                        <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}">
+                                                        <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
                                                             {{v.description1}}
                                                         </option>
                                                     </select>
@@ -148,7 +148,7 @@
                                                             ng-disabled="!auth.canSave('reason')"
                                                             ng-model="data.auditinspection.reason">
                                                         <option></option>    
-                                                        <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}">
+                                                        <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
                                                             {{v.description1}}
                                                         </option>
                                                     </select>
@@ -163,7 +163,7 @@
                                                             class="form-control input-sm"
                                                             ng-model="data.auditinspection.lead_officer">
                                                         <option></option>
-                                                        <option ng-repeat="v in valuelists.officer_audit_inspection | filter:criteriaMatchOfficer1(data.auditinspection.lead_officer)" value="{{v.id}}">
+                                                        <option ng-repeat="v in valuelists.officer_audit_inspection | filter:criteriaMatchOfficer1(data.auditinspection.lead_officer)" value="{{v.id}}" ng-disabled="v.id == false" ng-class="{'dropdown-partition-bar': v.id == false, 'dropdown-inactive-item': (v.is_passive == 1 && v.id != false) }">
                                                             {{v.description1}}
                                                         </option>
                                                     </select>
@@ -177,7 +177,7 @@
                                                             ng-disabled="!auth.canSave('personnel')" id="users"
                                                             class="form-control input-sm"
                                                             ng-model="data.auditinspection.user_ids">
-                                                        <option ng-repeat="v in valuelists.officer_audit_inspection | filter:criteriaMatchOfficer1(data.auditinspection.user_ids)" value="{{v.id}}">
+                                                        <option ng-repeat="v in valuelists.officer_audit_inspection | filter:criteriaMatchOfficer1(data.auditinspection.user_ids)" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
                                                             {{v.description1}}
                                                         </option>
                                                     </select>
@@ -244,7 +244,7 @@
                                                             ng-disabled="!auth.canSave('action_taken')" id="performance_level" class="form-control input-sm"
                                                             ng-model="data.auditinspection.performance_level">
                                                             <option></option>
-                                                            <option ng-repeat="v in valuelists.grade" value="{{v.id}}">
+                                                            <option ng-repeat="v in valuelists.grade" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
                                                             {{v.description1}}
                                                         </option>
                                                     </select>
@@ -303,7 +303,7 @@
                                                             ng-disabled="!auth.canSave('lead_agencies')" id="lead_agencies"
                                                             class="form-control input-sm"
                                                             ng-model="data.auditinspection.leadagency_ids">
-                                                        <option ng-repeat="v in valuelists.leadagency" value="{{v.id}}">
+                                                        <option ng-repeat="v in valuelists.leadagency" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
                                                             {{v.description2}}
                                                         </option>
                                                     </select>
@@ -351,7 +351,7 @@
                                                             ng-disabled="!auth.canSave('action_taken')" id="action_taken" class="form-control input-sm"
                                                             ng-model="data.auditinspection.action_taken">
                                                         <option></option>
-                                                        <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}">
+                                                        <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
                                                             {{v.description1}}
                                                         </option>
                                                     </select>

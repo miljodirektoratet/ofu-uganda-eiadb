@@ -414,3 +414,17 @@ textarea.ng-invalid,
     text-decoration: none;
     background-color: #f5f5f5;
 }
+
+.dropdown-partition-bar {
+    background-color:red !important;
+    color: white;
+}
+
+.dropdown-inactive-item {
+    background-color:rgb(247 96 96 / 36%) !important;
+    color: white;
+    border-bottom: white !important;
+    border-top: white !important;
+    border-top-style: solid !important;
+    border-bottom-style: solid !important;
+}

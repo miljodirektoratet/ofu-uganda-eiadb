@@ -53,7 +53,7 @@
                                                     <label for="teamleader_id">Practitioner team leader</label>
                                                     <select ui-select2="{allowClear:true}" ng-change="saveCurrentEiaPermit(ep)" ng-disabled="!auth.canSave('teamleader_id')" id="teamleader_id" class="form-control input-sm" ng-model="ep.teamleader_id">
                                                         <option></option>
-                                                        <option ng-repeat="v in valuelists.teamleader"  ng-show="v.is_passive == 'false' || ep.teamleader_id == v.id" value="{{v.id}}">{{v.description1}}</option>
+                                                        <option ng-repeat="v in valuelists.teamleader"  ng-show="v.is_passive == 'false' || ep.teamleader_id == v.id" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -62,7 +62,7 @@
                                                     <label for="team_members">Practitioner team members</label>
                                                    
                                                     <select ui-select2 multiple="true" placeholder="Click to pick"  ng-change="saveCurrentEiaPermit(ep)" ng-disabled="!auth.canSave('practitioner_id')" id="team_members" class="form-control input-sm" ng-model="ep.teammember_ids">
-                                                        <option ng-repeat="v in valuelists.teammember"  ng-show="v.is_passive == 'false' || ep.teammember_ids.includes(v.id)" value="{{v.id}}">{{v.description1}}</option>
+                                                        <option ng-repeat="v in valuelists.teammember"  ng-show="v.is_passive == 'false' || ep.teammember_ids.includes(v.id)" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -79,7 +79,7 @@
                                                         <div class="col-md-6">
                                                             <select ui-select2="{allowClear:true}" ng-change="saveCurrentEiaPermit(ep)" ng-disabled="!auth.canSave('cost_currency')" id="cost_currency" class="form-control input-sm" ng-model="ep.cost_currency">
                                                                 <option></option>
-                                                                <option ng-repeat="v in valuelists.currency" value="{{v.id}}">{{v.description1}}</option>
+                                                                <option ng-repeat="v in valuelists.currency" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -98,7 +98,7 @@
                                                     <label for="user_id">Team leader</label>
                                                     <select ui-select2="{allowClear:true}" ng-change="saveCurrentEiaPermit(ep)" ng-disabled="!auth.canSave('user_id')" id="user_id" class="form-control input-sm" ng-model="ep.user_id">
                                                         <option></option>
-                                                        <option ng-repeat="v in valuelists.team_leader_eia_permit | filter:criteriaMatchOfficer1(ep.user_id)" value="{{v.id}}">{{v.description1}}</option>
+                                                        <option ng-repeat="v in valuelists.team_leader_eia_permit | filter:criteriaMatchOfficer1(ep.user_id)" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false, 'dropdown-inactive-item': (v.is_passive == 1 && v.id != false) }" ng-disabled="v.id == false">{{v.description1}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -110,7 +110,7 @@
                                                             ng-disabled="!auth.canSave('personnel')" id="users"
                                                             class="form-control input-sm"
                                                             ng-model="ep.user_ids">
-                                                        <option ng-repeat="v in valuelists.officer_eia_permit | filter:criteriaMatchOfficer(ep.user_ids)" value="{{v.id}}">
+                                                        <option ng-repeat="v in valuelists.officer_eia_permit | filter:criteriaMatchOfficer(ep.user_ids)" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false, 'dropdown-inactive-item': (v.is_passive == 1 && v.id != false) }"  ng-disabled="v.id == false">
                                                             {{v.description1}}
                                                         </option>
                                                     </select>
@@ -124,7 +124,7 @@
                                                     <label for="inspection_recommended">Inspection before decision?</label>
                                                     <select ui-select2="{allowClear:true}" ng-change="saveCurrentEiaPermit(ep)" ng-disabled="!auth.canSave('inspection_recommended')" id="inspection_recommended" class="form-control input-sm" ng-model="ep.inspection_recommended">
                                                        <option></option>
-                                                        <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
+                                                        <option ng-repeat="v in valuelists.yesno" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -164,7 +164,7 @@
                                                         <div class="col-md-6">
                                                             <select ui-select2="{allowClear:true}" ng-change="saveCurrentEiaPermit(ep)" ng-disabled="!auth.canSave('fee_currency')" id="fee_currency" class="form-control input-sm" ng-model="ep.fee_currency">
                                                                 <option></option>
-                                                                <option ng-repeat="v in valuelists.currency" value="{{v.id}}">{{v.description1}}</option>
+                                                                <option ng-repeat="v in valuelists.currency" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -189,7 +189,7 @@
                                                     <label for="decision">Decision taken</label>
                                                     <select ui-select2="{allowClear:true}" ng-change="saveCurrentEiaPermit(ep)" ng-disabled="!auth.canSave('decision')" id="decision" class="form-control input-sm" ng-model="ep.decision">
                                                         <option></option>
-                                                        <option ng-repeat="v in valuelists.decision" value="{{v.id}}">{{v.description1}}</option>
+                                                        <option ng-repeat="v in valuelists.decision" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -252,7 +252,7 @@
                                                     <label for="designation">Signature on certificate</label>
                                                     <select ui-select2="{allowClear:true}" ng-change="saveCurrentEiaPermit(ep)" ng-disabled="!auth.canSave('designation')" id="designation" class="form-control input-sm" ng-model="ep.designation">
                                                        <option></option>
-                                                        <option ng-repeat="v in valuelists.executivedirector" value="{{v.id}}">{{v.description1}}</option>
+                                                        <option ng-repeat="v in valuelists.executivedirector" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
                                                     </select>
                                                 </div>
                                             </div>

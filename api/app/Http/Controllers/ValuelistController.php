@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use App\LeadAgency;
 use Response;
@@ -107,13 +109,13 @@ class ValuelistController extends Controller
     private function practitionertype()
     {
         return $this->getCodesFromDrowdownName("cert_type");
-//        return $this->getCodesFromArray(array(50, 51, 52));
+        //        return $this->getCodesFromArray(array(50, 51, 52));
     }
 
     private function practitionermembertype()
     {
         return $this->getCodesFromDrowdownName("practitioner");
-//        return $this->getCodesFromArray(array(38, 39, 53));
+        //        return $this->getCodesFromArray(array(38, 39, 53));
     }
 
     private function yesno()
@@ -156,7 +158,7 @@ class ValuelistController extends Controller
         return $this->getCodesFromDrowdownName("audit_inspection_type");
     }
 
-//    private function documenttype()
+    //    private function documenttype()
     //    {
     //        return $this->getCodesFromArray(array(8, 9, 10, 11, 12, 13));
     //    }
@@ -185,51 +187,60 @@ class ValuelistController extends Controller
 
     private function category()
     {
-        $districts = Category::
-            get(array('id', 'description_long as description1'));
+        $districts = Category::get(array('id', 'description_long as description1'));
         return $districts;
     }
 
     private function teamleader()
     {
-        return Practitioner::
-        whereHas('practitionerCertificates', function ($q) {
-            $q->whereRaw('conditions in (38)')->whereRaw('cert_type in (50,51)');
-        })
-        ->get(array('id', 'person as description1', \DB::raw("'false' as is_passive")));
+        return Practitioner::whereHas('practitionerCertificates', function ($q) {
+                $q->whereRaw('conditions in (38)')->whereRaw('cert_type in (50,51)');
+            })
+            ->get(array('id', 'person as description1', \DB::raw("'false' as is_passive")));
     }
 
     private function teammember()
     {
-        return Practitioner::
-        whereHas('practitionerCertificates', function ($q) {
-            $q->whereRaw('conditions in (38,39)')->whereRaw('cert_type in (50,51,148)');
-        })
-        ->get(array('id', 'person as description1', \DB::raw("'false' as is_passive")));
+        return Practitioner::whereHas('practitionerCertificates', function ($q) {
+                $q->whereRaw('conditions in (38,39)')->whereRaw('cert_type in (50,51,148)');
+            })
+            ->get(array('id', 'person as description1', \DB::raw("'false' as is_passive")));
     }
 
     private function users_with_role($role)
     {
-        $systemManagers = User::whereHas('roles', function($q){
-            $q->where('name', 'Role 8');
-        })->get();
 
         $usersWithRequestedRoles = User::whereHas('roles', function ($q) use ($role) {
             $q->where('name', '=', $role);
-            })->orderBy('name')
-        ->get(array('id', 'name as description1', 'is_passive'))->toArray();
-        
-        $users = [];
-        foreach($usersWithRequestedRoles as $user) {
-            $manager = $systemManagers->where('id', $user['id'])->first();
-                 if($manager && $manager->is_passive) {
-                   continue;
-                }
-            $users[] = $user;
-        }
-        return $users;
+        })->orderBy('name')
+            ->get(array('id', 'name as description1', 'is_passive', 'job_position_code'))->toArray();
 
-}
+        $users = [];
+        $activeUsers = [];
+        $inActiveUsers = [];
+        foreach ($usersWithRequestedRoles as $user) {
+            if (strpos(strtolower($user['job_position_code']), ':non_essential') !== false) {
+                continue;
+            }
+
+            if($user['is_passive'] === 0) {
+                $activeUsers[] = $user;
+            } else {
+               $inActiveUsers[] = $user;
+            }
+        }
+        $users = array_merge($users, $activeUsers);
+        if(count($inActiveUsers)) {
+            $users[] = [
+                'id' => false,
+                'is_passive' => true,
+                'description1' => '- Inactive users below -',
+            ];
+            $users = array_merge($users, $inActiveUsers);
+        }
+
+        return $users;
+    }
 
     private function team_leader_eia_permit()
     {
@@ -248,8 +259,7 @@ class ValuelistController extends Controller
 
     private function executivedirector()
     {
-        $users = User::
-            whereRaw("job_position_code in ('DED','ED')")
+        $users = User::whereRaw("job_position_code in ('DED','ED')")
             ->get(array('id', 'name as description1'));
         return $users;
     }
