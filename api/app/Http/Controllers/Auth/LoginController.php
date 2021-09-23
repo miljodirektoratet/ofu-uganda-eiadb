@@ -66,12 +66,16 @@ class LoginController extends Controller
         'initials' => 'required', 'password' => 'required',
         ]);
 
-        $credentials = $request->all('initials', 'password') + ['is_passive' => 0];
+        $credentials = $request->all('initials', 'password');
+        $successfullyAuthenticated = \Auth::attempt($credentials, $request->filled('remember'));
+        $user = \Auth::user();
+        $isActiveUser = ($user->is_passive == 0 || strpos(strtolower($user->job_position_code), ':non_essential') !== false);
 
-        if ($output = \Auth::attempt($credentials, $request->filled('remember')))
+        if ($successfullyAuthenticated && $isActiveUser)
         {
         return Response::json(['message' => trans('messages.logged_in')], 200);
         }
+        \Auth::logout();
         return Response::json(['error' => trans('messages.failed_login')], 422);
     }
 
