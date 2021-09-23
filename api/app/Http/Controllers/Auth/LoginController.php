@@ -69,7 +69,10 @@ class LoginController extends Controller
         $credentials = $request->all('initials', 'password');
         $successfullyAuthenticated = \Auth::attempt($credentials, $request->filled('remember'));
         $user = \Auth::user();
-        $isActiveUser = ($user->is_passive == 0 || strpos(strtolower($user->job_position_code), ':non_essential') !== false);
+        $isActiveUser = false;
+        if($user) {
+            $isActiveUser = ($user->is_passive == 0 || strpos(strtolower($user->job_position_code), ':non_essential') !== false);
+        }
 
         if ($successfullyAuthenticated && $isActiveUser)
         {
