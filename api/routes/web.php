@@ -64,14 +64,13 @@ Route::get('/', function ()
 
 Route::get('/cron-route', function ()
 {
-    return abort(404, 'issue getting displace size');
     Artisan::call("email:process");
     try {
         if((float)disk_free_space(".") < 1090000000) {
-            return abort('issue getting displace size');
+            return abort(404,'issue getting displace size');
         }
     } catch(\exception $e) {
-        abort('issue getting displace size');
+        abort(404, 'issue getting displace size');
     }
     return Artisan::output();
 });
