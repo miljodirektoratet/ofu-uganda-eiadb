@@ -48,6 +48,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             {
                 scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + ep.id);
             }
+            console.log(eiapermit.inspection_recommended);
         });
     };
 

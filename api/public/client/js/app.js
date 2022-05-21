@@ -974,3 +974,16 @@ Number.prototype.truncateDecimal = function(digits) {
       m = this.toString().match(re);
   return m ? parseFloat(m[1]) : this.valueOf();
 };
+
+String.prototype.includesAtLeastOne = function(compareList) {
+  console.log(this, "value provided");
+  var listLength = compareList.length;
+  for(var i=0; i< listLength;i++) {
+      var hasIt = this.includes(compareList[i]);
+      if(hasIt) {
+        break;
+      }
+  }
+  console.log(hasIt, "returned value");
+  return hasIt;
+}

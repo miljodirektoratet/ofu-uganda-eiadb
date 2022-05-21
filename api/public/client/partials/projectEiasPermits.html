@@ -133,7 +133,7 @@
                                                     <label for="date_inspection">Date of inspection</label>
                                                     <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentEiaPermit(ep)" ng-readonly="!auth.canSave('date_inspection')" class="form-control input-sm" id="date_inspection" ng-model="ep.date_inspection" />-->
                                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                                                        <input type="text" ng-blur="saveCurrentEiaPermit(ep)" ng-readonly="!auth.canSave('date_inspection')" id="date_inspection" class="form-control input-sm input-date" ng-model="ep.date_inspection" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <input type="text" ng-blur="saveCurrentEiaPermit(ep)" ng-readonly="true" id="date_inspection" class="form-control input-sm input-date" ng-model="ep.date_inspection" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
                                                         <span class="input-group-btn">
                                                           <button type="button" ng-disabled="!auth.canSave('date_inspection')" class="btn btn-default btn-sm" ng-click="open($event)">
                                                               <span class="glyphicon glyphicon-calendar"></span>
