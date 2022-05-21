@@ -975,15 +975,13 @@ Number.prototype.truncateDecimal = function(digits) {
   return m ? parseFloat(m[1]) : this.valueOf();
 };
 
-String.prototype.includesAtLeastOne = function(compareList) {
-  console.log(this, "value provided");
+Number.prototype.isOneOf = function(compareList) {
   var listLength = compareList.length;
   for(var i=0; i< listLength;i++) {
-      var hasIt = this.includes(compareList[i]);
+      var hasIt = this == compareList[i];
       if(hasIt) {
         break;
       }
   }
-  console.log(hasIt, "returned value");
   return hasIt;
 }

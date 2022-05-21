@@ -449,7 +449,7 @@
                                                 <div class="form-group">
                                                     <label for="pl.date_inspection">Date of inspection</label>
                                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                                                        <input type="text" ng-blur="saveCurrentPermitLicense(pl)" ng-required="false" ng-readonly="!auth.canSave('date_inspection')" id="pl.date_inspection" class="form-control input-sm input-date" ng-model="pl.date_inspection" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <input type="text" ng-blur="saveCurrentPermitLicense(pl)" ng-required="false" ng-readonly="!auth.canSave('date_inspection')  || pl.inspection_recommended.isOneOf(['41', '42'])" id="pl.date_inspection" class="form-control input-sm input-date" ng-model="pl.date_inspection" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
                                                         <span class="input-group-btn">
                                                             <button type="button" ng-disabled="!auth.canSave('date_inspection')" class="btn btn-default btn-sm" ng-click="open($event)">
                                                                 <span class="glyphicon glyphicon-calendar"></span>

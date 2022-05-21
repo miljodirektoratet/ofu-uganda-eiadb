@@ -48,7 +48,6 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
             {
                 scope.goto("/projects/" + scope.data.project.id + "/eiaspermits/" + ep.id);
             }
-            console.log(eiapermit.inspection_recommended);
         });
     };
 
@@ -56,7 +55,7 @@ controllers.controller('EiasPermitsController', ['$scope', 'ProjectFactory', '$t
     {
         scope.parts.eiapermit.state = SavingStateEnum.LoadingNew;
         ProjectFactory.createNewEiaPermit(scope.data.project);
-        //scope.saveCurrentEiaPermit(scope.data.eiapermit);
+        scope.saveCurrentEiaPermit(scope.data.eiapermit);
     };
 
     scope.deleteEiaPermit = function ()
