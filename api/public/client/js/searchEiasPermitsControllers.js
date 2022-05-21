@@ -68,6 +68,12 @@ controllers.controller("SearchEiasPermitsController", [
         headerTooltip: true
       },
       {
+        name: "eiapermit_decision",
+        displayName: "Decision taken",
+        cellTooltip: true,
+        headerTooltip: true
+      },
+      {
         name: "eiapermit_officer_assigned",
         displayName: "Team leader",
         cellTooltip: true,
