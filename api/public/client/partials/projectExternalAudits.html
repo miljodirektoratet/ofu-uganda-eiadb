@@ -209,6 +209,45 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_create_invoice">Date of invoicing</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_create_invoice')" id="date_create_invoice" class="form-control input-sm input-date" ng-model="ea.date_create_invoice" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_create_invoice')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_invoice_payment">Invoice payment date</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_invoice_payment')" id="date_invoice_payment" class="form-control input-sm input-date" ng-model="ea.date_invoice_payment" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_invoice_payment')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_invoice_receipt_issued">Date of receipt issuing</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_invoice_receipt_issued')" id="date_invoice_receipt_issued" class="form-control input-sm input-date" ng-model="ea.date_invoice_receipt_issued" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_invoice_receipt_issued')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">
