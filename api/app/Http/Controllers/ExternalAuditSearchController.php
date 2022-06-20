@@ -49,7 +49,10 @@ class ExternalAuditSearchController extends Controller
                 'o.name as organisation_name',
                 'o.id as organisation_id',
                 'd.district as district_district',
-                'c.description_short as category_name'
+                'c.description_short as category_name',
+                'ea.date_invoice_payment as date_invoice_payment',
+                'ea.date_invoice_receipt_issued as date_invoice_receipt_issued',
+                'ea.date_create_invoice as date_create_invoice'
                 // , 'doc.title'
                 //                ,'doc.code'
                 //                ,'doc.number'

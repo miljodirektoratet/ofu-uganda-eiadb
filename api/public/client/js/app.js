@@ -34,7 +34,7 @@ var seroApp = angular
   .config([
     "$routeProvider",
     "$rootScopeProvider",
-    function($routeProvider, $rootScopeProvider) {
+    function ($routeProvider, $rootScopeProvider) {
       $rootScopeProvider.digestTtl(500);
       var projectTabsOptions = {
         templateUrl: "partials/projectTabs.html",
@@ -197,13 +197,13 @@ var seroApp = angular
   .factory("authHttpResponseInterceptor", [
     "$q",
     "$location",
-    function($q, $location) {
+    function ($q, $location) {
       return {
-        responseError: function(rejection) {
+        responseError: function (rejection) {
           if ($location.path().indexOf("/password/reset/") == 0 || $location.path() == "/public/practitioners") {
             // No redirect.
           } else if (rejection.status === 401) {
-              $location.path("/login");
+            $location.path("/login");
           }
           return $q.reject(rejection);
         }
@@ -213,22 +213,22 @@ var seroApp = angular
   .factory("unsavedDataProtection", [
     "$q",
     "$location",
-    function($q, $location) {
+    function ($q, $location) {
       return {
-        request: function(config) {
-          if(config.method != 'GET') {
+        request: function (config) {
+          if (config.method != 'GET') {
             window.globalWordCount = '';
           } else {
             window.interceptPageNavigation();
           }
-            return config;
+          return config;
         }
       };
     }
   ])
   .config([
     "$httpProvider",
-    function($httpProvider) {
+    function ($httpProvider) {
       $httpProvider.interceptors.push("authHttpResponseInterceptor");
       $httpProvider.interceptors.push("unsavedDataProtection");
     }
@@ -247,7 +247,7 @@ var SavingStateEnum = {
 };
 
 var DisplayStateEnum = {
-  Show: true, 
+  Show: true,
   Hide: false
 }
 
@@ -300,7 +300,7 @@ var fileUploadMaxSize = "50MB";
 //start of export script
 var exportObj = {};
 exportObj.exportMetaData = {};
-exportObj.exportData = function(data, tabName) {
+exportObj.exportData = function (data, tabName) {
   var dataMeta = this.exportMetaData[tabName];
   //excelExport.js
   excelExport(data, dataMeta, tabName);
@@ -524,9 +524,12 @@ exportObj.exportMetaData["externalAudit"] = {
     category_name: "Category",
     district_district: "District",
     organisation_id: "Developer ID",
-    organisation_name: "Developer name"
+    organisation_name: "Developer name",
+    date_create_invoice: "Date of invoice creation",
+    date_invoice_receipt_issued: "Date invoice was issued",
+    date_invoice_payment: "Date invoice was paid"
   },
-  dateFields: ["date_inspection", "date_response"]
+  dateFields: ["date_inspection", "date_response", "date_create_invoice", "date_invoice_receipt_issued", "date_invoice_payment"]
 };
 
 //End of export script
@@ -535,19 +538,19 @@ function so() {
 }
 //coordinate check 
 function isCoordinateWithinUganda(lat, long, callback) {
-  if(!lat || !long) {
-    return callback(false, {error:"undefined coordinates"});
+  if (!lat || !long) {
+    return callback(false, { error: "undefined coordinates" });
   }
-  fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat="+lat+"&lon="+long, {"headers":{"content-type":"application/json"},"method":"GET","mode":"cors"}).then(function(resp){
+  fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + long, { "headers": { "content-type": "application/json" }, "method": "GET", "mode": "cors" }).then(function (resp) {
     return resp.json();
-}).then(function(resp){
-  if(!resp.address || resp.address.country_code != 'ug') {
-    return callback(false, resp);
-  }
-  return callback(true, resp);
-}).catch(function(){
-  return callback(false, {error:"network"})
-});
+  }).then(function (resp) {
+    if (!resp.address || resp.address.country_code != 'ug') {
+      return callback(false, resp);
+    }
+    return callback(true, resp);
+  }).catch(function () {
+    return callback(false, { error: "network" })
+  });
 }
 //var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
 var regexIso8601 = /^(\d{4}-\d{2}-\d{2} \d{2}\:\d{2}\:\d{2})$/;
@@ -594,15 +597,15 @@ function convertDateStringsToDates(input) {
 
 seroApp.config([
   "$httpProvider",
-  function($httpProvider) {
-    $httpProvider.defaults.transformResponse.push(function(responseData) {
+  function ($httpProvider) {
+    $httpProvider.defaults.transformResponse.push(function (responseData) {
       convertDateStringsToDates(responseData);
       return responseData;
     });
   }
 ]);
 
-var uploadFile = function($q, $timeout, Upload, partInForm, file, tag) {
+var uploadFile = function ($q, $timeout, Upload, partInForm, file, tag) {
   partInForm.$setValidity("serverError", true);
 
   var deferred = $q.defer();
@@ -615,13 +618,13 @@ var uploadFile = function($q, $timeout, Upload, partInForm, file, tag) {
     });
 
     file.upload.then(
-      function(response) {
-        $timeout(function() {
+      function (response) {
+        $timeout(function () {
           file.result = response.data;
           deferred.resolve(file);
         });
       },
-      function(response) {
+      function (response) {
         if (response.status > 0) {
           partInForm.$setValidity("serverError", false);
           file.progress = 0;
@@ -631,7 +634,7 @@ var uploadFile = function($q, $timeout, Upload, partInForm, file, tag) {
       }
     );
 
-    file.upload.progress(function(evt) {
+    file.upload.progress(function (evt) {
       file.progress = Math.min(100, parseInt((100.0 * evt.loaded) / evt.total));
     });
   } else {
@@ -651,84 +654,79 @@ function addDays(date, days) {
 function updateExternalAuditStatus(ea, documents) {
   var newStatus = null;
 
-  var documentsByType = _.groupBy(documents, function(document) {
+  var documentsByType = _.groupBy(documents, function (document) {
     return document.type;
   });
 
-  var setStatusByDocument = function(document, docMap) {
+  var setStatusByDocument = function (document, docMap) {
     var keys = Object.keys(docMap);
-    for(var i = 0; i < keys.length; i++) {
+    for (var i = 0; i < keys.length; i++) {
       console.log(document[keys[i]], keys[i], "find set keys")
-      if(document[keys[i]]) {
+      if (document[keys[i]]) {
         newStatus = docMap[keys[i]];
       }
     }
   }
 
-  if(ea.date_deadline_compliance) {
+  if (ea.date_deadline_compliance) {
     console.log(ea);
     ea.status = 147;
     return true;
   } else if (ea.date_response) {
     ea.status = 146;
     return true;
-  } else if(documents.length) {
-      console.log(ea);
-      if(documentsByType[12]) {
-        var document = documentsByType[12][0];
-        var docMap = {
-          date_submitted: 142,
-          date_sent_director: 143,
-          date_sent_from_dep: 144,
-          date_sent_officer: 145, 
-        }
-      } else if(documentsByType[11]) {
-        var document = documentsByType[11][0];
-        var docMap = {
-          date_submitted: 137,
-          date_sent_director: 138,
-          date_sent_from_dep: 139,
-          date_sent_officer: 140, 
-          date_conclusion: 141
-        }
+  } else if (documents.length) {
+    console.log(ea);
+    if (documentsByType[12]) {
+      var document = documentsByType[12][0];
+      var docMap = {
+        date_submitted: 142,
+        date_sent_director: 143,
+        date_sent_from_dep: 144,
+        date_sent_officer: 145,
       }
-      setStatusByDocument(document, docMap);
-      ea.status = newStatus;
-      return true;
+    } else if (documentsByType[11]) {
+      var document = documentsByType[11][0];
+      var docMap = {
+        date_submitted: 137,
+        date_sent_director: 138,
+        date_sent_from_dep: 139,
+        date_sent_officer: 140,
+        date_conclusion: 141
+      }
+    }
+    setStatusByDocument(document, docMap);
+    ea.status = newStatus;
+    return true;
   }
   return false;
 }
 
 function updateAuditInspectionStatus(ai) {
-    // 70 = Created
-        // 71 = Carried out
-        // 72 = Action taken
-        // 73 = Deadline passed
-        // 74 = Corrections received
-        // 75 = Closed
-        if (ai.date_closing)
-        {
-            ai.status = 75;
-        }
-        else if (ai.date_received)
-        {
-            ai.status = 74;
-        }
-        else if (ai.date_deadline && ai.date_deadline < new Date())
-        {
-            ai.status = 73;
-        }
-        else if (ai.action_taken)
-        {
-            ai.status = 72;
-        }
-        else if (ai.date_carried_out)
-        {
-            ai.status = 71;
-        }
-        // console.log(ai.id, ai.project_id, ai.status, "75 =>", ai.date_closing, "74 =>",ai.date_received, "73 =>",ai.date_deadline, "72 =>",ai.action_taken,"71 =>", ai.date_carried_out, ai.status, "finishing status");
-        
-        return ([71,72,73,74,75].includes(ai.status))? true:false;
+  // 70 = Created
+  // 71 = Carried out
+  // 72 = Action taken
+  // 73 = Deadline passed
+  // 74 = Corrections received
+  // 75 = Closed
+  if (ai.date_closing) {
+    ai.status = 75;
+  }
+  else if (ai.date_received) {
+    ai.status = 74;
+  }
+  else if (ai.date_deadline && ai.date_deadline < new Date()) {
+    ai.status = 73;
+  }
+  else if (ai.action_taken) {
+    ai.status = 72;
+  }
+  else if (ai.date_carried_out) {
+    ai.status = 71;
+  }
+  // console.log(ai.id, ai.project_id, ai.status, "75 =>", ai.date_closing, "74 =>",ai.date_received, "73 =>",ai.date_deadline, "72 =>",ai.action_taken,"71 =>", ai.date_carried_out, ai.status, "finishing status");
+
+  return ([71, 72, 73, 74, 75].includes(ai.status)) ? true : false;
 }
 function updateEiaPermitStatus(ep, documents) {
   //if (!scope.userinfo.info.features.notproduction)
@@ -762,7 +760,7 @@ function updateEiaPermitStatus(ep, documents) {
   }
   // Document is criteria 2.
   else {
-    var documentsByType = _.groupBy(documents, function(document) {
+    var documentsByType = _.groupBy(documents, function (document) {
       return document.type;
     });
     var newStatusFromDocuments = 0;
@@ -800,11 +798,11 @@ function updateEiaPermitStatus(ep, documents) {
         date_submitted: 15
       }
     };
-    _.forEach(typePriority, function(type) {
+    _.forEach(typePriority, function (type) {
       var documents = documentsByType[type];
       if (documents) {
         var tempStatus = 0;
-        _.forEach(documents, function(d) {
+        _.forEach(documents, function (d) {
           // Only conclusion if Accepted (78) or Not accepted (79)
           if (
             d.conclusion &&
@@ -852,91 +850,93 @@ function updateEiaPermitStatus(ep, documents) {
 }
 
 function updatePermitLicenseStatus(pl) {
- if(pl.date_permit_license_expired && pl.date_permit_license_expired < new Date()) {
-   pl.status = 157;
- } else if(pl.permit_license_no) {
-   pl.status = 156;
- } else if(pl.fee_receipt_no) {
-   pl.status = 154;
- } else if(pl.date_sent_for_decision) {
-   pl.status = 155;
- } else if(pl.date_of_evaluation) {
-   pl.status = 153;
- } else if(pl.date_sent_officer) {
-   pl.status = 152;
- } else if(pl.date_sent_from_dep) {
-   pl.status = 151;
- } else if(pl.date_sent_to_director) {
-   pl.status = 150;
- } else if(pl.date_submitted) {
-   pl.status = 149;
- }
+  if (pl.date_permit_license_expired && pl.date_permit_license_expired < new Date()) {
+    pl.status = 157;
+  } else if (pl.permit_license_no) {
+    pl.status = 156;
+  } else if (pl.fee_receipt_no) {
+    pl.status = 154;
+  } else if (pl.date_sent_for_decision) {
+    pl.status = 155;
+  } else if (pl.date_of_evaluation) {
+    pl.status = 153;
+  } else if (pl.date_sent_officer) {
+    pl.status = 152;
+  } else if (pl.date_sent_from_dep) {
+    pl.status = 151;
+  } else if (pl.date_sent_to_director) {
+    pl.status = 150;
+  } else if (pl.date_submitted) {
+    pl.status = 149;
+  }
   return true;
 }
 
 function showNavBarItems(show) {
   var el = document.querySelectorAll(".navbar-nav, .navbar-right");
-  el[0].style.display =  el[1].style.display = show ? "block" : "none";
+  el[0].style.display = el[1].style.display = show ? "block" : "none";
 }
 
 function toggleNavBarItems(userInfo, location) {
   location = location ? location : false;
   var publicPath = '/public/';
-  if(location == false) {
-    location = {path: function(){
-      return publicPath;
-    }}
-  }
-  if (location.path().startsWith("/public/") == false  || (location.path().startsWith("/public/") == true && userInfo.info.name != "Not signed in") ) {
-      return showNavBarItems(true);
+  if (location == false) {
+    location = {
+      path: function () {
+        return publicPath;
+      }
     }
-    showNavBarItems(false);
+  }
+  if (location.path().startsWith("/public/") == false || (location.path().startsWith("/public/") == true && userInfo.info.name != "Not signed in")) {
+    return showNavBarItems(true);
+  }
+  showNavBarItems(false);
 }
 window.unsavedDataProtectionIgnoredSubPaths = [
-   '#/practitioners',
-   '/#/search',
-   '#/statistics',
-   '#/about',
-   '#/advanced',
-   '/#/user'
- ]
+  '#/practitioners',
+  '/#/search',
+  '#/statistics',
+  '#/about',
+  '#/advanced',
+  '/#/user'
+]
 
 window.unsavedDataProtectionIgnoredExactPaths = [
   '#/projects',
 ]
 
-window.verifyEmailList = function(emailList) {
-      var emails = emailList;
-      emails = emails.split(";");
-      var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      var invalidEmails = [];
-      
-      for (var i = 0; i < emails.length; i++) {
-          emails[i] = emails[i].trim();
-          if( emails[i] == "" || ! regex.test(emails[i])){
-              invalidEmails.push(emails[i]);
-          }
-      }
+window.verifyEmailList = function (emailList) {
+  var emails = emailList;
+  emails = emails.split(";");
+  var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  var invalidEmails = [];
 
-      if(invalidEmails.length != 0) {
-          return false;
-      }
+  for (var i = 0; i < emails.length; i++) {
+    emails[i] = emails[i].trim();
+    if (emails[i] == "" || !regex.test(emails[i])) {
+      invalidEmails.push(emails[i]);
+    }
+  }
 
-      return true;
+  if (invalidEmails.length != 0) {
+    return false;
+  }
+
+  return true;
 }
 
-window.createEmailOrder = function(orderType, entityId, documentId, callback) {
-  fetch('/api/v1/create-email-order/'+(orderType.toLowerCase())+'/'+entityId+'/'+documentId)
-    .then(function(response) {
+window.createEmailOrder = function (orderType, entityId, documentId, callback) {
+  fetch('/api/v1/create-email-order/' + (orderType.toLowerCase()) + '/' + entityId + '/' + documentId)
+    .then(function (response) {
       return response.json();
-    }).then(function(data) {
-        fetch("/cron-route").then(function(response) {
-          return response.json();
-        }).then(function(cronOutput) {
-            data.order_status = cronOutput.order_status;
-            callback(data);
+    }).then(function (data) {
+      fetch("/cron-route").then(function (response) {
+        return response.json();
+      }).then(function (cronOutput) {
+        data.order_status = cronOutput.order_status;
+        callback(data);
       });
-  });
+    });
 }
 
 //status is marked by id of of the array
@@ -950,38 +950,38 @@ window.emailerStatusObj = [
     index: 1,
     type: "processing",
     btnMsg: "Sending email...",
-  },{
+  }, {
     index: 2,
     type: "processing",
     btnMsg: "Sending email...",
-  },{
+  }, {
     index: 3,
     type: "processed",
     btnMsg: "Email sent",
-  },{
+  }, {
     index: 4,
     type: "failed",
     btnMsg: "Email failed",
   }
 ]
 Number.prototype.countDecimals = function () {
-  if(Math.floor(this.valueOf()) === this.valueOf()) return 0;
-  return this.toString().split(".")[1].length || 0; 
+  if (Math.floor(this.valueOf()) === this.valueOf()) return 0;
+  return this.toString().split(".")[1].length || 0;
 }
 
-Number.prototype.truncateDecimal = function(digits) {
+Number.prototype.truncateDecimal = function (digits) {
   var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
-      m = this.toString().match(re);
+    m = this.toString().match(re);
   return m ? parseFloat(m[1]) : this.valueOf();
 };
 
-Number.prototype.isOneOf = function(compareList) {
+Number.prototype.isOneOf = function (compareList) {
   var listLength = compareList.length;
-  for(var i=0; i< listLength;i++) {
-      var hasIt = this == compareList[i];
-      if(hasIt) {
-        break;
-      }
+  for (var i = 0; i < listLength; i++) {
+    var hasIt = this == compareList[i];
+    if (hasIt) {
+      break;
+    }
   }
   return hasIt;
 }
