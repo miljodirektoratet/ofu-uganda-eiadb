@@ -9,7 +9,7 @@ class Practitioner extends Model
     use SoftDeletes;
     use DateFormatTrait;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'date_of_entry'];
     protected $fillable = ['practitioner_title_id', 'person', 'tin', 'organisation_name', 'visiting_address', 'box_no', 'city', 'phone', 'fax', 'email', 'qualifications', 'expertise', 'remarks'];
     protected $hidden = ['deleted_at'];
 

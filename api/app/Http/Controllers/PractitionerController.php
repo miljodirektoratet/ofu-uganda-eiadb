@@ -19,7 +19,7 @@ class PractitionerController extends Controller
 
         $withFunction = function ($query) {
             //$year = intval(date("Y"));
-            $query->select('id', 'practitioner_id', 'year', 'cert_type', 'conditions', 'is_cancelled');
+            $query->get();
             // ->where('year', '=', $year);
         };
 
@@ -27,7 +27,7 @@ class PractitionerController extends Controller
             with(array('practitionerCertificates' => $withFunction))
             ->orderBy('person', 'ASC')
         //->take(3)
-            ->get(array('id', 'person', 'organisation_name', 'visiting_address', 'city'));
+            ->get();
 
         return Response::json($practitioners->toArray(), 200);
     }

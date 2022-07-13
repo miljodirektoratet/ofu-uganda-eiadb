@@ -532,6 +532,32 @@ exportObj.exportMetaData["externalAudit"] = {
   dateFields: ["date_inspection", "date_response", "date_create_invoice", "date_invoice_receipt_issued", "date_invoice_payment"]
 };
 
+exportObj.exportMetaData["practitioners"] = {
+  fieldmap: {
+    practitioner_id: "Practitioner ID",
+    certificate_id: "Certificate ID",
+    practitioner: "Practitioner",
+    tin: "TIN",
+    organisation_nam: "Organisation Name",
+    visiting_address: "Address",
+    box_no: "P.O. Box",
+    city: "City",
+    phone: "Phone",
+    fax: "Fax",
+    email: "Email",
+    qualifications: "Qualifications",
+    expertise: "Expertise",
+    remarks: "Remarks",
+    year: "Year",
+    date_of_entry_export: "Date of entry",
+    cert_type: "Type of certificate",
+    cert_no: "Certificate number",
+    conditions: "Conditions",
+    is_cancelled: "Cancelled?"
+  },
+  dateFields: ["date_of_entry_export"]
+};
+
 //End of export script
 function so() {
   console.log("ca")

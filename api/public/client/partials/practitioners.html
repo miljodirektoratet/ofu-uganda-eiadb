@@ -29,7 +29,7 @@
         <span>Count: {{ (practitioners | filter: filterText).length }}</span>
       </form>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
       <button
         type="button"
         class="btn btn-success pull-right"
@@ -38,6 +38,9 @@
       >
         New practitioner
       </button>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-success pull-right" ng-show="practitioners.length" ng-click="exportPractitioners(practitioners)">Export to excel</button>
     </div>
     <div class="col-md-12"><hr /></div>
   </div>
