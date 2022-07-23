@@ -534,8 +534,6 @@ exportObj.exportMetaData["externalAudit"] = {
 
 exportObj.exportMetaData["practitioners"] = {
   fieldmap: {
-    practitioner_id: "Practitioner ID",
-    certificate_id: "Certificate ID",
     practitioner: "Practitioner",
     tin: "TIN",
     organisation_nam: "Organisation Name",
@@ -549,13 +547,13 @@ exportObj.exportMetaData["practitioners"] = {
     expertise: "Expertise",
     remarks: "Remarks",
     year: "Year",
-    date_of_entry_export: "Date of entry",
+    date_of_entry: "Date of entry",
     cert_type: "Type of certificate",
     cert_no: "Certificate number",
     conditions: "Conditions",
     is_cancelled: "Cancelled?"
   },
-  dateFields: ["date_of_entry_export"]
+  dateFields: []
 };
 
 //End of export script
@@ -1010,4 +1008,9 @@ Number.prototype.isOneOf = function (compareList) {
     }
   }
   return hasIt;
+}
+
+Date.prototype.humanDate = function() {
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  return this.getDate()+' '+months[this.getMonth()]+' '+this.getFullYear();
 }

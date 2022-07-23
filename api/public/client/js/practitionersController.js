@@ -304,8 +304,6 @@ controllers.controller("PractitionersController", [
           // console.log(practitioner.practitioner_title_id)
           var practTitle = practitioner.practitioner_title_id ?scope.valuelists.practitioner_title.find(title => title.id == practitioner.practitioner_title_id).description1 :'';
           var newCertObj = certificates[j];
-          newCertObj.practitioner_id = practitioner.id;
-          newCertObj.certificate_id = newCertObj.id;
           delete newCertObj.id;
           newCertObj.cert_type = scope.valuelists.practitionertype.find(cert => cert.id == newCertObj.cert_type).description2;
           newCertObj.practitioner = practTitle + ' ' + practitioner.person;
@@ -322,9 +320,7 @@ controllers.controller("PractitionersController", [
           newCertObj.city = practitioner.city;
           newCertObj.is_cancelled = newCertObj.is_cancelled ? 'YES' : 'NO';
           newCertObj.conditions = scope.valuelists.practitionermembertype.find(condition => condition.id == newCertObj.conditions).description2;
-          var offset = newCertObj.date_of_entry.getTimezoneOffset()
-          newCertObj.date_of_entry_export = new Date(newCertObj.date_of_entry.getTime() - (offset * 60 * 1000))
-          newCertObj.date_of_entry_export = newCertObj.date_of_entry_export.toISOString().split('T')[0];
+          newCertObj.date_of_entry = newCertObj.date_of_entry.humanDate();
           certificateList.push(newCertObj);
         }
       }
