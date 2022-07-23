@@ -1011,6 +1011,12 @@ Number.prototype.isOneOf = function (compareList) {
 }
 
 Date.prototype.humanDate = function() {
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return this.getDate()+' '+months[this.getMonth()]+' '+this.getFullYear();
+}
+
+Array.prototype.searchObj = function(ObjKey, findKey) {
+  return this.find(function(item){
+    return item[ObjKey] == findKey
+  });
 }
