@@ -539,7 +539,6 @@ exportObj.exportMetaData["practitioners"] = {
     organisation_nam: "Organisation Name",
     visiting_address: "Address",
     box_no: "P.O. Box",
-    city: "City",
     phone: "Phone",
     fax: "Fax",
     email: "Email",
@@ -988,6 +987,12 @@ window.emailerStatusObj = [
     btnMsg: "Email failed",
   }
 ]
+
+window.yearList = function() {
+  const now = new Date().getUTCFullYear();
+  const years = Array(now - (now - 20)).fill('').map((v, idx) => now - idx);
+  return years;
+}
 Number.prototype.countDecimals = function () {
   if (Math.floor(this.valueOf()) === this.valueOf()) return 0;
   return this.toString().split(".")[1].length || 0;
@@ -1009,6 +1014,7 @@ Number.prototype.isOneOf = function (compareList) {
   }
   return hasIt;
 }
+
 
 Date.prototype.humanDate = function() {
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

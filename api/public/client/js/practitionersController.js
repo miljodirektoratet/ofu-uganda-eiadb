@@ -292,6 +292,22 @@ controllers.controller("PractitionersController", [
       });
     }
 
+    function getCertLabel(certID) {
+      var certUpdatedLabels = {
+        EIA : "Environmental Impact Assessor",
+        EA : "Environmental Auditor",
+        EP : "Environmental Partnership",
+        FP : "Foreign Practitioner",
+      }
+      var certType = scope.valuelists.practitionertype.find(cert => cert.id == certID);
+      var certCode = (certType)? certType.description1: null;
+      try {
+        return certUpdatedLabels[certCode] ?? certType.description2;
+      } catch(Exception) {
+        return 'NA';
+      }
+    }
+
     scope.exportPractitioners = function (practitioners) {
       var practitionerList = practitioners;
       var certificateList = [];
@@ -301,23 +317,26 @@ controllers.controller("PractitionersController", [
         var certificates = practitioner['practitioner_certificates'];
         var numberOfCertificates = certificates.length;
         for (var j = 0; j < numberOfCertificates; j++) {
+
           // console.log(practitioner.practitioner_title_id)
           var practTitle = practitioner.practitioner_title_id ?scope.valuelists.practitioner_title.searchObj('id', practitioner.practitioner_title_id).description1 :'';
+        
+
+          var practTitle = practitioner.practitioner_title_id ?scope.valuelists.practitioner_title.find(title => title.id == practitioner.practitioner_title_id).description1 :'';
           var newCertObj = certificates[j];
           delete newCertObj.id;
-          newCertObj.cert_type = scope.valuelists.practitionertype.searchObj('id', newCertObj.cert_type).description2;
+          newCertObj.cert_type = getCertLabel(newCertObj.cert_type);
           newCertObj.practitioner = practTitle + ' ' + practitioner.person;
           newCertObj.organisation_name = practitioner.organisation_name;
           newCertObj.visiting_address = practitioner.visiting_address;
           newCertObj.tin = practitioner.tin;
-          newCertObj.box_no = practitioner.box_no;
+          newCertObj.box_no = practitioner.box_no+','+practitioner.city;
           newCertObj.fax = practitioner.fax;
           newCertObj.email = practitioner.email;
           newCertObj.expertise = practitioner.expertise;
           newCertObj.qualifications = practitioner.qualifications;
           newCertObj.phone = practitioner.phone;
           newCertObj.remark = practitioner.remark;
-          newCertObj.city = practitioner.city;
           newCertObj.is_cancelled = newCertObj.is_cancelled ? 'YES' : 'NO';
           newCertObj.conditions = scope.valuelists.practitionermembertype.searchObj('id', newCertObj.conditions).description2;
           newCertObj.date_of_entry = newCertObj.date_of_entry.humanDate();
