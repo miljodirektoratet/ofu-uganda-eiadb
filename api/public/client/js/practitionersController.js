@@ -319,10 +319,8 @@ controllers.controller("PractitionersController", [
         for (var j = 0; j < numberOfCertificates; j++) {
 
           // console.log(practitioner.practitioner_title_id)
-          var practTitle = practitioner.practitioner_title_id ?scope.valuelists.practitioner_title.searchObj('id', practitioner.practitioner_title_id).description1 :'';
-        
+          var practTitle = (practitioner.practitioner_title_id) ?scope.valuelists.practitioner_title.searchObj('id', practitioner.practitioner_title_id).description1 :'';
 
-          var practTitle = (practitioner.practitioner_title_id) ?scope.valuelists.practitioner_title.searchObj('id' == practitioner.practitioner_title_id).description1 :'';
           var newCertObj = certificates[j];
           delete newCertObj.id;
           newCertObj.cert_type = getCertLabel(newCertObj.cert_type);

@@ -536,7 +536,7 @@ exportObj.exportMetaData["practitioners"] = {
   fieldmap: {
     practitioner: "Practitioner",
     tin: "TIN",
-    organisation_nam: "Organisation Name",
+    organisation_name: "Organisation Name",
     visiting_address: "Address",
     box_no: "P.O. Box",
     phone: "Phone",
