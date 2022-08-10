@@ -988,11 +988,6 @@ window.emailerStatusObj = [
   }
 ]
 
-window.yearList = function() {
-  const now = new Date().getUTCFullYear();
-  const years = Array(now - (now - 20)).fill('').map((v, idx) => now - idx);
-  return years;
-}
 Number.prototype.countDecimals = function () {
   if (Math.floor(this.valueOf()) === this.valueOf()) return 0;
   return this.toString().split(".")[1].length || 0;

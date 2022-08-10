@@ -299,10 +299,10 @@ controllers.controller("PractitionersController", [
         EP : "Environmental Partnership",
         FP : "Foreign Practitioner",
       }
-      var certType = scope.valuelists.practitionertype.find(cert => cert.id == certID);
+      var certType = scope.valuelists.practitionertype.searchObj('id', certID);
       var certCode = (certType)? certType.description1: null;
       try {
-        return certUpdatedLabels[certCode] ?? certType.description2;
+        return (certUpdatedLabels[certCode])? certUpdatedLabels[certCode]: certType.description2;
       } catch(Exception) {
         return 'NA';
       }
@@ -322,7 +322,7 @@ controllers.controller("PractitionersController", [
           var practTitle = practitioner.practitioner_title_id ?scope.valuelists.practitioner_title.searchObj('id', practitioner.practitioner_title_id).description1 :'';
         
 
-          var practTitle = practitioner.practitioner_title_id ?scope.valuelists.practitioner_title.find(title => title.id == practitioner.practitioner_title_id).description1 :'';
+          var practTitle = (practitioner.practitioner_title_id) ?scope.valuelists.practitioner_title.searchObj('id' == practitioner.practitioner_title_id).description1 :'';
           var newCertObj = certificates[j];
           delete newCertObj.id;
           newCertObj.cert_type = getCertLabel(newCertObj.cert_type);
