@@ -240,11 +240,12 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
             case "date_feedback_to_applicants":
             case "date_sent_to_director":
             case "date_sent_from_dep":
-            case "date_sent_officer":
             case "folio_no":
             case "can_email":
             case "recipient_email":
                 return scope.userinfo.info.role_1;
+            case "date_sent_officer":
+                return scope.userinfo.info.role_1 || scope.userinfo.info.role_2;
             case "personnel":
             case "remarks_team_leader":
                 return scope.userinfo.info.role_2;
