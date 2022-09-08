@@ -422,6 +422,10 @@
                                                         <option ng-repeat="v in valuelists.team_leader_eia_permit | filter:criteriaMatchOfficer1(pl.user_id)" ng-class="{'dropdown-partition-bar': v.id == false, 'dropdown-inactive-item': (v.is_passive == 1 && v.id != false) }"  ng-disabled="v.id == false" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="remarks_team_leader">Remarks by Team Leader</label>
+                                                    <textarea ng-blur="saveCurrentPermitLicense(pl)" ng-readonly="!auth.canSave('remarks_team_leader')" class="form-control input-sm" rows="2" id="remarks_team_leader" ng-model="pl.remarks_team_leader"></textarea>
+                                                </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
@@ -443,6 +447,17 @@
                                                     <select ui-select2 ng-change="saveCurrentPermitLicense(pl)" ng-disabled="!auth.canSave('inspection_recommended')" id="inspection_recommended" class="form-control input-sm" ng-model="pl.inspection_recommended">
                                                         <option ng-repeat="v in valuelists.yesno" value="{{v.id}}">{{v.description1}}</option>
                                                     </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="pl.date_sent_for_decision">Date to {{pl.regulation==idPermit ? "ED" : "committee"}} for decision</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentPermitLicense(pl)" ng-required="false" ng-readonly="!auth.canSave('date_sent_for_decision')" id="pl.date_sent_for_decision" class="form-control input-sm input-date" ng-model="pl.date_sent_for_decision" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('date_sent_for_decision')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                          </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -468,7 +483,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label for="pl.date_sent_for_decision">Date to {{pl.regulation==idPermit ? "ED" : "committee"}} for decision</label>
                                                     <div class="input-group container-datepicker" ng-controller="DatePickerController">
                                                         <input type="text" ng-blur="saveCurrentPermitLicense(pl)" ng-required="false" ng-readonly="!auth.canSave('date_sent_for_decision')" id="pl.date_sent_for_decision" class="form-control input-sm input-date" ng-model="pl.date_sent_for_decision" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
@@ -478,7 +493,7 @@
                                                             </button>
                                                           </span>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">

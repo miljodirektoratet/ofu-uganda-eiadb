@@ -247,14 +247,14 @@ controllers.controller('EiasPermitsDocumentsController', ['$scope', 'ProjectFact
             case "document.folio_no":
                 return scope.userinfo.info.role_1;
             case "document.date_sent_officer":
+            case "document.remarks_team_leader":
                 return scope.userinfo.info.role_2;
             case "document.file_metadata_response_id":
             case "document.conclusion":
             case "document.date_conclusion":
             case "document.remarks":
-            case "document.remarks_director":
-            case "document.remarks_team_leader":
                 return scope.userinfo.info.role_3;
+            case "document.remarks_director":
             case "document.date_sent_from_dep":
                 return scope.userinfo.info.role_5;
             case "move":

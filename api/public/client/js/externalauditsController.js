@@ -114,6 +114,7 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
             case "recipient_email":
                 return scope.userinfo.info.role_1;
             case "personnel":
+            case "remarks_team_leader":
                 return scope.userinfo.info.role_2;
             case "verification_inspection":
             case "date_inspection":

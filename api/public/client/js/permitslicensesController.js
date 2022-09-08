@@ -242,8 +242,11 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
             case "date_sent_from_dep":
             case "date_sent_officer":
             case "folio_no":
+            case "can_email":
+            case "recipient_email":
                 return scope.userinfo.info.role_1;
             case "personnel":
+            case "remarks_team_leader":
                 return scope.userinfo.info.role_2;
             case "application_evaluation_by_officer":
             case "date_of_evaluation":
@@ -265,9 +268,9 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
             case "upload_documentation_permit_license":
             case "delete_documentation_permit_license":
                 return scope.userinfo.info.role_5;
-            case "recipient_email":
-            case "can_email":
-                return scope.userinfo.info.role_7;
+            // case "can_email":
+            // case "recipient_email":
+                // return scope.userinfo.info.role_7;
             case "status":
                 return false;
             default:
