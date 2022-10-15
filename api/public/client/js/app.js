@@ -525,6 +525,7 @@ exportObj.exportMetaData["externalAudit"] = {
     district_district: "District",
     organisation_id: "Developer ID",
     organisation_name: "Developer name",
+    invoice_fees: "Fees Invoiced",
     date_create_invoice: "Date of invoice creation",
     date_invoice_receipt_issued: "Date invoice was issued",
     date_invoice_payment: "Date invoice was paid"
@@ -1011,13 +1012,24 @@ Number.prototype.isOneOf = function (compareList) {
 }
 
 
-Date.prototype.humanDate = function() {
+Date.prototype.humanDate = function () {
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  return this.getDate()+' '+months[this.getMonth()]+' '+this.getFullYear();
+  return this.getDate() + ' ' + months[this.getMonth()] + ' ' + this.getFullYear();
 }
 
-Array.prototype.searchObj = function(ObjKey, findKey) {
-  return this.find(function(item){
+Array.prototype.searchObj = function (ObjKey, findKey) {
+  return this.find(function (item) {
     return item[ObjKey] == findKey
   });
+}
+
+
+window.getAppointmentDate = function () {
+  var date = new Date();
+  date.setDate(date.getDate() + 7);
+  var splitDate = date.humanDate().split(' ');
+  //shorten month to conform with date picker.
+  splitDate[1] = splitDate[1].substring(0,3);
+  var newDate = splitDate.join(' ');
+  return newDate;
 }

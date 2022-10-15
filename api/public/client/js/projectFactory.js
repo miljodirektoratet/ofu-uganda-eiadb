@@ -430,7 +430,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
             {
                 eia_permit_id: ep.id,
                 director_copy_no: 1,
-                is_new: true
+                is_new: true,
+                date_next_appointment: window.getAppointmentDate()
             };
             factory.document = new Document(dData);
             factory.documents.unshift(factory.document);
@@ -588,7 +589,8 @@ services.factory('ProjectFactory', ['$q', '$filter', 'Project', 'Organisation', 
                 {
                     external_audit_id: ea.id,
                     director_copy_no: 1,
-                    is_new: true
+                    is_new: true,
+                    date_next_appointment: window.getAppointmentDate()
                 };
             // console.log(dData);
             factory.document_ea = new DocumentEA(dData);

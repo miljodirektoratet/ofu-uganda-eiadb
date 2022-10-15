@@ -11,7 +11,7 @@ class ExternalAudit extends Model
 
     protected $table = 'external_audits';
     protected $dates = ['deleted_at','date_inspection','date_response','date_deadline_compliance', 'date_invoice_payment', 'date_invoice_receipt_issued', 'date_create_invoice'];
-    protected $fillable = ['project_id','teamleader_id','status','user_id','verification_inspection','date_inspection','date_response','file_metadata_response_id','response','review_findings','date_deadline_compliance', 'type', 'email_contact','date_invoice_payment', 'date_invoice_receipt_issued', 'date_create_invoice', 'remarks_team_leader'];
+    protected $fillable = ['project_id','teamleader_id','status','user_id','verification_inspection','date_inspection','date_response','file_metadata_response_id','response','review_findings','date_deadline_compliance', 'type', 'email_contact','date_invoice_payment', 'date_invoice_receipt_issued', 'date_create_invoice', 'remarks_team_leader', 'invoice_fees'];
     protected $hidden = ['deleted_at'];
 
     public function project()

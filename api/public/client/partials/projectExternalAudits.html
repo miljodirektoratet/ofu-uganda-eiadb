@@ -139,6 +139,13 @@
                                                         </span>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="response">Response</label>
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('response')" id="response" class="form-control input-sm" ng-model="ea.response">
+                                                       <option></option>
+                                                        <option ng-repeat="v in valuelists.yesno" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
                                             </div>
 
                                             <div class="col-md-3">
@@ -188,16 +195,27 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="date_deadline_compliance">Date for complete compliance</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_deadline_compliance')" id="date_deadline_compliance" class="form-control input-sm input-date" ng-model="ea.date_deadline_compliance" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                          <button type="button" ng-disabled="!auth.canSave('date_deadline_compliance')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                              <span class="glyphicon glyphicon-calendar"></span>
+                                                          </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="review_findings">Review findings (Max. 2000 characters)</label>
-                                                    <textarea ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('review_findings')" class="form-control input-sm" rows="2" id="review_findings" ng-model="ea.review_findings"></textarea>
-                                                </div>
-                                                <div class="form-group">
                                                     <label for="remarks_team_leader">Remarks by Team Leader</label>
                                                     <textarea ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('remarks_team_leader')" class="form-control input-sm" rows="2" id="remarks_team_leader" ng-model="ea.remarks_team_leader"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="review_findings">Review findings (Max. 2000 characters)</label>
+                                                    <textarea ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('review_findings')" class="form-control input-sm" rows="2" id="review_findings" ng-model="ea.review_findings"></textarea>
                                                 </div>
                                             </div>
 
@@ -206,11 +224,9 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="response">Response</label>
-                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentExternalAudit(ea)" ng-disabled="!auth.canSave('response')" id="response" class="form-control input-sm" ng-model="ea.response">
-                                                       <option></option>
-                                                        <option ng-repeat="v in valuelists.yesno" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
-                                                    </select>
+                                                    <label for="invoice_fees">Fees Invoiced</label>
+                                                    <input type="text" ng-blur="saveCurrentExternalAudit(ea)" class="form-control input-sm"
+                                                    ng-readonly="!auth.canSave('invoice_fees')" id="invoice_fees" ng-model="ea.invoice_fees"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -255,26 +271,13 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="date_deadline_compliance">Date for complete compliance</label>
-                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
-                                                        <input type="text" ng-blur="saveCurrentExternalAudit(ea)" ng-readonly="!auth.canSave('date_deadline_compliance')" id="date_deadline_compliance" class="form-control input-sm input-date" ng-model="ea.date_deadline_compliance" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
-                                                        <span class="input-group-btn">
-                                                          <button type="button" ng-disabled="!auth.canSave('date_deadline_compliance')" class="btn btn-default btn-sm" ng-click="open($event)">
-                                                              <span class="glyphicon glyphicon-calendar"></span>
-                                                          </button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-5" ng-hide="!auth.canSave('recipient_email')">
+                                            <div class="form-group col-md-6" ng-hide="!auth.canSave('recipient_email')">
                                                 <label>Recipient Emails (;)</label>
                                                 <input type="text"  class="form-control input-sm"
                                                 ng-blur="saveCurrentEmailContact(ea)" id="email_contact" ng-model="ea.email_contact"/>
                                                 <span ng-show="invalidRecipients" class="text-danger">Invalid email format.Separate multiple emails with semicolons (;)</span>
                                                 </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 pull-right">
                                                 <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
                                                                     text="'Delete External audit'"
                                                                     warning="'NB! Any documents linked to this External audit will also be deleted. Do you want to proceed?'"
