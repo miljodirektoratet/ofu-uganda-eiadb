@@ -106,7 +106,7 @@ controllers.controller('ExternalAuditsController', ['$scope', 'ProjectFactory', 
             case "date_invoice_receipt_issued":
             case "date_create_invoice":
             case "invoice_fees":
-                return true;
+                return scope.userinfo.info.role_4;
             case "new":
                 return scope.userinfo.info.role_1;
             case "teamleader_id":
