@@ -121,7 +121,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.type">Type of document</label>
-                                                    <select ui-select2="{allowClear:true}" ng-change="setDefaultDocumentConclusion();calculateDocumentCode();saveCurrentDocument(d);" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="d.type">
+                                                    <select ui-select2="{allowClear:true}" ng-change="calculateDocumentCode()" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="d.type">
                                                         <option></option>
                                                         <option ng-repeat="v in valuelists.documenttypeexternalaudits" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description2}}</option>
                                                     </select>
@@ -130,13 +130,14 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.number">Listed number</label>
-                                                    <input type="text" integer ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.number')" class="form-control input-sm" id="document.number" ng-model="d.number" ng-change="calculateDocumentCode()"/>
+                                                    <input type="text" integer ng-blur="saveCurrentDocument(d)" ng-required="true" ng-focus="clearError()" ng-readonly="!auth.canSave('document.number')" class="form-control input-sm" id="document.number" ng-model="d.number" ng-change="calculateDocumentCode()"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="document.code">Document code</label>
                                                     <input type="text" ng-readonly="true" class="form-control input-sm" id="document.code" ng-model="d.code"/>
+                                                    <span style="color:red" ng-show="listNumberAlreadyExists">Document code {{documentCode}} exists</span>
                                                 </div>
                                             </div>
                                         </div>

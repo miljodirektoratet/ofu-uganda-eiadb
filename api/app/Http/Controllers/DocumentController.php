@@ -7,6 +7,7 @@ use \DateTime;
 use \App\Project;
 use \App\Document;
 use \App\EmailOrder;
+use App\Http\Requests\Request;
 
 class DocumentController extends Controller
 {
@@ -169,5 +170,12 @@ class DocumentController extends Controller
     private function notAuthorized()
     {
         return Response::json("Not authorized to perform this.", 403); // 403 Forbidden
+    }
+
+    public function codeCheck($code)
+    {
+        $document = Document::where('code', $code)->first();
+        $documentID = optional($document)->id;
+        return ['code_exists' => ($document)? true:false, 'code' => $code, 'document_id' => $documentID];
     }
 }

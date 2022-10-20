@@ -685,7 +685,6 @@ function updateExternalAuditStatus(ea, documents) {
   var setStatusByDocument = function (document, docMap) {
     var keys = Object.keys(docMap);
     for (var i = 0; i < keys.length; i++) {
-      console.log(document[keys[i]], keys[i], "find set keys")
       if (document[keys[i]]) {
         newStatus = docMap[keys[i]];
       }

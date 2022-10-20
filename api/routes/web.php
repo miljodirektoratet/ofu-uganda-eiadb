@@ -116,6 +116,7 @@ Route::prefix('api/v1')->middleware('auth')->group(function ()
     Route::resource('organisation', OrganisationController::class);
     Route::resource('project.eiapermit', EiaPermitController::class);
     Route::resource('project.eiapermit.document', DocumentController::class);
+    Route::get('document/code-check/{code}',[DocumentController::class, 'codeCheck']);
     Route::resource('project.eiapermit.document.hearing', HearingController::class);
 
     Route::resource('project.externalaudit', ExternalAuditController::class);
