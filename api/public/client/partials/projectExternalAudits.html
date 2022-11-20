@@ -240,6 +240,7 @@
                                                           </button>
                                                         </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="ea.date_invoice_payment && !ea.date_create_invoice.toString()">Date should be filled if <b>"Date for decision"</b> is provided</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -253,6 +254,7 @@
                                                           </button>
                                                         </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="ea.date_invoice_payment.toString() && (ea.date_create_invoice > ea.date_invoice_payment)">Payment date should be ahead of invoicing date</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -266,6 +268,7 @@
                                                           </button>
                                                         </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="ea.date_invoice_receipt_issued.toString() && (ea.date_create_invoice > ea.date_invoice_receipt_issued ||  ea.date_invoice_payment > ea.date_invoice_receipt_issued)">Reciept issuing date should be ahead of invoicing and payment date</div>
                                                 </div>
                                             </div>
                                         </div>

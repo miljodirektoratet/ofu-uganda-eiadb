@@ -184,6 +184,7 @@
                                                           </button>
                                                         </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="ep.date_decision.toString() && !ep.date_sent_ded_approval.toString()">Date should be filled if <b>"Date for decision"</b> is provided</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -207,6 +208,7 @@
                                                           </button>
                                                         </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="ep.date_decision.toString() && ep.date_sent_ded_approval.toString().length && (ep.date_decision < ep.date_sent_ded_approval)"><b>"Date for decision"</b> should be ahead of <b>"Date sent for approval"</b></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -224,6 +226,7 @@
                                                           </button>
                                                         </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="ep.date_fee_payed && !ep.date_fee_notification.toString()">Date should be filled if <b>"Date for decision"</b> is provided</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -238,6 +241,7 @@
                                                           </button>
                                                         </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="ep.date_fee_payed.toString() && (ep.date_fee_notification > ep.date_fee_payed)">Payment date should be ahead of invoicing date</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
