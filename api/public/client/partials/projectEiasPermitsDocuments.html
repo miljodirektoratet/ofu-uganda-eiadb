@@ -202,6 +202,8 @@
                                                                 <span class="glyphicon glyphicon-calendar"></span></button>
                                                           </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="(d.date_sent_director.toString() && d.date_copies_coordinator.toString()) && d.date_sent_director < d.date_copies_coordinator">
+                                                        Documents should be sent to team leader before the director</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-9">
@@ -225,6 +227,7 @@
                                                             </button>
                                                         </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="(d.date_sent_director.toString() && d.date_sent_from_dep.toString()) && d.date_sent_director > d.date_sent_from_dep">Document should be sent to director before team leader dept</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-9">
@@ -248,6 +251,7 @@
                                                             </button>
                                                         </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="(d.date_sent_officer.toString() && d.date_sent_from_dep.toString()) && d.date_sent_officer < d.date_sent_from_dep">Document should be sent to team leader dept before officer</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-9">
