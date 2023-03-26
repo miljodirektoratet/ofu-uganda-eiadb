@@ -92,7 +92,6 @@ controllers.controller('PermitsLicensesController', ['$scope', 'ProjectFactory',
         }
         else if (!scope.routeParams.permitlicenseId)
         {
-            console.log("it says its not set")
             scope.goto("/projects/" + scope.data.project.id + "/permitslicenses/" + id);
         }
     };

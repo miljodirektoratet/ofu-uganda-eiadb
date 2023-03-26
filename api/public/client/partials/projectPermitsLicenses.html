@@ -366,6 +366,7 @@
                                                             </button>
                                                           </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="(pl.date_sent_from_dep.toString() && pl.date_sent_to_director.toString()) && pl.date_sent_from_dep < pl.date_sent_to_director">Application should be sent to the director before the team leader</div>
                                                 </div>
                                             </div>
                                         </div>

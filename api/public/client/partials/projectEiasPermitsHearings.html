@@ -107,6 +107,7 @@
                                                             </button>
                                                           </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="(h.date_expected.toString() && h.date_dispatched.toString()) && h.date_dispatched > h.date_expected"><b>Date expected</b> should be ahead of <b>Date dispatched</b></div>
                                                 </div>
                                             </div>
 
@@ -121,6 +122,7 @@
                                                             </button>
                                                           </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="(h.date_expected.toString() && h.date_received.toString()) && h.date_received < h.date_expected"><b>Date received</b> should be ahead of <b>Date expected</b></div>
                                                 </div>
                                             </div>
 

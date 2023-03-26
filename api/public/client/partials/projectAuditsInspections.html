@@ -342,6 +342,7 @@
                                                                       class="glyphicon glyphicon-calendar"></span></button>
                                                             </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="(ai.date_action_taken.toString() && ai.date_carried_out.toString()) && ai.date_action_taken < ai.date_carried_out">Application should be sent to the team leader before the officer</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -469,6 +470,7 @@
                                                                       class="glyphicon glyphicon-calendar"></span></button>
                                                             </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="(ai.date_closing.toString() && ai.date_deadline.toString()) && ai.date_closing < ai.date_deadline"><b>Activity end</b> date should be ahead of the <b>Follow-up date</b></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
