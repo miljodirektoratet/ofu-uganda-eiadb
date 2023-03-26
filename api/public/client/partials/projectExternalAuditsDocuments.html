@@ -205,6 +205,7 @@
                                                                 <span class="glyphicon glyphicon-calendar"></span></button>
                                                           </span>
                                                     </div>
+                                                    <div class="inline-err" ng-show="(d.date_copies_coordinator.toString() && d.date_sent_director.toString()) && d.date_copies_coordinator > d.date_sent_director">Document should be sent to team leaders before the director</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
