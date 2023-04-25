@@ -181,6 +181,7 @@ class PractitionerController extends Controller
                     $certificate->practitioner()->associate($practitioner);
                 }
                 $certificateChanged = $this->updateValuesInResource($certificate, $certificateInputData);
+                // dd($certificateInputData);
                 $certificate->save();
                 if ($certificateChanged) {
                     $changed = true;
@@ -199,7 +200,7 @@ class PractitionerController extends Controller
                 if ($value === "") {
                     $value = null;
                 }
-                if ($value && in_array($key, $dates)) {
+                if ($value && in_array($key, $dates) && $key != 'date_of_entry') {
                     $timestamp = strtotime($value . " + 12 hours");
                     if ($timestamp === false) {
                         $value = null;
