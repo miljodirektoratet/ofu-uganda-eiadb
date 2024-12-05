@@ -231,5 +231,5 @@ return [
 		'Entrust' => 'Zizaco\Entrust\EntrustFacade',
 		'Notification' => 'Illuminate\Support\Facades\Notification',
 	],
-	'migration_key' => '9vN3FRk-HqrKQ9V-K7u6edr-px2jXHn-Q368Tiw-bM6d2mB-T2TheDn-XzYJ4pb-fEjjCHp-ZN5xNXg'
+	'migration_key' => env('MIGRATION_KEY')
 ];
