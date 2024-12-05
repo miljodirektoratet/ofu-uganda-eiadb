@@ -34,7 +34,7 @@ use App\Http\Controllers\PirkingController;
 use App\Http\Controllers\DataAnonymizerController;
 use App\Http\Controllers\Export\ExportMapController;
 use App\Http\Controllers\Migration\MigrationController;
-
+use Illuminate\Support\Facades\Response;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -103,7 +103,9 @@ Route::prefix('api/v1')->group(function () {
     Route::resource('valuelist', ValuelistController::class);
 });
 
-Route::prefix('api/migration')->group(function () {
+Route::prefix('api/migration')->middleware('validate.migration.key')->group(function () {
+
+    Route::get('file/{id}', [FileController::class, 'download']);
     Route::get('{entity}', [MigrationController::class, 'endpoint']);
     Route::get('{entity}/csv', [MigrationController::class, 'csvDownload']);
 });

@@ -59,5 +59,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'manager' => \App\Http\Middleware\AuthenticateSystemManager::class,
         // 'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'validate.migration.key' => \App\Http\Middleware\ValidateMigrationKey::class,
+
     ];
 }

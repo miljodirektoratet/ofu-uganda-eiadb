@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Migration;
 
 use App\Project;
+use App\EiaPermit;
 
 trait Modifiers
 {
@@ -161,5 +162,19 @@ trait Modifiers
                 'organisations.physical_address as physical_address',
 
             ]);
-    } 
+    }
+
+    private function EiaPermitModel()
+    {
+        $providedKey = request()->get('key');
+        $baseUrl = url('/');
+        $filePath =  $baseUrl . '/api/migration/file';
+        return EiaPermit::orderBy('eias_permits.created_at', 'ASC')
+            ->join('file_metadata', 'file_metadata.id', '=', 'eias_permits.file_metadata_id')
+            ->select(
+                "*",
+                \DB::raw("file_metadata.filename as attached_filename"),
+                \DB::raw("CONCAT('" . $filePath . "/',file_metadata.id, '?key=" . $providedKey . "') as file_id")
+            );
+    }
 }

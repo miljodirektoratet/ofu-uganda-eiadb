@@ -17,23 +17,20 @@ class MigrationController extends Controller
         'projects' => ['model' => 'Project', 'override' => true],
         'organisations' => ['model' => 'Organisation'],
         'users' => ['model' => 'User'],
-        'eiapermits' => ['model' => 'eiaPermit'],
+        'eiapermits' => ['model' => 'EiaPermit', 'override' => true],
     ];
 
     public function endpoint($entity)
     {
         $entity = strtolower($entity);
-        $accessKey = config('app.migration_key');
-        $providedKey =  request()->get('key');
-        if ($accessKey !== $providedKey) {
-            return Response::json(array('error' => true, 'message' => 'Forbidden'), 403);
-        }
-
         $perPage = request()->get('per_page', 100);
         try {
             $results = $this->model($entity)
                 ->paginate($perPage);
         } catch (\Exception $e) {
+            if(env('APP_DEBUG') == true) {
+                dd($e);
+            }
             return Response::json(array('error' => true, 'message' => 'No such resource'), 404);
         }
 
@@ -48,12 +45,6 @@ class MigrationController extends Controller
     }
     public function csvDownload()
     {
-        $accessKey = config('app.migration_key');
-        $providedKey = request()->get('key');
-
-        if ($accessKey !== $providedKey) {
-            return Response::json(['error' => true, 'message' => 'Forbidden'], 403);
-        }
         $perPage = request()->get('per_page', 100);
 
         // Set up CSV response headers
