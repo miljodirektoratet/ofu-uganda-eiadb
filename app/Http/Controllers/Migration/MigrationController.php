@@ -43,7 +43,7 @@ class MigrationController extends Controller
             'payload' => $results->items(),
         ];
     }
-    public function csvDownload()
+    public function csvDownload($entity)
     {
         $perPage = request()->get('per_page', 100);
 
@@ -56,22 +56,22 @@ class MigrationController extends Controller
             "Expires" => "0",
         ];
         // dd(collect($this->OrganisationModel())->toArray());
-        $columns = collect($this->OrganisationModel()->first(1))->keys()->toArray();
-        return Response::stream(function () use ($columns, $perPage) {
+        $columns = collect($this->model($entity)->first(1))->keys()->toArray();
+        return Response::stream(function () use ($columns, $perPage, $entity) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
 
             $page = 1;
             while (true) {
-                $organisations = $this->OrganisationModel()->take(30)
+                $data = $this->model($entity)->take(30)
                     ->paginate($perPage, ['*'], 'page', $page);
-                foreach ($organisations as $project) {
+                foreach ($data as $datum) {
                     fputcsv($file, array_map(function ($value) {
                         return $value === null ? 'null' : $value;
-                    }, $project->toArray()));
+                    }, $datum->toArray()));
                 }
 
-                if ($page >= $organisations->lastPage()) break;
+                if ($page >= $data->lastPage()) break;
                 // if ($page == 2) break;
 
                 $page++;
