@@ -33,8 +33,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\PirkingController;
 use App\Http\Controllers\DataAnonymizerController;
 use App\Http\Controllers\Export\ExportMapController;
-use App\Http\Controllers\Migration\ProjectController as MigrationProjectController;
-use App\Http\Controllers\Migration\OrganisationController as MigrationOrgController;
+use App\Http\Controllers\Migration\MigrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,10 +104,8 @@ Route::prefix('api/v1')->group(function () {
 });
 
 Route::prefix('api/migration')->group(function () {
-    Route::get('projects', [MigrationProjectController::class, 'projectsAPI']);
-    Route::get('projects/csv', [MigrationProjectController::class, 'projectsDownload']);
-    Route::get('organisations', [MigrationOrgController::class, 'organizationAPI']);
-    Route::get('organisations/csv', [MigrationOrgController::class, 'OrganisationDownload']);
+    Route::get('{entity}', [MigrationController::class, 'endpoint']);
+    Route::get('{entity}/csv', [MigrationController::class, 'csvDownload']);
 });
 
 Route::prefix('api/v1')->middleware('auth')->group(function () {
@@ -178,41 +175,3 @@ Route::prefix('export/v1')->group(function () {
 });
 
 Route::get('anonymizerData/v1/{action}', [DataAnonymizerController::class, 'index']);
-
-
-// Route::get('categories', function () {
-//     $categories = config('newcategories');
-
-//     // Start the table with headers
-//     echo "<table border='1' cellpadding='5'>";
-//     echo "<tr><th>ID</th><th>Category</th><th>Description</th></tr>";
-
-//     // Loop through each category and output it in a table row
-//     foreach ($categories as $category) {
-//         echo "<tr>";
-//         echo "<td>" . htmlspecialchars($category['id']) . "</td>";
-//         echo "<td>" . htmlspecialchars($category['name']) . "</td>";
-//         echo "<td>" . htmlspecialchars($category['description']) . "</td>";
-//         echo "</tr>";
-//     }
-
-//     echo "</table>";
-// });
-// Route::get('old-categories', function () {
-//     $categories = \App\Category::all();
-
-//     // Start the table with headers
-//     echo "<table border='1' cellpadding='5'>";
-//     echo "<tr><th>ID</th><th>Category</th><th>Description</th></tr>";
-
-//     // Loop through each category and output it in a table row
-//     foreach ($categories as $category) {
-//         echo "<tr>";
-//         echo "<td>" . htmlspecialchars($category->id) . "</td>";
-//         echo "<td>" . htmlspecialchars($category->description_short) . "</td>";
-//         echo "<td>" . htmlspecialchars($category->description_long) . "</td>";
-//         echo "</tr>";
-//     }
-
-//     echo "</table>";
-// });

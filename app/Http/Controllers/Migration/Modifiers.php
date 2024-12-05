@@ -2,89 +2,11 @@
 
 namespace App\Http\Controllers\Migration;
 
-// use Response;
-// use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
+use App\Project;
 
-use \App\Project;
-use \App\District;
-use \App\User;
-use \App\Organisation;
-use \App\Code;
-use \App\Category;
-use Barryvdh\Reflection\DocBlock\Type\Collection;
-use App\Http\Controllers\Controller;
-
-class ProjectController extends Controller
+trait Modifiers
 {
-
-    // GET /projects
-    public function projectsAPI()
-    {
-        $accessKey = config('app.migration_key');
-        $providedKey =  request()->get('key');
-        if ($accessKey !== $providedKey) {
-            return Response::json(array('error' => true, 'message' => 'Forbidden'), 403);
-        }
-
-        $perPage = request()->get('per_page', 100);
-        $projects = $this->projectsModel()
-            ->paginate($perPage);
-
-        return [
-            'error' => false,
-            'message' => 'Project list',
-            'totalCount' => $projects->total(),
-            'totalPages' => $projects->lastPage(),
-            'currentPage' => $projects->currentPage(),
-            'payload' => $projects->items(),
-        ];
-    }
-    public function projectsDownload()
-    {
-        $accessKey = config('app.migration_key');
-        $providedKey = request()->get('key');
-
-        if ($accessKey !== $providedKey) {
-            return Response::json(['error' => true, 'message' => 'Forbidden'], 403);
-        }
-        $perPage = request()->get('per_page', 100);
-
-        // Set up CSV response headers
-        $headers = [
-            "Content-type" => "text/csv",
-            "Content-Disposition" => "attachment; filename=projects_export.csv",
-            "Pragma" => "no-cache",
-            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
-            "Expires" => "0",
-        ];
-        $columns = collect($this->projectsModel()->first(1))->keys()->toArray();
-        return Response::stream(function () use ($columns, $perPage) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
-
-            $page = 1;
-            while (true) {
-                $projects = $this->projectsModel()->take(30)
-                    ->paginate($perPage, ['*'], 'page', $page);
-                foreach ($projects as $project) {
-                    fputcsv($file, array_map(function ($value) {
-                        return $value === null ? 'null' : $value;
-                    }, $project->toArray()));
-                }
-
-                if ($page >= $projects->lastPage()) break;
-                // if ($page == 2) break;
-
-                $page++;
-            }
-
-            fclose($file);
-        }, 200, $headers);
-    }
-
-
-    private function projectsModel()
+    private function ProjectModel()
     {
 
         $districtStmt = config('stmts')['districts'];
@@ -239,5 +161,5 @@ class ProjectController extends Controller
                 'organisations.physical_address as physical_address',
 
             ]);
-    }
+    } 
 }

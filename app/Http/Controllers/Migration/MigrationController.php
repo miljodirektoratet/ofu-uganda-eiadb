@@ -6,21 +6,23 @@ namespace App\Http\Controllers\Migration;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-use \App\Project;
-use \App\District;
-use \App\User;
-use \App\Organisation;
-use \App\Code;
-use \App\Category;
-use Barryvdh\Reflection\DocBlock\Type\Collection;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Migration\Modifiers;
 
-class OrganisationController extends Controller
+class MigrationController extends Controller
 {
+    use Modifiers;
 
-    // GET /organisations
-    public function organizationAPI()
+    private $entityMapping = [
+        'projects' => ['model' => 'Project', 'override' => true],
+        'organisations' => ['model' => 'Organisation'],
+        'users' => ['model' => 'User'],
+        'eiapermits' => ['model' => 'eiaPermit'],
+    ];
+
+    public function endpoint($entity)
     {
+        $entity = strtolower($entity);
         $accessKey = config('app.migration_key');
         $providedKey =  request()->get('key');
         if ($accessKey !== $providedKey) {
@@ -28,19 +30,23 @@ class OrganisationController extends Controller
         }
 
         $perPage = request()->get('per_page', 100);
-        $organisations = $this->OrganisationModel()
-            ->paginate($perPage);
+        try {
+            $results = $this->model($entity)
+                ->paginate($perPage);
+        } catch (\Exception $e) {
+            return Response::json(array('error' => true, 'message' => 'No such resource'), 404);
+        }
 
         return [
             'error' => false,
-            'message' => 'Organization list',
-            'totalCount' => $organisations->total(),
-            'totalPages' => $organisations->lastPage(),
-            'currentPage' => $organisations->currentPage(),
-            'payload' => $organisations->items(),
+            'message' => "List of $entity",
+            'totalCount' => $results->total(),
+            'totalPages' => $results->lastPage(),
+            'currentPage' => $results->currentPage(),
+            'payload' => $results->items(),
         ];
     }
-    public function OrganisationDownload()
+    public function csvDownload()
     {
         $accessKey = config('app.migration_key');
         $providedKey = request()->get('key');
@@ -85,8 +91,23 @@ class OrganisationController extends Controller
     }
 
 
-    private function OrganisationModel()
+    private function model($entity)
     {
-        return  Organisation::orderBy('organisations.created_at', 'ASC')->select();
+        if (!in_array($entity, array_keys($this->entityMapping))) {
+            throw new \Exception("Model $entity does not exist.");
+        }
+        $modelName = $this->entityMapping[$entity]['model'];
+        $hasModelOverride = isset($this->entityMapping[$entity]['override']);
+        $model = ($hasModelOverride) ?  $modelName . "Model" : $modelName;
+        $class = "\\App\\" . $model;
+
+        if (! $hasModelOverride && class_exists($class)) {
+            return $class::orderBy('created_at', 'ASC')->select();
+        } else if ($hasModelOverride && method_exists($this, $model)) {
+            return $this->{$model}();
+        }
+
+
+        throw new \Exception("Model $class does not exist.");
     }
 }
