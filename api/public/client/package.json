@@ -1,0 +1,41 @@
+{
+  "name": "Uganda",
+  "version": "5.60.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "bower": "^1.3.1",
+    "grunt": "^1.4.1",
+    "grunt-angular-templates": "^1.2.0",
+    "grunt-bump": "^0.8.0",
+    "grunt-contrib-clean": "^2.0.1",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sync": "^0.8.0",
+    "grunt-text-replace": "^0.4.0",
+    "http-server": "^14.1.1",
+    "karma": "^6.4.2",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-jasmine": "^0.1.5",
+    "protractor": "^3.3.0",
+    "shelljs": "^0.8.5",
+    "tmp": "0.0.23"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "test": "karma start test/karma.conf.js",
+    "update-webdriver": "webdriver-manager update",
+    "protractor": "protractor test/protractor-conf.js",
+    "test-single-run": "karma start test/karma.conf.js  --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:miljodir/sero.git"
+  },
+  "author": "Jostein Skaar <jostein.skaar@gmail.com>",
+  "license": "MIT"
+}

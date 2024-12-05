@@ -1,0 +1,38 @@
+<div class="search">
+    <ul class="nav nav-tabs" role="tablist">
+
+        <li ng-class="{active: tab==SearchTabEnum.Projects}">
+            <a ng-href="#/search/projects">Project</a>
+        </li>
+        <li ng-class="{active: tab==SearchTabEnum.EiasPermits}">
+            <a href="#/search/eiaspermits">EIA</a>
+        </li>
+        <li ng-class="{active: tab==SearchTabEnum.PermitsLicenses}">
+            <a href="#/search/permitslicenses">Permit and License</a>
+        </li>
+        <li ng-class="{active: tab==SearchTabEnum.AuditsInspections}">
+            <a href="#/search/auditsinspections">Audit and Inspection</a>
+        </li>
+        <li ng-class="{active: tab==SearchTabEnum.ExternalAudits}">
+            <a href="#/search/externalaudits">External audit</a>
+        </li>
+    </ul>
+
+
+    <div ng-if="tab==SearchTabEnum.Projects">
+        <div ng-controller="SearchProjectsController" ng-include="'partials/searchProjects.html'"></div>
+    </div>
+    <div ng-if="tab==SearchTabEnum.EiasPermits">
+        <div ng-controller="SearchEiasPermitsController" ng-include="'partials/searchEiasPermits.html'"></div>
+    </div>
+    <div ng-if="tab==SearchTabEnum.PermitsLicenses">
+        <div ng-controller="SearchPermitsLicensesController" ng-include="'partials/searchPermitsLicenses.html'"></div>
+    </div>
+    <div ng-if="tab==SearchTabEnum.AuditsInspections">
+        <div ng-controller="SearchAuditsInspectionsController" ng-include="'partials/searchAuditsInspections.html'"></div>
+    </div>
+    <div ng-if="tab==SearchTabEnum.ExternalAudits">
+        <div ng-controller="SearchExternalAuditsController" ng-include="'partials/searchExternalAudits.html'"></div>
+    </div>
+
+</div>

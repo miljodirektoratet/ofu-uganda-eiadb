@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" ng-app="seroApp">
+<head>
+    <meta charset="utf-8">
+    <title>EIA Database</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+
+    <link rel="stylesheet" href="vendor/vendor.min.css?v=5.60.0"/>
+	<link rel="stylesheet" href="app.min.css?v=5.60.0"/>
+</head>
+<body>
+    <div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavBarController">
+        <div class="container" style="width: 1205px;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="https://www.nema.go.ug/" target="_blank">
+                    <img class="navbar-left" src="img/NEMA-logo-small.png" alt="NEMA logo" style="padding-right:5px;"/>
+                </a>
+              
+            <a class="navbar-brand" href="#/">EIA Database 
+                <b class="badge env-badge" ng-show="envinfo.toLowerCase() == 'test'">{{envinfo}}</b>
+                <!-- <b class="badge env-badge" ng-show="envinfo.toLowerCase() == 'test'">{{lvVersion}}</b> -->
+            </a>
+        </div>
+        <div class="navbar-collapse" collapse="isCollapsed">
+            <ul class="nav navbar-nav">
+                <li ng-class="{ active: isAdvancedActive('/projects')}"><a href="#/projects">Projects</a></li>
+                <li ng-class="{ active: isAdvancedActive('/practitioners')}"><a href="#/practitioners">Practitioners</a></li>
+                <li ng-class="{ active: isAdvancedActive('/search')}"><a href="#/search">Search</a></li>
+                <li ng-class="{ active: isAdvancedActive('/statistics')}"><a href="#/statistics">Statistics</a></li>
+                <!-- <li ng-class="{ active: isAdvancedActive('/advanced')}" ng-show="hasAccess('/advanced')"><a href="#/advanced">Advanced</a></li> -->
+                <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
+                
+                    <li class="dropdown" ng-show="hasAccess('/advanced')" ng-class="{ active: isAdvancedActive('/advanced', true)}" >
+                        <a class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li ng-hide="envinfo  != 'test'" ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/anonymize-data')}"><a href="#/advanced/anonymize-data">Anonymize data</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/codes')}"><a href="#/advanced/codes">Manage Codes</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/users')}"><a href="#/advanced/users">Manage Users</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/users')}"><a href="#/advanced/emailOrders">Manage Email
+                                Orders</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusEIA')}"><a href="#/advanced/pirking/statusEIA">Update status for EIA</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusEA')}"><a href="#/advanced/pirking/statusEA">Update status for External audits</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusAI')}"><a href="#/advanced/pirking/statusAI">Update status for Audits and inspection</a></li>
+                            <li ng-class="{ 'dropdown-hover': isAdvancedActive('/advanced/pirking/statusPL')}"><a href="#/advanced/pirking/statusPL">Update status for Permit and License</a></li>
+                           
+                        </ul>
+                      </li>
+                      <li> 
+                        <a href="#" onclick="return false;" class="version"><app-version/></a></li>
+            </ul>
+            <p class="navbar-text navbar-right">
+                
+                User: <a href="#/user" class="navbar-link">{{userinfo.info.name}}</a>
+            </p>
+        </div>
+        <!--/.nav-collapse -->
+
+    </div>
+</div>
+
+<!--<div id="infoMessageBox" class="bgcolor-info">-->
+<!--All data saved.-->
+<!--</div>-->
+
+<div class="container-fluid max-width">
+    <div ng-view></div>
+</div>
+<div id="dvjson"></div>
+
+<script src="vendor/vendor.min.js?v=5.60.0"></script>
+	<script src="app.min.js?v=5.60.0"></script>
+	<script src="partials.min.js?v=5.60.0"></script>
+<div class="forceload"><img src="img/loader.gif" alt="loader"/></div>
+</body>
+</html>

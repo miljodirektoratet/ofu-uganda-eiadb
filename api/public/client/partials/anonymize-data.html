@@ -1,0 +1,54 @@
+<div class="top-header">
+    <h1>Anonymize Data</h1>
+</div>
+
+<div>
+    <p>Anonymize field data <sub style="color:#ff0000" ng-show="envinfo != TEST">(Available only on Test)</sub></p><br><br>
+    <div class="alert alert-warning text-center" ng-show="working">Processing...</div>
+    <div class="alert alert-success text-center" ng-show="!working && successState">Done</div>
+    <div class="alert alert-danger text-center" ng-show="done == 2 && !working && !successState">Failed :(</div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Organization emails</label>
+            </div>
+            <div class="col-md-6">
+               <button class="btn btn-warning" ng-hide="working || envinfo != TEST" ng-click='anonymize("org_email_update")'>{{defaultBtnTxt}}</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Practitioner emails</label>
+            </div>
+            <div class="col-md-6">
+               <button class="btn btn-warning" ng-hide="working || envinfo != TEST" ng-click='anonymize("prac_email_update")'>{{defaultBtnTxt}}</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label>EIA email contacts</label>
+            </div>
+            <div class="col-md-6">
+               <button class="btn btn-warning"  ng-hide="working || envinfo != TEST" ng-click='anonymize("eia_email_update")'>{{defaultBtnTxt}}</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label>External Audit email contacts</label>
+            </div>
+            <div class="col-md-6">
+               <button class="btn btn-warning" ng-click='anonymize("ea_email_update")' ng-hide="working || envinfo != TEST">{{defaultBtnTxt}}</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Permit License email contacts</label>
+            </div>
+            <div class="col-md-6">
+               <button class="btn btn-warning"  ng-hide="working || envinfo != TEST" ng-click='anonymize("pl_email_update")'>{{defaultBtnTxt}}</button>
+            </div>
+        </div>
+</div>

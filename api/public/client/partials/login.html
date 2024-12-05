@@ -1,0 +1,62 @@
+<div class="top-header">
+  <h1>Not Logged In</h1>
+  <p class="lead">You need to be logged in in order to use this application.</p>
+</div>
+<div ng-controller="LoginController">
+
+  <div class="row" >
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Login Needed (Dirty:{{loginForm.$dirty}}, valid:{{loginForm.$valid}})</h2>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal" role="form" name="loginForm" novalidation ng-submit="login()">
+
+            <div class="form-group" ng-show="loginMessages">
+              <ul>
+                <li ng-repeat="message in loginMessages">{{message}}</li>
+              </ul>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Initials</label>
+              <div class="col-md-6">
+                <input type="text" ng-required="true" class="form-control" set-focus name="initials" ng-model="loginData.initials">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Password</label>
+              <div class="col-md-6">
+                <input type="password" ng-required="true" class="form-control" name="password" ng-model="loginData.password">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-4">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="remember" ng-model="loginData.remember"> Remember Me
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-4">
+                <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid || loginFormDisabled">Login</button>
+                <a class="btn btn-link" ng-href="#/password/send">Forgot Your Password?</a>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>

@@ -1,0 +1,566 @@
+<div class="project-auditsandinspections">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="edit-container">
+                <div class="row header visible-md visible-lg">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Control number</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Lead officer</th>
+                                <th>Date started carried out</th>
+                                <th>Date of response</th>
+                                <th>Activity report</th>
+                                <th>
+                                    <div class="btn-group new-button pull-right" dropdown auto-close="disabled" is-open="newButton.isopen" ng-hide="!auth.canSave('new')">
+                                        <button type="button" class="btn btn-xs btn-success pull-right" dropdown-toggle ng-disabled="routeParams.auditinspectionId" ng-hide="!auth.canSave('new')">
+                                            New<span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li role="menuitem">
+                                                <form role="form" name="parts.auditinspection.form" novalidation>
+                                                    <div class="row">
+                                                        <!-- <div class="col-md-2">
+                                                            <label for="newButton.year">Year</label>
+                                                            <input type="text" integer
+                                                                   id="newButton.year"
+                                                                   ng-required="true"
+                                                                   ng-model="newButton.year"
+                                                                   class="form-control input-sm"/>
+                                                        </div> -->
+                                                        <div class="col-md-3">
+                                                            <label for="newButton.type">Activity</label>
+                                                            <select ui-select2="{allowClear:true}" id="newButton.type" class="form-control input-sm"
+                                                                    ng-required="true"
+                                                                    ng-model="newButton.type">
+                                                                    <option></option>
+                                                                <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
+                                                                    {{v.description1}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="newButton.reason">Type</label>
+                                                            <select ui-select2="{allowClear:true}" id="newButton.reason" class="form-control input-sm"
+                                                                    ng-required="true"
+                                                                    ng-model="newButton.reason">
+                                                                    <option></option>
+                                                                    <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
+                                                                    {{v.description1}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="newButton.date_carried_out">Date started carried out</label>
+                                                            <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                                <input type="text"
+                                                                       ng-required="true"
+                                                                       id="newButton.date_carried_out"
+                                                                       class="form-control input-sm input-date"
+                                                                       ng-model="newButton.date_carried_out"
+                                                                       data-datepicker-popup="d MMM yyyy" data-is-open="opened"
+                                                                       data-datepicker-options="datepickerOptions"
+                                                                       data-show-button-bar="false"/>
+                                                                <span class="input-group-btn">
+                                          <button type="button"
+                                                  class="btn btn-default btn-sm" ng-click="open($event)"><span
+                                                  class="glyphicon glyphicon-calendar"></span></button>
+                                        </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="newButton.create">&nbsp;</label><br>
+                                                            <button type="button" class="btn btn-sm btn-primary use-button pull-right"
+                                                                    id="newButton.create"
+                                                                    ng-disabled="parts.auditinspection.form.$invalid"
+                                                                    ng-click="newAuditInspection()">Create
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="edit-row" ng-repeat="ai in data.auditsinspections">
+                            <tr class="master" ng-class="{selected: routeParams.auditinspectionId==ai.id, notvalid: routeParams.auditinspectionId==ai.id && parts.auditinspection.form.$invalid}"
+                                ng-click="openAuditInspection(ai.id, $event)">
+                                <td>{{ai.code}}</td>
+                                <td>{{data.getCodeFromValuelist('auditinspectionstatus', ai.status)}}</td>
+                                <td>{{data.getCodeFromValuelist('auditinspectiontype', ai.type)}}</td>
+                                <td>{{data.getCodeFromValuelist('officer_audit_inspection', ai.lead_officer)}}</td>
+                                <td>{{ai.date_carried_out | date:'d MMM yyyy'}}</td>
+                                <td>{{ai.date_action_taken | date:'d MMM yyyy'}}</td>
+                                <td align="left">
+                                    <a ng-href="{{downloadFileUrl(ai.report_file.id)}}" ng-click="stopPropagation($event)" ng-show="ai.report_file" ng-attr-alt="{{ai.report_file.filename}}" ng-attr-title="{{ai.report_file.filename}}">
+                                        <span class="glyphicon glyphicon-file"></span>
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <div style="min-width:65px;">
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(routeParams.auditinspectionId, $event)" ng-disabled="routeParams.auditinspectionId" ng-show="routeParams.auditinspectionId!=ai.id" ng-href="#/projects/{{routeParams.projectId}}/auditsinspections/{{ai.id}}">{{auth.canSave('new') ? "Edit" : "Open"}}</a>
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(parts.auditinspection.state == SavingStateEnum.Loading, $event)" ng-disabled="parts.auditinspection.state == SavingStateEnum.Loading" ng-show="routeParams.auditinspectionId==ai.id" ng-href="#/projects/{{routeParams.projectId}}/auditsinspections">Close</a>
+                                        <span class="loader pull-right" ng-show="routeParams.auditinspectionId==ai.id && parts.auditinspection.state == SavingStateEnum.Loading"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="shouldShowAuditInspection(ai)" class="detail">
+                                <td colspan="8">
+                                    <form role="form" name="parts.auditinspection.form" novalidation>
+
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+                                                    <label for="year">Year</label>
+                                                    <input type="text" integer ng-blur="saveCurrentAuditInspection()"
+                                                            readonly class="form-control input-sm" id="year"
+                                                            ng-model="data.auditinspection.year"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="type">Activity</label>
+                                                    <select ui-select2="{allowClear:true}" id="type" class="form-control input-sm"
+                                                            ng-change="saveCurrentAuditInspection()"
+                                                            ng-required="true"
+                                                            ng-disabled="!auth.canSave('type')"
+                                                            ng-model="data.auditinspection.type">
+                                                        <option></option>    
+                                                        <option ng-repeat="v in valuelists.auditinspectiontype" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
+                                                            {{v.description1}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="reason">Type</label>
+                                                    <select ui-select2="{allowClear:true}" id="reason" class="form-control input-sm"
+                                                            ng-change="saveCurrentAuditInspection()"
+                                                            ng-required="true"
+                                                            ng-disabled="!auth.canSave('reason')"
+                                                            ng-model="data.auditinspection.reason">
+                                                        <option></option>    
+                                                        <option ng-repeat="v in valuelists.audit_inspection_reason" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
+                                                            {{v.description1}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="lead_officer">Lead officer</label>
+                                                    <select ui-select2="{allowClear:true}"
+                                                            ng-change="saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('lead_officer')" id="lead_officer"
+                                                            class="form-control input-sm"
+                                                            ng-model="data.auditinspection.lead_officer">
+                                                        <option></option>
+                                                        <option ng-repeat="v in valuelists.officer_audit_inspection | filter:criteriaMatchOfficer1(data.auditinspection.lead_officer)" value="{{v.id}}" ng-disabled="v.id == false" ng-class="{'dropdown-partition-bar': v.id == false, 'dropdown-inactive-item': (v.is_passive == 1 && v.id != false) }">
+                                                            {{v.description1}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="users">Other officers</label>
+                                                    <select ui-select2 multiple="true" placeholder="Click to pick"
+                                                            ng-change="saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('personnel')" id="users"
+                                                            class="form-control input-sm"
+                                                            ng-model="data.auditinspection.user_ids">
+                                                        <option ng-repeat="v in valuelists.officer_audit_inspection | filter:criteriaMatchOfficer1(data.auditinspection.user_ids)" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
+                                                            {{v.description1}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_carried_out">Date started carried out</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                                                ng-required="true"
+                                                                ng-readonly="!auth.canSave('date_carried_out')" id="date_carried_out"
+                                                                class="form-control input-sm input-date"
+                                                                ng-model="data.auditinspection.date_carried_out"
+                                                                data-datepicker-popup="d MMM yyyy" data-is-open="opened"
+                                                                data-datepicker-options="datepickerOptions"
+                                                                data-show-button-bar="false"/>
+                                                            <span class="input-group-btn">
+                                                              <button type="button" ng-disabled="!auth.canSave('date_inspection')"
+                                                                      class="btn btn-default btn-sm" ng-click="open($event)"><span
+                                                                      class="glyphicon glyphicon-calendar"></span></button>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="days">Number of days</label>
+                                                    <input type="text" integer ng-blur="saveCurrentAuditInspection()"
+                                                            ng-required="true"
+                                                            ng-readonly="!auth.canSave('days')" class="form-control input-sm" id="days"
+                                                            ng-model="data.auditinspection.days"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="external_participants">Participants from lead agencies, facilities etc.</label>
+                                                    <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                                            ng-readonly="!auth.canSave('external_participants')"
+                                                            class="form-control input-sm" id="external_participants"
+                                                            ng-model="data.auditinspection.external_participants"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+
+                                                    <label for="coordinated">Multisectoral</label>
+                                                    <input type="checkbox" class="checkbox-small form-control input-sm" id="coordinated"
+                                                            ng-model="fake_coordinated" ng-checked="data.auditinspection.coordinated"
+                                                            ng-click="data.auditinspection.coordinated = !data.auditinspection.coordinated; saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('coordinated')"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="performance_level">Performance level</label>
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('action_taken')" id="performance_level" class="form-control input-sm"
+                                                            ng-model="data.auditinspection.performance_level">
+                                                            <option></option>
+                                                            <option ng-repeat="v in valuelists.grade" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
+                                                            {{v.description1}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Activity report</label>
+                                                    <div class="uploaded-file" ng-show="data.auditinspection.file_metadata_report_id">
+                                                        <a ng-href="{{downloadFileUrl(data.auditinspection.file_metadata_report_id)}}" ng-show="data.auditinspection.report_file">{{data.auditinspection.report_file.filename}}</a>
+                                                        
+                                                        <sero-delete-button class="delete-button" 
+                                                        text="'delete'"
+                                                        warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                        button-class="'delete btn btn-sm btn-link'"
+                                                        ng-hide="!auth.canSave('delete')"
+                                                        on-yes="deleteReport()"></sero-delete-button>
+
+                                                    </div>
+                                                    <div>
+                                                        <button class="btn btn-sm btn-default"
+                                                                type="button"
+                                                                ngf-select="uploadReport($files)"
+                                                                accept="{{fileUploadPattern}}"
+                                                                ngf-pattern="{{fileUploadNgfPattern}}"
+                                                                ng-model="fake_report"
+                                                                name="report"
+                                                                ng-hide="data.auditinspection.file_metadata_report_id"
+                                                                ng-disabled="!auth.canSave('delete')"
+                                                                ngf-max-size="{{fileUploadMaxSize}}">
+                                                            Select File
+                                                        </button>
+                                                        <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingFileReport">
+                                                            <div class="file">{{reportFile.name}}<br/>
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{reportFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                                            style="width: {{reportFile.progress}}%;">
+                                                                        {{reportFile.progress}}%
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="errors" ng-messages="parts.auditinspection.form.report.$error" role="alert">
+                                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                                <div ng-message="maxSize">The file is to big.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="lead_agencies">Lead agencies</label>
+                                                    <select ui-select2 multiple="true" placeholder="Click to pick"
+                                                            ng-change="saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('lead_agencies')" id="lead_agencies"
+                                                            class="form-control input-sm"
+                                                            ng-model="data.auditinspection.leadagency_ids">
+                                                        <option ng-repeat="v in valuelists.leadagency" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
+                                                            {{v.description2}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="advance_notice">Advanced notice</label>
+                                                    <input type="checkbox" class="checkbox-small form-control input-sm"
+                                                            id="advance_notice"
+                                                            ng-model="fake_advance_notice"
+                                                            ng-checked="data.auditinspection.advance_notice"
+                                                            ng-click="data.auditinspection.advance_notice = !data.auditinspection.advance_notice; saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('advance_notice')"/>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                          
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_action_taken">Date of response</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                                                ng-readonly="!auth.canSave('date_action_taken')" id="date_action_taken"
+                                                                class="form-control input-sm input-date"
+                                                                ng-model="data.auditinspection.date_action_taken"
+                                                                data-datepicker-popup="d MMM yyyy" data-is-open="opened"
+                                                                data-datepicker-options="datepickerOptions"
+                                                                data-show-button-bar="false"/>
+                                                            <span class="input-group-btn">
+                                                              <button type="button" ng-disabled="!auth.canSave('date_action_taken')"
+                                                                      class="btn btn-default btn-sm" ng-click="open($event)"><span
+                                                                      class="glyphicon glyphicon-calendar"></span></button>
+                                                            </span>
+                                                    </div>
+                                                    <div class="inline-err" ng-show="(ai.date_action_taken.toString() && ai.date_carried_out.toString()) && ai.date_action_taken < ai.date_carried_out">Application should be sent to the team leader before the officer</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="action_taken">Response</label>
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentAuditInspection()"
+                                                            ng-disabled="!auth.canSave('action_taken')" id="action_taken" class="form-control input-sm"
+                                                            ng-model="data.auditinspection.action_taken">
+                                                        <option></option>
+                                                        <option ng-repeat="v in valuelists.actiontaken" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">
+                                                            {{v.description1}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="findings">Description of findings</label>
+                                                    <textarea class="form-control input-sm" rows="2" id="findings"
+                                                            ng-blur="saveCurrentAuditInspection()"
+                                                            ng-readonly="!auth.canSave('findings')"
+                                                            ng-model="data.auditinspection.findings"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Response document</label>
+                                                    <div class="uploaded-file" ng-show="data.auditinspection.file_metadata_id">
+                                                        <a ng-href="{{downloadFileUrl(data.auditinspection.file_metadata_id)}}" ng-show="data.auditinspection.action_taken_letter">{{data.auditinspection.action_taken_letter.filename}}</a>
+
+                                                        <sero-delete-button class="delete-button" 
+                                                        text="'delete'"
+                                                        warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                        button-class="'delete btn btn-sm btn-link'"
+                                                        ng-hide="!auth.canSave('delete')"
+                                                        on-yes="deleteActionTakenLetter()"></sero-delete-button>
+
+                                                        <!-- <button type="button" class="delete btn btn-sm btn-link"
+                                                                ng-click="deleteActionTakenLetter()"
+                                                                ng-hide="!auth.canSave('delete')">delete
+                                                        </button> -->
+                                                    </div>
+                                                    <div>
+                                                        <button class="btn btn-sm btn-default"
+                                                                ngf-select="uploadActionTakenLetter($files)"
+                                                                type="button"
+                                                                accept="{{fileUploadPattern}}"
+                                                                ngf-pattern="{{fileUploadNgfPattern}}"
+                                                                ng-model="fake_action_taken_letter"
+                                                                name="action_taken_letter"
+                                                                ng-hide="data.auditinspection.file_metadata_id"
+                                                                ng-disabled="!auth.canSave('delete')"
+                                                                ngf-max-size="{{fileUploadMaxSize}}">
+                                                            Select File
+                                                        </button>
+                                                        <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingFileActionTakenLetter">
+                                                            <div class="file">{{actionTakenLetterFile.name}}<br/>
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{actionTakenLetterFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                                            style="width: {{actionTakenLetterFile.progress}}%;">
+                                                                        {{actionTakenLetterFile.progress}}%
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="errors" ng-messages="parts.auditinspection.form.action_taken_letter.$error" role="alert">
+                                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                                <div ng-message="maxSize">The file is to big.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="recommendations">Recommendations</label>
+                                                    <textarea class="form-control input-sm" rows="2" id="recommendations"
+                                                            ng-blur="saveCurrentAuditInspection()"
+                                                            ng-readonly="!auth.canSave('recommendations')"
+                                                            ng-model="data.auditinspection.recommendations"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_deadline">Follow-up date</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                                                ng-readonly="!auth.canSave('date_deadline')" id="date_deadline"
+                                                                class="form-control input-sm input-date"
+                                                                ng-model="data.auditinspection.date_deadline"
+                                                                data-datepicker-popup="d MMM yyyy" data-is-open="opened"
+                                                                data-datepicker-options="datepickerOptions"
+                                                                data-show-button-bar="false"/>
+                                                            <span class="input-group-btn">
+                                                              <button type="button" ng-disabled="!auth.canSave('date_deadline')"
+                                                                      class="btn btn-default btn-sm" ng-click="open($event)"><span
+                                                                      class="glyphicon glyphicon-calendar"></span></button>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_closing">Activity ended</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentAuditInspection()"
+                                                                ng-readonly="!auth.canSave('date_closing')" id="date_closing"
+                                                                class="form-control input-sm input-date"
+                                                                ng-model="data.auditinspection.date_closing"
+                                                                data-datepicker-popup="d MMM yyyy" data-is-open="opened"
+                                                                data-datepicker-options="datepickerOptions"
+                                                                data-show-button-bar="false"/>
+                                                            <span class="input-group-btn">
+                                                              <button type="button" ng-disabled="!auth.canSave('date_closing')"
+                                                                      class="btn btn-default btn-sm" ng-click="open($event)"><span
+                                                                      class="glyphicon glyphicon-calendar"></span></button>
+                                                            </span>
+                                                    </div>
+                                                    <div class="inline-err" ng-show="(ai.date_closing.toString() && ai.date_deadline.toString()) && ai.date_closing < ai.date_deadline"><b>Activity end</b> date should be ahead of the <b>Follow-up date</b></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="remarks">Remarks</label>
+                                                    <textarea class="form-control input-sm" rows="2" id="remarks"
+                                                            ng-blur="saveCurrentAuditInspection()"
+                                                            ng-readonly="!auth.canSave('remarks')"
+                                                            ng-model="data.auditinspection.remarks"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Supporting documentation</label>
+                                                    <div class="uploaded-files" ng-show="data.auditinspection.documentation">
+                                                        <div class="file" ng-repeat="d in data.auditinspection.documentation">
+                                                            <a ng-href="{{downloadFileUrl(d.id)}}">{{d.filename}}</a>
+                                                            <sero-delete-button class="delete-button" 
+                                                            text="'delete'"
+                                                            warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                            button-class="'delete btn btn-sm btn-link'"
+                                                            ng-hide="!auth.canSave('delete')"
+                                                            on-yes="deleteDocumentation(d.id)"></sero-delete-button>
+
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button class="btn btn-sm btn-default"
+                                                                type="button"
+                                                                ngf-select="uploadDocumentation($files)"
+                                                                accept="{{fileUploadPattern}}"
+                                                                ngf-pattern="{{fileUploadNgfPattern}}"
+                                                                ng-model="fake_documentation"
+                                                                name="documentation"
+                                                                ng-disabled="!auth.canSave('delete')"
+                                                                ngf-max-size="{{fileUploadMaxSize}}">
+                                                            Select File
+                                                        </button>
+                                                        <div class="uploading-file ng-hide cssSlideUp" ng-show="showUploadingFileDocumentation">
+                                                            <div class="file">{{documentationFile.name}}<br/>
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{documentationFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                                            style="width: {{documentationFile.progress}}%;">
+                                                                        {{documentationFile.progress}}%
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="errors" ng-messages="parts.auditinspection.form.documentation.$error" role="alert">
+                                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                                <div ng-message="maxSize">The file is to big.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                                        text="'Delete Audit and Inspection'"
+                                                        warning="'Do you really want to delete this record?'"
+                                                        button-class="'btn-danger'"
+                                                        on-yes="deleteAuditInspection()"></sero-delete-button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>(Dirty:{{parts.auditinspection.form.$dirty}}, valid:{{parts.auditinspection.form.$valid}})
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.Loaded && !ai.is_new">Last changed by {{ai.updated_by}}</span>
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.SavingStarted">Saving...</span>
+                                                    <span class="saving-message-inline pull-right" ng-show="parts.auditinspection.state == SavingStateEnum.SavingFinished">All changes saved</span>
+                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.auditinspection.state == SavingStateEnum.SavingFailed">Saving failed</span>
+                                                    <span class="saving-message-inline pull-right color-error" ng-show="parts.auditinspection.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

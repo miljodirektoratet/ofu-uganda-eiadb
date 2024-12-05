@@ -1,0 +1,29 @@
+<div class="project-eiasandpermits">
+
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" role="tablist">
+                <li ng-class="{active: eptab==EiasPermitsTabEnum.EiaPermit}">
+                    <a ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}">EIA</a>
+                </li>
+                <li ng-click="preventClickIfDisabled(isDocumentsDisabled(routeParams.eiapermitId), $event)" ng-class="{active: eptab==EiasPermitsTabEnum.Documents, disabled: isDocumentsDisabled(routeParams.eiapermitId) }">
+                    <a ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}/documents/{{routeParams.documentId}}">Documents{{isDocumentsDisabled(routeParams.eiapermitId) ? "" : " (" + data.documents.length + ")"}}</a>
+                </li>
+                <li ng-click="preventClickIfDisabled(isHearingsDisabled(routeParams.documentId), $event)" ng-class="{active: eptab==EiasPermitsTabEnum.Hearings, disabled: isHearingsDisabled(routeParams.documentId)}">
+                    <a ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}/documents/{{routeParams.documentId}}/hearings">LA review{{isHearingsDisabled(routeParams.documentId) ? "" : " (" + data.hearings.length + ")"}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div ng-if="eptab==EiasPermitsTabEnum.EiaPermit">
+        <div ng-controller="EiasPermitsController" ng-include="'partials/projectEiasPermits.html'"></div>
+    </div>
+    <div ng-if="eptab==EiasPermitsTabEnum.Documents">
+        <div ng-controller="EiasPermitsDocumentsController" ng-include="'partials/projectEiasPermitsDocuments.html'"></div>
+    </div>
+    <div ng-if="eptab==EiasPermitsTabEnum.Hearings">
+        <div ng-controller="EiasPermitsHearingsController" ng-include="'partials/projectEiasPermitsHearings.html'"></div>
+    </div>
+
+</div>

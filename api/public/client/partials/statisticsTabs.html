@@ -1,0 +1,24 @@
+<div class="statistics">
+    <ul class="nav nav-tabs" role="tablist">
+        <li ng-class="{active: tab==StatisticsTabEnum.Projects}">
+            <a ng-href="#/statistics/projects">Project</a>
+        </li>
+        <!--<li ng-class="{active: tab==StatisticsTabEnum.EiasPermits}" class="disabled">-->
+            <!--<a href="#/statistics/eiaspermits">EIA</a>-->
+        <!--</li>-->
+        <!--<li ng-class="{active: tab==StatisticsTabEnum.AuditsInspections}"  class="disabled">-->
+            <!--<a href="#/statistics/auditsinspections">Audit and Inspection</a>-->
+        <!--</li>-->
+    </ul>
+
+    <div ng-if="tab==StatisticsTabEnum.Projects">
+        <div ng-controller="StatisticsProjectsController" ng-include="'partials/statisticsProjects.html'"></div>
+    </div>
+    <div ng-if="tab==StatisticsTabEnum.EiasPermits">
+        NOT IMPLEMENTED
+    </div>
+    <div ng-if="tab==StatisticsTabEnum.AuditsInspections">
+        NOT IMPLEMENTED
+    </div>
+
+</div>

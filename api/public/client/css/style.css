@@ -1,0 +1,430 @@
+/* Needed by ui.bootstrap */
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+
+.top-header {
+    margin-bottom: 30px;
+}
+
+.top-header h1 {
+    margin-top: 0;
+}
+
+.practitioners {
+}
+
+.practitioners .header,
+.projects .header,
+.project-project-new .header {
+    font-weight: bold;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.projects .project .master,
+.project .project-project-new .master {
+    background-color: #f3f3f3;
+    /*border-top:1px solid darkgray;*/
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.practitioners .message-inline {
+    padding: 4px;
+    font-size: 12px;
+    color: #808080;
+}
+
+.practitioners .practitioner .master {
+    background-color: #CCCCCC;
+    font-size: 13px;
+
+}
+.edit-container .edit-row .master {
+    background-color: #CCCCCC;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.edit-container .edit-row .master .btn-download-file {
+    padding: 0px;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 0px 10px;
+}
+
+.edit-container .edit-row .master td {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.practitioners .practitioner .master .noCertificate {
+    opacity: 0;
+    display: none;
+}
+
+.practitioners .practitioner .detail,
+.edit-container .edit-row .detail {
+    padding-top: 5px;
+    padding-bottom: 10px;
+    background-color: #FCFCFC;
+}
+
+.practitioners .practitioner .selected {
+    /*background-color: #FCFCFC;*/
+}
+
+.edit-container .edit-row .other-is-selected {
+    opacity: 0.5;
+
+}
+
+.edit-container .edit-row .selected {
+
+}
+
+.edit-container .edit-row .detail td {
+    border: none;
+}
+
+.btn-link-hover {
+    color: #2a6496;
+    text-decoration: underline;
+}
+
+.max-width {
+    max-width: 1200px;
+}
+
+.practitioners .practitioner .master .certificate-label {
+    font-size: 9px;
+    padding: 0.1em 0.6em 0.1em;
+}
+
+.practitioners .btn-link {
+    line-height: 1.2;
+}
+
+.practitioners .practitioner .certificates .btn-delete-certificate,
+.practitioners .practitioner .certificates .btn-add-certificate {
+    min-width: 60px;
+}
+
+.practitioners .practitioner .certificates .input-date {
+    min-width: 87px;
+}
+
+.practitioners .practitioner .certificates .dropdown-menu table {
+    min-width: 280px;
+}
+
+.practitioners .practitioner .certificates .input-year {
+    min-width: 65px;
+}
+
+.practitioners .practitioner .certificates .input-conditions {
+    min-width: 140px;
+}
+
+.practitioners .practitioner .certificates .input-remarks {
+    min-width: 200px;
+}
+
+.practitioners .practitioner .certificates table th {
+    white-space: nowrap;
+}
+
+.container-datepicker .input-group-btn {
+    /* Fix for bug: https://github.com/twbs/bootstrap/issues/9950 */
+    width: auto;
+}
+
+.practitioners .input-filter,
+.projects .input-filter,
+.project .input-filter {
+    min-width: 400px;
+}
+
+.projects .delete-button .btn-delete {
+    width: 200px;
+}
+
+#infoMessageBox {
+    top: 60px;
+    left: 50%;
+    width: 300px;
+    /*height:50px;*/
+    /*margin-top: 0px; *//*set to a negative number 1/2 of your height*/
+    margin-left: -200px; /*set to a negative number 1/2 of your width*/
+    position: fixed;
+    z-index: 100000;
+    padding: 2px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.1em;
+    opacity: 0;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px;
+}
+
+.infomessagebox-add, .infomessagebox-remove {
+    /*display: none !important;*/
+    opacity: 0 !important;
+    -webkit-transition: all 750ms ease-in-out;
+    -moz-transition: all 750ms ease-in-out;
+    -o-transition: all 750ms ease-in-out;
+    transition: all 750ms ease-in-out;
+}
+
+.infomessagebox, .infomessagebox-add-active {
+    /*display: block !important;*/
+    opacity: 1 !important;
+}
+
+.infomessagebox-remove-active {
+    /*display: none !important;*/
+    opacity: 0 !important;
+}
+
+.checkbox-small {
+    width: 30px;
+    margin: 0 !important;
+}
+
+input.ng-invalid,
+select.ng-invalid,
+textarea.ng-invalid,
+.select2-container.ng-invalid .select2-choice,
+.practitioners .practitioner .notvalid,
+.edit-container .edit-row .notvalid {
+    background-color: #FFFF99;
+}
+
+.loader {
+    background-image: url('../img/loader.gif');
+    background-repeat: no-repeat;
+    background-size: 14px;
+    background-position: 50% 2px;
+    height: 16px;
+    width: 20px;
+}
+
+.loader-standalone {
+    background-image: url('../img/loader.gif');
+    height: 32px;
+    width: 32px;
+}
+
+.forceload {
+    position: absolute;
+    top: -1000px;
+    opacity: 0;
+}
+
+.project .project-project,
+.project .project-eiasandpermits,
+.project .project-auditsandinspections,
+.project-externalaudits,
+.project-permitslicenses {
+    padding-top: 15px;
+}
+
+.project .project-project .project-project-project {
+    /*padding-right:8px;*/
+}
+
+.project .project-project .project-project-organisation {
+    /*padding-left:8px;*/
+}
+
+.saving-message-inline {
+    padding: 4px;
+    font-size: 12px;
+    color: #808080;
+}
+
+.project .container-datepicker,
+.search .container-datepicker {
+    width: 100%;
+}
+
+.project .container-datepicker .input-group-btn,
+.search .container-datepicker .input-group-btn {
+    width: 30px;
+}
+
+.bg-success {
+    background-color: #5cb85c;
+}
+
+.bgcolor-success {
+    background-color: #5cb85c;
+}
+
+.bgcolor-info {
+    background-color: #5bc0de;
+}
+
+.color-error {
+    color: #a94442;
+}
+
+.element-dropdown .btn,
+.element-dropdown .dropdown-menu {
+    width: 100%;
+}
+
+.warningfont {
+    color: red;
+    font-weight: bold;
+}
+
+/*
+.project-auditsandinspections .new-button .xinput {
+    margin-left: 10px;
+    height: 30px;
+    width: 70px;
+    padding-left: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.project-auditsandinspections .new-button .use-button {
+
+    width: 65px;
+}*/
+
+.project-auditsandinspections .new-button form
+{
+    width: 800px;
+}
+
+.project-permitslicenses .new-button form
+{
+    width: 800px;
+}
+
+.uploading-file {
+    margin-top: 5px;
+}
+
+.uploading-file .file .progress {
+    margin-top: 3px;
+}
+
+.uploaded-file {
+    margin-bottom: 10px;
+}
+
+.btn-link.delete {
+    color: red;
+}
+
+.btn-link.undelete {
+    color: green;
+}
+
+.advanced .ui-grid-cell-focus {
+    background-color: transparent;
+}
+
+.advanced .ui-grid-footer-info {
+    padding-top: 7px;
+    padding-left: 5px;
+}
+
+.search .nav,
+.statistics .nav {
+    margin-bottom: 15px;
+}
+
+.result-grid .ui-grid-header-cell,
+.result-grid .ui-grid-cell {
+    font-size: 12px;
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .result-grid {
+        width: 960px;
+        height: 360px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .result-grid {
+        width: 1168px;
+        height: 360px;
+    }
+}
+
+.statistics .table {
+    margin-bottom: 0px;
+}
+
+.new-button .row, .delete-button .row, .move-button .row  {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.project-eiasandpermits .delete-button {
+    margin-top: 65px;
+
+}
+
+.edit-container .edit-row .delete-button {
+    margin-top: 35px;
+}
+
+.edit-container .edit-row .move-button {
+    margin-top: 35px;
+    margin-right: 10px;
+
+}
+
+/* .project-project .btn-delete {
+    width: 200px;
+} */
+
+.edit-container .edit-row form {
+    margin-top: 15px;
+}
+
+.move-button form {
+    width: 200px;
+    margin-top: 0px !important;
+}
+
+.env-badge {
+    background-color:red;
+}
+
+.inline-err {
+    color: red;
+    margin-bottom: 2%;
+}
+
+.navbar-nav, .navbar-right {
+    display: none;
+}
+
+.dropdown-hover {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+.dropdown-partition-bar {
+    background-color:red !important;
+    color: white;
+}
+
+.dropdown-inactive-item {
+    background-color:rgb(247 96 96 / 36%) !important;
+    color: white;
+    border-bottom: white !important;
+    border-top: white !important;
+    border-top-style: solid !important;
+    border-bottom-style: solid !important;
+}
