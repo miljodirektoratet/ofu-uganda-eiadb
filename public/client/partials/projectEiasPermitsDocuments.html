@@ -1,0 +1,422 @@
+<div class="project-eiasandpermits">
+
+    <div class="row" >
+        <div class="col-md-12">
+            <div class="edit-container">
+                <div class="row header visible-md visible-lg">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Date of submission</th>
+                                <th>Document title</th>
+                                <th>Document code</th>
+                                <th>Date sent to Director</th>
+                                <th>Date sent to team leader from dep.secretary</th>
+                                <th>Date sent to the officer</th>
+                                <th>Conclusion (PB/Tor)</th>
+                                <th>File</th>
+                                <th>
+                                    <button type="button" class="btn btn-xs btn-success pull-right" ng-disabled="routeParams.documentId" ng-click="newDocument()" ng-hide="!auth.canSave('new')">New</button>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="edit-row" ng-repeat="d in data.documents">
+                            <tr class="master" ng-class="{selected: routeParams.documentId==d.id, notvalid: routeParams.documentId==d.id && parts.document.form.$invalid}"
+                                ng-click="openEiapermitDocument(d.id, $event)">
+                                <td>{{d.id}}</td>
+                                <td>{{d.date_submitted | date:'d MMM yyyy'}}</td>
+                                <td>{{d.title}}</td>
+                                <td>{{d.code}}</td>
+                                <td>{{d.date_sent_director | date:'d MMM yyyy'}}</td>
+                                <td>{{d.date_sent_from_dep | date:'d MMM yyyy'}}</td>
+                                <td>{{d.date_sent_officer | date:'d MMM yyyy'}}</td>
+                                <td>{{data.getCodeFromValuelist('documentconclusion', d.conclusion)}}</td>
+                                <td align="left">
+                                    <a ng-href="{{downloadFileUrl(d.file_metadata_id)}}" ng-click="stopPropagation($event)" ng-show="d.attachment" ng-attr-alt="{{d.attachment.filename}}" ng-attr-title="{{d.attachment.filename}}">
+                                        <span class="glyphicon glyphicon-file"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <div style="min-width:65px;">
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(routeParams.documentId, $event)" ng-disabled="routeParams.documentId" ng-show="routeParams.documentId!=d.id" ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}/documents/{{d.id}}">{{auth.canSave('new') ? "Edit" : "Open"}}</a>
+                                        <a class="btn btn-xs btn-link pull-right text-right" ng-click="preventClickIfDisabled(parts.document.state == SavingStateEnum.Loading, $event)" ng-disabled="parts.document.state == SavingStateEnum.Loading" ng-show="routeParams.documentId==d.id" ng-href="#/projects/{{routeParams.projectId}}/eiaspermits/{{routeParams.eiapermitId}}/documents">Close</a>
+                                        <span class="loader pull-right" ng-show="routeParams.documentId==d.id && parts.document.state == SavingStateEnum.Loading"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="shouldShowDocument(d)" class="detail">
+                                <td colspan="10">
+                                    <form role="form" name="parts.document.form" novalidation>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.date_submitted">Date of submission</label>
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.date_submitted')" id="document.date_submitted" class="form-control input-sm input-date" ng-model="d.date_submitted" datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('document.date_submitted')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                          </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="document.title">Document title</label>
+                                                    <input type="text" ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.title')" class="form-control input-sm" id="document.title" ng-model="d.title"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Document file</label>
+                                                    <div class="uploaded-file" ng-show="d.file_metadata_id">
+                                                        <a ng-href="{{downloadFileUrl(d.file_metadata_id)}}" ng-show="d.attachment">{{d.attachment.filename}}</a>
+
+                                                        <sero-delete-button class="delete-button" 
+                                                        text="'delete'"
+                                                        warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                        button-class="'delete btn btn-sm btn-link'"
+                                                        ng-hide="!auth.canSave('delete')"
+                                                        on-yes="deleteAttachment()"></sero-delete-button>
+
+                                                    </div>
+                                                    <div>
+                                                        <button class="btn btn-sm btn-default"
+                                                                type="button"
+                                                                ngf-select="uploadAttachment($files)"
+                                                                accept="{{fileUploadPattern}}"
+                                                                ngf-pattern="{{fileUploadNgfPattern}}"
+                                                                ng-model="fake_attachment"
+                                                                name="attachment"
+                                                                ng-hide="d.file_metadata_id"
+                                                                ng-disabled="!auth.canSave('delete')"
+                                                                ngf-max-size="{{fileUploadMaxSize}}">
+                                                            Select File
+                                                        </button>
+                                                        <div class="uploading-file" ng-show="showUploadingAttachment">
+                                                            <div class="file">{{attachmentFile.name}}<br/>
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{attachmentFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                                            style="width: {{attachmentFile.progress}}%;">
+                                                                        {{attachmentFile.progress}}%
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="errors" ng-messages="parts.document.form.attachment.$error" role="alert">
+                                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                                <div ng-message="maxSize">The file is to big.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.type">Type of document</label>
+                                                    <select ui-select2="{allowClear:true}" ng-change="calculateDocumentCode()" ng-required="true" ng-disabled="!auth.canSave('document.type')" id="document.type" class="form-control input-sm" ng-model="d.type">
+                                                        <option></option>
+                                                        <option ng-repeat="v in valuelists.documenttype" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description2}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.number">Listed number</label>
+                                                    <input type="text" integer ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.number')" class="form-control input-sm" id="document.number" ng-model="d.number" ng-change="calculateDocumentCode()"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.code">Document code</label>
+                                                    <input type="text" ng-readonly="true" class="form-control input-sm" id="document.code" ng-model="d.code"/>
+                                                                                                        <span style="color:red" ng-show="listNumberAlreadyExists">Document code {{documentCode}} exists</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.date_next_appointment">Date of next appointment</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.date_next_appointment')" class="form-control input-sm" id="document.date_next_appointment" ng-model="d.date_next_appointment" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.date_next_appointment')" id="document.date_next_appointment" class="form-control input-sm input-date" ng-model="d.date_next_appointment" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('document.date_next_appointment')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                            <span class="glyphicon glyphicon-calendar"></span></button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.sub_copy_no">No. of copies submitted</label>
+                                                    <input type="text" integer ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.sub_copy_no')" class="form-control input-sm" id="document.sub_copy_no" ng-model="d.sub_copy_no" ng-change="calculateNumberOfCopiesOfDocument()"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="font-weight:bold;">
+                                                <div style="padding-top:15px;"><ng-pluralize count="d.director_copy_no" when="{'one': '1 copy ', 'other': '{} copies '}"></ng-pluralize>to director,</div>
+                                                <div><ng-pluralize count="d.coordinator_copy_no" when="{'one': '1 copy ', 'other': '{} copies '}"></ng-pluralize>to team leader</div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.date_copies_coordinator">Date copies sent to team leader</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.date_copies_coordinator')" class="form-control input-sm" id="document.date_copies_coordinator" ng-model="d.date_copies_coordinator" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.date_copies_coordinator')" id="document.date_copies_coordinator" class="form-control input-sm input-date" ng-model="d.date_copies_coordinator" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('document.date_copies_coordinator')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                          </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.consultent">Consulting team for PB & TOR</label>
+                                                    <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.consultent')" class="form-control input-sm" id="document.consultent" ng-model="d.consultent"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.date_sent_director">Date sent to Director</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument(d)" ng-required="true" ng-readonly="!auth.canSave('document.date_sent_director')" class="form-control input-sm" id="document.date_sent_director" ng-model="d.date_sent_director" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.date_sent_director')" id="document.date_sent_director" class="form-control input-sm input-date" ng-model="d.date_sent_director" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('document.date_sent_director')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                <span class="glyphicon glyphicon-calendar"></span></button>
+                                                          </span>
+                                                    </div>
+                                                    <div class="inline-err" ng-show="(d.date_sent_director.toString() && d.date_copies_coordinator.toString()) && d.date_sent_director < d.date_copies_coordinator">
+                                                        Documents should be sent to team leader before the director</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label for="document.remarks_director">Remarks by Director</label>
+                                                    <textarea ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.remarks_director')" class="form-control input-sm" rows="2" id="document.remarks_director" ng-model="d.remarks_director"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.date_sent_from_dep">Date sent to team leader from dep.</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.date_sent_from_dep')" class="form-control input-sm" id="document.date_sent_from_dep" ng-model="d.date_sent_from_dep" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.date_sent_from_dep')" id="document.date_sent_from_dep" class="form-control input-sm input-date" ng-model="d.date_sent_from_dep" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('document.date_sent_from_dep')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                    <div class="inline-err" ng-show="(d.date_sent_director.toString() && d.date_sent_from_dep.toString()) && d.date_sent_director > d.date_sent_from_dep">Document should be sent to director before team leader dept</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label for="document.remarks_team_leader">Remarks by team leader</label>
+                                                    <textarea ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.remarks_team_leader')" class="form-control input-sm" rows="2" id="document.remarks_team_leader" ng-model="d.remarks_team_leader"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.date_sent_officer">Date sent to the officer</label>
+                                                    <!--<input type="text" placeholder="d mmm yyyy" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.date_sent_officer')" class="form-control input-sm" id="document.date_sent_officer" ng-model="d.date_sent_officer" />-->
+                                                    <div class="input-group container-datepicker" ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.date_sent_officer')" id="document.date_sent_officer" class="form-control input-sm input-date" ng-model="d.date_sent_officer" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" ng-disabled="!auth.canSave('document.date_sent_officer')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                    <div class="inline-err" ng-show="(d.date_sent_officer.toString() && d.date_sent_from_dep.toString()) && d.date_sent_officer < d.date_sent_from_dep">Document should be sent to team leader dept before officer</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label for="document.remarks">Remarks by Reviewer</label>
+                                                    <textarea ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.remarks')" class="form-control input-sm" rows="2" id="document.remarks" ng-model="d.remarks"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.conclusion">Conclusion (PB/Tor)</label>
+                                                    <select ui-select2="{allowClear:true}" ng-change="saveCurrentDocument(d);" ng-disabled="!auth.canSave('document.conclusion') || isDisabledBasedOnRule('document.conclusion')" id="document.conclusion" class="form-control input-sm" ng-model="d.conclusion">
+                                                        <option></option>
+                                                        <option ng-repeat="v in valuelists.documentconclusion" value="{{v.id}}" ng-class="{'dropdown-partition-bar': v.id == false }" ng-disabled="v.id == false">{{v.description1}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.date_conclusion">Date of conclusion for PB & TOR</label>
+                                                    <div class="input-group container-datepicker"  
+                                                    ng-controller="DatePickerController">
+                                                        <input type="text" ng-blur="saveCurrentDocument(d)" ng-disabled="isDisabledBasedOnRule('document.type')" ng-readonly="!auth.canSave('document.date_conclusion')" id="document.date_conclusion" class="form-control input-sm input-date" ng-model="d.date_conclusion" data-datepicker-popup="d MMM yyyy" data-is-open="opened" data-datepicker-options="datepickerOptions" data-show-button-bar="false"/>
+                                                        <span class="input-group-btn">
+                                                                    <button type="button" ng-disabled="!auth.canSave('document.date_conclusion') || isDisabledBasedOnRule('document.type')" class="btn btn-default btn-sm" ng-click="open($event)">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                    </button>
+                                                                  </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Response document</label>
+                                                    <div class="uploaded-file" ng-show="d.file_metadata_response_id">
+                                                        <a ng-href="{{downloadFileUrl(d.file_metadata_response_id)}}" ng-show="d.response_document">{{d.response_document.filename}}</a>
+                                                        <sero-delete-button class="delete-button" 
+                                                        text="'delete'"
+                                                        warning="'NB! You are now going to delete this document. Do you want to proceed?'"
+                                                        button-class="'delete btn btn-sm btn-link'"
+                                                        ng-hide="!auth.canSave('document.file_metadata_response_id')"
+                                                        on-yes="deleteResponseDocument()"></sero-delete-button>
+
+                                                    </div>
+                                                    <div>
+                                                        <button class="btn btn-sm btn-default"
+                                                                type="button"
+                                                                ngf-select="uploadResponseDocument($files)"
+                                                                accept="{{fileUploadPattern}}"
+                                                                ngf-pattern="{{fileUploadNgfPattern}}"
+                                                                ng-model="fake_response_document"
+                                                                name="response_document"
+                                                                ng-hide="d.file_metadata_response_id"
+                                                                ng-disabled="!auth.canSave('document.file_metadata_response_id')"
+                                                                ngf-max-size="{{fileUploadMaxSize}}">
+                                                            Select File
+                                                        </button>
+                                                        <div class="uploading-file" ng-show="showUploadingResponseDocument">
+                                                            <div class="file">{{responseDocumentFile.name}}<br/>
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{responseDocumentFile.progress}}" aria-valuemin="0" aria-valuemax="100"
+                                                                            style="width: {{responseDocumentFile.progress}}%;">
+                                                                        {{responseDocumentFile.progress}}%
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="errors" ng-messages="parts.document.form.response_document.$error" role="alert">
+                                                                <div ng-message="pattern">The file type is not supported.</div>
+                                                                <div ng-message="serverError">Something went wrong on the server.</div>
+                                                                <div ng-message="maxSize">The file is to big.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="document.folio_no">File and foliono.</label>
+                                                    <input type="text" ng-blur="saveCurrentDocument(d)" ng-readonly="!auth.canSave('document.folio_no')" class="form-control input-sm" id="document.folio_no" ng-model="d.folio_no"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <sero-delete-button class="delete-button pull-right" ng-hide="!auth.canSave('delete')"
+                                                                text="'Delete document'"
+                                                                warning="'Do you really want to delete this record?'"
+                                                                button-class="'btn-danger'"
+                                                                on-yes="deleteDocument()"></sero-delete-button>
+                                                                <button ng-hide="!auth.canSave('can_email')"
+                                                                ng-click="createEmailOrder('EIA', ep.id, d.id, ep)"
+                                                                ng-disabled="!ep.email_contact || d.email_order"
+                                                                class="btn btn-success pull-right"
+                                                                style="margin-top:35px;margin-right:10px"
+                                                                >{{(d.id)?getEmailerObj(d).btnMsg : 'Send email'}} </button>
+                                            <div class="btn-group move-button pull-right" dropdown auto-close="disabled" is-open="moveButton.isopen" ng-hide="!auth.canSave('move') || d.is_new">
+                                                <button type="button" class="btn btn-warning pull-right" dropdown-toggle ng-hide="!auth.canSave('new')">
+                                                    Move document<span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li role="menuitem">
+                                                        <form role="form" name="moveButton.form" novalidation>
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <label for="moveButton.id">EIA ID</label>
+                                                                    <input type="text" integer
+                                                                           id="moveButton.id"
+                                                                           ng-required="true"
+                                                                           ng-model="moveButton.id"
+                                                                           class="form-control input-sm"/>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label for="moveButton.move">&nbsp;</label><br>
+                                                                    <button type="button" class="btn btn-sm btn-primary use-button pull-right"
+                                                                            id="moveButton.move"
+                                                                            ng-disabled="moveButton.form.$invalid"
+                                                                            ng-click="moveDocument()">Move
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" ng-show="moveButton.error">
+                                                                <div class="col-md-12">
+                                                                    {{moveButton.error}}
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <span ng-show="ep.email_order.order_status == 4" class="text-danger pull-right">
+                                            Contact an admin to fix issue with email services
+                                        </span>
+                                        <span  ng-show="failedToSendMail" class="text-danger pull-right">
+                                            We could not send the email because you haven’t added the email address or another mandatory information is missing
+                                        </span>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>(Dirty:{{parts.document.form.$dirty}}, valid:{{parts.document.form.$valid}})
+                                                <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.Loaded && !d.is_new">Last changed by {{d.updated_by}}</span>
+                                                <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.SavingStarted">Saving...</span>
+                                                <span class="saving-message-inline pull-right" ng-show="parts.document.state == SavingStateEnum.SavingFinished">All changes saved</span>
+                                                <span class="saving-message-inline pull-right color-error" ng-show="parts.document.state == SavingStateEnum.SavingFailed">Saving failed</span>
+                                                <span class="saving-message-inline pull-right color-error" ng-show="parts.document.state == SavingStateEnum.Invalid">All required fields must be filled out</span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

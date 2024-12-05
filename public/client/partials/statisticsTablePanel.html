@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">{{part.title}}</h2>
+    </div>
+    <div class="panel-body">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>{{part.label1}}</th>
+                <th>
+                    <div class="text-right">{{part.label2}}</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in part.rows">
+                <td title="{{row.id}}">{{row.description}}</td>
+                <td>
+                    <div class="text-right">
+                        <span ng-if="!row.search">{{row.count}}</span>
+                        <a ng-if="row.search" ng-href="#/search/projects?{{row.search}}">{{row.count}}</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

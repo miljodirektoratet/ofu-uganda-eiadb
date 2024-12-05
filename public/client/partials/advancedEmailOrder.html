@@ -1,0 +1,23 @@
+<div class="top-header">
+    <h1>Email Order Management</h1>
+</div>
+
+<div class="advanced">
+
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-success pull-right" ng-show="gridOptions.data.length" ng-click="exportEmailOrders(gridOptions.data)">Export to excel</button>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+
+    <div ui-grid="gridOptions" ui-grid-edit ui-grid-row-edit ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="grid"></div>
+
+</div>

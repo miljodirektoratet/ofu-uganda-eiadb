@@ -1,0 +1,28 @@
+<div class="top-header">
+    <h1>User Management</h1>
+</div>
+
+<div class="advanced">
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="alert alert-warning">
+                <b>NB:</b> 
+                <li>Users wth <b>Is Passive</b> set to <b>1</b> will not be able to login.</li>
+                <li>Users with <b>:non_essential</b> appended to their <b>Job Position Code</b> will be able to login, but not show up in drop-down lists.</li>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-success pull-right" ng-click="addRow()">New user</button>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+
+    <div ui-grid="gridOptions" ui-grid-edit ui-grid-row-edit ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="grid"></div>
+
+</div>

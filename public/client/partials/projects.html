@@ -1,0 +1,61 @@
+<div class="top-header">
+  <h1>Projects</h1>
+</div>
+
+<div class="projects">
+
+  <div class="row">
+    <div class="col-md-8">
+      <form class="form-inline" role="form" >
+        <div class="form-group">
+          <label class="sr-only" for="filterText">Filter</label>
+          <input type="text" class="form-control input-filter" id="filterText" placeholder="Search (try anything, e.g. name, location, or organisation)" ng-model="searchWord">
+        <button class="btn btn-success" ng-click="searchProjects()">{{projectSearchTxt}}</button>
+        </div>
+      </form>
+     </div>
+    <div class="col-md-4">
+      <!--<button type="button" class="btn btn-success pull-right" ng-click="goto('/projects/new');" ng-hide="!canSave()">New project</button>-->
+
+      <sero-delete-button class="delete-button pull-right" ng-hide="!canSave()"
+              text="'New project'"
+              warning="'Are you sure that you want to create a new <span class=\'warningfont\'>project</span>? You should only create a new project if it already doesn\'t exist.'"
+              button-class="'btn-success'"
+              on-yes="goto('/projects/new')"></sero-delete-button>
+
+    </div>
+    <div class="col-md-12"><hr/></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead class="header">
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Project District</th>
+          <th>Category of project</th>
+          <th>Developer</th>
+          <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody class="project" ng-repeat="p in projects | filter:filterText">
+        <tr class="master" ng-click="goto('/projects/'+p.id);">
+          <td>{{p.id}}</td>
+          <td>{{p.title}}</td>
+          <td>{{p.location}}</td>
+          <td>{{p.district.district}}</td>
+          <td>{{p.category.description}}</td>
+          <td title="id={{p.organisation.id}}">{{p.organisation.name}}</td>
+          <td><button type="button" class="btn btn-xs btn-link pull-right text-right" hover-on-parent=".master">Open</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <button class="btn btn-block btn-success" ng-hide="hideProjectLoader" ng-click="loadMoreProjects()">{{loadMoreProjectsTxt}}</button><br>
+
+</div>
+
