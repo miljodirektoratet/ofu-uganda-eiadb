@@ -13,12 +13,22 @@ class MigrationController extends Controller
 {
     use Modifiers;
 
+    private $providedKey;
+    private $filePath;
     private $entityMapping = [
         'projects' => ['model' => 'Project', 'override' => true],
         'organisations' => ['model' => 'Organisation'],
         'users' => ['model' => 'User'],
         'eiapermits' => ['model' => 'EiaPermit', 'override' => true],
+        'permitlicence' => ['model' => 'PermitLicense', 'override' => true],
     ];
+
+    public function __construct()
+    {
+
+        $this->providedKey = config('app.migration_key');
+        $this->filePath =   url('/') . '/api/migration/file';
+    }
 
     public function endpoint($entity)
     {
@@ -28,7 +38,7 @@ class MigrationController extends Controller
             $results = $this->model($entity)
                 ->paginate($perPage);
         } catch (\Exception $e) {
-            if(env('APP_DEBUG') == true) {
+            if (env('APP_DEBUG') == true) {
                 dd($e);
             }
             return Response::json(array('error' => true, 'message' => 'No such resource'), 404);
@@ -46,17 +56,17 @@ class MigrationController extends Controller
     public function csvDownload($entity)
     {
         $perPage = request()->get('per_page', 100);
-
-        // Set up CSV response headers
+        $exportName = $entity . '_export.csv';
         $headers = [
             "Content-type" => "text/csv",
-            "Content-Disposition" => "attachment; filename=organisation_export.csv",
+            "Content-Disposition" => "attachment; filename=$exportName",
             "Pragma" => "no-cache",
             "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
             "Expires" => "0",
         ];
-        // dd(collect($this->OrganisationModel())->toArray());
-        $columns = collect($this->model($entity)->first(1))->keys()->toArray();
+
+        $columns = collect($this->model($entity)->first())->keys()->toArray();
+
         return Response::stream(function () use ($columns, $perPage, $entity) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
@@ -67,12 +77,17 @@ class MigrationController extends Controller
                     ->paginate($perPage, ['*'], 'page', $page);
                 foreach ($data as $datum) {
                     fputcsv($file, array_map(function ($value) {
-                        return $value === null ? 'null' : $value;
+                        if ($value === null) {
+                            return 'null';
+                        }
+                        if (is_array($value) || is_object($value)) {
+                            return json_encode($value);
+                        }
+                        return $value;
                     }, $datum->toArray()));
                 }
 
                 if ($page >= $data->lastPage()) break;
-                // if ($page == 2) break;
 
                 $page++;
             }

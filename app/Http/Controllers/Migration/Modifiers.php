@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Migration;
 
 use App\Project;
 use App\EiaPermit;
+use App\PermitLicense;
 
 trait Modifiers
 {
+
     private function ProjectModel()
     {
 
@@ -166,15 +168,26 @@ trait Modifiers
 
     private function EiaPermitModel()
     {
+
+
+        return EiaPermit::with(['user', 'users', 'teamleader', 'teammembers', 'project', 'documents' => function ($query) {
+            $query->with([
+                'attachment' => function ($subQuery) {
+                    $subQuery->select(
+                        '*',
+                        \DB::raw("CONCAT('" . $this->filePath . "/',file_metadata.id, '?key=" . $this->providedKey . "') as attached_file_path")
+                    );
+                }
+            ])->select('*');
+        }, 'certificate'])->orderBy('eias_permits.created_at', 'ASC');
+    }
+
+    private function PermitLicenseModel()
+    {
         $providedKey = request()->get('key');
         $baseUrl = url('/');
         $filePath =  $baseUrl . '/api/migration/file';
-        return EiaPermit::orderBy('eias_permits.created_at', 'ASC')
-            ->join('file_metadata', 'file_metadata.id', '=', 'eias_permits.file_metadata_id')
-            ->select(
-                "*",
-                \DB::raw("file_metadata.filename as attached_filename"),
-                \DB::raw("CONCAT('" . $filePath . "/',file_metadata.id, '?key=" . $providedKey . "') as file_id")
-            );
+
+        return PermitLicense::with(['project', 'user', 'users', 'documentation'])->orderBy('permits_licenses.created_at', 'ASC');
     }
 }

@@ -20,12 +20,12 @@ class Document extends Model
 
     public function attachment()
     {
-        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_id');
+        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_id')->select('*');
     }
 
     public function response_document()
     {
-        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_response_id');
+        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_response_id')->select('*');
     }
 
     public function hearings()
