@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Migration;
 
+use App\AuditInspection;
 use App\Project;
 use App\EiaPermit;
+use App\ExternalAudit;
 use App\PermitLicense;
 
 trait Modifiers
@@ -184,10 +186,16 @@ trait Modifiers
 
     private function PermitLicenseModel()
     {
-        $providedKey = request()->get('key');
-        $baseUrl = url('/');
-        $filePath =  $baseUrl . '/api/migration/file';
-
         return PermitLicense::with(['project', 'user', 'users', 'documentation'])->orderBy('permits_licenses.created_at', 'ASC');
+    }
+
+    private function ExternalAuditModel()
+    {
+        return ExternalAudit::with(['project', 'user', 'users', 'documents', 'teammembers', 'response_document', 'teamleader'])->orderBy('external_audits.created_at', 'ASC');
+    }
+
+    private function AuditInspectionModel()
+    {
+        return AuditInspection::with(['project', 'leadOfficer', 'users', 'leadagencies', 'actionTakenLetter', 'reportFile', 'documentation'])->orderBy('audits_inspections.created_at', 'ASC');
     }
 }

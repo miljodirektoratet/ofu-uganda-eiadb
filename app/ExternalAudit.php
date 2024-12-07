@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,8 +12,8 @@ class ExternalAudit extends Model
     use DateFormatTrait;
 
     protected $table = 'external_audits';
-    protected $dates = ['deleted_at','date_inspection','date_response','date_deadline_compliance', 'date_invoice_payment', 'date_invoice_receipt_issued', 'date_create_invoice'];
-    protected $fillable = ['project_id','teamleader_id','status','user_id','verification_inspection','date_inspection','date_response','file_metadata_response_id','response','review_findings','date_deadline_compliance', 'type', 'email_contact','date_invoice_payment', 'date_invoice_receipt_issued', 'date_create_invoice', 'remarks_team_leader', 'invoice_fees'];
+    protected $dates = ['deleted_at', 'date_inspection', 'date_response', 'date_deadline_compliance', 'date_invoice_payment', 'date_invoice_receipt_issued', 'date_create_invoice'];
+    protected $fillable = ['project_id', 'teamleader_id', 'status', 'user_id', 'verification_inspection', 'date_inspection', 'date_response', 'file_metadata_response_id', 'response', 'review_findings', 'date_deadline_compliance', 'type', 'email_contact', 'date_invoice_payment', 'date_invoice_receipt_issued', 'date_create_invoice', 'remarks_team_leader', 'invoice_fees'];
     protected $hidden = ['deleted_at'];
 
     public function project()
@@ -46,7 +48,12 @@ class ExternalAudit extends Model
 
     public function response_document()
     {
-        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_response_id');
+        $providedKey = config('app.migration_key');
+        $filePath =   url('/') . '/api/migration/file';
+        return $this->hasOne('App\FileMetadata', 'id', 'file_metadata_response_id')->select(
+            '*',
+            \DB::raw("CONCAT('" . $filePath . "/',file_metadata.id, '?key=" . $providedKey . "') as file_path")
+        );
     }
 
     public static function boot()
@@ -54,8 +61,7 @@ class ExternalAudit extends Model
         parent::boot();
 
         // Soft delete children as well
-        static::deleted(function($eiapermit)
-        {
+        static::deleted(function ($eiapermit) {
             //$eiapermit->documents()->delete();
         });
     }

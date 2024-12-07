@@ -20,7 +20,11 @@ class MigrationController extends Controller
         'organisations' => ['model' => 'Organisation'],
         'users' => ['model' => 'User'],
         'eiapermits' => ['model' => 'EiaPermit', 'override' => true],
-        'permitlicence' => ['model' => 'PermitLicense', 'override' => true],
+        'permitlicense' => ['model' => 'PermitLicense', 'override' => true],
+        'externalaudit' => ['model' => 'ExternalAudit', 'override' => true],
+        'auditinspection' => ['model' => 'AuditInspection', 'override' => true],
+        'categories' => ['model' => 'Category'],
+        'districts' => ['model' => 'District'],
     ];
 
     public function __construct()
