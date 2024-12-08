@@ -59,7 +59,6 @@ class MigrationController extends Controller
     }
     public function csvDownload($entity)
     {
-        $perPage = request()->get('per_page', 100);
         $exportName = $entity . '_export.csv';
         $headers = [
             "Content-type" => "text/csv",
@@ -71,29 +70,21 @@ class MigrationController extends Controller
 
         $columns = collect($this->model($entity)->first())->keys()->toArray();
 
-        return Response::stream(function () use ($columns, $perPage, $entity) {
+        return Response::stream(function () use ($columns, $entity) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
 
-            $page = 1;
-            while (true) {
-                $data = $this->model($entity)->take(30)
-                    ->paginate($perPage, ['*'], 'page', $page);
-                foreach ($data as $datum) {
-                    fputcsv($file, array_map(function ($value) {
-                        if ($value === null) {
-                            return 'null';
-                        }
-                        if (is_array($value) || is_object($value)) {
-                            return json_encode($value);
-                        }
-                        return $value;
-                    }, $datum->toArray()));
-                }
-
-                if ($page >= $data->lastPage()) break;
-
-                $page++;
+            foreach ($this->model($entity)->cursor() as $datum) {
+                fputcsv($file, array_map(function ($value) {
+                    if ($value === null) {
+                        return 'null';
+                    }
+                    if (is_array($value) || is_object($value)) {
+                        return json_encode($value);
+                    }
+                    return $value;
+                }, $datum->toArray()));
+                flush();
             }
 
             fclose($file);
